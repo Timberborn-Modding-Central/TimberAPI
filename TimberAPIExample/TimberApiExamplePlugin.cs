@@ -1,0 +1,82 @@
+﻿using BepInEx;
+using Bindito.Core;
+using HarmonyLib;
+using Timberborn.SingletonSystem;
+using Timberborn.TimeSystem;
+using Timberborn.ToolSystem;
+using UnityEngine;
+using Timberborn.FactionSystem;
+using Timberborn.WeatherSystem;
+using TimberbornAPI;
+using TimberbornAPI.Event;
+
+namespace TimberAPIExample {
+
+    [BepInPlugin("com.timberapi.example", "TimberAPIExample", "0.1.0")]
+    [BepInDependency("com.timberapi.timberapi")]
+    [HarmonyPatch]
+    public class TimberAPIExamplePlugin : BaseUnityPlugin {
+
+        public void Awake() {
+            TimberAPI.Dependencies.AddConfigurator(new ExampleConfigurator());
+            Logger.LogInfo("TimberAPIExample is loaded!");
+        }
+    }
+
+    /**
+     * Example IConfigurator for dependency injection
+     * 1. Use Bind to inject the class, and 2. Add it via TimberAPI.Dependencies.AddConfigurator
+     */
+    public class ExampleConfigurator : IConfigurator {
+        public void Configure(IContainerDefinition containerDefinition) {
+            containerDefinition.Bind<ExampleListener>().AsSingleton();
+        }
+    }
+
+
+    /**
+     * Example listener class. Can listen to any event with [OnEvent]
+     * It automatically registers, but must be bound with an IConfigurator
+     */
+    public class ExampleListener : Listener {
+        [OnEvent]
+        public void OnToolGroupEntered(ToolGroupEnteredEvent toolGroupEnteredEvent) {
+            Debug.Log("Tool Group: " + toolGroupEnteredEvent.ToolGroup.DisplayNameLocKey);
+        }
+
+        [OnEvent]
+        public void OnToolEntered(ToolEnteredEvent toolEnteredEvent) {
+            Debug.Log("Tool: " + toolEnteredEvent.Tool.ToString());
+        }
+
+        [OnEvent]
+        public void OnToolExited(ToolExitedEvent toolExitedEvent) {
+            Debug.Log("ToolExitedEvent");
+        }
+
+        [OnEvent]
+        public void OnNighttimeStartEvent(NighttimeStartEvent nighttimeStartEvent) {
+            Debug.Log("NighttimeStartEvent");
+        }
+
+        [OnEvent]
+        public void OnDaytimeStartEvent(DaytimeStartEvent daytimeStartEvent) {
+            Debug.Log("DaytimeStartEvent");
+        }
+
+        [OnEvent]
+        public void OnFactionUnlocked(FactionUnlockedEvent factionUnlockedEvent) {
+            Debug.Log("FactionUnlockedEvent");
+        }
+
+        [OnEvent]
+        public void OnDroughtStarted(DroughtStartedEvent droughtStartedEvent) {
+            Debug.Log("DroughtStartedEvent");
+        }
+
+        [OnEvent]
+        public void OnDroughtEnded(DroughtEndedEvent droughtEndedEvent) {
+            Debug.Log("DroughtEndedEvent");
+        }
+    }
+}
