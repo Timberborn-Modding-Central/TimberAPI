@@ -18,6 +18,7 @@ namespace TimberAPIExample {
     public class TimberAPIExamplePlugin : BaseUnityPlugin {
 
         public void Awake() {
+            // Register our configurator
             TimberAPI.Dependencies.AddConfigurator(new ExampleConfigurator());
             Logger.LogInfo("TimberAPIExample is loaded!");
         }
@@ -41,17 +42,14 @@ namespace TimberAPIExample {
     public class ExampleListener : Listener {
         [OnEvent]
         public void OnToolGroupEntered(ToolGroupEnteredEvent toolGroupEnteredEvent) {
-            Debug.Log("Tool Group: " + toolGroupEnteredEvent.ToolGroup.DisplayNameLocKey);
+            if (toolGroupEnteredEvent.ToolGroup != null) {
+                Debug.Log("Tool Group: " + toolGroupEnteredEvent.ToolGroup.DisplayNameLocKey);
+            }
         }
 
         [OnEvent]
         public void OnToolEntered(ToolEnteredEvent toolEnteredEvent) {
-            Debug.Log("Tool: " + toolEnteredEvent.Tool.ToString());
-        }
-
-        [OnEvent]
-        public void OnToolExited(ToolExitedEvent toolExitedEvent) {
-            Debug.Log("ToolExitedEvent");
+            Debug.Log("ToolEnteredEvent");
         }
 
         [OnEvent]
