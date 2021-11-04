@@ -27,9 +27,11 @@
   <ItemGroup>
     <None Remove="Dependency\" />
     <None Remove="Event\" />
+    <None Remove="Localization\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dependency\" />
     <Folder Include="Event\" />
+    <Folder Include="Localization\" />
   </ItemGroup>
 </Project>
