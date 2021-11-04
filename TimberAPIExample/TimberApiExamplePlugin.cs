@@ -20,6 +20,7 @@ namespace TimberAPIExample {
         public void Awake() {
             // Register our configurator
             TimberAPI.Dependencies.AddConfigurator(new ExampleConfigurator());
+            // Add a label to localization
             TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
             Logger.LogInfo("TimberAPIExample is loaded!");
         }

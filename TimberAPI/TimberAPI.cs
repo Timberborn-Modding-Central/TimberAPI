@@ -10,11 +10,11 @@ namespace TimberbornAPI {
         /**
          * Entrypoint for Dependency-related utilities
          */
-        public static Dependencies Dependencies = new();
+        public static IDependencies Dependencies = new Dependencies();
 
         /**
          * Entrypoint for Localization-related utilities
          */
-        public static Localization Localization = new();
+        public static ILocalization Localization = new Localization();
     }
 }

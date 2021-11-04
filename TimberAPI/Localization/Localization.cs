@@ -4,7 +4,8 @@ using Timberborn.Common;
 using Timberborn.Localization;
 
 namespace TimberbornAPI.Localizations {
-    public class Localization {
+    [HarmonyPatch]
+    public class Localization : ILocalization {
         private static Dictionary<string, string> labelsToInject = new();
 
         /**

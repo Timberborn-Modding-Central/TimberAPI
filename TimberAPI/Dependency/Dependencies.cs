@@ -5,11 +5,11 @@ using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
 using Timberborn.MasterScene;
 using UnityEngine;
+using static TimberbornAPI.IDependencies;
 
 namespace TimberbornAPI.Dependency {
-
     [HarmonyPatch]
-    public class Dependencies {
+    public class Dependencies : IDependencies {
         private static Dictionary<EntryPoint, List<IConfigurator>> configuratorsByEntryPoint = new();
 
         /**
@@ -62,11 +62,5 @@ namespace TimberbornAPI.Dependency {
             }
             Debug.Log("Initialized configurators for " + entryPoint.ToString());
         }
-    }
-
-    public enum EntryPoint {
-        InGame,
-        MainMenu,
-        MapEditor
     }
 }
