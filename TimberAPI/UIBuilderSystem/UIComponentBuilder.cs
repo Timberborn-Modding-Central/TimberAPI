@@ -270,13 +270,13 @@ public class UIComponentBuilder : IUIComponentBuilder
 
         #region TextFields
 
-        public IUIComponentBuilder AddTextField(string nameField = null, string nameInput = null, string defaultText = "", Length width = default, Length height = default, Length fontsize = default, bool multiline = false, TextAnchor textAnchor = TextAnchor.MiddleCenter, Action<IStyle> style = null)
+        public IUIComponentBuilder AddTextField(string fieldName = null, string inputName = null, string defaultText = "", Length width = default, Length height = default, Length fontsize = default, bool multiline = false, TextAnchor textAnchor = TextAnchor.MiddleCenter, Action<IStyle> style = null)
         {
-            TextField textField = _elementFactory.TextField(new[] {"text-field"}, nameField);
-            return AddTextField(textField, nameInput, defaultText, width, height, fontsize, multiline, textAnchor, style);
+            TextField textField = _elementFactory.TextField(new[] {"text-field"}, fieldName);
+            return AddTextField(textField, inputName, defaultText, width, height, fontsize, multiline, textAnchor, style);
         } 
         
-        private IUIComponentBuilder AddTextField(TextField textField, string nameInput, string defaultText, Length width, Length height, Length fontsize, bool multiline, TextAnchor textAnchor, Action<IStyle> style)
+        private IUIComponentBuilder AddTextField(TextField textField, string inputName, string defaultText, Length width, Length height, Length fontsize, bool multiline, TextAnchor textAnchor, Action<IStyle> style)
         {
             style?.Invoke(textField.style);
             textField.textInput.style.unityTextAlign = new StyleEnum<TextAnchor>(textAnchor);
@@ -289,7 +289,7 @@ public class UIComponentBuilder : IUIComponentBuilder
             textField.multiline = multiline;
             textField.text = defaultText;
 
-            textField.textInput.name = nameInput;
+            textField.textInput.name = inputName;
             _root.Add(textField);
             return this;
         }
