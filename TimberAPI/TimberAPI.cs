@@ -1,4 +1,5 @@
 ﻿using TimberbornAPI.Dependency;
+using TimberbornAPI.Localizations;
 
 namespace TimberbornAPI {
     /**
@@ -9,6 +10,11 @@ namespace TimberbornAPI {
         /**
          * Entrypoint for Dependency-related utilities
          */
-        public static Dependencies Dependencies = new Dependencies();
+        public static IDependencies Dependencies = new Dependencies();
+
+        /**
+         * Entrypoint for Localization-related utilities
+         */
+        public static ILocalization Localization = new Localization();
     }
 }

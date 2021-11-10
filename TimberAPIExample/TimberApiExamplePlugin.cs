@@ -20,8 +20,20 @@ namespace TimberAPIExample {
         public void Awake() {
             // Register our configurator
             TimberAPI.Dependencies.AddConfigurator(new ExampleConfigurator());
+            // Add a label to localization
+            TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
             Logger.LogInfo("TimberAPIExample is loaded!");
         }
+    }
+
+    /**
+     * Example use of localization label in a ToolGroup
+     */
+    public class ExampleToolGroup : ToolGroup {
+
+        public override string IconName => "PriorityToolGroupIcon";
+
+        public override string DisplayNameLocKey => "ExampleMod.ToolGroups.ExampleToolGroup";
     }
 
     /**
@@ -33,7 +45,6 @@ namespace TimberAPIExample {
             containerDefinition.Bind<ExampleListener>().AsSingleton();
         }
     }
-
 
     /**
      * Example listener class. Can listen to any event with [OnEvent]
