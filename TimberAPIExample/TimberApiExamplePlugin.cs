@@ -23,6 +23,17 @@ namespace TimberAPIExample {
             // Add a label to localization
             TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
             Logger.LogInfo("TimberAPIExample is loaded!");
+            
+            
+            // This is only for the example mod to provide automatic configurators.
+            InstallAutoConfigurators();
+        }
+        
+        public void InstallAutoConfigurators()
+        {
+            TimberAPI.Dependencies.AddConfigurator(new AutoConfiguratorInGame());
+            TimberAPI.Dependencies.AddConfigurator(new AutoConfiguratorMainMenu());
+            TimberAPI.Dependencies.AddConfigurator(new AutoConfiguratorEditor());
         }
     }
 
