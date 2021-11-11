@@ -42,5 +42,18 @@ public class ExampleListener : Listener {
 TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
 ```
 
+## UIBuilder
+1. Inject UIBuilder into a configurated class
+2. Build any visual element with the timberborn components
+```c#
+public UIBuilderFragmentExample(IUIBuilder builder)
+{
+    builder.CreateComponentBuilder()
+        .AddButton("First Button", name: "firstButton")
+        ...
+        .Build();
+}
+```
+
 
 See [ExamplePlugin](https://github.com/Timberborn-Modding-Central/TimberAPI/blob/main/TimberAPIExample/TimberApiExamplePlugin.cs) for more examples
