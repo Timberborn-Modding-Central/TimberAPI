@@ -22,7 +22,7 @@ public class UIBoxBuilder : IUIBoxBuilder
 
         private Action<IStyle> _style;
 
-        public UIBoxBuilder(ElementFactory elementFactory, VisualElementInitializer visualElementInitializer)
+        public UIBoxBuilder(IElementFactory elementFactory, VisualElementInitializer visualElementInitializer)
         {
             _root = new UIComponentBuilder(elementFactory, visualElementInitializer);
             _root.RootStyle(style =>

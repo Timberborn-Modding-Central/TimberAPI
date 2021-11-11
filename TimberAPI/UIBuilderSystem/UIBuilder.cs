@@ -2,13 +2,13 @@ using Timberborn.CoreUI;
 
 namespace TimberbornAPI.UIBuilderSystem
 {
-    public class UIBuilderFactory : IUIBuilderFactory
+    public class UIBuilder : IUIBuilder
     {
-        private readonly ElementFactory _elementFactory;
+        private readonly IElementFactory _elementFactory;
 
         private readonly VisualElementInitializer _visualElementInitializer;
 
-        public UIBuilderFactory(ElementFactory elementFactory, VisualElementInitializer visualElementInitializer)
+        public UIBuilder(IElementFactory elementFactory, VisualElementInitializer visualElementInitializer)
         {
             this._elementFactory = elementFactory;
             this._visualElementInitializer = visualElementInitializer;

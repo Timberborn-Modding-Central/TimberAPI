@@ -12,18 +12,18 @@ public class UIComponentBuilder : IUIComponentBuilder
 {
         private readonly VisualElementInitializer _visualElementInitializer;
         
-        private readonly ElementFactory _elementFactory;
+        private readonly IElementFactory _elementFactory;
         
         private VisualElement _root;
         
-        public UIComponentBuilder(ElementFactory elementFactory, VisualElementInitializer visualElementInitializer)
+        public UIComponentBuilder(IElementFactory elementFactory, VisualElementInitializer visualElementInitializer)
         {
             _elementFactory = elementFactory;
             _visualElementInitializer = visualElementInitializer;
             _root = new VisualElement();
         }
         
-        public UIComponentBuilder(ElementFactory elementFactory, VisualElementInitializer visualElementInitializer, VisualElement root)
+        public UIComponentBuilder(IElementFactory elementFactory, VisualElementInitializer visualElementInitializer, VisualElement root)
         {
             _elementFactory = elementFactory;
             _root = root;

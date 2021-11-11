@@ -1,6 +1,6 @@
 namespace TimberbornAPI.UIBuilderSystem
 {
-    public interface IUIBuilderFactory
+    public interface IUIBuilder
     {
         /// <summary>
         /// Creates a box builder for making boxes
