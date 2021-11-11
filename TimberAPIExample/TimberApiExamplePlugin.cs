@@ -1,6 +1,8 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using Bindito.Core;
 using HarmonyLib;
+using TimberAPIExample.AutoConfiguratorInstaller;
 using Timberborn.SingletonSystem;
 using Timberborn.TimeSystem;
 using Timberborn.ToolSystem;
@@ -15,14 +17,30 @@ namespace TimberAPIExample {
     [BepInPlugin("com.timberapi.example", "TimberAPIExample", "0.1.0")]
     [BepInDependency("com.timberapi.timberapi")]
     [HarmonyPatch]
-    public class TimberAPIExamplePlugin : BaseUnityPlugin {
+    public class TimberAPIExamplePlugin : BaseUnityPlugin
+    {
+
+        internal static ManualLogSource Log;
 
         public void Awake() {
+            // Saves the logger instance
+            Log = Logger;
             // Register our configurator
             TimberAPI.Dependencies.AddConfigurator(new ExampleConfigurator());
             // Add a label to localization
             TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
             Logger.LogInfo("TimberAPIExample is loaded!");
+            
+            
+            // This is only for the example mod to provide automatic configurators.
+            InstallAutoConfigurators();
+        }
+        
+        public void InstallAutoConfigurators()
+        {
+            TimberAPI.Dependencies.AddConfigurator(new AutoConfiguratorInGame());
+            TimberAPI.Dependencies.AddConfigurator(new AutoConfiguratorMainMenu());
+            TimberAPI.Dependencies.AddConfigurator(new AutoConfiguratorEditor());
         }
     }
 
