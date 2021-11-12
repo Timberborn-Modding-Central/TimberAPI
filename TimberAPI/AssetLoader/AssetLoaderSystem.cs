@@ -1,0 +1,111 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using TimberbornAPI.AssetLoader.AssetSystem;
+using TimberbornAPI.AssetLoader.Exceptions;
+using TimberbornAPI.AssetLoader.PluginSystem;
+
+namespace TimberbornAPI.AssetLoader
+{
+    public class AssetLoaderSystem : IAssetLoaderSystem
+    {
+        internal static IAssetLoaderSystem.EntryPoint ActiveScene = IAssetLoaderSystem.EntryPoint.Global;
+
+        internal static PluginRepository PluginRepository = new PluginRepository();
+
+        public void AddSceneAssets(string prefix, string[] assetLocation, IAssetLoaderSystem.EntryPoint assetEntryPoint)
+        {
+            Console.WriteLine($"Creating new asset area with prefix: {prefix}");
+            CreateNewPluginAsset(prefix, assetLocation, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
+        }
+        
+        public void LoadSceneAssets(IAssetLoaderSystem.EntryPoint scene)
+        {
+            Console.WriteLine($"Loading scene: {scene}, prefixes in scene: {string.Join(",", PluginRepository.All().Where(plugin => plugin.LoadingScene == scene).Select(plugin => plugin.Prefix))}");
+            ActiveScene = scene;
+            foreach (Plugin plugin in PluginRepository.All().Where(plugin => plugin.LoadingScene == scene))
+            {
+                plugin.AssetRepository.LoadAll();
+            }
+        }
+
+        public void UnloadSceneAssets(IAssetLoaderSystem.EntryPoint scene)
+        {
+            Console.WriteLine($"Unloading scene: {scene}");
+            foreach (Plugin plugin in PluginRepository.All().Where(plugin => plugin.LoadingScene == scene))
+            {
+                plugin.AssetRepository.UnloadAll();
+            }
+        }
+        
+        private void CreateNewPluginAsset(string prefix, string[] assetLocation, string assemblyFolder, IAssetLoaderSystem.EntryPoint loadingScene)
+        {
+            if(assemblyFolder == null || string.IsNullOrEmpty(assemblyFolder))
+            {
+                Console.WriteLine($"Failed to load assets with the prefix {prefix}. dll location was not found");
+                return;
+            }
+            
+            try
+            {
+                Plugin plugin = new Plugin(prefix, assetLocation, assemblyFolder, loadingScene);
+                List<string[]> relativeAssetPaths = ModPluginAssetRelativePathFinder(plugin.AssemblyPath, Path.Combine(plugin.RootPath));
+                foreach (string[] relativeAssetPath in relativeAssetPaths)
+                {
+                    plugin.AssetRepository.Add(new CustomAssetBundle(plugin, relativeAssetPath.Take(relativeAssetPath.Length - 1).ToArray(), relativeAssetPath.Last()));
+                }
+
+                PluginRepository.Add(plugin);
+                Console.WriteLine($"Prefix {plugin.Prefix}, assets: {plugin.AssetRepository.All().Count()}");
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                Console.WriteLine($"Failed to load assets for prefix: {prefix}");
+                Console.WriteLine(e.Message);
+            }
+            catch (PluginPrefixInUseException e)
+            {
+                Console.WriteLine($"Failed to load prefix {e.Plugin.Prefix}, prefix is already in use.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Something went wrong please contact the mod owner.");
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+        
+        private List<string[]> ModPluginAssetRelativePathFinder(string assemblyPath, string rootPath)
+        {
+            return FromAbsoluteToRelative(RecursiveAssetSearch(Path.Combine(assemblyPath, rootPath)), rootPath);
+        }
+        
+        private List<string[]> FromAbsoluteToRelative(IEnumerable<string> absolutePathList, string root)
+        {
+            return absolutePathList.Select(absolutePath => 
+                absolutePath[(absolutePath.LastIndexOf(root, StringComparison.Ordinal) + root.Length + 1)..].Split('\\'))
+                .ToList();
+        }
+        
+        private List<string> RecursiveAssetSearch(string absolutePath)
+        {
+            List<string> assetLocations = new List<string>();
+            assetLocations.AddRange(AssetsInFolder(absolutePath));
+            foreach (string directory in Directory.GetDirectories(absolutePath))
+            {
+                assetLocations.AddRange(RecursiveAssetSearch(directory));
+            }
+            return assetLocations;
+        }
+
+        private IEnumerable<string> AssetsInFolder(string absolutePath)
+        {
+            return Directory.GetFiles(absolutePath).Where(asset => 
+                !Path.HasExtension(asset) 
+                || Path.GetExtension(asset).Equals(".bundle") 
+                || Path.GetExtension(asset).Equals(".asset"));
+        }
+    }
+}

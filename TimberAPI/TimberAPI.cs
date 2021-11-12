@@ -1,4 +1,5 @@
-﻿using TimberbornAPI.Dependency;
+﻿using TimberbornAPI.AssetLoader;
+using TimberbornAPI.Dependency;
 using TimberbornAPI.Localizations;
 
 namespace TimberbornAPI {
@@ -16,5 +17,10 @@ namespace TimberbornAPI {
          * Entrypoint for Localization-related utilities
          */
         public static ILocalization Localization = new Localization();
+
+        /**
+         * Entrypoint for AssetLoader-related utilities
+         */
+        public static IAssetLoaderSystem AssetLoaderSystem = new AssetLoaderSystem();
     }
 }
