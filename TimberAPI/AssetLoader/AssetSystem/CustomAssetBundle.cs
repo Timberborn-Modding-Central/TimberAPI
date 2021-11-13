@@ -29,6 +29,9 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
             FileName = fileName;
         }
 
+        /// <summary>
+        /// Loads a asset bundle
+        /// </summary>
         public void Load()
         {
             if (IsBundleLoaded || AssetBundle != null)
@@ -44,6 +47,9 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
                 IsBundleLoaded = true;
         }
         
+        /// <summary>
+        /// Unloads a asset bundle
+        /// </summary>
         public void Unload()
         {
             if (!IsBundleLoaded || AssetBundle == null)

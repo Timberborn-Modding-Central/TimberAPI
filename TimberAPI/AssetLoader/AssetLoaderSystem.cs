@@ -14,13 +14,19 @@ namespace TimberbornAPI.AssetLoader
         internal static IAssetLoaderSystem.EntryPoint ActiveScene = IAssetLoaderSystem.EntryPoint.Global;
 
         internal static PluginRepository PluginRepository = new PluginRepository();
-
-        public void AddSceneAssets(string prefix, string[] assetLocation, IAssetLoaderSystem.EntryPoint assetEntryPoint)
+        
+        public void AddSceneAssets(string prefix, IAssetLoaderSystem.EntryPoint assetEntryPoint, string[] assetLocation)
         {
             Console.WriteLine($"Creating new asset area with prefix: {prefix}");
             CreateNewPluginAsset(prefix, assetLocation, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
         }
-        
+
+        public void AddSceneAssets(string prefix, IAssetLoaderSystem.EntryPoint assetEntryPoint)
+        {
+            Console.WriteLine($"Creating new asset area with prefix: {prefix}");
+            CreateNewPluginAsset(prefix, new [] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
+        }
+
         public void LoadSceneAssets(IAssetLoaderSystem.EntryPoint scene)
         {
             Console.WriteLine($"Loading scene: {scene}, prefixes in scene: {string.Join(",", PluginRepository.All().Where(plugin => plugin.LoadingScene == scene).Select(plugin => plugin.Prefix))}");
@@ -77,11 +83,23 @@ namespace TimberbornAPI.AssetLoader
             }
         }
         
+        /// <summary>
+        /// returns all asset locations with a relative path.
+        /// </summary>
+        /// <param name="assemblyPath"></param>
+        /// <param name="rootPath"></param>
+        /// <returns></returns>
         private List<string[]> ModPluginAssetRelativePathFinder(string assemblyPath, string rootPath)
         {
             return FromAbsoluteToRelative(RecursiveAssetSearch(Path.Combine(assemblyPath, rootPath)), rootPath);
         }
         
+        /// <summary>
+        /// Extracts the absolute path location
+        /// </summary>
+        /// <param name="absolutePathList"></param>
+        /// <param name="root"></param>
+        /// <returns></returns>
         private List<string[]> FromAbsoluteToRelative(IEnumerable<string> absolutePathList, string root)
         {
             return absolutePathList.Select(absolutePath => 
@@ -89,6 +107,11 @@ namespace TimberbornAPI.AssetLoader
                 .ToList();
         }
         
+        /// <summary>
+        /// returns absolute paths from all assets inside the root folder
+        /// </summary>
+        /// <param name="absolutePath"></param>
+        /// <returns></returns>
         private List<string> RecursiveAssetSearch(string absolutePath)
         {
             List<string> assetLocations = new List<string>();
@@ -100,6 +123,11 @@ namespace TimberbornAPI.AssetLoader
             return assetLocations;
         }
 
+        /// <summary>
+        /// Iterates thru files, allowed files extensions: none, .bundle, .asset
+        /// </summary>
+        /// <param name="absolutePath"></param>
+        /// <returns></returns>
         private IEnumerable<string> AssetsInFolder(string absolutePath)
         {
             return Directory.GetFiles(absolutePath).Where(asset => 

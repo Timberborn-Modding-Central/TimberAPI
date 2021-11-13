@@ -13,6 +13,12 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
             _plugins = new List<Plugin>();
         }
         
+        /// <summary>
+        /// Finds plugin by their prefix withing the active entry point or global
+        /// </summary>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
+        /// <exception cref="PrefixNotFoundException"></exception>
         public Plugin FindByPrefix(string prefix)
         {
             Plugin modPlugin = _plugins.FirstOrDefault(plugin => plugin.Prefix == prefix && (plugin.LoadingScene == AssetLoaderSystem.ActiveScene 
@@ -36,6 +42,11 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
             return _plugins;
         }
         
+        /// <summary>
+        /// Checks if prefix is already used in the given entrypoint or global
+        /// </summary>
+        /// <param name="plugin"></param>
+        /// <returns></returns>
         private bool PluginPrefixInUse(Plugin plugin)
         {
             return _plugins.Any(p => (p.Prefix == plugin.Prefix && p.LoadingScene == plugin.LoadingScene) 

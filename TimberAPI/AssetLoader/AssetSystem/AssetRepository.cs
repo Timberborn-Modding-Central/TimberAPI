@@ -12,7 +12,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         {
             _assetBundles = new List<CustomAssetBundle>();
         }
-
+        
         public void Add(CustomAssetBundle customAssetBundle)
         {
             _assetBundles.Add(customAssetBundle);
