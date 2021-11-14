@@ -45,13 +45,21 @@ namespace TimberbornAPI.Localizations {
             /// File localization, overwrites code localization, has any localization
             /// Missing file localization, defaults back to enUS, overwrites code localization
             /// </summary>
-            private static void Postfix(string localizationKey, IDictionary<string, string> __result)
+            private static void Postfix(string localizationKey, ref IDictionary<string, string> __result)
             {
-                IDictionary<string, string> localization = new Dictionary<string, string>();
+                IDictionary<string, string> localization = new Dictionary<string, string>(labelsToInject);
                 IDictionary<string, string> fileLocalization = LocalizationRepository.GetLocalization(localizationKey);
-                foreach ((string locKey, string locValue) in labelsToInject)
+                
+                foreach ((string locKey, string locValue) in fileLocalization)
                 {
-                    localization.Add(locKey, fileLocalization.ContainsKey(locKey) ? fileLocalization[locKey] : locValue);
+                    if (localization.ContainsKey(locKey))
+                    {
+                        localization[locKey] = locValue;
+                    }
+                    else
+                    {
+                        localization.Add(locKey, locValue);
+                    }
                 }
 
                 try

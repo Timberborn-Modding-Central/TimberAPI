@@ -17,7 +17,7 @@ namespace TimberbornAPI.Localizations
         /// </summary>
         /// <param name="localizationKey"></param>
         /// <returns></returns>
-        public static IDictionary<string, string> GetLocalization(string localizationKey)
+        public static Dictionary<string, string> GetLocalization(string localizationKey)
         {
             Dictionary<string, string> dictionary1 = new Dictionary<string, string>();
             Dictionary<string, string> dictionary2 = GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey)).ToDictionary(record => record.Id, record => record.Text);
