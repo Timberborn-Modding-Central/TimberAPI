@@ -5,6 +5,7 @@ using Timberborn.MainMenuSceneLoading;
 using Timberborn.MapEditorSceneLoading;
 using Timberborn.MapSystem;
 using Timberborn.MasterSceneLoading;
+using TimberbornAPI.Common;
 
 namespace TimberbornAPI.AssetLoader.Patches
 {
@@ -15,8 +16,8 @@ namespace TimberbornAPI.AssetLoader.Patches
         {
             private static void Postfix()
             {
-                TimberAPI.AssetLoaderSystem.LoadSceneAssets(IAssetLoaderSystem.EntryPoint.Global);
-                TimberAPI.AssetLoaderSystem.LoadSceneAssets(IAssetLoaderSystem.EntryPoint.MainMenu);
+                TimberAPI.AssetLoaderSystem.LoadSceneAssets(SceneEntryPoint.Global);
+                TimberAPI.AssetLoaderSystem.LoadSceneAssets(SceneEntryPoint.MainMenu);
             }
         }
         
@@ -25,7 +26,7 @@ namespace TimberbornAPI.AssetLoader.Patches
         {
             private static void Postfix()
             {
-                LoadHelper.LoadSceneAssets(IAssetLoaderSystem.EntryPoint.MainMenu);
+                LoadHelper.LoadSceneAssets(SceneEntryPoint.MainMenu);
             }
         }
         
@@ -34,7 +35,7 @@ namespace TimberbornAPI.AssetLoader.Patches
         {
             private static void Postfix()
             {
-                LoadHelper.LoadSceneAssets(IAssetLoaderSystem.EntryPoint.InGame);
+                LoadHelper.LoadSceneAssets(SceneEntryPoint.InGame);
             }
         }
         
@@ -43,7 +44,7 @@ namespace TimberbornAPI.AssetLoader.Patches
         {
             private static void Postfix()
             {
-                LoadHelper.LoadSceneAssets(IAssetLoaderSystem.EntryPoint.InGame);
+                LoadHelper.LoadSceneAssets(SceneEntryPoint.InGame);
             }
         }
         
@@ -52,7 +53,7 @@ namespace TimberbornAPI.AssetLoader.Patches
         {
             private static void Postfix()
             {
-                LoadHelper.LoadSceneAssets(IAssetLoaderSystem.EntryPoint.MapEditor);
+                LoadHelper.LoadSceneAssets(SceneEntryPoint.MapEditor);
             }
         }
         
@@ -61,7 +62,7 @@ namespace TimberbornAPI.AssetLoader.Patches
         {
             private static void Postfix()
             {
-                LoadHelper.LoadSceneAssets(IAssetLoaderSystem.EntryPoint.MapEditor);
+                LoadHelper.LoadSceneAssets(SceneEntryPoint.MapEditor);
             }
         }
 
@@ -70,7 +71,7 @@ namespace TimberbornAPI.AssetLoader.Patches
             /**
              * Unloads active scene assets, loads the new scene accets
              */
-            internal static void LoadSceneAssets(IAssetLoaderSystem.EntryPoint scene)
+            internal static void LoadSceneAssets(SceneEntryPoint scene)
             {
                 TimberAPI.AssetLoaderSystem.UnloadSceneAssets(AssetLoaderSystem.ActiveScene);
                 TimberAPI.AssetLoaderSystem.LoadSceneAssets(scene);

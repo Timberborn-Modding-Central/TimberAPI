@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TimberbornAPI {
+namespace TimberbornAPI.Localizations {
     public interface ILocalization {
         /**
          * Add a label into the current localization

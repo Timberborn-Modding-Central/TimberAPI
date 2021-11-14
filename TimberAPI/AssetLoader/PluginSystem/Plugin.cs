@@ -1,4 +1,5 @@
 using TimberbornAPI.AssetLoader.AssetSystem;
+using TimberbornAPI.Common;
 
 namespace TimberbornAPI.AssetLoader.PluginSystem
 {
@@ -10,11 +11,11 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
         
         public readonly string Prefix;
 
-        public readonly IAssetLoaderSystem.EntryPoint LoadingScene;
+        public readonly SceneEntryPoint LoadingScene;
 
         public readonly string[] RootPath;
 
-        public Plugin(string prefix, string[] rootPath, string assemblyPath, IAssetLoaderSystem.EntryPoint loadingScene)
+        public Plugin(string prefix, string[] rootPath, string assemblyPath, SceneEntryPoint loadingScene)
         {
             Prefix = prefix;
             RootPath = rootPath;

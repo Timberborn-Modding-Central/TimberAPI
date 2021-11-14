@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using TimberbornAPI.Common;
 using TimberbornAPI.UIBuilderSystem;
 
 namespace TimberbornAPI.Internal {
@@ -21,9 +22,9 @@ namespace TimberbornAPI.Internal {
         /// </summary>
         public void InstallUIBuilderConfigurators()
         {
-            TimberAPI.Dependencies.AddConfigurator(new UIBuilderConfigurator(), IDependencies.EntryPoint.InGame);
-            TimberAPI.Dependencies.AddConfigurator(new UIBuilderConfigurator(), IDependencies.EntryPoint.MainMenu);
-            TimberAPI.Dependencies.AddConfigurator(new UIBuilderConfigurator(), IDependencies.EntryPoint.MapEditor);
+            TimberAPI.Dependencies.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.InGame);
+            TimberAPI.Dependencies.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MainMenu);
+            TimberAPI.Dependencies.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
         }
     }
 }

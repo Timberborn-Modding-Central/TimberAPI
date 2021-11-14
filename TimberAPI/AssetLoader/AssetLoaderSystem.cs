@@ -6,22 +6,23 @@ using System.Reflection;
 using TimberbornAPI.AssetLoader.AssetSystem;
 using TimberbornAPI.AssetLoader.Exceptions;
 using TimberbornAPI.AssetLoader.PluginSystem;
+using TimberbornAPI.Common;
 
 namespace TimberbornAPI.AssetLoader
 {
     public class AssetLoaderSystem : IAssetLoaderSystem
     {
-        internal static IAssetLoaderSystem.EntryPoint ActiveScene = IAssetLoaderSystem.EntryPoint.Global;
+        internal static SceneEntryPoint ActiveScene = SceneEntryPoint.Global;
 
         internal static PluginRepository PluginRepository = new PluginRepository();
         
-        public void AddSceneAssets(string prefix, IAssetLoaderSystem.EntryPoint assetEntryPoint, string[] assetLocation)
+        public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint, string[] assetLocation)
         {
             Console.WriteLine($"Creating new asset area with prefix: {prefix}");
             CreateNewPluginAsset(prefix, assetLocation, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
         }
 
-        public void AddSceneAssets(string prefix, IAssetLoaderSystem.EntryPoint assetEntryPoint)
+        public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint)
         {
             Console.WriteLine($"Creating new asset area with prefix: {prefix}");
             CreateNewPluginAsset(prefix, new [] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
@@ -30,10 +31,10 @@ namespace TimberbornAPI.AssetLoader
         public void AddSceneAssets(string prefix)
         {
             Console.WriteLine($"Creating new asset area with prefix: {prefix}");
-            CreateNewPluginAsset(prefix, new [] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), IAssetLoaderSystem.EntryPoint.InGame);
+            CreateNewPluginAsset(prefix, new [] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), SceneEntryPoint.InGame);
         }
 
-        public void LoadSceneAssets(IAssetLoaderSystem.EntryPoint scene)
+        public void LoadSceneAssets(SceneEntryPoint scene)
         {
             Console.WriteLine($"Loading scene: {scene}, prefixes in scene: {string.Join(",", PluginRepository.All().Where(plugin => plugin.LoadingScene == scene).Select(plugin => plugin.Prefix))}");
             ActiveScene = scene;
@@ -43,7 +44,7 @@ namespace TimberbornAPI.AssetLoader
             }
         }
 
-        public void UnloadSceneAssets(IAssetLoaderSystem.EntryPoint scene)
+        public void UnloadSceneAssets(SceneEntryPoint scene)
         {
             Console.WriteLine($"Unloading scene: {scene}");
             foreach (Plugin plugin in PluginRepository.All().Where(plugin => plugin.LoadingScene == scene))
@@ -52,7 +53,7 @@ namespace TimberbornAPI.AssetLoader
             }
         }
         
-        private void CreateNewPluginAsset(string prefix, string[] assetLocation, string assemblyFolder, IAssetLoaderSystem.EntryPoint loadingScene)
+        private void CreateNewPluginAsset(string prefix, string[] assetLocation, string assemblyFolder, SceneEntryPoint loadingScene)
         {
             if(assemblyFolder == null || string.IsNullOrEmpty(assemblyFolder))
             {

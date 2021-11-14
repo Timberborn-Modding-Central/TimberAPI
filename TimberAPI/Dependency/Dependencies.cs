@@ -4,19 +4,23 @@ using HarmonyLib;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
 using Timberborn.MasterScene;
+using TimberbornAPI.Common;
 using UnityEngine;
-using static TimberbornAPI.IDependencies;
 
 namespace TimberbornAPI.Dependency {
     [HarmonyPatch]
     public class Dependencies : IDependencies {
-        private static Dictionary<EntryPoint, List<IConfigurator>> configuratorsByEntryPoint = new();
+        private static Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPoint = new();
 
         /**
          * Install a Configurator into a scene to allow dependency injection
          * The class must implement IConfigurator and can use Bind<>() to inject dependencies
          */
-        public void AddConfigurator(IConfigurator configurator, EntryPoint entryPoint = EntryPoint.InGame) {
+        public void AddConfigurator(IConfigurator configurator, SceneEntryPoint entryPoint = SceneEntryPoint.InGame) {
+            if (entryPoint == SceneEntryPoint.Global) {
+                Debug.Log("Global is currently unsupported");
+                return;
+            }
             if (configuratorsByEntryPoint.TryGetValue(entryPoint, out var configurators)) {
                 configurators.Add(configurator);
             } else {
@@ -30,7 +34,7 @@ namespace TimberbornAPI.Dependency {
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MasterSceneConfigurator), "Configure")]
         static void InjectMasterScene(IContainerDefinition containerDefinition) {
-            InstallAll(containerDefinition, EntryPoint.InGame);
+            InstallAll(containerDefinition, SceneEntryPoint.InGame);
         }
 
         /**
@@ -39,7 +43,7 @@ namespace TimberbornAPI.Dependency {
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MainMenuSceneConfigurator), "Configure")]
         static void InjectMainMenuScene(IContainerDefinition containerDefinition) {
-            InstallAll(containerDefinition, EntryPoint.MainMenu);
+            InstallAll(containerDefinition, SceneEntryPoint.MainMenu);
         }
 
         /**
@@ -48,13 +52,13 @@ namespace TimberbornAPI.Dependency {
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MapEditorSceneConfigurator), "Configure")]
         static void InjectMapEditorScene(IContainerDefinition containerDefinition) {
-            InstallAll(containerDefinition, EntryPoint.MapEditor);
+            InstallAll(containerDefinition, SceneEntryPoint.MapEditor);
         }
 
         /**
          * Install all the configurators for the given entryPoint
          */
-        private static void InstallAll(IContainerDefinition containerDefinition, EntryPoint entryPoint) {
+        private static void InstallAll(IContainerDefinition containerDefinition, SceneEntryPoint entryPoint) {
             List<IConfigurator> configurators =
                 configuratorsByEntryPoint.GetValueOrDefault(entryPoint, new());
             foreach (IConfigurator configurator in configurators) {

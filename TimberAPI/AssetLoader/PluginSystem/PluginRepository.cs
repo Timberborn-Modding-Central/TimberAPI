@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TimberbornAPI.AssetLoader.Exceptions;
+using TimberbornAPI.Common;
 
 namespace TimberbornAPI.AssetLoader.PluginSystem
 {
@@ -22,7 +23,7 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
         public Plugin FindByPrefix(string prefix)
         {
             Plugin modPlugin = _plugins.FirstOrDefault(plugin => plugin.Prefix == prefix && (plugin.LoadingScene == AssetLoaderSystem.ActiveScene 
-                || plugin.LoadingScene == IAssetLoaderSystem.EntryPoint.Global));
+                || plugin.LoadingScene == SceneEntryPoint.Global));
             
             if(modPlugin == null)
                 throw new PrefixNotFoundException(prefix);
@@ -50,8 +51,8 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
         private bool PluginPrefixInUse(Plugin plugin)
         {
             return _plugins.Any(p => (p.Prefix == plugin.Prefix && p.LoadingScene == plugin.LoadingScene) 
-                                                || p.Prefix == plugin.Prefix && (p.LoadingScene == IAssetLoaderSystem.EntryPoint.Global 
-                                                    || plugin.LoadingScene == IAssetLoaderSystem.EntryPoint.Global));
+                                                || p.Prefix == plugin.Prefix && (p.LoadingScene == SceneEntryPoint.Global 
+                                                    || plugin.LoadingScene == SceneEntryPoint.Global));
         }
     }
 }

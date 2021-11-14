@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using TimberbornAPI.AssetLoader.PluginSystem;
+using TimberbornAPI.Common;
 using UnityEngine;
 
 namespace TimberbornAPI.AssetLoader.AssetSystem
@@ -36,7 +37,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         {
             if (IsBundleLoaded || AssetBundle != null)
             {
-                if(_plugin.LoadingScene == IAssetLoaderSystem.EntryPoint.Global)
+                if(_plugin.LoadingScene == SceneEntryPoint.Global)
                     return;
                 Console.WriteLine($"Asset: {FileName} was already loaded.");
                 return;
