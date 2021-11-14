@@ -14,6 +14,7 @@
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.6" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.4.16" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
+    <PackageReference Include="LinqToCsv" Version="1.5.0" />
     <PackageReference Include="UnityEngine.Modules" Version="2021.1.27" IncludeAssets="compile" />
   </ItemGroup>
   
