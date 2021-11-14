@@ -26,6 +26,12 @@ namespace TimberbornAPI.AssetLoader
             Console.WriteLine($"Creating new asset area with prefix: {prefix}");
             CreateNewPluginAsset(prefix, new [] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
         }
+        
+        public void AddSceneAssets(string prefix)
+        {
+            Console.WriteLine($"Creating new asset area with prefix: {prefix}");
+            CreateNewPluginAsset(prefix, new [] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), IAssetLoaderSystem.EntryPoint.InGame);
+        }
 
         public void LoadSceneAssets(IAssetLoaderSystem.EntryPoint scene)
         {
