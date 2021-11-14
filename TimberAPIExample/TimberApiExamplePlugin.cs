@@ -10,6 +10,7 @@ using UnityEngine;
 using Timberborn.FactionSystem;
 using Timberborn.WeatherSystem;
 using TimberbornAPI;
+using TimberbornAPI.AssetLoader;
 using TimberbornAPI.Event;
 
 namespace TimberAPIExample {
@@ -31,6 +32,10 @@ namespace TimberAPIExample {
             TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
             Logger.LogInfo("TimberAPIExample is loaded!");
             
+            // Adds in game assets with the prefix TimberAPIExample, default folder is assets
+            TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame);
+            // Adds in game assets with prefix TimberAPIExample with custom location > assets > ingame.
+            // TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame, new []{ "assets", "ingame" });
             
             // This is only for the example mod to provide automatic configurators.
             InstallAutoConfigurators();

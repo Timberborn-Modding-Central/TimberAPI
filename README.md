@@ -55,5 +55,20 @@ public UIBuilderFragmentExample(IUIBuilder builder)
 }
 ```
 
+## Asset loader
+1. Register asset to the game (default asset file location `assets`)
+2. Use the `IAssetLoader` to use the loaded assets, `IAssetLoader` will automatically be injected into binded classes
+```c#
+TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame);
+```
+Custom asset root location:
+```c#
+TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame, new []{ "assets", "ingame" });
+```
+```c#
+private readonly IAssetLoader _assetLoader;
+_assetLoader.Load<Sprite>("prefix/subfolder/filename/itemname")
+```
+
 
 See [ExamplePlugin](https://github.com/Timberborn-Modding-Central/TimberAPI/blob/main/TimberAPIExample/TimberApiExamplePlugin.cs) for more examples
