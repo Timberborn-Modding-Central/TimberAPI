@@ -15,7 +15,7 @@ namespace TimberbornAPI.AssetLoader.Patches
             containerDefinition.Install(new AssetConfigurator());
         }
     }
-    
+
     [HarmonyPatch(typeof(MainMenuSceneConfigurator), "Configure", typeof(IContainerDefinition))]
     public static class MainMenuSceneConfiguratorPatch
     {
@@ -24,7 +24,7 @@ namespace TimberbornAPI.AssetLoader.Patches
             containerDefinition.Install(new AssetConfigurator());
         }
     }
-    
+
     [HarmonyPatch(typeof(MapEditorConfigurator), "Configure", typeof(IContainerDefinition))]
     public static class MapEditorConfiguratorPatch
     {

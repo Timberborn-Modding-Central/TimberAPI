@@ -13,7 +13,7 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
         {
             _plugins = new List<Plugin>();
         }
-        
+
         /// <summary>
         /// Finds plugin by their prefix withing the active entry point or global
         /// </summary>
@@ -22,27 +22,27 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
         /// <exception cref="PrefixNotFoundException"></exception>
         public Plugin FindByPrefix(string prefix)
         {
-            Plugin modPlugin = _plugins.FirstOrDefault(plugin => plugin.Prefix == prefix && (plugin.LoadingScene == AssetLoaderSystem.ActiveScene 
+            Plugin modPlugin = _plugins.FirstOrDefault(plugin => plugin.Prefix == prefix && (plugin.LoadingScene == AssetLoaderSystem.ActiveScene
                 || plugin.LoadingScene == SceneEntryPoint.Global));
-            
-            if(modPlugin == null)
+
+            if (modPlugin == null)
                 throw new PrefixNotFoundException(prefix);
             return modPlugin;
         }
 
         public void Add(Plugin plugin)
         {
-            if(PluginPrefixInUse(plugin))
+            if (PluginPrefixInUse(plugin))
                 throw new PluginPrefixInUseException(plugin);
-            
+
             _plugins.Add(plugin);
         }
-        
+
         public List<Plugin> All()
         {
             return _plugins;
         }
-        
+
         /// <summary>
         /// Checks if prefix is already used in the given entrypoint or global
         /// </summary>
@@ -50,8 +50,8 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
         /// <returns></returns>
         private bool PluginPrefixInUse(Plugin plugin)
         {
-            return _plugins.Any(p => (p.Prefix == plugin.Prefix && p.LoadingScene == plugin.LoadingScene) 
-                                                || p.Prefix == plugin.Prefix && (p.LoadingScene == SceneEntryPoint.Global 
+            return _plugins.Any(p => (p.Prefix == plugin.Prefix && p.LoadingScene == plugin.LoadingScene)
+                                                || p.Prefix == plugin.Prefix && (p.LoadingScene == SceneEntryPoint.Global
                                                     || plugin.LoadingScene == SceneEntryPoint.Global));
         }
     }

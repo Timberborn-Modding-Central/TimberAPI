@@ -7,7 +7,7 @@ namespace ModConfigMenu.UIBuilder.CustomElements
     public class LocalizableSlider : Slider, ILocalizableElement
     {
         private string _textLocKey;
-        
+
         public string TextLocKey
         {
             set

@@ -8,7 +8,7 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
         public readonly AssetRepository AssetRepository;
 
         public readonly string AssemblyPath;
-        
+
         public readonly string Prefix;
 
         public readonly SceneEntryPoint LoadingScene;

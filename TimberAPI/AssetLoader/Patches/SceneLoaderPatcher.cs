@@ -20,7 +20,7 @@ namespace TimberbornAPI.AssetLoader.Patches
                 TimberAPI.AssetLoaderSystem.LoadSceneAssets(SceneEntryPoint.MainMenu);
             }
         }
-        
+
         [HarmonyPatch(typeof(MainMenuSceneLoader), "StartMainMenu")]
         public static class MMainMenuSceneLoaderPatch
         {
@@ -29,7 +29,7 @@ namespace TimberbornAPI.AssetLoader.Patches
                 LoadHelper.LoadSceneAssets(SceneEntryPoint.MainMenu);
             }
         }
-        
+
         [HarmonyPatch(typeof(MasterSceneLoader), "StartNewGame", typeof(NewGameConfiguration))]
         public static class MasterSceneLoaderStartNewPatch
         {
@@ -38,7 +38,7 @@ namespace TimberbornAPI.AssetLoader.Patches
                 LoadHelper.LoadSceneAssets(SceneEntryPoint.InGame);
             }
         }
-        
+
         [HarmonyPatch(typeof(MasterSceneLoader), "StartSaveGame", typeof(SaveReference))]
         public static class MasterSceneLoaderStartSavePatch
         {
@@ -47,7 +47,7 @@ namespace TimberbornAPI.AssetLoader.Patches
                 LoadHelper.LoadSceneAssets(SceneEntryPoint.InGame);
             }
         }
-        
+
         [HarmonyPatch(typeof(MapEditorSceneLoader), "StartNewMap")]
         public static class MapEditorSceneLoaderStartNewPatch
         {
@@ -56,7 +56,7 @@ namespace TimberbornAPI.AssetLoader.Patches
                 LoadHelper.LoadSceneAssets(SceneEntryPoint.MapEditor);
             }
         }
-        
+
         [HarmonyPatch(typeof(MapEditorSceneLoader), "LoadMap", typeof(MapFileReference))]
         public static class MapEditorSceneLoaderLoadPatch
         {

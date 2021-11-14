@@ -1,7 +1,8 @@
 ﻿using Bindito.Core;
 using Timberborn.SingletonSystem;
 
-namespace TimberbornAPI.Event {
+namespace TimberbornAPI.Event
+{
     /**
      * Extend Listener class to automatically register event listening
      * Listen to any event with [OnEvent]
@@ -9,15 +10,18 @@ namespace TimberbornAPI.Event {
      * You must also bind that class in a Configurator and add it with 
      * TimberAPI.Depeendencies.AddConfigurator()
      */
-    public abstract class Listener : ILoadableSingleton {
+    public abstract class Listener : ILoadableSingleton
+    {
         private EventBus _eventBus;
 
         [Inject]
-        public void InjectDependencies(EventBus eventBus) {
+        public void InjectDependencies(EventBus eventBus)
+        {
             _eventBus = eventBus;
         }
 
-        public void Load() {
+        public void Load()
+        {
             _eventBus.Register(this);
         }
     }

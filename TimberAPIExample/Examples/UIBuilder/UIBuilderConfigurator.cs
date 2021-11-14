@@ -11,7 +11,7 @@ namespace TimberAPIExample.Examples.UIBuilder
             containerDefinition.Bind<UIBuilderFragmentExample>().AsSingleton();
             containerDefinition.MultiBind<EntityPanelModule>().ToProvider<EntityPanelModuleProvider>().AsSingleton();
         }
-        
+
         private class EntityPanelModuleProvider : IProvider<EntityPanelModule>
         {
             private readonly UIBuilderFragmentExample _fragmentExample;

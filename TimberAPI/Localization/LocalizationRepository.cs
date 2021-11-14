@@ -23,7 +23,7 @@ namespace TimberbornAPI.Localizations
         {
             Dictionary<string, string> dictionary1 = new Dictionary<string, string>();
             Dictionary<string, string> dictionary2 = GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey)).ToDictionary(record => record.Id, record => record.Text);
-            
+
             foreach (LocalizationRecord localizationRecord in GetDefaultLocalization())
             {
                 string id = localizationRecord.Id;
@@ -39,7 +39,7 @@ namespace TimberbornAPI.Localizations
 
             return dictionary1;
         }
-        
+
         /// <summary>
         /// Parses text files into LocalizationRecords
         /// </summary>
@@ -74,10 +74,10 @@ namespace TimberbornAPI.Localizations
             {
                 string message = "Unable to parse file for " + localization + ".";
                 if (ex is AggregatedException aggregatedException1)
-                    message = message + " First error: " + ((List<Exception>) aggregatedException1.m_InnerExceptionsList)[0].Message;
+                    message = message + " First error: " + ((List<Exception>)aggregatedException1.m_InnerExceptionsList)[0].Message;
                 if (localization == LocalizationCodes.Default)
                     throw new InvalidDataException(message, ex);
-                Debug.LogError((object) message);
+                Debug.LogError((object)message);
                 return new List<LocalizationRecord>();
             }
         }
@@ -100,14 +100,14 @@ namespace TimberbornAPI.Localizations
                 string pluginLocalizationPath = Path.Combine(Path.GetDirectoryName(keyValuePair.Value.Location) ?? string.Empty, LocalizationPathKey);
                 (bool hasLocalization, string localizationName) = LocalizationNameOrDefault(pluginLocalizationPath, localizationKey);
 
-                if(!hasLocalization)
+                if (!hasLocalization)
                     continue;
                 localizationFilePaths.Add(Path.Combine(pluginLocalizationPath, localizationName));
             }
 
             return localizationFilePaths;
         }
-        
+
         /// <summary>
         /// Check if localization file exists, return default if not
         /// Returns false if default and localization file doesn't exists 
@@ -118,16 +118,16 @@ namespace TimberbornAPI.Localizations
         {
             if (string.IsNullOrEmpty(localizationName))
                 return (false, "");
-            
+
             if (!Directory.Exists(pluginLocalizationPath))
                 return (false, "");
-            
-            if(File.Exists(Path.Combine(pluginLocalizationPath, localizationName + ".txt")))
+
+            if (File.Exists(Path.Combine(pluginLocalizationPath, localizationName + ".txt")))
                 return (true, localizationName + ".txt");
-            
+
             if (File.Exists(Path.Combine(pluginLocalizationPath, LocalizationCodes.Default + ".txt")))
                 return (true, LocalizationCodes.Default + ".txt");
-            
+
             return (false, "");
         }
     }

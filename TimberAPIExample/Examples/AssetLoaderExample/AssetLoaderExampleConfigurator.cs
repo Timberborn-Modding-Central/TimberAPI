@@ -12,7 +12,7 @@ namespace TimberAPIExample.Examples.AssetLoaderExample
             containerDefinition.Bind<AssetLoaderExampleTool>().AsSingleton();
             containerDefinition.MultiBind<BottomBarModule>().ToProvider<BottomBarModuleProvider>().AsSingleton();
         }
-        
+
         private class BottomBarModuleProvider : IProvider<BottomBarModule>
         {
             private readonly AssetLoaderExampleButton _assetLoaderExampleButton;
@@ -22,7 +22,7 @@ namespace TimberAPIExample.Examples.AssetLoaderExample
             public BottomBarModule Get()
             {
                 BottomBarModule.Builder builder = new BottomBarModule.Builder();
-                builder.AddRightSectionElement((IBottomBarElementProvider) this._assetLoaderExampleButton);
+                builder.AddRightSectionElement((IBottomBarElementProvider)this._assetLoaderExampleButton);
                 return builder.Build();
             }
         }

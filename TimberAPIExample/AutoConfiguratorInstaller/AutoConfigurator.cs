@@ -19,7 +19,7 @@ namespace TimberAPIExample.AutoConfiguratorInstaller
             }
         }
     }
-    
+
     /// <summary>
     /// NOTE: THIS IS NOT AN EXAMPLE TO USE IN REAL MODS
     /// </summary>
@@ -34,7 +34,7 @@ namespace TimberAPIExample.AutoConfiguratorInstaller
             }
         }
     }
-    
+
     /// <summary>
     /// NOTE: THIS IS NOT AN EXAMPLE TO USE IN REAL MODS
     /// </summary>

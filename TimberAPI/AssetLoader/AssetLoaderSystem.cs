@@ -15,7 +15,7 @@ namespace TimberbornAPI.AssetLoader
         internal static SceneEntryPoint ActiveScene = SceneEntryPoint.Global;
 
         internal static PluginRepository PluginRepository = new PluginRepository();
-        
+
         public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint, string[] assetLocation)
         {
             Console.WriteLine($"Creating new asset area with prefix: {prefix}");
@@ -25,13 +25,13 @@ namespace TimberbornAPI.AssetLoader
         public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint)
         {
             Console.WriteLine($"Creating new asset area with prefix: {prefix}");
-            CreateNewPluginAsset(prefix, new [] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
+            CreateNewPluginAsset(prefix, new[] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
         }
-        
+
         public void AddSceneAssets(string prefix)
         {
             Console.WriteLine($"Creating new asset area with prefix: {prefix}");
-            CreateNewPluginAsset(prefix, new [] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), SceneEntryPoint.InGame);
+            CreateNewPluginAsset(prefix, new[] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), SceneEntryPoint.InGame);
         }
 
         public void LoadSceneAssets(SceneEntryPoint scene)
@@ -52,15 +52,15 @@ namespace TimberbornAPI.AssetLoader
                 plugin.AssetRepository.UnloadAll();
             }
         }
-        
+
         private void CreateNewPluginAsset(string prefix, string[] assetLocation, string assemblyFolder, SceneEntryPoint loadingScene)
         {
-            if(assemblyFolder == null || string.IsNullOrEmpty(assemblyFolder))
+            if (assemblyFolder == null || string.IsNullOrEmpty(assemblyFolder))
             {
                 Console.WriteLine($"Failed to load assets with the prefix {prefix}. dll location was not found");
                 return;
             }
-            
+
             try
             {
                 Plugin plugin = new Plugin(prefix, assetLocation, assemblyFolder, loadingScene);
@@ -89,7 +89,7 @@ namespace TimberbornAPI.AssetLoader
                 throw;
             }
         }
-        
+
         /// <summary>
         /// returns all asset locations with a relative path.
         /// </summary>
@@ -100,7 +100,7 @@ namespace TimberbornAPI.AssetLoader
         {
             return FromAbsoluteToRelative(RecursiveAssetSearch(Path.Combine(assemblyPath, rootPath)), rootPath);
         }
-        
+
         /// <summary>
         /// Extracts the absolute path location
         /// </summary>
@@ -109,11 +109,11 @@ namespace TimberbornAPI.AssetLoader
         /// <returns></returns>
         private List<string[]> FromAbsoluteToRelative(IEnumerable<string> absolutePathList, string root)
         {
-            return absolutePathList.Select(absolutePath => 
+            return absolutePathList.Select(absolutePath =>
                 absolutePath[(absolutePath.LastIndexOf(root, StringComparison.Ordinal) + root.Length + 1)..].Split('\\'))
                 .ToList();
         }
-        
+
         /// <summary>
         /// returns absolute paths from all assets inside the root folder
         /// </summary>
@@ -137,9 +137,9 @@ namespace TimberbornAPI.AssetLoader
         /// <returns></returns>
         private IEnumerable<string> AssetsInFolder(string absolutePath)
         {
-            return Directory.GetFiles(absolutePath).Where(asset => 
-                !Path.HasExtension(asset) 
-                || Path.GetExtension(asset).Equals(".bundle") 
+            return Directory.GetFiles(absolutePath).Where(asset =>
+                !Path.HasExtension(asset)
+                || Path.GetExtension(asset).Equals(".bundle")
                 || Path.GetExtension(asset).Equals(".asset"));
         }
     }

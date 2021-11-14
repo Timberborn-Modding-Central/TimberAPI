@@ -2,25 +2,26 @@
 using TimberbornAPI.Dependency;
 using TimberbornAPI.Localizations;
 
-namespace TimberbornAPI {
-    /**
-     * Entrypoint for all APIs
-     * Only use this in Awake()
-     */
-    public static class TimberAPI {
-        /**
-         * Entrypoint for Dependency-related utilities
-         */
+namespace TimberbornAPI
+{
+    /// <summary>
+    /// Provides simplified APIs for writing mods.
+    /// </summary>
+    public static class TimberAPI
+    {
+        /// <summary>
+        /// APIs for dependency injection and management
+        /// </summary>
         public static IDependencies Dependencies = new Dependencies();
 
-        /**
-         * Entrypoint for Localization-related utilities
-         */
+        /// <summary>
+        /// APIs for localization and language files
+        /// </summary>
         public static ILocalization Localization = new Localization();
 
-        /**
-         * Entrypoint for AssetLoader-related utilities
-         */
+        /// <summary>
+        /// APIs to load and fetch assets
+        /// </summary>
         public static IAssetLoaderSystem AssetLoaderSystem = new AssetLoaderSystem();
     }
 }
