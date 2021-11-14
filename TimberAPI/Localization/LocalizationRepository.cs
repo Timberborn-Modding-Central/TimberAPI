@@ -12,6 +12,8 @@ namespace TimberbornAPI.Localizations
 {
     internal static class LocalizationRepository
     {
+        public const string LocalizationPathKey = "lang";
+
         /// <summary>
         /// Modified timberborn method Timberborn.Localization.LocalizationRepository.GetLocalization
         /// </summary>
@@ -95,7 +97,7 @@ namespace TimberbornAPI.Localizations
             List<string> localizationFilePaths = new List<string>();
             foreach (KeyValuePair<string, BepInEx.PluginInfo> keyValuePair in Chainloader.PluginInfos.Where(kv => kv.Value.Dependencies.Any(dep => dep.DependencyGUID == TimberAPIPlugin.Guid)))
             {
-                string pluginLocalizationPath = Path.Combine(Path.GetDirectoryName(keyValuePair.Value.Location) ?? string.Empty, "lang");
+                string pluginLocalizationPath = Path.Combine(Path.GetDirectoryName(keyValuePair.Value.Location) ?? string.Empty, LocalizationPathKey);
                 (bool hasLocalization, string localizationName) = LocalizationNameOrDefault(pluginLocalizationPath, localizationKey);
 
                 if(!hasLocalization)
