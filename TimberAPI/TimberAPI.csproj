@@ -11,11 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BepInEx.Analyzers" Version="1.0.6" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Analyzers" Version="1.0.7" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.4.16" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
-    <PackageReference Include="LinqToCsv" Version="1.5.0" />
-    <PackageReference Include="UnityEngine.Modules" Version="2021.1.27" IncludeAssets="compile" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.2.2" IncludeAssets="compile" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -24,15 +23,5 @@
 
   <ItemGroup>
     <Reference Include="../libs/*.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Dependency\" />
-    <None Remove="Event\" />
-    <None Remove="Localization\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dependency\" />
-    <Folder Include="Event\" />
-    <Folder Include="Localization\" />
   </ItemGroup>
 </Project>
