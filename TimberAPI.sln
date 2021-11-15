@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.11
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberAPI", "TimberApi\TimberAPI.csproj", "{20D47DCC-AF36-47EC-A6AA-F5CB19D53EC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberAPI", "TimberAPI\TimberAPI.csproj", "{20D47DCC-AF36-47EC-A6AA-F5CB19D53EC4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberAPIExample", "TimberAPIExample\TimberAPIExample.csproj", "{018FC7B7-A51D-4078-95FD-6419BF3C7FCD}"
 EndProject
