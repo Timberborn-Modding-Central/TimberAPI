@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using Timberborn.EntityPanelSystem;
 using TimberbornAPI.UIBuilderSystem;
@@ -16,7 +17,8 @@ namespace TimberAPIExample.Examples.UIBuilder
         {
             _builder = builder;
         }
-
+        
+        [SuppressMessage("", "Publicizer001")]
         public VisualElement InitializeFragment()
         {
             // Create a root visual element that is used as fragment

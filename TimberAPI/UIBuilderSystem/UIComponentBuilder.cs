@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -276,6 +277,7 @@ namespace TimberbornAPI.UIBuilderSystem
             return AddTextField(textField, inputName, defaultText, width, height, fontsize, multiline, textAnchor, style);
         }
 
+        [SuppressMessage("", "Publicizer001")]
         private IUIComponentBuilder AddTextField(TextField textField, string inputName, string defaultText, Length width, Length height, Length fontsize, bool multiline, TextAnchor textAnchor, Action<IStyle> style)
         {
             style?.Invoke(textField.style);

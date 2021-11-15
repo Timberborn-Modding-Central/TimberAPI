@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using UnityEngine.UIElements;
 using LocalizableButton = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableButton;
@@ -7,6 +8,7 @@ using LocalizableToggle = TimberbornAPI.UIBuilderSystem.CustomElements.Localizab
 
 namespace TimberbornAPI.UIBuilderSystem
 {
+    [SuppressMessage("", "Publicizer001")]
     public class ElementFactory : IElementFactory
     {
         public Toggle Toggle(IEnumerable<string> classes = null, string name = null)

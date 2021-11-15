@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using UnityEngine.UIElements;
 
@@ -22,6 +23,7 @@ namespace TimberbornAPI.UIBuilderSystem
 
         private Action<IStyle> _style;
 
+        [SuppressMessage("", "Publicizer001")]
         public UIBoxBuilder(IElementFactory elementFactory, VisualElementInitializer visualElementInitializer)
         {
             _root = new UIComponentBuilder(elementFactory, visualElementInitializer);
