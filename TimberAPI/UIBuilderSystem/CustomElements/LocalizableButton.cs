@@ -8,7 +8,7 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
     public class LocalizableButton : Button, ILocalizableElement
     {
         private string _textLocKey;
-        
+
         public string TextLocKey
         {
             set
@@ -17,7 +17,7 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
                     _textLocKey = value;
             }
         }
-        
+
         private readonly NineSliceBackground _nineSliceBackground = new NineSliceBackground();
 
         public LocalizableButton()
@@ -26,8 +26,8 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
             this.generateVisualContent = this.generateVisualContent + new Action<MeshGenerationContext>(this.OnGenerateVisualContent);
             foreach (Delegate b in invocationList)
             {
-                this.generateVisualContent = (Action<MeshGenerationContext>) Delegate.Remove((Delegate) this.generateVisualContent, b);
-                this.generateVisualContent = (Action<MeshGenerationContext>) Delegate.Combine((Delegate) this.generateVisualContent, b);
+                this.generateVisualContent = (Action<MeshGenerationContext>)Delegate.Remove((Delegate)this.generateVisualContent, b);
+                this.generateVisualContent = (Action<MeshGenerationContext>)Delegate.Combine((Delegate)this.generateVisualContent, b);
             }
             this.RegisterCallback<CustomStyleResolvedEvent>(new EventCallback<CustomStyleResolvedEvent>(this.OnCustomStyleResolved));
         }

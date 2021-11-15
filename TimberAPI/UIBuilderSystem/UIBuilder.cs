@@ -13,12 +13,12 @@ namespace TimberbornAPI.UIBuilderSystem
             this._elementFactory = elementFactory;
             this._visualElementInitializer = visualElementInitializer;
         }
-        
+
         public IUIBoxBuilder CreateBoxBuilder()
         {
             return new UIBoxBuilder(_elementFactory, _visualElementInitializer);
         }
-        
+
         public IUIComponentBuilder CreateComponentBuilder()
         {
             return new UIComponentBuilder(_elementFactory, _visualElementInitializer);

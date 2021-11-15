@@ -7,7 +7,7 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
     public class LocalizableSliderInt : SliderInt, ILocalizableElement
     {
         private string _textLocKey;
-        
+
         public string TextLocKey
         {
             set

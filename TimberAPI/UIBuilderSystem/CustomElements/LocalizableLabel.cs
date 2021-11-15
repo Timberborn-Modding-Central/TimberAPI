@@ -8,7 +8,7 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
     public class LocalizableLabel : Label, ILocalizableElement
     {
         private string _textLocKey;
-        
+
         public string TextLocKey
         {
             set
@@ -26,8 +26,8 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
             generateVisualContent = generateVisualContent + OnGenerateVisualContent;
             foreach (Delegate b in invocationList)
             {
-                generateVisualContent = (Action<MeshGenerationContext>) Delegate.Remove(generateVisualContent, b);
-                generateVisualContent = (Action<MeshGenerationContext>) Delegate.Combine(generateVisualContent, b);
+                generateVisualContent = (Action<MeshGenerationContext>)Delegate.Remove(generateVisualContent, b);
+                generateVisualContent = (Action<MeshGenerationContext>)Delegate.Combine(generateVisualContent, b);
             }
             RegisterCallback(new EventCallback<CustomStyleResolvedEvent>(OnCustomStyleResolved));
         }

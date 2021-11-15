@@ -9,7 +9,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         /// <param name="path">Path to the asset</param>
         /// <typeparam name="T">Unity asset object</typeparam>
         T Load<T>(string path) where T : UnityEngine.Object;
-        
+
         /// <summary>
         /// Load a single asset with prefix and path string
         /// </summary>
@@ -17,7 +17,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         /// <param name="path">Path to asset without the prefix</param>
         /// <typeparam name="T">Unity asset object</typeparam>
         T Load<T>(string prefix, string path) where T : UnityEngine.Object;
-        
+
         /// <summary>
         /// Load a single asset
         /// </summary>
@@ -27,7 +27,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         /// <param name="name">name of object</param>
         /// <typeparam name="T">Unity asset object</typeparam>
         T Load<T>(string prefix, string[] path, string fileName, string name) where T : UnityEngine.Object;
-        
+
         /// <summary>
         /// Load all assets inside bundle
         /// Example: Prefix/Subfolder/Filename
@@ -35,7 +35,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         /// <param name="path">Path to the asset</param>
         /// <typeparam name="T">Unity asset object</typeparam>
         T[] LoadAll<T>(string path) where T : UnityEngine.Object;
-        
+
         /// <summary>
         /// Load all assets inside bundle
         /// </summary>
@@ -43,7 +43,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         /// <param name="path">Path to asset without the prefix</param>
         /// <typeparam name="T">Unity asset object</typeparam>
         T[] LoadAll<T>(string prefix, string path) where T : UnityEngine.Object;
-        
+
         /// <summary>
         /// Load all assets inside bundle
         /// </summary>

@@ -12,25 +12,25 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         {
             _assetBundles = new List<CustomAssetBundle>();
         }
-        
+
         public void Add(CustomAssetBundle customAssetBundle)
         {
             _assetBundles.Add(customAssetBundle);
         }
-        
+
         public CustomAssetBundle FindByPathAndFileName(string[] path, string fileName)
         {
             CustomAssetBundle bundle = _assetBundles.FirstOrDefault(bundle => bundle.AssetPath.SequenceEqual(path) && bundle.FileName == fileName);
-            if(bundle == null)
+            if (bundle == null)
                 throw new AssetNotFoundException();
             return bundle;
         }
-        
+
         public IEnumerable<CustomAssetBundle> All()
         {
             return _assetBundles;
         }
-        
+
         public void LoadAll()
         {
             foreach (CustomAssetBundle customAssetBundle in _assetBundles)
@@ -38,7 +38,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
                 customAssetBundle.Load();
             }
         }
-        
+
         public void UnloadAll()
         {
             foreach (CustomAssetBundle customAssetBundle in _assetBundles)

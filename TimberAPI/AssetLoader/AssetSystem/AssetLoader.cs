@@ -23,7 +23,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
                 throw;
             }
         }
-        
+
         public T Load<T>(string prefix, string path) where T : UnityEngine.Object
         {
             try
@@ -41,7 +41,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
                 throw;
             }
         }
-        
+
         public T Load<T>(string prefix, string[] path, string fileName, string name) where T : UnityEngine.Object
         {
             try
@@ -68,7 +68,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
                 throw;
             }
         }
-        
+
         public T[] LoadAll<T>(string path) where T : UnityEngine.Object
         {
             try
@@ -86,7 +86,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
                 throw;
             }
         }
-        
+
         public T[] LoadAll<T>(string prefix, string path) where T : UnityEngine.Object
         {
             try
@@ -103,7 +103,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
                 throw;
             }
         }
-        
+
         public T[] LoadAll<T>(string prefix, string[] path, string fileName) where T : UnityEngine.Object
         {
             try

@@ -1,8 +1,10 @@
 ﻿using Bindito.Core;
 using TimberbornAPI.Common;
 
-namespace TimberbornAPI.Dependency {
-    public interface IDependencies {
+namespace TimberbornAPI.Dependency
+{
+    public interface IDependencies
+    {
         /**
          * Install a Configurator into a scene to allow dependency injection
          * The class must implement IConfigurator and can use Bind<>() to inject dependencies

@@ -6,7 +6,7 @@ namespace TimberbornAPI.UIBuilderSystem
         /// Creates a box builder for making boxes
         /// </summary>
         IUIBoxBuilder CreateBoxBuilder();
-        
+
         /// <summary>
         /// Creates a Component builder for making components/fragments
         /// </summary>

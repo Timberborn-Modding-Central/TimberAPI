@@ -14,7 +14,7 @@ namespace TimberAPIExample.Examples.AssetLoaderExample
 
         public AssetLoaderExampleButton(
             AssetLoaderExampleTool assetLoaderExampleTool,
-            ToolButtonFactory toolButtonFactory, 
+            ToolButtonFactory toolButtonFactory,
             // Inject the asset loader
             IAssetLoader assetLoader)
         {
@@ -27,8 +27,8 @@ namespace TimberAPIExample.Examples.AssetLoaderExample
         {
             return BottomBarElement
                 .CreateSingleLevel(this._toolButtonFactory
-                .CreateGrouplessGreen((Tool) this._assetLoaderExampleTool, 
-                            // Use the asset loader to load a sprite named present which is located in the icon file
+                .CreateGrouplessGreen((Tool)this._assetLoaderExampleTool,
+                    // Use the asset loader to load a sprite named present which is located in the icon file
                     _assetLoader.Load<Sprite>("TimberAPIExample/icons/present"))
                 .Root);
         }
