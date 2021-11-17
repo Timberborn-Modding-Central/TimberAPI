@@ -1,6 +1,6 @@
 using LINQtoCSV;
 
-namespace TimberbornAPI.Localizations
+namespace TimberbornAPI.LocalizationSystem
 {
     /// <summary>
     /// Timberborn code Timberborn.Localization.LocalizationRecord

@@ -4,27 +4,28 @@ using System.Reflection;
 using HarmonyLib;
 using Timberborn.Common;
 
-namespace TimberbornAPI.Localizations
+namespace TimberbornAPI.LocalizationSystem
 {
     [HarmonyPatch]
     public class Localization : ILocalization
     {
         private static Dictionary<string, string> labelsToInject = new();
 
-        /**
-         * Add a label into the current localization
-         * 
-         * Example: CreativeMode.ToolGroups.MapEditor : "Map editor tools" 
-         * For use in DisplayNameLocKey, such as in ToolGroup
-         */
+        /// <summary>
+        /// Add a label into the current localization
+        /// For use in DisplayNameLocKey, such as in ToolGroup
+        /// </summary>
+        /// <param name="key">The key to reference the label with later</param>
+        /// <param name="value">The localized label</param>
         public void AddLabel(string key, string value)
         {
             labelsToInject.Add(key, value);
         }
 
-        /**
-         * Add multiple labels into the current localization
-         */
+        /// <summary>
+        /// Add multiple labels into the current localization
+        /// </summary>
+        /// <param name="labels">Multiple key:value labels to add</param>
         public void AddLabels(Dictionary<string, string> labels)
         {
             labelsToInject.AddRange(labels);

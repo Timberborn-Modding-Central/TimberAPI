@@ -25,9 +25,9 @@ namespace TimberbornAPI.Internal
         /// </summary>
         public void InstallUIBuilderConfigurators()
         {
-            TimberAPI.Dependencies.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.InGame);
-            TimberAPI.Dependencies.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MainMenu);
-            TimberAPI.Dependencies.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
+            TimberAPI.Dependency.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.InGame);
+            TimberAPI.Dependency.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MainMenu);
+            TimberAPI.Dependency.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
         }
     }
 }

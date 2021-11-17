@@ -10,7 +10,7 @@ using TimberbornAPI.Common;
 
 namespace TimberbornAPI.AssetLoader
 {
-    public class AssetLoaderSystem : IAssetLoaderSystem
+    public class AssetLoaderService : IAssetLoaderService
     {
         internal static SceneEntryPoint ActiveScene = SceneEntryPoint.Global;
 
