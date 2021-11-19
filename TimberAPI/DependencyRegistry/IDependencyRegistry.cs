@@ -3,7 +3,7 @@ using TimberbornAPI.Common;
 
 namespace TimberbornAPI.DependencySystem
 {
-    public interface IDependency
+    public interface IDependencyRegistry
     {
         /// <summary>
         /// Install a Configurator into a scene to allow dependency injection

@@ -31,13 +31,13 @@ namespace TimberAPIExample
             // Saves the logger instance
             Log = Logger;
             // Register our configurator
-            TimberAPI.Dependency.AddConfigurator(new ExampleConfigurator());
+            TimberAPI.DependecyRegistry.AddConfigurator(new ExampleConfigurator());
             // Add a label to localization
             TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
             Logger.LogInfo("TimberAPIExample is loaded!");
 
             // Adds in game assets with the prefix TimberAPIExample, default folder is assets
-            TimberAPI.AssetLoaderService.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame);
+            TimberAPI.AssetRegistry.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame);
             // Alternatively, add in game assets with prefix TimberAPIExample with custom location > assets > ingame.
             // TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame, new []{ "assets", "ingame" });
 
@@ -47,9 +47,9 @@ namespace TimberAPIExample
 
         public void InstallAutoConfigurators()
         {
-            TimberAPI.Dependency.AddConfigurator(new AutoConfiguratorInGame());
-            TimberAPI.Dependency.AddConfigurator(new AutoConfiguratorMainMenu());
-            TimberAPI.Dependency.AddConfigurator(new AutoConfiguratorEditor());
+            TimberAPI.DependecyRegistry.AddConfigurator(new AutoConfiguratorInGame());
+            TimberAPI.DependecyRegistry.AddConfigurator(new AutoConfiguratorMainMenu());
+            TimberAPI.DependecyRegistry.AddConfigurator(new AutoConfiguratorEditor());
         }
     }
 

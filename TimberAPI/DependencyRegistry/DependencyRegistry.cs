@@ -10,7 +10,7 @@ using UnityEngine;
 namespace TimberbornAPI.DependencySystem
 {
     [HarmonyPatch]
-    public class Dependency : IDependency
+    public class DependencyRegistry : IDependencyRegistry
     {
         private static Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPoint = new();
 
@@ -37,32 +37,27 @@ namespace TimberbornAPI.DependencySystem
             }
         }
 
-        
-        // Inject configurators into MasterScene (InGame)
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MasterSceneConfigurator), "Configure")]
-        static void InjectMasterScene(IContainerDefinition containerDefinition)
+        static void InjectIntoMasterScene(IContainerDefinition containerDefinition)
         {
             InstallAll(containerDefinition, SceneEntryPoint.InGame);
         }
 
-        // Inject configurators into MainMenuScene
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MainMenuSceneConfigurator), "Configure")]
-        static void InjectMainMenuScene(IContainerDefinition containerDefinition)
+        static void InjectIntoMainMenuScene(IContainerDefinition containerDefinition)
         {
             InstallAll(containerDefinition, SceneEntryPoint.MainMenu);
         }
 
-        // Inject configurators into MapEditorScene
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MapEditorSceneConfigurator), "Configure")]
-        static void InjectMapEditorScene(IContainerDefinition containerDefinition)
+        static void InjectIntoMapEditorScene(IContainerDefinition containerDefinition)
         {
             InstallAll(containerDefinition, SceneEntryPoint.MapEditor);
         }
 
-        // Install all the configurators for the given entryPoint        
         private static void InstallAll(IContainerDefinition containerDefinition, SceneEntryPoint entryPoint)
         {
             List<IConfigurator> configurators =

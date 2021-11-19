@@ -2,7 +2,7 @@ using TimberbornAPI.Common;
 
 namespace TimberbornAPI.AssetLoader
 {
-    public interface IAssetLoaderService
+    public interface IAssetRegistry
     {
         /// <summary>
         /// Adds assets to a scene that are placed in the assetLocation

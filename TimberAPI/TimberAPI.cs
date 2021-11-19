@@ -12,7 +12,7 @@ namespace TimberbornAPI
         /// <summary>
         /// APIs for dependency injection and management
         /// </summary>
-        public static IDependency Dependency = new Dependency();
+        public static IDependencyRegistry DependecyRegistry = new DependencyRegistry();
 
         /// <summary>
         /// APIs for localization and language files
@@ -22,6 +22,6 @@ namespace TimberbornAPI
         /// <summary>
         /// APIs to load and fetch assets
         /// </summary>
-        public static IAssetLoaderService AssetLoaderService = new AssetLoaderService();
+        public static IAssetRegistry AssetRegistry = new AssetRegistry();
     }
 }

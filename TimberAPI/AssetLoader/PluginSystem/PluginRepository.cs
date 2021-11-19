@@ -22,7 +22,7 @@ namespace TimberbornAPI.AssetLoader.PluginSystem
         /// <exception cref="PrefixNotFoundException"></exception>
         public Plugin FindByPrefix(string prefix)
         {
-            Plugin modPlugin = _plugins.FirstOrDefault(plugin => plugin.Prefix == prefix && (plugin.LoadingScene == AssetLoaderService.ActiveScene
+            Plugin modPlugin = _plugins.FirstOrDefault(plugin => plugin.Prefix == prefix && (plugin.LoadingScene == AssetRegistry.ActiveScene
                 || plugin.LoadingScene == SceneEntryPoint.Global));
 
             if (modPlugin == null)
