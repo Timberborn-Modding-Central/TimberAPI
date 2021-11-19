@@ -1,6 +1,6 @@
 ﻿using TimberbornAPI.AssetLoader;
-using TimberbornAPI.Dependency;
-using TimberbornAPI.Localizations;
+using TimberbornAPI.DependencySystem;
+using TimberbornAPI.LocalizationSystem;
 
 namespace TimberbornAPI
 {
@@ -12,7 +12,7 @@ namespace TimberbornAPI
         /// <summary>
         /// APIs for dependency injection and management
         /// </summary>
-        public static IDependencies Dependencies = new Dependencies();
+        public static IDependencyRegistry DependecyRegistry = new DependencyRegistry();
 
         /// <summary>
         /// APIs for localization and language files
@@ -22,6 +22,6 @@ namespace TimberbornAPI
         /// <summary>
         /// APIs to load and fetch assets
         /// </summary>
-        public static IAssetLoaderSystem AssetLoaderSystem = new AssetLoaderSystem();
+        public static IAssetRegistry AssetRegistry = new AssetRegistry();
     }
 }

@@ -46,12 +46,12 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         {
             try
             {
-                return AssetLoaderSystem.PluginRepository.FindByPrefix(prefix).AssetRepository
+                return AssetRegistry.PluginRepository.FindByPrefix(prefix).AssetRepository
                     .FindByPathAndFileName(path, fileName).AssetBundle.LoadAsset<T>(name);
             }
             catch (PrefixNotFoundException e)
             {
-                Console.WriteLine($"Given prefix ({e.Prefix}) was not found. did you load it in the correct scene: {AssetLoaderSystem.ActiveScene}");
+                Console.WriteLine($"Given prefix ({e.Prefix}) was not found. did you load it in the correct scene: {AssetRegistry.ActiveScene}");
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
@@ -108,7 +108,7 @@ namespace TimberbornAPI.AssetLoader.AssetSystem
         {
             try
             {
-                return AssetLoaderSystem.PluginRepository.FindByPrefix(prefix).AssetRepository
+                return AssetRegistry.PluginRepository.FindByPrefix(prefix).AssetRepository
                     .FindByPathAndFileName(path, fileName).AssetBundle.LoadAllAssets<T>();
             }
             catch (PrefixNotFoundException e)

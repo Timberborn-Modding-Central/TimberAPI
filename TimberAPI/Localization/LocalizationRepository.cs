@@ -8,7 +8,7 @@ using LINQtoCSV;
 using TimberbornAPI.Internal;
 using UnityEngine;
 
-namespace TimberbornAPI.Localizations
+namespace TimberbornAPI.LocalizationSystem
 {
     internal static class LocalizationRepository
     {

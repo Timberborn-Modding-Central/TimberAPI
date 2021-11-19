@@ -7,17 +7,19 @@ using Timberborn.MasterScene;
 using TimberbornAPI.Common;
 using UnityEngine;
 
-namespace TimberbornAPI.Dependency
+namespace TimberbornAPI.DependencySystem
 {
     [HarmonyPatch]
-    public class Dependencies : IDependencies
+    public class DependencyRegistry : IDependencyRegistry
     {
         private static Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPoint = new();
 
-        /**
-         * Install a Configurator into a scene to allow dependency injection
-         * The class must implement IConfigurator and can use Bind<>() to inject dependencies
-         */
+        /// <summary>
+        /// Install a Configurator into a scene to allow dependency injection
+        /// The class must implement IConfigurator and can use Bind<>() to inject dependencies
+        /// </summary>
+        /// <param name="configurator">The configurator class to inject, which does the binding</param>
+        /// <param name="entryPoint">Scene to bind to, defaults to InGame</param>
         public void AddConfigurator(IConfigurator configurator, SceneEntryPoint entryPoint = SceneEntryPoint.InGame)
         {
             if (entryPoint == SceneEntryPoint.Global)
@@ -35,39 +37,27 @@ namespace TimberbornAPI.Dependency
             }
         }
 
-        /**
-         * Inject configurators into MasterScene (InGame)
-         */
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MasterSceneConfigurator), "Configure")]
-        static void InjectMasterScene(IContainerDefinition containerDefinition)
+        static void InjectIntoMasterScene(IContainerDefinition containerDefinition)
         {
             InstallAll(containerDefinition, SceneEntryPoint.InGame);
         }
 
-        /**
-         * Inject configurators into MainMenuScene
-         */
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MainMenuSceneConfigurator), "Configure")]
-        static void InjectMainMenuScene(IContainerDefinition containerDefinition)
+        static void InjectIntoMainMenuScene(IContainerDefinition containerDefinition)
         {
             InstallAll(containerDefinition, SceneEntryPoint.MainMenu);
         }
 
-        /**
-         * Inject configurators into MapEditorScene
-         */
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MapEditorSceneConfigurator), "Configure")]
-        static void InjectMapEditorScene(IContainerDefinition containerDefinition)
+        static void InjectIntoMapEditorScene(IContainerDefinition containerDefinition)
         {
             InstallAll(containerDefinition, SceneEntryPoint.MapEditor);
         }
 
-        /**
-         * Install all the configurators for the given entryPoint
-         */
         private static void InstallAll(IContainerDefinition containerDefinition, SceneEntryPoint entryPoint)
         {
             List<IConfigurator> configurators =

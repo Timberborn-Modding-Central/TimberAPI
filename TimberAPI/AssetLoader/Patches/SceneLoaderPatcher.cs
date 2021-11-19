@@ -16,8 +16,8 @@ namespace TimberbornAPI.AssetLoader.Patches
         {
             private static void Postfix()
             {
-                TimberAPI.AssetLoaderSystem.LoadSceneAssets(SceneEntryPoint.Global);
-                TimberAPI.AssetLoaderSystem.LoadSceneAssets(SceneEntryPoint.MainMenu);
+                TimberAPI.AssetRegistry.LoadSceneAssets(SceneEntryPoint.Global);
+                TimberAPI.AssetRegistry.LoadSceneAssets(SceneEntryPoint.MainMenu);
             }
         }
 
@@ -73,8 +73,8 @@ namespace TimberbornAPI.AssetLoader.Patches
              */
             internal static void LoadSceneAssets(SceneEntryPoint scene)
             {
-                TimberAPI.AssetLoaderSystem.UnloadSceneAssets(AssetLoaderSystem.ActiveScene);
-                TimberAPI.AssetLoaderSystem.LoadSceneAssets(scene);
+                TimberAPI.AssetRegistry.UnloadSceneAssets(AssetRegistry.ActiveScene);
+                TimberAPI.AssetRegistry.LoadSceneAssets(scene);
             }
         }
     }

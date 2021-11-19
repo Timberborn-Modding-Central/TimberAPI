@@ -1,74 +1,18 @@
 # TimberAPI
-Upcoming API to enable easier Timberborn modding
+Unofficial API to enable easier Timberborn modding
 
-*Currently has the following features:*
-1. Bind your code to Timberborn to allow Dependency Injection. Supports InGame, MainMenu, and MapEditor
-2. Listen to any event. Extend the Listener class and use `[OnEvent]`
-3. Add labels to localization
+### **Currently supported features:**
+1. Bind your code easily with depencency injection
+2. Event listening of any event to get triggered on in game actions
+3. A comprehensive UI component builder
+4. Asset injection, provide your own icons or even unity bundles
+5. Labels and localization support
 
-Wiki (with general Timberborn modding info too!
-[Wiki Link](https://github.com/Timberborn-Modding-Central/TimberAPI/wiki)
+## More Information can be found on the wiki
+**[Timberborn Modding Wiki](https://github.com/Timberborn-Modding-Central/TimberAPI/wiki)**
 
-*To use this API, add this BepInEx annotation:*
-`[BepInDependency("com.timberapi.timberapi")]`
+## TimberAPI Documentation
+**[Documentation for TimberAPI](https://github.com/Timberborn-Modding-Central/TimberAPI/wiki/TimberAPI-Feature-Guide)**
 
-## Dependency Injection:
-1. Create a configurator and bind your class:
-```
-public class ExampleConfigurator : IConfigurator {
-    public void Configure(IContainerDefinition containerDefinition) {
-        containerDefinition.Bind<ExampleListener>().AsSingleton();
-    }
-}
-```
-2. Register it with the game
-```
-TimberAPI.Dependencies.AddConfigurator(new ExampleConfigurator());
-```
-
-## Event Listening
-1. Extend the TimberAPI Listener class, which will automatically hook the eventbus
-2. Listen to an event with `[OnEvent`
-```
-public class ExampleListener : Listener {
-    [OnEvent]
-    public void OnDroughtStarted(DroughtStartedEvent droughtStartedEvent) {...}
-```
-3. Register your class with the game through a configurator (see Dependency Injection)
-
-## Localization Labels 
-1. Add a label
-```
-TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
-```
-
-## UIBuilder
-1. Inject UIBuilder into a configurated class
-2. Build any visual element with the timberborn components
-```c#
-public UIBuilderFragmentExample(IUIBuilder builder)
-{
-    builder.CreateComponentBuilder()
-        .AddButton("First Button", name: "firstButton")
-        ...
-        .Build();
-}
-```
-
-## Asset loader
-1. Register asset to the game (default asset file location `assets`)
-2. Use the `IAssetLoader` to use the loaded assets, `IAssetLoader` will automatically be injected into binded classes
-```c#
-TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame);
-```
-Custom asset root location:
-```c#
-TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame, new []{ "assets", "ingame" });
-```
-```c#
-private readonly IAssetLoader _assetLoader;
-_assetLoader.Load<Sprite>("prefix/subfolder/filename/itemname")
-```
-
-
-See [ExamplePlugin](https://github.com/Timberborn-Modding-Central/TimberAPI/blob/main/TimberAPIExample/TimberApiExamplePlugin.cs) for more examples
+## Provided Sample Plugin with API examples
+**[Example Plugin](https://github.com/Timberborn-Modding-Central/TimberAPI/blob/main/TimberAPIExample/TimberApiExamplePlugin.cs)**

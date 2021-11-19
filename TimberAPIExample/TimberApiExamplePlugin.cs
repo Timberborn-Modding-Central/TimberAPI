@@ -10,7 +10,7 @@ using UnityEngine;
 using Timberborn.FactionSystem;
 using Timberborn.WeatherSystem;
 using TimberbornAPI;
-using TimberbornAPI.Event;
+using TimberbornAPI.EventSystem;
 using TimberbornAPI.Common;
 
 namespace TimberAPIExample
@@ -31,13 +31,13 @@ namespace TimberAPIExample
             // Saves the logger instance
             Log = Logger;
             // Register our configurator
-            TimberAPI.Dependencies.AddConfigurator(new ExampleConfigurator());
+            TimberAPI.DependecyRegistry.AddConfigurator(new ExampleConfigurator());
             // Add a label to localization
             TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
             Logger.LogInfo("TimberAPIExample is loaded!");
 
             // Adds in game assets with the prefix TimberAPIExample, default folder is assets
-            TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame);
+            TimberAPI.AssetRegistry.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame);
             // Alternatively, add in game assets with prefix TimberAPIExample with custom location > assets > ingame.
             // TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame, new []{ "assets", "ingame" });
 
@@ -47,9 +47,9 @@ namespace TimberAPIExample
 
         public void InstallAutoConfigurators()
         {
-            TimberAPI.Dependencies.AddConfigurator(new AutoConfiguratorInGame());
-            TimberAPI.Dependencies.AddConfigurator(new AutoConfiguratorMainMenu());
-            TimberAPI.Dependencies.AddConfigurator(new AutoConfiguratorEditor());
+            TimberAPI.DependecyRegistry.AddConfigurator(new AutoConfiguratorInGame());
+            TimberAPI.DependecyRegistry.AddConfigurator(new AutoConfiguratorMainMenu());
+            TimberAPI.DependecyRegistry.AddConfigurator(new AutoConfiguratorEditor());
         }
     }
 
@@ -79,8 +79,9 @@ namespace TimberAPIExample
     /**
      * Example listener class. Can listen to any event with [OnEvent]
      * It automatically registers, but must be bound with an IConfigurator
+     * This is not comprehensive of all events, but you can use it with any.
      */
-    public class ExampleListener : Listener
+    public class ExampleListener : EventListener
     {
         [OnEvent]
         public void OnToolGroupEntered(ToolGroupEnteredEvent toolGroupEnteredEvent)

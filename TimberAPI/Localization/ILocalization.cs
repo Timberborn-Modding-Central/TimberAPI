@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace TimberbornAPI.Localizations
+namespace TimberbornAPI.LocalizationSystem
 {
     public interface ILocalization
     {
-
         /// <summary>
         /// Add a label into the current localization
         /// For use in DisplayNameLocKey, such as in ToolGroup
