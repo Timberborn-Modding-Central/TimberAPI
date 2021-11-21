@@ -1,5 +1,6 @@
 ﻿using TimberbornAPI.AssetLoader;
 using TimberbornAPI.DependencySystem;
+using TimberbornAPI.GameObjectModifier;
 using TimberbornAPI.LocalizationSystem;
 
 namespace TimberbornAPI
