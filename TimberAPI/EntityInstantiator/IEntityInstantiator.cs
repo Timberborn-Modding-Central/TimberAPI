@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TimberbornAPI.GameObjectModifier
+namespace TimberbornAPI.EntityInstantiatorSystem
 {
     public interface IEntityInstantiator
     {

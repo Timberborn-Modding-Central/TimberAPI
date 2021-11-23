@@ -1,6 +1,6 @@
 using Bindito.Core;
 
-namespace TimberbornAPI.GameObjectModifier
+namespace TimberbornAPI.EntityInstantiatorSystem
 {
     public class ModifierConfigurator : IConfigurator
     {

@@ -5,7 +5,7 @@ using HarmonyLib;
 using Timberborn.EntitySystem;
 using UnityEngine;
 
-namespace TimberbornAPI.GameObjectModifier
+namespace TimberbornAPI.EntityInstantiatorSystem
 {
     internal class EntityInstantiator
     {

@@ -1,6 +1,6 @@
 using Bindito.Core;
 using TimberAPIExample.AutoConfiguratorInstaller;
-using TimberbornAPI.GameObjectModifier;
+using TimberbornAPI.EntityInstantiatorSystem;
 
 namespace TimberAPIExample.Examples.GameObjectModifier
 {

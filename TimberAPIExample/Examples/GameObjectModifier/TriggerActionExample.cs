@@ -1,5 +1,5 @@
 using Timberborn.ConstructibleSystem;
-using TimberbornAPI.GameObjectModifier;
+using TimberbornAPI.EntityInstantiatorSystem;
 using UnityEngine;
 
 namespace TimberAPIExample.Examples.GameObjectModifier

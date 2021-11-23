@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using TimberbornAPI.Common;
-using TimberbornAPI.GameObjectModifier;
+using TimberbornAPI.EntityInstantiatorSystem;
 using TimberbornAPI.UIBuilderSystem;
 
 namespace TimberbornAPI.Internal
