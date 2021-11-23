@@ -1,6 +1,5 @@
 ﻿using TimberbornAPI.AssetLoader;
 using TimberbornAPI.DependencySystem;
-using TimberbornAPI.GameObjectModifier;
 using TimberbornAPI.LocalizationSystem;
 
 namespace TimberbornAPI
@@ -24,10 +23,5 @@ namespace TimberbornAPI
         /// APIs to load and fetch assets
         /// </summary>
         public static IAssetRegistry AssetRegistry = new AssetRegistry();
-        
-        /// <summary>
-        /// APIs for modifying in game objects
-        /// </summary>
-        public static IGameObjectModifierRegistry GameObjectModifierRegistry = new GameObjectModifierRegistry();
     }
 }

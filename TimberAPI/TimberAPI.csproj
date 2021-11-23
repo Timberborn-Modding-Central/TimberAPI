@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="../libs/Bindito.Core.dll" /> 
-    <Reference Include="../libs/Bindito.Unity.dll" /> 
-    <Reference Include="../libs/LINQtoCSV.dll" /> 
+    <Reference Include="../libs/Bindito.Core.dll" />
+    <Reference Include="../libs/Bindito.Unity.dll" />
+    <Reference Include="../libs/LINQtoCSV.dll" />
     <Reference Include="../libs/Timberborn.Common.dll" />
     <Reference Include="../libs/Timberborn.CoreUI.dll" />
     <Reference Include="../libs/Timberborn.GameSaveRepositorySystem.dll" />

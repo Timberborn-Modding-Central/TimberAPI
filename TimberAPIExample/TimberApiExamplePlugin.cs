@@ -3,7 +3,6 @@ using BepInEx.Logging;
 using Bindito.Core;
 using HarmonyLib;
 using TimberAPIExample.AutoConfiguratorInstaller;
-using TimberAPIExample.Examples.GameObjectModifier;
 using Timberborn.SingletonSystem;
 using Timberborn.TimeSystem;
 using Timberborn.ToolSystem;
@@ -44,9 +43,6 @@ namespace TimberAPIExample
 
             // This is only for the example mod to provide automatic configurators.
             InstallAutoConfigurators();
-            
-            // Adds a modifier for any object in game (buildings, blocks, etc...)
-            TimberAPI.GameObjectModifierRegistry.AddModifier(new ModifierExample());
         }
 
         public void InstallAutoConfigurators()
