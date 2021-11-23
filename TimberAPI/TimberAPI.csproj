@@ -38,5 +38,7 @@
     <Reference Include="../libs/Timberborn.MainMenuSceneLoading.dll" />
     <Reference Include="../libs/Timberborn.Localization.dll" />
     <Reference Include="../libs/Timberborn.SingletonSystem.dll" />
+    <Reference Include="../libs/Timberborn.EntitySystem.dll" />
+    <Reference Include="../libs/System.Collections.Immutable.dll" />
   </ItemGroup>
 </Project>
