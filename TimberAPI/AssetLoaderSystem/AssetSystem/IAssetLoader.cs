@@ -1,4 +1,4 @@
-namespace TimberbornAPI.AssetLoader.AssetSystem
+namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
 {
     public interface IAssetLoader
     {

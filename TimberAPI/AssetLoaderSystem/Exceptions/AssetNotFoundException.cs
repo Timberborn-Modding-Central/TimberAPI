@@ -1,6 +1,6 @@
 using System;
 
-namespace TimberbornAPI.AssetLoader.Exceptions
+namespace TimberbornAPI.AssetLoaderSystem.Exceptions
 {
     internal class AssetNotFoundException : Exception
     {

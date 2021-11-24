@@ -1,7 +1,7 @@
-using TimberbornAPI.AssetLoader.AssetSystem;
+using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.Common;
 
-namespace TimberbornAPI.AssetLoader.PluginSystem
+namespace TimberbornAPI.AssetLoaderSystem.PluginSystem
 {
     internal class Plugin
     {

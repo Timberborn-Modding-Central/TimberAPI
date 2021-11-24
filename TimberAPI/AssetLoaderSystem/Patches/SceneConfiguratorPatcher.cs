@@ -3,9 +3,9 @@ using HarmonyLib;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditor;
 using Timberborn.MasterScene;
-using TimberbornAPI.AssetLoader.AssetSystem;
+using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 
-namespace TimberbornAPI.AssetLoader.Patches
+namespace TimberbornAPI.AssetLoaderSystem.Patches
 {
     [HarmonyPatch(typeof(MasterSceneConfigurator), "Configure", typeof(IContainerDefinition))]
     public static class MasterSceneConfiguratorPatch

@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="../libs/Bindito.Core.dll" /> 
-    <Reference Include="../libs/Bindito.Unity.dll" /> 
-    <Reference Include="../libs/LINQtoCSV.dll" /> 
+    <Reference Include="../libs/Bindito.Core.dll" />
+    <Reference Include="../libs/Bindito.Unity.dll" />
+    <Reference Include="../libs/LINQtoCSV.dll" />
     <Reference Include="../libs/Timberborn.Common.dll" />
     <Reference Include="../libs/Timberborn.CoreUI.dll" />
     <Reference Include="../libs/Timberborn.GameSaveRepositorySystem.dll" />
@@ -38,5 +38,7 @@
     <Reference Include="../libs/Timberborn.MainMenuSceneLoading.dll" />
     <Reference Include="../libs/Timberborn.Localization.dll" />
     <Reference Include="../libs/Timberborn.SingletonSystem.dll" />
+    <Reference Include="../libs/Timberborn.EntitySystem.dll" />
+    <Reference Include="../libs/System.Collections.Immutable.dll" />
   </ItemGroup>
 </Project>

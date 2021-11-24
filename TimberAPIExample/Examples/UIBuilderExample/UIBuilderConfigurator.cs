@@ -2,7 +2,7 @@ using Bindito.Core;
 using TimberAPIExample.AutoConfiguratorInstaller;
 using Timberborn.EntityPanelSystem;
 
-namespace TimberAPIExample.Examples.UIBuilder
+namespace TimberAPIExample.Examples.UIBuilderExample
 {
     public class UIBuilderConfigurator : IInGameConfigurator
     {

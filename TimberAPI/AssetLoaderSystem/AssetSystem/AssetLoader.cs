@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using TimberbornAPI.AssetLoader.Exceptions;
+using TimberbornAPI.AssetLoaderSystem.Exceptions;
 
-namespace TimberbornAPI.AssetLoader.AssetSystem
+namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
 {
     public class AssetLoader : IAssetLoader
     {

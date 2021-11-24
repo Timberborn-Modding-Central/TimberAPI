@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TimberbornAPI.AssetLoader.PluginSystem
+namespace TimberbornAPI.AssetLoaderSystem.PluginSystem
 {
     internal interface IPluginRepository
     {

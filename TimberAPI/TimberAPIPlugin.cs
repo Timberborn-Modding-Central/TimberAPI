@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using TimberbornAPI.Common;
+using TimberbornAPI.EntityActionSystem;
 using TimberbornAPI.UIBuilderSystem;
 
 namespace TimberbornAPI.Internal
@@ -16,18 +17,20 @@ namespace TimberbornAPI.Internal
             var harmony = new Harmony("com.timberapi.plugin");
             harmony.PatchAll();
 
-            InstallUIBuilderConfigurators();
+            InstallConfigurators();
             Logger.LogInfo("TimberAPI is loaded!");
         }
 
         /// <summary>
         /// Installs UI Builder configurators into the scenes in game, main menu & map editor
         /// </summary>
-        public void InstallUIBuilderConfigurators()
+        public void InstallConfigurators()
         {
             TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.InGame);
             TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MainMenu);
             TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
+            
+            TimberAPI.DependecyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);
         }
     }
 }
