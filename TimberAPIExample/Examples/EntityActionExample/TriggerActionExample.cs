@@ -1,3 +1,4 @@
+using Timberborn.Buildings;
 using Timberborn.ConstructibleSystem;
 using TimberbornAPI.EntityInstantiatorSystem;
 using UnityEngine;
@@ -9,14 +10,16 @@ namespace TimberAPIExample.Examples.EntityActionExample
         public void ApplyToEntity(GameObject entity)
         {
             // Receives the constructable component
-            Constructible constructible = entity.GetComponent<Constructible>();
+            Constructible constructable = entity.GetComponent<Constructible>();
+            // Receives the building component
+            Building building = entity.GetComponent<Building>();
             
-            // Is this a constructable entity or is finished
-            if (constructible == null || constructible.IsFinished)
+            // Skip entity if components are missing or building is already finished on place
+            if (constructable  == null || building == null || building.PlaceFinished)
                 return;
             
-            // Completes building skipping the needs or resources or building (only works when placing, already placed entities will be skipped)
-            constructible.Finish();
+            // Finishes the constructor
+            constructable.Finish();
         }
     }
 }

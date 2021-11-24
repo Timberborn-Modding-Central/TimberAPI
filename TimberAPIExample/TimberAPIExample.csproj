@@ -46,6 +46,8 @@
     <Reference Include="../libs/Timberborn.ToolSystem.dll" />
     <Reference Include="../libs/Timberborn.WeatherSystem.dll" />
     <Reference Include="../libs/Timberborn.GameDistricts.dll" />
-    <Reference Include="../libs/Timberborn.ConstructibleSystem.dll" />
+    <Reference Include="../libs/Timberborn.ConstructibleSystem.dll" />    
+    <Reference Include="../libs/Timberborn.Buildings.dll" />
+
   </ItemGroup>
 </Project>
