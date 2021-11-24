@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using System.Linq;
-using TimberbornAPI.AssetLoader.PluginSystem;
+using TimberbornAPI.AssetLoaderSystem.PluginSystem;
 using TimberbornAPI.Common;
 using UnityEngine;
 
-namespace TimberbornAPI.AssetLoader.AssetSystem
+namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
 {
     internal class CustomAssetBundle
     {

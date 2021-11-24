@@ -1,6 +1,6 @@
 using Bindito.Core;
 
-namespace TimberbornAPI.EntityInstantiatorSystem
+namespace TimberbornAPI.EntityActionSystem
 {
     public class EntityActionConfigurator : IConfigurator
     {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using TimberbornAPI.AssetLoader.Exceptions;
+using TimberbornAPI.AssetLoaderSystem.Exceptions;
 using TimberbornAPI.Common;
 
-namespace TimberbornAPI.AssetLoader.PluginSystem
+namespace TimberbornAPI.AssetLoaderSystem.PluginSystem
 {
     internal class PluginRepository : IPluginRepository
     {

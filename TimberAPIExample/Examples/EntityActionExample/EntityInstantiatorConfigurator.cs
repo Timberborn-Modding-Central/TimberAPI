@@ -1,6 +1,6 @@
 using Bindito.Core;
 using TimberAPIExample.AutoConfiguratorInstaller;
-using TimberbornAPI.EntityInstantiatorSystem;
+using TimberbornAPI.EntityActionSystem;
 
 namespace TimberAPIExample.Examples.EntityActionExample
 {

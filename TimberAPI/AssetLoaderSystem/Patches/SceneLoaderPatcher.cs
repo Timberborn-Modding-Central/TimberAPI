@@ -7,7 +7,7 @@ using Timberborn.MapSystem;
 using Timberborn.MasterSceneLoading;
 using TimberbornAPI.Common;
 
-namespace TimberbornAPI.AssetLoader.Patches
+namespace TimberbornAPI.AssetLoaderSystem.Patches
 {
     public class SceneLoaderPatcher
     {

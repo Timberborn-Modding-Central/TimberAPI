@@ -1,6 +1,6 @@
 using Bindito.Core;
 
-namespace TimberbornAPI.AssetLoader.AssetSystem
+namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
 {
     public class AssetConfigurator : IConfigurator
     {

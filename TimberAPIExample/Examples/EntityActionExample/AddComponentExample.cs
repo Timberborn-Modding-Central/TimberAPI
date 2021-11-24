@@ -1,6 +1,6 @@
 using Bindito.Unity;
 using Timberborn.GameDistricts;
-using TimberbornAPI.EntityInstantiatorSystem;
+using TimberbornAPI.EntityActionSystem;
 using UnityEngine;
 
 namespace TimberAPIExample.Examples.EntityActionExample

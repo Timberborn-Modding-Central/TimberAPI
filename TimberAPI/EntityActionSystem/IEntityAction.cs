@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TimberbornAPI.EntityInstantiatorSystem
+namespace TimberbornAPI.EntityActionSystem
 {
     public interface IEntityAction
     {

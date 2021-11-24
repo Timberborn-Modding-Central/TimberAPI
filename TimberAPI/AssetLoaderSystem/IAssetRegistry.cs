@@ -1,6 +1,6 @@
 using TimberbornAPI.Common;
 
-namespace TimberbornAPI.AssetLoader
+namespace TimberbornAPI.AssetLoaderSystem
 {
     public interface IAssetRegistry
     {

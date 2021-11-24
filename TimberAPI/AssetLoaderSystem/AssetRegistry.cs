@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using TimberbornAPI.AssetLoader.AssetSystem;
-using TimberbornAPI.AssetLoader.Exceptions;
-using TimberbornAPI.AssetLoader.PluginSystem;
+using TimberbornAPI.AssetLoaderSystem.AssetSystem;
+using TimberbornAPI.AssetLoaderSystem.Exceptions;
+using TimberbornAPI.AssetLoaderSystem.PluginSystem;
 using TimberbornAPI.Common;
 
-namespace TimberbornAPI.AssetLoader
+namespace TimberbornAPI.AssetLoaderSystem
 {
     public class AssetRegistry : IAssetRegistry
     {

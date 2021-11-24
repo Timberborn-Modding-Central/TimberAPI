@@ -1,7 +1,7 @@
 using System;
-using TimberbornAPI.AssetLoader.PluginSystem;
+using TimberbornAPI.AssetLoaderSystem.PluginSystem;
 
-namespace TimberbornAPI.AssetLoader.Exceptions
+namespace TimberbornAPI.AssetLoaderSystem.Exceptions
 {
     internal class PluginPrefixInUseException : Exception
     {

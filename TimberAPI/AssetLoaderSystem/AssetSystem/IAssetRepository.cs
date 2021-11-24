@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TimberbornAPI.AssetLoader.AssetSystem
+namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
 {
     internal interface IAssetRepository
     {

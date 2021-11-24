@@ -5,7 +5,7 @@ using HarmonyLib;
 using Timberborn.EntitySystem;
 using UnityEngine;
 
-namespace TimberbornAPI.EntityInstantiatorSystem
+namespace TimberbornAPI.EntityActionSystem
 {
     internal class EntityActionApplier
     {
