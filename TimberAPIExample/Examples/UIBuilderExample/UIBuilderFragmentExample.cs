@@ -5,7 +5,7 @@ using TimberbornAPI.UIBuilderSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace TimberAPIExample.Examples.UIBuilder
+namespace TimberAPIExample.Examples.UIBuilderExample
 {
     public class UIBuilderFragmentExample : IEntityPanelFragment
     {
