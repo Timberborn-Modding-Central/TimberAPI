@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace TimberAPIExample.Examples.GameObjectModifier
+namespace TimberAPIExample.Examples.EntityActionExample
 {
     public class ComponentExample : MonoBehaviour
     {

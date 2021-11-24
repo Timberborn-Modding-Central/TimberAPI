@@ -30,7 +30,7 @@ namespace TimberbornAPI.Internal
             TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MainMenu);
             TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
             
-            TimberAPI.DependecyRegistry.AddConfigurator(new ModifierConfigurator(), SceneEntryPoint.InGame);
+            TimberAPI.DependecyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);
         }
     }
 }

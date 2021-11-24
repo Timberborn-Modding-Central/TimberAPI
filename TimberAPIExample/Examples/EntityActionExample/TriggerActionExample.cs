@@ -2,14 +2,14 @@ using Timberborn.ConstructibleSystem;
 using TimberbornAPI.EntityInstantiatorSystem;
 using UnityEngine;
 
-namespace TimberAPIExample.Examples.GameObjectModifier
+namespace TimberAPIExample.Examples.EntityActionExample
 {
-    public class TriggerActionExample : IEntityInstantiator
+    public class TriggerActionExample : IEntityAction
     {
-        public void Instantiate(GameObject gameObject)
+        public void ApplyToEntity(GameObject entity)
         {
             // Receives the constructable component
-            Constructible constructible = gameObject.GetComponent<Constructible>();
+            Constructible constructible = entity.GetComponent<Constructible>();
             
             // Is this a constructable entity or is finished
             if (constructible == null || constructible.IsFinished)

@@ -3,9 +3,9 @@ using Timberborn.GameDistricts;
 using TimberbornAPI.EntityInstantiatorSystem;
 using UnityEngine;
 
-namespace TimberAPIExample.Examples.GameObjectModifier
+namespace TimberAPIExample.Examples.EntityActionExample
 {
-    public class AddComponentExample : IEntityInstantiator
+    public class AddComponentExample : IEntityAction
     {
         private readonly IInstantiator _instantiator;
 
@@ -14,17 +14,17 @@ namespace TimberAPIExample.Examples.GameObjectModifier
             _instantiator = instantiator;
         }
 
-        public void Instantiate(GameObject gameObject)
+        public void ApplyToEntity(GameObject entity)
         {
             // Return if object isn't a district
-            if(gameObject.GetComponent<DistrictCenter>() == null)
+            if(entity.GetComponent<DistrictCenter>() == null)
                 return;
             
             // Add a default component
-            gameObject.AddComponent<ComponentExample>();
+            entity.AddComponent<ComponentExample>();
             
             // Adds a component that can inject dependency injection classes
-            _instantiator.AddComponent<BinditoComponentExample>(gameObject);
+            _instantiator.AddComponent<BinditoComponentExample>(entity);
         }
     }
 }

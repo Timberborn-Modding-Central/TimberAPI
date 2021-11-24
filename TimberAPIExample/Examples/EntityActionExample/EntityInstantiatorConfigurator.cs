@@ -2,14 +2,14 @@ using Bindito.Core;
 using TimberAPIExample.AutoConfiguratorInstaller;
 using TimberbornAPI.EntityInstantiatorSystem;
 
-namespace TimberAPIExample.Examples.GameObjectModifier
+namespace TimberAPIExample.Examples.EntityActionExample
 {
     public class EntityInstantiatorConfigurator : IInGameConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.MultiBind<IEntityInstantiator>().To<AddComponentExample>().AsSingleton();
-            containerDefinition.MultiBind<IEntityInstantiator>().To<TriggerActionExample>().AsSingleton();
+            containerDefinition.MultiBind<IEntityAction>().To<AddComponentExample>().AsSingleton();
+            containerDefinition.MultiBind<IEntityAction>().To<TriggerActionExample>().AsSingleton();
         }
     }
 }

@@ -7,13 +7,13 @@ using UnityEngine;
 
 namespace TimberbornAPI.EntityInstantiatorSystem
 {
-    internal class EntityInstantiator
+    internal class EntityActionApplier
     {
-        private static ImmutableArray<IEntityInstantiator> _gameObjectModifiers;
+        private static ImmutableArray<IEntityAction> _entityActions;
 
-        public EntityInstantiator(IEnumerable<IEntityInstantiator> visualElementInitializers)
+        public EntityActionApplier(IEnumerable<IEntityAction> entityActions)
         {
-            _gameObjectModifiers = visualElementInitializers.ToImmutableArray();
+            _entityActions = entityActions.ToImmutableArray();
         }
         
         [HarmonyPatch(typeof(EntityService), "Instantiate", typeof(GameObject), typeof(Guid))]
@@ -21,9 +21,9 @@ namespace TimberbornAPI.EntityInstantiatorSystem
         {
             private static void Postfix(GameObject __result)
             {
-                for (int i = 0; i < _gameObjectModifiers.Length; i++)
+                for (int i = 0; i < _entityActions.Length; i++)
                 {
-                    _gameObjectModifiers[i].Instantiate(__result);
+                    _entityActions[i].ApplyToEntity(__result);
                 }
             }
         }

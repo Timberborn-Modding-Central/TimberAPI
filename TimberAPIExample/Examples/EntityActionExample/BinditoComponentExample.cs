@@ -3,7 +3,7 @@ using Bindito.Core;
 using Timberborn.Localization;
 using UnityEngine;
 
-namespace TimberAPIExample.Examples.GameObjectModifier
+namespace TimberAPIExample.Examples.EntityActionExample
 {
     public class BinditoComponentExample : MonoBehaviour
     {

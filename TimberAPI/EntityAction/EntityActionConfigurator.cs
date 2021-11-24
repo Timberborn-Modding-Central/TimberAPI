@@ -2,11 +2,11 @@ using Bindito.Core;
 
 namespace TimberbornAPI.EntityInstantiatorSystem
 {
-    public class ModifierConfigurator : IConfigurator
+    public class EntityActionConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Bind<EntityInstantiator>().AsSingleton();
+            containerDefinition.Bind<EntityActionApplier>().AsSingleton();
         }
     }
 }
