@@ -8,6 +8,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
     <RootNamespace>TimberbornAPI</RootNamespace>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageVersion>0.2</PackageVersion>
+    <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
   </PropertyGroup>
 
   <ItemGroup>
