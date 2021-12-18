@@ -48,6 +48,20 @@
     <Reference Include="../libs/Timberborn.GameDistricts.dll" />
     <Reference Include="../libs/Timberborn.ConstructibleSystem.dll" />    
     <Reference Include="../libs/Timberborn.Buildings.dll" />
-
+    <Reference Include="../libs/Timberborn.Options.dll" />
+    <Reference Include="../libs/System.Collections.Immutable.dll" />
+    
+    
+    <Reference Include="../libs/Timberborn.AssetSystem.dll" />
+    
+    
+    
+    <Reference Include="../libs/Timberborn.Goods.dll" />
+    <Reference Include="../libs/Timberborn.Warehouses.dll" />
+    <Reference Include="../libs/Timberborn.InventorySystem.dll" />
+    <Reference Include="../libs/Timberborn.InventorySystem.dll" />
+<!--    <Reference Include="../libs/*.dll" />-->
+    
+    
   </ItemGroup>
 </Project>

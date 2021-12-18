@@ -1,3 +1,5 @@
+using UnityEngine.Rendering;
+
 namespace TimberbornAPI.UIBuilderSystem
 {
     public static class TimberApiStyle
@@ -6,13 +8,39 @@ namespace TimberbornAPI.UIBuilderSystem
         {
             public static string BorderTransparent = "tba-border_transparent";
         }
-        
+
+        public static class Scales
+        {
+            public static string Scale1 = "tba-scale-1";
+
+            public static string Scale2 = "tba-scale-2";
+
+            public static string Scale3 = "tba-scale-3";
+
+            public static string Scale4 = "tba-scale-4";
+
+            public static string Scale5 = "tba-scale-5";
+
+            public static string Scale6 = "tba-scale-6";
+
+            public static string Scale7 = "tba-scale-7";
+
+            public static string Scale8 = "tba-scale-8";
+
+            public static string Scale9 = "tba-scale-9";
+        }
+
+        public static class Sounds
+        {
+            public static string Click = "tba-click";
+
+            public static string Cancel = "tba-cancel";
+        }
+
         public static class Buttons
         {
             public static class Normal
             {
-                public static string Button = "tba-button";
-                
                 public static string ArrowDownInverted = "tba-arrow-down-inverted";
 
                 public static string ArrowDown = "tba-arrow-down";
@@ -29,9 +57,13 @@ namespace TimberbornAPI.UIBuilderSystem
 
                 public static string ArrowUp = "tba-arrow-up";
 
+                public static string Button = "tba-button";
+
                 public static string CheckboxOff = "tba-checkbox_off";
 
                 public static string CheckboxOn = "tba-checkbox_on";
+
+                public static string CheckmarkAlt = "tba-checkmark-alt";
 
                 public static string CheckmarkInverted = "tba-checkmark-inverted";
 
@@ -43,11 +75,15 @@ namespace TimberbornAPI.UIBuilderSystem
 
                 public static string CircleOn = "tba-circle-on";
 
+                public static string Close = "tba-close";
+
                 public static string CrossInverted = "tba-cross-inverted";
 
-                public static string CyclerLeft = "tba-cycler_left";
+                public static string Cross = "tba-cross";
 
-                public static string CyclerRight = "tba-cycler_right";
+                public static string CyclerLeftMain = "tba-cycler_left";
+
+                public static string CyclerRightMain = "tba-cycler_right";
 
                 public static string DownArrow = "tba-down_arrow";
 
@@ -74,12 +110,32 @@ namespace TimberbornAPI.UIBuilderSystem
                 public static string SliderHolder = "tba-slider_holder";
 
                 public static string UpArrow = "tba-up_arrow";
+
+                public static string BugTracker = "tba-bug-tracker";
+
+                public static string ClampDown = "tba-clamp-down";
+
+                public static string ClampUp = "tba-clamp-up";
+
+                public static string CyclerLeft = "tba-cycler-left";
+
+                public static string CyclerRight = "tba-cycler-right";
+
+                public static string LevelVisibilityReset = "tba-level-visibility-reset";
+
+                public static string ResetButton = "tba-reset-button";
+
+                public static string SpeedButton0 = "tba-speed-button-0";
+
+                public static string SpeedButton1 = "tba-speed-button-1";
+
+                public static string SpeedButton2 = "tba-speed-button-2";
+
+                public static string SpeedButton3 = "tba-speed-button-3";
             }
 
             public static class Hover
             {
-                public static string ButtonHover = "tba-button-hover";
-                
                 public static string ArrowDownHover = "tba-arrow-down-hover";
 
                 public static string ArrowLeftHover = "tba-arrow-left-hover";
@@ -87,6 +143,8 @@ namespace TimberbornAPI.UIBuilderSystem
                 public static string ArrowRightHover = "tba-arrow-right-hover";
 
                 public static string ArrowUpHover = "tba-arrow-up-hover";
+
+                public static string ButtonHover = "tba-button-hover";
 
                 public static string CheckboxOffHover = "tba-checkbox_off_hover";
 
@@ -102,11 +160,13 @@ namespace TimberbornAPI.UIBuilderSystem
 
                 public static string CircleOnHover = "tba-circle-on-hover";
 
+                public static string CloseHover = "tba-close_hover";
+
                 public static string CrossHover = "tba-cross-hover";
 
-                public static string CyclerLeftHover = "tba-cycler_left_hover";
+                public static string CyclerLeftMainHover = "tba-cycler_left_hover";
 
-                public static string CyclerRightHover = "tba-cycler_right_hover";
+                public static string CyclerRightMainHover = "tba-cycler_right_hover";
 
                 public static string DownArrowHover = "tba-down_arrow_hover";
 
@@ -125,6 +185,28 @@ namespace TimberbornAPI.UIBuilderSystem
                 public static string SliderHolderHover = "tba-slider_holder_hover";
 
                 public static string UpArrowHover = "tba-up_arrow_hover";
+
+                public static string BugTrackerHover = "tba-bug-tracker-hover";
+
+                public static string ClampDownHover = "tba-clamp-down-hover";
+
+                public static string ClampUpHover = "tba-clamp-up-hover";
+
+                public static string CyclerLeftHover = "tba-cycler-left-hover";
+
+                public static string CyclerRightHover = "tba-cycler-right-hover";
+
+                public static string LevelVisibilityResetHover = "tba-level-visibility-reset-hover";
+
+                public static string ResetButtonHover = "tba-reset-button-hover";
+
+                public static string SpeedButton0Hover = "tba-speed-button-0-hover";
+
+                public static string SpeedButton1Hover = "tba-speed-button-1-hover";
+
+                public static string SpeedButton2Hover = "tba-speed-button-2-hover";
+
+                public static string SpeedButton3Hover = "tba-speed-button-3-hover";
             }
 
             public static class Active
@@ -148,6 +230,22 @@ namespace TimberbornAPI.UIBuilderSystem
                 public static string MinusActive = "tba-minus-active";
 
                 public static string PlusActive = "tba-plus-active";
+
+                public static string BugTrackerActive = "tba-bug-tracker-active";
+
+                public static string ClampDownActive = "tba-clamp-down-active";
+
+                public static string ClampUpActive = "tba-clamp-up-active";
+
+                public static string ResetButtonActive = "tba-reset-button-active";
+
+                public static string SpeedButton0Active = "tba-speed-button-0-active";
+
+                public static string SpeedButton1Active = "tba-speed-button-1-active";
+
+                public static string SpeedButton2Active = "tba-speed-button-2-active";
+
+                public static string SpeedButton3Active = "tba-speed-button-3-active";
             }
 
             public static class Checked
@@ -170,9 +268,13 @@ namespace TimberbornAPI.UIBuilderSystem
 
                     public static string ArrowUpChecked = "tba-arrow-up-checked";
 
+                    public static string ButtonChecked = "tba-button-checked";
+
                     public static string CheckboxOffChecked = "tba-checkbox_off-checked";
 
                     public static string CheckboxOnChecked = "tba-checkbox_on-checked";
+
+                    public static string CheckmarkAltChecked = "tba-checkmark-alt-checked";
 
                     public static string CheckmarkInvertedChecked = "tba-checkmark-inverted-checked";
 
@@ -184,11 +286,15 @@ namespace TimberbornAPI.UIBuilderSystem
 
                     public static string CircleOnChecked = "tba-circle-on-checked";
 
+                    public static string CloseChecked = "tba-close-checked";
+
                     public static string CrossInvertedChecked = "tba-cross-inverted-checked";
 
-                    public static string CyclerLeftChecked = "tba-cycler_left-checked";
+                    public static string CrossChecked = "tba-cross-checked";
 
-                    public static string CyclerRightChecked = "tba-cycler_right-checked";
+                    public static string CyclerLeftCheckedMain = "tba-cycler_left-checked";
+
+                    public static string CyclerRightCheckedMain = "tba-cycler_right-checked";
 
                     public static string DownArrowChecked = "tba-down_arrow-checked";
 
@@ -215,6 +321,28 @@ namespace TimberbornAPI.UIBuilderSystem
                     public static string SliderHolderChecked = "tba-slider_holder-checked";
 
                     public static string UpArrowChecked = "tba-up_arrow-checked";
+
+                    public static string BugTrackerChecked = "tba-bug-tracker-checked";
+
+                    public static string ClampDownChecked = "tba-clamp-down-checked";
+
+                    public static string ClampUpChecked = "tba-clamp-up-checked";
+
+                    public static string CyclerLeftChecked = "tba-cycler-left-checked";
+
+                    public static string CyclerRightChecked = "tba-cycler-right-checked";
+
+                    public static string LevelVisibilityResetChecked = "tba-level-visibility-reset-checked";
+
+                    public static string ResetButtonChecked = "tba-reset-button-checked";
+
+                    public static string SpeedButton0Checked = "tba-speed-button-0-checked";
+
+                    public static string SpeedButton1Checked = "tba-speed-button-1-checked";
+
+                    public static string SpeedButton2Checked = "tba-speed-button-2-checked";
+
+                    public static string SpeedButton3Checked = "tba-speed-button-3-checked";
                 }
 
                 public static class Hover
@@ -226,6 +354,8 @@ namespace TimberbornAPI.UIBuilderSystem
                     public static string ArrowRightHoverChecked = "tba-arrow-right-hover-checked";
 
                     public static string ArrowUpHoverChecked = "tba-arrow-up-hover-checked";
+
+                    public static string ButtonHoverChecked = "tba-button-hover-checked";
 
                     public static string CheckboxOffHoverChecked = "tba-checkbox_off_hover-checked";
 
@@ -241,11 +371,13 @@ namespace TimberbornAPI.UIBuilderSystem
 
                     public static string CircleOnHoverChecked = "tba-circle-on-hover-checked";
 
+                    public static string CloseHoverChecked = "tba-close_hover-checked";
+
                     public static string CrossHoverChecked = "tba-cross-hover-checked";
 
-                    public static string CyclerLeftHoverChecked = "tba-cycler_left_hover-checked";
+                    public static string CyclerLeftHoverMainChecked = "tba-cycler_left_hover-checked";
 
-                    public static string CyclerRightHoverChecked = "tba-cycler_right_hover-checked";
+                    public static string CyclerRightMainHoverChecked = "tba-cycler_right_hover-checked";
 
                     public static string DownArrowHoverChecked = "tba-down_arrow_hover-checked";
 
@@ -264,6 +396,28 @@ namespace TimberbornAPI.UIBuilderSystem
                     public static string SliderHolderHoverChecked = "tba-slider_holder_hover-checked";
 
                     public static string UpArrowHoverChecked = "tba-up_arrow_hover-checked";
+
+                    public static string BugTrackerHoverChecked = "tba-bug-tracker-hover-checked";
+
+                    public static string ClampDownHoverChecked = "tba-clamp-down-hover-checked";
+
+                    public static string ClampUpHoverChecked = "tba-clamp-up-hover-checked";
+
+                    public static string CyclerLeftHoverChecked = "tba-cycler-left-hover-checked";
+
+                    public static string CyclerRightHoverChecked = "tba-cycler-right-hover-checked";
+
+                    public static string LevelVisibilityResetHoverChecked = "tba-level-visibility-reset-hover-checked";
+
+                    public static string ResetButtonHoverChecked = "tba-reset-button-hover-checked";
+
+                    public static string SpeedButton0HoverChecked = "tba-speed-button-0-hover-checked";
+
+                    public static string SpeedButton1HoverChecked = "tba-speed-button-1-hover-checked";
+
+                    public static string SpeedButton2HoverChecked = "tba-speed-button-2-hover-checked";
+
+                    public static string SpeedButton3HoverChecked = "tba-speed-button-3-hover-checked";
                 }
 
                 public static class Active
@@ -287,52 +441,24 @@ namespace TimberbornAPI.UIBuilderSystem
                     public static string MinusActiveChecked = "tba-minus-active-checked";
 
                     public static string PlusActiveChecked = "tba-plus-active-checked";
+
+                    public static string BugTrackerActiveChecked = "tba-bug-tracker-active-checked";
+
+                    public static string ClampDownActiveChecked = "tba-clamp-down-active-checked";
+
+                    public static string ClampUpActiveChecked = "tba-clamp-up-active-checked";
+
+                    public static string ResetButtonActiveChecked = "tba-reset-button-active-checked";
+
+                    public static string SpeedButton0ActiveChecked = "tba-speed-button-0-active-checked";
+
+                    public static string SpeedButton1ActiveChecked = "tba-speed-button-1-active-checked";
+
+                    public static string SpeedButton2ActiveChecked = "tba-speed-button-2-active-checked";
+
+                    public static string SpeedButton3ActiveChecked = "tba-speed-button-3-active-checked";
                 }
             }
-        }
-    }
-
-    public static class Image
-    {
-        public static class Background
-        {
-            public static string[] BoxGreen =
-                {"bg-box--green"};
-
-            public static string[] BoxRed = {"bg-box--red"};
-            public static string[] BoxBrown = {"bg-box--brown"};
-
-            public static string[] SubBoxPalePurple = {"bg-sub-box--pale-purple"};
-            public static string[] SubBoxGreen = {"bg-sub-box--green"};
-            public static string[] SubBoxBlue = {"bg-sub-box--blue"};
-            public static string[] SubBoxFrame = {"bg-sub-box--frame"};
-            public static string[] SubBoxPurpleStriped = {"bg-sub-box--purple-striped"};
-
-            public static string[] SquareGreen = {"square-large--green"};
-            public static string[] SquareRed = {"square-large--red"};
-            public static string[] SquareDarkRed = {"square-large--dark-red"};
-            public static string[] SquareTransparentPurple = {"square-large--transparent-purple"};
-
-            public static string[] StripedGreen = {"bg-striped--green"};
-
-            // public static string[] StripedDarkGreen = { "top-bar-counter__wrapper--district" };
-            public static string[] StripedDarkRed = {"bg-striped--red"};
-            // public static string[] StripedRed = { "weather-panel__top" };
-
-            // public static string[] PixelDarkGreen = { "district-list-panel__item" };
-        }
-
-        public static class Button
-        {
-            public static string[] CircleSmallGreen = {"entity-panel__button--green"};
-            public static string[] CircleSmallRed = {"entity-panel__button--red"};
-
-            public static string[] SquareRed = {"entity-fragment__button--red"};
-            public static string[] SquareGreen = {"entity-fragment__button--green"};
-
-            public static string[] SettingClose = {"close-button"};
-            public static string[] SettingIncrease = {"settings-cycler__increase"};
-            public static string[] SettingDecrease = {"settings-cycler__decrease"};
         }
     }
 }

@@ -8,37 +8,30 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
     <RootNamespace>TimberbornAPI</RootNamespace>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageVersion>0.2</PackageVersion>
+    <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.7" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.4.16" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
-    <PackageReference Include="UnityEngine.Modules" Version="2021.2.2" IncludeAssets="compile" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.2.5" IncludeAssets="compile" />
+<!--    <PackageReference Include="Timberborn.GameLibs" Version="2021.12.10-r.0" />-->
+    <PackageReference Include="LinqToCsv" Version="1.5.0">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
   </ItemGroup>
-  
+
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="../libs/Bindito.Core.dll" />
-    <Reference Include="../libs/Bindito.Unity.dll" />
-    <Reference Include="../libs/LINQtoCSV.dll" />
-    <Reference Include="../libs/Timberborn.Common.dll" />
-    <Reference Include="../libs/Timberborn.CoreUI.dll" />
-    <Reference Include="../libs/Timberborn.GameSaveRepositorySystem.dll" />
-    <Reference Include="../libs/Timberborn.MapEditor.dll" />
-    <Reference Include="../libs/Timberborn.MapEditorScene.dll" />
-    <Reference Include="../libs/Timberborn.MapEditorSceneLoading.dll" />
-    <Reference Include="../libs/Timberborn.MapSystem.dll" />
-    <Reference Include="../libs/Timberborn.MasterScene.dll" />
-    <Reference Include="../libs/Timberborn.MasterSceneLoading.dll" />
-    <Reference Include="../libs/Timberborn.MainMenuScene.dll" />
-    <Reference Include="../libs/Timberborn.MainMenuSceneLoading.dll" />
-    <Reference Include="../libs/Timberborn.Localization.dll" />
-    <Reference Include="../libs/Timberborn.SingletonSystem.dll" />
-    <Reference Include="../libs/Timberborn.EntitySystem.dll" />
-    <Reference Include="../libs/System.Collections.Immutable.dll" />
+    <Reference Include="../libs/*.dll">
+      <DestinationSubDirectory>libs\</DestinationSubDirectory>
+    </Reference>
   </ItemGroup>
 </Project>

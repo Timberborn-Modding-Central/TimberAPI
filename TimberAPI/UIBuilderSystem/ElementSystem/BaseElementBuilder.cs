@@ -1,3 +1,4 @@
+using System;
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using UnityEngine.UIElements;
@@ -40,6 +41,18 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         public TBuilder SetHeight(Length height)
         {
             Root.style.height = height;
+            return BuilderInstance;
+        }
+        
+        public TBuilder SetStyle(Action<IStyle> style)
+        {
+            style.Invoke(Root.style);
+            return BuilderInstance;
+        }
+        
+        public TBuilder SetMargin(Length margin)
+        {
+            Root.style.marginLeft = margin;
             return BuilderInstance;
         }
 

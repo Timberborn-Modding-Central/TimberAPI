@@ -18,7 +18,7 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
             Root.text = text;
             return this;
         }
-        
+
         public ButtonBuilder SetLocKey(string key)
         {
             Root.TextLocKey = key;

@@ -37,9 +37,39 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
             return this;
         }
 
-        public VisualElementBuilder AddComponent(Func<UiPresetFactory, VisualElement> presetFactory)
+        public VisualElementBuilder AddPreset(Func<UiPresetFactory, VisualElement> presetFactory)
         {
             Root.Add(presetFactory.Invoke(_uiPresetFactory));
+            return this;
+        }
+        
+        public VisualElementBuilder SetJustifyContent(Justify justify)
+        {
+            Root.style.justifyContent = justify;
+            return this;
+        }
+        
+        public VisualElementBuilder SetAlignItems(Align align)
+        {
+            Root.style.alignItems = align;
+            return this;
+        }
+        
+        public VisualElementBuilder SetAlignContent(Align align)
+        {
+            Root.style.alignContent = align;
+            return this;
+        }
+        
+        public VisualElementBuilder SetFlexWrap(Wrap wrap)
+        {
+            Root.style.flexWrap = wrap;
+            return this;
+        }
+        
+        public VisualElementBuilder SetFlexDirection(FlexDirection direction)
+        {
+            Root.style.flexDirection = direction;
             return this;
         }
     }
