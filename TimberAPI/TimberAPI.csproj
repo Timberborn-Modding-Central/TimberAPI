@@ -4,15 +4,15 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>TimberAPI</AssemblyName>
     <Description>The unofficial API for Timberborn</Description>
-    <Version>0.1.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
     <RootNamespace>TimberbornAPI</RootNamespace>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.1.1</PackageVersion>
     <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
     <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
     <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+    <Version>0.2.0</Version>
+    <ReleaseVersion>0.2.0</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>

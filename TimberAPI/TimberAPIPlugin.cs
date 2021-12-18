@@ -7,7 +7,7 @@ using TimberbornAPI.UIBuilderSystem;
 namespace TimberbornAPI.Internal
 {
 
-    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "0.1.1")]
+    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "0.2.0")]
     public class TimberAPIPlugin : BaseUnityPlugin
     {
         public static string Guid = "com.timberapi.timberapi";

@@ -18,7 +18,7 @@ namespace TimberAPIExample
     /// <summary>
     /// Example TimberAPI/BepInEx Plugin showing the power of the API
     /// </summary>
-    [BepInPlugin("com.timberapi.example", "TimberAPIExample", "0.1.1")]
+    [BepInPlugin("com.timberapi.example", "TimberAPIExample", "0.2.0")]
     [BepInDependency("com.timberapi.timberapi")]
     [HarmonyPatch]
     public class TimberAPIExamplePlugin : BaseUnityPlugin
