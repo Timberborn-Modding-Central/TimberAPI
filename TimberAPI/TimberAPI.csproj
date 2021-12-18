@@ -11,8 +11,8 @@
     <PackOnBuild>true</PackOnBuild>
     <PackageVersion>0.1.1</PackageVersion>
     <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
-    <ReleaseVersion>0.1.1</ReleaseVersion>
     <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
+    <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
