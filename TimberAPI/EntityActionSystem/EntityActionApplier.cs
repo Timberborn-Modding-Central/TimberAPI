@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using HarmonyLib;
 using Timberborn.EntitySystem;
+using TimberbornAPI.Internal;
 using UnityEngine;
 
 namespace TimberbornAPI.EntityActionSystem

@@ -19,6 +19,7 @@ namespace TimberAPIExample.Examples.EntityActionExample
                 return;
             
             // Finishes the constructor
+            
             constructable.Finish();
         }
     }

@@ -34,6 +34,10 @@ namespace TimberAPIExample
             TimberAPI.DependecyRegistry.AddConfigurator(new ExampleConfigurator());
             // Add a label to localization
             TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
+            
+            // Harmony patches
+            new Harmony("com.timberapi.examples").PatchAll();
+            
             Logger.LogInfo("TimberAPIExample is loaded!");
 
             // Adds in game assets with the prefix TimberAPIExample, default folder is assets

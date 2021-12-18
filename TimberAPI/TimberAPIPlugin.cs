@@ -1,8 +1,10 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using HarmonyLib;
 using TimberbornAPI.Common;
 using TimberbornAPI.EntityActionSystem;
 using TimberbornAPI.UIBuilderSystem;
+using UnityEngine;
 
 namespace TimberbornAPI.Internal
 {
@@ -12,12 +14,18 @@ namespace TimberbornAPI.Internal
     {
         public static string Guid = "com.timberapi.timberapi";
 
+        public static ManualLogSource Log;
+
         public void Awake()
         {
+            Log = Logger;
             var harmony = new Harmony("com.timberapi.plugin");
             harmony.PatchAll();
 
             InstallConfigurators();
+            
+            TimberAPI.AssetRegistry.AddSceneAssets("timberApi", SceneEntryPoint.Global, new []{ "timberAssets" });
+            
             Logger.LogInfo("TimberAPI is loaded!");
         }
 
@@ -31,6 +39,7 @@ namespace TimberbornAPI.Internal
             TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
             
             TimberAPI.DependecyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);
+            TimberAPI.DependecyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
         }
     }
 }

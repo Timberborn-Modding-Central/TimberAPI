@@ -6,10 +6,10 @@ using LocalizableButton = TimberbornAPI.UIBuilderSystem.CustomElements.Localizab
 using LocalizableLabel = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableLabel;
 using LocalizableToggle = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableToggle;
 
-namespace TimberbornAPI.UIBuilderSystem
+namespace TimberbornAPI.UIBuilderSystem.ElementSystem
 {
     [SuppressMessage("", "Publicizer001")]
-    public class ElementFactory : IElementFactory
+    public class ElementFactory
     {
         public Toggle Toggle(IEnumerable<string> classes = null, string name = null)
         {
@@ -53,7 +53,8 @@ namespace TimberbornAPI.UIBuilderSystem
 
         public Button Button(IEnumerable<string> classes = null, string name = null)
         {
-            Button element = new Button();
+            Button element = new NineSliceButton();
+            
             if (name != null)
                 element.name = name;
             if (classes != null)
