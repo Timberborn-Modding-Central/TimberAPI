@@ -4,6 +4,8 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
 {
     public interface IUIBuilderPreview
     {
+        string GetPreviewKey();
+        
         string GetPreviewName();
         
         VisualElement GetPreview();

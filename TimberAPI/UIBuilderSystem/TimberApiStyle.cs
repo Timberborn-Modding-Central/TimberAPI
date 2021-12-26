@@ -7,12 +7,36 @@ namespace TimberbornAPI.UIBuilderSystem
         public static class Backgrounds
         {
             public static string BorderTransparent = "tba-border_transparent";
+            public static string BorderNonTransparent = "tba-border_nontransparent";
+            
+            public static string Bg1 = "tba-bg-1";
+            public static string Bg2 = "tba-bg-2";
+            public static string Bg2Striped = "tba-bg-2-striped";
+            public static string Bg3 = "tba-bg-3";
+            public static string Bg4 = "tba-bg-4";
+            public static string Bg5 = "tba-bg-5";
+            public static string Bg6 = "tba-bg-6";
+            public static string Bg6Striped = "tba-bg-6-striped";
+            public static string Bg7 = "tba-bg-7";
+            public static string BgInput = "tba-bg-input";
+            public static string BgSquare1 = "tba-bg-square-1";
+            public static string BgSquare2 = "tba-bg-square-2";
+            public static string BgSquare3 = "tba-bg-square-3";
+            public static string BgSquare4 = "tba-bg-square-4";
+            public static string BgSquare5 = "tba-bg-square-5";
+            public static string BgSquare6 = "tba-bg-square-6";
+            public static string BgSquareLarge1 = "tba-bg-square-large-1";
+            public static string BgSquareLarge2 = "tba-bg-square-large-2";
+            public static string BgSquareLarge3 = "tba-bg-square-large-3";
+            public static string BgSquareLarge4 = "tba-bg-square-large-4";
+            public static string BgSquareLarge5 = "tba-bg-square-large-5";
+            public static string BgSquareLarge6 = "tba-bg-square-large-6";
+            
+            
         }
 
         public static class Scales
         {
-            public static string Scale1 = "tba-scale-1";
-
             public static string Scale2 = "tba-scale-2";
 
             public static string Scale3 = "tba-scale-3";
@@ -41,6 +65,16 @@ namespace TimberbornAPI.UIBuilderSystem
         {
             public static class Normal
             {
+                public static string ButtonGame = "tba-button-game";
+                
+                public static string NewGameCustom = "tba-custom";
+                
+                public static string NewGameEasy = "tba-easy";
+                
+                public static string NewGameNormal = "tba-normal";
+                
+                public static string NewGameHard = "tba-hard";
+                
                 public static string ArrowDownInverted = "tba-arrow-down-inverted";
 
                 public static string ArrowDown = "tba-arrow-down";
@@ -136,6 +170,16 @@ namespace TimberbornAPI.UIBuilderSystem
 
             public static class Hover
             {
+                public static string ButtonGameHover = "tba-button-game-hover";
+                
+                public static string NewGameCustomHover = "tba-custom-hover";
+                
+                public static string NewGameEasyHover = "tba-easy-hover";
+                
+                public static string NewGameNormalHover = "tba-normal-hover";
+                
+                public static string NewGameHardHover = "tba-hard-hover";
+                
                 public static string ArrowDownHover = "tba-arrow-down-hover";
 
                 public static string ArrowLeftHover = "tba-arrow-left-hover";
@@ -211,6 +255,16 @@ namespace TimberbornAPI.UIBuilderSystem
 
             public static class Active
             {
+                public static string ButtonGameActive = "tba-button-game-active";
+                
+                public static string NewGameCustomActive = "tba-custom-active";
+                
+                public static string NewGameEasyActive = "tba-easy-active";
+                
+                public static string NewGameNormalActive = "tba-normal-active";
+                
+                public static string NewGameHardActive = "tba-hard-active";
+                
                 public static string ArrowDownActive = "tba-arrow-down-active";
 
                 public static string ArrowLeftActive = "tba-arrow-left-active";

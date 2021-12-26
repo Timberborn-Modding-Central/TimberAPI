@@ -77,7 +77,7 @@ namespace TimberbornAPI.UIBuilderSystem
         
         public UIBoxBuilder AddCloseButton(string name = null)
         {
-            _box.AddPreset(factory => factory.Buttons().Close(null, builder: builder => builder.SetStyle(style =>
+            _box.AddPreset(factory => factory.Buttons().Close(name, builder: builder => builder.SetStyle(style =>
             {
                 style.position = Position.Absolute;
                 style.alignSelf = Align.FlexEnd;

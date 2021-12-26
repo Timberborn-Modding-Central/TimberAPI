@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.ComponentModel.Design;
+using System.Linq;
 using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previews;
-using Timberborn.AssetSystem;
 using Timberborn.CoreUI;
-using TimberbornAPI.Internal;
+using TimberbornAPI.Common;
 using TimberbornAPI.UIBuilderSystem;
-using TimberbornAPI.UIBuilderSystem.delete;
-using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
 
@@ -21,11 +18,12 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
         private readonly PanelStack _panelStack;
 
         private static ImmutableArray<IUIBuilderPreview> _previews;
+        
+        private readonly UIBuilder _uiBuilder;
 
+        private VisualElement _previewBox;
 
-        private readonly IUIBuilder _uiBuilder;
-
-        public UIBuilderPreviewBox(IUIBuilder uiBuilder, PanelStack panelStack, IEnumerable<IUIBuilderPreview> previews)
+        public UIBuilderPreviewBox(UIBuilder uiBuilder, PanelStack panelStack, IEnumerable<IUIBuilderPreview> previews)
         {
             _uiBuilder = uiBuilder;
             _panelStack = panelStack;
@@ -35,60 +33,61 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
 
         private void OpenPreviewBox()
         { 
-            // _panelStack.HideAndPush(this);
-
-            Sprite[] sprites = _resourceAssetLoader.LoadAll<Sprite>("ui");
-            
-
-            TimberAPIPlugin.Log.LogFatal(sprites?.Length);
-            
-
-
-            // string styling = $"Timberborn image slices: \r\n";
-            // foreach (KeyValuePair<string, ImageSlice> keyValuePair in NineSlicedBackgroundPatch.ImageSlices)
-            // {
-            //     ImageSlice imageSlice = keyValuePair.Value;
-            //     if (imageSlice.SliceBottom == imageSlice.SliceLeft && imageSlice.SliceLeft == imageSlice.SliceRight &&
-            //         imageSlice.SliceRight == imageSlice.SliceTop)
-            //     {
-            //         styling += $".{imageSlice.Image.name} {{\r\n" +
-            //                    $"   --background-image: resource('{imageSlice.ImagePath}');\r\n" +
-            //                    $"   --background-slice: {imageSlice.SliceBottom};\r\n" +
-            //                    $"   --background-slice-scale: {imageSlice.SliceScale};\r\n" +
-            //                    // $"   --background-tint: {imageSlice.Tint}\r\n" +
-            //                    $"}}\r\n";
-            //     }
-            //     else
-            //     {
-            //         styling += $".{imageSlice.Image.name} {{\r\n" +
-            //                    $"   --background-image: resource('{imageSlice.ImagePath}');\r\n" +
-            //                    $"   --background-slice-top: {imageSlice.SliceTop};\r\n" +
-            //                    $"   --background-slice-right: {imageSlice.SliceRight};\r\n" +
-            //                    $"   --background-slice-bottom: {imageSlice.SliceBottom};\r\n" +
-            //                    $"   --background-slice-left: {imageSlice.SliceLeft};\r\n" +
-            //                    $"   --background-slice-scale: {imageSlice.SliceScale};\r\n" +
-            //                    // $"   --background-tint: {imageSlice.Tint}\r\n" +
-            //                    $"}}\r\n";
-            //     }
-            // }
-            // TimberAPIPlugin.Log.LogFatal(styling);
+            _panelStack.HideAndPush(this);
         }
 
         public VisualElement GetPanel()
         {
-            IUIBoxBuilder boxBuilder = _uiBuilder.CreateBoxBuilder()
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
+            
+            UIBoxBuilder menu = _uiBuilder.CreateBoxBuilder()
                 .SetHeight(new Length(650, Pixel))
-                .SetWidth(new Length(850, Pixel));
-
+                .SetWidth(new Length(300, Pixel))
+                .ModifyBox(builder =>
+                {
+                    builder.SetMargin(new Margin(0,0,0,new Length(-300, Pixel)));
+                    builder.SetStyle(style => style.position = Position.Absolute);
+                });
+            
             foreach (IUIBuilderPreview preview in _previews)
             {
-                boxBuilder.AddComponents(builder => builder.AddSectionHeader(preview.GetPreviewName()).AddCustomComponent(preview.GetPreview()));
+                menu.AddPreset(factory => factory.Buttons().Button(text: preview.GetPreviewName(), name: preview.GetPreviewKey(), builder: builder => builder.SetWidth(new Length(100, Percent))));
+            }
+            
+            UIBoxBuilder boxBuilder = _uiBuilder.CreateBoxBuilder()
+                .SetHeight(new Length(650, Pixel))
+                .SetWidth(new Length(850, Pixel))
+                .ModifyWrapper(builder => builder.AddComponent(menu.Build()))
+                .ModifyScrollView(builder => builder.SetName("elementPreview"));
+
+            IUIBuilderPreview firstElement = _previews.FirstOrDefault();
+            if(firstElement != null)
+                boxBuilder.AddComponent(firstElement.GetPreview());
+            
+            VisualElement root = boxBuilder.AddCloseButton("CloseButton").SetBoxInCenter().AddHeader(text: "UI Previews").BuildAndInitialize();
+            _previewBox = root.Q<VisualElement>("elementPreview");
+            root.Q<Button>("CloseButton").clicked += OnUICancelled;
+            
+            foreach (IUIBuilderPreview uiBuilderPreview in _previews)
+            {
+                root.Q<Button>(uiBuilderPreview.GetPreviewKey()).clicked += delegate { SwitchPreview(uiBuilderPreview); };
             }
 
-            VisualElement root = boxBuilder.Build();
-            // root.Q<Button>("CloseButton").clicked += OnUICancelled;
+            watch.Stop();
+            Console.WriteLine("Time elapsed (ms): {0}", watch.ElapsedMilliseconds);
 
             return root;
+        }
+        
+        private void SwitchPreview(IUIBuilderPreview selectedPreview)
+        {
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
+            _previewBox.Clear();
+            _previewBox.Add(selectedPreview.GetPreview());
+            watch.Stop();
+            Console.WriteLine("Time elapsed (ms): {0}", watch.ElapsedMilliseconds);
         }
 
         public bool OnUIConfirmed()

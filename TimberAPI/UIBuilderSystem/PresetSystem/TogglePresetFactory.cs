@@ -111,5 +111,20 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             builder?.Invoke(toggle);
             return toggle.Build();
         }
+        
+        public LocalizableToggle Circle(string name = null, Length size = default, Action<ToggleBuilder> builder = default)
+        {
+            ToggleBuilder toggle = _componentBuilder.CreateToggle()
+                .AddClass(TimberApiStyle.Buttons.Normal.CircleOff)
+                .AddClass(TimberApiStyle.Buttons.Hover.CircleOffHover)
+                .AddClass(TimberApiStyle.Buttons.Checked.Normal.CircleOnChecked)
+                .AddClass(TimberApiStyle.Buttons.Checked.Hover.CircleOnHoverChecked)
+                .AddClass(TimberApiStyle.Sounds.Click)
+                .SetName(name)
+                .SetHeight(size == default ? new Length(40, Pixel) : size)
+                .SetWidth(size == default ? new Length(40, Pixel) : size);
+            builder?.Invoke(toggle);
+            return toggle.Build();
+        }
     }
 }
