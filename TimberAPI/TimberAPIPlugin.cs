@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using Timberborn.ToolPanelSystem;
 using TimberbornAPI.Common;
 using TimberbornAPI.EntityActionSystem;
 using TimberbornAPI.UIBuilderSystem;
@@ -24,7 +25,7 @@ namespace TimberbornAPI.Internal
 
             InstallConfigurators();
             
-            TimberAPI.AssetRegistry.AddSceneAssets("timberApi", SceneEntryPoint.Global, new []{ "timberAssets" });
+            TimberAPI.AssetRegistry.AddSceneAssets("timberApi", SceneEntryPoint.Global, new []{ "assets" });
             
             Logger.LogInfo("TimberAPI is loaded!");
         }

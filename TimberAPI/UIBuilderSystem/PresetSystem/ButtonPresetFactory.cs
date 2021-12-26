@@ -1,6 +1,7 @@
 using System;
 using TimberbornAPI.UIBuilderSystem.CustomElements;
 using TimberbornAPI.UIBuilderSystem.ElementSystem;
+using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
 
@@ -452,7 +453,7 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
 
-        public LocalizableButton Button(string locKey = null, Length width = default, Length height = default, string name = null, string text = null, Action<ButtonBuilder> builder = default)
+        public LocalizableButton Button(string locKey = null, Length width = default, Length height = default, Length fontSize = default, FontStyle fontStyle = default, StyleColor color = default, string name = null, string text = null, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
                 .AddClass(TimberApiStyle.Buttons.Normal.Button)
@@ -461,6 +462,9 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .SetName(name)
                 .SetLocKey(locKey)
                 .SetText(text)
+                .SetColor(color == default ? new StyleColor(new Color(1,1,1,1)) : color)
+                .SetFontSize(fontSize == default ? new Length(13, Pixel) : fontSize)
+                .SetFontStyle(fontStyle == default ? FontStyle.Bold : fontStyle)
                 .SetHeight(height == default ? new Length(33, Pixel) : height)
                 .SetWidth(width == default ? new Length(184, Pixel) : width);
             builder?.Invoke(button);

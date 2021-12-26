@@ -1,5 +1,7 @@
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
+using UnityEngine;
+using UnityEngine.UIElements;
 using LocalizableButton = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableButton;
 
 namespace TimberbornAPI.UIBuilderSystem.ElementSystem
@@ -22,6 +24,24 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         public ButtonBuilder SetLocKey(string key)
         {
             Root.TextLocKey = key;
+            return this;
+        }
+        
+        public ButtonBuilder SetColor(StyleColor color)
+        {
+            Root.style.color = color;
+            return this;
+        }
+        
+        public ButtonBuilder SetFontSize(Length size)
+        {
+            Root.style.fontSize = size;
+            return this;
+        }
+        
+        public ButtonBuilder SetFontStyle(FontStyle style)
+        {
+            Root.style.unityFontStyleAndWeight = style;
             return this;
         }
     }

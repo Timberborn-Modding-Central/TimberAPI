@@ -2,14 +2,14 @@ using UnityEngine.UIElements;
 
 namespace TimberbornAPI.Common
 {
-    public struct Padding
+    public struct Margin
     {
         public Length Top;
         public Length Right;
         public Length Bottom;
         public Length Left;
-
-        public Padding(Length padding)
+        
+        public Margin(Length padding)
         {
             Top = padding;
             Right = padding;
@@ -17,7 +17,7 @@ namespace TimberbornAPI.Common
             Left = padding;
         }
 
-        public Padding(Length paddingX, Length paddingY)
+        public Margin(Length paddingX, Length paddingY)
         {
             Top = paddingY;
             Bottom = paddingY;
@@ -25,7 +25,7 @@ namespace TimberbornAPI.Common
             Right = paddingX;
         }
 
-        public Padding(Length top, Length right, Length bottom, Length left)
+        public Margin(Length top, Length right, Length bottom, Length left)
         {
             Top = top;
             Right = right;
@@ -33,12 +33,12 @@ namespace TimberbornAPI.Common
             Left = left;
         }
         
-        public static implicit operator Padding(int value) {
-            return new Padding(value);
+        public static implicit operator Margin(int value) {
+            return new Margin(value);
         }
         
-        public static implicit operator Padding(Length value) {
-            return new Padding(value);
+        public static implicit operator Margin(Length value) {
+            return new Margin(value);
         }
     }
 }

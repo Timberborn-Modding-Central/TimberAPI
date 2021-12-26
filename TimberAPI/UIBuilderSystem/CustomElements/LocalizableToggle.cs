@@ -32,7 +32,12 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
             this.RegisterCallback<CustomStyleResolvedEvent>(new EventCallback<CustomStyleResolvedEvent>(this.OnCustomStyleResolved));
         }
 
-        public void Localize(ILoc loc) => this.text = loc.T(this._textLocKey);
+        public void Localize(ILoc loc)
+        {
+            if(_textLocKey == null)
+                return;
+            this.text = loc.T(this._textLocKey);
+        }
 
         private void OnCustomStyleResolved(CustomStyleResolvedEvent e) => this._nineSliceBackground.GetDataFromStyle(this.customStyle);
 

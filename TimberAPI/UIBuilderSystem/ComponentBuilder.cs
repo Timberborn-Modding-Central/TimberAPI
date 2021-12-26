@@ -1,3 +1,4 @@
+using Timberborn.AssetSystem;
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.UIBuilderSystem.ElementSystem;
@@ -13,11 +14,11 @@ namespace TimberbornAPI.UIBuilderSystem
 
         private readonly UiPresetFactory _uiPresetFactory;
         
-        public ComponentBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader)
+        public ComponentBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, IResourceAssetLoader resourceAssetLoader)
         {
             _visualElementInitializer = visualElementInitializer;
             _assetLoader = assetLoader;
-            _uiPresetFactory = new UiPresetFactory(this);
+            _uiPresetFactory = new UiPresetFactory(this, resourceAssetLoader);
         }
         
         public ButtonBuilder CreateButton()
@@ -25,9 +26,34 @@ namespace TimberbornAPI.UIBuilderSystem
             return new ButtonBuilder(_visualElementInitializer, _assetLoader);
         }
         
+        public ToggleBuilder CreateToggle()
+        {
+            return new ToggleBuilder(_visualElementInitializer, _assetLoader);
+        }
+        
         public VisualElementBuilder CreateVisualElement()
         {
             return new VisualElementBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
+        }
+        
+        public ScrollViewBuilder CreateScrollView()
+        {
+            return new ScrollViewBuilder(_visualElementInitializer, _assetLoader);
+        }
+        
+        public LabelBuilder CreateLabel()
+        {
+            return new LabelBuilder(_visualElementInitializer, _assetLoader);
+        }
+        
+        public SliderBuilder CreateSlider()
+        {
+            return new SliderBuilder(_visualElementInitializer, _assetLoader);
+        }
+        
+        public SliderIntBuilder CreateSliderInt()
+        {
+            return new SliderIntBuilder(_visualElementInitializer, _assetLoader);
         }
     }
 }

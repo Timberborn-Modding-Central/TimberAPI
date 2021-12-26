@@ -1,7 +1,9 @@
 using System;
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
+using TimberbornAPI.Common;
 using UnityEngine.UIElements;
+using LocalizableSlider = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableSlider;
 
 namespace TimberbornAPI.UIBuilderSystem.ElementSystem
 {
@@ -16,8 +18,14 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         public BaseElementBuilder(TElement root, VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader)
         {
             Root = root;
-            root.styleSheets.Add(assetLoader.Load<StyleSheet>("timberApi/timber_api/style"));
             _visualElementInitializer = visualElementInitializer;
+            AddStyleSheet(assetLoader.Load<StyleSheet>("timberApi/timber_api/style"));
+        }
+        
+        public TBuilder AddStyleSheet(StyleSheet styleSheet)
+        {
+            Root.styleSheets.Add(styleSheet);
+            return BuilderInstance;
         }
         
         public TBuilder SetName(string name)
@@ -29,6 +37,12 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         public TBuilder AddClass(string className)
         {
             Root.AddToClassList(className);
+            return BuilderInstance;
+        }
+        
+        public TBuilder RemoveClass(string className)
+        {
+            Root.RemoveFromClassList(className);
             return BuilderInstance;
         }
         
@@ -50,9 +64,21 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
             return BuilderInstance;
         }
         
-        public TBuilder SetMargin(Length margin)
+        public TBuilder SetMargin(Margin margin)
         {
-            Root.style.marginLeft = margin;
+            Root.style.marginLeft = margin.Left;
+            Root.style.marginTop = margin.Top;
+            Root.style.marginRight = margin.Right;
+            Root.style.marginBottom = margin.Bottom;
+            return BuilderInstance;
+        }
+        
+        public TBuilder SetPadding(Padding padding)
+        {
+            Root.style.paddingLeft = padding.Left;
+            Root.style.paddingTop = padding.Top;
+            Root.style.paddingRight = padding.Right;
+            Root.style.paddingBottom = padding.Bottom;
             return BuilderInstance;
         }
 

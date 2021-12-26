@@ -34,7 +34,9 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
 
         public void Localize(ILoc loc)
         {
-            text = loc.T(_textLocKey);
+            if(_textLocKey == null)
+                return;
+            this.text = loc.T(this._textLocKey);
         }
 
         private void OnCustomStyleResolved(CustomStyleResolvedEvent e) => _nineSliceBackground.GetDataFromStyle(customStyle);
