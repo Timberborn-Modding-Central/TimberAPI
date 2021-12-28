@@ -18,7 +18,7 @@
     <PackageReference Include="BepInEx.Core" Version="5.4.16" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
     <PackageReference Include="UnityEngine.Modules" Version="2021.2.5" IncludeAssets="compile" />
-<!--    <PackageReference Include="Timberborn.GameLibs" Version="2021.12.10-r.0" />-->
+    <PackageReference Include="Timberborn.GameLibs" Version="2021.12.10-r.0" />
     <PackageReference Include="LinqToCsv" Version="1.5.0">
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
@@ -27,11 +27,5 @@
 
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="../libs/*.dll">
-      <DestinationSubDirectory>libs\</DestinationSubDirectory>
-    </Reference>
   </ItemGroup>
 </Project>
