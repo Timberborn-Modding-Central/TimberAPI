@@ -11,8 +11,8 @@
     <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
     <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
     <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
-    <Version>0.2.0</Version>
-    <ReleaseVersion>0.2.0</ReleaseVersion>
+    <Version>0.3.0</Version>
+    <ReleaseVersion>0.3.0</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,9 +26,8 @@
     </PackageReference>
     <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
   </ItemGroup>
-  
+
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
-
 </Project>

@@ -1,109 +1,140 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
-using Timberborn.CoreUI;
+using Timberborn.AssetSystem;
+using TimberbornAPI.Common;
+using TimberbornAPI.UIBuilderSystem.ElementSystem;
+using TimberbornAPI.UIBuilderSystem.PresetSystem;
+using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.UIElements.Length.Unit;
 
 namespace TimberbornAPI.UIBuilderSystem
 {
-    public class UIBoxBuilder : IUIBoxBuilder
+    public class UIBoxBuilder
     {
-        private readonly IUIComponentBuilder _root;
+        private readonly IResourceAssetLoader _resourceAssetLoader;
+        
+        private readonly VisualElementBuilder _centerWrapper;
+        
+        private readonly VisualElementBuilder _wrapper;
 
-        private Action<IUIComponentBuilder> _boxComponents;
+        private readonly VisualElementBuilder _box;
 
-        private Action<IUIComponentBuilder> _children;
+        private readonly VisualElementBuilder _scrollView;
 
-        private string _name;
-
-        private Length _width;
-
-        private Length _height;
-
-        private Length _padding;
-
-        private Action<IStyle> _style;
-
-        [SuppressMessage("", "Publicizer001")]
-        public UIBoxBuilder(IElementFactory elementFactory, VisualElementInitializer visualElementInitializer)
+        public UIBoxBuilder(ComponentBuilder componentBuilder, IResourceAssetLoader resourceAssetLoader)
         {
-            _root = new UIComponentBuilder(elementFactory, visualElementInitializer);
-            _root.RootStyle(style =>
+            _resourceAssetLoader = resourceAssetLoader;
+            _wrapper = componentBuilder.CreateVisualElement();
+            _centerWrapper = componentBuilder.CreateVisualElement();
+            _box = componentBuilder.CreateVisualElement()
+                .AddClass(TimberApiStyle.Backgrounds.BorderTransparent)
+                .AddClass(TimberApiStyle.Scales.Scale5)
+                .SetPadding(new Length(45, Pixel));
+            _scrollView = componentBuilder.CreateVisualElement();
+        }
+
+        public UIBoxBuilder SetBoxInCenter()
+        {
+            _centerWrapper
+                .SetJustifyContent(Justify.Center)
+                .SetAlignItems(Align.Center)
+                .SetFlexDirection(FlexDirection.Row)
+                .SetFlexWrap(Wrap.Wrap)
+                .SetStyle(style => style.flexGrow = 1);
+            return this;
+        }
+
+        public UIBoxBuilder SetHeight(Length height)
+        {
+            _box.SetHeight(height);
+            return this;
+        }
+
+        public UIBoxBuilder SetWidth(Length width)
+        {
+            _box.SetWidth(width);
+            return this;
+        }
+
+        public UIBoxBuilder AddComponent(Action<VisualElementBuilder> builder)
+        {
+            _scrollView.AddComponent(builder);
+            return this;
+        }
+
+        public UIBoxBuilder AddComponent(VisualElement element)
+        {
+            _scrollView.AddComponent(element);
+            return this;
+        }
+
+        public UIBoxBuilder AddPreset(Func<UiPresetFactory, VisualElement> presetFactory)
+        {
+            _scrollView.AddPreset(presetFactory);
+            return this;
+        }
+        
+        public UIBoxBuilder AddCloseButton(string name = null)
+        {
+            _box.AddPreset(factory => factory.Buttons().Close(name, builder: builder => builder.SetStyle(style =>
             {
-                style.flexGrow = 1;
-                style.alignItems = Align.Center;
-                style.justifyContent = Justify.Center;
-                style.flexWrap = Wrap.Wrap;
-                style.flexDirection = FlexDirection.Row;
-            });
-            _boxComponents = delegate { };
-            _children = delegate { };
-            _width = new Length(100, Length.Unit.Percent);
-            _height = new Length(100, Length.Unit.Percent);
+                style.position = Position.Absolute;
+                style.right = new Length(-3, Pixel);
+                style.top = new Length(-3, Pixel);
+            })));
+            return this;
         }
-
-        public IUIBoxBuilder AddComponents(Action<IUIComponentBuilder> action)
+        
+        public UIBoxBuilder AddHeader(string locKey = default, string text = default, string name = null)
         {
-            _children += action;
+            _box.AddComponent(builder => builder.SetStyle(style =>
+                {
+                    style.minWidth = new Length(237, Pixel);
+                    style.height = new Length(51, Pixel);
+                    style.backgroundImage = new StyleBackground(_resourceAssetLoader.Load<Sprite>("Ui/Images/Core/Header"));
+                    style.position = Position.Absolute;
+                    style.top = new Length(-9, Pixel);
+                    style.alignSelf = Align.Center;
+                    style.alignItems = Align.Center;
+                    style.justifyContent = Justify.Center;
+                })
+                .SetPadding(new Padding(new Length(20, Pixel), new Length(0, Pixel)))
+                .AddPreset(factory => factory.Labels().Label(locKey, new Length(18, Pixel), Color.white, text: text, name: name)));
+            return this;
+        }
+        
+        public UIBoxBuilder ModifyCenterWrapper(Action<VisualElementBuilder> builder)
+        {
+            builder.Invoke(_centerWrapper);
             return this;
         }
 
-        public IUIBoxBuilder AddLocalizedHeader(string textLocKey, string name = null, string wrapperName = null, Action<IStyle> style = null, Action<IStyle> wrapperStyle = null)
+        public UIBoxBuilder ModifyWrapper(Action<VisualElementBuilder> builder)
         {
-            _boxComponents += builder => builder.AddLocalizedBoxHeader(textLocKey, name, wrapperName, style, wrapperStyle);
+            builder.Invoke(_wrapper);
             return this;
         }
 
-        public IUIBoxBuilder AddHeader(string text, string name = null, string wrapperName = null, Action<IStyle> style = null, Action<IStyle> wrapperStyle = null)
+        public UIBoxBuilder ModifyBox(Action<VisualElementBuilder> builder)
         {
-            _boxComponents += builder => builder.AddBoxHeader(text, name, wrapperName, style, wrapperStyle);
+            builder.Invoke(_box);
             return this;
         }
 
-        public IUIBoxBuilder AddCloseButton(Length width = default, Length height = default, Length fontsize = default, string name = null, Action<IStyle> style = null)
+        public UIBoxBuilder ModifyScrollView(Action<VisualElementBuilder> builder)
         {
-            _boxComponents += builder => builder.AddCloseButton(width, height, fontsize, name, style);
-            return this;
-        }
-
-        public IUIBoxBuilder BoxStyle(Action<IStyle> style)
-        {
-            _style = style;
-            return this;
-        }
-
-        public IUIBoxBuilder BoxWrapperStyle(Action<IStyle> style)
-        {
-            _root.RootStyle(_style);
-            return this;
-        }
-
-        public IUIBoxBuilder SetWidth(Length width)
-        {
-            _width = width;
-            return this;
-        }
-
-        public IUIBoxBuilder SetHeight(Length height)
-        {
-            _height = height;
-            return this;
-        }
-
-        public IUIBoxBuilder SetPadding(Length padding)
-        {
-            _padding = padding;
-            return this;
-        }
-
-        public IUIBoxBuilder SetName(string name)
-        {
-            _name = name;
+            builder.Invoke(_scrollView);
             return this;
         }
 
         public VisualElement Build()
         {
-            return _root.AddBox(_boxComponents + (componentBuilder => componentBuilder.AddScrollView(_children)), _width, _height, _padding, _name, _style).Build();
+            return _centerWrapper.AddComponent(_wrapper.AddComponent(_box.AddPreset(factory => factory.ScrollViews().MainScrollView(_scrollView.Build())).Build()).Build()).Build();
+        }
+
+        public VisualElement BuildAndInitialize()
+        {
+            return _centerWrapper.AddComponent(_wrapper.AddComponent(_box.AddPreset(factory => factory.ScrollViews().MainScrollView(_scrollView.Build())).Build()).Build()).BuildAndInitialize();
         }
     }
 }

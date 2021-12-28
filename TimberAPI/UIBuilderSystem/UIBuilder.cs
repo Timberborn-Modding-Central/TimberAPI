@@ -1,27 +1,32 @@
-using Timberborn.CoreUI;
+using Timberborn.AssetSystem;
 
 namespace TimberbornAPI.UIBuilderSystem
 {
-    public class UIBuilder : IUIBuilder
+    public class UIBuilder
     {
-        private readonly IElementFactory _elementFactory;
+        private readonly IResourceAssetLoader _resourceAssetLoader;
+        
+        private readonly ComponentBuilder _componentBuilder;
 
-        private readonly VisualElementInitializer _visualElementInitializer;
-
-        public UIBuilder(IElementFactory elementFactory, VisualElementInitializer visualElementInitializer)
+        public UIBuilder(ComponentBuilder componentBuilder, IResourceAssetLoader resourceAssetLoader)
         {
-            this._elementFactory = elementFactory;
-            this._visualElementInitializer = visualElementInitializer;
+            _componentBuilder = componentBuilder;
+            _resourceAssetLoader = resourceAssetLoader;
         }
-
-        public IUIBoxBuilder CreateBoxBuilder()
+        
+        public UIBoxBuilder CreateBoxBuilder()
         {
-            return new UIBoxBuilder(_elementFactory, _visualElementInitializer);
+            return new UIBoxBuilder(_componentBuilder, _resourceAssetLoader);
         }
-
-        public IUIComponentBuilder CreateComponentBuilder()
+        
+        public UIFragmentBuilder CreateFragmentBuilder()
         {
-            return new UIComponentBuilder(_elementFactory, _visualElementInitializer);
+            return new UIFragmentBuilder(_componentBuilder);
+        }
+        
+        public ComponentBuilder CreateComponentBuilder()
+        {
+            return _componentBuilder;
         }
     }
 }

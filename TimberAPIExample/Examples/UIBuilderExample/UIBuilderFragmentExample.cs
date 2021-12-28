@@ -1,42 +1,66 @@
-using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using Timberborn.EntityPanelSystem;
+using TimberbornAPI.Common;
 using TimberbornAPI.UIBuilderSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.UIElements.Length.Unit;
 
 namespace TimberAPIExample.Examples.UIBuilderExample
 {
     public class UIBuilderFragmentExample : IEntityPanelFragment
     {
-        private readonly IUIBuilder _builder;
+        private readonly UIBuilder _builder;
 
         private VisualElement _root;
 
-        public UIBuilderFragmentExample(IUIBuilder builder)
+        public UIBuilderFragmentExample(UIBuilder builder)
         {
             _builder = builder;
         }
-        
-        [SuppressMessage("", "Publicizer001")]
+
         public VisualElement InitializeFragment()
         {
             // Create a root visual element that is used as fragment
-            _root = _builder.CreateComponentBuilder()
-                .AddWrapper(builder => builder // Adds a wrapper to group components
-                    .AddButton("First Button", name: "firstButton", width: new Length(120, Length.Unit.Pixel)) // Adds a button to the wrapper
-                    .AddButton("Another one", name: "secondButton", width: new Length(120, Length.Unit.Pixel)), // Adds a button to the wrapper
-                    justifyContent: Justify.SpaceAround) // Positions the buttons around the wrapper (maximum spaced between)
-                .Build(); // Creates the visual element
+            _root = _builder.CreateComponentBuilder().CreateVisualElement()
+                // Create a fragment with the default background and scaling.
+                .AddComponent(_builder.CreateFragmentBuilder()
+                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( "firstToggle", locKey: "fragment.example.button1", builder: builder => builder.SetMargin(new Margin(0,0,new Length(3, Pixel),0))))
+                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( "secondToggle", locKey: "fragment.example.button2"))
+                    .Build())
+                // Create a fragment with the default scaling and other background.
+                .AddComponent(_builder.CreateFragmentBuilder()
+                    .SetBackground(TimberApiStyle.Backgrounds.Bg1)
+                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( locKey: "fragment.example.button1", builder: builder => builder.SetMargin(new Margin(0,0,new Length(3, Pixel),0))))
+                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( locKey: "fragment.example.button2"))
+                    .Build())
+                // Create a fragment with the different background and scaling
+                .AddComponent(_builder.CreateFragmentBuilder()
+                    .SetBackground(TimberApiStyle.Backgrounds.Bg7)
+                    .SetScale(TimberApiStyle.Scales.Scale7)
+                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( locKey: "fragment.example.button1", builder: builder => builder.SetMargin(new Margin(0,0,new Length(3, Pixel),0))))
+                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( locKey: "fragment.example.button2"))
+                    .Build())
+                // Builds the element and initializes them, adding sounds effects etc.
+                .BuildAndInitialize();
+            
+            // This is enough for one fragment, the example previews 3 fragments in one.
+            // _root = _builder.CreateFragmentBuilder()
+            //     .AddPreset(factory => factory.Toggles().Checkmark( "firstButton", locKey: "fragment.example.button1"))
+            //     .AddPreset(factory => factory.Toggles().Checkmark( "firstButton", locKey: "fragment.example.button2"))
+            //     .BuildAndInitialize();
 
             // Creating on click events for the buttons, using the name that is used with creating the button.
-            _root.Q<Button>("firstButton").clicked += OnFirstButtonClick; // name: firstButton
-            _root.Q<Button>("secondButton").clicked += OnSecondButtonClick; // name: secondButton
-
+            _root.Q<Toggle>("firstToggle").RegisterValueChangedCallback(value => OnFirstToggleValueChange(value.newValue)); // name: firstButton
+            _root.Q<Toggle>("secondToggle").RegisterValueChangedCallback(value => OnSecondToggleValueChange(value.newValue)); // name: firstButton
+            this._root.ToggleDisplayStyle(false);
             return _root;
         }
 
-        public void ShowFragment(GameObject entity) { }
+        public void ShowFragment(GameObject entity)
+        {
+            
+        }
 
         public void ClearFragment()
         {
@@ -46,20 +70,19 @@ namespace TimberAPIExample.Examples.UIBuilderExample
 
         public void UpdateFragment()
         {
-            // Enable fragment when selected.
-            _root.ToggleDisplayStyle(true);
+            this._root.ToggleDisplayStyle(true);
         }
 
-        private void OnFirstButtonClick()
+        private void OnFirstToggleValueChange(bool value)
         {
-            // Do some action when button is clicked
-            TimberAPIExamplePlugin.Log.LogFatal("Clicked on first button");
+            // Do some action when toggle changed value
+            TimberAPIExamplePlugin.Log.LogFatal("New first toggle value:" + value);
         }
 
-        private void OnSecondButtonClick()
+        private void OnSecondToggleValueChange(bool value)
         {
-            // Do some action when button is clicked
-            TimberAPIExamplePlugin.Log.LogFatal("Clicked on second button");
+            // Do some action when toggle changed value
+            TimberAPIExamplePlugin.Log.LogFatal("New second toggle value:" + value);
         }
     }
 }

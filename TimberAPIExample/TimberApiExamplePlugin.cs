@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using Bindito.Core;
 using HarmonyLib;
 using TimberAPIExample.AutoConfiguratorInstaller;
+using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel;
 using Timberborn.SingletonSystem;
 using Timberborn.TimeSystem;
 using Timberborn.ToolSystem;
@@ -12,6 +13,7 @@ using Timberborn.WeatherSystem;
 using TimberbornAPI;
 using TimberbornAPI.EventSystem;
 using TimberbornAPI.Common;
+using TimberbornAPI.UIBuilderSystem;
 
 namespace TimberAPIExample
 {
@@ -34,6 +36,10 @@ namespace TimberAPIExample
             TimberAPI.DependecyRegistry.AddConfigurator(new ExampleConfigurator());
             // Add a label to localization
             TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
+            
+            // Harmony patches
+            new Harmony("com.timberapi.examples").PatchAll();
+            
             Logger.LogInfo("TimberAPIExample is loaded!");
 
             // Adds in game assets with the prefix TimberAPIExample, default folder is assets
@@ -43,6 +49,7 @@ namespace TimberAPIExample
 
             // This is only for the example mod to provide automatic configurators.
             InstallAutoConfigurators();
+            TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderPanelConfigurator(), SceneEntryPoint.Global);
         }
 
         public void InstallAutoConfigurators()

@@ -7,6 +7,7 @@ namespace TimberAPIExample.Examples.EntityActionExample
     {
         private void Awake()
         {
+            
             Console.WriteLine("I'm inside a district centre :D");
         }
     }

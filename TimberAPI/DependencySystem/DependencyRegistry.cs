@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Bindito.Core;
 using HarmonyLib;
 using Timberborn.MainMenuScene;
@@ -22,11 +23,6 @@ namespace TimberbornAPI.DependencySystem
         /// <param name="entryPoint">Scene to bind to, defaults to InGame</param>
         public void AddConfigurator(IConfigurator configurator, SceneEntryPoint entryPoint = SceneEntryPoint.InGame)
         {
-            if (entryPoint == SceneEntryPoint.Global)
-            {
-                Debug.Log("Global is currently unsupported");
-                return;
-            }
             if (configuratorsByEntryPoint.TryGetValue(entryPoint, out var configurators))
             {
                 configurators.Add(configurator);
@@ -42,6 +38,7 @@ namespace TimberbornAPI.DependencySystem
         static void InjectIntoMasterScene(IContainerDefinition containerDefinition)
         {
             InstallAll(containerDefinition, SceneEntryPoint.InGame);
+            InstallAll(containerDefinition, SceneEntryPoint.Global);
         }
 
         [HarmonyPostfix]
@@ -49,6 +46,7 @@ namespace TimberbornAPI.DependencySystem
         static void InjectIntoMainMenuScene(IContainerDefinition containerDefinition)
         {
             InstallAll(containerDefinition, SceneEntryPoint.MainMenu);
+            InstallAll(containerDefinition, SceneEntryPoint.Global);
         }
 
         [HarmonyPostfix]
@@ -56,8 +54,10 @@ namespace TimberbornAPI.DependencySystem
         static void InjectIntoMapEditorScene(IContainerDefinition containerDefinition)
         {
             InstallAll(containerDefinition, SceneEntryPoint.MapEditor);
+            InstallAll(containerDefinition, SceneEntryPoint.Global);
         }
 
+        [SuppressMessage("", "Harmony003")]
         private static void InstallAll(IContainerDefinition containerDefinition, SceneEntryPoint entryPoint)
         {
             List<IConfigurator> configurators =

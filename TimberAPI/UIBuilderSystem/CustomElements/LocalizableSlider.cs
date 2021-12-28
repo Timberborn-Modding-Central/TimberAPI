@@ -2,7 +2,7 @@ using Timberborn.CoreUI;
 using Timberborn.Localization;
 using UnityEngine.UIElements;
 
-namespace ModConfigMenu.UIBuilder.CustomElements
+namespace TimberbornAPI.UIBuilderSystem.CustomElements
 {
     public class LocalizableSlider : Slider, ILocalizableElement
     {
@@ -17,6 +17,11 @@ namespace ModConfigMenu.UIBuilder.CustomElements
             }
         }
 
-        public void Localize(ILoc loc) => this.label = loc.T(this._textLocKey);
+        public void Localize(ILoc loc)
+        {
+            if(_textLocKey == null)
+                return;
+            this.label = loc.T(this._textLocKey);
+        }
     }
 }

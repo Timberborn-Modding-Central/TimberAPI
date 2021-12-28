@@ -17,7 +17,12 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
             }
         }
 
-        public void Localize(ILoc loc) => this.label = loc.T(this._textLocKey);
+        public void Localize(ILoc loc)
+        {
+            if(_textLocKey == null)
+                return;
+            this.label = loc.T(this._textLocKey);
+        }
 
     }
 }
