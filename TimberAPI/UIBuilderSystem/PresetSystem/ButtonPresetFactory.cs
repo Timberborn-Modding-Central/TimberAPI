@@ -23,9 +23,10 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.ArrowDownHover)
                 .AddClass(TimberApiStyle.Buttons.Active.ArrowDownActive)
                 .AddClass(TimberApiStyle.Sounds.Click)
+                .SetStyle(style => style.unityBackgroundScaleMode = ScaleMode.StretchToFill)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(20, Pixel) : size)
-                .SetWidth(size == default ? new Length(20, Pixel) : size);
+                .SetHeight(size == default ? new Length(24, Pixel) : size)
+                .SetWidth(size == default ? new Length(24, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -38,8 +39,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Active.ArrowDownActive)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(20, Pixel) : size)
-                .SetWidth(size == default ? new Length(20, Pixel) : size);
+                .SetHeight(size == default ? new Length(24, Pixel) : size)
+                .SetWidth(size == default ? new Length(24, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -52,8 +53,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Active.ArrowLeftActive)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(20, Pixel) : size)
-                .SetWidth(size == default ? new Length(20, Pixel) : size);
+                .SetHeight(size == default ? new Length(24, Pixel) : size)
+                .SetWidth(size == default ? new Length(24, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -66,8 +67,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Active.ArrowLeftActive)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(20, Pixel) : size)
-                .SetWidth(size == default ? new Length(20, Pixel) : size);
+                .SetHeight(size == default ? new Length(24, Pixel) : size)
+                .SetWidth(size == default ? new Length(24, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -80,8 +81,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Active.ArrowRightActive)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(20, Pixel) : size)
-                .SetWidth(size == default ? new Length(20, Pixel) : size);
+                .SetHeight(size == default ? new Length(24, Pixel) : size)
+                .SetWidth(size == default ? new Length(24, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -94,8 +95,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Active.ArrowRightActive)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(20, Pixel) : size)
-                .SetWidth(size == default ? new Length(20, Pixel) : size);
+                .SetHeight(size == default ? new Length(24, Pixel) : size)
+                .SetWidth(size == default ? new Length(24, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -108,8 +109,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Active.ArrowUpActive)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(20, Pixel) : size)
-                .SetWidth(size == default ? new Length(20, Pixel) : size);
+                .SetHeight(size == default ? new Length(24, Pixel) : size)
+                .SetWidth(size == default ? new Length(24, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -122,8 +123,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Active.ArrowUpActive)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(20, Pixel) : size)
-                .SetWidth(size == default ? new Length(20, Pixel) : size);
+                .SetHeight(size == default ? new Length(24, Pixel) : size)
+                .SetWidth(size == default ? new Length(24, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -256,8 +257,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.CyclerLeftHover)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(24, Pixel) : size)
-                .SetWidth(size == default ? new Length(24, Pixel) : size);
+                .SetHeight(size == default ? new Length(20, Pixel) : size)
+                .SetWidth(size == default ? new Length(11, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -269,8 +270,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.CyclerRightHover)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(24, Pixel) : size)
-                .SetWidth(size == default ? new Length(24, Pixel) : size);
+                .SetHeight(size == default ? new Length(20, Pixel) : size)
+                .SetWidth(size == default ? new Length(11, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }

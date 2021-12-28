@@ -1,6 +1,7 @@
 using System;
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
+using TimberbornAPI.UIBuilderSystem.PresetSystem;
 using UnityEngine.UIElements;
 using LocalizableSlider = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableSlider;
 
@@ -10,7 +11,8 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
     {
         protected override SliderBuilder BuilderInstance => this;
         
-        public SliderBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader) : base(new LocalizableSlider(), visualElementInitializer, assetLoader)
+        public SliderBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) 
+            : base(new LocalizableSlider(), visualElementInitializer, assetLoader, uiPresetFactory)
         {
 
         }

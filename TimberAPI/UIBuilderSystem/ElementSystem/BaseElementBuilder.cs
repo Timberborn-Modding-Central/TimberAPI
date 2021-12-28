@@ -2,6 +2,7 @@ using System;
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.Common;
+using TimberbornAPI.UIBuilderSystem.PresetSystem;
 using UnityEngine.UIElements;
 using LocalizableSlider = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableSlider;
 
@@ -11,14 +12,20 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
     {
         private readonly VisualElementInitializer _visualElementInitializer;
         
+        private readonly UiPresetFactory _uiPresetFactory;
+        
+        private readonly IAssetLoader _assetLoader;
+        
         protected abstract TBuilder BuilderInstance { get; }
         
         protected readonly TElement Root;
         
-        public BaseElementBuilder(TElement root, VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader)
+        public BaseElementBuilder(TElement root, VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory)
         {
             Root = root;
             _visualElementInitializer = visualElementInitializer;
+            _assetLoader = assetLoader;
+            _uiPresetFactory = uiPresetFactory;
             AddStyleSheet(assetLoader.Load<StyleSheet>("timberApi/timber_api/style"));
         }
         
@@ -43,6 +50,26 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         public TBuilder RemoveClass(string className)
         {
             Root.RemoveFromClassList(className);
+            return BuilderInstance;
+        }
+        
+        public TBuilder AddComponent(Action<VisualElementBuilder> builder)
+        {
+            VisualElementBuilder visualElementBuilder = new VisualElementBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
+            builder(visualElementBuilder);
+            Root.Add(visualElementBuilder.Build());
+            return BuilderInstance;
+        }
+        
+        public TBuilder AddComponent(VisualElement element)
+        {
+            Root.Add(element);
+            return BuilderInstance;
+        }
+
+        public TBuilder AddPreset(Func<UiPresetFactory, VisualElement> presetFactory)
+        {
+            Root.Add(presetFactory.Invoke(_uiPresetFactory));
             return BuilderInstance;
         }
         
@@ -81,9 +108,57 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
             Root.style.paddingBottom = padding.Bottom;
             return BuilderInstance;
         }
-
+        
+        public TBuilder SetJustifyContent(Justify justify)
+        {
+            Root.style.justifyContent = justify;
+            return BuilderInstance;
+        }
+        
+        public TBuilder SetAlignItems(Align align)
+        {
+            Root.style.alignItems = align;
+            return BuilderInstance;
+        }
+        
+        public TBuilder SetAlignContent(Align align)
+        {
+            Root.style.alignContent = align;
+            return BuilderInstance;
+        }
+        
+        public TBuilder SetFlexWrap(Wrap wrap)
+        {
+            Root.style.flexWrap = wrap;
+            return BuilderInstance;
+        }
+        
+        public TBuilder SetFlexDirection(FlexDirection direction)
+        {
+            Root.style.flexDirection = direction;
+            return BuilderInstance;
+        }
+        
+        public TBuilder SetBackgroundImage(StyleBackground backgroundImage)
+        {
+            Root.style.backgroundImage = backgroundImage;
+            return BuilderInstance;
+        }
+        
+        public TBuilder ModifyElement(Action<TElement> elementAction)
+        {
+            elementAction.Invoke(Root);
+            return BuilderInstance;
+        }
+        
         public TElement Build()
         {
+            return Root;
+        }
+        
+        public TElement Initialize()
+        {
+            _visualElementInitializer.InitializeVisualElement(Root);
             return Root;
         }
         

@@ -1,5 +1,6 @@
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
+using TimberbornAPI.UIBuilderSystem.PresetSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 using LocalizableButton = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableButton;
@@ -10,7 +11,8 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
     {
         protected override ButtonBuilder BuilderInstance => this;
         
-        public ButtonBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader) : base(new LocalizableButton(), visualElementInitializer, assetLoader)
+        public ButtonBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) 
+            : base(new LocalizableButton(), visualElementInitializer, assetLoader, uiPresetFactory)
         {
             
         }

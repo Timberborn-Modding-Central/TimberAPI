@@ -19,6 +19,11 @@ namespace TimberbornAPI.UIBuilderSystem
             return new UIBoxBuilder(_componentBuilder, _resourceAssetLoader);
         }
         
+        public UIFragmentBuilder CreateFragmentBuilder()
+        {
+            return new UIFragmentBuilder(_componentBuilder);
+        }
+        
         public ComponentBuilder CreateComponentBuilder()
         {
             return _componentBuilder;

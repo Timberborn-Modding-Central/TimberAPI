@@ -33,7 +33,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
             root.AddComponent(builder =>
             {
                 builder.SetFlexDirection(FlexDirection.Row).SetFlexWrap(Wrap.Wrap).SetJustifyContent(Justify.SpaceAround);
-                builder.AddPreset(factory => factory.Buttons().Button(text: "I am a button"));
+                builder.AddPreset(factory => factory.Buttons().Button(text: "I am a button", width: new Length(150, Pixel)));
                 builder.AddPreset(factory => factory.Buttons().Close());
                 builder.AddPreset(factory => factory.Buttons().Minus());
                 builder.AddPreset(factory => factory.Buttons().MinusInverted());
@@ -45,6 +45,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 builder.AddPreset(factory => factory.Buttons().BugTracker());
                 builder.AddPreset(factory => factory.Buttons().LevelVisibilityReset());
                 builder.AddPreset(factory => factory.Buttons().SliderHolder());
+                builder.AddPreset(factory => factory.Buttons().ResetButton());
             });
             
             root.AddPreset(factory => factory.Labels().DefaultHeader(text: "Arrow buttons", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));

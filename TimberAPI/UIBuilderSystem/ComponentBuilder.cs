@@ -23,12 +23,12 @@ namespace TimberbornAPI.UIBuilderSystem
         
         public ButtonBuilder CreateButton()
         {
-            return new ButtonBuilder(_visualElementInitializer, _assetLoader);
+            return new ButtonBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
         }
         
         public ToggleBuilder CreateToggle()
         {
-            return new ToggleBuilder(_visualElementInitializer, _assetLoader);
+            return new ToggleBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
         }
         
         public VisualElementBuilder CreateVisualElement()
@@ -38,22 +38,22 @@ namespace TimberbornAPI.UIBuilderSystem
         
         public ScrollViewBuilder CreateScrollView()
         {
-            return new ScrollViewBuilder(_visualElementInitializer, _assetLoader);
+            return new ScrollViewBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
         }
         
         public LabelBuilder CreateLabel()
         {
-            return new LabelBuilder(_visualElementInitializer, _assetLoader);
+            return new LabelBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
         }
         
         public SliderBuilder CreateSlider()
         {
-            return new SliderBuilder(_visualElementInitializer, _assetLoader);
+            return new SliderBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
         }
         
         public SliderIntBuilder CreateSliderInt()
         {
-            return new SliderIntBuilder(_visualElementInitializer, _assetLoader);
+            return new SliderIntBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
         }
     }
 }

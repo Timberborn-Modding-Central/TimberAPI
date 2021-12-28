@@ -39,8 +39,14 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 builder.AddPreset(factory => factory.Toggles().CheckmarkCrossInverted());
                 builder.AddPreset(factory => factory.Toggles().Circle());
                 builder.AddPreset(factory => factory.Toggles().CheckmarkAlt());
-
             });
+            root.AddPreset(factory => factory.Toggles().Checkbox(text: "Re have text"));
+            root.AddPreset(factory => factory.Toggles().Checkmark(text: "Re have text"));
+            root.AddPreset(factory => factory.Toggles().CheckmarkInverted(text: "We have text"));
+            root.AddPreset(factory => factory.Toggles().CheckmarkCross(text: "We have text"));
+            root.AddPreset(factory => factory.Toggles().CheckmarkCrossInverted(text: "We have text"));
+            root.AddPreset(factory => factory.Toggles().Circle(text: "We have text"));
+            root.AddPreset(factory => factory.Toggles().CheckmarkAlt(text: "We have text"));
 
             return root.Build();
         }

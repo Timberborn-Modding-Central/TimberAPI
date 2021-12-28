@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
+using TimberbornAPI.UIBuilderSystem.PresetSystem;
 using UnityEngine.UIElements;
 
 namespace TimberbornAPI.UIBuilderSystem.ElementSystem
@@ -10,7 +11,8 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
     {
         protected override ScrollViewBuilder BuilderInstance => this;
         
-        public ScrollViewBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader) : base(new ScrollView(), visualElementInitializer, assetLoader)
+        public ScrollViewBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) 
+            : base(new ScrollView(), visualElementInitializer, assetLoader, uiPresetFactory)
         {
         }
         

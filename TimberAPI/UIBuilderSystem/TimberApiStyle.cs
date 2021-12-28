@@ -7,32 +7,52 @@ namespace TimberbornAPI.UIBuilderSystem
         public static class Backgrounds
         {
             public static string BorderTransparent = "tba-border_transparent";
+
             public static string BorderNonTransparent = "tba-border_nontransparent";
-            
+
             public static string Bg1 = "tba-bg-1";
+
             public static string Bg2 = "tba-bg-2";
+
             public static string Bg2Striped = "tba-bg-2-striped";
+
             public static string Bg3 = "tba-bg-3";
+
             public static string Bg4 = "tba-bg-4";
+
             public static string Bg5 = "tba-bg-5";
+
             public static string Bg6 = "tba-bg-6";
+
             public static string Bg6Striped = "tba-bg-6-striped";
+
             public static string Bg7 = "tba-bg-7";
+
             public static string BgInput = "tba-bg-input";
+
             public static string BgSquare1 = "tba-bg-square-1";
+
             public static string BgSquare2 = "tba-bg-square-2";
+
             public static string BgSquare3 = "tba-bg-square-3";
+
             public static string BgSquare4 = "tba-bg-square-4";
+
             public static string BgSquare5 = "tba-bg-square-5";
+
             public static string BgSquare6 = "tba-bg-square-6";
+
             public static string BgSquareLarge1 = "tba-bg-square-large-1";
+
             public static string BgSquareLarge2 = "tba-bg-square-large-2";
+
             public static string BgSquareLarge3 = "tba-bg-square-large-3";
+
             public static string BgSquareLarge4 = "tba-bg-square-large-4";
+
             public static string BgSquareLarge5 = "tba-bg-square-large-5";
+
             public static string BgSquareLarge6 = "tba-bg-square-large-6";
-            
-            
         }
 
         public static class Scales
@@ -66,15 +86,15 @@ namespace TimberbornAPI.UIBuilderSystem
             public static class Normal
             {
                 public static string ButtonGame = "tba-button-game";
-                
+
                 public static string NewGameCustom = "tba-custom";
-                
+
                 public static string NewGameEasy = "tba-easy";
-                
+
                 public static string NewGameNormal = "tba-normal";
-                
+
                 public static string NewGameHard = "tba-hard";
-                
+
                 public static string ArrowDownInverted = "tba-arrow-down-inverted";
 
                 public static string ArrowDown = "tba-arrow-down";
@@ -171,15 +191,15 @@ namespace TimberbornAPI.UIBuilderSystem
             public static class Hover
             {
                 public static string ButtonGameHover = "tba-button-game-hover";
-                
+
                 public static string NewGameCustomHover = "tba-custom-hover";
-                
+
                 public static string NewGameEasyHover = "tba-easy-hover";
-                
+
                 public static string NewGameNormalHover = "tba-normal-hover";
-                
+
                 public static string NewGameHardHover = "tba-hard-hover";
-                
+
                 public static string ArrowDownHover = "tba-arrow-down-hover";
 
                 public static string ArrowLeftHover = "tba-arrow-left-hover";
@@ -256,15 +276,15 @@ namespace TimberbornAPI.UIBuilderSystem
             public static class Active
             {
                 public static string ButtonGameActive = "tba-button-game-active";
-                
+
                 public static string NewGameCustomActive = "tba-custom-active";
-                
+
                 public static string NewGameEasyActive = "tba-easy-active";
-                
+
                 public static string NewGameNormalActive = "tba-normal-active";
-                
+
                 public static string NewGameHardActive = "tba-hard-active";
-                
+
                 public static string ArrowDownActive = "tba-arrow-down-active";
 
                 public static string ArrowLeftActive = "tba-arrow-left-active";
@@ -301,216 +321,428 @@ namespace TimberbornAPI.UIBuilderSystem
 
                 public static string SpeedButton3Active = "tba-speed-button-3-active";
             }
+        }
+
+        public static class CheckBox
+        {
+            public static class Normal
+            {
+                public static string ArrowDownInverted = "tba-arrow-down-inverted-cb";
+
+                public static string ArrowDown = "tba-arrow-down-cb";
+
+                public static string ArrowLeftInverted = "tba-arrow-left-inverted-cb";
+
+                public static string ArrowLeft = "tba-arrow-left-cb";
+
+                public static string ArrowRightInverted = "tba-arrow-right-inverted-cb";
+
+                public static string ArrowRight = "tba-arrow-right-cb";
+
+                public static string ArrowUpInverted = "tba-arrow-up-inverted-cb";
+
+                public static string ArrowUp = "tba-arrow-up-cb";
+
+                public static string Button = "tba-button-cb";
+
+                public static string CheckboxOff = "tba-checkbox_off-cb";
+
+                public static string CheckboxOn = "tba-checkbox_on-cb";
+
+                public static string CheckmarkAlt = "tba-checkmark-alt-cb";
+
+                public static string CheckmarkInverted = "tba-checkmark-inverted-cb";
+
+                public static string Checkmark = "tba-checkmark-cb";
+
+                public static string CircleEmpty = "tba-circle-empty-cb";
+
+                public static string CircleOff = "tba-circle-off-cb";
+
+                public static string CircleOn = "tba-circle-on-cb";
+
+                public static string Close = "tba-close-cb";
+
+                public static string CrossInverted = "tba-cross-inverted-cb";
+
+                public static string Cross = "tba-cross-cb";
+
+                public static string CyclerLeftMain = "tba-cycler_left-cb";
+
+                public static string CyclerRightMain = "tba-cycler_right-cb";
+
+                public static string DownArrow = "tba-down_arrow-cb";
+
+                public static string EmptyAlt = "tba-empty-alt-cb";
+
+                public static string EmptyInverted = "tba-empty-inverted-cb";
+
+                public static string EmptyRed = "tba-empty-red-cb";
+
+                public static string Empty = "tba-empty-cb";
+
+                public static string LeftArrow = "tba-left_arrow-cb";
+
+                public static string MinusInverted = "tba-minus-inverted-cb";
+
+                public static string Minus = "tba-minus-cb";
+
+                public static string PlusInverted = "tba-plus-inverted-cb";
+
+                public static string Plus = "tba-plus-cb";
+
+                public static string RightArrow = "tba-right_arrow-cb";
+
+                public static string SliderHolder = "tba-slider_holder-cb";
+
+                public static string UpArrow = "tba-up_arrow-cb";
+
+                public static string BugTracker = "tba-bug-tracker-cb";
+
+                public static string ClampDown = "tba-clamp-down-cb";
+
+                public static string ClampUp = "tba-clamp-up-cb";
+
+                public static string CyclerLeft = "tba-cycler-left-cb";
+
+                public static string CyclerRight = "tba-cycler-right-cb";
+
+                public static string LevelVisibilityReset = "tba-level-visibility-reset-cb";
+
+                public static string ResetButton = "tba-reset-button-cb";
+
+                public static string SpeedButton0 = "tba-speed-button-0-cb";
+
+                public static string SpeedButton1 = "tba-speed-button-1-cb";
+
+                public static string SpeedButton2 = "tba-speed-button-2-cb";
+
+                public static string SpeedButton3 = "tba-speed-button-3-cb";
+            }
+
+            public static class Hover
+            {
+                public static string ArrowDownHover = "tba-arrow-down-hover-cb";
+
+                public static string ArrowLeftHover = "tba-arrow-left-hover-cb";
+
+                public static string ArrowRightHover = "tba-arrow-right-hover-cb";
+
+                public static string ArrowUpHover = "tba-arrow-up-hover-cb";
+
+                public static string ButtonHover = "tba-button-hover-cb";
+
+                public static string CheckboxOffHover = "tba-checkbox_off_hover-cb";
+
+                public static string CheckboxOnHover = "tba-checkbox_on_hover-cb";
+
+                public static string CheckmarkHover = "tba-checkmark-hover-cb";
+
+                public static string CircleEmptyHover = "tba-circle-empty-hover-cb";
+
+                public static string CircleHover = "tba-circle-hover-cb";
+
+                public static string CircleOffHover = "tba-circle-off-hover-cb";
+
+                public static string CircleOnHover = "tba-circle-on-hover-cb";
+
+                public static string CloseHover = "tba-close_hover-cb";
+
+                public static string CrossHover = "tba-cross-hover-cb";
+
+                public static string CyclerLeftHoverMain = "tba-cycler_left_hover-cb";
+
+                public static string CyclerRightHoverMain = "tba-cycler_right_hover-cb";
+
+                public static string DownArrowHover = "tba-down_arrow_hover-cb";
+
+                public static string EmptyHover = "tba-empty-hover-cb";
+
+                public static string EmptyRedHover = "tba-empty-red-hover-cb";
+
+                public static string LeftArrowHover = "tba-left_arrow_hover-cb";
+
+                public static string MinusHover = "tba-minus-hover-cb";
+
+                public static string PlusHover = "tba-plus-hover-cb";
+
+                public static string RightArrowHover = "tba-right_arrow_hover-cb";
+
+                public static string SliderHolderHover = "tba-slider_holder_hover-cb";
+
+                public static string UpArrowHover = "tba-up_arrow_hover-cb";
+
+                public static string BugTrackerHover = "tba-bug-tracker-hover-cb";
+
+                public static string ClampDownHover = "tba-clamp-down-hover-cb";
+
+                public static string ClampUpHover = "tba-clamp-up-hover-cb";
+
+                public static string CyclerLeftHover = "tba-cycler-left-hover-cb";
+
+                public static string CyclerRightHover = "tba-cycler-right-hover-cb";
+
+                public static string LevelVisibilityResetHover = "tba-level-visibility-reset-hover-cb";
+
+                public static string ResetButtonHover = "tba-reset-button-hover-cb";
+
+                public static string SpeedButton0Hover = "tba-speed-button-0-hover-cb";
+
+                public static string SpeedButton1Hover = "tba-speed-button-1-hover-cb";
+
+                public static string SpeedButton2Hover = "tba-speed-button-2-hover-cb";
+
+                public static string SpeedButton3Hover = "tba-speed-button-3-hover-cb";
+            }
+
+            public static class Active
+            {
+                public static string ArrowDownActive = "tba-arrow-down-active-cb";
+
+                public static string ArrowLeftActive = "tba-arrow-left-active-cb";
+
+                public static string ArrowRightActive = "tba-arrow-right-active-cb";
+
+                public static string ArrowUpActive = "tba-arrow-up-active-cb";
+
+                public static string CheckmarkActive = "tba-checkmark-active-cb";
+
+                public static string CircleEmptyActive = "tba-circle-empty-active-cb";
+
+                public static string CrossActive = "tba-cross-active-cb";
+
+                public static string EmptyActive = "tba-empty-active-cb";
+
+                public static string MinusActive = "tba-minus-active-cb";
+
+                public static string PlusActive = "tba-plus-active-cb";
+
+                public static string BugTrackerActive = "tba-bug-tracker-active-cb";
+
+                public static string ClampDownActive = "tba-clamp-down-active-cb";
+
+                public static string ClampUpActive = "tba-clamp-up-active-cb";
+
+                public static string ResetButtonActive = "tba-reset-button-active-cb";
+
+                public static string SpeedButton0Active = "tba-speed-button-0-active-cb";
+
+                public static string SpeedButton1Active = "tba-speed-button-1-active-cb";
+
+                public static string SpeedButton2Active = "tba-speed-button-2-active-cb";
+
+                public static string SpeedButton3Active = "tba-speed-button-3-active-cb";
+            }
 
             public static class Checked
             {
                 public static class Normal
                 {
-                    public static string ArrowDownInvertedChecked = "tba-arrow-down-inverted-checked";
+                    public static string ArrowDownInverted = "tba-arrow-down-inverted-cb-checked";
 
-                    public static string ArrowDownChecked = "tba-arrow-down-checked";
+                    public static string ArrowDown = "tba-arrow-down-cb-checked";
 
-                    public static string ArrowLeftInvertedChecked = "tba-arrow-left-inverted-checked";
+                    public static string ArrowLeftInverted = "tba-arrow-left-inverted-cb-checked";
 
-                    public static string ArrowLeftChecked = "tba-arrow-left-checked";
+                    public static string ArrowLeft = "tba-arrow-left-cb-checked";
 
-                    public static string ArrowRightInvertedChecked = "tba-arrow-right-inverted-checked";
+                    public static string ArrowRightInverted = "tba-arrow-right-inverted-cb-checked";
 
-                    public static string ArrowRightChecked = "tba-arrow-right-checked";
+                    public static string ArrowRight = "tba-arrow-right-cb-checked";
 
-                    public static string ArrowUpInvertedChecked = "tba-arrow-up-inverted-checked";
+                    public static string ArrowUpInverted = "tba-arrow-up-inverted-cb-checked";
 
-                    public static string ArrowUpChecked = "tba-arrow-up-checked";
+                    public static string ArrowUp = "tba-arrow-up-cb-checked";
 
-                    public static string ButtonChecked = "tba-button-checked";
+                    public static string Button = "tba-button-cb-checked";
 
-                    public static string CheckboxOffChecked = "tba-checkbox_off-checked";
+                    public static string CheckboxOff = "tba-checkbox_off-cb-checked";
 
-                    public static string CheckboxOnChecked = "tba-checkbox_on-checked";
+                    public static string CheckboxOn = "tba-checkbox_on-cb-checked";
 
-                    public static string CheckmarkAltChecked = "tba-checkmark-alt-checked";
+                    public static string CheckmarkAlt = "tba-checkmark-alt-cb-checked";
 
-                    public static string CheckmarkInvertedChecked = "tba-checkmark-inverted-checked";
+                    public static string CheckmarkInverted = "tba-checkmark-inverted-cb-checked";
 
-                    public static string CheckmarkChecked = "tba-checkmark-checked";
+                    public static string Checkmark = "tba-checkmark-cb-checked";
 
-                    public static string CircleEmptyChecked = "tba-circle-empty-checked";
+                    public static string CircleEmpty = "tba-circle-empty-cb-checked";
 
-                    public static string CircleOffChecked = "tba-circle-off-checked";
+                    public static string CircleOff = "tba-circle-off-cb-checked";
 
-                    public static string CircleOnChecked = "tba-circle-on-checked";
+                    public static string CircleOn = "tba-circle-on-cb-checked";
 
-                    public static string CloseChecked = "tba-close-checked";
+                    public static string Close = "tba-close-cb-checked";
 
-                    public static string CrossInvertedChecked = "tba-cross-inverted-checked";
+                    public static string CrossInverted = "tba-cross-inverted-cb-checked";
 
-                    public static string CrossChecked = "tba-cross-checked";
+                    public static string Cross = "tba-cross-cb-checked";
 
-                    public static string CyclerLeftCheckedMain = "tba-cycler_left-checked";
+                    public static string CyclerLeftMain = "tba-cycler_left-cb-checked";
 
-                    public static string CyclerRightCheckedMain = "tba-cycler_right-checked";
+                    public static string CyclerRightMain = "tba-cycler_right-cb-checked";
 
-                    public static string DownArrowChecked = "tba-down_arrow-checked";
+                    public static string DownArrow = "tba-down_arrow-cb-checked";
 
-                    public static string EmptyAltChecked = "tba-empty-alt-checked";
+                    public static string EmptyAlt = "tba-empty-alt-cb-checked";
 
-                    public static string EmptyInvertedChecked = "tba-empty-inverted-checked";
+                    public static string EmptyInverted = "tba-empty-inverted-cb-checked";
 
-                    public static string EmptyRedChecked = "tba-empty-red-checked";
+                    public static string EmptyRed = "tba-empty-red-cb-checked";
 
-                    public static string EmptyChecked = "tba-empty-checked";
+                    public static string Empty = "tba-empty-cb-checked";
 
-                    public static string LeftArrowChecked = "tba-left_arrow-checked";
+                    public static string LeftArrow = "tba-left_arrow-cb-checked";
 
-                    public static string MinusInvertedChecked = "tba-minus-inverted-checked";
+                    public static string MinusInverted = "tba-minus-inverted-cb-checked";
 
-                    public static string MinusChecked = "tba-minus-checked";
+                    public static string Minus = "tba-minus-cb-checked";
 
-                    public static string PlusInvertedChecked = "tba-plus-inverted-checked";
+                    public static string PlusInverted = "tba-plus-inverted-cb-checked";
 
-                    public static string PlusChecked = "tba-plus-checked";
+                    public static string Plus = "tba-plus-cb-checked";
 
-                    public static string RightArrowChecked = "tba-right_arrow-checked";
+                    public static string RightArrow = "tba-right_arrow-cb-checked";
 
-                    public static string SliderHolderChecked = "tba-slider_holder-checked";
+                    public static string SliderHolder = "tba-slider_holder-cb-checked";
 
-                    public static string UpArrowChecked = "tba-up_arrow-checked";
+                    public static string UpArrow = "tba-up_arrow-cb-checked";
 
-                    public static string BugTrackerChecked = "tba-bug-tracker-checked";
+                    public static string BugTracker = "tba-bug-tracker-cb-checked";
 
-                    public static string ClampDownChecked = "tba-clamp-down-checked";
+                    public static string ClampDown = "tba-clamp-down-cb-checked";
 
-                    public static string ClampUpChecked = "tba-clamp-up-checked";
+                    public static string ClampUp = "tba-clamp-up-cb-checked";
 
-                    public static string CyclerLeftChecked = "tba-cycler-left-checked";
+                    public static string CyclerLeft = "tba-cycler-left-cb-checked";
 
-                    public static string CyclerRightChecked = "tba-cycler-right-checked";
+                    public static string CyclerRight = "tba-cycler-right-cb-checked";
 
-                    public static string LevelVisibilityResetChecked = "tba-level-visibility-reset-checked";
+                    public static string LevelVisibilityReset = "tba-level-visibility-reset-cb-checked";
 
-                    public static string ResetButtonChecked = "tba-reset-button-checked";
+                    public static string ResetButton = "tba-reset-button-cb-checked";
 
-                    public static string SpeedButton0Checked = "tba-speed-button-0-checked";
+                    public static string SpeedButton0 = "tba-speed-button-0-cb-checked";
 
-                    public static string SpeedButton1Checked = "tba-speed-button-1-checked";
+                    public static string SpeedButton1 = "tba-speed-button-1-cb-checked";
 
-                    public static string SpeedButton2Checked = "tba-speed-button-2-checked";
+                    public static string SpeedButton2 = "tba-speed-button-2-cb-checked";
 
-                    public static string SpeedButton3Checked = "tba-speed-button-3-checked";
+                    public static string SpeedButton3 = "tba-speed-button-3-cb-checked";
                 }
 
                 public static class Hover
                 {
-                    public static string ArrowDownHoverChecked = "tba-arrow-down-hover-checked";
+                    public static string ArrowDownHover = "tba-arrow-down-hover-cb-checked";
 
-                    public static string ArrowLeftHoverChecked = "tba-arrow-left-hover-checked";
+                    public static string ArrowLeftHover = "tba-arrow-left-hover-cb-checked";
 
-                    public static string ArrowRightHoverChecked = "tba-arrow-right-hover-checked";
+                    public static string ArrowRightHover = "tba-arrow-right-hover-cb-checked";
 
-                    public static string ArrowUpHoverChecked = "tba-arrow-up-hover-checked";
+                    public static string ArrowUpHover = "tba-arrow-up-hover-cb-checked";
 
-                    public static string ButtonHoverChecked = "tba-button-hover-checked";
+                    public static string ButtonHover = "tba-button-hover-cb-checked";
 
-                    public static string CheckboxOffHoverChecked = "tba-checkbox_off_hover-checked";
+                    public static string CheckboxOffHover = "tba-checkbox_off_hover-cb-checked";
 
-                    public static string CheckboxOnHoverChecked = "tba-checkbox_on_hover-checked";
+                    public static string CheckboxOnHover = "tba-checkbox_on_hover-cb-checked";
 
-                    public static string CheckmarkHoverChecked = "tba-checkmark-hover-checked";
+                    public static string CheckmarkHover = "tba-checkmark-hover-cb-checked";
 
-                    public static string CircleEmptyHoverChecked = "tba-circle-empty-hover-checked";
+                    public static string CircleEmptyHover = "tba-circle-empty-hover-cb-checked";
 
-                    public static string CircleHoverChecked = "tba-circle-hover-checked";
+                    public static string CircleHover = "tba-circle-hover-cb-checked";
 
-                    public static string CircleOffHoverChecked = "tba-circle-off-hover-checked";
+                    public static string CircleOffHover = "tba-circle-off-hover-cb-checked";
 
-                    public static string CircleOnHoverChecked = "tba-circle-on-hover-checked";
+                    public static string CircleOnHover = "tba-circle-on-hover-cb-checked";
 
-                    public static string CloseHoverChecked = "tba-close_hover-checked";
+                    public static string CloseHover = "tba-close_hover-cb-checked";
 
-                    public static string CrossHoverChecked = "tba-cross-hover-checked";
+                    public static string CrossHover = "tba-cross-hover-cb-checked";
 
-                    public static string CyclerLeftHoverMainChecked = "tba-cycler_left_hover-checked";
+                    public static string CyclerLeftHoverMain = "tba-cycler_left_hover-cb-checked";
 
-                    public static string CyclerRightMainHoverChecked = "tba-cycler_right_hover-checked";
+                    public static string CyclerRightHoverMain = "tba-cycler_right_hover-cb-checked";
 
-                    public static string DownArrowHoverChecked = "tba-down_arrow_hover-checked";
+                    public static string DownArrowHover = "tba-down_arrow_hover-cb-checked";
 
-                    public static string EmptyHoverChecked = "tba-empty-hover-checked";
+                    public static string EmptyHover = "tba-empty-hover-cb-checked";
 
-                    public static string EmptyRedHoverChecked = "tba-empty-red-hover-checked";
+                    public static string EmptyRedHover = "tba-empty-red-hover-cb-checked";
 
-                    public static string LeftArrowHoverChecked = "tba-left_arrow_hover-checked";
+                    public static string LeftArrowHover = "tba-left_arrow_hover-cb-checked";
 
-                    public static string MinusHoverChecked = "tba-minus-hover-checked";
+                    public static string MinusHover = "tba-minus-hover-cb-checked";
 
-                    public static string PlusHoverChecked = "tba-plus-hover-checked";
+                    public static string PlusHover = "tba-plus-hover-cb-checked";
 
-                    public static string RightArrowHoverChecked = "tba-right_arrow_hover-checked";
+                    public static string RightArrowHover = "tba-right_arrow_hover-cb-checked";
 
-                    public static string SliderHolderHoverChecked = "tba-slider_holder_hover-checked";
+                    public static string SliderHolderHover = "tba-slider_holder_hover-cb-checked";
 
-                    public static string UpArrowHoverChecked = "tba-up_arrow_hover-checked";
+                    public static string UpArrowHover = "tba-up_arrow_hover-cb-checked";
 
-                    public static string BugTrackerHoverChecked = "tba-bug-tracker-hover-checked";
+                    public static string BugTrackerHover = "tba-bug-tracker-hover-cb-checked";
 
-                    public static string ClampDownHoverChecked = "tba-clamp-down-hover-checked";
+                    public static string ClampDownHover = "tba-clamp-down-hover-cb-checked";
 
-                    public static string ClampUpHoverChecked = "tba-clamp-up-hover-checked";
+                    public static string ClampUpHover = "tba-clamp-up-hover-cb-checked";
 
-                    public static string CyclerLeftHoverChecked = "tba-cycler-left-hover-checked";
+                    public static string CyclerLeftHover = "tba-cycler-left-hover-cb-checked";
 
-                    public static string CyclerRightHoverChecked = "tba-cycler-right-hover-checked";
+                    public static string CyclerRightHover = "tba-cycler-right-hover-cb-checked";
 
-                    public static string LevelVisibilityResetHoverChecked = "tba-level-visibility-reset-hover-checked";
+                    public static string LevelVisibilityResetHover = "tba-level-visibility-reset-hover-cb-checked";
 
-                    public static string ResetButtonHoverChecked = "tba-reset-button-hover-checked";
+                    public static string ResetButtonHover = "tba-reset-button-hover-cb-checked";
 
-                    public static string SpeedButton0HoverChecked = "tba-speed-button-0-hover-checked";
+                    public static string SpeedButton0Hover = "tba-speed-button-0-hover-cb-checked";
 
-                    public static string SpeedButton1HoverChecked = "tba-speed-button-1-hover-checked";
+                    public static string SpeedButton1Hover = "tba-speed-button-1-hover-cb-checked";
 
-                    public static string SpeedButton2HoverChecked = "tba-speed-button-2-hover-checked";
+                    public static string SpeedButton2Hover = "tba-speed-button-2-hover-cb-checked";
 
-                    public static string SpeedButton3HoverChecked = "tba-speed-button-3-hover-checked";
+                    public static string SpeedButton3Hover = "tba-speed-button-3-hover-cb-checked";
                 }
 
                 public static class Active
                 {
-                    public static string ArrowDownActiveChecked = "tba-arrow-down-active-checked";
+                    public static string ArrowDownActive = "tba-arrow-down-active-cb-checked";
 
-                    public static string ArrowLeftActiveChecked = "tba-arrow-left-active-checked";
+                    public static string ArrowLeftActive = "tba-arrow-left-active-cb-checked";
 
-                    public static string ArrowRightActiveChecked = "tba-arrow-right-active-checked";
+                    public static string ArrowRightActive = "tba-arrow-right-active-cb-checked";
 
-                    public static string ArrowUpActiveChecked = "tba-arrow-up-active-checked";
+                    public static string ArrowUpActive = "tba-arrow-up-active-cb-checked";
 
-                    public static string CheckmarkActiveChecked = "tba-checkmark-active-checked";
+                    public static string CheckmarkActive = "tba-checkmark-active-cb-checked";
 
-                    public static string CircleEmptyActiveChecked = "tba-circle-empty-active-checked";
+                    public static string CircleEmptyActive = "tba-circle-empty-active-cb-checked";
 
-                    public static string CrossActiveChecked = "tba-cross-active-checked";
+                    public static string CrossActive = "tba-cross-active-cb-checked";
 
-                    public static string EmptyActiveChecked = "tba-empty-active-checked";
+                    public static string EmptyActive = "tba-empty-active-cb-checked";
 
-                    public static string MinusActiveChecked = "tba-minus-active-checked";
+                    public static string MinusActive = "tba-minus-active-cb-checked";
 
-                    public static string PlusActiveChecked = "tba-plus-active-checked";
+                    public static string PlusActive = "tba-plus-active-cb-checked";
 
-                    public static string BugTrackerActiveChecked = "tba-bug-tracker-active-checked";
+                    public static string BugTrackerActive = "tba-bug-tracker-active-cb-checked";
 
-                    public static string ClampDownActiveChecked = "tba-clamp-down-active-checked";
+                    public static string ClampDownActive = "tba-clamp-down-active-cb-checked";
 
-                    public static string ClampUpActiveChecked = "tba-clamp-up-active-checked";
+                    public static string ClampUpActive = "tba-clamp-up-active-cb-checked";
 
-                    public static string ResetButtonActiveChecked = "tba-reset-button-active-checked";
+                    public static string ResetButtonActive = "tba-reset-button-active-cb-checked";
 
-                    public static string SpeedButton0ActiveChecked = "tba-speed-button-0-active-checked";
+                    public static string SpeedButton0Active = "tba-speed-button-0-active-cb-checked";
 
-                    public static string SpeedButton1ActiveChecked = "tba-speed-button-1-active-checked";
+                    public static string SpeedButton1Active = "tba-speed-button-1-active-cb-checked";
 
-                    public static string SpeedButton2ActiveChecked = "tba-speed-button-2-active-checked";
+                    public static string SpeedButton2Active = "tba-speed-button-2-active-cb-checked";
 
-                    public static string SpeedButton3ActiveChecked = "tba-speed-button-3-active-checked";
+                    public static string SpeedButton3Active = "tba-speed-button-3-active-cb-checked";
                 }
             }
         }

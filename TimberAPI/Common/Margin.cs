@@ -9,20 +9,20 @@ namespace TimberbornAPI.Common
         public Length Bottom;
         public Length Left;
         
-        public Margin(Length padding)
+        public Margin(Length margin)
         {
-            Top = padding;
-            Right = padding;
-            Bottom = padding;
-            Left = padding;
+            Top = margin;
+            Right = margin;
+            Bottom = margin;
+            Left = margin;
         }
 
-        public Margin(Length paddingX, Length paddingY)
+        public Margin(Length marginX, Length marginY)
         {
-            Top = paddingY;
-            Bottom = paddingY;
-            Left = paddingX;
-            Right = paddingX;
+            Top = marginY;
+            Bottom = marginY;
+            Left = marginX;
+            Right = marginX;
         }
 
         public Margin(Length top, Length right, Length bottom, Length left)

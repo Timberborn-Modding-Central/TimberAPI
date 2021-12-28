@@ -1,6 +1,5 @@
 using Bindito.Core;
 using HarmonyLib;
-using TimberAPIExample.AutoConfiguratorInstaller;
 using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previews;
 using Timberborn.MainMenuScene;
 using Timberborn.Options;
@@ -17,6 +16,9 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
             containerDefinition.MultiBind<IUIBuilderPreview>().To<ButtonPreview>().AsSingleton();
             containerDefinition.MultiBind<IUIBuilderPreview>().To<TogglePreview>().AsSingleton();
             containerDefinition.MultiBind<IUIBuilderPreview>().To<SliderPreview>().AsSingleton();
+            containerDefinition.MultiBind<IUIBuilderPreview>().To<VisualElementBuilderPreview>().AsSingleton();
+            containerDefinition.MultiBind<IUIBuilderPreview>().To<LabelPreview>().AsSingleton();
+            containerDefinition.MultiBind<IUIBuilderPreview>().To<CustomPreview>().AsSingleton();
         }
     }
     

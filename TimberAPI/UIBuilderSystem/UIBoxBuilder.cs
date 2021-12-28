@@ -19,7 +19,7 @@ namespace TimberbornAPI.UIBuilderSystem
 
         private readonly VisualElementBuilder _box;
 
-        private VisualElementBuilder _scrollView;
+        private readonly VisualElementBuilder _scrollView;
 
         public UIBoxBuilder(ComponentBuilder componentBuilder, IResourceAssetLoader resourceAssetLoader)
         {

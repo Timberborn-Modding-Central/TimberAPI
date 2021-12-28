@@ -1,5 +1,6 @@
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
+using TimberbornAPI.UIBuilderSystem.PresetSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 using LocalizableLabel = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableLabel;
@@ -10,8 +11,8 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
     {
         protected override LabelBuilder BuilderInstance => this;
 
-        public LabelBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader) : base(
-            new LocalizableLabel(), visualElementInitializer, assetLoader)
+        public LabelBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) 
+            : base(new LocalizableLabel(), visualElementInitializer, assetLoader, uiPresetFactory)
         {
         }
 
