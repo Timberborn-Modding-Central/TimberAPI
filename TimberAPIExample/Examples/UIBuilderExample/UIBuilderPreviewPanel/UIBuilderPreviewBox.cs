@@ -62,7 +62,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
             if(firstElement != null)
                 boxBuilder.AddComponent(firstElement.GetPreview());
             
-            VisualElement root = boxBuilder.AddCloseButton("CloseButton").SetBoxInCenter().AddHeader(text: "UI Previews").BuildAndInitialize();
+            VisualElement root = boxBuilder.AddCloseButton("CloseButton").SetBoxInCenter().AddHeader("preview.box.title").BuildAndInitialize();
             _previewBox = root.Q<VisualElement>("elementPreview");
             root.Q<Button>("CloseButton").clicked += OnUICancelled;
             

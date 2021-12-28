@@ -28,7 +28,7 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .SetFontStyle(fontStyle == default ? FontStyle.Normal : fontStyle)
                 .SetWhiteSpace(whiteSpace == default ? WhiteSpace.Normal : whiteSpace);
             builder?.Invoke(label);
-            return label.Build();
+            return label.BuildAndInitialize();
         }
         
         public LocalizableLabel GameTextSmall(string locKey = default, string text = default, string name = null, Action<LabelBuilder> builder = default)

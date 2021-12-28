@@ -29,11 +29,11 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
         {
             VisualElementBuilder root = _uiBuilder.CreateComponentBuilder().CreateVisualElement();
 
-            root.AddPreset(factory => factory.Labels().DefaultHeader(text: "Buttons", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
+            root.AddPreset(factory => factory.Labels().DefaultHeader("preview.buttons.buttons", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             root.AddComponent(builder =>
             {
                 builder.SetFlexDirection(FlexDirection.Row).SetFlexWrap(Wrap.Wrap).SetJustifyContent(Justify.SpaceAround);
-                builder.AddPreset(factory => factory.Buttons().Button(text: "I am a button", width: new Length(150, Pixel)));
+                builder.AddPreset(factory => factory.Buttons().Button(locKey: "preview.buttons.iambutton", width: new Length(150, Pixel)));
                 builder.AddPreset(factory => factory.Buttons().Close());
                 builder.AddPreset(factory => factory.Buttons().Minus());
                 builder.AddPreset(factory => factory.Buttons().MinusInverted());
@@ -48,7 +48,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 builder.AddPreset(factory => factory.Buttons().ResetButton());
             });
             
-            root.AddPreset(factory => factory.Labels().DefaultHeader(text: "Arrow buttons", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
+            root.AddPreset(factory => factory.Labels().DefaultHeader("preview.buttons.arrows", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             root.AddComponent(builder =>
             {
                 builder.SetFlexDirection(FlexDirection.Row).SetFlexWrap(Wrap.Wrap).SetJustifyContent(Justify.SpaceAround);
@@ -66,7 +66,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 builder.AddPreset(factory => factory.Buttons().RightArrow());
             });
             
-            root.AddPreset(factory => factory.Labels().DefaultHeader(text: "Cycler buttons", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
+            root.AddPreset(factory => factory.Labels().DefaultHeader("preview.buttons.cycler", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             root.AddComponent(builder =>
             {
                 builder.SetFlexDirection(FlexDirection.Row).SetFlexWrap(Wrap.Wrap).SetJustifyContent(Justify.SpaceAround);
@@ -76,7 +76,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 builder.AddPreset(factory => factory.Buttons().CyclerRightMain());
             });
             
-            root.AddPreset(factory => factory.Labels().DefaultHeader(text: "Speed control buttons", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
+            root.AddPreset(factory => factory.Labels().DefaultHeader("preview.buttons.speedcontrol", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             root.AddComponent(builder =>
             {
                 builder.SetFlexDirection(FlexDirection.Row).SetFlexWrap(Wrap.Wrap).SetJustifyContent(Justify.SpaceAround);
@@ -86,8 +86,8 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 builder.AddPreset(factory => factory.Buttons().SpeedButton3());
             });
 
-            root.AddPreset(factory => factory.Labels().DefaultHeader(text: "Nine sliced buttons", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; })));
-            root.AddPreset(factory => factory.Labels().GameTextSmall(text: "These buttons can be used with any height & width without transformation", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
+            root.AddPreset(factory => factory.Labels().DefaultHeader("preview.buttons.ninesliced", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; })));
+            root.AddPreset(factory => factory.Labels().GameTextSmall("preview.buttons.ninesliced.comment", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             
             FieldInfo[] scales = typeof(TimberApiStyle.Scales).GetFields(BindingFlags.Static | BindingFlags.Public);
 
@@ -97,16 +97,16 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 root.AddComponent(builder =>
                 {
                     builder.SetFlexDirection(FlexDirection.Row).SetFlexWrap(Wrap.Wrap).SetJustifyContent(Justify.SpaceAround);
-                    builder.AddPreset(factory => factory.Buttons().ButtonGame(text: "I am a button", scale: scale.GetValue(null).ToString()));
-                    builder.AddPreset(factory => factory.Buttons().NewGameCustom(text: "I am a button", scale: scale.GetValue(null).ToString()));
-                    builder.AddPreset(factory => factory.Buttons().NewGameEasy(text: "I am a button", scale: scale.GetValue(null).ToString()));
-                    builder.AddPreset(factory => factory.Buttons().NewGameNormal(text: "I am a button", scale: scale.GetValue(null).ToString()));
-                    builder.AddPreset(factory => factory.Buttons().NewGameHard(text: "I am a button", scale: scale.GetValue(null).ToString()));
+                    builder.AddPreset(factory => factory.Buttons().ButtonGame("preview.buttons.iambutton", scale: scale.GetValue(null).ToString()));
+                    builder.AddPreset(factory => factory.Buttons().NewGameCustom("preview.buttons.iambutton", scale: scale.GetValue(null).ToString()));
+                    builder.AddPreset(factory => factory.Buttons().NewGameEasy("preview.buttons.iambutton", scale: scale.GetValue(null).ToString()));
+                    builder.AddPreset(factory => factory.Buttons().NewGameNormal("preview.buttons.iambutton", scale: scale.GetValue(null).ToString()));
+                    builder.AddPreset(factory => factory.Buttons().NewGameHard("preview.buttons.iambutton", scale: scale.GetValue(null).ToString()));
                 });
             }
 
             
-            return root.Build();
+            return root.BuildAndInitialize();
         }
     }
 }

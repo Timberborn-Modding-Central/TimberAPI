@@ -33,7 +33,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
         {
             VisualElementBuilder root = _uiBuilder.CreateComponentBuilder().CreateVisualElement();
 
-            root.AddPreset(factory => factory.Labels().DefaultHeader(text: "Empty circle button with a image inside", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
+            root.AddPreset(factory => factory.Labels().DefaultHeader("preview.customs.emptycircle", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             root.AddComponent(_uiBuilder.CreateComponentBuilder().CreateButton()
                 .AddClass(TimberApiStyle.Buttons.Normal.CircleEmpty)
                 .AddClass(TimberApiStyle.Buttons.Hover.CircleEmptyHover)
@@ -51,7 +51,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 .SetHeight(new Length(50, Pixel))
                 .SetWidth(new Length(50, Pixel)).Build());
             
-            root.AddPreset(factory => factory.Labels().DefaultHeader(text: "Customized hover, active behaviour", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
+            root.AddPreset(factory => factory.Labels().DefaultHeader("preview.customs.custombutton", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             root.AddComponent(_uiBuilder.CreateComponentBuilder().CreateButton()
                 .AddClass(TimberApiStyle.Buttons.Normal.ArrowLeftInverted)
                 .AddClass(TimberApiStyle.Buttons.Hover.ArrowRightHover)
@@ -60,7 +60,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 .SetHeight(new Length(50, Pixel))
                 .SetWidth(new Length(50, Pixel)).Build());
             
-            return root.Build();
+            return root.BuildAndInitialize();
         }
     }
 }
