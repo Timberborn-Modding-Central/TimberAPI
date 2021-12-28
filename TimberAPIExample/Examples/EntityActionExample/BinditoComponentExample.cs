@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace TimberAPIExample.Examples.EntityActionExample
 {
-    public class BinditoComponentExample : MonoBehaviour, IUnfinishedStateListener
+    public class BinditoComponentExample : MonoBehaviour
     {
         private ILoc _loc;
         
@@ -23,23 +23,6 @@ namespace TimberAPIExample.Examples.EntityActionExample
         private void Start()
         {
             Console.WriteLine(_loc.T("menu.continue"));
-        }
-
-        public void OnEnterUnfinishedState()
-        {
-            
-        }
-
-        public void OnExitUnfinishedState()
-        {
-            if (gameObject.TryGetComponent(out Stockpile stockpile) && gameObject.TryGetComponent(out ToggleableGoodDisallower disallower))
-            {
-                foreach (StorableGoodAmount good in stockpile.Inventory.AllowedGoods)
-                {
-                    disallower.Disallow(good.StorableGood.GoodSpecification);
-                    TimberAPIPlugin.Log.LogFatal(good.StorableGood.GoodSpecification.name);
-                }
-            }
         }
     }
 }

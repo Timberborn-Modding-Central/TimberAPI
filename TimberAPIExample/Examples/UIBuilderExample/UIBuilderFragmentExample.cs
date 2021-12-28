@@ -25,8 +25,8 @@ namespace TimberAPIExample.Examples.UIBuilderExample
             _root = _builder.CreateComponentBuilder().CreateVisualElement()
                 // Create a fragment with the default background and scaling.
                 .AddComponent(_builder.CreateFragmentBuilder()
-                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( "firstButton", locKey: "fragment.example.button1", builder: builder => builder.SetMargin(new Margin(0,0,new Length(3, Pixel),0))))
-                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( "firstButton", locKey: "fragment.example.button2"))
+                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( "firstToggle", locKey: "fragment.example.button1", builder: builder => builder.SetMargin(new Margin(0,0,new Length(3, Pixel),0))))
+                    .AddPreset(factory => factory.Toggles().CheckmarkInverted( "secondToggle", locKey: "fragment.example.button2"))
                     .Build())
                 // Create a fragment with the default scaling and other background.
                 .AddComponent(_builder.CreateFragmentBuilder()
@@ -51,9 +51,9 @@ namespace TimberAPIExample.Examples.UIBuilderExample
             //     .BuildAndInitialize();
 
             // Creating on click events for the buttons, using the name that is used with creating the button.
-            // _root.Q<Button>("firstButton").clicked += OnFirstButtonClick; // name: firstButton
-            // _root.Q<Button>("secondButton").clicked += OnSecondButtonClick; // name: secondButton
-
+            _root.Q<Toggle>("firstToggle").RegisterValueChangedCallback(value => OnFirstToggleValueChange(value.newValue)); // name: firstButton
+            _root.Q<Toggle>("secondToggle").RegisterValueChangedCallback(value => OnSecondToggleValueChange(value.newValue)); // name: firstButton
+            this._root.ToggleDisplayStyle(false);
             return _root;
         }
 
@@ -70,20 +70,19 @@ namespace TimberAPIExample.Examples.UIBuilderExample
 
         public void UpdateFragment()
         {
-            // Enable fragment when selected.
-            _root.ToggleDisplayStyle(true);
+            this._root.ToggleDisplayStyle(true);
         }
 
-        private void OnFirstButtonClick()
+        private void OnFirstToggleValueChange(bool value)
         {
-            // Do some action when button is clicked
-            TimberAPIExamplePlugin.Log.LogFatal("Clicked on first button");
+            // Do some action when toggle changed value
+            TimberAPIExamplePlugin.Log.LogFatal("New first toggle value:" + value);
         }
 
-        private void OnSecondButtonClick()
+        private void OnSecondToggleValueChange(bool value)
         {
-            // Do some action when button is clicked
-            TimberAPIExamplePlugin.Log.LogFatal("Clicked on second button");
+            // Do some action when toggle changed value
+            TimberAPIExamplePlugin.Log.LogFatal("New second toggle value:" + value);
         }
     }
 }
