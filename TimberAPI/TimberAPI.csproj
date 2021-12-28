@@ -4,21 +4,23 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>TimberAPI</AssemblyName>
     <Description>The unofficial API for Timberborn</Description>
-    <Version>0.1.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
     <RootNamespace>TimberbornAPI</RootNamespace>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.2</PackageVersion>
     <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
+    <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
+    <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+    <Version>0.3.0</Version>
+    <ReleaseVersion>0.3.0</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.7" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.4.16" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
-    <PackageReference Include="UnityEngine.Modules" Version="2021.2.5" IncludeAssets="compile" />
-    <PackageReference Include="Timberborn.GameLibs" Version="2021.12.10-r.0" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.2.7" IncludeAssets="compile" />
+    <PackageReference Include="Timberborn.GameLibs" Version="2021.12.17-r.0" />
     <PackageReference Include="LinqToCsv" Version="1.5.0">
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
