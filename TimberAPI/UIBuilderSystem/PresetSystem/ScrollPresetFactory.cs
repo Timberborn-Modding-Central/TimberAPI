@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Timberborn.AssetSystem;
 using TimberbornAPI.UIBuilderSystem.ElementSystem;
 using UnityEngine;
@@ -30,6 +31,7 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return MainScrollView(name, height, width, builder + (viewBuilder => viewBuilder.AddChild(child)));
         }
 
+        [SuppressMessage("", "Publicizer001")]
         public ScrollView MainScrollView(string name = null, Length height = default, Length width = default, Action<ScrollViewBuilder> builder = default)
         {
             ScrollViewBuilder scrollView = _componentBuilder.CreateScrollView()

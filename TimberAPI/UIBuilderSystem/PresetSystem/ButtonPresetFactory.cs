@@ -16,6 +16,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             _componentBuilder = componentBuilder;
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton ArrowDown(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -31,6 +36,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton ArrowDownInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -45,6 +55,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton ArrowLeft(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -59,6 +74,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton ArrowLeftInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -73,6 +93,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton ArrowRight(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -87,6 +112,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton ArrowRightInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -101,6 +131,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton ArrowUp(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -115,6 +150,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton ArrowUpInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -129,6 +169,7 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        
         public LocalizableButton Close(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -136,11 +177,12 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.CloseHover)
                 .AddClass(TimberApiStyle.Sounds.Cancel)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(36, Pixel) : size)
-                .SetWidth(size == default ? new Length(36, Pixel) : size);
+                .SetHeight(size == default ? new Length(40, Pixel) : size)
+                .SetWidth(size == default ? new Length(40, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
+        
         
         public LocalizableButton DownArrow(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
@@ -149,8 +191,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.DownArrowHover)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(40, Pixel) : size)
-                .SetWidth(size == default ? new Length(60, Pixel) : size);
+                .SetHeight(size == default ? new Length(34, Pixel) : size)
+                .SetWidth(size == default ? new Length(57, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -162,8 +204,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.LeftArrowHover)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(60, Pixel) : size)
-                .SetWidth(size == default ? new Length(40, Pixel) : size);
+                .SetHeight(size == default ? new Length(57, Pixel) : size)
+                .SetWidth(size == default ? new Length(34, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -175,8 +217,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.RightArrowHover)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(60, Pixel) : size)
-                .SetWidth(size == default ? new Length(40, Pixel) : size);
+                .SetHeight(size == default ? new Length(57, Pixel) : size)
+                .SetWidth(size == default ? new Length(34, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -188,12 +230,17 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.UpArrowHover)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(40, Pixel) : size)
-                .SetWidth(size == default ? new Length(60, Pixel) : size);
+                .SetHeight(size == default ? new Length(34, Pixel) : size)
+                .SetWidth(size == default ? new Length(57, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton Minus(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -208,6 +255,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton MinusInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -236,6 +288,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton PlusInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -249,6 +306,7 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             builder?.Invoke(button);
             return button.Build();
         }
+        
         
         public LocalizableButton CyclerLeft(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
@@ -283,8 +341,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.CyclerLeftMainHover)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(24, Pixel) : size)
-                .SetWidth(size == default ? new Length(24, Pixel) : size);
+                .SetHeight(size == default ? new Length(25, Pixel) : size)
+                .SetWidth(size == default ? new Length(25, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -296,8 +354,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .AddClass(TimberApiStyle.Buttons.Hover.CyclerRightMainHover)
                 .AddClass(TimberApiStyle.Sounds.Click)
                 .SetName(name)
-                .SetHeight(size == default ? new Length(24, Pixel) : size)
-                .SetWidth(size == default ? new Length(24, Pixel) : size);
+                .SetHeight(size == default ? new Length(25, Pixel) : size)
+                .SetWidth(size == default ? new Length(25, Pixel) : size);
             builder?.Invoke(button);
             return button.Build();
         }
@@ -329,6 +387,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
         
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableButton ResetButton(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -454,6 +517,10 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return button.Build();
         }
 
+        /// <summary>
+        /// Medium: height 33px, width 184px, font-size 13px
+        /// Large text: font-size 17px
+        /// </summary>
         public LocalizableButton Button(string locKey = null, Length width = default, Length height = default, Length fontSize = default, FontStyle fontStyle = default, StyleColor color = default, string name = null, string text = null, Action<ButtonBuilder> builder = default)
         {
             ButtonBuilder button = _componentBuilder.CreateButton()
@@ -464,10 +531,10 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .SetLocKey(locKey)
                 .SetText(text)
                 .SetColor(color == default ? new StyleColor(new Color(1,1,1,1)) : color)
-                .SetFontSize(fontSize == default ? new Length(13, Pixel) : fontSize)
+                .SetFontSize(fontSize == default ? new Length(14, Pixel) : fontSize)
                 .SetFontStyle(fontStyle == default ? FontStyle.Bold : fontStyle)
-                .SetHeight(height == default ? new Length(33, Pixel) : height)
-                .SetWidth(width == default ? new Length(184, Pixel) : width);
+                .SetHeight(height == default ? new Length(44, Pixel) : height)
+                .SetWidth(width == default ? new Length(254, Pixel) : width);
             builder?.Invoke(button);
             return button.Build();
         }

@@ -15,12 +15,12 @@ namespace TimberAPIExample.Examples.UIBuilderExample
         private class EntityPanelModuleProvider : IProvider<EntityPanelModule>
         {
             private readonly UIBuilderFragmentExample _fragmentExample;
-    
+        
             public EntityPanelModuleProvider(UIBuilderFragmentExample fragmentExample)
             {
                 _fragmentExample = fragmentExample;
             }
-    
+        
             public EntityPanelModule Get()
             {
                 EntityPanelModule.Builder builder = new EntityPanelModule.Builder();

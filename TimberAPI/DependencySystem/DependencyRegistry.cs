@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Bindito.Core;
 using HarmonyLib;
 using Timberborn.MainMenuScene;
@@ -56,6 +57,7 @@ namespace TimberbornAPI.DependencySystem
             InstallAll(containerDefinition, SceneEntryPoint.Global);
         }
 
+        [SuppressMessage("", "Harmony003")]
         private static void InstallAll(IContainerDefinition containerDefinition, SceneEntryPoint entryPoint)
         {
             List<IConfigurator> configurators =

@@ -24,8 +24,8 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
         {
             ToggleBuilder toggle = _componentBuilder.CreateToggle()
                 .ModifyCheckMarkElement(checkmarkBuilder => checkmarkBuilder
-                    .SetHeight(size == default ? new Length(26, Pixel) : size)
-                    .SetWidth(size == default ? new Length(26, Pixel) : size)
+                    .SetHeight(size == default ? new Length(25, Pixel) : size)
+                    .SetWidth(size == default ? new Length(25, Pixel) : size)
                 )
                 .AddClass(TimberApiStyle.CheckBox.Normal.CheckboxOff)
                 .AddClass(TimberApiStyle.CheckBox.Hover.CheckboxOffHover)
@@ -47,6 +47,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return toggle.Build();
         }
 
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableToggle Checkmark(string name = null, Length size = default, string locKey = null,
             Length width = default, Length fontSize = default, FontStyle fontStyle = default,
             StyleColor color = default, string text = default,
@@ -81,6 +86,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return toggle.Build();
         }
 
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableToggle CheckmarkInverted(string name = null, Length size = default, string locKey = null,
             Length width = default, Length fontSize = default, FontStyle fontStyle = default,
             StyleColor color = default, string text = default,
@@ -115,6 +125,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return toggle.Build();
         }
 
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableToggle CheckmarkCross(string name = null, Length size = default, string locKey = null,
             Length width = default, Length fontSize = default, FontStyle fontStyle = default,
             StyleColor color = default, string text = default,
@@ -149,6 +164,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return toggle.Build();
         }
 
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableToggle CheckmarkCrossInverted(string name = null, Length size = default, string locKey = null,
             Length width = default, Length fontSize = default, FontStyle fontStyle = default,
             StyleColor color = default, string text = default,
@@ -183,6 +203,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return toggle.Build();
         }
 
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableToggle CheckmarkAlt(string name = null, Length size = default, string locKey = null,
             Length width = default, Length fontSize = default, FontStyle fontStyle = default,
             StyleColor color = default, string text = default,
@@ -213,6 +238,11 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             return toggle.Build();
         }
 
+        /// <summary>
+        /// Normal: width 20px, height 20px
+        /// Small: width 18px, height 18px
+        /// Large: width 24px, height 24px
+        /// </summary>
         public LocalizableToggle Circle(string name = null, Length size = default, string locKey = null,
             Length width = default, Length fontSize = default, FontStyle fontStyle = default,
             StyleColor color = default, string text = default,

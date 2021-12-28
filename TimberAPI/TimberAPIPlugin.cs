@@ -14,12 +14,9 @@ namespace TimberbornAPI.Internal
     public class TimberAPIPlugin : BaseUnityPlugin
     {
         public static string Guid = "com.timberapi.timberapi";
-
-        public static ManualLogSource Log;
-
+        
         public void Awake()
         {
-            Log = Logger;
             var harmony = new Harmony("com.timberapi.plugin");
             harmony.PatchAll();
 

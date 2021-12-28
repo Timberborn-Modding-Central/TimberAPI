@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.UIBuilderSystem.PresetSystem;
@@ -47,12 +48,14 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
             return this;
         }
 
+        [SuppressMessage("", "Publicizer001")]
         public SliderBuilder ModifyDragContainer(Action<VisualElement> modifyScroller)
         {
             modifyScroller.Invoke(Root.dragContainer);
             return this;
         }
         
+        [SuppressMessage("", "Publicizer001")]
         public SliderBuilder ModifyDragElement(Action<VisualElement> modifyScroller)
         {
             modifyScroller.Invoke(Root.dragElement);

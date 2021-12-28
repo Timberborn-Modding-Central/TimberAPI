@@ -31,7 +31,6 @@ namespace TimberbornAPI.UIBuilderSystem
                 .AddClass(TimberApiStyle.Scales.Scale5)
                 .SetPadding(new Length(45, Pixel));
             _scrollView = componentBuilder.CreateVisualElement();
-            
         }
 
         public UIBoxBuilder SetBoxInCenter()
@@ -80,7 +79,8 @@ namespace TimberbornAPI.UIBuilderSystem
             _box.AddPreset(factory => factory.Buttons().Close(name, builder: builder => builder.SetStyle(style =>
             {
                 style.position = Position.Absolute;
-                style.alignSelf = Align.FlexEnd;
+                style.right = new Length(-3, Pixel);
+                style.top = new Length(-3, Pixel);
             })));
             return this;
         }
