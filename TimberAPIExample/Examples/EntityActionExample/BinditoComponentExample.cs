@@ -22,7 +22,7 @@ namespace TimberAPIExample.Examples.EntityActionExample
 
         private void Start()
         {
-            Console.WriteLine(_loc.T("menu.continue"));
+            Console.WriteLine(_loc.T("preview.bindito.start"));
         }
     }
 }

@@ -1,4 +1,5 @@
 ID,Text,Comment
+preview.bindito.start,I'm inside a district centre :D
 preview.box.title,UI Previews
 fragment.example.button1,First button
 fragment.example.button2,Anohter button
