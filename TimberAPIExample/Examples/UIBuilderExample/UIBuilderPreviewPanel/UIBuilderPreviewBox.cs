@@ -38,9 +38,6 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
 
         public VisualElement GetPanel()
         {
-            var watch = new System.Diagnostics.Stopwatch();
-            watch.Start();
-            
             UIBoxBuilder menu = _uiBuilder.CreateBoxBuilder()
                 .SetHeight(new Length(650, Pixel))
                 .SetWidth(new Length(300, Pixel))
@@ -73,21 +70,13 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
             {
                 root.Q<Button>(uiBuilderPreview.GetPreviewKey()).clicked += delegate { SwitchPreview(uiBuilderPreview); };
             }
-
-            watch.Stop();
-            Console.WriteLine("Time elapsed (ms): {0}", watch.ElapsedMilliseconds);
-
             return root;
         }
         
         private void SwitchPreview(IUIBuilderPreview selectedPreview)
         {
-            var watch = new System.Diagnostics.Stopwatch();
-            watch.Start();
             _previewBox.Clear();
             _previewBox.Add(selectedPreview.GetPreview());
-            watch.Stop();
-            Console.WriteLine("Time elapsed (ms): {0}", watch.ElapsedMilliseconds);
         }
 
         public bool OnUIConfirmed()
