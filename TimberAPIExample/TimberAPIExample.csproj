@@ -4,10 +4,10 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>TimberAPIExample</AssemblyName>
     <Description>An example plugin on how to use the TimberAPI</Description>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
-    <ReleaseVersion>0.2.0</ReleaseVersion>
+    <ReleaseVersion>0.2.1</ReleaseVersion>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">

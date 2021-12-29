@@ -11,8 +11,8 @@
     <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
     <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
     <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
-    <Version>0.2.0</Version>
-    <ReleaseVersion>0.2.0</ReleaseVersion>
+    <Version>0.2.1</Version>
+    <ReleaseVersion>0.2.1</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>
