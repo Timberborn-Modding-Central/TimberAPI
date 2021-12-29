@@ -12,7 +12,7 @@ namespace TimberbornAPI
         /// <summary>
         /// APIs for dependency injection and management
         /// </summary>
-        public static IDependencyRegistry DependecyRegistry = new DependencyRegistry();
+        public static IDependencyRegistry DependencyRegistry = new DependencyRegistry();
 
         /// <summary>
         /// APIs for localization and language files

@@ -32,12 +32,12 @@ namespace TimberbornAPI.Internal
         /// </summary>
         public void InstallConfigurators()
         {
-            TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.InGame);
-            TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MainMenu);
-            TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
+            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.InGame);
+            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MainMenu);
+            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
             
-            TimberAPI.DependecyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);
-            TimberAPI.DependecyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
+            TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);
+            TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
         }
     }
 }

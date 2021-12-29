@@ -33,7 +33,7 @@ namespace TimberAPIExample
             // Saves the logger instance
             Log = Logger;
             // Register our configurator
-            TimberAPI.DependecyRegistry.AddConfigurator(new ExampleConfigurator());
+            TimberAPI.DependencyRegistry.AddConfigurator(new ExampleConfigurator());
             // Add a label to localization
             TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
             
@@ -49,14 +49,14 @@ namespace TimberAPIExample
 
             // This is only for the example mod to provide automatic configurators.
             InstallAutoConfigurators();
-            TimberAPI.DependecyRegistry.AddConfigurator(new UIBuilderPanelConfigurator(), SceneEntryPoint.Global);
+            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderPanelConfigurator(), SceneEntryPoint.Global);
         }
 
         public void InstallAutoConfigurators()
         {
-            TimberAPI.DependecyRegistry.AddConfigurator(new AutoConfiguratorInGame());
-            TimberAPI.DependecyRegistry.AddConfigurator(new AutoConfiguratorMainMenu());
-            TimberAPI.DependecyRegistry.AddConfigurator(new AutoConfiguratorEditor());
+            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorInGame());
+            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorMainMenu());
+            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorEditor());
         }
     }
 
