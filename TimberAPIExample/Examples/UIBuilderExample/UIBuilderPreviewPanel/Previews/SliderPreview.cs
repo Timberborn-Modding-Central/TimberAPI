@@ -29,40 +29,46 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
         public VisualElement GetPreview()
         {
             VisualElementBuilder rootBuilder = _uiBuilder.CreateComponentBuilder().CreateVisualElement();
+            rootBuilder.AddPreset(factory => factory.Labels().DefaultHeader("preview.sliders.variants", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderDiamond(1, 100));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderIntDiamond(1, 10));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderCircle(1, 100));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderIntCircle(1, 10));
+            
 
             rootBuilder.AddPreset(factory => factory.Labels().DefaultHeader("preview.sliders.floatslider", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.normal"));
-            rootBuilder.AddPreset(factory => factory.Sliders().Slider(1, 100));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderDiamond(1, 100));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.starting30"));
-            rootBuilder.AddPreset(factory => factory.Sliders().Slider(1, 100, 30));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderDiamond(1, 100, 30));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.fixedwidth"));
-            rootBuilder.AddPreset(factory => factory.Sliders().Slider(1, 100, width: new Length(250, Pixel)));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderDiamond(1, 100, width: new Length(250, Pixel)));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.labeled"));
-            rootBuilder.AddPreset(factory => factory.Sliders().Slider(1, 100, locKey: "preview.sliders.labeled.short"));
-            rootBuilder.AddPreset(factory => factory.Sliders().Slider(1, 100, locKey: "preview.sliders.labeled.long"));
-            rootBuilder.AddPreset(factory => factory.Sliders().Slider(1, 100, locKey: "preview.sliders.labeled.superlong"));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderDiamond(1, 100, locKey: "preview.sliders.labeled.short"));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderDiamond(1, 100, locKey: "preview.sliders.labeled.long"));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderDiamond(1, 100, locKey: "preview.sliders.labeled.superlong"));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.progress"));
             rootBuilder.AddComponent(builder => builder
                 .SetName("controlledSlider")
-                .AddPreset(factory => factory.Sliders().Slider(1, 10, name: "Slider",builder: sliderBuilder => sliderBuilder.SetStyle(style => style.flexGrow = 1f)))
+                .AddPreset(factory => factory.Sliders().SliderDiamond(1, 10, name: "Slider",builder: sliderBuilder => sliderBuilder.SetStyle(style => style.flexGrow = 1f)))
                 .AddPreset(factory => factory.Labels().DefaultText(name: "Value", text: "1.00", builder: labelBuilder => labelBuilder.SetMargin(new Margin(new Length(8, Pixel), 0))))
                 .SetFlexDirection(FlexDirection.Row));
             
             rootBuilder.AddPreset(factory => factory.Labels().DefaultHeader("preview.sliders.intslider", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.normal"));
-            rootBuilder.AddPreset(factory => factory.Sliders().SliderInt(1, 25));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderIntDiamond(1, 25));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.starting10"));
-            rootBuilder.AddPreset(factory => factory.Sliders().SliderInt(1, 25, 10));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderIntDiamond(1, 25, 10));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.fixedwidth"));
-            rootBuilder.AddPreset(factory => factory.Sliders().SliderInt(1, 25, width: new Length(250, Pixel)));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderIntDiamond(1, 25, width: new Length(250, Pixel)));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.labeled"));
-            rootBuilder.AddPreset(factory => factory.Sliders().SliderInt(1, 25, locKey: "preview.sliders.labeled.short"));
-            rootBuilder.AddPreset(factory => factory.Sliders().SliderInt(1, 25, locKey: "preview.sliders.labeled.long"));
-            rootBuilder.AddPreset(factory => factory.Sliders().SliderInt(1, 25, locKey: "preview.sliders.labeled.superlong"));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderIntDiamond(1, 25, locKey: "preview.sliders.labeled.short"));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderIntDiamond(1, 25, locKey: "preview.sliders.labeled.long"));
+            rootBuilder.AddPreset(factory => factory.Sliders().SliderIntDiamond(1, 25, locKey: "preview.sliders.labeled.superlong"));
             rootBuilder.AddPreset(factory => factory.Labels().DefaultBold("preview.sliders.progress"));
             rootBuilder.AddComponent(builder => builder
                 .SetName("controlledSliderInt")
-                .AddPreset(factory => factory.Sliders().SliderInt(1, 10, name: "Slider",builder: sliderBuilder => sliderBuilder.SetStyle(style => style.flexGrow = 1f)))
+                .AddPreset(factory => factory.Sliders().SliderIntDiamond(1, 10, name: "Slider",builder: sliderBuilder => sliderBuilder.SetStyle(style => style.flexGrow = 1f)))
                 .AddPreset(factory => factory.Labels().DefaultText(name: "Value", text: "1", builder: labelBuilder => labelBuilder.SetMargin(new Margin(new Length(8, Pixel), 0))))
                 .SetFlexDirection(FlexDirection.Row));
 

@@ -13,7 +13,7 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
         private readonly ComponentBuilder _componentBuilder;
 
         private readonly IResourceAssetLoader _resourceAssetLoader;
-        
+
 
         public SliderPresetFactory(ComponentBuilder componentBuilder, IResourceAssetLoader resourceAssetLoader)
         {
@@ -21,40 +21,80 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
             _resourceAssetLoader = resourceAssetLoader;
         }
         
-        public LocalizableSliderInt SliderInt(int lowValue, int highValue, int value = default, string locKey = default, Length width = default, string text = default, string name = default, Action<SliderIntBuilder> builder = default)
+        public LocalizableSliderInt SliderIntCircle(int lowValue, int highValue, int value = default, string locKey = default,
+            Length width = default, string text = default, string name = default,
+            Action<SliderIntBuilder> builder = default)
         {
-            SliderIntBuilder slider = _componentBuilder.CreateSliderInt()
-                .SetName(name)
-                .SetLabel(text)
-                .SetLowValue(lowValue)
-                .SetHighValue(highValue)
-                .SetValue(value)
-                .SetLabelLocKey(locKey)
-                .ModifyTracker(element =>
-                {
-                    element.style.backgroundImage = new StyleBackground(_resourceAssetLoader.Load<Sprite>("Ui/Images/Buttons/Slider_bar"));
-                    element.style.height = new Length(4, Pixel);
-                    element.style.unityBackgroundScaleMode = ScaleMode.StretchToFill;
-                })
-                .ModifyDragContainer(element => element.style.justifyContent = Justify.Center)
-                .ModifyDragElement(element =>
+            SliderIntBuilder slider = EmptySliderInt(lowValue, highValue, value, locKey, width, text, name);
+            slider.ModifyDragElement(element =>
+            {
+                element.AddToClassList(TimberApiStyle.Buttons.Normal.CircleOff);
+                element.AddToClassList(TimberApiStyle.Buttons.Hover.CircleHover);
+                element.style.width = new Length(16, Pixel);
+                element.style.height = new Length(16, Pixel);
+                element.style.marginTop = -6f;
+            });
+
+            builder?.Invoke(slider);
+            return slider.Build();
+        }
+
+        public LocalizableSliderInt SliderIntDiamond(int lowValue, int highValue, int value = default, string locKey = default,
+            Length width = default, string text = default, string name = default,
+            Action<SliderIntBuilder> builder = default)
+        {
+            SliderIntBuilder slider = EmptySliderInt(lowValue, highValue, value, locKey, width, text, name);
+            slider.ModifyDragElement(element =>
                 {
                     element.AddToClassList(TimberApiStyle.Buttons.Normal.SliderHolder);
                     element.AddToClassList(TimberApiStyle.Buttons.Hover.SliderHolderHover);
                     element.style.width = new Length(24, Pixel);
                     element.style.height = new Length(24, Pixel);
                     element.style.marginTop = -10f;
-                })
-                .ModifyLabelElement(element => element.style.color = Color.white);
+                });
 
-            if (width != default)
-                slider.SetWidth(width);
-            
             builder?.Invoke(slider);
             return slider.Build();
         }
         
-        public LocalizableSlider Slider(float lowValue, float highValue, float value = default, string locKey = default, Length width = default, string text = default, string name = default, Action<SliderBuilder> builder = default)
+        public LocalizableSlider SliderCircle(float lowValue, float highValue, float value = default, string locKey = default,
+            Length width = default, string text = default, string name = default,
+            Action<SliderBuilder> builder = default)
+        {
+            SliderBuilder slider = EmptySlider(lowValue, highValue, value, locKey, width, text, name);
+            slider.ModifyDragElement(element =>
+            {
+                element.AddToClassList(TimberApiStyle.Buttons.Normal.CircleOff);
+                element.AddToClassList(TimberApiStyle.Buttons.Hover.CircleHover);
+                element.style.width = new Length(16, Pixel);
+                element.style.height = new Length(16, Pixel);
+                element.style.marginTop = -6f;
+            });
+
+            builder?.Invoke(slider);
+            return slider.Build();
+        }
+
+        public LocalizableSlider SliderDiamond(float lowValue, float highValue, float value = default, string locKey = default,
+            Length width = default, string text = default, string name = default,
+            Action<SliderBuilder> builder = default)
+        {
+            SliderBuilder slider = EmptySlider(lowValue, highValue, value, locKey, width, text, name);
+            slider.ModifyDragElement(element =>
+                {
+                    element.AddToClassList(TimberApiStyle.Buttons.Normal.SliderHolder);
+                    element.AddToClassList(TimberApiStyle.Buttons.Hover.SliderHolderHover);
+                    element.style.width = new Length(24, Pixel);
+                    element.style.height = new Length(24, Pixel);
+                    element.style.marginTop = -10f;
+                });
+
+            builder?.Invoke(slider);
+            return slider.Build();
+        }
+
+        private SliderBuilder EmptySlider(float lowValue, float highValue, float value = default,
+            string locKey = default, Length width = default, string text = default, string name = default)
         {
             SliderBuilder slider = _componentBuilder.CreateSlider()
                 .SetName(name)
@@ -63,28 +103,45 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .SetHighValue(highValue)
                 .SetValue(value)
                 .SetLabelLocKey(locKey)
+                .ModifyDragContainer(element => element.style.justifyContent = Justify.Center)
+                .ModifyLabelElement(element => element.style.color = Color.white)
                 .ModifyTracker(element =>
                 {
-                    element.style.backgroundImage = new StyleBackground(_resourceAssetLoader.Load<Sprite>("Ui/Images/Buttons/Slider_bar"));
+                    element.style.backgroundImage =
+                        new StyleBackground(_resourceAssetLoader.Load<Sprite>("Ui/Images/Buttons/Slider_bar"));
+                    element.style.height = new Length(4, Pixel);
+                    element.style.unityBackgroundScaleMode = ScaleMode.StretchToFill;
+                });
+            if (width != default)
+                slider.SetWidth(width);
+            return slider;
+        }
+
+        private SliderIntBuilder EmptySliderInt(int lowValue, int highValue, int value = default,
+            string locKey = default, Length width = default, string text = default, string name = default,
+            Action<SliderIntBuilder> builder = default)
+        {
+            SliderIntBuilder slider = _componentBuilder.CreateSliderInt()
+                .SetName(name)
+                .SetLabel(text)
+                .SetLowValue(lowValue)
+                .SetHighValue(highValue)
+                .SetValue(value)
+                .SetLabelLocKey(locKey)
+                .ModifyLabelElement(element => element.style.color = Color.white)
+                .ModifyTracker(element =>
+                {
+                    element.style.backgroundImage =
+                        new StyleBackground(_resourceAssetLoader.Load<Sprite>("Ui/Images/Buttons/Slider_bar"));
                     element.style.height = new Length(4, Pixel);
                     element.style.unityBackgroundScaleMode = ScaleMode.StretchToFill;
                 })
-                .ModifyDragContainer(element => element.style.justifyContent = Justify.Center)
-                .ModifyDragElement(element =>
-                {
-                    element.AddToClassList(TimberApiStyle.Buttons.Normal.SliderHolder);
-                    element.AddToClassList(TimberApiStyle.Buttons.Hover.SliderHolderHover);
-                    element.style.width = new Length(24, Pixel);
-                    element.style.height = new Length(24, Pixel);
-                    element.style.marginTop = -10f;
-                })
-                .ModifyLabelElement(element => element.style.color = Color.white);
+                .ModifyDragContainer(element => element.style.justifyContent = Justify.Center);
 
             if (width != default)
                 slider.SetWidth(width);
-            
-            builder?.Invoke(slider);
-            return slider.Build();
+
+            return slider;
         }
     }
 }

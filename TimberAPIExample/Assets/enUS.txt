@@ -13,6 +13,7 @@ preview.buttons.iambutton,I am button
 preview.customs.emptycircle,Empty circle button with a image inside
 preview.customs.custombutton,Customized hover, active behaviour
 preview.labels.previewtext,This is a preview text
+preview.sliders.variants,Sliders
 preview.sliders.floatslider,Float sliders
 preview.sliders.intslider,Int sliders
 preview.sliders.normal,Normal
