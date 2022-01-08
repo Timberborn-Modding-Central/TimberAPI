@@ -15,7 +15,7 @@ namespace TimberAPIExample.Examples.EntityActionExample
             Building building = entity.GetComponent<Building>();
             
             // Skip entity if components are missing or building is already finished on place
-            if (constructable  == null || building == null || building.PlaceFinished)
+            if (constructable  == null || building == null || building.PlaceFinished || !constructable.IsUnfinished)
                 return;
             
             // Finishes the constructor
