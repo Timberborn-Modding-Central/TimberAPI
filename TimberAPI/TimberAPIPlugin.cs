@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using Timberborn.ToolPanelSystem;
 using TimberbornAPI.Common;
+using TimberbornAPI.DependencySystem;
 using TimberbornAPI.EntityActionSystem;
 using TimberbornAPI.UIBuilderSystem;
 using UnityEngine;
@@ -32,9 +33,11 @@ namespace TimberbornAPI.Internal
         /// </summary>
         public void InstallConfigurators()
         {
-            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.InGame);
-            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MainMenu);
-            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
+            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorInGame(), SceneEntryPoint.InGame);
+            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorMainMenu(), SceneEntryPoint.MainMenu);
+            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorMapEditor(), SceneEntryPoint.MapEditor);
+            
+            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
             
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);

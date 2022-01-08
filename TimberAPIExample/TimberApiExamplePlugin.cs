@@ -2,7 +2,6 @@
 using BepInEx.Logging;
 using Bindito.Core;
 using HarmonyLib;
-using TimberAPIExample.AutoConfiguratorInstaller;
 using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel;
 using Timberborn.SingletonSystem;
 using Timberborn.TimeSystem;
@@ -47,16 +46,7 @@ namespace TimberAPIExample
             // Alternatively, add in game assets with prefix TimberAPIExample with custom location > assets > ingame.
             // TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame, new []{ "assets", "ingame" });
 
-            // This is only for the example mod to provide automatic configurators.
-            InstallAutoConfigurators();
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderPanelConfigurator(), SceneEntryPoint.Global);
-        }
-
-        public void InstallAutoConfigurators()
-        {
-            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorInGame());
-            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorMainMenu());
-            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorEditor());
         }
     }
 

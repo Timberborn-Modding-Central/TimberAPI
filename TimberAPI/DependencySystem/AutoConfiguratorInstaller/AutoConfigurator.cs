@@ -3,48 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using Bindito.Core;
 
-namespace TimberAPIExample.AutoConfiguratorInstaller
+namespace TimberbornAPI.DependencySystem
 {
-    /// <summary>
-    /// NOTE: THIS IS NOT AN EXAMPLE TO USE IN REAL MODS
-    /// </summary>
+
     internal class AutoConfiguratorInGame : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            foreach (Type inGameConfigurators in AutoConfiguratorHelper.GetAllTypesThatImplementInterface<IInGameConfigurator>())
+            foreach (Type inGameConfigurators in AutoConfiguratorHelper.GetAllTypesThatImplementInterface<IAutoConfiguratorInGame>())
             {
-                var instance = (IInGameConfigurator)Activator.CreateInstance(inGameConfigurators);
+                var instance = (IAutoConfiguratorInGame)Activator.CreateInstance(inGameConfigurators);
                 containerDefinition.Install(instance);
             }
         }
     }
 
-    /// <summary>
-    /// NOTE: THIS IS NOT AN EXAMPLE TO USE IN REAL MODS
-    /// </summary>
     internal class AutoConfiguratorMainMenu : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            foreach (Type inGameConfigurators in AutoConfiguratorHelper.GetAllTypesThatImplementInterface<IIMainMenuConfigurator>())
+            foreach (Type inGameConfigurators in AutoConfiguratorHelper.GetAllTypesThatImplementInterface<IAutoConfiguratorMainMenu>())
             {
-                var instance = (IIMainMenuConfigurator)Activator.CreateInstance(inGameConfigurators);
+                var instance = (IAutoConfiguratorInGame)Activator.CreateInstance(inGameConfigurators);
                 containerDefinition.Install(instance);
             }
         }
     }
 
-    /// <summary>
-    /// NOTE: THIS IS NOT AN EXAMPLE TO USE IN REAL MODS
-    /// </summary>
-    internal class AutoConfiguratorEditor : IConfigurator
+    internal class AutoConfiguratorMapEditor : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            foreach (Type inGameConfigurators in AutoConfiguratorHelper.GetAllTypesThatImplementInterface<IEditorConfigurator>())
+            foreach (Type inGameConfigurators in AutoConfiguratorHelper.GetAllTypesThatImplementInterface<IAutoConfiguratorMapEditor>())
             {
-                var instance = (IEditorConfigurator)Activator.CreateInstance(inGameConfigurators);
+                var instance = (IAutoConfiguratorMapEditor)Activator.CreateInstance(inGameConfigurators);
                 containerDefinition.Install(instance);
             }
         }

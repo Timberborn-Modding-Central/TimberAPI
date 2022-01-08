@@ -1,10 +1,10 @@
 using Bindito.Core;
-using TimberAPIExample.AutoConfiguratorInstaller;
 using Timberborn.BottomBarSystem;
+using TimberbornAPI.DependencySystem;
 
 namespace TimberAPIExample.Examples.AssetLoaderExample
 {
-    public class AssetLoaderExampleConfigurator : IInGameConfigurator
+    public class AssetLoaderExampleConfigurator : IAutoConfiguratorInGame
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

@@ -1,10 +1,10 @@
 using Bindito.Core;
-using TimberAPIExample.AutoConfiguratorInstaller;
+using TimberbornAPI.DependencySystem;
 using TimberbornAPI.EntityActionSystem;
 
 namespace TimberAPIExample.Examples.EntityActionExample
 {
-    public class EntityInstantiatorConfigurator : IInGameConfigurator
+    public class EntityInstantiatorConfigurator : IAutoConfiguratorInGame
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
