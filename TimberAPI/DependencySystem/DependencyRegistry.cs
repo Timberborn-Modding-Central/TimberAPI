@@ -15,12 +15,6 @@ namespace TimberbornAPI.DependencySystem
     {
         private static Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPoint = new();
 
-        /// <summary>
-        /// Install a Configurator into a scene to allow dependency injection
-        /// The class must implement IConfigurator and can use Bind<>() to inject dependencies
-        /// </summary>
-        /// <param name="configurator">The configurator class to inject, which does the binding</param>
-        /// <param name="entryPoint">Scene to bind to, defaults to InGame</param>
         public void AddConfigurator(IConfigurator configurator, SceneEntryPoint entryPoint = SceneEntryPoint.InGame)
         {
             if (configuratorsByEntryPoint.TryGetValue(entryPoint, out var configurators))
@@ -30,6 +24,14 @@ namespace TimberbornAPI.DependencySystem
             else
             {
                 configuratorsByEntryPoint.Add(entryPoint, new() { configurator });
+            }
+        }
+
+        public void AddConfigurators(List<IConfigurator> configurators, SceneEntryPoint entryPoint = SceneEntryPoint.InGame)
+        {
+            foreach(IConfigurator configurator in configurators)
+            {
+                AddConfigurator(configurator, entryPoint);
             }
         }
 

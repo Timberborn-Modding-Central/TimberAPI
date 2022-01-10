@@ -49,9 +49,12 @@ namespace TimberAPIExample
             // Bind all the other configurators we use in examples.
             // These could all live in one Configurator, but we use multiple for readability
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderPanelConfigurator(), SceneEntryPoint.Global);
-            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderFragmentConfigurator());
-            TimberAPI.DependencyRegistry.AddConfigurator(new AssetLoaderExampleConfigurator());
-            TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionExampleConfigurator());
+            TimberAPI.DependencyRegistry.AddConfigurators(new()
+            {
+                new AssetLoaderExampleConfigurator(),
+                new EntityActionExampleConfigurator(),
+                new UIBuilderFragmentConfigurator(),
+            });
 
             Logger.LogInfo("TimberAPIExample is loaded!");
         }
