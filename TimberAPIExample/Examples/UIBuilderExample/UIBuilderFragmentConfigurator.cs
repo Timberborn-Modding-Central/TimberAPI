@@ -4,7 +4,7 @@ using TimberbornAPI.DependencySystem;
 
 namespace TimberAPIExample.Examples.UIBuilderExample
 {
-    public class UIBuilderConfigurator : IAutoConfiguratorInGame
+    public class UIBuilderFragmentConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

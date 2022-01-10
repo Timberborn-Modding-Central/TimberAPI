@@ -33,10 +33,6 @@ namespace TimberbornAPI.Internal
         /// </summary>
         public void InstallConfigurators()
         {
-            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorInGame(), SceneEntryPoint.InGame);
-            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorMainMenu(), SceneEntryPoint.MainMenu);
-            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorMapEditor(), SceneEntryPoint.MapEditor);
-            
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
             
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);

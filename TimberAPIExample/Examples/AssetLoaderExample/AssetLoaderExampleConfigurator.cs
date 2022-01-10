@@ -4,7 +4,7 @@ using TimberbornAPI.DependencySystem;
 
 namespace TimberAPIExample.Examples.AssetLoaderExample
 {
-    public class AssetLoaderExampleConfigurator : IAutoConfiguratorInGame
+    public class AssetLoaderExampleConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

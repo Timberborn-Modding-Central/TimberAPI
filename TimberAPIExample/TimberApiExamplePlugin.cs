@@ -12,7 +12,9 @@ using Timberborn.WeatherSystem;
 using TimberbornAPI;
 using TimberbornAPI.EventSystem;
 using TimberbornAPI.Common;
-using TimberbornAPI.UIBuilderSystem;
+using TimberAPIExample.Examples.EntityActionExample;
+using TimberAPIExample.Examples.AssetLoaderExample;
+using TimberAPIExample.Examples.UIBuilderExample;
 
 namespace TimberAPIExample
 {
@@ -44,9 +46,14 @@ namespace TimberAPIExample
             // Adds in game assets with the prefix TimberAPIExample, default folder is assets
             TimberAPI.AssetRegistry.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame);
             // Alternatively, add in game assets with prefix TimberAPIExample with custom location > assets > ingame.
-            // TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame, new []{ "assets", "ingame" });
+            // TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame, new []{ "assets", "ingame" });
 
+            // Bind all the other configurators we use in examples.
+            // These could all live in one Configurator, but we use multiple for readability
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderPanelConfigurator(), SceneEntryPoint.Global);
+            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderFragmentConfigurator());
+            TimberAPI.DependencyRegistry.AddConfigurator(new AssetLoaderExampleConfigurator());
+            TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionExampleConfigurator());
         }
     }
 
@@ -55,7 +62,6 @@ namespace TimberAPIExample
      */
     public class ExampleToolGroup : ToolGroup
     {
-
         public override string IconName => "PriorityToolGroupIcon";
 
         public override string DisplayNameLocKey => "ExampleMod.ToolGroups.ExampleToolGroup";

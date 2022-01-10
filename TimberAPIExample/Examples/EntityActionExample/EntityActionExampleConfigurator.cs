@@ -4,7 +4,7 @@ using TimberbornAPI.EntityActionSystem;
 
 namespace TimberAPIExample.Examples.EntityActionExample
 {
-    public class EntityInstantiatorConfigurator : IAutoConfiguratorInGame
+    public class EntityActionExampleConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
