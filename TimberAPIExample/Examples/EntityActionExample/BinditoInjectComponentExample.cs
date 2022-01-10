@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace TimberAPIExample.Examples.EntityActionExample
 {
-    public class BinditoComponentExample : MonoBehaviour
+    public class BinditoInjectComponentExample : MonoBehaviour
     {
         private ILoc _loc;
         

@@ -2,7 +2,6 @@
 using BepInEx.Logging;
 using Bindito.Core;
 using HarmonyLib;
-using TimberAPIExample.AutoConfiguratorInstaller;
 using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel;
 using Timberborn.SingletonSystem;
 using Timberborn.TimeSystem;
@@ -13,14 +12,16 @@ using Timberborn.WeatherSystem;
 using TimberbornAPI;
 using TimberbornAPI.EventSystem;
 using TimberbornAPI.Common;
-using TimberbornAPI.UIBuilderSystem;
+using TimberAPIExample.Examples.EntityActionExample;
+using TimberAPIExample.Examples.AssetLoaderExample;
+using TimberAPIExample.Examples.UIBuilderExample;
 
 namespace TimberAPIExample
 {
     /// <summary>
     /// Example TimberAPI/BepInEx Plugin showing the power of the API
     /// </summary>
-    [BepInPlugin("com.timberapi.example", "TimberAPIExample", "0.2.0")]
+    [BepInPlugin("com.timberapi.example", "TimberAPIExample", "0.3.0")]
     [BepInDependency("com.timberapi.timberapi")]
     [HarmonyPatch]
     public class TimberAPIExamplePlugin : BaseUnityPlugin
@@ -40,23 +41,22 @@ namespace TimberAPIExample
             // Harmony patches
             new Harmony("com.timberapi.examples").PatchAll();
             
-            Logger.LogInfo("TimberAPIExample is loaded!");
-
             // Adds in game assets with the prefix TimberAPIExample, default folder is assets
             TimberAPI.AssetRegistry.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame);
             // Alternatively, add in game assets with prefix TimberAPIExample with custom location > assets > ingame.
-            // TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", IAssetLoaderSystem.EntryPoint.InGame, new []{ "assets", "ingame" });
+            // TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame, new []{ "assets", "ingame" });
 
-            // This is only for the example mod to provide automatic configurators.
-            InstallAutoConfigurators();
+            // Bind all the other configurators we use in examples.
+            // These could all live in one Configurator, but we use multiple for readability
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderPanelConfigurator(), SceneEntryPoint.Global);
-        }
+            TimberAPI.DependencyRegistry.AddConfigurators(new()
+            {
+                new AssetLoaderExampleConfigurator(),
+                new EntityActionExampleConfigurator(),
+                new UIBuilderFragmentConfigurator(),
+            });
 
-        public void InstallAutoConfigurators()
-        {
-            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorInGame());
-            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorMainMenu());
-            TimberAPI.DependencyRegistry.AddConfigurator(new AutoConfiguratorEditor());
+            Logger.LogInfo("TimberAPIExample is loaded!");
         }
     }
 
@@ -65,7 +65,6 @@ namespace TimberAPIExample
      */
     public class ExampleToolGroup : ToolGroup
     {
-
         public override string IconName => "PriorityToolGroupIcon";
 
         public override string DisplayNameLocKey => "ExampleMod.ToolGroups.ExampleToolGroup";

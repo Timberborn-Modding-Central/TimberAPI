@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using Timberborn.ToolPanelSystem;
 using TimberbornAPI.Common;
+using TimberbornAPI.DependencySystem;
 using TimberbornAPI.EntityActionSystem;
 using TimberbornAPI.UIBuilderSystem;
 using UnityEngine;
@@ -10,7 +11,7 @@ using UnityEngine;
 namespace TimberbornAPI.Internal
 {
 
-    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "0.2.0")]
+    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "0.3.0")]
     public class TimberAPIPlugin : BaseUnityPlugin
     {
         public static string Guid = "com.timberapi.timberapi";
@@ -32,9 +33,7 @@ namespace TimberbornAPI.Internal
         /// </summary>
         public void InstallConfigurators()
         {
-            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.InGame);
-            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MainMenu);
-            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.MapEditor);
+            TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
             
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);

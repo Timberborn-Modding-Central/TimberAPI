@@ -400,3 +400,5 @@ FodyWeavers.xsd
 libs/
 libs
 .DS_Store
+manifest/
+*.dll
