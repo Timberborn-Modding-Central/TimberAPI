@@ -21,7 +21,7 @@ namespace TimberAPIExample
     /// <summary>
     /// Example TimberAPI/BepInEx Plugin showing the power of the API
     /// </summary>
-    [BepInPlugin("com.timberapi.example", "TimberAPIExample", "0.2.0")]
+    [BepInPlugin("com.timberapi.example", "TimberAPIExample", "0.3.0")]
     [BepInDependency("com.timberapi.timberapi")]
     [HarmonyPatch]
     public class TimberAPIExamplePlugin : BaseUnityPlugin
@@ -41,8 +41,6 @@ namespace TimberAPIExample
             // Harmony patches
             new Harmony("com.timberapi.examples").PatchAll();
             
-            Logger.LogInfo("TimberAPIExample is loaded!");
-
             // Adds in game assets with the prefix TimberAPIExample, default folder is assets
             TimberAPI.AssetRegistry.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame);
             // Alternatively, add in game assets with prefix TimberAPIExample with custom location > assets > ingame.
@@ -54,6 +52,8 @@ namespace TimberAPIExample
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderFragmentConfigurator());
             TimberAPI.DependencyRegistry.AddConfigurator(new AssetLoaderExampleConfigurator());
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionExampleConfigurator());
+
+            Logger.LogInfo("TimberAPIExample is loaded!");
         }
     }
 
