@@ -16,4 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="../TimberAPI/TimberAPI.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\enUS.txt" />
+  </ItemGroup>
 </Project>

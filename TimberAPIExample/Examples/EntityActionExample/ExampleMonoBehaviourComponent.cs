@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TimberAPIExample.Examples.EntityActionExample
 {
-    public class ComponentExample : MonoBehaviour
+    public class ExampleMonoBehaviourComponent : MonoBehaviour
     {
         private void Awake()
         {
