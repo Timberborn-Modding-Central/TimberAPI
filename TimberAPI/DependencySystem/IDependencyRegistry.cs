@@ -1,4 +1,5 @@
-﻿using Bindito.Core;
+﻿using System.Collections.Generic;
+using Bindito.Core;
 using TimberbornAPI.Common;
 
 namespace TimberbornAPI.DependencySystem
@@ -13,5 +14,13 @@ namespace TimberbornAPI.DependencySystem
         /// <param name="entryPoint">Scene to bind to, defaults to InGame</param>
         /// <param name="first">Install before everything else is bound</param>
         void AddConfigurator(IConfigurator configurator, SceneEntryPoint entryPoint = SceneEntryPoint.InGame, bool first = false);
+
+        /// <summary>
+        /// Install multiple Configurators into a scene to allow dependency injection
+        /// The classes must implement IConfigurator and can use Bind<>() to inject dependencies
+        /// </summary>
+        /// <param name="configurators">The configurators to inject, which do the binding</param>
+        /// <param name="entryPoint">Scene to bind to, defaults to InGame</param>
+        void AddConfigurators(List<IConfigurator> configurators, SceneEntryPoint entryPoint = SceneEntryPoint.InGame, bool first = false);
     }
 }

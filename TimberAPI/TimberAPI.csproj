@@ -16,14 +16,12 @@
 
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.7" PrivateAssets="all" />
-    <PackageReference Include="BepInEx.Core" Version="5.4.16" />
+    <PackageReference Include="BepInEx.Core" Version="5.4.17" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
     <PackageReference Include="UnityEngine.Modules" Version="2021.2.7" IncludeAssets="compile" />
     <PackageReference Include="Timberborn.GameLibs" Version="2021.12.17-r.0" />
-    <PackageReference Include="LinqToCsv" Version="1.5.0">
-      <NoWarn>NU1701</NoWarn>
-    </PackageReference>
     <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+    <PackageReference Include="Threenine.LinqToCsv" Version="1.6.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">

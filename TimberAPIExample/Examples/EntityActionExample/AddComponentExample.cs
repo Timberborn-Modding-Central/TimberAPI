@@ -14,13 +14,14 @@ namespace TimberAPIExample.Examples.EntityActionExample
             _instantiator = instantiator;
         }
 
+        // We can give entities custom MonoBehaviors or other Components when they are constructed
         public void ApplyToEntity(GameObject entity)
         {
             // Return if object isn't a district
             if (entity.GetComponent<DistrictCenter>() == null)
                 return;
             
-            // Add a default component
+            // Add a new Monobehavior component
             entity.AddComponent<ExampleMonoBehaviourComponent>();
             
             // Adds a component that can inject dependency injection classes
