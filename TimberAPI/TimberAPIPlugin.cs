@@ -5,6 +5,7 @@ using Timberborn.ToolPanelSystem;
 using TimberbornAPI.Common;
 using TimberbornAPI.DependencySystem;
 using TimberbornAPI.EntityActionSystem;
+using TimberbornAPI.ObjectCollectionSystem;
 using TimberbornAPI.UIBuilderSystem;
 using UnityEngine;
 
@@ -35,8 +36,10 @@ namespace TimberbornAPI.Internal
         {
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
             
-            TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);
+            TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator());
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
+
+            TimberAPI.DependencyRegistry.AddConfigurator(new ObjectCollectionSystemConfigurator());
         }
     }
 }

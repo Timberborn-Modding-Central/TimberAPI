@@ -1,6 +1,7 @@
 ﻿using TimberbornAPI.AssetLoaderSystem;
 using TimberbornAPI.DependencySystem;
 using TimberbornAPI.LocalizationSystem;
+using TimberbornAPI.ObjectCollectionSystem;
 
 namespace TimberbornAPI
 {
@@ -23,5 +24,10 @@ namespace TimberbornAPI
         /// APIs to load and fetch assets
         /// </summary>
         public static IAssetRegistry AssetRegistry = new AssetRegistry();
+
+        /// <summary>
+        /// APIs for ObjectCollection
+        /// </summary>
+        public static ICustomObjectCollection CustomObjectCollection = new CustomObjectCollection();
     }
 }
