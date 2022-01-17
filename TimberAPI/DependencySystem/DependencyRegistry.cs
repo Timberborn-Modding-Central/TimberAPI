@@ -42,61 +42,62 @@ namespace TimberbornAPI.DependencySystem
         [HarmonyPatch(typeof(MasterSceneConfigurator), "Configure")]
         static void InjectIntoMasterSceneFirst(IContainerDefinition containerDefinition)
         {
-            InstallAll(containerDefinition, SceneEntryPoint.InGame, configuratorsByEntryPointFirst);
-            InstallAll(containerDefinition, SceneEntryPoint.Global, configuratorsByEntryPointFirst);
+            InstallAll(containerDefinition, SceneEntryPoint.Global, true);
+            InstallAll(containerDefinition, SceneEntryPoint.InGame, true);
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(MainMenuSceneConfigurator), "Configure")]
         static void InjectIntoMainMenuSceneFirst(IContainerDefinition containerDefinition)
         {
-            InstallAll(containerDefinition, SceneEntryPoint.MainMenu, configuratorsByEntryPointFirst);
-            InstallAll(containerDefinition, SceneEntryPoint.Global, configuratorsByEntryPointFirst);
+            InstallAll(containerDefinition, SceneEntryPoint.Global, true);
+            InstallAll(containerDefinition, SceneEntryPoint.MainMenu, true);
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(MapEditorSceneConfigurator), "Configure")]
         static void InjectIntoMapEditorSceneFirst(IContainerDefinition containerDefinition)
         {
-            InstallAll(containerDefinition, SceneEntryPoint.MapEditor, configuratorsByEntryPointFirst);
-            InstallAll(containerDefinition, SceneEntryPoint.Global, configuratorsByEntryPointFirst);
+            InstallAll(containerDefinition, SceneEntryPoint.Global, true);
+            InstallAll(containerDefinition, SceneEntryPoint.MapEditor, true);
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MasterSceneConfigurator), "Configure")]
         static void InjectIntoMasterSceneLast(IContainerDefinition containerDefinition)
         {
-            InstallAll(containerDefinition, SceneEntryPoint.InGame, configuratorsByEntryPointLast);
-            InstallAll(containerDefinition, SceneEntryPoint.Global, configuratorsByEntryPointLast);
+            InstallAll(containerDefinition, SceneEntryPoint.Global, false);
+            InstallAll(containerDefinition, SceneEntryPoint.InGame, false);
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MainMenuSceneConfigurator), "Configure")]
         static void InjectIntoMainMenuSceneLast(IContainerDefinition containerDefinition)
         {
-            InstallAll(containerDefinition, SceneEntryPoint.MainMenu, configuratorsByEntryPointLast);
-            InstallAll(containerDefinition, SceneEntryPoint.Global, configuratorsByEntryPointLast);
+            InstallAll(containerDefinition, SceneEntryPoint.Global, false);
+            InstallAll(containerDefinition, SceneEntryPoint.MainMenu, false);
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(MapEditorSceneConfigurator), "Configure")]
         static void InjectIntoMapEditorSceneLast(IContainerDefinition containerDefinition)
         {
-            InstallAll(containerDefinition, SceneEntryPoint.MapEditor, configuratorsByEntryPointLast);
-            InstallAll(containerDefinition, SceneEntryPoint.Global, configuratorsByEntryPointLast);
+            InstallAll(containerDefinition, SceneEntryPoint.Global, false);
+            InstallAll(containerDefinition, SceneEntryPoint.MapEditor, false);
         }
 
         [SuppressMessage("", "Harmony003")]
-        private static void InstallAll(IContainerDefinition containerDefinition, SceneEntryPoint entryPoint,
-            Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPoint)
+        private static void InstallAll(IContainerDefinition containerDefinition, SceneEntryPoint entryPoint, bool first)
         {
+            Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPoint =
+                first ? configuratorsByEntryPointFirst : configuratorsByEntryPointLast;
             List<IConfigurator> configurators =
                 configuratorsByEntryPoint.GetValueOrDefault(entryPoint, new());
             foreach (IConfigurator configurator in configurators)
             {
                 containerDefinition.Install(configurator);
             }
-            Debug.Log("Initialized configurators for " + entryPoint.ToString());
+            Debug.Log($"Initialized configurators for {entryPoint.ToString()} ({(first ? "First" : "Last")})");
         }
     }
 }

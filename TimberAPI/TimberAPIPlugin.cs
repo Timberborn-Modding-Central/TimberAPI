@@ -2,6 +2,7 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using Timberborn.ToolPanelSystem;
+using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.Common;
 using TimberbornAPI.DependencySystem;
 using TimberbornAPI.EntityActionSystem;
@@ -34,6 +35,7 @@ namespace TimberbornAPI.Internal
         /// </summary>
         public void InstallConfigurators()
         {
+            TimberAPI.DependencyRegistry.AddConfigurator(new AssetConfigurator(), SceneEntryPoint.Global, true);
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
             
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator());
