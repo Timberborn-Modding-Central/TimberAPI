@@ -34,5 +34,15 @@ namespace TimberbornAPI.UIBuilderSystem
         {
             return _componentBuilder;
         }
+        
+        public UiPresetFactory Presets()
+        {
+            return new UiPresetFactory(_componentBuilder);
+        }
+        
+        public void InitializeVisualElement(VisualElement visualElement)
+        {
+            _visualElementInitializer.InitializeVisualElement(visualElement);
+        }
     }
 }
