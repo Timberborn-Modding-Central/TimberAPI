@@ -8,6 +8,7 @@ namespace TimberAPIExample.Examples.EntityActionExample
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
+            containerDefinition.MultiBind<IEntityAction>().To<AddBasicLocalizedPrefab>().AsSingleton();
             containerDefinition.MultiBind<IEntityAction>().To<AddComponentActionExample>().AsSingleton();
             containerDefinition.MultiBind<IEntityAction>().To<TriggerActionExample>().AsSingleton();
         }
