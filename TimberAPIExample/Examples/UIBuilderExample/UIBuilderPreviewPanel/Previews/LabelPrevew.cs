@@ -9,7 +9,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
     public class LabelPreview : IUIBuilderPreview
     {
         private readonly UIBuilder _uiBuilder;
-
+        
         public LabelPreview(UIBuilder uiBuilder)
         {
             _uiBuilder = uiBuilder;

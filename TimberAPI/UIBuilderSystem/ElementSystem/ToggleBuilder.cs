@@ -8,7 +8,7 @@ using LocalizableToggle = TimberbornAPI.UIBuilderSystem.CustomElements.Localizab
 
 namespace TimberbornAPI.UIBuilderSystem.ElementSystem
 {
-    public class ToggleBuilder : BaseElementBuilder<LocalizableToggle, ToggleBuilder>
+    public class ToggleBuilder : BaseElementBuilder<LocalizableToggle, ToggleBuilder>, ITextElementBuilder<ToggleBuilder>
     {
         protected override ToggleBuilder BuilderInstance => this;
 
@@ -21,12 +21,6 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
             _toggleElementBuilder = new VisualElementBuilder(visualElementInitializer, assetLoader, uiPresetFactory, Root.Q<VisualElement>("unity-checkmark"));
         }
         
-        public ToggleBuilder ModifyCheckMarkElement(Action<VisualElementBuilder> builder)
-        {
-            builder.Invoke(_toggleElementBuilder);
-            return this;
-        }
-
         public ToggleBuilder SetText(string text)
         {
             Root.text = text;
@@ -54,6 +48,12 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         public ToggleBuilder SetFontStyle(FontStyle style)
         {
             Root.style.unityFontStyleAndWeight = style;
+            return this;
+        }
+        
+        public ToggleBuilder ModifyCheckMarkElement(Action<VisualElementBuilder> builder)
+        {
+            builder.Invoke(_toggleElementBuilder);
             return this;
         }
     }

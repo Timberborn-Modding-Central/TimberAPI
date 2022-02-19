@@ -12,13 +12,9 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
     {
         private readonly ComponentBuilder _componentBuilder;
 
-        private readonly IResourceAssetLoader _resourceAssetLoader;
-
-
-        public SliderPresetFactory(ComponentBuilder componentBuilder, IResourceAssetLoader resourceAssetLoader)
+        public SliderPresetFactory(ComponentBuilder componentBuilder)
         {
             _componentBuilder = componentBuilder;
-            _resourceAssetLoader = resourceAssetLoader;
         }
         
         public LocalizableSliderInt SliderIntCircle(int lowValue, int highValue, int value = default, string locKey = default,
@@ -107,8 +103,7 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .ModifyLabelElement(element => element.style.color = Color.white)
                 .ModifyTracker(element =>
                 {
-                    element.style.backgroundImage =
-                        new StyleBackground(_resourceAssetLoader.Load<Sprite>("Ui/Images/Buttons/Slider_bar"));
+                    element.AddToClassList(TimberApiStyle.Backgrounds.ScrollBar);
                     element.style.height = new Length(4, Pixel);
                     element.style.unityBackgroundScaleMode = ScaleMode.StretchToFill;
                 });
@@ -131,8 +126,7 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 .ModifyLabelElement(element => element.style.color = Color.white)
                 .ModifyTracker(element =>
                 {
-                    element.style.backgroundImage =
-                        new StyleBackground(_resourceAssetLoader.Load<Sprite>("Ui/Images/Buttons/Slider_bar"));
+                    element.AddToClassList(TimberApiStyle.Backgrounds.ScrollBar);
                     element.style.height = new Length(4, Pixel);
                     element.style.unityBackgroundScaleMode = ScaleMode.StretchToFill;
                 })
