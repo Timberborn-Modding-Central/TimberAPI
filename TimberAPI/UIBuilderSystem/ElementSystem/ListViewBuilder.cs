@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.UIBuilderSystem.PresetSystem;
@@ -21,12 +22,14 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
             
         }
 
+        [SuppressMessage("Member Access", "Publicizer001:Accessing a member that was not originally public")]
         public ListViewBuilder ModifyVerticalScroller(Action<Scroller> modifyScroller)
         {
             modifyScroller.Invoke(Root.scrollView.verticalScroller);
             return this;
         }
 
+        [SuppressMessage("Member Access", "Publicizer001:Accessing a member that was not originally public")]
         public ListViewBuilder ModifyHorizontalScroller(Action<Scroller> modifyScroller)
         {
             modifyScroller.Invoke(Root.scrollView.horizontalScroller);
