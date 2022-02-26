@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TimberbornAPI.UIBuilderSystem.ElementSystem;
+using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
 
@@ -20,7 +21,7 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
         /// <summary>
         /// Item text label name: ItemLabel
         /// </summary>
-        public ListView MainMenuListView(IList itemSource, Action<VisualElement, int> bindItem, Action<IEnumerable<object>> selectionChange, SelectionType selectionType = SelectionType.Single, Length width = default, Length height = default, string name = default, Action<ListViewBuilder> builder = default)
+        public ListView MainMenuListView(IList itemSource = default, Action<VisualElement, int> bindItem = default, Action<IEnumerable<object>> selectionChange = default, SelectionType selectionType = SelectionType.Single, Length width = default, Length height = default, string name = default, Action<ListViewBuilder> builder = default)
         {
             return CustomListView(
                 itemSource,
@@ -45,35 +46,42 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 }, selectionType, width, height, name, builder);
         }
 
-        public ListView ColorListView(IList itemSource, Func<VisualElement> makeItem, Action<VisualElement, int> bindItem, Action<IEnumerable<object>> selectionChange, StyleColor scrollbarColor, StyleColor dragButtonColor, SelectionType selectionType = SelectionType.Single, Length width = default, Length height = default, string name = default, Action<ListViewBuilder> builder = default)
+        public ListView ColorListView(IList itemSource = default, Func<VisualElement> makeItem = default, Action<VisualElement, int> bindItem = default, Action<IEnumerable<object>> selectionChange = default, StyleColor scrollbarColor = default, StyleColor dragButtonColor = default, SelectionType selectionType = SelectionType.Single, Length width = default, Length height = default, string name = default, Action<ListViewBuilder> builder = default)
         {
             return CustomListView(itemSource, makeItem, bindItem, selectionChange,
                 scrollbarElement =>
                 {
-                    scrollbarElement.style.backgroundColor = scrollbarColor;
+                    scrollbarElement.style.backgroundColor = scrollbarColor == default ? Color.gray : scrollbarColor;
                 },
                 dragElement =>
                 {
-                    dragElement.style.backgroundColor = dragButtonColor;
+                    dragElement.style.backgroundColor = dragButtonColor == default ? Color.black : dragButtonColor;
                     dragElement.style.minHeight = new Length(60, Pixel);
                     dragElement.style.maxHeight = new Length(60, Pixel);
                 }, selectionType, width, height, name, builder);
         }
         
-        public ListView CustomListView(IList itemSource, Func<VisualElement> makeItem, Action<VisualElement, int> bindItem, Action<IEnumerable<object>> selectionChange, Action<Slider> scrollbarElement, Action<VisualElement> dragElement, SelectionType selectionType = SelectionType.Single, Length width = default, Length height = default, string name = default, Action<ListViewBuilder> builder = default)
+        public ListView CustomListView(IList itemSource = default, Func<VisualElement> makeItem = default, Action<VisualElement, int> bindItem = default, Action<IEnumerable<object>> selectionChange = default, Action<Slider> scrollbarElement = default, Action<VisualElement> dragElement = default, SelectionType selectionType = SelectionType.Single, Length width = default, Length height = default, string name = default, Action<ListViewBuilder> builder = default)
         {
             ListViewBuilder listViewBuilder = _componentBuilder.CreateListView()
                 .SetName(name)
-                .SetItemSource(itemSource)
-                .SetMakeItem(makeItem)
-                .SetBindItem(bindItem)
-                .SetSelectionChange(selectionChange)
-                .SetSelectionType(selectionType)
                 .ModifyVerticalScroller(scroller =>
                 {
-                    scrollbarElement.Invoke(scroller.slider);
-                    dragElement.Invoke(scroller.slider?.dragElement);
+                    scrollbarElement?.Invoke(scroller.slider);
+                    dragElement?.Invoke(scroller.slider?.dragElement);
                 });
+
+            if(selectionChange != default)
+                listViewBuilder.SetSelectionChange(selectionChange);
+            
+            if(bindItem != default)
+                listViewBuilder.SetBindItem(bindItem);
+            
+            if(makeItem != default)
+                listViewBuilder.SetMakeItem(makeItem);
+            
+            if(itemSource != default)
+                listViewBuilder.SetItemSource(itemSource);
             
             if(width != default)
                 listViewBuilder.SetWidth(width);
