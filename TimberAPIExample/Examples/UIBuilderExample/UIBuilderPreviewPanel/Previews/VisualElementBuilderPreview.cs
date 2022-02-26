@@ -89,7 +89,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 builder.AddPreset(factory => factory.Buttons().Button(text: "1"));
                 builder.AddPreset(factory => factory.Buttons().Button(text: "2"));
             });
-            return root.BuildAndInitialize();
+            return root.Build();
         }
     }
 }

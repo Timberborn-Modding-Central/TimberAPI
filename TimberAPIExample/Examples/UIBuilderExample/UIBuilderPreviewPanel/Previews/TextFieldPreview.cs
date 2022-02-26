@@ -38,7 +38,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
             root.AddPreset(factory => factory.Labels().DefaultHeader("preview.textfields.ingame.color", builder: builder => builder.SetStyle(style => { style.alignSelf = Align.Center; style.marginBottom = new Length(10, Pixel); })));
             root.AddPreset(factory => factory.TextFields().InGameTextField(new Length(200, Pixel), backgroundColor: Color.grey, fontColor: Color.blue));
 
-            return root.BuildAndInitialize();
+            return root.Build();
         }
     }
 }

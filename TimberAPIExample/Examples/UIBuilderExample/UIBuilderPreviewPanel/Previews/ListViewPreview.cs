@@ -118,7 +118,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 },
                 height: new Length(200, Pixel)));
             
-            return root.BuildAndInitialize();
+            return root.Build();
         }
         
         private void BindItemExample(VisualElement visualElement, int i)

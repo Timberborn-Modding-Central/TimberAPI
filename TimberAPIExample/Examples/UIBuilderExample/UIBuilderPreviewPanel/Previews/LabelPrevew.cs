@@ -39,7 +39,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
             root.AddPreset(factory => factory.Labels().GameTextHeading("preview.labels.previewtext", builder: builder => builder.SetMargin(new Margin(0,0,new Length(10, Pixel),0))));
             root.AddPreset(factory => factory.Labels().GameTextTitle("preview.labels.previewtext", builder: builder => builder.SetMargin(new Margin(0,0,new Length(10, Pixel),0))));
 
-            return root.BuildAndInitialize();
+            return root.Build();
         }
     }
 }

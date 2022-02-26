@@ -60,7 +60,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 .SetHeight(new Length(50, Pixel))
                 .SetWidth(new Length(50, Pixel)).Build());
             
-            return root.BuildAndInitialize();
+            return root.Build();
         }
     }
 }

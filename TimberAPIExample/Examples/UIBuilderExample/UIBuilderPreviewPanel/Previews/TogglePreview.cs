@@ -48,7 +48,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
             root.AddPreset(factory => factory.Toggles().Circle(locKey: "preview.checkboxes.text"));
             root.AddPreset(factory => factory.Toggles().CheckmarkAlt(locKey: "preview.checkboxes.text"));
 
-            return root.BuildAndInitialize();
+            return root.Build();
         }
     }
 }

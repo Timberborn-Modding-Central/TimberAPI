@@ -106,7 +106,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
             }
 
             
-            return root.BuildAndInitialize();
+            return root.Build();
         }
     }
 }
