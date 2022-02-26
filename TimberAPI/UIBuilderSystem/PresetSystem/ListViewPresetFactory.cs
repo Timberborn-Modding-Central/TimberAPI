@@ -70,6 +70,9 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                     scrollbarElement?.Invoke(scroller.slider);
                     dragElement?.Invoke(scroller.slider?.dragElement);
                 });
+            
+            if(selectionType != default)
+                listViewBuilder.SetSelectionType(selectionType);
 
             if(selectionChange != default)
                 listViewBuilder.SetSelectionChange(selectionChange);
