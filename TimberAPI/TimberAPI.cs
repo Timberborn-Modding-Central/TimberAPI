@@ -1,4 +1,5 @@
 ﻿using TimberbornAPI.AssetLoaderSystem;
+using TimberbornAPI.ContainerSystem;
 using TimberbornAPI.DependencySystem;
 using TimberbornAPI.LocalizationSystem;
 
@@ -23,5 +24,11 @@ namespace TimberbornAPI
         /// APIs to load and fetch assets
         /// </summary>
         public static IAssetRegistry AssetRegistry = new AssetRegistry();
+
+        /// <summary>
+        /// APIs for better integration between dependency injection and harmony
+        /// Able to access all loaded dependency classes with a static instance
+        /// </summary>
+        public static IContainer DependencyContainer = new ContainerHolder();
     }
 }
