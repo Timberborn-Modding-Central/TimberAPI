@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 namespace TimberbornAPI.UIBuilderSystem.ElementSystem
 {
-    public class ScrollViewBuilder : BaseElementBuilder<ScrollView, ScrollViewBuilder>
+    public class ScrollViewBuilder : BaseElementBuilder<ScrollView, ScrollViewBuilder>, IScrollableBuilder<ScrollViewBuilder>
     {
         protected override ScrollViewBuilder BuilderInstance => this;
         

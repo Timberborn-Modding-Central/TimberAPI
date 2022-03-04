@@ -13,12 +13,9 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
     {
         private readonly ComponentBuilder _componentBuilder;
         
-        private readonly IResourceAssetLoader _resourceAssetLoader;
-
-        public ScrollPresetFactory(ComponentBuilder componentBuilder, IResourceAssetLoader resourceAssetLoader)
+        public ScrollPresetFactory(ComponentBuilder componentBuilder)
         {
             _componentBuilder = componentBuilder;
-            _resourceAssetLoader = resourceAssetLoader;
         }
         
         public ScrollView MainScrollView(IEnumerable<VisualElement> children, string name = null, Length height = default, Length width = default, Action<ScrollViewBuilder> builder = default)
@@ -40,11 +37,9 @@ namespace TimberbornAPI.UIBuilderSystem.PresetSystem
                 {
                     scroller.slider.dragElement.style.minHeight = new Length(60, Pixel);
                     scroller.slider.dragElement.style.maxHeight = new Length(60, Pixel);
-                    scroller.slider.dragElement.style.backgroundImage =
-                        new StyleBackground(_resourceAssetLoader.Load<Sprite>("Ui/Images/Core/Scroll_button"));
-                    scroller.slider.style.backgroundImage =
-                        new StyleBackground(_resourceAssetLoader.Load<Sprite>("Ui/Images/Core/Scroll_bar"));
                     scroller.slider.style.unityBackgroundScaleMode = new StyleEnum<ScaleMode>(ScaleMode.StretchToFill);
+                    scroller.slider.dragElement.AddToClassList(TimberApiStyle.Backgrounds.ScrollButton);
+                    scroller.slider.AddToClassList(TimberApiStyle.Backgrounds.ScrollBar);
                 });
             
             if(height != default)

@@ -72,7 +72,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 .AddPreset(factory => factory.Labels().DefaultText(name: "Value", text: "1", builder: labelBuilder => labelBuilder.SetMargin(new Margin(new Length(8, Pixel), 0))))
                 .SetFlexDirection(FlexDirection.Row));
 
-            VisualElement root = rootBuilder.BuildAndInitialize();
+            VisualElement root = rootBuilder.Build();
             InitializeSlider(root, "controlledSlider");
             InitializeSliderInt(root, "controlledSliderInt");
             return root;

@@ -7,7 +7,7 @@ using LocalizableLabel = TimberbornAPI.UIBuilderSystem.CustomElements.Localizabl
 
 namespace TimberbornAPI.UIBuilderSystem.ElementSystem
 {
-    public class LabelBuilder : BaseElementBuilder<LocalizableLabel, LabelBuilder>
+    public class LabelBuilder : BaseElementBuilder<LocalizableLabel, LabelBuilder>, ITextElementBuilder<LabelBuilder>
     {
         protected override LabelBuilder BuilderInstance => this;
 
@@ -16,6 +16,12 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         {
         }
 
+        public LabelBuilder SetWhiteSpace(WhiteSpace whiteSpace)
+        {
+            Root.style.whiteSpace = whiteSpace;
+            return this;
+        }
+        
         public LabelBuilder SetText(string text)
         {
             Root.text = text;
@@ -37,12 +43,6 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         public LabelBuilder SetFontSize(Length size)
         {
             Root.style.fontSize = size;
-            return this;
-        }
-        
-        public LabelBuilder SetWhiteSpace(WhiteSpace whiteSpace)
-        {
-            Root.style.whiteSpace = whiteSpace;
             return this;
         }
         
