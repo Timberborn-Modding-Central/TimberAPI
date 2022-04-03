@@ -1,7 +1,7 @@
 ﻿using TimberbornAPI.EntityLinkerSystem.UI;
 using TimberbornAPI.UIBuilderSystem;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample.UI
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample.UI
 {
     /// <summary>
     /// Creates views for Links. The views are added to Linker/Linkee UI Fragments

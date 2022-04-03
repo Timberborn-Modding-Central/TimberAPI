@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample.UI
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample.UI
 {
     /// <summary>
     /// This class represent a custom Fragment that is added to the Mechanical Water Pumps UI.

@@ -1,6 +1,6 @@
 ﻿using TimberbornAPI.EntityLinkerSystem;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample
 {
     public class MechanicalWaterPumpWarehouseLink : 
         BaseEntityLink<MechanicalWaterPumpBehaviour, WarehouseBehaviour>

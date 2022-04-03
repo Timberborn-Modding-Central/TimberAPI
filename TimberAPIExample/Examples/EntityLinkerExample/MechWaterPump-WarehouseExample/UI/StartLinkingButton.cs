@@ -4,7 +4,7 @@ using Timberborn.SelectionSystem;
 using Timberborn.ToolSystem;
 using TimberbornAPI.EntityLinkerSystem.UI;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample.UI
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample.UI
 {
     /// <summary>
     /// Definition of the button that starts the linking process

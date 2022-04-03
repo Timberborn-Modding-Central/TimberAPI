@@ -4,7 +4,7 @@ using Timberborn.EntityPanelSystem;
 using TimberbornAPI;
 using TimberbornAPI.EntityActionSystem;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample
 {
     public class EntityLinkerConfigurator : IConfigurator
     {

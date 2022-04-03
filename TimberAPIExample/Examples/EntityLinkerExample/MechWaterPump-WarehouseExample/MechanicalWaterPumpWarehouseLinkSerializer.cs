@@ -1,7 +1,7 @@
 ﻿using Timberborn.Persistence;
 using TimberbornAPI.EntityLinkerSystem;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample
 {
     public class MechanicalWaterPumpWarehouseLinkSerializer : BaseEntityLinkSerializer<MechanicalWaterPumpWarehouseLink, MechanicalWaterPumpBehaviour, WarehouseBehaviour>
     {

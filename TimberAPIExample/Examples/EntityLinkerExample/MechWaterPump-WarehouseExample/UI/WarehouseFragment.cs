@@ -3,7 +3,7 @@ using Timberborn.SelectionSystem;
 using TimberbornAPI.EntityLinkerSystem.UI;
 using TimberbornAPI.UIBuilderSystem;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample.UI
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample.UI
 {
     /// <summary>
     /// Definition of custom fargment for Warehouse, which acts as the Linkee.

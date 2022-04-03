@@ -4,7 +4,7 @@ using Timberborn.WaterBuildings;
 using TimberbornAPI.EntityActionSystem;
 using UnityEngine;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample
 {
     public class EntityActions : IEntityAction
     {

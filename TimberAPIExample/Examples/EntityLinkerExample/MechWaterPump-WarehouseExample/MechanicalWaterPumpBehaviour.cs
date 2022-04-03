@@ -1,7 +1,7 @@
 ﻿using Timberborn.Buildings;
 using TimberbornAPI.EntityLinkerSystem;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample
 {
     /// <summary>
     /// Custom class that represent the linker in a entitylink

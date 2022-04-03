@@ -2,7 +2,7 @@
 using Timberborn.Warehouses;
 using TimberbornAPI.EntityLinkerSystem;
 
-namespace TimberAPIExample.Examples.EntityLinkerExample
+namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample
 {
     public class WarehouseBehaviour : BaseEntityLinkee<MechanicalWaterPumpWarehouseLink, MechanicalWaterPumpBehaviour, WarehouseBehaviour>
     {
