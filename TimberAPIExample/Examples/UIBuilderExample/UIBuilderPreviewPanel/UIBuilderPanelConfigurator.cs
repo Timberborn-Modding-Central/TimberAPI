@@ -3,6 +3,9 @@ using HarmonyLib;
 using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previews;
 using Timberborn.MainMenuScene;
 using Timberborn.Options;
+using TimberbornAPI;
+using TimberbornAPI.UIBuilderSystem;
+using TimberbornAPI.UIBuilderSystem.CustomElements;
 using UnityEngine.UIElements;
 
 namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
@@ -30,9 +33,10 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
         private static void Postfix(ref VisualElement __result)
         {
             VisualElement root = __result.Query("OptionsBox");
-            Button button = new Button() { classList = { "menu-button" }};
-            button.text = "UI Builder preview";
+            UIBuilder uiBuilder = TimberAPI.DependencyContainer.GetInstance<UIBuilder>();
+            LocalizableButton button = uiBuilder.Presets().Buttons().Button("menu.uipreview", new Length(244, Length.Unit.Pixel));
             button.clicked += UIBuilderPreviewBox.OpenPreviewBoxDelegate;
+            uiBuilder.InitializeVisualElement(button);
             root.Insert(6, button);
         }
     }
@@ -43,9 +47,10 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
         private static void Postfix(ref VisualElement __result)
         {
             VisualElement root = __result.Query("MainMenuPanel");
-            Button button = new Button() { classList = { "menu-button" }};
-            button.text = "UI Builder preview";
+            UIBuilder uiBuilder = TimberAPI.DependencyContainer.GetInstance<UIBuilder>();
+            LocalizableButton button = uiBuilder.Presets().Buttons().Button("menu.uipreview", new Length(244, Length.Unit.Pixel));
             button.clicked += UIBuilderPreviewBox.OpenPreviewBoxDelegate;
+            uiBuilder.InitializeVisualElement(button);
             root.Insert(6, button);
         }
     }
