@@ -106,28 +106,5 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             return root;
         }
 
-        private VisualElement SlidenInt(float max, float min = 0f)
-        {
-            var element = _builder.CreateComponentBuilder()
-                                  .CreateVisualElement()
-                                  .AddPreset(
-                                      factory => factory.Labels()
-                                                        .GameTextBig(name: "",
-                                                                     locKey: "",
-                                                                     builder:
-                                                                      builder => builder.SetStyle(
-                                                                          style => style.alignSelf = Align.Center)))
-                                  .AddPreset(
-                                      factory => factory.Sliders()
-                                                        .SliderCircle(min,
-                                                                      max,
-                                                                      name: "",
-                                                                      builder:
-                                                                          builder => builder.SetStyle(
-                                                                              style => style.flexGrow = 1f)
-                                                                                             .SetPadding(new Padding(new Length(21, Pixel), 0))))
-                                  .BuildAndInitialize();
-            return element;
-        }
     }
 }

@@ -22,23 +22,23 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
         where TLinkViewFactory : IBaseEntityLinkViewFactory
         where TStartLinkButton : IBaseStartLinkingButton<TLinker, TLinkee, TLink>
     {
-        private readonly UIBuilder _builder;
-        private VisualElement _root;
-        private TLinker _entityLinker;
+        protected readonly UIBuilder _builder;
+        protected VisualElement _root;
+        protected TLinker _entityLinker;
 
-        private static string LinkContainerName = "LinkContainer";
-        private static string SettingsContainerName = "SettingsContainer";
-        private static string NewLinkButtonName = "NewLinkButton";
+        protected static string LinkContainerName = "LinkContainer";
+        protected static string SettingsContainerName = "SettingsContainer";
+        protected static string NewLinkButtonName = "NewLinkButton";
 
-        private VisualElement _linksContainer;
-        private VisualElement _settingsContainer;
+        protected VisualElement _linksContainer;
+        protected VisualElement _settingsContainer;
 
         //private IBaseStartLinkingButton<TLinker, TLinkee, TLink> _startLinkButton;
-        private TStartLinkButton _startLinkButton;
+        protected TStartLinkButton _startLinkButton;
 
-        private TLinkViewFactory _entityLinkViewFactory;
-        private readonly SelectionManager _selectionManager;
-        private readonly ILoc _loc;
+        protected TLinkViewFactory _entityLinkViewFactory;
+        protected readonly SelectionManager _selectionManager;
+        protected readonly ILoc _loc;
 
         public BaseLinkerFragment(
             UIBuilder builder,
@@ -163,6 +163,7 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
                 };
 
                 _linksContainer.Add(view);
+                _linksContainer.Add(CreateLinkViewSettingContainer(i));
             }
 
             _startLinkButton.UpdateRemainingSlots(links.Count, _entityLinker.MaxLinks);
@@ -173,6 +174,14 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             RemoveAllLinkViews();
             AddAllLinkViews();
             UpdateFragment();
+        }
+
+        public VisualElement CreateLinkViewSettingContainer(int index)
+        {
+            return _builder.CreateComponentBuilder()
+                           .CreateVisualElement()
+                           .SetName($"ViewSettingContainer{index}")
+                           .Build();
         }
     }
 }
