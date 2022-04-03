@@ -6,6 +6,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseEx
 {
     public class WarehouseBehaviour : BaseEntityLinkee<MechanicalWaterPumpWarehouseLink, MechanicalWaterPumpBehaviour, WarehouseBehaviour>
     {
+        // Store the actual game component
         private Stockpile _warehouse;
 
         public override void OnEnterFinishedState()

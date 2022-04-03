@@ -16,6 +16,7 @@ using TimberAPIExample.Examples.EntityActionExample;
 using TimberAPIExample.Examples.AssetLoaderExample;
 using TimberAPIExample.Examples.UIBuilderExample;
 using TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample;
+using TimberAPIExample.Examples.EntityLinkerExample.LumbermillWIndmillExample;
 
 namespace TimberAPIExample
 {
@@ -58,7 +59,12 @@ namespace TimberAPIExample
             });
 
             EntityLinkerConfigurator.AddLabels();
-            TimberAPI.DependencyRegistry.AddConfigurator(new EntityLinkerConfigurator(), SceneEntryPoint.InGame);
+
+            TimberAPI.DependencyRegistry.AddConfigurators(new()
+            {
+                new EntityLinkerConfigurator(),
+                new LumbermillWindmillExampleConfigurator()
+                }, SceneEntryPoint.InGame);
 
             Logger.LogInfo("TimberAPIExample is loaded!");
         }
