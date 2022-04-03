@@ -57,13 +57,9 @@ namespace TimberAPIExample
                 new UIBuilderFragmentConfigurator(),
             });
 
-            // Load this before anything else is bound
-            TimberAPI.DependencyRegistry.AddConfigurators(new()
-            {
-                new EntityActionExampleConfigurator(),
-                new ObjectCollectionExampleConfigurator(),
-            },
-            SceneEntryPoint.InGame, true);
+            // Load these before anything else is bound
+            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new EntityActionExampleConfigurator());
+            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new ObjectCollectionExampleConfigurator());
 
             Logger.LogInfo("TimberAPIExample is loaded!");
         }

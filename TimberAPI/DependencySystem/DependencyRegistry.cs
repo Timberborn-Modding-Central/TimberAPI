@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Bindito.Core;
 using HarmonyLib;
+using Timberborn.EntitySystem;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
 using Timberborn.MasterScene;
@@ -16,25 +17,35 @@ namespace TimberbornAPI.DependencySystem
         private static Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPointFirst = new();
         private static Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPointLast = new();
 
-        public void AddConfigurator(IConfigurator configurator, SceneEntryPoint entryPoint = SceneEntryPoint.InGame, bool first = false)
+        public void AddConfigurator(IConfigurator configurator, SceneEntryPoint entryPoint = SceneEntryPoint.InGame)
         {
-            Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPoint =
-                first ? configuratorsByEntryPointFirst : configuratorsByEntryPointLast;
-            if (configuratorsByEntryPoint.TryGetValue(entryPoint, out var configurators))
+            if (configuratorsByEntryPointLast.TryGetValue(entryPoint, out var configurators))
             {
                 configurators.Add(configurator);
             }
             else
             {
-                configuratorsByEntryPoint.Add(entryPoint, new() { configurator });
+                configuratorsByEntryPointLast.Add(entryPoint, new() { configurator });
             }
         }
 
-        public void AddConfigurators(List<IConfigurator> configurators, SceneEntryPoint entryPoint = SceneEntryPoint.InGame, bool first = false)
+        public void AddConfigurators(List<IConfigurator> configurators, SceneEntryPoint entryPoint = SceneEntryPoint.InGame)
         {
             foreach(IConfigurator configurator in configurators)
             {
-                AddConfigurator(configurator, entryPoint, first);
+                AddConfigurator(configurator, entryPoint);
+            }
+        }
+
+        public void AddConfiguratorBeforeLoad(IConfigurator configurator, SceneEntryPoint entryPoint = SceneEntryPoint.InGame)
+        {
+            if (configuratorsByEntryPointFirst.TryGetValue(entryPoint, out var configurators))
+            {
+                configurators.Add(configurator);
+            }
+            else
+            {
+                configuratorsByEntryPointFirst.Add(entryPoint, new() { configurator });
             }
         }
 
@@ -98,6 +109,17 @@ namespace TimberbornAPI.DependencySystem
                 containerDefinition.Install(configurator);
             }
             Debug.Log($"Initialized configurators for {entryPoint.ToString()} ({(first ? "First" : "Last")})");
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(PrefabNameMapper), "Load")]
+        static void InjectLoadTest(ObjectCollectionService ____objectCollectionService)
+        {
+            Debug.Log("All loaded!");
+            foreach (Prefab allMonoBehaviour in ____objectCollectionService.GetAllMonoBehaviours<Prefab>())
+            {
+                Debug.Log(allMonoBehaviour.PrefabName);
+            }
         }
     }
 }

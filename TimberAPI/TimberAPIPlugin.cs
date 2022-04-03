@@ -35,7 +35,7 @@ namespace TimberbornAPI.Internal
         /// </summary>
         public void InstallConfigurators()
         {
-            TimberAPI.DependencyRegistry.AddConfigurator(new AssetConfigurator(), SceneEntryPoint.Global, true);
+            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new AssetConfigurator(), SceneEntryPoint.Global);
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
             
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator());
