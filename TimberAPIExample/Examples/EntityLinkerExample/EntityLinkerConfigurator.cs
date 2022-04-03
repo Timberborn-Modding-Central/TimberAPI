@@ -1,13 +1,8 @@
 ﻿using Bindito.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TimberAPIExample.Examples.EntityLinkerExample.UI;
 using Timberborn.EntityPanelSystem;
-using Timberborn.WaterBuildings;
 using TimberbornAPI;
 using TimberbornAPI.EntityActionSystem;
-using TimberbornAPI.EntityLinkerSystem.UI;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample
 {
@@ -18,6 +13,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
             TimberAPI.Localization.AddLabel("Entitylink.StartLink", "Attach");
             TimberAPI.Localization.AddLabel("Entitylink.StartLinkingTip", "Cool tip");
             TimberAPI.Localization.AddLabel("Entitylink.StartLinkingTitle", "Cool title");
+            TimberAPI.Localization.AddLabel("Entitylink.Berries", "Pause when berries >= ");
         }
 
         public void Configure(IContainerDefinition containerDefinition)
