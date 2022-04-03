@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TimberbornAPI.EntityLinkerSystem
+﻿namespace TimberbornAPI.EntityLinkerSystem
 {
     public interface IEntityLink<T1, T2>
     {

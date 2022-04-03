@@ -1,5 +1,4 @@
-﻿using System;
-using Timberborn.Persistence;
+﻿using Timberborn.Persistence;
 using TimberbornAPI.EntityLinkerSystem;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample
@@ -22,6 +21,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
         public override Obsoletable<MechanicalWaterPumpWarehouseLink> Deserialize(IObjectLoader objectLoader)
         {
             var link = base.Deserialize(objectLoader);
+
             link.Value.BerryTreshold = objectLoader.Get(BerryTresholdKey);
             return link;
         }

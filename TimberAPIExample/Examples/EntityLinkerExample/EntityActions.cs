@@ -1,7 +1,4 @@
 ﻿using Bindito.Unity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Timberborn.Warehouses;
 using Timberborn.WaterBuildings;
 using TimberbornAPI.EntityActionSystem;
@@ -17,6 +14,11 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
         {
             _instantiator = instantiator;
         }
+
+        /// <summary>
+        /// Add our custom behaviours to desired game objects
+        /// </summary>
+        /// <param name="entity"></param>
         public void ApplyToEntity(GameObject entity)
         {
             var watermover = entity.GetComponent<WaterMover>();

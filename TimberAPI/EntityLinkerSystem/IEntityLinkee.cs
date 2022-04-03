@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Timberborn.ConstructibleSystem;
 using Timberborn.EntitySystem;
-using UnityEngine;
 
 namespace TimberbornAPI.EntityLinkerSystem
 {
@@ -14,7 +11,5 @@ namespace TimberbornAPI.EntityLinkerSystem
         public void AddLink(TLink link);
 
         public void RemoveLink(TLink link);
-
-        //void RemoveAllLinks();
     }
 }

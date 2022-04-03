@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Timberborn.Buildings;
-using Timberborn.Persistence;
-using Timberborn.Warehouses;
+﻿using Timberborn.Buildings;
 using TimberbornAPI.EntityLinkerSystem;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample
@@ -15,7 +9,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
     public class MechanicalWaterPumpBehaviour : BaseEntityLinker<MechanicalWaterPumpWarehouseLink, WarehouseBehaviour, MechanicalWaterPumpBehaviour>
     {
         //The following methods can be anything. In this example we want to 
-        // pause/unpause the waterpump based on the carrots in a warehouse.
+        // pause/unpause the waterpump based on the berries in a warehouse.
         // They are called in the WarehouseBehaviour.Tick()
         public void PauseWaterPump()
         {

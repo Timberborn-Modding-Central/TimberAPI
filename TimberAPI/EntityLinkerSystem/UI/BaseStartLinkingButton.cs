@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Timberborn.EntitySystem;
 using Timberborn.Localization;
 using Timberborn.PickObjectToolSystem;
@@ -50,7 +48,6 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
         protected virtual void StartLinkEntities(TLinker linker,
                                        Action createdLinkCallback)
         {
-            Console.WriteLine($"started picking: {typeof(TLinkee)}");
             _pickObjectTool.StartPicking<TLinkee>(
                 _loc.T(StartLinkingTitleLocKey),
                 _loc.T(StartLinkingTipLocKey),
@@ -64,7 +61,6 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
         protected virtual string ValidateLinkee(TLinker linker,
                                       GameObject gameObject)
         {
-            //IEntityLinkee linkeeComponent = gameObject.GetComponent<IEntityLinkee>();
             return "";
         }
 
@@ -77,6 +73,7 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             linker.CreateLink(linkeeComponent);
             createdLinkCallback();
         }
+
         public virtual void UpdateRemainingSlots(int currentLinks, int maxLinks)
         {
             _button.text = $"{_loc.T(StartLinkLocKey)} ({currentLinks}/{maxLinks})";

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Timberborn.CoreUI;
 using Timberborn.EntityPanelSystem;
 using Timberborn.EntitySystem;
@@ -10,7 +8,6 @@ using Timberborn.SelectionSystem;
 using TimberbornAPI.UIBuilderSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEngine.UIElements.Length.Unit;
 
 namespace TimberbornAPI.EntityLinkerSystem.UI
 {
@@ -22,7 +19,6 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
     {
         protected readonly UIBuilder _builder;
         protected VisualElement _root;
-        //private Type _linkerComponentType;
         protected TLinkee _entityLinkee;
 
         protected static string LinkContainerName = "LinkContainer";

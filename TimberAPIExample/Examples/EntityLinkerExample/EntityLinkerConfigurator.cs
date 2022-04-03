@@ -16,6 +16,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
             TimberAPI.Localization.AddLabel("Entitylink.Berries", "Pause when berries >= ");
         }
 
+        // Bind our custom classes
         public void Configure(IContainerDefinition containerDefinition)
         {
             containerDefinition.MultiBind<IEntityAction>().To<EntityActions>().AsSingleton();

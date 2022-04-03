@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using Timberborn.Persistence;
 using UnityEngine;
 
@@ -82,7 +80,7 @@ namespace TimberbornAPI.EntityLinkerSystem
         {
             if (!_entityLinks.Remove(link))
             {
-                throw new InvalidOperationException($"Coudln't remove {link} from {this}, it wasn't added.");
+                throw new InvalidOperationException($"Couldn't remove {link} from {this}, it wasn't added.");
             }
             PostRemoveLink(link);
         }
