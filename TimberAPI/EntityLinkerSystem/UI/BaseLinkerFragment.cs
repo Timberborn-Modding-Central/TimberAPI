@@ -33,7 +33,6 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
         protected VisualElement _linksContainer;
         protected VisualElement _settingsContainer;
 
-        //private IBaseStartLinkingButton<TLinker, TLinkee, TLink> _startLinkButton;
         protected TStartLinkButton _startLinkButton;
 
         protected TLinkViewFactory _entityLinkViewFactory;
