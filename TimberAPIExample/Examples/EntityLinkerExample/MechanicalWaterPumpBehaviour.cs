@@ -19,21 +19,19 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
         // They are called in the WarehouseBehaviour.Tick()
         public void PauseWaterPump()
         {
-            var warehouseComponent = GetComponent<PausableBuilding>();
-            if(!warehouseComponent.Paused)
+            var pausableComponent = GetComponent<PausableBuilding>();
+            if(!pausableComponent.Paused)
             {
-                Console.WriteLine($"do the pause");
-                warehouseComponent.Pause();
+                pausableComponent.Pause();
             }
         }
 
         public void ResumeWaterPump()
         {
-            var warehouseComponent = GetComponent<PausableBuilding>();
-            if(warehouseComponent.Paused)
+            var pausableComponent = GetComponent<PausableBuilding>();
+            if(pausableComponent.Paused)
             {
-                Console.WriteLine($"resume");
-                warehouseComponent.Resume();
+                pausableComponent.Resume();
             }
         }
     }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TimberAPIExample.Examples.EntityLinkerExample.UI;
 using Timberborn.EntityPanelSystem;
 using Timberborn.WaterBuildings;
 using TimberbornAPI;
@@ -25,21 +26,22 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
 
             containerDefinition.Bind<MechanicalWaterPumpWarehouseLinkSerializer>().AsSingleton();
 
-            containerDefinition.Bind<LinkerFragment<WaterMover, MechanicalWaterPumpBehaviour, WarehouseBehaviour, MechanicalWaterPumpWarehouseLink>>().AsSingleton();
-            containerDefinition.Bind<LinkeeFragment<MechanicalWaterPumpWarehouseLink, MechanicalWaterPumpBehaviour, WarehouseBehaviour>>().AsSingleton();
-            containerDefinition.Bind<EntityLinkViewFactory>().AsSingleton();
-            containerDefinition.Bind<StartLinkingButton<MechanicalWaterPumpBehaviour, WarehouseBehaviour, MechanicalWaterPumpWarehouseLink>>().AsSingleton();
+            containerDefinition.Bind<MechanicalWaterPumpFragment>().AsSingleton();
+            containerDefinition.Bind<WarehouseFragment>().AsSingleton();
+            containerDefinition.Bind<LinkViewFactory>().AsSingleton();
+            containerDefinition.Bind<StartLinkingButton>().AsSingleton();
+
             containerDefinition.MultiBind<EntityPanelModule>().ToProvider<EntityPanelModuleProvider>().AsSingleton();
         }
 
 
         private class EntityPanelModuleProvider : IProvider<EntityPanelModule>
         {
-            private readonly LinkerFragment<WaterMover, MechanicalWaterPumpBehaviour, WarehouseBehaviour, MechanicalWaterPumpWarehouseLink> _linkerFragment;
-            private readonly LinkeeFragment<MechanicalWaterPumpWarehouseLink, MechanicalWaterPumpBehaviour, WarehouseBehaviour> _linkeeFragment;
+            private readonly MechanicalWaterPumpFragment _linkerFragment;
+            private readonly WarehouseFragment _linkeeFragment;
 
-            public EntityPanelModuleProvider(LinkerFragment<WaterMover, MechanicalWaterPumpBehaviour, WarehouseBehaviour, MechanicalWaterPumpWarehouseLink> linkerFragment,
-                                             LinkeeFragment<MechanicalWaterPumpWarehouseLink, MechanicalWaterPumpBehaviour, WarehouseBehaviour> linkeeFragment)
+            public EntityPanelModuleProvider(MechanicalWaterPumpFragment linkerFragment,
+                                             WarehouseFragment linkeeFragment)
             {
                 _linkerFragment = linkerFragment;
                 _linkeeFragment = linkeeFragment;

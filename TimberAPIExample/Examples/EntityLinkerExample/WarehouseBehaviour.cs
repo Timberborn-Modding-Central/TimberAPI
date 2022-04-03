@@ -35,19 +35,19 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
                                        .SingleOrDefault();
 
             //Loop thru all the links this warehouse has
-            foreach (MechanicalWaterPumpWarehouseLink link in EntityLinks)
+            foreach (var link in EntityLinks)
             {
                 // If we have equally or more berries. pause the water pump
                 if (berryCount >= link.BerryTreshold)
                 {
-                    var waterPump = link.Linker as MechanicalWaterPumpBehaviour;
+                    var waterPump = link.Linker;
                     waterPump.PauseWaterPump();
                     continue;
                 }
                 // If we dont have anough berries, unpause the water pump
                 if(berryCount < link.BerryTreshold)
                 {
-                    var waterPump = link.Linker as MechanicalWaterPumpBehaviour;
+                    var waterPump = link.Linker;
                     waterPump.ResumeWaterPump();
                     continue;
                 }
