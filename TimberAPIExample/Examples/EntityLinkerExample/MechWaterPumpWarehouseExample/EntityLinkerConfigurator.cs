@@ -1,5 +1,5 @@
 ﻿using Bindito.Core;
-using TimberAPIExample.Examples.EntityLinkerExample.UI;
+using TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample.UI;
 using Timberborn.EntityPanelSystem;
 using TimberbornAPI;
 using TimberbornAPI.EntityActionSystem;
