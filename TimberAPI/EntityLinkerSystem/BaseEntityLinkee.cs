@@ -5,10 +5,10 @@ using Timberborn.TickSystem;
 
 namespace TimberbornAPI.EntityLinkerSystem
 {
-    public abstract class BaseEntityLinkee<TLink, TLinker, T> : TickableComponent, IEntityLinkee<TLink>
-        where T : IEntityLinkee<TLink>
-        where TLink : IEntityLink<TLinker, T>
-        where TLinker : IEntityLinker<TLink, T>
+    public abstract class BaseEntityLinkee<TLink, TLinker, TLinkee> : TickableComponent, IEntityLinkee<TLink>
+        where TLinkee : IEntityLinkee<TLink>
+        where TLink : IEntityLink<TLinker, TLinkee>
+        where TLinker : IEntityLinker<TLink, TLinkee>
     {
         private readonly List<TLink> _entityLinks = new List<TLink>();
         public IReadOnlyCollection<TLink> EntityLinks { get; private set; }

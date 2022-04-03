@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace TimberbornAPI.EntityLinkerSystem
 {
-    public abstract class BaseEntityLinker<TLink, TLinkee, T> : MonoBehaviour, IEntityLinker<TLink, TLinkee>
+    public abstract class BaseEntityLinker<TLink, TLinkee, TLinker> : MonoBehaviour, IEntityLinker<TLink, TLinkee>
         where TLinkee : IEntityLinkee<TLink>
-        where T : IEntityLinker<TLink, TLinkee>
-        where TLink : IEntityLink<T, TLinkee>
+        where TLinker : IEntityLinker<TLink, TLinkee>
+        where TLink : IEntityLink<TLinker, TLinkee>
     {
         protected static readonly ComponentKey EntityLinkerKey = new ComponentKey("EntityLinker");
         protected static readonly ListKey<TLink> EntityLinksKey = new ListKey<TLink>(nameof(EntityLinks));
