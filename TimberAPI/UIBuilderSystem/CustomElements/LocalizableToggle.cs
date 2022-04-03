@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using Timberborn.Localization;
 using UnityEngine.UIElements;
@@ -39,6 +40,7 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
             this.text = loc.T(this._textLocKey);
         }
 
+        #pragma warning disable CS0108, CS0114
         private void OnCustomStyleResolved(CustomStyleResolvedEvent e) => this._nineSliceBackground.GetDataFromStyle(this.customStyle);
 
         private void OnGenerateVisualContent(MeshGenerationContext mgc)

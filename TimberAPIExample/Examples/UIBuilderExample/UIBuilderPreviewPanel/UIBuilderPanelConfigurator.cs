@@ -18,7 +18,9 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
             containerDefinition.MultiBind<IUIBuilderPreview>().To<SliderPreview>().AsSingleton();
             containerDefinition.MultiBind<IUIBuilderPreview>().To<VisualElementBuilderPreview>().AsSingleton();
             containerDefinition.MultiBind<IUIBuilderPreview>().To<LabelPreview>().AsSingleton();
+            containerDefinition.MultiBind<IUIBuilderPreview>().To<ListViewPreview>().AsSingleton();
             containerDefinition.MultiBind<IUIBuilderPreview>().To<CustomPreview>().AsSingleton();
+            containerDefinition.MultiBind<IUIBuilderPreview>().To<TextFieldPreview>().AsSingleton();
         }
     }
     

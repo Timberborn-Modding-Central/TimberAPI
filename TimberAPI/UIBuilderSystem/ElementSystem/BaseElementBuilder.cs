@@ -4,11 +4,12 @@ using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.Common;
 using TimberbornAPI.UIBuilderSystem.PresetSystem;
 using UnityEngine.UIElements;
-using LocalizableSlider = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableSlider;
 
 namespace TimberbornAPI.UIBuilderSystem.ElementSystem
 {
-    public abstract class BaseElementBuilder<TElement, TBuilder> where TElement : VisualElement where TBuilder : BaseElementBuilder<TElement, TBuilder>
+    public abstract class BaseElementBuilder<TElement, TBuilder> 
+        where TElement : VisualElement 
+        where TBuilder : BaseElementBuilder<TElement, TBuilder>
     {
         private readonly VisualElementInitializer _visualElementInitializer;
         
@@ -142,6 +143,12 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         public TBuilder SetBackgroundImage(StyleBackground backgroundImage)
         {
             Root.style.backgroundImage = backgroundImage;
+            return BuilderInstance;
+        }
+        
+        public TBuilder SetBackgroundColor(StyleColor color)
+        {
+            Root.style.backgroundColor = color;
             return BuilderInstance;
         }
         

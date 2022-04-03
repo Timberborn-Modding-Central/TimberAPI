@@ -14,11 +14,11 @@ namespace TimberbornAPI.UIBuilderSystem
 
         private readonly UiPresetFactory _uiPresetFactory;
         
-        public ComponentBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, IResourceAssetLoader resourceAssetLoader)
+        public ComponentBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader)
         {
             _visualElementInitializer = visualElementInitializer;
             _assetLoader = assetLoader;
-            _uiPresetFactory = new UiPresetFactory(this, resourceAssetLoader);
+            _uiPresetFactory = new UiPresetFactory(this);
         }
         
         public ButtonBuilder CreateButton()
@@ -54,6 +54,16 @@ namespace TimberbornAPI.UIBuilderSystem
         public SliderIntBuilder CreateSliderInt()
         {
             return new SliderIntBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
+        }
+        
+        public TextFieldBuilder CreateTextField()
+        {
+            return new TextFieldBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
+        }
+        
+        public ListViewBuilder CreateListView()
+        {
+            return new ListViewBuilder(_visualElementInitializer, _assetLoader, _uiPresetFactory);
         }
     }
 }

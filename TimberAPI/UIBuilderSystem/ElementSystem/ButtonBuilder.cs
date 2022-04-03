@@ -7,7 +7,7 @@ using LocalizableButton = TimberbornAPI.UIBuilderSystem.CustomElements.Localizab
 
 namespace TimberbornAPI.UIBuilderSystem.ElementSystem
 {
-    public class ButtonBuilder : BaseElementBuilder<LocalizableButton, ButtonBuilder>
+    public class ButtonBuilder : BaseElementBuilder<LocalizableButton, ButtonBuilder>, ITextElementBuilder<ButtonBuilder>
     {
         protected override ButtonBuilder BuilderInstance => this;
         
@@ -16,7 +16,7 @@ namespace TimberbornAPI.UIBuilderSystem.ElementSystem
         {
             
         }
-        
+
         public ButtonBuilder SetText(string text)
         {
             Root.text = text;
