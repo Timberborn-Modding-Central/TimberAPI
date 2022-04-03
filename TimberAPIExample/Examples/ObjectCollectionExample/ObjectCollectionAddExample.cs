@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TimberAPIExample.Examples.ObjectCollectionExample
 {
-    public class ObjectCollectionAddExample : ILoadableSingleton
+    public class ObjectCollectionAddExample : IInitializableSingleton
     {
         private readonly IAssetLoader _assetLoader;
         private readonly IResourceAssetLoader _resourceAssetLoader;
@@ -26,21 +26,40 @@ namespace TimberAPIExample.Examples.ObjectCollectionExample
             _factionSpecificationService = factionSpecificationService;
         }
 
-        // Get the first Unique Building from the other faction and load it
-        // Then add it to the custom object collection
-        public void Load()
+        // Add a building to the custom object collection
+        public void Initialize()
         {
-            GameObject customObject =_assetLoader.Load<GameObject>("TimberAPIExample/elec.extendedarchitecture.bundle/4x1Arch");
-            Debug.Log(customObject.name);
+            // Load the Building with Prefab (use Thunderkit to make a bundle)
+            GameObject customObject = _assetLoader.Load<GameObject>("TimberAPIExample/testprefab.bundle/testprefab");
+            Debug.Log("Loaded Building: " + customObject.name);
+            // Let TimberAPI load labels for you - just add to lang/<enUS>.txt
             customObject.AddComponent<BasicLabeledPrefab>();
+
+            // A hack to fix shaders. Unknown how to fix this at the moment
+            var platformModel = _resourceAssetLoader.Load<GameObject>("Buildings/Paths/Platform/Platform.Full.Folktails");
+            FixMaterialShader(customObject, platformModel.GetComponent<MeshRenderer>().materials[0].shader);
+
+            // Tell TimberAPI to add the building
             TimberAPI.CustomObjectCollection.AddGameObject(customObject);
-            foreach (FactionSpecification factionSpecification in _factionSpecificationService._factions)
+        }
+
+        // Re-apply shaders based 
+        static void FixMaterialShader(GameObject obj, Shader shader)
+        {
+            var meshRenderer = obj.GetComponent<MeshRenderer>();
+            if (meshRenderer)
             {
-                if (factionSpecification.Id != _factionService.Current.Id)
+                foreach (var mat in meshRenderer.materials)
                 {
-                    // Buildings/Housing/Barrack/Barrack.IronTeeth if Current=Folktails
-                    string path = factionSpecification.UniqueBuildings[0];                   
-                    TimberAPI.CustomObjectCollection.AddGameObject(_resourceAssetLoader.Load<GameObject>(path));
+                    mat.shader = shader;
+                }
+            }
+
+            foreach (Transform child in obj.transform)
+            {
+                if (child.gameObject)
+                {
+                    FixMaterialShader(child.gameObject, shader);
                 }
             }
         }
