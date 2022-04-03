@@ -14,28 +14,29 @@ using static UnityEngine.UIElements.Length.Unit;
 
 namespace TimberbornAPI.EntityLinkerSystem.UI
 {
-    public class LinkeeFragment<TLink, TLinker, TLinkee> : IEntityPanelFragment
+    public abstract class BaseLinkeeFragment<TLink, TLinker, TLinkee, TLinkViewFactory> : IEntityPanelFragment
         where TLinkee : MonoBehaviour, IRegisteredComponent, IEntityLinkee<TLink>
         where TLink : IEntityLink<TLinker, TLinkee>
         where TLinker : MonoBehaviour, IEntityLinker<TLink, TLinkee>
+        where TLinkViewFactory : IBaseEntityLinkViewFactory
     {
-        private readonly UIBuilder _builder;
-        private VisualElement _root;
+        protected readonly UIBuilder _builder;
+        protected VisualElement _root;
         //private Type _linkerComponentType;
-        private TLinkee _entityLinkee;
+        protected TLinkee _entityLinkee;
 
-        private static string LinkContainerName = "LinkContainer";
-        private static string NewLinkButtonName = "NewLinkButton";
+        protected static string LinkContainerName = "LinkContainer";
+        protected static string NewLinkButtonName = "NewLinkButton";
 
-        private VisualElement _linksContainer;
+        protected VisualElement _linksContainer;
 
-        private EntityLinkViewFactory _entityLinkViewFactory;
-        private readonly SelectionManager _selectionManager;
-        private readonly ILoc _loc;
+        protected TLinkViewFactory _entityLinkViewFactory;
+        protected readonly SelectionManager _selectionManager;
+        protected readonly ILoc _loc;
 
-        public LinkeeFragment(
+        public BaseLinkeeFragment(
             UIBuilder builder,
-            EntityLinkViewFactory entityLinkViewFactory,
+            TLinkViewFactory entityLinkViewFactory,
             SelectionManager selectionManager,
             ILoc loc)
         {
@@ -45,7 +46,7 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             _loc = loc;
         }
 
-        public VisualElement InitializeFragment()
+        public virtual VisualElement InitializeFragment()
         {
             _root = _builder.CreateFragmentBuilder()
                             .ModifyWrapper(builder => builder.SetFlexDirection(FlexDirection.Row)
@@ -64,7 +65,7 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             return _root;
         }
 
-        public void ShowFragment(GameObject entity)
+        public virtual void ShowFragment(GameObject entity)
         {
             _entityLinkee = entity.GetComponent<TLinkee>();
 
@@ -74,7 +75,7 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             }
         }
 
-        public void UpdateFragment()
+        public virtual void UpdateFragment()
         {
             if (_entityLinkee != null)
             {
@@ -86,14 +87,14 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             }
         }
 
-        public void ClearFragment()
+        public virtual void ClearFragment()
         {
             _entityLinkee = null;
             _root.ToggleDisplayStyle(false);
             RemoveAllLinkViews();
         }
 
-        public void AddAllLinkViews()
+        public virtual void AddAllLinkViews()
         {
             ReadOnlyCollection<TLink> links = (ReadOnlyCollection<TLink>)_entityLinkee.EntityLinks;
             for (int i = 0; i < links.Count; i++)
@@ -126,12 +127,12 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             }
         }
 
-        public void RemoveAllLinkViews()
+        public virtual void RemoveAllLinkViews()
         {
             _linksContainer.Clear();
         }
 
-        public void ResetLinks()
+        public virtual void ResetLinks()
         {
             RemoveAllLinkViews();
             AddAllLinkViews();

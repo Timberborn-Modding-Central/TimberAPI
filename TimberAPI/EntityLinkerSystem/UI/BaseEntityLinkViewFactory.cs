@@ -9,33 +9,32 @@ using static UnityEngine.UIElements.Length.Unit;
 
 namespace TimberbornAPI.EntityLinkerSystem.UI
 {
-    public class EntityLinkViewFactory
+    public abstract class BaseEntityLinkViewFactory : IBaseEntityLinkViewFactory
     {
-        private readonly UIBuilder _builder;
-        public EntityLinkViewFactory(
+        protected readonly UIBuilder _builder;
+        public BaseEntityLinkViewFactory(
             UIBuilder builder)
         {
             _builder = builder;
         }
 
-        public VisualElement CreateForLinker(string buttonLabelText)
-        {
-            //var buttonLabelText = "Foo";
-            var root = Create(buttonLabelText);
-
-            return root;
-        }
-
-        public VisualElement CreateForLinkee(string buttonLabelText)
+        public virtual VisualElement CreateForLinker(string buttonLabelText)
         {
             var root = Create(buttonLabelText);
 
             return root;
         }
 
-        private VisualElement Create(string buttonLabelText)
+        public virtual VisualElement CreateForLinkee(string buttonLabelText)
         {
-            var root =
+            var root = Create(buttonLabelText);
+
+            return root;
+        }
+
+        protected virtual VisualElement Create(string buttonLabelText)
+        {
+            var rootBuilder =
                 _builder.CreateComponentBuilder()
                         .CreateVisualElement()
                         .AddComponent(
@@ -98,10 +97,37 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
                                                                                 .Build())
                                                             .Build())
                                                 .Build())
-                                    .Build())
-                        .BuildAndInitialize();
+                                    .Build());
+
+
+
+            var root = rootBuilder.BuildAndInitialize();
 
             return root;
+        }
+
+        private VisualElement SlidenInt(float max, float min = 0f)
+        {
+            var element = _builder.CreateComponentBuilder()
+                                  .CreateVisualElement()
+                                  .AddPreset(
+                                      factory => factory.Labels()
+                                                        .GameTextBig(name: "",
+                                                                     locKey: "",
+                                                                     builder:
+                                                                      builder => builder.SetStyle(
+                                                                          style => style.alignSelf = Align.Center)))
+                                  .AddPreset(
+                                      factory => factory.Sliders()
+                                                        .SliderCircle(min,
+                                                                      max,
+                                                                      name: "",
+                                                                      builder:
+                                                                          builder => builder.SetStyle(
+                                                                              style => style.flexGrow = 1f)
+                                                                                             .SetPadding(new Padding(new Length(21, Pixel), 0))))
+                                  .BuildAndInitialize();
+            return element;
         }
     }
 }

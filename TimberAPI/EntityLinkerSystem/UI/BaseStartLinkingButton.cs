@@ -11,22 +11,21 @@ using UnityEngine.UIElements;
 
 namespace TimberbornAPI.EntityLinkerSystem.UI
 {
-    public class StartLinkingButton<TLinker, TLinkee, TLink>
+    public abstract class BaseStartLinkingButton<TLinker, TLinkee, TLink> : IBaseStartLinkingButton<TLinker, TLinkee, TLink> 
         where TLinkee : MonoBehaviour, IRegisteredComponent
-        //where TLinkee : MonoBehaviour
         where TLinker : class, IEntityLinker<TLink, TLinkee>
     {
-        private static readonly string StartLinkingTipLocKey = "Entitylink.StartLinkingTip";
-        private static readonly string StartLinkingTitleLocKey = "Entitylink.StartLinkingTitle";
-        private static readonly string StartLinkLocKey = "Entitylink.StartLink";
+        protected static readonly string StartLinkingTipLocKey = "Entitylink.StartLinkingTip";
+        protected static readonly string StartLinkingTitleLocKey = "Entitylink.StartLinkingTitle";
+        protected static readonly string StartLinkLocKey = "Entitylink.StartLink";
 
-        private readonly ILoc _loc;
-        private readonly PickObjectTool _pickObjectTool;
-        private readonly SelectionManager _selectionManager;
-        private readonly ToolManager _toolManager;
-        private Button _button;
+        protected readonly ILoc _loc;
+        protected readonly PickObjectTool _pickObjectTool;
+        protected readonly SelectionManager _selectionManager;
+        protected readonly ToolManager _toolManager;
+        protected Button _button;
 
-        public StartLinkingButton(ILoc loc,
+        public BaseStartLinkingButton(ILoc loc,
                                   PickObjectTool pickObjectTool,
                                   SelectionManager selectionManager,
                                   ToolManager toolManager)
@@ -37,7 +36,7 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             _toolManager = toolManager;
         }
 
-        public void Initialize(VisualElement root,
+        public virtual void Initialize(VisualElement root,
                                Func<TLinker> linkerProvider,
                                Action createdLinkCallback)
         {
@@ -48,7 +47,7 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             };
         }
 
-        private void StartLinkEntities(TLinker linker,
+        protected virtual void StartLinkEntities(TLinker linker,
                                        Action createdLinkCallback)
         {
             Console.WriteLine($"started picking: {typeof(TLinkee)}");
@@ -62,14 +61,14 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
                 });
         }
 
-        private string ValidateLinkee(TLinker linker,
+        protected virtual string ValidateLinkee(TLinker linker,
                                       GameObject gameObject)
         {
             //IEntityLinkee linkeeComponent = gameObject.GetComponent<IEntityLinkee>();
             return "";
         }
 
-        private void FinishLinkSelection(
+        protected virtual void FinishLinkSelection(
             TLinker linker,
             GameObject linkee,
             Action createdLinkCallback)
@@ -78,7 +77,7 @@ namespace TimberbornAPI.EntityLinkerSystem.UI
             linker.CreateLink(linkeeComponent);
             createdLinkCallback();
         }
-        public void UpdateRemainingSlots(int currentLinks, int maxLinks)
+        public virtual void UpdateRemainingSlots(int currentLinks, int maxLinks)
         {
             _button.text = $"{_loc.T(StartLinkLocKey)} ({currentLinks}/{maxLinks})";
             _button.SetEnabled(currentLinks < maxLinks);
