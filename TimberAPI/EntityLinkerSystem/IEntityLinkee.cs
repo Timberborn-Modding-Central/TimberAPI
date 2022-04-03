@@ -11,5 +11,7 @@ namespace TimberbornAPI.EntityLinkerSystem
         public void AddLink(TLink link);
 
         public void RemoveLink(TLink link);
+
+        public void RemoveAllLinks();
     }
 }

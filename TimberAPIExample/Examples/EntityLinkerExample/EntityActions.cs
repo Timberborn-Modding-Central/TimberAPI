@@ -21,12 +21,15 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
         /// <param name="entity"></param>
         public void ApplyToEntity(GameObject entity)
         {
+            //Mechanical water pumps have a WaterMover component
             var watermover = entity.GetComponent<WaterMover>();
+            //Really make sure custom class is only added to Mechanical water pumps
             if (watermover != null && watermover.name.Contains("Mechanical"))
             {
                 _instantiator.AddComponent<MechanicalWaterPumpBehaviour>(entity);
             }
 
+            //Add custom class to Warehouses
             var stockpile = entity.GetComponent<Stockpile>();
             if (stockpile != null && stockpile.name.Contains("Ware"))
             {

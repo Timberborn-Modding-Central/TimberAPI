@@ -15,7 +15,9 @@ using static UnityEngine.UIElements.Length.Unit;
 namespace TimberAPIExample.Examples.EntityLinkerExample.UI
 {
     /// <summary>
-    /// This class represent a custom Fragment that is added to the Mechanical Water Pumps UI
+    /// This class represent a custom Fragment that is added to the Mechanical Water Pumps UI.
+    /// This has some custom implementations of base methods because we have a label and slider
+    /// added, which can't be done in base class
     /// </summary>
     public class MechanicalWaterPumpFragment : BaseLinkerFragment<WaterMover, MechanicalWaterPumpBehaviour, WarehouseBehaviour, MechanicalWaterPumpWarehouseLink, LinkViewFactory, StartLinkingButton>
     {

@@ -36,7 +36,9 @@ namespace TimberbornAPI.EntityLinkerSystem
 
         public virtual void OnExitFinishedState()
         {
+            enabled = false;
             _entityComponentRegistry.Unregister(this);
+            RemoveAllLinks();
         }
 
         public virtual void AddLink(TLink link)
@@ -49,7 +51,7 @@ namespace TimberbornAPI.EntityLinkerSystem
             _entityLinks.Remove(link);
         }
 
-        private void RemoveAllLinks()
+        public void RemoveAllLinks()
         {
             for (int i = _entityLinks.Count - 1; i >= 0; i--)
             {

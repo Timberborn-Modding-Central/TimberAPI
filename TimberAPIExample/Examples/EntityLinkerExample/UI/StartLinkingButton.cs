@@ -6,6 +6,9 @@ using TimberbornAPI.EntityLinkerSystem.UI;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample.UI
 {
+    /// <summary>
+    /// Definition of the button that starts the linking process
+    /// </summary>
     public class StartLinkingButton : BaseStartLinkingButton<MechanicalWaterPumpBehaviour, WarehouseBehaviour, MechanicalWaterPumpWarehouseLink>
     {
         public StartLinkingButton(ILoc loc, 
