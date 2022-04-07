@@ -5,6 +5,7 @@ using Timberborn.ToolPanelSystem;
 using TimberbornAPI.Common;
 using TimberbornAPI.DependencySystem;
 using TimberbornAPI.EntityActionSystem;
+using TimberbornAPI.EntityLinkerSystem;
 using TimberbornAPI.UIBuilderSystem;
 using UnityEngine;
 
@@ -15,9 +16,12 @@ namespace TimberbornAPI.Internal
     public class TimberAPIPlugin : BaseUnityPlugin
     {
         public static string Guid = "com.timberapi.timberapi";
-        
+        internal static ManualLogSource Log;
+
         public void Awake()
         {
+            Log = Logger;
+
             var harmony = new Harmony("com.timberapi.plugin");
             harmony.PatchAll();
 
@@ -37,6 +41,8 @@ namespace TimberbornAPI.Internal
             
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.InGame);
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
+
+            TimberAPI.DependencyRegistry.AddConfigurator(new EntityLinkerConfigurator(), SceneEntryPoint.InGame);
         }
     }
 }
