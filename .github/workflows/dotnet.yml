@@ -1,29 +1,187 @@
-name: .NET
+name: Build and Publish TimberAPI packs
 
 on: 
   workflow_dispatch:
     inputs:
-      apiVersion:
-        description: 'The version to publish'
+      NugetKey:
+        description: 'The API key used to push the NuGet package'
         required: true
         type: string
+      DoPrerelease:
+        description: 'Do a prerelease. If checked, does not push to NuGet.'
+        required: true
+        type: boolean
+      PrereleaseSuffix:
+        description: 'The suffix to add to the version number if a prerelease is done. (eg "alpha", "beta", "rc.1" etc)'
+        required: false
+        type: string
 
+env:
+  TimberApiProjectPath: "TimberAPI/TimberAPI.csproj"
+  TimberApiOutputPath: "TimberAPI/bin/RELEASE/netstandard2.1"
+  TimberApiExampleProjectPath: "TimberAPIExample/TimberAPIExample.csproj"
+  TimberApiExampleOutputPath: "TimberAPIExample/bin/RELEASE/netstandard2.1"
+  
 jobs:
-  build:
-
+  PublishTimberAPINuget:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 2.1.x
+      
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build "TimberAPI/TimberAPI.csproj" --no-restore
-    - name: Test
+      
+    - name: Build TimberAPI
+      run: dotnet build ${{env.TimberApiProjectPath}} --no-restore --configuration RELEASE
+      
+    - name: Test 
       run: dotnet test --no-build --verbosity normal
       
-  
+    - name: .NET - Get Project File ReleaseVersion
+      id: get_version
+      uses: greenygh0st/net-proj-release-version@v2
+      with:
+        PROJ_FILE: ${{env.TimberApiProjectPath}}
+      
+    - name: Pack TimberAPI
+      run: dotnet pack ${{env.TimberApiProjectPath}} --configuration RELEASE -p:PackageVersion=${{ steps.get_version.outputs.RELEASE_VERSION }} --version-suffix "${{ github.event.inputs.PrereleaseSuffix }}"
+      
+    - name: Upload TimberAPI Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: TimberAPINugetPackage
+        path: ${{github.workspace}}/TimberAPI/bin/RELEASE/*.nupkg
+      
+    - name: Push NuGet Package
+      if: github.event.env.inputs.DoPrerelease == 'false'
+      run: dotnet nuget push ${{github.workspace}}/TimberAPI/bin/RELEASE/*.nupkg -k ${{ github.event.inputs.NugetKey }}
+ 
+  CreateTimberAPIThunderstorePack:
+    runs-on: ubuntu-latest
+    steps: 
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build TimberAPI
+      run: dotnet build ${{env.TimberApiProjectPath}} --no-restore --configuration RELEASE
+      
+    - name: .NET - Get Project File ReleaseVersion
+      id: get_version
+      uses: greenygh0st/net-proj-release-version@v2
+      with:
+        PROJ_FILE: ${{env.TimberApiProjectPath}}
+        
+    - name: Create TimberAPI package dir
+      run: mkdir TimberAPI/TimberAPIPackage
+
+    - name: Copy TimberAPI.dll to package folder
+      run: cp ${{ env.TimberApiOutputPath }}/TimberAPI.dll TimberAPI/TimberAPIPackage 
+   
+    - name: Edit version number to TimberAPI manifest.json
+      id: json-edit
+      uses: 898anil/github-actions-json-edit@v0.2
+      with:
+        file_path: "${{github.workspace}}/TimberAPI/ThunderstorePackage/manifest.json"
+        field_path: version_number
+        field_value: "${{ steps.get_version.outputs.RELEASE_VERSION }}"
+        
+    - name: Get modified manifest.json for TimberAPI
+      id: get-file
+      uses: GenesisSam/get-simple-file-action@v1.0.5
+      with:
+        file-name: ${{ steps.json-edit.outputs.out_file }}
+        
+    - name: Create modified manifest-json for TimberAPI
+      uses: jsdaniell/create-json@1.1.2
+      with:
+        name: manifest.json
+        json: '${{ steps.get-file.outputs.data }}'
+        dir: TimberAPI/TimberAPIPackage/
+
+    - name: Copy README to package folder for TimberAPI
+      run: cp README.md TimberAPI/TimberAPIPackage
+
+    - name: Copy Icon to package floder for TimberAPI
+      run: cp TimberAPI/ThunderstorePackage/Icon.png TimberAPI/TimberAPIPackage
+      
+    - name: Upload TimberAPI Thunderstore Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: TimberAPIThunderstorePackage
+        path: ${{github.workspace}}/TimberAPI/TimberAPIPackage
+        
+  CreateTimberAPIExampleThunderstorePack:
+    runs-on: ubuntu-latest
+    steps: 
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build TimberAPIExample
+      run: dotnet build ${{env.TimberApiExampleProjectPath}} --no-restore --configuration RELEASE
+      
+    - name: .NET - Get Project File ReleaseVersion
+      id: get_version
+      uses: greenygh0st/net-proj-release-version@v2
+      with:
+        PROJ_FILE: ${{env.TimberApiProjectPath}}
+        
+    - name: Create TimberAPIExample package dir
+      run: mkdir TimberAPIExample/TimberAPIExamplePackage
+
+    - name: Copy TimberAPIExample.dll to package folder
+      run: cp ${{ env.TimberApiExampleOutputPath }}/TimberAPIExample.dll TimberAPIExample/TimberAPIExamplePackage 
+        
+    - name: Edit version number to TimberAPIExample manifest.json
+      id: json-edit2
+      uses: 898anil/github-actions-json-edit@v0.2
+      with:
+        file_path: "${{github.workspace}}/TimberAPIExample/ThunderstorePackage/manifest.json"
+        field_path: version_number
+        field_value: "${{ steps.get_version.outputs.RELEASE_VERSION }}"
+        
+    - name: Get modified manifest.json for TimberAPIExample
+      id: get-file2
+      uses: GenesisSam/get-simple-file-action@v1.0.5
+      with:
+        file-name: ${{ steps.json-edit2.outputs.out_file }}
+        
+    - name: Create modified manifest-json TimberAPIExample
+      uses: jsdaniell/create-json@1.1.2
+      with:
+        name: manifest.json
+        json: '${{ steps.get-file2.outputs.data }}'
+        dir: TimberAPIExample/TimberAPIExamplePackage/
+
+    - name: Copy README to package folder for TimberAPIExample
+      run: cp README.md TimberAPIExample/TimberAPIExamplePackage
+           
+    - name: Modify README for TimberAPIExample
+      run: sed -i 's/# TimberAPI/# TimberAPIExample/' TimberAPIExample/TimberAPIExamplePackage/README.md      
+    - name: Modify README for TimberAPIExample
+      run: sed -i 's/Unofficial API to enable easier Timberborn modding/The example plugin for TimberAPI/' TimberAPIExample/TimberAPIExamplePackage/README.md      
+    - name: Modify README for TimberAPIExample
+      run: sed -i 's/Currently supported features/Shows the following features/' TimberAPIExample/TimberAPIExamplePackage/README.md
+
+    - name: Copy Icon to package folder for TimberAPIExample
+      run: cp TimberAPIExample/ThunderstorePackage/Icon.png TimberAPIExample/TimberAPIExamplePackage
+
+    
+    - name: Upload TimberAPIExample Thunderstore Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: TimberAPIExampleThunderstorePackage
+        path: ${{github.workspace}}/TimberAPIExample/TimberAPIExamplePackage
+      
