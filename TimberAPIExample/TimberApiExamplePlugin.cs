@@ -15,10 +15,7 @@ using TimberbornAPI.Common;
 using TimberAPIExample.Examples.EntityActionExample;
 using TimberAPIExample.Examples.AssetLoaderExample;
 using TimberAPIExample.Examples.UIBuilderExample;
-//using TimberAPIExample.Examples.EntityLinkerExample.MechWaterPumpWarehouseExample;
-//using TimberAPIExample.Examples.EntityLinkerExample.LumbermillWIndmillExample;
 using TimberAPIExample.Examples.EntityLinkerExample;
-using System.Collections.Generic;
 
 namespace TimberAPIExample
 {
