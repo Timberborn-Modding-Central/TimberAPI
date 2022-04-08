@@ -15,8 +15,7 @@ using TimberbornAPI.Common;
 using TimberAPIExample.Examples.EntityActionExample;
 using TimberAPIExample.Examples.AssetLoaderExample;
 using TimberAPIExample.Examples.UIBuilderExample;
-using TimberAPIExample.Examples.ObjectCollectionExample;
-using TimberbornAPI.ObjectCollectionSystem;
+using TimberAPIExample.Examples.CustomObjectRegistryExample;
 
 namespace TimberAPIExample
 {
@@ -55,11 +54,11 @@ namespace TimberAPIExample
             {
                 new AssetLoaderExampleConfigurator(),
                 new UIBuilderFragmentConfigurator(),
+                new EntityActionExampleConfigurator()
             });
 
-            // Load these before anything else is bound
-            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new EntityActionExampleConfigurator());
-            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new ObjectCollectionExampleConfigurator());
+            // Load this before anything else is bound
+            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new CustomObjectExampleConfigurator());
 
             Logger.LogInfo("TimberAPIExample is loaded!");
         }

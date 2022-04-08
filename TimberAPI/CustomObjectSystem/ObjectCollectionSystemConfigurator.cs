@@ -2,7 +2,7 @@
 using Bindito.Core;
 using Timberborn.EntitySystem;
 
-namespace TimberbornAPI.ObjectCollectionSystem
+namespace TimberbornAPI.CustomObjectSystem
 {
     public class ObjectCollectionSystemConfigurator : IConfigurator
 	{

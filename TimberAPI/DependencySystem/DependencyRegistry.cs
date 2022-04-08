@@ -110,16 +110,5 @@ namespace TimberbornAPI.DependencySystem
             }
             Debug.Log($"Initialized configurators for {entryPoint.ToString()} ({(first ? "First" : "Last")})");
         }
-
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(PrefabNameMapper), "Load")]
-        static void InjectLoadTest(ObjectCollectionService ____objectCollectionService)
-        {
-            Debug.Log("All loaded!");
-            foreach (Prefab allMonoBehaviour in ____objectCollectionService.GetAllMonoBehaviours<Prefab>())
-            {
-                Debug.Log(allMonoBehaviour.PrefabName);
-            }
-        }
     }
 }

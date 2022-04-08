@@ -6,30 +6,26 @@ using Timberborn.SingletonSystem;
 using TimberbornAPI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.LocalizationSystem;
-using TimberbornAPI.ObjectCollectionSystem;
 using UnityEngine;
 
-namespace TimberAPIExample.Examples.ObjectCollectionExample
+namespace TimberAPIExample.Examples.CustomObjectRegistryExample
 {
-    public class ObjectCollectionAddExample : IInitializableSingleton
+    public class CustomObjectAddExample : IInitializableSingleton
     {
         private readonly IAssetLoader _assetLoader;
         private readonly IResourceAssetLoader _resourceAssetLoader;
-        private readonly FactionService _factionService;
-        private readonly FactionSpecificationService _factionSpecificationService;
 
-        public ObjectCollectionAddExample(IAssetLoader assetLoader, IResourceAssetLoader resourceAssetLoader, FactionService factionService, FactionSpecificationService factionSpecificationService)
+        public CustomObjectAddExample(IAssetLoader assetLoader, IResourceAssetLoader resourceAssetLoader)
         {
             _assetLoader = assetLoader;
             _resourceAssetLoader = resourceAssetLoader;
-            _factionService = factionService;
-            _factionSpecificationService = factionSpecificationService;
         }
 
-        // Add a building to the custom object collection
+        // Add a building to the custom object registry
         public void Initialize()
         {
             // Load the Building with Prefab (use Thunderkit to make a bundle)
+            // AssetLoader is part of TimberAPI
             GameObject customObject = _assetLoader.Load<GameObject>("TimberAPIExample/testprefab.bundle/testprefab");
             Debug.Log("Loaded Building: " + customObject.name);
             // Let TimberAPI load labels for you - just add to lang/<enUS>.txt
@@ -40,10 +36,10 @@ namespace TimberAPIExample.Examples.ObjectCollectionExample
             FixMaterialShader(customObject, platformModel.GetComponent<MeshRenderer>().materials[0].shader);
 
             // Tell TimberAPI to add the building
-            TimberAPI.CustomObjectCollection.AddGameObject(customObject);
+            TimberAPI.CustomObjectRegistry.AddGameObject(customObject);
         }
 
-        // Re-apply shaders based 
+        // Re-apply shaders to our custom object using the shaders from an in game object
         static void FixMaterialShader(GameObject obj, Shader shader)
         {
             var meshRenderer = obj.GetComponent<MeshRenderer>();
