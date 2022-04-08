@@ -2,6 +2,7 @@
 using TimberAPIExample.Examples.EntityLinkerExample.UI;
 using Timberborn.Buildings;
 using Timberborn.EntityPanelSystem;
+using TimberbornAPI.EntityActionSystem;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample
 {
@@ -10,6 +11,8 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
         // Bind our custom classes
         public void Configure(IContainerDefinition containerDefinition)
         {
+            containerDefinition.MultiBind<IEntityAction>().To<EntityActions>().AsSingleton();
+
             containerDefinition.Bind<LinkerFragment<Building>>().AsSingleton();
             containerDefinition.Bind<EntityLinkViewFactory>().AsSingleton();
             containerDefinition.Bind<StartLinkingButton>().AsSingleton();
