@@ -1,4 +1,5 @@
-﻿using TimberbornAPI.EntityActionSystem;
+﻿using Timberborn.Buildings;
+using TimberbornAPI.EntityActionSystem;
 using UnityEngine;
 
 namespace TimberbornAPI.EntityLinkerSystem
@@ -11,7 +12,10 @@ namespace TimberbornAPI.EntityLinkerSystem
         /// <param name="entity"></param>
         public void ApplyToEntity(GameObject entity)
         {
-            entity.AddComponent<EntityLinker>();
+            if (entity.GetComponent<Building>() != null)
+            {
+                entity.AddComponent<EntityLinker>();
+            }
         }
     }
 }
