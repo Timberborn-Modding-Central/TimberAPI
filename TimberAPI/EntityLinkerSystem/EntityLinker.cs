@@ -9,7 +9,11 @@ using UnityEngine;
 namespace TimberbornAPI.EntityLinkerSystem
 {
     /// <summary>
-    /// Defines the behaviour of Linkers
+    /// Defines the behaviour of Linkers. TimberAPI adds an instance of Entitylinker to
+    /// all Building entities. EntityLinker is used to create new EntityLinks between two entities.
+    /// If you want to create a new Link between EntityLinkers, use the CreateLink() method.
+    /// If can be called in code or you could for example create an in game button
+    /// which can make the call.
     /// </summary>
     public class EntityLinker : MonoBehaviour, IFinishedStateListener, IPersistentEntity
     {
@@ -54,11 +58,7 @@ namespace TimberbornAPI.EntityLinkerSystem
                     return;
                 }
                 var linkerLinks = links.Where(x => x.Linker == this).ToList();
-                _entityLinks.AddRange(linkerLinks);
-                foreach (var link in linkerLinks)
-                {
-                    PostCreateLink(link);
-                }
+                _entityLinks.AddRange(links);
             }
         }
 
@@ -88,7 +88,7 @@ namespace TimberbornAPI.EntityLinkerSystem
             }
             var link = new EntityLink(this, linkee);
             AddLink(link);
-            PostCreateLink(link);
+            AddLinkInLinkee(link);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace TimberbornAPI.EntityLinkerSystem
         /// Add the Link on the Linkee
         /// </summary>
         /// <param name="link"></param>
-        public virtual void PostCreateLink(EntityLink link)
+        private void AddLinkInLinkee(EntityLink link)
         {
             link.Linkee.AddLink(link);
         }
@@ -120,7 +120,7 @@ namespace TimberbornAPI.EntityLinkerSystem
             {
                 throw new InvalidOperationException($"Couldn't remove {link} from {this}, it wasn't added.");
             }
-            PostDeleteLink(link);
+            DeleteLinkFromLinkee(link);
         }
 
 
@@ -128,7 +128,7 @@ namespace TimberbornAPI.EntityLinkerSystem
         /// Removes the Link from Linkee too
         /// </summary>
         /// <param name="link"></param>
-        public virtual void PostDeleteLink(EntityLink link)
+        private void DeleteLinkFromLinkee(EntityLink link)
         {
             link.Linkee.RemoveLink(link);
         }

@@ -1,5 +1,6 @@
 ﻿using Bindito.Core;
-using TimberbornAPI.EntityActionSystem;
+using Timberborn.Buildings;
+using Timberborn.TemplateSystem;
 
 namespace TimberbornAPI.EntityLinkerSystem
 {
@@ -7,8 +8,15 @@ namespace TimberbornAPI.EntityLinkerSystem
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.MultiBind<IEntityAction>().To<EntityActions>().AsSingleton();
             containerDefinition.Bind<EntityLinkSerializer>().AsSingleton();
+            containerDefinition.MultiBind<TemplateModule>().ToProvider(ProvideTemplateModule).AsSingleton();
+        }
+
+        private static TemplateModule ProvideTemplateModule()
+        {
+            TemplateModule.Builder builder = new TemplateModule.Builder();
+            builder.AddDecorator<Building, EntityLinker>();
+            return builder.Build();
         }
     }
 }
