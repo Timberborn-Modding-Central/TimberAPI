@@ -57,8 +57,12 @@ namespace TimberbornAPI.EntityLinkerSystem
                 {
                     return;
                 }
-                var linkerLinks = links.Where(x => x.Linker == this).ToList();
-                _entityLinks.AddRange(links);
+                var linkerLinks = links.Where(x => x.Linker == this).ToList(); 
+                foreach (var link in linkerLinks)
+                {
+                    AddLinkInLinkee(link);
+                }
+                _entityLinks.AddRange(linkerLinks);
             }
         }
 

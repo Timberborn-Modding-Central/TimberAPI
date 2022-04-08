@@ -74,7 +74,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.UI
                                        .SetHeight(new Length(28, Pixel))
                                        .SetMargin(new Margin(new Length(1, Pixel), 0, 0, new Length(6, Pixel)))
                                        .Build())
-                           .AddPreset(factory => 
+                           .AddPreset(factory =>
                                 factory.Labels()
                                        .GameTextBig(text: buttonLabelText,
                                                     builder: builder => builder.SetWidth(new Length(180, Pixel))
@@ -83,7 +83,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.UI
                                                                                        style.unityTextAlign = TextAnchor.MiddleLeft;
                                                                                        style.paddingLeft = new Length(3, Pixel);
                                                                                    })))
-                           .Build()
+                           .Build();
         }
 
         private VisualElement CreateRemoveButton()

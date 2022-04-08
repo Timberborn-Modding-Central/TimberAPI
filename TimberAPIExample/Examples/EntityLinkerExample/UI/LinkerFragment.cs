@@ -149,6 +149,9 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.UI
                 };
                 view.Q<Button>("RemoveLinkButton").clicked += delegate
                 {
+                    Console.WriteLine($"link: {link}");
+                    Console.WriteLine($"linker: {link.Linker}");
+                    Console.WriteLine($"linkee: {link.Linkee}");
                     link.Linker.DeleteLink(link);
                     ResetLinks();
                 };
