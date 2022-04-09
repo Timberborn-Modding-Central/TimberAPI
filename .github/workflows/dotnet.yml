@@ -80,7 +80,7 @@ jobs:
         PROJ_FILE: ${{env.TimberApiProjectPath}}
 
     - name: Copy TimberAPI.dll to package folder
-      run: cp ${{ env.TimberApiOutputPath }}/TimberAPI.dll ${{ env.TimberAPIPackageDir }} 
+      run: cp ${{ env.TimberApiOutputPath }}/TimberAPI.dll ${{ env.TimberAPIPackageDir }}/TimberAPI/plugins
            
     - name: Edit Version number in manifest
       run: sed -i 's/VERSION/${{ steps.get_version.outputs.RELEASE_VERSION }}/' ${{ env.TimberAPIPackageDir }}/manifest.json
@@ -91,7 +91,7 @@ jobs:
     - name: Upload TimberAPI Thunderstore Build Artifact
       uses: actions/upload-artifact@v3.0.0
       with:
-        name: TimberAPIThunderstorePackage
+        name: TimberAPI
         path: ${{ env.TimberAPIPackageDir }} 
         
   CreateTimberAPIExampleThunderstorePack:
@@ -115,7 +115,7 @@ jobs:
         PROJ_FILE: ${{env.TimberApiProjectPath}}
 
     - name: Copy TimberAPIExample.dll to package folder
-      run: cp ${{ env.TimberApiExampleOutputPath }}/TimberAPIExample.dll ${{ env.TimberApiExamplePackageDir }}
+      run: cp ${{ env.TimberApiExampleOutputPath }}/TimberAPIExample.dll ${{ env.TimberApiExamplePackageDir }}/TimberAPIExample/plugins
                 
     - name: Edit TimberAPI Dependency string
       run: sed -i 's/VERSION/${{ steps.get_version.outputs.RELEASE_VERSION }}/' ${{ env.TimberApiExamplePackageDir }}/manifest.json
@@ -133,6 +133,6 @@ jobs:
     - name: Upload TimberAPIExample Thunderstore Build Artifact
       uses: actions/upload-artifact@v3.0.0
       with:
-        name: TimberAPIExampleThunderstorePackage
+        name: TimberAPIExample
         path: ${{ env.TimberApiExamplePackageDir }}
       
