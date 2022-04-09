@@ -21,5 +21,14 @@ namespace TimberbornAPI.DependencySystem
         /// <param name="configurators">The configurators to inject, which do the binding</param>
         /// <param name="entryPoint">Scene to bind to, defaults to InGame</param>
         void AddConfigurators(List<IConfigurator> configurators, SceneEntryPoint entryPoint = SceneEntryPoint.InGame);
+
+        /// <summary>
+        /// Install a Configurator into the InGame scene before anything else to allow dependency injection
+        /// Use only if you need to - e.g. before objects are loaded
+        /// The class must implement IConfigurator and can use Bind<>() to inject dependencies
+        /// </summary>
+        /// <param name="configurator">The configurator class to inject, which does the binding</param>
+        /// <param name="entryPoint">Scene to bind to, defaults to InGame</param>
+        void AddConfiguratorBeforeLoad(IConfigurator configurator, SceneEntryPoint entryPoint = SceneEntryPoint.InGame);
     }
 }

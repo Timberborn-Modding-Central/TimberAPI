@@ -2,6 +2,7 @@
 using TimberbornAPI.ContainerSystem;
 using TimberbornAPI.DependencySystem;
 using TimberbornAPI.LocalizationSystem;
+using TimberbornAPI.CustomObjectSystem;
 
 namespace TimberbornAPI
 {
@@ -14,6 +15,12 @@ namespace TimberbornAPI
         /// APIs for dependency injection and management
         /// </summary>
         public static IDependencyRegistry DependencyRegistry = new DependencyRegistry();
+      
+        /// <summary>
+        /// APIs for better integration between dependency injection and harmony
+        /// Able to access all loaded dependency classes with a static instance
+        /// </summary>
+        public static IContainer DependencyContainer = new ContainerHolder();
 
         /// <summary>
         /// APIs for localization and language files
@@ -26,9 +33,8 @@ namespace TimberbornAPI
         public static IAssetRegistry AssetRegistry = new AssetRegistry();
 
         /// <summary>
-        /// APIs for better integration between dependency injection and harmony
-        /// Able to access all loaded dependency classes with a static instance
+        /// APIs to add Objects to be loaded by the game
         /// </summary>
-        public static IContainer DependencyContainer = new ContainerHolder();
+        public static ICustomObjectRegistry CustomObjectRegistry = new CustomObjectRegistry();
     }
 }
