@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
 using Timberborn.Common;
+using static TimberbornAPI.Internal.TimberAPIPlugin;
 
 namespace TimberbornAPI.LocalizationSystem
 {
@@ -69,10 +70,11 @@ namespace TimberbornAPI.LocalizationSystem
                 try
                 {
                     __result.AddRange(localization);
+                    Log.LogInfo($"Loaded {localization.Count} custom labels");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    Log.LogError(e);
                     throw;
                 }
             }

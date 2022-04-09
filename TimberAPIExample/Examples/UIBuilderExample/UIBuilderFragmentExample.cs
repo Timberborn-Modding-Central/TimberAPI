@@ -5,6 +5,7 @@ using TimberbornAPI.UIBuilderSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
+using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.UIBuilderExample
 {
@@ -76,13 +77,13 @@ namespace TimberAPIExample.Examples.UIBuilderExample
         private void OnFirstToggleValueChange(bool value)
         {
             // Do some action when toggle changed value
-            TimberAPIExamplePlugin.Log.LogFatal("New first toggle value:" + value);
+            Log.LogInfo("New first toggle value:" + value);
         }
 
         private void OnSecondToggleValueChange(bool value)
         {
             // Do some action when toggle changed value
-            TimberAPIExamplePlugin.Log.LogFatal("New second toggle value:" + value);
+            Log.LogInfo("New second toggle value:" + value);
         }
     }
 }

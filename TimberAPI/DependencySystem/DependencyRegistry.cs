@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Bindito.Core;
 using HarmonyLib;
-using Timberborn.EntitySystem;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
 using Timberborn.MasterScene;
 using TimberbornAPI.Common;
-using UnityEngine;
+using static TimberbornAPI.Internal.TimberAPIPlugin;
 
 namespace TimberbornAPI.DependencySystem
 {
@@ -97,7 +95,6 @@ namespace TimberbornAPI.DependencySystem
             InstallAll(containerDefinition, SceneEntryPoint.MapEditor, false);
         }
 
-        [SuppressMessage("", "Harmony003")]
         private static void InstallAll(IContainerDefinition containerDefinition, SceneEntryPoint entryPoint, bool first)
         {
             Dictionary<SceneEntryPoint, List<IConfigurator>> configuratorsByEntryPoint =
@@ -108,7 +105,7 @@ namespace TimberbornAPI.DependencySystem
             {
                 containerDefinition.Install(configurator);
             }
-            Debug.Log($"Initialized configurators for {entryPoint.ToString()} ({(first ? "First" : "Last")})");
+            Log.LogInfo($"Initialized configurators for {entryPoint} ({(first ? "First" : "Last")})");
         }
     }
 }

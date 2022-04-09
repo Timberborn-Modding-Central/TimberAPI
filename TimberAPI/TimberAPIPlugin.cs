@@ -17,17 +17,20 @@ namespace TimberbornAPI.Internal
     public class TimberAPIPlugin : BaseUnityPlugin
     {
         public static string Guid = "com.timberapi.timberapi";
-        
+
+        internal static ManualLogSource Log;
+
         public void Awake()
         {
-            var harmony = new Harmony("com.timberapi.plugin");
-            harmony.PatchAll();
+            Log = Logger;
+
+            new Harmony("com.timberapi.plugin").PatchAll();
 
             InstallConfigurators();
             
-            TimberAPI.AssetRegistry.AddSceneAssets("timberApi", SceneEntryPoint.Global, new []{ "assets" });
+            TimberAPI.AssetRegistry.AddSceneAssets("timberApi", SceneEntryPoint.Global);
             
-            Logger.LogInfo("TimberAPI is loaded!");
+            Log.LogInfo("TimberAPI is loaded!");
         }
 
         /// <summary>

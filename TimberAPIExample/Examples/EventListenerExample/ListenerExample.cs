@@ -1,11 +1,10 @@
-﻿using System;
-using Timberborn.FactionSystem;
+﻿using Timberborn.FactionSystem;
 using Timberborn.SingletonSystem;
 using Timberborn.TimeSystem;
 using Timberborn.ToolSystem;
 using Timberborn.WeatherSystem;
 using TimberbornAPI.EventSystem;
-using UnityEngine;
+using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.EventListenerExample
 {
@@ -21,44 +20,44 @@ namespace TimberAPIExample.Examples.EventListenerExample
         {
             if (toolGroupEnteredEvent.ToolGroup != null)
             {
-                Debug.Log("Tool Group: " + toolGroupEnteredEvent.ToolGroup.DisplayNameLocKey);
+                Log.LogInfo("Tool Group: " + toolGroupEnteredEvent.ToolGroup.DisplayNameLocKey);
             }
         }
 
         [OnEvent]
         public void OnToolEntered(ToolEnteredEvent toolEnteredEvent)
         {
-            Debug.Log("ToolEnteredEvent");
+            Log.LogInfo("ToolEnteredEvent");
         }
 
         [OnEvent]
         public void OnNighttimeStartEvent(NighttimeStartEvent nighttimeStartEvent)
         {
-            Debug.Log("NighttimeStartEvent");
+            Log.LogInfo("NighttimeStartEvent");
         }
 
         [OnEvent]
         public void OnDaytimeStartEvent(DaytimeStartEvent daytimeStartEvent)
         {
-            Debug.Log("DaytimeStartEvent");
+            Log.LogInfo("DaytimeStartEvent");
         }
 
         [OnEvent]
         public void OnFactionUnlocked(FactionUnlockedEvent factionUnlockedEvent)
         {
-            Debug.Log("FactionUnlockedEvent");
+            Log.LogInfo("FactionUnlockedEvent");
         }
 
         [OnEvent]
         public void OnDroughtStarted(DroughtStartedEvent droughtStartedEvent)
         {
-            Debug.Log("DroughtStartedEvent");
+            Log.LogInfo("DroughtStartedEvent");
         }
 
         [OnEvent]
         public void OnDroughtEnded(DroughtEndedEvent droughtEndedEvent)
         {
-            Debug.Log("DroughtEndedEvent");
+            Log.LogInfo("DroughtEndedEvent");
         }
     }
 }

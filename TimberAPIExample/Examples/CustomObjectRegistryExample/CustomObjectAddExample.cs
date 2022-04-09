@@ -1,12 +1,12 @@
 ﻿using System;
 using Timberborn.AssetSystem;
-using Timberborn.FactionSystem;
-using Timberborn.FactionSystemGame;
 using Timberborn.SingletonSystem;
 using TimberbornAPI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.LocalizationSystem;
 using UnityEngine;
+using static TimberAPIExample.TimberAPIExamplePlugin;
+
 
 namespace TimberAPIExample.Examples.CustomObjectRegistryExample
 {
@@ -27,7 +27,7 @@ namespace TimberAPIExample.Examples.CustomObjectRegistryExample
             // Load the Building with Prefab (use Thunderkit to make a bundle)
             // AssetLoader is part of TimberAPI
             GameObject customObject = _assetLoader.Load<GameObject>("TimberAPIExample/testprefab.bundle/testprefab");
-            Debug.Log("Loaded Building: " + customObject.name);
+            Log.LogInfo("Loaded Building: " + customObject.name);
             // Let TimberAPI load labels for you - just add to lang/<enUS>.txt
             customObject.AddComponent<BasicLabeledPrefab>();
 

@@ -1,5 +1,5 @@
-using System;
 using Timberborn.ToolSystem;
+using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.AssetLoaderExample
 {
@@ -7,12 +7,12 @@ namespace TimberAPIExample.Examples.AssetLoaderExample
     {
         public override void Enter()
         {
-            Console.WriteLine("Selected");
+            Log.LogInfo("Selected");
         }
 
         public override void Exit()
         {
-            Console.WriteLine("Deselected");
+            Log.LogInfo("Deselected");
         }
     }
 }
