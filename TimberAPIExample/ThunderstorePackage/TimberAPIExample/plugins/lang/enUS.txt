@@ -42,3 +42,6 @@ preview.listview.custom,Custom listview
 preview.textfields.ingame,Normal ingame textfield
 preview.textfields.ingame.multi,Normal ingame textfield multiple lines
 preview.textfields.ingame.color,Custom color textfield
+Entitylink.StartLinkingTitle,Entitylinker
+Entitylink.StartLinkingTip,Pick an entity to link to the building.
+Entitylink.StartLink,New Link
