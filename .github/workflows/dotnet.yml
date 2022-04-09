@@ -58,14 +58,6 @@ jobs:
         name: TimberAPINugetPackage
         path: ${{env.TimberApiNugetPath}}/*.nupkg
       
-    - name: Foo1
-      if: github.event.inputs.DoPrerelease == 'true'
-      run: echo 'Foo1'
-      
-    - name: Foo2
-      if: github.event.inputs.DoPrerelease != 'true'
-      run: echo 'Foo2 ${{github.event.inputs.DoPrerelease}}'
-      
     - name: Push NuGet Package
       if: github.event.inputs.DoPrerelease != 'true'
       run: dotnet nuget push ${{env.TimberApiNugetPath}}/*.nupkg -k ${{ github.event.inputs.NugetKey }} -s https://api.nuget.org/v3/index.json
