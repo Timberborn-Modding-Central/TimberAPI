@@ -6,6 +6,7 @@ on:
       DoPrerelease:
         description: 'Do a prerelease. If checked, does not push to NuGet.'
         required: true
+        default: 'true'
         type: boolean
       PrereleaseSuffix:
         description: 'The suffix to add to the version number if a prerelease is done. (eg "alpha", "beta", "rc.1" etc)'
