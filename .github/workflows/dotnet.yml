@@ -68,7 +68,7 @@ jobs:
       
     - name: Push NuGet Package
       if: github.event.inputs.DoPrerelease != 'true'
-      run: dotnet nuget push ${{env.TimberApiNugetPath}}/*.nupkg -k ${{ github.event.inputs.NugetKey }}
+      run: dotnet nuget push ${{env.TimberApiNugetPath}}/*.nupkg -k ${{ github.event.inputs.NugetKey }} -s https://api.nuget.org/v3/index.json
  
   CreateTimberAPIThunderstorePack:
     runs-on: ubuntu-latest
