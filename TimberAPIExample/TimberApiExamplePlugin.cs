@@ -16,6 +16,7 @@ using TimberAPIExample.Examples.EntityActionExample;
 using TimberAPIExample.Examples.AssetLoaderExample;
 using TimberAPIExample.Examples.UIBuilderExample;
 using TimberAPIExample.Examples.CustomObjectRegistryExample;
+using TimberAPIExample.Examples.EventListenerExample;
 
 namespace TimberAPIExample
 {
@@ -34,18 +35,18 @@ namespace TimberAPIExample
         {
             // Saves the logger instance
             Log = Logger;
-            // Register our configurator
+
+            // DependencyRegistry
+            // This is the heart of TimberAPI. Use Configurators to tell the game that your codes exists
             TimberAPI.DependencyRegistry.AddConfigurator(new ExampleConfigurator());
-            // Add a label to localization
-            TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
-            
-            // Harmony patches
-            new Harmony("com.timberapi.examples").PatchAll();
-            
-            // Adds in game assets with the prefix TimberAPIExample, default folder is assets
+
+            // AssetRegistry
+            // Adds in game assets with a prefix of TimberAPIExample, default folder is assets
             TimberAPI.AssetRegistry.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame);
-            // Alternatively, add in game assets with prefix TimberAPIExample with custom location > assets > ingame.
-            // TimberAPI.AssetLoaderSystem.AddSceneAssets("TimberAPIExample", SceneEntryPoint.InGame, new []{ "assets", "ingame" });
+
+            // Localization
+            // Add a label to localization directly. Alternatively, use lang files (enUS.txt)
+            TimberAPI.Localization.AddLabel("ExampleMod.ToolGroups.ExampleToolGroup", "Example Label");
 
             // Bind all the other configurators we use in examples.
             // These could all live in one Configurator, but we use multiple for readability
@@ -57,24 +58,19 @@ namespace TimberAPIExample
                 new EntityActionExampleConfigurator()
             });
 
+            // CustomObjectRegistry
             // Load this before anything else is bound
             TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new CustomObjectExampleConfigurator());
+
+            // Harmony patches
+            new Harmony("com.timberapi.examples").PatchAll();
 
             Logger.LogInfo("TimberAPIExample is loaded!");
         }
     }
 
     /**
-     * Example use of localization label in a ToolGroup
-     */
-    public class ExampleToolGroup : ToolGroup
-    {
-        public override string IconName => "PriorityToolGroupIcon";
-
-        public override string DisplayNameLocKey => "ExampleMod.ToolGroups.ExampleToolGroup";
-    }
-
-    /**
+     * DependencyRegistry
      * Example IConfigurator for dependency injection
      * 1. Use Bind to inject the class, and 2. Add it via TimberAPI.Dependencies.AddConfigurator
      */
@@ -83,59 +79,6 @@ namespace TimberAPIExample
         public void Configure(IContainerDefinition containerDefinition)
         {
             containerDefinition.Bind<ExampleListener>().AsSingleton();
-        }
-    }
-
-    /**
-     * Example listener class. Can listen to any event with [OnEvent]
-     * It automatically registers, but must be bound with an IConfigurator
-     * This is not comprehensive of all events, but you can use it with any.
-     */
-    public class ExampleListener : EventListener
-    {
-        [OnEvent]
-        public void OnToolGroupEntered(ToolGroupEnteredEvent toolGroupEnteredEvent)
-        {
-            if (toolGroupEnteredEvent.ToolGroup != null)
-            {
-                Debug.Log("Tool Group: " + toolGroupEnteredEvent.ToolGroup.DisplayNameLocKey);
-            }
-        }
-
-        [OnEvent]
-        public void OnToolEntered(ToolEnteredEvent toolEnteredEvent)
-        {
-            Debug.Log("ToolEnteredEvent");
-        }
-
-        [OnEvent]
-        public void OnNighttimeStartEvent(NighttimeStartEvent nighttimeStartEvent)
-        {
-            Debug.Log("NighttimeStartEvent");
-        }
-
-        [OnEvent]
-        public void OnDaytimeStartEvent(DaytimeStartEvent daytimeStartEvent)
-        {
-            Debug.Log("DaytimeStartEvent");
-        }
-
-        [OnEvent]
-        public void OnFactionUnlocked(FactionUnlockedEvent factionUnlockedEvent)
-        {
-            Debug.Log("FactionUnlockedEvent");
-        }
-
-        [OnEvent]
-        public void OnDroughtStarted(DroughtStartedEvent droughtStartedEvent)
-        {
-            Debug.Log("DroughtStartedEvent");
-        }
-
-        [OnEvent]
-        public void OnDroughtEnded(DroughtEndedEvent droughtEndedEvent)
-        {
-            Debug.Log("DroughtEndedEvent");
         }
     }
 }
