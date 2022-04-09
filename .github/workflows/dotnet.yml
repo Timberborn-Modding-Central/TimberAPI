@@ -3,10 +3,6 @@ name: Build and Publish TimberAPI packs
 on: 
   workflow_dispatch:
     inputs:
-      NugetKey:
-        description: 'The API key used to push the NuGet package'
-        required: true
-        type: string
       DoPrerelease:
         description: 'Do a prerelease. If checked, does not push to NuGet.'
         required: true
@@ -60,7 +56,7 @@ jobs:
       
     - name: Push NuGet Package
       if: github.event.inputs.DoPrerelease != 'true'
-      run: dotnet nuget push ${{env.TimberApiNugetPath}}/*.nupkg -k ${{ github.event.inputs.NugetKey }} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ${{env.TimberApiNugetPath}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
  
   CreateTimberAPIThunderstorePack:
     runs-on: ubuntu-latest
