@@ -16,8 +16,8 @@ namespace TimberAPIExample.Examples.EntityActionExample
             RangeEnterableHighlighter highlighter = entity.GetComponent<RangeEnterableHighlighter>();
             if (highlighter == null)
                 return;
-            // Changes the color of the Monument building heighlight to green
-            highlighter._colors.BuildingInRange = Color.green;
+            // Changes the color of the Monument building heighlight to yellow
+            highlighter._colors.BuildingInRange = Color.yellow;
         }
     }
 }
