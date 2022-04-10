@@ -11,6 +11,7 @@ using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
 using TimberbornAPI.EntityLinkerSystem;
 using Timberborn.Warehouses;
+using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample.UI
 {
@@ -149,9 +150,9 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.UI
                 };
                 view.Q<Button>("RemoveLinkButton").clicked += delegate
                 {
-                    Console.WriteLine($"link: {link}");
-                    Console.WriteLine($"linker: {link.Linker}");
-                    Console.WriteLine($"linkee: {link.Linkee}");
+                    Log.LogInfo($"link: {link}");
+                    Log.LogInfo($"linker: {link.Linker}");
+                    Log.LogInfo($"linkee: {link.Linkee}");
                     link.Linker.DeleteLink(link);
                     ResetLinks();
                 };

@@ -1,15 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-using Timberborn.ToolPanelSystem;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.Common;
 using TimberbornAPI.CustomObjectSystem;
-using TimberbornAPI.DependencySystem;
 using TimberbornAPI.EntityActionSystem;
 using TimberbornAPI.EntityLinkerSystem;
 using TimberbornAPI.UIBuilderSystem;
-using UnityEngine;
 
 namespace TimberbornAPI.Internal
 {
@@ -41,11 +38,13 @@ namespace TimberbornAPI.Internal
             TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new AssetConfigurator(), SceneEntryPoint.Global);
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
             
-            TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator());
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
 
-            TimberAPI.DependencyRegistry.AddConfigurator(new EntityLinkerConfigurator(), SceneEntryPoint.InGame);
-            TimberAPI.DependencyRegistry.AddConfigurator(new ObjectCollectionSystemConfigurator());
+            TimberAPI.DependencyRegistry.AddConfigurators(new() {
+                new EntityActionConfigurator(),
+                new EntityLinkerConfigurator(),
+                new ObjectCollectionSystemConfigurator()
+            }, SceneEntryPoint.InGame);
         }
     }
 }
