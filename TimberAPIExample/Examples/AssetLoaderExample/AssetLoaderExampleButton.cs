@@ -26,8 +26,8 @@ namespace TimberAPIExample.Examples.AssetLoaderExample
         public BottomBarElement GetElement()
         {
             return BottomBarElement
-                .CreateSingleLevel(this._toolButtonFactory
-                .CreateGrouplessGreen((Tool)this._assetLoaderExampleTool,
+                .CreateSingleLevel(_toolButtonFactory
+                .CreateGrouplessGreen(_assetLoaderExampleTool,
                     // Use the asset loader to load a sprite named present which is located in the icon file
                     _assetLoader.Load<Sprite>("TimberAPIExample/icons/present"))
                 .Root);

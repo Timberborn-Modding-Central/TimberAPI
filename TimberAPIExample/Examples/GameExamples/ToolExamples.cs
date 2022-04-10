@@ -1,5 +1,4 @@
-﻿using System;
-using Timberborn.ToolSystem;
+﻿using Timberborn.ToolSystem;
 
 /**
  * This is for any other code that isn't TimberAPI, but you can 

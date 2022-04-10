@@ -12,7 +12,7 @@ namespace TimberAPIExample.Examples.EntityActionExample
         [Inject]
         public void InjectDependencies(ILoc loc)
         {
-            this._loc = loc;
+            _loc = loc;
         }
 
         private void Start()

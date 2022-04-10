@@ -54,7 +54,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample
             // Creating on click events for the buttons, using the name that is used with creating the button.
             _root.Q<Toggle>("firstToggle").RegisterValueChangedCallback(value => OnFirstToggleValueChange(value.newValue)); // name: firstButton
             _root.Q<Toggle>("secondToggle").RegisterValueChangedCallback(value => OnSecondToggleValueChange(value.newValue)); // name: firstButton
-            this._root.ToggleDisplayStyle(false);
+            _root.ToggleDisplayStyle(false);
             return _root;
         }
 
@@ -71,7 +71,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample
 
         public void UpdateFragment()
         {
-            this._root.ToggleDisplayStyle(true);
+            _root.ToggleDisplayStyle(true);
         }
 
         private void OnFirstToggleValueChange(bool value)

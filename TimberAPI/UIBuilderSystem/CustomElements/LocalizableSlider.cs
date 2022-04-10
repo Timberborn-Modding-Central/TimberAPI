@@ -21,7 +21,7 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
         {
             if(_textLocKey == null)
                 return;
-            this.label = loc.T(this._textLocKey);
+            label = loc.T(_textLocKey);
         }
     }
 }

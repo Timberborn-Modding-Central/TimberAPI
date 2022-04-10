@@ -1,5 +1,4 @@
-﻿using System;
-using Timberborn.AssetSystem;
+﻿using Timberborn.AssetSystem;
 using Timberborn.SingletonSystem;
 using TimberbornAPI;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;

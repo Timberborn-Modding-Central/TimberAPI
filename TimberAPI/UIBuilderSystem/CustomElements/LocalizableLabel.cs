@@ -23,7 +23,7 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
         public LocalizableLabel()
         {
             Delegate[] invocationList = generateVisualContent.GetInvocationList();
-            generateVisualContent = generateVisualContent + OnGenerateVisualContent;
+            generateVisualContent += OnGenerateVisualContent;
             foreach (Delegate b in invocationList)
             {
                 generateVisualContent = (Action<MeshGenerationContext>)Delegate.Remove(generateVisualContent, b);
@@ -36,7 +36,7 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
         {
             if(_textLocKey == null)
                 return;
-            this.text = loc.T(this._textLocKey);
+            text = loc.T(_textLocKey);
         }
 
         private void OnCustomStyleResolved(CustomStyleResolvedEvent e) => _nineSliceBackground.GetDataFromStyle(customStyle);

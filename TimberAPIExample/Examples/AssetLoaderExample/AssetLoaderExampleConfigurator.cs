@@ -1,6 +1,5 @@
 using Bindito.Core;
 using Timberborn.BottomBarSystem;
-using TimberbornAPI.DependencySystem;
 
 namespace TimberAPIExample.Examples.AssetLoaderExample
 {
@@ -17,12 +16,12 @@ namespace TimberAPIExample.Examples.AssetLoaderExample
         {
             private readonly AssetLoaderExampleButton _assetLoaderExampleButton;
 
-            public BottomBarModuleProvider(AssetLoaderExampleButton assetLoaderExampleButton) => this._assetLoaderExampleButton = assetLoaderExampleButton;
+            public BottomBarModuleProvider(AssetLoaderExampleButton assetLoaderExampleButton) => _assetLoaderExampleButton = assetLoaderExampleButton;
 
             public BottomBarModule Get()
             {
-                BottomBarModule.Builder builder = new BottomBarModule.Builder();
-                builder.AddRightSectionElement((IBottomBarElementProvider)this._assetLoaderExampleButton);
+                BottomBarModule.Builder builder = new();
+                builder.AddRightSectionElement(_assetLoaderExampleButton);
                 return builder.Build();
             }
         }

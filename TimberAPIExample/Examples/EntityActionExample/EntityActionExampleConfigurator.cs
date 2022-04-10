@@ -1,5 +1,4 @@
 using Bindito.Core;
-using TimberbornAPI.DependencySystem;
 using TimberbornAPI.EntityActionSystem;
 
 namespace TimberAPIExample.Examples.EntityActionExample
