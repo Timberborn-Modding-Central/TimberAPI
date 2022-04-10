@@ -8,6 +8,7 @@ using TimberbornAPI.Common;
 using TimberAPIExample.Examples.EntityActionExample;
 using TimberAPIExample.Examples.AssetLoaderExample;
 using TimberAPIExample.Examples.UIBuilderExample;
+using TimberAPIExample.Examples.EntityLinkerExample;
 using TimberAPIExample.Examples.CustomObjectRegistryExample;
 using TimberAPIExample.Examples.EventListenerExample;
 
@@ -48,7 +49,8 @@ namespace TimberAPIExample
             {
                 new AssetLoaderExampleConfigurator(),
                 new UIBuilderFragmentConfigurator(),
-                new EntityActionExampleConfigurator()
+                new EntityActionExampleConfigurator(),
+                new EntityLinkerExampleConfigurator()
             });
 
             // CustomObjectRegistry
