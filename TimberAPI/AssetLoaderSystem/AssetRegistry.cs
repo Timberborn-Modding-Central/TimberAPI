@@ -15,24 +15,22 @@ namespace TimberbornAPI.AssetLoaderSystem
     {
         internal static SceneEntryPoint ActiveScene = SceneEntryPoint.Global;
 
-        internal static PluginRepository PluginRepository = new PluginRepository();
+        internal static PluginRepository PluginRepository = new();
+
+        public void AddSceneAssets(string prefix)
+        {
+            AddSceneAssets(prefix, SceneEntryPoint.InGame);
+        }
+
+        public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint)
+        {
+            AddSceneAssets(prefix, assetEntryPoint, new[] { "assets" });
+        }
 
         public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint, string[] assetLocation)
         {
             Log.LogInfo($"Creating new asset area with prefix: {prefix}");
             CreateNewPluginAsset(prefix, assetLocation, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
-        }
-
-        public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint)
-        {
-            Log.LogInfo($"Creating new asset area with prefix: {prefix}");
-            CreateNewPluginAsset(prefix, new[] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
-        }
-
-        public void AddSceneAssets(string prefix)
-        {
-            Log.LogInfo($"Creating new asset area with prefix: {prefix}");
-            CreateNewPluginAsset(prefix, new[] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), SceneEntryPoint.InGame);
         }
 
         public void LoadSceneAssets(SceneEntryPoint scene)
