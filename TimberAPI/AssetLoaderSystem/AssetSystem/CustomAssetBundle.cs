@@ -39,7 +39,7 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
             {
                 if (_plugin.LoadingScene == SceneEntryPoint.Global)
                     return;
-                Log.LogError($"Asset: {FileName} was already loaded.");
+                Log.LogWarning($"Asset: {FileName} was already loaded.");
                 return;
             }
 
@@ -55,7 +55,7 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
         {
             if (!IsBundleLoaded || AssetBundle == null)
             {
-                Log.LogError($"Asset: {FileName} was already unloaded.");
+                Log.LogWarning($"Asset: {FileName} was already unloaded.");
                 return;
             }
 

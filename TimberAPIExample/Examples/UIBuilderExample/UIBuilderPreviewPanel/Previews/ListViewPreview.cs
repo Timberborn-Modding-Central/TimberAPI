@@ -135,7 +135,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 if (itemObject is not CustomSourceExample item) 
                     return;
             
-                Log.LogFatal(item.Text);
+                Log.LogInfo(item.Text);
             }
 
         }
