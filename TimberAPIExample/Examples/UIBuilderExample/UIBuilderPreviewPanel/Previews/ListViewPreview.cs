@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using TimberbornAPI.Common;
 using TimberbornAPI.UIBuilderSystem;
 using TimberbornAPI.UIBuilderSystem.ElementSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
+using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previews
 {
@@ -34,14 +34,14 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
         /// </summary>
         private static readonly List<CustomSourceExample> _list = new ()
         {
-            new CustomSourceExample("Example Item 1", UnityEngine.Color.blue), 
-            new CustomSourceExample("Example Item 2", UnityEngine.Color.cyan), 
-            new CustomSourceExample("Example Item 3", UnityEngine.Color.gray),
-            new CustomSourceExample("Example Item 4", UnityEngine.Color.green),
-            new CustomSourceExample("Example Item 5", UnityEngine.Color.magenta),
-            new CustomSourceExample("Example Item 6", UnityEngine.Color.white),
-            new CustomSourceExample("Example Item 7", UnityEngine.Color.yellow),
-            new CustomSourceExample("Example Item 8", UnityEngine.Color.red),
+            new CustomSourceExample("Example Item 1", Color.blue), 
+            new CustomSourceExample("Example Item 2", Color.cyan), 
+            new CustomSourceExample("Example Item 3", Color.gray),
+            new CustomSourceExample("Example Item 4", Color.green),
+            new CustomSourceExample("Example Item 5", Color.magenta),
+            new CustomSourceExample("Example Item 6", Color.white),
+            new CustomSourceExample("Example Item 7", Color.yellow),
+            new CustomSourceExample("Example Item 8", Color.red),
         };
 
         public ListViewPreview(UIBuilder uiBuilder)
@@ -135,7 +135,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previ
                 if (itemObject is not CustomSourceExample item) 
                     return;
             
-                TimberAPIExamplePlugin.Log.LogFatal(item.Text);
+                Log.LogInfo(item.Text);
             }
 
         }

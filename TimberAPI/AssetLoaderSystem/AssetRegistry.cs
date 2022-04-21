@@ -7,6 +7,7 @@ using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.AssetLoaderSystem.Exceptions;
 using TimberbornAPI.AssetLoaderSystem.PluginSystem;
 using TimberbornAPI.Common;
+using static TimberbornAPI.Internal.TimberAPIPlugin;
 
 namespace TimberbornAPI.AssetLoaderSystem
 {
@@ -14,29 +15,27 @@ namespace TimberbornAPI.AssetLoaderSystem
     {
         internal static SceneEntryPoint ActiveScene = SceneEntryPoint.Global;
 
-        internal static PluginRepository PluginRepository = new PluginRepository();
+        internal static PluginRepository PluginRepository = new();
 
-        public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint, string[] assetLocation)
+        public void AddSceneAssets(string prefix)
         {
-            Console.WriteLine($"Creating new asset area with prefix: {prefix}");
-            CreateNewPluginAsset(prefix, assetLocation, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
+            AddSceneAssets(prefix, SceneEntryPoint.InGame);
         }
 
         public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint)
         {
-            Console.WriteLine($"Creating new asset area with prefix: {prefix}");
-            CreateNewPluginAsset(prefix, new[] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
+            AddSceneAssets(prefix, assetEntryPoint, new[] { "assets" });
         }
 
-        public void AddSceneAssets(string prefix)
+        public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint, string[] assetLocation)
         {
-            Console.WriteLine($"Creating new asset area with prefix: {prefix}");
-            CreateNewPluginAsset(prefix, new[] { "assets" }, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), SceneEntryPoint.InGame);
+            Log.LogInfo($"Creating new asset area with prefix: {prefix}");
+            CreateNewPluginAsset(prefix, assetLocation, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
         }
 
         public void LoadSceneAssets(SceneEntryPoint scene)
         {
-            Console.WriteLine($"Loading scene: {scene}, prefixes in scene: {string.Join(",", PluginRepository.All().Where(plugin => plugin.LoadingScene == scene).Select(plugin => plugin.Prefix))}");
+            Log.LogInfo($"Loading scene: {scene}, prefixes in scene: {string.Join(",", PluginRepository.All().Where(plugin => plugin.LoadingScene == scene).Select(plugin => plugin.Prefix))}");
             ActiveScene = scene;
             foreach (Plugin plugin in PluginRepository.All().Where(plugin => plugin.LoadingScene == scene))
             {
@@ -46,7 +45,7 @@ namespace TimberbornAPI.AssetLoaderSystem
 
         public void UnloadSceneAssets(SceneEntryPoint scene)
         {
-            Console.WriteLine($"Unloading scene: {scene}");
+            Log.LogInfo($"Unloading scene: {scene}");
             foreach (Plugin plugin in PluginRepository.All().Where(plugin => plugin.LoadingScene == scene))
             {
                 plugin.AssetRepository.UnloadAll();
@@ -57,7 +56,7 @@ namespace TimberbornAPI.AssetLoaderSystem
         {
             if (assemblyFolder == null || string.IsNullOrEmpty(assemblyFolder))
             {
-                Console.WriteLine($"Failed to load assets with the prefix {prefix}. dll location was not found");
+                Log.LogError($"Failed to load assets with the prefix {prefix}. dll location was not found");
                 return;
             }
 
@@ -71,21 +70,21 @@ namespace TimberbornAPI.AssetLoaderSystem
                 }
 
                 PluginRepository.Add(plugin);
-                Console.WriteLine($"Prefix {plugin.Prefix}, assets: {plugin.AssetRepository.All().Count()}");
+                Log.LogInfo($"Prefix {plugin.Prefix}, assets: {plugin.AssetRepository.All().Count()}");
             }
             catch (DirectoryNotFoundException e)
             {
-                Console.WriteLine($"Failed to load assets for prefix: {prefix}");
-                Console.WriteLine(e.Message);
+                Log.LogError($"Failed to load assets for prefix: {prefix}");
+                Log.LogError(e.Message);
             }
             catch (PluginPrefixInUseException e)
             {
-                Console.WriteLine($"Failed to load prefix {e.Plugin.Prefix}, prefix is already in use.");
+                Log.LogInfo($"Failed to load prefix {e.Plugin.Prefix}, prefix is already in use.");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Something went wrong please contact the mod owner.");
-                Console.WriteLine(e.Message);
+                Log.LogError($"Something went wrong please contact the mod owner.");
+                Log.LogError(e.Message);
                 throw;
             }
         }

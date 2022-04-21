@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using Timberborn.Localization;
 using UnityEngine.UIElements;
@@ -23,31 +22,31 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
 
         public LocalizableToggle()
         {
-            Delegate[] delegateArray = this.generateVisualContent?.GetInvocationList() ?? new Delegate[0];
-            this.generateVisualContent = this.generateVisualContent + new Action<MeshGenerationContext>(this.OnGenerateVisualContent);
+            Delegate[] delegateArray = generateVisualContent?.GetInvocationList() ?? new Delegate[0];
+            generateVisualContent += new Action<MeshGenerationContext>(OnGenerateVisualContent);
             foreach (Delegate b in delegateArray)
             {
-                this.generateVisualContent = (Action<MeshGenerationContext>)Delegate.Remove((Delegate)this.generateVisualContent, b);
-                this.generateVisualContent = (Action<MeshGenerationContext>)Delegate.Combine((Delegate)this.generateVisualContent, b);
+                generateVisualContent = (Action<MeshGenerationContext>)Delegate.Remove(generateVisualContent, b);
+                generateVisualContent = (Action<MeshGenerationContext>)Delegate.Combine(generateVisualContent, b);
             }
-            this.RegisterCallback<CustomStyleResolvedEvent>(new EventCallback<CustomStyleResolvedEvent>(this.OnCustomStyleResolved));
+            RegisterCallback(new EventCallback<CustomStyleResolvedEvent>(OnCustomStyleResolved));
         }
 
         public void Localize(ILoc loc)
         {
             if(_textLocKey == null)
                 return;
-            this.text = loc.T(this._textLocKey);
+            text = loc.T(_textLocKey);
         }
 
         #pragma warning disable CS0108, CS0114
-        private void OnCustomStyleResolved(CustomStyleResolvedEvent e) => this._nineSliceBackground.GetDataFromStyle(this.customStyle);
+        private void OnCustomStyleResolved(CustomStyleResolvedEvent e) => _nineSliceBackground.GetDataFromStyle(customStyle);
 
         private void OnGenerateVisualContent(MeshGenerationContext mgc)
         {
-            if (!this._nineSliceBackground.IsNineSlice)
+            if (!_nineSliceBackground.IsNineSlice)
                 return;
-            this._nineSliceBackground.GenerateVisualContent(mgc, this.paddingRect);
+            _nineSliceBackground.GenerateVisualContent(mgc, paddingRect);
         }
     }
 }

@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.EntityActionExample
 {
@@ -7,7 +7,7 @@ namespace TimberAPIExample.Examples.EntityActionExample
     {
         private void Awake()
         {
-            Console.WriteLine("I'm inside a district centre :D");
+            Log.LogInfo("I'm inside a district centre :D");
         }
     }
 }

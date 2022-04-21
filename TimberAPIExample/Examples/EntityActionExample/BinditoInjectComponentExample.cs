@@ -1,11 +1,6 @@
 using System;
 using Bindito.Core;
-using Timberborn.ConstructibleSystem;
-using Timberborn.Goods;
-using Timberborn.InventorySystem;
 using Timberborn.Localization;
-using Timberborn.Warehouses;
-using TimberbornAPI.Internal;
 using UnityEngine;
 
 namespace TimberAPIExample.Examples.EntityActionExample
@@ -17,7 +12,7 @@ namespace TimberAPIExample.Examples.EntityActionExample
         [Inject]
         public void InjectDependencies(ILoc loc)
         {
-            this._loc = loc;
+            _loc = loc;
         }
 
         private void Start()

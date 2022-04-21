@@ -18,34 +18,34 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
             }
         }
 
-        private readonly NineSliceBackground _nineSliceBackground = new NineSliceBackground();
+        private readonly NineSliceBackground _nineSliceBackground = new();
 
         public LocalizableButton()
         {
-            Delegate[] invocationList = this.generateVisualContent.GetInvocationList();
-            this.generateVisualContent = this.generateVisualContent + new Action<MeshGenerationContext>(this.OnGenerateVisualContent);
+            Delegate[] invocationList = generateVisualContent.GetInvocationList();
+            generateVisualContent += new Action<MeshGenerationContext>(OnGenerateVisualContent);
             foreach (Delegate b in invocationList)
             {
-                this.generateVisualContent = (Action<MeshGenerationContext>)Delegate.Remove((Delegate)this.generateVisualContent, b);
-                this.generateVisualContent = (Action<MeshGenerationContext>)Delegate.Combine((Delegate)this.generateVisualContent, b);
+                generateVisualContent = (Action<MeshGenerationContext>)Delegate.Remove(generateVisualContent, b);
+                generateVisualContent = (Action<MeshGenerationContext>)Delegate.Combine(generateVisualContent, b);
             }
-            this.RegisterCallback<CustomStyleResolvedEvent>(new EventCallback<CustomStyleResolvedEvent>(this.OnCustomStyleResolved));
+            RegisterCallback(new EventCallback<CustomStyleResolvedEvent>(OnCustomStyleResolved));
         }
 
         public void Localize(ILoc loc)
         {
             if(_textLocKey == null)
                 return;
-            this.text = loc.T(this._textLocKey);
+            text = loc.T(_textLocKey);
         }
 
-        private void OnCustomStyleResolved(CustomStyleResolvedEvent e) => this._nineSliceBackground.GetDataFromStyle(this.customStyle);
+        private void OnCustomStyleResolved(CustomStyleResolvedEvent e) => _nineSliceBackground.GetDataFromStyle(customStyle);
 
         private new void OnGenerateVisualContent(MeshGenerationContext mgc)
         {
-            if (!this._nineSliceBackground.IsNineSlice)
+            if (!_nineSliceBackground.IsNineSlice)
                 return;
-            this._nineSliceBackground.GenerateVisualContent(mgc, this.paddingRect);
+            _nineSliceBackground.GenerateVisualContent(mgc, paddingRect);
         }
     }
 }

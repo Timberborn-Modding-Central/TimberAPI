@@ -1,5 +1,4 @@
-﻿using System;
-using Bindito.Core;
+﻿using Bindito.Core;
 
 namespace TimberAPIExample.Examples.CustomObjectRegistryExample
 {

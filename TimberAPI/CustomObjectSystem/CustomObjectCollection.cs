@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Timberborn.AssetSystem;
 using Timberborn.EntitySystem;
 using UnityEngine;
+using static TimberbornAPI.Internal.TimberAPIPlugin;
 
 namespace TimberbornAPI.CustomObjectSystem
 {
@@ -11,7 +10,9 @@ namespace TimberbornAPI.CustomObjectSystem
 
 		public IEnumerable<Object> GetObjects()
 		{
-			return TimberAPI.CustomObjectRegistry.GetAllGameObjects();
+			List<GameObject> objects = TimberAPI.CustomObjectRegistry.GetAllGameObjects();
+			Log.LogInfo($"Loaded {objects.Count} custom objects");
+			return objects;
 		}
 	}
 }

@@ -5,6 +5,7 @@ using TimberbornAPI.UIBuilderSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
+using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.UIBuilderExample
 {
@@ -53,7 +54,7 @@ namespace TimberAPIExample.Examples.UIBuilderExample
             // Creating on click events for the buttons, using the name that is used with creating the button.
             _root.Q<Toggle>("firstToggle").RegisterValueChangedCallback(value => OnFirstToggleValueChange(value.newValue)); // name: firstButton
             _root.Q<Toggle>("secondToggle").RegisterValueChangedCallback(value => OnSecondToggleValueChange(value.newValue)); // name: firstButton
-            this._root.ToggleDisplayStyle(false);
+            _root.ToggleDisplayStyle(false);
             return _root;
         }
 
@@ -70,19 +71,19 @@ namespace TimberAPIExample.Examples.UIBuilderExample
 
         public void UpdateFragment()
         {
-            this._root.ToggleDisplayStyle(true);
+            _root.ToggleDisplayStyle(true);
         }
 
         private void OnFirstToggleValueChange(bool value)
         {
             // Do some action when toggle changed value
-            TimberAPIExamplePlugin.Log.LogFatal("New first toggle value:" + value);
+            Log.LogInfo("New first toggle value:" + value);
         }
 
         private void OnSecondToggleValueChange(bool value)
         {
             // Do some action when toggle changed value
-            TimberAPIExamplePlugin.Log.LogFatal("New second toggle value:" + value);
+            Log.LogInfo("New second toggle value:" + value);
         }
     }
 }

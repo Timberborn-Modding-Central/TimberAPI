@@ -1,5 +1,4 @@
-﻿using System;
-using Timberborn.EntitySystem;
+﻿using Timberborn.EntitySystem;
 
 namespace TimberbornAPI.LocalizationSystem
 {

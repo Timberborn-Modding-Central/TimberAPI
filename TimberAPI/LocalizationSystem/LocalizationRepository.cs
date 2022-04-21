@@ -6,7 +6,7 @@ using BepInEx.Bootstrap;
 using Timberborn.Localization;
 using LINQtoCSV;
 using TimberbornAPI.Internal;
-using UnityEngine;
+using static TimberbornAPI.Internal.TimberAPIPlugin;
 
 namespace TimberbornAPI.LocalizationSystem
 {
@@ -77,7 +77,7 @@ namespace TimberbornAPI.LocalizationSystem
                     message = message + " First error: " + ((List<Exception>)aggregatedException1.m_InnerExceptionsList)[0].Message;
                 if (localization == LocalizationCodes.Default)
                     throw new InvalidDataException(message, ex);
-                Debug.LogError((object)message);
+                Log.LogError((object)message);
                 return new List<LocalizationRecord>();
             }
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using TimberbornAPI.AssetLoaderSystem.Exceptions;
+using static TimberbornAPI.Internal.TimberAPIPlugin;
 
 namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
 {
@@ -18,8 +19,8 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Failed to load asset.");
-                Console.WriteLine(e.StackTrace);
+                Log.LogError($"Failed to load asset.");
+                Log.LogError(e.StackTrace);
                 throw;
             }
         }
@@ -36,8 +37,8 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Failed to load asset.");
-                Console.WriteLine(e.StackTrace);
+                Log.LogError($"Failed to load asset.");
+                Log.LogError(e.StackTrace);
                 throw;
             }
         }
@@ -51,20 +52,20 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
             }
             catch (PrefixNotFoundException e)
             {
-                Console.WriteLine($"Given prefix ({e.Prefix}) was not found. did you load it in the correct scene: {AssetRegistry.ActiveScene}");
-                Console.WriteLine(e.StackTrace);
+                Log.LogError($"Given prefix ({e.Prefix}) was not found. did you load it in the correct scene: {AssetRegistry.ActiveScene}");
+                Log.LogError(e.StackTrace);
                 throw;
             }
             catch (AssetNotFoundException e)
             {
-                Console.WriteLine($"Given asset location was not found.");
-                Console.WriteLine(e.StackTrace);
+                Log.LogError($"Given asset location was not found.");
+                Log.LogError(e.StackTrace);
                 throw;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Something went wrong please contact the mod owner.");
-                Console.WriteLine(e.Message);
+                Log.LogError($"Something went wrong: please contact the mod owner.");
+                Log.LogError(e.Message);
                 throw;
             }
         }
@@ -81,8 +82,8 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Failed to load asset.");
-                Console.WriteLine(e.StackTrace);
+                Log.LogError($"Failed to load asset.");
+                Log.LogError(e.StackTrace);
                 throw;
             }
         }
@@ -98,8 +99,8 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Failed to load asset.");
-                Console.WriteLine(e.StackTrace);
+                Log.LogError($"Failed to load asset.");
+                Log.LogError(e.StackTrace);
                 throw;
             }
         }
@@ -113,20 +114,20 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
             }
             catch (PrefixNotFoundException e)
             {
-                Console.WriteLine($"Given prefix ({e.Prefix}) was not found.");
-                Console.WriteLine(e.StackTrace);
+                Log.LogError($"Given prefix ({e.Prefix}) was not found.");
+                Log.LogError(e.StackTrace);
                 throw;
             }
             catch (AssetNotFoundException e)
             {
-                Console.WriteLine($"Given asset location was not found.");
-                Console.WriteLine(e.StackTrace);
+                Log.LogError($"Given asset location was not found.");
+                Log.LogError(e.StackTrace);
                 throw;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Something went wrong please contact the mod owner.");
-                Console.WriteLine(e.Message);
+                Log.LogError($"Something went wrong please contact the mod owner.");
+                Log.LogError(e.Message);
                 throw;
             }
         }

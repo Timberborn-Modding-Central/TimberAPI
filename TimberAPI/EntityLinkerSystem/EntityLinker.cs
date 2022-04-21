@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Timberborn.ConstructibleSystem;
 using Timberborn.Persistence;
-using TimberbornAPI.Internal;
 using UnityEngine;
+using static TimberbornAPI.Internal.TimberAPIPlugin;
 
 namespace TimberbornAPI.EntityLinkerSystem
 {
@@ -87,7 +87,7 @@ namespace TimberbornAPI.EntityLinkerSystem
         {
             if(linkee == this)
             {
-                TimberAPIPlugin.Log.LogWarning($"Tried to link entity with itself. Stopped linking.");
+                Log.LogWarning($"Tried to link entity with itself. Stopped linking.");
                 return;
             }
             var link = new EntityLink(this, linkee);
