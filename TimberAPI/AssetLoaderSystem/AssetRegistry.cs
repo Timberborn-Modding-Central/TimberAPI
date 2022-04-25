@@ -19,18 +19,22 @@ namespace TimberbornAPI.AssetLoaderSystem
 
         public void AddSceneAssets(string prefix)
         {
-            AddSceneAssets(prefix, SceneEntryPoint.InGame);
+            AddSceneAssets(prefix, SceneEntryPoint.InGame, new[] { "assets" }, Assembly.GetCallingAssembly()?.Location);
         }
 
         public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint)
         {
-            AddSceneAssets(prefix, assetEntryPoint, new[] { "assets" });
+            AddSceneAssets(prefix, assetEntryPoint, new[] { "assets" }, Assembly.GetCallingAssembly()?.Location);
         }
 
         public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint, string[] assetLocation)
         {
+            AddSceneAssets(prefix, assetEntryPoint, assetLocation, Assembly.GetCallingAssembly()?.Location);
+        }
+
+        public void AddSceneAssets(string prefix, SceneEntryPoint assetEntryPoint, string[] assetLocation, string assemblyLocation) {
             Log.LogInfo($"Creating new asset area with prefix: {prefix}");
-            CreateNewPluginAsset(prefix, assetLocation, Path.GetDirectoryName(Assembly.GetCallingAssembly()?.Location), assetEntryPoint);
+            CreateNewPluginAsset(prefix, assetLocation, Path.GetDirectoryName(assemblyLocation), assetEntryPoint);
         }
 
         public void LoadSceneAssets(SceneEntryPoint scene)
@@ -67,6 +71,7 @@ namespace TimberbornAPI.AssetLoaderSystem
                 foreach (string[] relativeAssetPath in relativeAssetPaths)
                 {
                     plugin.AssetRepository.Add(new CustomAssetBundle(plugin, relativeAssetPath.Take(relativeAssetPath.Length - 1).ToArray(), relativeAssetPath.Last()));
+                    Log.LogInfo($"Asset {plugin.Prefix}/{string.Join("/", relativeAssetPath)} found");
                 }
 
                 PluginRepository.Add(plugin);
