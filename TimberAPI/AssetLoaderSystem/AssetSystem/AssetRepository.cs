@@ -22,7 +22,7 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
         {
             CustomAssetBundle bundle = _assetBundles.FirstOrDefault(bundle => bundle.AssetPath.SequenceEqual(path) && bundle.FileName == fileName);
             if (bundle == null)
-                throw new AssetNotFoundException();
+                throw new AssetNotFoundException(fileName);
             return bundle;
         }
 

@@ -58,7 +58,7 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
             }
             catch (AssetNotFoundException e)
             {
-                Log.LogError($"Given asset location was not found.");
+                Log.LogError($"Given asset location ({e.Filename}) was not found.");
                 Log.LogError(e.StackTrace);
                 throw;
             }
@@ -120,7 +120,7 @@ namespace TimberbornAPI.AssetLoaderSystem.AssetSystem
             }
             catch (AssetNotFoundException e)
             {
-                Log.LogError($"Given asset location was not found.");
+                Log.LogError($"Given asset location ({e.Filename}) was not found.");
                 Log.LogError(e.StackTrace);
                 throw;
             }
