@@ -176,7 +176,7 @@ jobs:
         run: dotnet restore
 
       - name: Build TimberAPI
-        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE
+        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
 
       - name: Copy TimberAPI.dll to package folder
         run: cp ${{ env.timber_api_output_path }}/TimberAPI.dll ${{ env.timber_api_package_dir }}/TimberAPI/plugins
@@ -221,7 +221,7 @@ jobs:
         run: dotnet restore
 
       - name: Build TimberAPIExample
-        run: dotnet build ${{env.timber_api_example_project_path}} --no-restore --configuration RELEASE
+        run: dotnet build ${{env.timber_api_example_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_example }}
 
       - name: Copy TimberAPIExample.dll to package folder
         run: cp ${{ env.timber_api_example_output_path }}/TimberAPIExample.dll ${{ env.timber_api_example_package_dir }}/TimberAPIExample/plugins
