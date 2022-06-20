@@ -11,7 +11,7 @@ using TimberbornAPI.UIBuilderSystem;
 namespace TimberbornAPI.Internal
 {
 
-    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "0.3.2")]
+    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "TIMBER_API_VERSION")]
     public class TimberAPIPlugin : BaseUnityPlugin
     {
         public static string Guid = "com.timberapi.timberapi";
