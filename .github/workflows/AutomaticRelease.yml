@@ -1,0 +1,280 @@
+name: Automatic release
+
+on:
+  workflow_dispatch:
+    inputs:
+      update_timber_api:
+        type: boolean
+        description: Update TimberAPI
+        default: false
+        required: true
+      timber_api_update_type:
+        type: choice
+        default: beta
+        description: Update type
+        required: false
+        options:
+          - major
+          - feature
+          - bug
+          - alpha
+          - beta
+          - rc
+      update_timber_api_example:
+        type: boolean
+        description: Update TimberAPIExample
+        required: true
+      timber_api_example_update_type:
+        type: choice
+        default: beta
+        description: Update type
+        required: false
+        options:
+          - major
+          - feature
+          - bug
+          - alpha
+          - beta
+          - rc
+
+
+env:
+  #Timber API
+  timber_api_release_name: "TimberAPI"
+  timber_api_project_path: "TimberAPI/TimberAPI.csproj"
+  timber_api_output_path: "TimberAPI/bin/RELEASE/netstandard2.1"
+  timber_api_package_dir: "TimberAPI/ThunderstorePackage"
+  timber_api_nuget_path: "TimberAPI/bin/RELEASE"
+  #Timber API Example
+  timber_api_example_release_name: "TimberAPI Example"
+  timber_api_example_project_path: "TimberAPIExample/TimberAPIExample.csproj"
+  timber_api_example_output_path: "TimberAPIExample/bin/RELEASE/netstandard2.1"
+  timber_api_example_package_dir: "TimberAPIExample/ThunderstorePackage"
+
+
+jobs:
+  # Automatic updating semantic versioning
+  versions:
+    name: Parse project versions
+    runs-on: ubuntu-latest
+    outputs:
+      timber_api: ${{ github.event.inputs.update_timber_api == 'false' && steps.timber_api.outputs.match || steps.bump_timber_api_version.outputs.next-version }}
+      timber_api_example: ${{ github.event.inputs.update_timber_api_example == 'false' && steps.timber_api_example.outputs.match || steps.bump_timber_api_example_version.outputs.next-version }}
+    steps:
+      - uses: actions/checkout@v3
+
+      # Loading versioning file
+      - name: Read versions.txt
+        id: read_versions_file
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./project_versions.txt
+
+      # TimberAPI versioning
+      - id: timber_api
+        uses: actions-ecosystem/action-regex-match@v2
+        with:
+          text: ${{ steps.read_versions_file.outputs.content }}
+          regex: '(?<=TIMBER_API=).*'
+
+      - id: bump_timber_api_version
+        uses: christian-draeger/increment-semantic-version@1.0.2
+        with:
+          current-version: ${{ steps.timber_api.outputs.match }}
+          version-fragment: ${{ github.event.inputs.timber_api_update_type }}
+
+      # TimberAPI Example versioning
+      - id: timber_api_example
+        uses: actions-ecosystem/action-regex-match@v2
+        with:
+          text: ${{ steps.read_versions_file.outputs.content }}
+          regex: '(?<=TIMBER_API_EXAMPLE=).*'
+
+      - id: bump_timber_api_example_version
+        uses: christian-draeger/increment-semantic-version@1.0.2
+        with:
+          current-version: ${{ steps.timber_api_example.outputs.match }}
+          version-fragment: ${{ github.event.inputs.timber_api_example_update_type }}
+
+  publish_timber_api_nuget:
+    if: ${{ github.event.inputs.timber_api_example_update_type == 'major' || github.event.inputs.timber_api_example_update_type == 'feature' || github.event.inputs.timber_api_example_update_type == 'bug'}}
+    runs-on: ubuntu-latest
+    needs: [versions, create_timber_api_thunderstore_pack]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "TIMBER_API_VERSION"
+          replace: ${{ needs.versions.outputs.timber_api }}
+          regex: false
+
+      - name: Replace TIMBER_API_EXAMPLE_VERSION
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "TIMBER_API_EXAMPLE_VERSION"
+          replace: ${{ needs.versions.outputs.timber_api_example }}
+          regex: false
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build TimberAPI
+        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
+      - name: .NET - Get Project File ReleaseVersion
+        id: get_version
+        uses: greenygh0st/net-proj-release-version@v2
+        with:
+          PROJ_FILE: ${{env.timber_api_project_path}}
+
+      - name: Pack TimberAPI
+        run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
+
+      - name: Upload TimberAPI Build Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: TimberAPI_NugetPackage
+          path: ${{env.timber_api_nuget_path}}/*.nupkg
+
+      - name: Push NuGet Package
+        if: github.event.inputs.DoPrerelease != 'true'
+        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
+
+  create_timber_api_thunderstore_pack:
+    if: ${{ github.event.inputs.update_timber_api == 'true' }}
+    needs: [versions]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "TIMBER_API_VERSION"
+          replace: ${{ needs.versions.outputs.timber_api }}
+          regex: false
+
+      - name: Replace TIMBER_API_EXAMPLE_VERSION
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "TIMBER_API_EXAMPLE_VERSION"
+          replace: ${{ needs.versions.outputs.timber_api_example }}
+          regex: false
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build TimberAPI
+        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE
+
+      - name: Copy TimberAPI.dll to package folder
+        run: cp ${{ env.timber_api_output_path }}/TimberAPI.dll ${{ env.timber_api_package_dir }}/TimberAPI/plugins
+
+      - name: Edit Version number in manifest
+        run: sed -i 's/VERSION/${{ needs.versions.outputs.timber_api }}/' ${{ env.timber_api_package_dir }}/manifest.json
+
+      - name: Copy README to package folder
+        run: cp README.md ${{ env.timber_api_package_dir }}
+
+      - name: Upload TimberAPI Thunderstore Build Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: TimberAPI_ThunderStorePackage
+          path: ${{ env.timber_api_package_dir }}
+
+  create_timber_api_example_thunderstore_pack:
+    if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
+    needs: versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+
+      - name: Replace TIMBER_API_VERSION
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "TIMBER_API_VERSION"
+          replace: ${{ needs.versions.outputs.timber_api }}
+          regex: false
+
+      - name: Replace TIMBER_API_EXAMPLE_VERSION
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "TIMBER_API_EXAMPLE_VERSION"
+          replace: ${{ needs.versions.outputs.timber_api_example }}
+          regex: false
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build TimberAPIExample
+        run: dotnet build ${{env.timber_api_example_project_path}} --no-restore --configuration RELEASE
+
+      - name: Copy TimberAPIExample.dll to package folder
+        run: cp ${{ env.timber_api_example_output_path }}/TimberAPIExample.dll ${{ env.timber_api_example_package_dir }}/TimberAPIExample/plugins
+
+      # Important: Change VERSION_API Before VERSION
+      - name: Edit TimberAPI Dependency string
+        run: sed -i 's/VERSION_API/${{ needs.versions.outputs.timber_api }}/' ${{ env.timber_api_example_package_dir }}/manifest.json
+
+      # Important: Change VERSION_API Before VERSION
+      - name: Edit TimberAPI Example version number
+        run: sed -i 's/VERSION/${{ needs.versions.outputs.timber_api_example }}/' ${{ env.timber_api_example_package_dir }}/manifest.json
+
+      - name: Copy README to package folder for TimberAPIExample
+        run: cp README.md ${{ env.timber_api_example_package_dir }}
+
+      - name: Modify README for TimberAPIExample
+        run: sed -i 's/# TimberAPI/# TimberAPIExample/' ${{ env.timber_api_example_package_dir }}/README.md
+      - name: Modify README for TimberAPIExample
+        run: sed -i 's/Unofficial API to enable easier Timberborn modding/The example plugin for TimberAPI/' ${{ env.timber_api_example_package_dir }}/README.md
+      - name: Modify README for TimberAPIExample
+        run: sed -i 's/Currently supported features/Shows the following features/' ${{ env.timber_api_example_package_dir }}/README.md
+
+      - name: Upload TimberAPIExample Thunderstore Build Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: TimberAPIExample_ThunderStorePackage
+          path: ${{ env.timber_api_example_package_dir }}
+
+  update_version:
+    runs-on: ubuntu-latest
+    needs: [versions, create_timber_api_thunderstore_pack, create_timber_api_example_thunderstore_pack]
+    if: always() && (needs.create_timber_api_thunderstore_pack.result == 'success' || needs.create_timber_api_example_thunderstore_pack.result == 'success')
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Modify timber api version number
+        if: needs.create_timber_api_thunderstore_pack.result == 'success'
+        uses: mingjun97/file-regex-replace@v1
+        with:
+          regex: '(?<=TIMBER_API=).*'
+          replacement: '${{ needs.versions.outputs.timber_api }}'
+          include: 'project_versions.txt'
+
+      - name: Modify timber api example version number
+        if: needs.create_timber_api_example_thunderstore_pack.result == 'success'
+        uses: mingjun97/file-regex-replace@v1
+        with:
+          regex: '(?<=TIMBER_API_EXAMPLE=).*'
+          replacement: '${{ needs.versions.outputs.timber_api_example }}'
+          include: 'project_versions.txt'
+
+      - name: Commit updated version
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Updated versions"
+          default_author: github_actions
