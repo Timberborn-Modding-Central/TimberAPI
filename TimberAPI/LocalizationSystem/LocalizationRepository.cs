@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using BepInEx.Bootstrap;
 using Timberborn.Localization;
 using LINQtoCSV;
 using TimberbornAPI.Internal;
+using TimberbornAPI.PluginSystem;
 using static TimberbornAPI.Internal.TimberAPIPlugin;
 
 namespace TimberbornAPI.LocalizationSystem
@@ -94,10 +94,11 @@ namespace TimberbornAPI.LocalizationSystem
         /// <returns></returns>
         private static List<string> GetLocalizationFilePathsFromDependencies(string localizationKey)
         {
+            PluginLocationService pluginLocationService = TimberAPI.DependencyContainer.GetInstance<PluginLocationService>();
             List<string> localizationFilePaths = new List<string>();
-            foreach (KeyValuePair<string, BepInEx.PluginInfo> keyValuePair in Chainloader.PluginInfos.Where(kv => kv.Value.Dependencies.Any(dep => dep.DependencyGUID == TimberAPIPlugin.Guid)))
+            foreach (string pluginLocation in pluginLocationService.GetDependentPluginPaths(TimberAPIPlugin.Guid, true))
             {
-                string pluginLocalizationPath = Path.Combine(Path.GetDirectoryName(keyValuePair.Value.Location) ?? string.Empty, LocalizationPathKey);
+                string pluginLocalizationPath = Path.Combine(pluginLocation ?? string.Empty, LocalizationPathKey);
                 (bool hasLocalization, string localizationName) = LocalizationNameOrDefault(pluginLocalizationPath, localizationKey);
 
                 if (!hasLocalization)
