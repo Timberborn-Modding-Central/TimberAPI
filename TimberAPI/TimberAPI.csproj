@@ -32,7 +32,7 @@
       <DestinationSubDirectory>libs\</DestinationSubDirectory>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>$(SolutionDir)Timberborn\Timberborn_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(SolutionDir)\Timberborn\Timberborn_Data\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
