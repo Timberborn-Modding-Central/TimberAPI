@@ -7,6 +7,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
     <ReleaseVersion>0.3.1</ReleaseVersion>
+    <ReleaseVersion>TIMBER_API_EXAMPLE_VERSION</ReleaseVersion>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">

@@ -9,13 +9,13 @@ using TimberbornAPI.EntityActionSystem;
 using TimberbornAPI.PluginSystem;
 using TimberbornAPI.SpecificationSystem;
 using TimberbornAPI.EntityLinkerSystem;
-using TimberbornAPI.SpecificationSystem.CustomSpecifications.Golems;
+using TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Golems;
 using TimberbornAPI.UIBuilderSystem;
 
 namespace TimberbornAPI.Internal
 {
 
-    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "0.3.1")]
+    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "TIMBER_API_VERSION")]
     public class TimberAPIPlugin : BaseUnityPlugin
     {
         public static string Guid = "com.timberapi.timberapi";
