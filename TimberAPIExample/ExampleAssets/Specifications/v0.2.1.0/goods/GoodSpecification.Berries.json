@@ -1,0 +1,22 @@
+{
+  "Id": "Berries",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.Berries.DisplayName",
+  "PluralDisplayNameLocKey": "Good.Berries.PluralDisplayName",
+  "ConsumptionEffects": [
+    {
+      "NeedId": "Food",
+      "Points": 0.3
+    }
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Food",
+  "Icon": "Sprites/Goods/BerriesIcon",
+  "RequiredFeatureToggle": ""
+}

@@ -1,0 +1,31 @@
+{
+  "Id": "Temple",
+  "BackwardCompatibleIds": [
+    "Spirituality"
+  ],
+  "Order": 48,
+  "NeedGroupId": "Spirituality",
+  "CharacterType": "BeaverAdult",
+  "DisplayNameLocKey": "Building.Temple.DisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -0.1,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "WorkingSpeed",
+      "MultiplierDelta": 0.25
+    }
+  ],
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": false,
+  "PositiveWellbeing": 5
+}

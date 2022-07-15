@@ -1,0 +1,29 @@
+﻿{
+  "Id": "BoostCooking",
+  "BackwardCompatibleIds": [],
+  "Order": 2000,
+  "NeedGroupId": "Boosts",
+  "CharacterType": "Golem",
+  "DisplayNameLocKey": "Need.BoostCooking.DisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -72,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "Cooking",
+      "MultiplierDelta": 0.15
+    }
+  ],
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": true,
+  "HideWhenInactive": true
+}

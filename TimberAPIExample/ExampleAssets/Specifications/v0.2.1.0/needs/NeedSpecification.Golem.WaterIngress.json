@@ -1,0 +1,32 @@
+{
+  "Id": "WaterIngress",
+  "BackwardCompatibleIds": [
+    "WetParts.IronTeeth"
+  ],
+  "Order": 1022,
+  "NeedGroupId": "BasicNeeds",
+  "CharacterType": "Golem",
+  "DisplayNameLocKey": "Need.WaterIngress.DisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": -1.0,
+  "MaximumValue": 0.0,
+  "DailyDelta": 0.5,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "WalkingSpeed",
+      "MultiplierDelta": -0.25
+    }
+  ],
+  "BonusesAppliedWhenAdverse": true,
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "HideWhenInactive": true,
+  "Wastable": true
+}

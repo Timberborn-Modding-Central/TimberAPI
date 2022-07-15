@@ -1,0 +1,5 @@
+{
+  "NeedId": "Biofuel",
+  "CriticalStatePreventsWork": true,
+  "WorkRefusalWarningLocKey": "Work.WorkRefusalWarning"
+}

@@ -1,0 +1,19 @@
+{
+  "Id": "MetalBlock",
+  "BackwardCompatibleIds": [
+    "MetaBlock"
+  ],
+  "DisplayNameLocKey": "Good.MetalBlock.DisplayName",
+  "PluralDisplayNameLocKey": "Good.MetalBlock.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 5,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/MetalBlockIcon",
+  "RequiredFeatureToggle": ""
+}

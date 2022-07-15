@@ -1,0 +1,28 @@
+{
+  "Id": "Plank",
+  "DisplayLocKey": "Good.Plank.PluralDisplayName",
+  "CycleDurationInHours": 1.25,
+  "CyclesCapacity": 13,
+  "Ingredients": [
+    {
+      "Good": {
+        "Id": "Log"
+      },
+      "Amount": 1
+    }
+  ],
+  "Products": [
+    {
+      "Good": {
+        "Id": "Plank"
+      },
+      "Amount": 1
+    }
+  ],
+  "ProducedSciencePoints": 0,
+  "Fuel": {
+    "Id": ""
+  },
+  "CyclesFuelLasts": 0,
+  "FuelCapacity": 0
+}

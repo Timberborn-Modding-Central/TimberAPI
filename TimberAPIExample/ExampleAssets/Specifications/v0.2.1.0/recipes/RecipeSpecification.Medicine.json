@@ -1,0 +1,34 @@
+{
+  "Id": "Medicine",
+  "DisplayLocKey": "Good.Medicine.PluralDisplayName",
+  "CycleDurationInHours": 4,
+  "CyclesCapacity": 15,
+  "Ingredients": [
+    {
+      "Good": {
+        "Id": "Dandelion"
+      },
+      "Amount": 2
+    },
+    {
+      "Good": {
+        "Id": "Water"
+      },
+      "Amount": 1
+    }
+  ],
+  "Products": [
+    {
+      "Good": {
+        "Id": "Medicine"
+      },
+      "Amount": 1
+    }
+  ],
+  "ProducedSciencePoints": 0,
+  "Fuel": {
+    "Id": "Log"
+  },
+  "CyclesFuelLasts": 5,
+  "FuelCapacity": 5
+}

@@ -1,0 +1,26 @@
+{
+  "Id": "CattailCracker",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.CattailCracker.DisplayName",
+  "PluralDisplayNameLocKey": "Good.CattailCracker.PluralDisplayName",
+  "ConsumptionEffects": [
+    {
+      "NeedId": "Food",
+      "Points": 0.3
+    },
+    {
+      "NeedId": "CattailCracker",
+      "Points": 0.2
+    }
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Food",
+  "Icon": "Sprites/Goods/CattailCrackerIcon",
+  "RequiredFeatureToggle": ""
+}

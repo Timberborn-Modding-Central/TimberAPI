@@ -1,0 +1,18 @@
+{
+  "Id": "Wheat",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.Wheat.DisplayName",
+  "PluralDisplayNameLocKey": "Good.Wheat.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/WheatIcon",
+  "RequiredFeatureToggle": ""
+}

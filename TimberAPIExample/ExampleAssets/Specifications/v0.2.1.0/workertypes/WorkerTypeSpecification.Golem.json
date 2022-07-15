@@ -1,0 +1,6 @@
+{
+  "Id": "Golem",
+  "DisplayNameLocKey": "Golem.PluralDisplayName",
+  "WorkerOnlyTextLocKey": "Work.GolemOnly",
+  "IgnoresWorkingHours": true
+}

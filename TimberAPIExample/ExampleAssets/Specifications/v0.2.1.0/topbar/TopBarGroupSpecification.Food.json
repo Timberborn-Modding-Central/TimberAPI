@@ -1,0 +1,7 @@
+{
+  "Id": "Food",
+  "Order": 2,
+  "DisplayNameLocKey": "TopBar.Food",
+  "Icon": "Sprites/TopBar/Food",
+  "SingleResourceGroup": false
+}

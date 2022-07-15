@@ -1,0 +1,18 @@
+{
+  "Id": "Plank",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.Plank.DisplayName",
+  "PluralDisplayNameLocKey": "Good.Plank.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 3,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/PlankIcon",
+  "RequiredFeatureToggle": ""
+}

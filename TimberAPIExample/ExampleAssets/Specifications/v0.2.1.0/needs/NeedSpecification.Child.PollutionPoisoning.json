@@ -1,0 +1,32 @@
+{
+  "Id": "PollutionPoisoning",
+  "BackwardCompatibleIds": [],
+  "Order": 10,
+  "NeedGroupId": "BasicNeeds",
+  "CharacterType": "BeaverChild",
+  "DisplayNameLocKey": "Need.PollutionPoisoning.DisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": -1.0,
+  "MaximumValue": 0.0,
+  "DailyDelta": 0.5,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "State"
+  },
+  "CriticalSpriteName": "PollutionPoisoning",
+  "CriticalDescriptionLocKey": "Need.PollutionPoisoning.CriticalDescription",
+  "CriticalDescriptionShortLocKey": "Need.PollutionPoisoning.CriticalDescriptionShort",
+  "Bonuses": [
+    {
+      "Id": "WalkingSpeed",
+      "MultiplierDelta": -0.25
+    }
+  ],
+  "BonusesAppliedWhenAdverse": true,
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": true,
+  "HideWhenInactive": true,
+  "NegativeWellbeing": -2
+}

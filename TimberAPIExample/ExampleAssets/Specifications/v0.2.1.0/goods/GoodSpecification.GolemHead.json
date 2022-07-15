@@ -1,0 +1,22 @@
+{
+  "Id": "GolemHead",
+  "BackwardCompatibleIds": [
+    "GolemHead.Folktails",
+    "GolemHatHead",
+    "GolemCogHead",
+    "GolemHead.IronTeeth"
+  ],
+  "DisplayNameLocKey": "Good.GolemHead.DisplayName",
+  "PluralDisplayNameLocKey": "Good.GolemHead.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 4,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/GolemHeadIcon",
+  "RequiredFeatureToggle": ""
+}

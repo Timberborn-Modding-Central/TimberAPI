@@ -1,0 +1,43 @@
+{
+  "Id": "Water",
+  "BackwardCompatibleIds": [
+    "Thirst"
+  ],
+  "Order": 1,
+  "NeedGroupId": "BasicNeeds",
+  "CharacterType": "BeaverAdult",
+  "DisplayNameLocKey": "Need.Water.DisplayName",
+  "StartingValue": 1.0,
+  "MinimumValue": -3.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -0.7,
+  "ImportanceMultiplier": 3.5,
+  "CriticalNeedType": {
+    "Value": "State"
+  },
+  "CriticalSpriteName": "Water",
+  "CriticalDescriptionLocKey": "Need.Water.CriticalDescription",
+  "Bonuses": [
+    {
+      "Id": "Fertility",
+      "MultiplierDelta": -1
+    },
+    {
+      "Id": "CarryingCapacity",
+      "MultiplierDelta": -0.25
+    },
+    {
+      "Id": "WalkingSpeed",
+      "MultiplierDelta": -0.25
+    }    
+  ],
+  "BonusesAppliedWhenAdverse": true,
+  "DeathOnMinValue": true,
+  "DeathWarningLocKey": "Need.Water.Critical",
+  "DeathMessageLocKey": "Need.Water.DeathMessage",
+  "Effectiveness": 1.0,
+  "Wastable": false,
+  "PositiveWellbeing": 1,
+  "NegativeWellbeing": -10,
+  "PositiveDescriptionLocKey" : "Need.Water.PositiveDescription",
+}

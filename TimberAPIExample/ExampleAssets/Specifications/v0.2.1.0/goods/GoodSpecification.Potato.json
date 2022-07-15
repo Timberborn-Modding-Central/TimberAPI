@@ -1,0 +1,18 @@
+{
+  "Id": "Potato",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.Potato.DisplayName",
+  "PluralDisplayNameLocKey": "Good.Potato.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/PotatoIcon",
+  "RequiredFeatureToggle": ""
+}

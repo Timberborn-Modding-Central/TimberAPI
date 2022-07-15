@@ -1,0 +1,26 @@
+{
+  "Id": "Bread",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.Bread.DisplayName",
+  "PluralDisplayNameLocKey": "Good.Bread.PluralDisplayName",
+  "ConsumptionEffects": [
+    {
+      "NeedId": "Food",
+      "Points": 0.3
+    },
+    {
+      "NeedId": "Bread",
+      "Points": 0.2
+    }
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Food",
+  "Icon": "Sprites/Goods/BreadIcon",
+  "RequiredFeatureToggle": ""
+}

@@ -1,0 +1,26 @@
+{
+  "Id": "MaplePastry",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.MaplePastry.DisplayName",
+  "PluralDisplayNameLocKey": "Good.MaplePastry.PluralDisplayName",
+  "ConsumptionEffects": [
+    {
+      "NeedId": "Food",
+      "Points": 0.3
+    },
+    {
+      "NeedId": "MaplePastry",
+      "Points": 0.21
+    }
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Food",
+  "Icon": "Sprites/Goods/MaplePastryIcon",
+  "RequiredFeatureToggle": ""
+}

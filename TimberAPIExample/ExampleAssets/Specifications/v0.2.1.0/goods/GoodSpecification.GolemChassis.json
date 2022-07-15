@@ -1,0 +1,18 @@
+{
+  "Id": "GolemChassis",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.GolemChassis.DisplayName",
+  "PluralDisplayNameLocKey": "Good.GolemChassis.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 11,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/GolemChassisIcon",
+  "RequiredFeatureToggle": ""
+}

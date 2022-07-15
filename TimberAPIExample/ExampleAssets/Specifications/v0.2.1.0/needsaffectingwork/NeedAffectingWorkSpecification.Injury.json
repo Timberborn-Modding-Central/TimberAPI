@@ -1,0 +1,5 @@
+{
+  "NeedId": "Injury",
+  "CriticalStatePreventsWork": true,
+  "WorkRefusalWarningLocKey": "Work.WorkRefusalWarning"
+}

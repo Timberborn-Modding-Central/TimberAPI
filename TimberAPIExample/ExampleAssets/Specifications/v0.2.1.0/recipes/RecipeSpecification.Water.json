@@ -1,0 +1,21 @@
+{
+  "Id": "Water",
+  "DisplayLocKey": "Good.Water.PluralDisplayName",
+  "CycleDurationInHours": 0.33,
+  "CyclesCapacity": 15,
+  "Ingredients": [],
+  "Products": [
+    {
+      "Good": {
+        "Id": "Water"
+      },
+      "Amount": 1
+    }
+  ],
+  "ProducedSciencePoints": 0,
+  "Fuel": {
+    "Id": ""
+  },
+  "CyclesFuelLasts": 0,
+  "FuelCapacity": 0
+}

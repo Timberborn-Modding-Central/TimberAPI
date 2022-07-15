@@ -1,0 +1,33 @@
+{
+  "Id": "HammerAndSaw",
+  "BackwardCompatibleIds": [],
+  "Order": 1,
+  "NeedGroupId": "Passive",
+  "CharacterType": "Golem",
+  "DisplayNameLocKey": "Need.HammerAndSaw.DisplayName",
+  "StartingValue": 1,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": 0,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "CriticalDescriptionShortLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "Woodworking",
+      "MultiplierDelta": 0.25
+    },
+    {
+      "Id": "Metalworking",
+      "MultiplierDelta": 0.25
+    }
+  ],
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": false
+}

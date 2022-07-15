@@ -1,0 +1,22 @@
+{
+  "Id": "Book",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.Book.DisplayName",
+  "PluralDisplayNameLocKey": "Good.Book.PluralDisplayName",
+  "ConsumptionEffects": [
+    {
+      "NeedId": "Books",
+      "Points": 0.4
+    }
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/BookIcon",
+  "RequiredFeatureToggle": ""
+}
