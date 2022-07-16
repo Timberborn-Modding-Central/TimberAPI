@@ -6,8 +6,9 @@ Unofficial API to enable easier Timberborn modding
 2. Event listening of any event to get triggered on in game actions
 3. A comprehensive UI component builder
 4. Asset and object injection, provide your own icons or even unity bundles
-5. Labels and localization support
-6. Link entities together for data communication 
+5. Modify and add specifications to change the game - with just JSON
+6. Labels and localization support
+7. Link entities together for data communication 
 
 ## More Information can be found on the wiki
 **[Timberborn Modding Wiki](https://github.com/Timberborn-Modding-Central/TimberAPI/wiki)**
