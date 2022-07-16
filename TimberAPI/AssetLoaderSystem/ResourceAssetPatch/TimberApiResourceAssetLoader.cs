@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
 {
-    public class ResourceAssetLoaderTimberApi : IResourceAssetLoader
+    public class TimberApiResourceAssetLoader : IResourceAssetLoader
     {
         private readonly IAssetLoader _assetLoader;
 
@@ -23,7 +23,7 @@ namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
             }
         }
 
-        public ResourceAssetLoaderTimberApi(IAssetLoader assetLoader)
+        public TimberApiResourceAssetLoader(IAssetLoader assetLoader)
         {
             _assetLoader = assetLoader;
         }
@@ -65,16 +65,6 @@ namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
                     FixMaterialShader(child.gameObject, shader);
                 }
             }
-        }
-    }
-    
-    [HarmonyPatch(typeof(AssetSystemConfigurator), "Configure", typeof(IContainerDefinition))]
-    public static class ResourceAssetLoaderPatch
-    {
-        private static bool Prefix(IContainerDefinition containerDefinition)
-        {
-            containerDefinition.Bind<IResourceAssetLoader>().To<ResourceAssetLoaderTimberApi>().AsSingleton();
-            return false;
         }
     }
 }
