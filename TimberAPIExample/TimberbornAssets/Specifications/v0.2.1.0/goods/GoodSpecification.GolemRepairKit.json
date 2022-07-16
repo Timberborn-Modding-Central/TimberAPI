@@ -1,0 +1,19 @@
+{
+  "Id": "GolemRepairKit",
+  "BackwardCompatibleIds": [
+    "RepairKit"
+  ],
+  "DisplayNameLocKey": "Good.GolemRepairKit.DisplayName",
+  "PluralDisplayNameLocKey": "Good.GolemRepairKit.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 2,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/GolemRepairKitIcon",
+  "RequiredFeatureToggle": ""
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bindito.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Timberborn.ConstructibleSystem;
@@ -24,6 +25,16 @@ namespace TimberbornAPI.EntityLinkerSystem
         internal readonly List<EntityLink> _entityLinks = new List<EntityLink>();
         public IReadOnlyCollection<EntityLink> EntityLinks { get; private set; }
 
+        private EntityLinkSerializer _entityLinkSerializer;
+
+
+        [Inject]
+        public void InjectDependencies(EntityLinkSerializer entityLinkSerializer)
+        {
+            _entityLinkSerializer = entityLinkSerializer;
+        }
+
+
         public virtual void Awake()
         {
             EntityLinks = _entityLinks.AsReadOnly();
@@ -36,7 +47,7 @@ namespace TimberbornAPI.EntityLinkerSystem
         public virtual void Save(IEntitySaver entitySaver)
         {
             IObjectSaver component = entitySaver.GetComponent(EntityLinkerKey);
-            component.Set(EntityLinksKey, EntityLinks);
+            component.Set(EntityLinksKey, EntityLinks, _entityLinkSerializer);
         }
 
         /// <summary>
@@ -52,7 +63,7 @@ namespace TimberbornAPI.EntityLinkerSystem
             IObjectLoader component = entityLoader.GetComponent(EntityLinkerKey);
             if (component.Has(EntityLinksKey))
             {
-                var links = component.Get(EntityLinksKey);
+                var links = component.Get(EntityLinksKey, _entityLinkSerializer);
                 if (links == null)
                 {
                     return;

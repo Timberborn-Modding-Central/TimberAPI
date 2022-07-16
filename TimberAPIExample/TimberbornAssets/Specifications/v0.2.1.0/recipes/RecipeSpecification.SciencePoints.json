@@ -1,0 +1,14 @@
+{
+  "Id": "SciencePoints",
+  "DisplayLocKey": "Science.SciencePoints",
+  "CycleDurationInHours": 1,
+  "CyclesCapacity": 1,
+  "Ingredients": [],
+  "Products": [],
+  "ProducedSciencePoints": 1,
+  "Fuel": {
+    "Id": ""
+  },
+  "CyclesFuelLasts": 0,
+  "FuelCapacity": 0
+}

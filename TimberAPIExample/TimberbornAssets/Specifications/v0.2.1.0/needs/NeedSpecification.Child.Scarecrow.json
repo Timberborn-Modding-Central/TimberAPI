@@ -1,0 +1,25 @@
+﻿{
+  "Id": "Scarecrow",
+  "BackwardCompatibleIds": [],
+  "Order": 52,
+  "NeedGroupId": "Aesthetics",
+  "CharacterType": "BeaverChild",
+  "DisplayNameLocKey": "Building.Scarecrow.DisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -0.5,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+  ],
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": true,
+  "PositiveWellbeing": 0
+}

@@ -1,0 +1,36 @@
+﻿{
+  "Id": "Lido",
+  "BackwardCompatibleIds": [
+    "Pool"
+  ],
+  "Order": 43,
+  "NeedGroupId": "Fun",
+  "CharacterType": "BeaverAdult",
+  "DisplayNameLocKey": "Building.Lido.DisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -0.4,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "WorkingSpeed",
+      "MultiplierDelta": 0.05
+    },
+    {
+      "Id": "SwimmingSpeed",
+      "MultiplierDelta": 0.15
+    }
+  ],
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": false,
+  "NewResources": true,
+  "PositiveWellbeing": 1
+}

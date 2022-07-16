@@ -1,0 +1,19 @@
+{
+  "Id": "CattailRoot",
+  "BackwardCompatibleIds": [
+    "Cattail"
+  ],
+  "DisplayNameLocKey": "Good.CattailRoot.DisplayName",
+  "PluralDisplayNameLocKey": "Good.CattailRoot.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/CattailRootIcon",
+  "RequiredFeatureToggle": ""
+}

@@ -1,0 +1,18 @@
+{
+  "Id": "Gear",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.Gear.DisplayName",
+  "PluralDisplayNameLocKey": "Good.Gear.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 3,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/GearIcon",
+  "RequiredFeatureToggle": ""
+}

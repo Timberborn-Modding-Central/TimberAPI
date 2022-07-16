@@ -1,0 +1,34 @@
+{
+  "Id": "Shelter",
+  "BackwardCompatibleIds": [
+    "Comfort"
+  ],
+  "Order": 3,
+  "NeedGroupId": "BasicNeeds",
+  "CharacterType": "BeaverChild",
+  "DisplayNameLocKey": "Need.Shelter.DisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": -0.2,
+  "MaximumValue": 0.8,
+  "DailyDelta": -0.3,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "LifeExpectancy",
+      "MultiplierDelta": -0.2
+    }
+  ],
+  "BonusesAppliedWhenAdverse": true,
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": true,
+  "PositiveWellbeing": 0,
+  "NegativeWellbeing": -3,
+  "PositiveDescriptionLocKey" : "Need.Shelter.PositiveDescription"
+}

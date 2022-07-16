@@ -1,0 +1,28 @@
+{
+  "Id": "MetalBlock",
+  "DisplayLocKey": "Good.MetalBlock.PluralDisplayName",
+  "CycleDurationInHours": 4.0,
+  "CyclesCapacity": 13,
+  "Ingredients": [
+    {
+      "Good": {
+        "Id": "ScrapMetal"
+      },
+      "Amount": 2
+    }
+  ],
+  "Products": [
+    {
+      "Good": {
+        "Id": "MetalBlock"
+      },
+      "Amount": 1
+    }
+  ],
+  "ProducedSciencePoints": 0,
+  "Fuel": {
+    "Id": "Log"
+  },
+  "CyclesFuelLasts": 5,
+  "FuelCapacity": 13
+}

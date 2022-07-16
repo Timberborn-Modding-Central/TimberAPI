@@ -1,0 +1,28 @@
+{
+  "Id": "WheatFlour",
+  "DisplayLocKey": "Good.WheatFlour.PluralDisplayName",
+  "CycleDurationInHours": 0.78,
+  "CyclesCapacity": 20,
+  "Ingredients": [
+    {
+      "Good": {
+        "Id": "Wheat"
+      },
+      "Amount": 1
+    }
+  ],
+  "Products": [
+    {
+      "Good": {
+        "Id": "WheatFlour"
+      },
+      "Amount": 1
+    }
+  ],
+  "ProducedSciencePoints": 0,
+  "Fuel": {
+    "Id": ""
+  },
+  "CyclesFuelLasts": 0,
+  "FuelCapacity": 0
+}

@@ -1,0 +1,31 @@
+{
+  "Id": "Bread",
+  "BackwardCompatibleIds": [
+    "NutritionIII"
+  ],
+  "Order": 47,
+  "NeedGroupId": "Nutrition",
+  "CharacterType": "BeaverChild",
+  "DisplayNameLocKey": "Good.Bread.PluralDisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -0.05,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "LifeExpectancy",
+      "MultiplierDelta": 0.2
+    }
+  ],
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": true,
+  "PositiveWellbeing": 2
+}

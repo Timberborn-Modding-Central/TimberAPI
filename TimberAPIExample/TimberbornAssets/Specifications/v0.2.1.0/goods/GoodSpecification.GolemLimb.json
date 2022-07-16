@@ -1,0 +1,18 @@
+{
+  "Id": "GolemLimb",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.GolemLimb.DisplayName",
+  "PluralDisplayNameLocKey": "Good.GolemLimb.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 2,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/GolemLimbIcon",
+  "RequiredFeatureToggle": ""
+}

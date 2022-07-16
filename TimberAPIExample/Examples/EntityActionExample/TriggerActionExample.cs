@@ -14,7 +14,7 @@ namespace TimberAPIExample.Examples.EntityActionExample
             if (highlighter == null)
                 return;
             // Changes the color of the Monument building heighlight to yellow
-            highlighter._colors.BuildingInRange = Color.yellow;
+            highlighter._colors._buildingInRange = Color.yellow;
         }
     }
 }

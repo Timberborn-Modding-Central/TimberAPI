@@ -1,0 +1,28 @@
+﻿{
+  "Id": "GrilledChestnut",
+  "DisplayLocKey": "Good.GrilledChestnut.PluralDisplayName",
+  "CycleDurationInHours": 0.33,
+  "CyclesCapacity": 30,
+  "Ingredients": [
+    {
+      "Good": {
+        "Id": "Chestnut"
+      },
+      "Amount": 1
+    }
+  ],
+  "Products": [
+    {
+      "Good": {
+        "Id": "GrilledChestnut"
+      },
+      "Amount": 2
+    }
+  ],
+  "ProducedSciencePoints": 0,
+  "Fuel": {
+    "Id": "Log"
+  },
+  "CyclesFuelLasts": 10,
+  "FuelCapacity": 5
+}

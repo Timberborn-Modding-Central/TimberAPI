@@ -1,0 +1,31 @@
+﻿{
+  "Id": "SunflowerSeeds",
+  "BackwardCompatibleIds": [
+    "SunflowerSeeds"
+  ],
+  "Order": 45,
+  "NeedGroupId": "Nutrition",
+  "CharacterType": "BeaverAdult",
+  "DisplayNameLocKey": "Good.SunflowerSeeds.PluralDisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -0.05,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "WorkingSpeed",
+      "MultiplierDelta": 0.05
+    }
+  ],
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": true,
+  "PositiveWellbeing": 1
+}

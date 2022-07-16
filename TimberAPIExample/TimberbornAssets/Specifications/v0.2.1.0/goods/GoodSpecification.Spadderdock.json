@@ -1,0 +1,19 @@
+{
+  "Id": "Spadderdock",
+  "BackwardCompatibleIds": [
+    "SpadderdockSeeds"
+  ],
+  "DisplayNameLocKey": "Good.Spadderdock.DisplayName",
+  "PluralDisplayNameLocKey": "Good.Spadderdock.PluralDisplayName",
+  "ConsumptionEffects": [
+  ],
+  "GoodType": "Box",
+  "VisibleContainer": {
+    "Value": "Box"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/SpadderdockIcon",
+  "RequiredFeatureToggle": ""
+}

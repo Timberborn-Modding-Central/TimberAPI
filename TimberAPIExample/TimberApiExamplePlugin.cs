@@ -9,7 +9,6 @@ using TimberAPIExample.Examples.EntityActionExample;
 using TimberAPIExample.Examples.AssetLoaderExample;
 using TimberAPIExample.Examples.UIBuilderExample;
 using TimberAPIExample.Examples.EntityLinkerExample;
-using TimberAPIExample.Examples.CustomObjectRegistryExample;
 using TimberAPIExample.Examples.EventListenerExample;
 
 namespace TimberAPIExample
@@ -53,9 +52,6 @@ namespace TimberAPIExample
                 new EntityLinkerExampleConfigurator()
             });
 
-            // CustomObjectRegistry
-            // Load this before anything else is bound
-            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new CustomObjectExampleConfigurator());
 
             // Harmony patches
             new Harmony("com.timberapi.examples").PatchAll();

@@ -1,11 +1,15 @@
-﻿using BepInEx;
+﻿using System.Collections.Generic;
+using BepInEx;
 using BepInEx.Logging;
+using Bindito.Core;
 using HarmonyLib;
 using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.Common;
-using TimberbornAPI.CustomObjectSystem;
 using TimberbornAPI.EntityActionSystem;
+using TimberbornAPI.PluginSystem;
+using TimberbornAPI.SpecificationSystem;
 using TimberbornAPI.EntityLinkerSystem;
+using TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Golems;
 using TimberbornAPI.UIBuilderSystem;
 
 namespace TimberbornAPI.Internal
@@ -35,15 +39,17 @@ namespace TimberbornAPI.Internal
         /// </summary>
         public void InstallConfigurators()
         {
+            TimberAPI.DependencyRegistry.AddConfigurator(new SpecificationConfigurator(), SceneEntryPoint.Global);
+            TimberAPI.DependencyRegistry.AddConfigurator(new PluginConfigurator(), SceneEntryPoint.Global);
             TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new AssetConfigurator(), SceneEntryPoint.Global);
+            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new GolemFactionConfigurator(), SceneEntryPoint.InGame);
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
-            
-            TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
 
-            TimberAPI.DependencyRegistry.AddConfigurators(new() {
+            TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
+            TimberAPI.DependencyRegistry.AddConfigurators(new List<IConfigurator>
+            {
                 new EntityActionConfigurator(),
                 new EntityLinkerConfigurator(),
-                new ObjectCollectionSystemConfigurator()
             }, SceneEntryPoint.InGame);
         }
     }

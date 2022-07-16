@@ -1,0 +1,29 @@
+﻿{
+  "Id": "Roof",
+  "BackwardCompatibleIds": [],
+  "Order": 50,
+  "NeedGroupId": "Aesthetics",
+  "CharacterType": "BeaverAdult",
+  "DisplayNameLocKey": "Need.Roof.DisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -0.7,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "Cooking",
+      "MultiplierDelta": 0.4
+    }
+  ],
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": true,
+  "PositiveWellbeing": 1
+}

@@ -1,0 +1,40 @@
+﻿{
+  "Id": "GolemHead.Folktails",
+  "DisplayLocKey": "Good.GolemHead.PluralDisplayName",
+  "CycleDurationInHours": 12,
+  "CyclesCapacity": 3,
+  "Ingredients": [
+    {
+      "Good": {
+        "Id": "Plank"
+      },
+      "Amount": 1
+    },
+    {
+      "Good": {
+        "Id": "Gear"
+      },
+      "Amount": 3
+    },
+    {
+      "Good": {
+        "Id": "Wheat"
+      },
+      "Amount": 1
+    }
+  ],
+  "Products": [
+    {
+      "Good": {
+        "Id": "GolemHead"
+      },
+      "Amount": 1
+    }
+  ],
+  "ProducedSciencePoints": 0,
+  "Fuel": {
+    "Id": ""
+  },
+  "CyclesFuelLasts": 0,
+  "FuelCapacity": 0
+}

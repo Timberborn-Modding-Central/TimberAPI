@@ -1,0 +1,8 @@
+{
+  "NeedId": "Overheat",
+  "PointsPerHourOutsideDay": -0.25,
+  "PointsPerHourOutsideNight": -0.1,
+  "PointsPerHourInsideDay": -0.025,
+  "PointsPerHourInsideNight": 0,
+  "ImmunityNeedId": "WetFur"
+}

@@ -1,0 +1,32 @@
+{
+  "Id": "Energy",
+  "BackwardCompatibleIds": [],
+  "Order": 1001,
+  "NeedGroupId": "BasicNeeds",
+  "CharacterType": "Golem",
+  "DisplayNameLocKey": "Need.Energy.DisplayName",
+  "StartingValue": 0.5,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -0.58,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "StateWithAlert"
+  },
+  "CriticalSpriteName": "OutOfEnergy",
+  "CriticalDescriptionLocKey": "Need.Energy.CriticalDescription",
+  "CriticalDescriptionShortLocKey": "Need.Energy.CriticalDescriptionShort",
+  "Bonuses": [
+    {
+      "Id": "WalkingSpeed",
+      "MultiplierDelta": -0.75
+    }
+  ],
+  "BonusesAppliedWhenAdverse": true,
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": false,
+  "HoursWarningThreshold": 3.5,
+  "PositiveDescriptionLocKey" : "Need.Energy.PositiveDescription"
+}

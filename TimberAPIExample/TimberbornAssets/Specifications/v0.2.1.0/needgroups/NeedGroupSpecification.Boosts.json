@@ -1,0 +1,6 @@
+{
+  "Id": "Boosts",
+  "Order": 100,
+  "DisplayNameLocKey": "NeedGroup.Boosts.DisplayName",
+  "HideWhenNoActiveNeed": true
+}

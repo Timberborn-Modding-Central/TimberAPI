@@ -1,0 +1,22 @@
+{
+  "Id": "Biofuel",
+  "BackwardCompatibleIds": [
+  ],
+  "DisplayNameLocKey": "Good.Biofuel.DisplayName",
+  "PluralDisplayNameLocKey": "Good.Biofuel.PluralDisplayName",
+  "ConsumptionEffects": [
+    {
+      "NeedId": "Biofuel",
+      "Points": 0.3
+    }
+  ],
+  "GoodType": "FuelBarrel",
+  "VisibleContainer": {
+    "Value": "Barrel"
+  },
+  "CarryingAnimation": "CarryInHands",
+  "Weight": 1,
+  "TopBarGroupId": "Materials",
+  "Icon": "Sprites/Goods/BiofuelIcon",
+  "RequiredFeatureToggle": ""
+}

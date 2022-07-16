@@ -1,0 +1,32 @@
+{
+  "Id": "GrilledChestnuts",
+  "BackwardCompatibleIds": [
+    ""
+  ],
+  "Order": 50,
+  "NeedGroupId": "Nutrition",
+  "CharacterType": "BeaverAdult",
+  "DisplayNameLocKey": "Good.GrilledChestnut.PluralDisplayName",
+  "StartingValue": 0.0,
+  "MinimumValue": 0.0,
+  "MaximumValue": 1.0,
+  "DailyDelta": -0.05,
+  "ImportanceMultiplier": 1.0,
+  "CriticalNeedType": {
+    "Value": "None"
+  },
+  "CriticalSpriteName": "",
+  "CriticalDescriptionLocKey": "",
+  "Bonuses": [
+    {
+      "Id": "CarryingCapacity",
+      "MultiplierDelta": 0.1
+    }
+  ],
+  "DeathOnMinValue": false,
+  "DeathMessageLocKey": "",
+  "Effectiveness": 1.0,
+  "Wastable": true,
+  "NewResources": true,
+  "PositiveWellbeing": 2
+}

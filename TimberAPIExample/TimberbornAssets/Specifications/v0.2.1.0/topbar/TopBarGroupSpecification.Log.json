@@ -1,0 +1,7 @@
+{
+  "Id": "Logs",
+  "Order": 3,
+  "DisplayNameLocKey": "TopBar.Logs",
+  "Icon": "Sprites/TopBar/Logs",
+  "SingleResourceGroup": true
+}
