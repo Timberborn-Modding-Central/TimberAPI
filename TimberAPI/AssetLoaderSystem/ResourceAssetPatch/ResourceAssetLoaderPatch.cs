@@ -13,3 +13,4 @@ namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
             return false;
         }
     }
+}
