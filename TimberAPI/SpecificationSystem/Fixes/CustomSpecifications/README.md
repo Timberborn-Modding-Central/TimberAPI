@@ -1,7 +1,5 @@
 # TimberAPI custom specifications
-Provide specifications to work around limitations for modders. These should be removed whenever the base game supports it!
-  
-Give in this readme the reason of existence.
+These specifications provide a workaround to certain features to improve the modding experience or fix bugs.
 
 ## Faction golem
 **What:** Reusing golem models in other factions or creating custom golem models  
