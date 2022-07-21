@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Timberborn.Buildings;
+using Timberborn.Goods;
 using Timberborn.TickSystem;
 using Timberborn.Warehouses;
 using TimberbornAPI.EntityLinkerSystem;
@@ -44,7 +45,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
                     : link.Linker.GetComponent<PausableBuilding>();
                 if (_stockpile.Inventory
                          .Stock
-                         .Where(x => x.GoodSpecification.Id.Contains("Berr"))
+                         .Where(x => x.GoodId.Contains("Berr"))
                          .FirstOrDefault()
                          .Amount > 150)
                 {
