@@ -68,7 +68,7 @@ namespace TimberbornAPI.EntityLinkerSystem
                 {
                     return;
                 }
-                var linkerLinks = links.Where(x => x.Linker == this).ToList(); 
+                var linkerLinks = links.Where(x => x != null && x.Linker == this).ToList(); 
                 foreach (var link in linkerLinks)
                 {
                     AddLinkInLinkee(link);

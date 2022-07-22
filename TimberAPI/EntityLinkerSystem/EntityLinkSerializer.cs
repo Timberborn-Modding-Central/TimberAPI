@@ -1,4 +1,5 @@
 ﻿using Timberborn.Persistence;
+using TimberbornAPI.Internal;
 
 namespace TimberbornAPI.EntityLinkerSystem
 {
@@ -13,10 +14,19 @@ namespace TimberbornAPI.EntityLinkerSystem
 
         public virtual Obsoletable<EntityLink> Deserialize(IObjectLoader objectLoader)
         {
-            var linker = objectLoader.Get(LinkerKey);
-            var linkee = objectLoader.Get(LinkeeKey);
-            var link = new EntityLink(linker, linkee);
-            return link;
+            try
+            {
+                var linker = objectLoader.Get(LinkerKey);
+                var linkee = objectLoader.Get(LinkeeKey);
+                var link = new EntityLink(linker, linkee);
+                return link;
+            }
+            catch(ObsoleteValueException ex)
+            {
+                TimberAPIPlugin.Log.LogWarning($"{ex.Message}");
+                TimberAPIPlugin.Log.LogWarning($"Skipping EntityLink.");
+                return null;
+            }
         }
 
         public virtual void Serialize(EntityLink value, IObjectSaver objectSaver)
