@@ -1,6 +1,11 @@
 # TimberAPI
 Unofficial API to enable easier Timberborn modding
 
+|TimberAPI Version |Game Version Compatible|
+|---|---|
+|0.4.X   |0.2.2.1-expirimental|
+|0.3.X   |0.1.5.2-main|
+
 ### **Currently supported features:**
 1. Bind your code easily with dependency injection
 2. Event listening of any event to get triggered on in game actions
