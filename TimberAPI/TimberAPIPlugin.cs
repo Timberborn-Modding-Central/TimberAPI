@@ -11,6 +11,7 @@ using TimberbornAPI.SpecificationSystem;
 using TimberbornAPI.EntityLinkerSystem;
 using TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Golems;
 using TimberbornAPI.UIBuilderSystem;
+using TimberbornAPI.SpecificationSystem.Buildings;
 
 namespace TimberbornAPI.Internal
 {
@@ -44,6 +45,8 @@ namespace TimberbornAPI.Internal
             TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new AssetConfigurator(), SceneEntryPoint.Global);
             TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new GolemFactionConfigurator(), SceneEntryPoint.InGame);
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
+
+            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new BuildingRecipeSpecificationConfigurator(), SceneEntryPoint.InGame);
 
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
             TimberAPI.DependencyRegistry.AddConfigurators(new List<IConfigurator>
