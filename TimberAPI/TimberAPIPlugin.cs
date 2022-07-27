@@ -16,7 +16,7 @@ using TimberbornAPI.SpecificationSystem.Buildings;
 namespace TimberbornAPI.Internal
 {
 
-    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "TIMBER_API_VERSION")]
+    [BepInPlugin("com.timberapi.timberapi", "TimberAPI", "0.4.3")]
     public class TimberAPIPlugin : BaseUnityPlugin
     {
         public static string Guid = "com.timberapi.timberapi";
@@ -46,7 +46,7 @@ namespace TimberbornAPI.Internal
             TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new GolemFactionConfigurator(), SceneEntryPoint.InGame);
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
 
-            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new BuildingRecipeSpecificationConfigurator(), SceneEntryPoint.InGame);
+            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new BuildingSpecificationConfigurator(), SceneEntryPoint.InGame);
 
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
             TimberAPI.DependencyRegistry.AddConfigurators(new List<IConfigurator>

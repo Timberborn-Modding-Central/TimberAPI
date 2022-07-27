@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using Timberborn.EntitySystem;
 using Timberborn.Goods;
+using Timberborn.PreviewSystem;
 using Timberborn.Warehouses;
 using Timberborn.Workshops;
+using UnityEngine;
 
 namespace TimberbornAPI.SpecificationSystem.Buildings
 {
@@ -19,32 +21,42 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
     {
         public static void Prefix(Manufactory subject)
         {
-            //Console.WriteLine($"Initialize stack:\n{System.Environment.StackTrace}");
-            Console.WriteLine($"manu: {subject}");
-            Console.WriteLine($"ProductionRecipeIds count: {subject.ProductionRecipeIds.Count()}");
-            Console.WriteLine($"ProductionRecipeIds: {subject.ProductionRecipeIds.Aggregate((foo, bar) => $"{foo}, {bar}")}");
-
-            var specificationService = TimberAPI.DependencyContainer.GetInstance<BuildingRecipeService>();
+            var specificationService = TimberAPI.DependencyContainer.GetInstance<BuildingSpecificationService>();
             var recipes = specificationService.GetRecipesByManufactory(subject);
             if (recipes == null)
             {
-                //Console.WriteLine("recipes null");
                 return;
-            }
-            Console.WriteLine($"curr recipes");
-            foreach (var item in subject.ProductionRecipeIds)
-            {
-                Console.WriteLine($"\tid: {item}");
             }
 
             subject._productionRecipeIds = recipes.Select(x => x.Id)
                                                   .ToArray();
+        }
+    }
 
-            Console.WriteLine($"new recipes");
-            foreach (var item in subject.ProductionRecipeIds)
+    /// <summary>
+    /// Changing building costs here just works. Costs are then updated on ToolButton
+    /// and on the construction site
+    /// </summary>
+    [HarmonyPatch(typeof(PreviewFactory), nameof(PreviewFactory.Create))]
+    public static class PreviewFactoryPatch
+    {
+        public static void Prefix(ref GameObject prefab)
+        {
+            if(!prefab.TryGetComponent<Timberborn.Buildings.Building>(out var buildingComponent))
             {
-                Console.WriteLine($"\tid: {item}");
+                return;
             }
+            var specificationService = TimberAPI.DependencyContainer.GetInstance<BuildingSpecificationService>();
+            var building = specificationService.GetBuildingByBuilding(buildingComponent);
+            if (building == null)
+            {
+                return;
+            }
+
+            buildingComponent._scienceCost = building.ScienceCost;
+            buildingComponent._buildingCost = building.BuildingCost
+                                                      .Select(x => new GoodAmountSpecification(x.GoodId, x.Amount))
+                                                      .ToArray();
         }
     }
 }
