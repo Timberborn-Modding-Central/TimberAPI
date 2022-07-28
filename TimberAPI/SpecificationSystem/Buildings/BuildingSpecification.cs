@@ -2,6 +2,10 @@
 
 namespace TimberbornAPI.SpecificationSystem.Buildings
 {
+    /// <summary>
+    /// Represents the various settings that can be changed 
+    /// on Buildings using TimberAPI
+    /// </summary>
     public class BuildingSpecification
     {
         public BuildingSpecification(

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TimberbornAPI.SpecificationSystem.Buildings
+﻿namespace TimberbornAPI.SpecificationSystem.Buildings
 {
+    /// <summary>
+    /// Stripped version of Timberborn.Goods.GoodAmountSpecification.
+    /// Only contains relevant fields
+    /// </summary>
     public class BuildingCost
     {
         public BuildingCost(string goodId, int amount)

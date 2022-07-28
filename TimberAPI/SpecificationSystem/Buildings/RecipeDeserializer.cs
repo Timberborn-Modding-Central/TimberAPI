@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Timberborn.Persistence;
 
 namespace TimberbornAPI.SpecificationSystem.Buildings
@@ -9,6 +7,11 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
     {
         private readonly PropertyKey<string> _recipeId = new PropertyKey<string>("RecipeId");
 
+        /// <summary>
+        /// This class only deserializes specification jsons, so this is not used
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="objectSaver"></param>
         public void Serialize(Recipe value, IObjectSaver objectSaver)
         {
             throw new NotSupportedException();

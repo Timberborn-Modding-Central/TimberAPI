@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
 using Timberborn.EntitySystem;
 using Timberborn.MechanicalSystem;
 using Timberborn.Persistence;
@@ -29,57 +27,53 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
             _buildingRecipeSpecificationObjectDeserializer = buildingRecipeSpecificationObjectDeserializer;
         }
 
+        /// <summary>
+        /// Fetches all BuildingSpecifications on load and stores them
+        /// </summary>
         public void Load()
         {
             _buildingSpecifications = _specificationService.GetSpecifications(_buildingRecipeSpecificationObjectDeserializer)
                                                            .ToImmutableArray();
         }
 
+        /// <summary>
+        /// Fetches all Recipes from loaded BuildingSpecifications that
+        /// have the same prefab name as given <paramref name="manufactory"/>
+        /// </summary>
+        /// <param name="manufactory"></param>
+        /// <returns></returns>
         public IEnumerable<Recipe> GetRecipesByManufactory(Manufactory manufactory)
         {
-            var prefab = manufactory.GetComponent<Prefab>();
-            var prefabName = prefab.PrefabName;
-            if (_buildingSpecifications == null)
-            {
-                return null;
-            }
-            var buildingSpec = _buildingSpecifications.Where(x => x?.BuildingId == prefabName)
-                                                      .FirstOrDefault();
-
-            if (buildingSpec == null)
-            {
-                ;
-                return null;
-            }
-            if (buildingSpec.Recipes == null)
+            var buildingSpec = GetBuildingSpecifications(manufactory).FirstOrDefault();
+            if (buildingSpec == null || buildingSpec.Recipes == null)
             {
                 return null;
             }
             return buildingSpec.Recipes;
         }
 
+        /// <summary>
+        /// Fetches all Recipes from loaded BuildingSpecifications that
+        /// have the same prefab name as given <paramref name="building"/>
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns></returns>
         public Building GetBuildingByBuilding(Timberborn.Buildings.Building building)
         {
-            var prefab = building.GetComponent<Prefab>();
-            var prefabName = prefab.PrefabName;
-            if (_buildingSpecifications == null)
-            {
-                return null;
-            }
-            var buildingSpec = _buildingSpecifications.Where(x => x?.BuildingId == prefabName)
-                                                      .FirstOrDefault();
-
-            if (buildingSpec == null)
-            {
-                return null;
-            }
-            if (buildingSpec.Building == null)
+            var buildingSpec = GetBuildingSpecifications(building).FirstOrDefault();
+            if (buildingSpec == null || buildingSpec.Building == null)
             {
                 return null;
             }
             return buildingSpec.Building;
         }
 
+        /// <summary>
+        /// Fetches all Recipes from loaded BuildingSpecifications that
+        /// have the same prefab name as given <paramref name="mechanicalNodeSpecification"/>
+        /// </summary>
+        /// <param name="mechanicalNodeSpecification"></param>
+        /// <returns></returns>
         public MechanicalNode GetMechanicalNodeByMechanicalNodeSpecification(
             MechanicalNodeSpecification mechanicalNodeSpecification)
         {
@@ -92,6 +86,12 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
             return buildingSpec.MechanicalNode;
         }
 
+        /// <summary>
+        /// Helper function that gets all specification that have the same
+        /// prefab name as given <paramref name="gameObject"/>
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <returns></returns>
         private IEnumerable<BuildingSpecification> GetBuildingSpecifications(MonoBehaviour gameObject)
         {
             var prefab = gameObject.GetComponent<Prefab>();

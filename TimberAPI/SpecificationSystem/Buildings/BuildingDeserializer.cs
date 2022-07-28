@@ -17,6 +17,11 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
             _buildingCostDeserializer = buildingCostDeserializer;
         }
 
+        /// <summary>
+        /// This class only deserializes specification jsons, so this is not used
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="objectSaver"></param>
         public void Serialize(Building value, IObjectSaver objectSaver)
         {
             throw new NotSupportedException();

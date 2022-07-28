@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace TimberbornAPI.SpecificationSystem.Buildings
 {
+    /// <summary>
+    /// Stripped version on Timberborn.Buildings.Building.
+    /// Only contains relevant fields
+    /// </summary>
     public class Building
     {
         public Building(int scienceCost, List<BuildingCost> buildingCost)
