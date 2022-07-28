@@ -10,16 +10,20 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
         private PropertyKey<string> _buildingIdKey = new PropertyKey<string>("BuildingId");
         private PropertyKey<Building> _buildingKey = new PropertyKey<Building>("Building");
         private ListKey<Recipe> _recipesKey = new ListKey<Recipe>("Recipes");
+        private PropertyKey<MechanicalNode> _mechanicalNodeKey = new PropertyKey<MechanicalNode>("MechanicalNode");
 
         private readonly RecipeDeserializer _recipeDeserializer;
         private readonly BuildingDeserializer _buildingDeserializer;
+        private readonly MechanicalNodeDeserializer _mechanicalNodeDeserializer;
 
         public BuildingSpecificationDeserializer(
             RecipeDeserializer recipeDeserializer,
-            BuildingDeserializer buildingDeserializer)
+            BuildingDeserializer buildingDeserializer,
+            MechanicalNodeDeserializer mechanicalNodeDeserializer)
         {
             _recipeDeserializer = recipeDeserializer;
             _buildingDeserializer = buildingDeserializer;
+            _mechanicalNodeDeserializer = mechanicalNodeDeserializer;
         }
 
         public void Serialize(BuildingSpecification value, IObjectSaver objectSaver)
@@ -35,9 +39,13 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
             var buildings = objectLoader.Has(_buildingKey)
                 ? objectLoader.Get(_buildingKey, _buildingDeserializer)
                 : null;
+            var mechanicalNode = objectLoader.Has(_mechanicalNodeKey)
+                ? objectLoader.Get(_mechanicalNodeKey, _mechanicalNodeDeserializer)
+                : null;
             return new BuildingSpecification(objectLoader.Get(_buildingIdKey),
                                              recipes,
-                                             buildings);
+                                             buildings,
+                                             mechanicalNode);
         }
     }
 }

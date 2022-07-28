@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace TimberbornAPI.SpecificationSystem.Buildings
 {
@@ -9,11 +7,13 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
         public BuildingSpecification(
             string buildingId,
             List<Recipe> recipes,
-            Building building)
+            Building building,
+            MechanicalNode mechanicalNode)
         {
             BuildingId = buildingId;
             Recipes = recipes;
             Building = building;
+            MechanicalNode = mechanicalNode;
         }
 
         public string BuildingId;
@@ -21,39 +21,7 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
         public List<Recipe> Recipes;
 
         public Building Building;
-    }
 
-    public class Recipe
-    {
-        public string Id;
-
-        public Recipe(string id)
-        {
-            Id = id;
-        }
-    }
-
-    public class Building
-    {
-        public Building(int scienceCost, List<BuildingCost> buildingCost)
-        {
-            ScienceCost = scienceCost;
-            BuildingCost = buildingCost;
-        }
-
-        public int ScienceCost { get; set; }
-        public List<BuildingCost> BuildingCost { get; set; }
-    }
-
-    public class BuildingCost
-    {
-        public BuildingCost(string goodId, int amount)
-        {
-            GoodId = goodId;
-            Amount = amount;
-        }
-
-        public string GoodId { get; set; }
-        public int Amount { get; set; }
+        public MechanicalNode MechanicalNode;
     }
 }

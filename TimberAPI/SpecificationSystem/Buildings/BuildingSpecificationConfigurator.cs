@@ -14,6 +14,7 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
             containerDefinition.Bind<RecipeDeserializer>().AsSingleton();
             containerDefinition.Bind<BuildingDeserializer>().AsSingleton();
             containerDefinition.Bind<BuildingCostDeserializer>().AsSingleton();
+            containerDefinition.Bind<MechanicalNodeDeserializer>().AsSingleton();
         }
     }
 }

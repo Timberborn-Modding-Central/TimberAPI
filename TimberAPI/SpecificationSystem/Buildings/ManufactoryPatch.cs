@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Timberborn.EntitySystem;
 using Timberborn.Goods;
+using Timberborn.MechanicalSystem;
 using Timberborn.PreviewSystem;
 using Timberborn.Warehouses;
 using Timberborn.Workshops;
@@ -34,29 +35,36 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
     }
 
     /// <summary>
-    /// Changing building costs here just works. Costs are then updated on ToolButton
-    /// and on the construction site
+    /// Changing building component stuff here just works. 
     /// </summary>
     [HarmonyPatch(typeof(PreviewFactory), nameof(PreviewFactory.Create))]
     public static class PreviewFactoryPatch
     {
         public static void Prefix(ref GameObject prefab)
         {
-            if(!prefab.TryGetComponent<Timberborn.Buildings.Building>(out var buildingComponent))
-            {
-                return;
-            }
             var specificationService = TimberAPI.DependencyContainer.GetInstance<BuildingSpecificationService>();
-            var building = specificationService.GetBuildingByBuilding(buildingComponent);
-            if (building == null)
+            if (prefab.TryGetComponent<Timberborn.Buildings.Building>(out var buildingComponent))
             {
-                return;
+                var building = specificationService.GetBuildingByBuilding(buildingComponent);
+                if (building != null)
+                {
+                    buildingComponent._scienceCost = building.ScienceCost;
+                    buildingComponent._buildingCost = building.BuildingCost
+                                                              .Select(x => new GoodAmountSpecification(x.GoodId, x.Amount))
+                                                              .ToArray();
+                }
             }
 
-            buildingComponent._scienceCost = building.ScienceCost;
-            buildingComponent._buildingCost = building.BuildingCost
-                                                      .Select(x => new GoodAmountSpecification(x.GoodId, x.Amount))
-                                                      .ToArray();
+            if(prefab.TryGetComponent<MechanicalNodeSpecification>(out var mechanicalNodeSpec))
+            {
+
+                var mechanicalNode = specificationService.GetMechanicalNodeByMechanicalNodeSpecification(mechanicalNodeSpec);
+                if(mechanicalNode != null)
+                {
+                    mechanicalNodeSpec._powerInput = mechanicalNode.PowerInput;
+                    mechanicalNodeSpec._powerOutput = mechanicalNode.PowerOutput;
+                }
+            }
         }
     }
 }
