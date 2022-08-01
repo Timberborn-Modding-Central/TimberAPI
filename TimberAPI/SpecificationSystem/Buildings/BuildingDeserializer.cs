@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Timberborn.Persistence;
 
 namespace TimberbornAPI.SpecificationSystem.Buildings
@@ -29,8 +28,14 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
 
         public Obsoletable<Building> Deserialize(IObjectLoader objectLoader)
         {
-            return new Building(objectLoader.Get(_scienceCostKey),
-                                objectLoader.Get(_buildingCostKey, _buildingCostDeserializer));
+            var scienceCost = objectLoader.Has(_scienceCostKey)
+                ? objectLoader.Get(_scienceCostKey)
+                : 0;
+            var buildingCost = objectLoader.Has(_buildingCostKey)
+                ? objectLoader.Get(_buildingCostKey, _buildingCostDeserializer)
+                : new List<BuildingCost>();
+            return new Building(scienceCost,
+                                buildingCost);
         }
     }
 }

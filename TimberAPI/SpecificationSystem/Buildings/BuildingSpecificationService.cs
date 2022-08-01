@@ -44,7 +44,7 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
         /// <returns></returns>
         public IEnumerable<Recipe> GetRecipesByManufactory(Manufactory manufactory)
         {
-            var buildingSpec = GetBuildingSpecifications(manufactory).FirstOrDefault();
+            var buildingSpec = GetBuildingSpecifications(manufactory);
             if (buildingSpec == null || buildingSpec.Recipes == null)
             {
                 return null;
@@ -60,7 +60,7 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
         /// <returns></returns>
         public Building GetBuildingByBuilding(Timberborn.Buildings.Building building)
         {
-            var buildingSpec = GetBuildingSpecifications(building).FirstOrDefault();
+            var buildingSpec = GetBuildingSpecifications(building);
             if (buildingSpec == null || buildingSpec.Building == null)
             {
                 return null;
@@ -77,7 +77,7 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
         public MechanicalNode GetMechanicalNodeByMechanicalNodeSpecification(
             MechanicalNodeSpecification mechanicalNodeSpecification)
         {
-            var buildingSpec = GetBuildingSpecifications(mechanicalNodeSpecification).FirstOrDefault();
+            var buildingSpec = GetBuildingSpecifications(mechanicalNodeSpecification);
             if (buildingSpec == null || buildingSpec.MechanicalNode == null)
             {
                 return null;
@@ -87,20 +87,22 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
         }
 
         /// <summary>
-        /// Helper function that gets all specification that have the same
+        /// Helper function returns the specification that has the same
         /// prefab name as given <paramref name="gameObject"/>
         /// </summary>
         /// <param name="gameObject"></param>
         /// <returns></returns>
-        private IEnumerable<BuildingSpecification> GetBuildingSpecifications(MonoBehaviour gameObject)
+        private BuildingSpecification GetBuildingSpecifications(MonoBehaviour gameObject)
         {
             var prefab = gameObject.GetComponent<Prefab>();
             var prefabName = prefab.PrefabName;
             if (_buildingSpecifications == null)
             {
-                return new ImmutableArray<BuildingSpecification>();
+                return null;
             }
-            return _buildingSpecifications.Where(x => x?.BuildingId == prefabName);
+            var specs = _buildingSpecifications.Where(x => x?.BuildingId == prefabName);
+            var spec = specs.FirstOrDefault();
+            return spec;
         }
     }
 }

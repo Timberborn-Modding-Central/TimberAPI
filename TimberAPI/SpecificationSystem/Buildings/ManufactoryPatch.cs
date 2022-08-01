@@ -1,9 +1,11 @@
 ﻿using HarmonyLib;
+using System.Collections.Generic;
 using System.Linq;
 using Timberborn.Goods;
 using Timberborn.MechanicalSystem;
 using Timberborn.PreviewSystem;
 using Timberborn.Workshops;
+using TimberbornAPI.Internal;
 using UnityEngine;
 
 namespace TimberbornAPI.SpecificationSystem.Buildings
@@ -24,7 +26,8 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
                 return;
             }
 
-            subject._productionRecipeIds = recipes.Select(x => x.Id)
+            subject._productionRecipeIds = recipes.Where(x => x.Id != "")
+                                                  .Select(x => x.Id)
                                                   .ToArray();
         }
     }
@@ -44,15 +47,19 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
                 if (building != null)
                 {
                     buildingComponent._scienceCost = building.ScienceCost;
-                    buildingComponent._buildingCost = building.BuildingCost
-                                                              .Select(x => new GoodAmountSpecification(x.GoodId, x.Amount))
-                                                              .ToArray();
+
+                    /// HACK: Reverse BuildingCost List so that custom costs are first, and so are kept
+                    var reverseList = new List<BuildingCost>(building.BuildingCost);
+                    reverseList.Reverse();
+
+                    buildingComponent._buildingCost = reverseList.Select(x => new GoodAmountSpecification(x.GoodId, x.Amount))
+                                                                 .Distinct(new GoodAmountSpecificationComparer())
+                                                                 .ToArray();
                 }
             }
 
             if(prefab.TryGetComponent<MechanicalNodeSpecification>(out var mechanicalNodeSpec))
             {
-
                 var mechanicalNode = specificationService.GetMechanicalNodeByMechanicalNodeSpecification(mechanicalNodeSpec);
                 if(mechanicalNode != null)
                 {
@@ -60,6 +67,40 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
                     mechanicalNodeSpec._powerOutput = mechanicalNode.PowerOutput;
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Custom EqualityComparer to detect duplicate BuildingCosts. Equality is based on GoodId
+    /// </summary>
+    class GoodAmountSpecificationComparer : IEqualityComparer<GoodAmountSpecification>
+    {
+        public bool Equals(GoodAmountSpecification gas1, GoodAmountSpecification gas2)
+        {
+            //Console.WriteLine($"good1: {gas1.GoodId}: {gas1.Amount}. good2: {gas2.GoodId}: {gas2.Amount}.");
+            if (gas1.Equals(default(GoodAmountSpecification)) && gas2.Equals(default(GoodAmountSpecification)))
+            {
+                return true;
+            }
+            else if (gas1.Equals(default(GoodAmountSpecification)) || gas2.Equals(default(GoodAmountSpecification)))
+            {
+                return false;
+            }
+            else if (gas1.GoodId == gas2.GoodId)
+            {
+                TimberAPIPlugin.Log.LogWarning($"Duplicate BuildingCost detected. Keeping \"GoodId: {gas1.GoodId}\". Cost: {gas1.Amount}");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int GetHashCode(GoodAmountSpecification gas)
+        {
+            int hCode = gas.GoodId.GetHashCode();
+            return hCode.GetHashCode();
         }
     }
 }

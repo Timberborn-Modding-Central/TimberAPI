@@ -19,7 +19,10 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
 
         public Obsoletable<Recipe> Deserialize(IObjectLoader objectLoader)
         {
-            return new Recipe(objectLoader.Get(_recipeId));
+            var recipe = objectLoader.Has(_recipeId)
+                ? objectLoader.Get(_recipeId)
+                : "";
+            return new Recipe(recipe);
         }
     }
 }
