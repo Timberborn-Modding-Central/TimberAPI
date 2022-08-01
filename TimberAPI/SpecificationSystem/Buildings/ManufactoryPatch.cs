@@ -53,7 +53,7 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
                     reverseList.Reverse();
 
                     buildingComponent._buildingCost = reverseList.Select(x => new GoodAmountSpecification(x.GoodId, x.Amount))
-                                                                 .Distinct(new GoodAmountSpecificationComparer())
+                                                                 .Distinct(new GoodAmountSpecificationComparer(prefab.name))
                                                                  .ToArray();
                 }
             }
@@ -75,9 +75,15 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
     /// </summary>
     class GoodAmountSpecificationComparer : IEqualityComparer<GoodAmountSpecification>
     {
+        public GoodAmountSpecificationComparer(string buildingName)
+        {
+            BuildingName = buildingName;
+        }
+
+        public string BuildingName;
+
         public bool Equals(GoodAmountSpecification gas1, GoodAmountSpecification gas2)
         {
-            //Console.WriteLine($"good1: {gas1.GoodId}: {gas1.Amount}. good2: {gas2.GoodId}: {gas2.Amount}.");
             if (gas1.Equals(default(GoodAmountSpecification)) && gas2.Equals(default(GoodAmountSpecification)))
             {
                 return true;
@@ -88,8 +94,7 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
             }
             else if (gas1.GoodId == gas2.GoodId)
             {
-                TimberAPIPlugin.Log.LogWarning($"Duplicate BuildingCost detected. Keeping \"GoodId: {gas1.GoodId}\". Cost: {gas1.Amount}");
-                return true;
+                 return true;
             }
             else
             {
