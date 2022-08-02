@@ -47,6 +47,7 @@ namespace TimberbornAPI.Internal
             TimberAPI.DependencyRegistry.AddConfigurator(new UIBuilderConfigurator(), SceneEntryPoint.Global);
 
             TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new BuildingSpecificationConfigurator(), SceneEntryPoint.InGame);
+            TimberAPI.DependencyRegistry.AddConfiguratorBeforeLoad(new BuildingSpecificationConfigurator(), SceneEntryPoint.MapEditor);
 
             TimberAPI.DependencyRegistry.AddConfigurator(new EntityActionConfigurator(), SceneEntryPoint.MapEditor);
             TimberAPI.DependencyRegistry.AddConfigurators(new List<IConfigurator>
