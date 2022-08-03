@@ -6,11 +6,11 @@
     /// </summary>
     public class Recipe
     {
-        public string Id;
+        public string RecipeId;
 
-        public Recipe(string id)
+        public Recipe(string recipeId)
         {
-            Id = id;
+            RecipeId = recipeId;
         }
     }
 }

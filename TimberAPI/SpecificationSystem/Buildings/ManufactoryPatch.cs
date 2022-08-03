@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Timberborn.Goods;
@@ -26,8 +27,8 @@ namespace TimberbornAPI.SpecificationSystem.Buildings
                 return;
             }
 
-            subject._productionRecipeIds = recipes.Where(x => x.Id != "")
-                                                  .Select(x => x.Id)
+            subject._productionRecipeIds = recipes.Where(x => x.RecipeId != "")
+                                                  .Select(x => x.RecipeId)
                                                   .ToArray();
         }
     }
