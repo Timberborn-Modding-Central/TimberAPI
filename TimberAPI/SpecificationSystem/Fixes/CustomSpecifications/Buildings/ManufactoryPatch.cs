@@ -9,7 +9,7 @@ using Timberborn.Workshops;
 using TimberbornAPI.Internal;
 using UnityEngine;
 
-namespace TimberbornAPI.SpecificationSystem.Buildings
+namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
 {
     /// <summary>
     /// Patch recipes in ManufactoryInventoryInitializer.Initialize, so that the Manufactory

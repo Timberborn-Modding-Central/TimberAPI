@@ -8,7 +8,7 @@ using Timberborn.SingletonSystem;
 using Timberborn.Workshops;
 using UnityEngine;
 
-namespace TimberbornAPI.SpecificationSystem.Buildings
+namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
 {
     /// <summary>
     /// This service fetches BuildingSpecifications

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TimberbornAPI.SpecificationSystem.Buildings
+namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
 {
     /// <summary>
     /// Represents the various settings that can be changed 

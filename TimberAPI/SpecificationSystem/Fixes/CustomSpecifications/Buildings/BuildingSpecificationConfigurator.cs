@@ -1,6 +1,6 @@
 ﻿using Bindito.Core;
 
-namespace TimberbornAPI.SpecificationSystem.Buildings
+namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
 {
     public class BuildingSpecificationConfigurator : IConfigurator
     {

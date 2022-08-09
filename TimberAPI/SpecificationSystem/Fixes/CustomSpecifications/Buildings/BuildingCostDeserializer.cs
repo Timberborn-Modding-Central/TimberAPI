@@ -1,7 +1,7 @@
 ﻿using System;
 using Timberborn.Persistence;
 
-namespace TimberbornAPI.SpecificationSystem.Buildings
+namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
 {
     public class BuildingCostDeserializer : IObjectSerializer<BuildingCost>
     {

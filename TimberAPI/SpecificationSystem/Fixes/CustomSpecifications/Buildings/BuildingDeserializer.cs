@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Timberborn.Persistence;
 
-namespace TimberbornAPI.SpecificationSystem.Buildings
+namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
 {
     public class BuildingDeserializer : IObjectSerializer<Building>
     {

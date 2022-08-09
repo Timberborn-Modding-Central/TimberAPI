@@ -1,4 +1,4 @@
-﻿namespace TimberbornAPI.SpecificationSystem.Buildings
+﻿namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
 {
     /// <summary>
     /// Stripped version of Timberborn.Goods.RecipeSpecification
