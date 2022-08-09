@@ -4,14 +4,13 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Timberborn.AssetSystem;
-using Timberborn.Buildings;
 using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 using Timberborn.Workshops;
 using Timberborn.WorldSerialization;
 using TimberbornAPI.Internal;
 using TimberbornAPI.PluginSystem;
-using TimberbornAPI.SpecificationSystem.Buildings;
+using TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings;
 using UnityEngine;
 
 namespace TimberbornAPI.SpecificationSystem
@@ -80,6 +79,7 @@ namespace TimberbornAPI.SpecificationSystem
         }
 
         /// <summary>
+        /// TODO: Should probably be in its own class?
         /// Generates Custom original BuildingSpecification jsons for
         /// all buildings in the game
         /// </summary>
@@ -99,10 +99,10 @@ namespace TimberbornAPI.SpecificationSystem
                                          .Select(x => new Recipe(x))
                                          .ToList();
                 }
-                var build = new Buildings.Building(component.ScienceCost,
-                                                   component.BuildingCost
-                                                            .Select(x => new BuildingCost(x.GoodId, x.Amount))
-                                                            .ToList());
+                var build = new Building(component.ScienceCost,
+                                         component.BuildingCost
+                                                  .Select(x => new BuildingCost(x.GoodId, x.Amount))
+                                                  .ToList());
                 var mechanicalNode = component.GetComponent<Timberborn.MechanicalSystem.MechanicalNodeSpecification>();
                 MechanicalNode mechNode = null;
                 if (mechanicalNode != null)
@@ -115,19 +115,23 @@ namespace TimberbornAPI.SpecificationSystem
                                                              build,
                                                              mechNode);
 
-                var bar = new JsonSerializer();
-                bar.DefaultValueHandling = DefaultValueHandling.Ignore;
+                var serializer = new JsonSerializer();
+                serializer.DefaultValueHandling = DefaultValueHandling.Ignore;
                 using var sw = new StringWriter();
+                serializer.Serialize(sw, buildingSpec);
 
-                bar.Serialize(sw, buildingSpec);
-
-                var test = sw.ToString();
-                var baz = new TextAsset(test)
+                var jsonText = sw.ToString();
+                var specificationAsset = new TextAsset(jsonText)
                 {
                     name = $"BuildingSpecification.{component.name}"
                 };
 
-                buildings.Add(baz);
+                // HACK: Uncomment to create BuildingSpecs files
+                //var file = File.CreateText($".\\{specificationAsset.name}.json");
+                //file.Write(JToken.Parse(jsonText).ToString(Formatting.Indented));
+                //file.Close();
+
+                buildings.Add(specificationAsset);
             }
 
             return buildings;
