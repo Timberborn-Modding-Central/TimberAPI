@@ -100,7 +100,7 @@ namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
             {
                 return null;
             }
-            var specs = _buildingSpecifications.Where(x => x?.BuildingId == prefabName);
+            var specs = _buildingSpecifications.Where(x => x?.Id == prefabName);
             var spec = specs.FirstOrDefault();
             return spec;
         }

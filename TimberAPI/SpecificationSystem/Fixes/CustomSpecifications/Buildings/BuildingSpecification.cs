@@ -14,13 +14,13 @@ namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
             Building building,
             MechanicalNode mechanicalNode)
         {
-            BuildingId = buildingId;
+            Id = buildingId;
             Recipes = recipes;
             Building = building;
             MechanicalNode = mechanicalNode;
         }
 
-        public string BuildingId;
+        public string Id;
 
         public List<Recipe> Recipes;
 

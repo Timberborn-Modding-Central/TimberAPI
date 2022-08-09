@@ -11,7 +11,7 @@ using TimberbornAPI.SpecificationSystem;
 using TimberbornAPI.EntityLinkerSystem;
 using TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Golems;
 using TimberbornAPI.UIBuilderSystem;
-using TimberbornAPI.SpecificationSystem.Buildings;
+using TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings;
 
 namespace TimberbornAPI.Internal
 {

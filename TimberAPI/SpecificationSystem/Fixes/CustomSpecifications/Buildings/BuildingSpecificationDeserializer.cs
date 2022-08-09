@@ -5,7 +5,7 @@ namespace TimberbornAPI.SpecificationSystem.Fixes.CustomSpecifications.Buildings
 {
     public class BuildingSpecificationDeserializer : IObjectSerializer<BuildingSpecification>
     {
-        private PropertyKey<string> _buildingIdKey = new PropertyKey<string>("BuildingId");
+        private PropertyKey<string> _buildingIdKey = new PropertyKey<string>("Id");
         private PropertyKey<Building> _buildingKey = new PropertyKey<Building>("Building");
         private ListKey<Recipe> _recipesKey = new ListKey<Recipe>("Recipes");
         private PropertyKey<MechanicalNode> _mechanicalNodeKey = new PropertyKey<MechanicalNode>("MechanicalNode");
