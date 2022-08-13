@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>TimberAPIExample</AssemblyName>
     <Description>An example plugin on how to use the TimberAPI</Description>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
     <ReleaseVersion>0.3.1</ReleaseVersion>
     <ReleaseVersion>TIMBER_API_EXAMPLE_VERSION</ReleaseVersion>
+    <PackageId>TimberAPIExample</PackageId>
+    <RootNamespace>TimberAPIExample</RootNamespace>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -15,6 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../TimberAPI/TimberAPI.csproj" />
+    <ProjectReference Include="..\TimberAPI.Old\TimberAPI.Old.csproj" />
   </ItemGroup>
 </Project>

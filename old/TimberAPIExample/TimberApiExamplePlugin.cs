@@ -14,7 +14,7 @@ using TimberAPIExample.Examples.EventListenerExample;
 namespace TimberAPIExample
 {
     /// <summary>
-    /// Example TimberAPI/BepInEx Plugin showing the power of the API
+    /// Example TimberAPI.Old/BepInEx Plugin showing the power of the API
     /// </summary>
     [BepInPlugin("com.timberapi.example", "TimberAPIExample", "TIMBER_API_EXAMPLE_VERSION")]
     [BepInDependency("com.timberapi.timberapi")]
@@ -30,7 +30,7 @@ namespace TimberAPIExample
             Log = Logger;
 
             // DependencyRegistry
-            // This is the heart of TimberAPI. Use Configurators to tell the game that your codes exists
+            // This is the heart of TimberAPI.Old. Use Configurators to tell the game that your codes exists
             TimberAPI.DependencyRegistry.AddConfigurator(new ExampleConfigurator());
 
             // AssetRegistry
@@ -63,7 +63,7 @@ namespace TimberAPIExample
     /**
      * DependencyRegistry
      * Example IConfigurator for dependency injection
-     * 1. Use Bind to inject the class, and 2. Add it via TimberAPI.Dependencies.AddConfigurator
+     * 1. Use Bind to inject the class, and 2. Add it via TimberAPI.Old.Dependencies.AddConfigurator
      */
     public class ExampleConfigurator : IConfigurator
     {

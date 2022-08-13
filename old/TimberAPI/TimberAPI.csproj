@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>TimberAPI</AssemblyName>
     <Description>The unofficial API for Timberborn</Description>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
@@ -12,6 +10,7 @@
     <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
     <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
     <ReleaseVersion>TIMBER_API_VERSION</ReleaseVersion>
+    <PackageId>TimberAPI</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

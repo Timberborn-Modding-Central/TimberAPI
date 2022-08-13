@@ -1,7 +1,7 @@
 ﻿using Timberborn.ToolSystem;
 
 /**
- * This is for any other code that isn't TimberAPI, but you can 
+ * This is for any other code that isn't TimberAPI.Old, but you can
  * do directly with Timberborn code
  * 
  * More examples to come

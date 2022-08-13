@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>8</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <TimberApiPath>$(SolutionDir)Timberborn\TimberAPI</TimberApiPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Timberborn.*.dll">
+            <DestinationSubDirectory>libs/</DestinationSubDirectory>
+        </Reference>
+        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
+            <DestinationSubDirectory>libs/</DestinationSubDirectory>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701" />
+      <PackageReference Include="MonoMod.Utils" Version="22.5.1.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+    <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild">
+        <Message Text="### Copying TimberApiCore ###" Importance="high" />
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core" />
+    </Target>
+</Project>
