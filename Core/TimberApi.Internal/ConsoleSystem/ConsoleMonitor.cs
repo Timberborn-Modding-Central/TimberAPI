@@ -12,7 +12,7 @@ namespace TimberApi.Internal.ConsoleSystem
     {
         private ConsoleMonitorController _monitorController = null!;
 
-        private KeyboardController _keyboardController;
+        private KeyboardController _keyboardController = null!;
 
         private bool _isGravePressed;
 
