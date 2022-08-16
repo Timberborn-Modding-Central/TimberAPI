@@ -19,13 +19,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701" />
-      <PackageReference Include="MonoMod.Utils" Version="22.5.1.1" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701"/>
+        <PackageReference Include="MonoMod.Utils" Version="22.5.1.1"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+        <PackageReference Include="UnityEngine.Modules" Version="2022.1.8" IncludeAssets="compile"/>
     </ItemGroup>
 
     <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild">
-        <Message Text="### Copying TimberApiCore ###" Importance="high" />
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core" />
+        <Message Text="### Copying TimberApiCore ###" Importance="high"/>
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core"/>
     </Target>
 </Project>

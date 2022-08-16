@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using Bindito.Core;
@@ -12,7 +11,7 @@ namespace TimberApi.Internal.ConfiguratorSystem
 {
     internal static class ConfiguratorBootstrapper
     {
-        private static bool _isInitialized;
+        public static bool IsInitialized { get; private set; }
 
         public static ImmutableArray<IConfigurator> BootstrapConfigurators { get; private set; }
 
@@ -27,12 +26,12 @@ namespace TimberApi.Internal.ConfiguratorSystem
         /// </summary>
         public static void Initialize()
         {
-            if(_isInitialized)
+            if(IsInitialized)
             {
                 throw new Exception("ConfiguratorBootstrapper already initialized");
             }
 
-            _isInitialized = true;
+            IsInitialized = true;
 
             ImmutableArray<IConfigurator> validatedConfigurators = ValidateAndCreateConfigurators(ReflectionHelper.GetTypesInAssemblyByAttribute<ConfiguratorAttribute>()).ToImmutableArray();
 

@@ -23,6 +23,17 @@ namespace Doorstop
             "TimberApi.Internal.dll"
         };
 
+        // private static readonly string[] LibraryDlls =
+        // {
+        //     "Mono.Cecil.dll",
+        //     "Mono.Cecil.Mdb.dll",
+        //     "Mono.Cecil.Pdb.dll",
+        //     "Mono.Cecil.Rocks.dll",
+        //     "MonoMod.Utils.dll",
+        //     "0Harmony.dll",
+        //     "TimberApi.LoaderInterfaces.dll"
+        // };
+
         private static readonly string[] LibraryDlls =
         {
             "Mono.Cecil.dll",
@@ -30,9 +41,12 @@ namespace Doorstop
             "Mono.Cecil.Pdb.dll",
             "Mono.Cecil.Rocks.dll",
             "MonoMod.Utils.dll",
+            "MonoMod.RuntimeDetour.dll",
             "0Harmony.dll",
+            "0Harmony20.dll",
             "TimberApi.LoaderInterfaces.dll"
         };
+
 
         /// <summary>
         /// Doorstop entry point

@@ -1,35 +1,49 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 using HarmonyLib;
 using TimberApi.Internal.Common;
 using TimberApi.Internal.ConfiguratorSystem;
+using TimberApi.Internal.LoggerSystem;
 using TimberApi.LoaderInterfaces;
 using Timberborn.Core;
+using UnityEngine;
 
 namespace TimberApi.Internal
 {
+    public class Test : MonoBehaviour
+    {
+        private void Awake()
+        {
+            File.WriteAllText("AAAA_LAST.txt", "AA");
+        }
+    }
+
     internal class TimberApiEntrypoint : ITimberApiPatcher
     {
         public void Initialize()
         {
             TimberApiEnvironments.Load();
             ConfiguratorBootstrapper.Initialize();
-            new Harmony("timberApi.patcher").PatchAll();
+            Harmony harmony = new Harmony("timberApi.patcher");
+            harmony.PatchAll();
+
+            ConsoleLogger.Instance.Log("Tobbert is kewl");
+            ConsoleLogger.Instance.Log("Tobbert is kewl");
+            ConsoleLogger.Instance.Log("Tobbert is kewl");
+            ConsoleLogger.Instance.Log("Tobbert is kewl");
+            ConsoleLogger.Instance.Log("Tobbert is kewl");
+            ConsoleLogger.Instance.Log("Tobbert is kewl");
+            ConsoleLogger.Instance.Log("Tobbert is kewl");
+            ConsoleLogger.Instance.Log("Tobbert is kewl");
+            ConsoleLogger.Instance.Log("Tobbert is kewl");
         }
     }
-
-    // [HarmonyPatch(typeof(BootstrapperConfigurator), nameof(IContainerDefinition))]
-    // internal class TimberApiInitialBootstrapperConfiguratorPatch
-    // {
-    //     public static void PostFix(IContainerDefinition containerDefinition)
-    //     {
-    //         containerDefinition.Install();
-    //     }
-    // }
 
     [HarmonyPatch]
     static class FixLag
     {
         private static MethodInfo TargetMethod() {
+
             return AccessTools.Method(typeof(GameStartLogger), "AppendDriveInfo");
         }
 
