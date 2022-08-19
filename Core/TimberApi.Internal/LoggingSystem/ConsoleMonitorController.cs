@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using TimberApi.Core.LoggerSystem;
-using TimberApi.Internal.LoggerSystem;
 using Timberborn.CoreUI;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace TimberApi.Internal.ConsoleSystem
+namespace TimberApi.Internal.LoggingSystem
 {
     public class ConsoleMonitorController
     {
@@ -115,15 +113,6 @@ namespace TimberApi.Internal.ConsoleSystem
         {
             _isSettingVisible = !_isSettingVisible;
             _settingsWrapper.ToggleDisplayStyle(_isSettingVisible);
-        }
-
-        public void ClearAndLoadHistory()
-        {
-            _logs.value = "";
-            foreach (Log log in ConsoleLogger.Instance.LogHistory)
-            {
-                AddLog(log.Message, log.StackTrace, log.LogType);
-            }
         }
 
         public void AddLog(string message, string stackTrace, LogType logType)

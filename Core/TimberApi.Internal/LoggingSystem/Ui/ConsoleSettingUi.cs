@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace TimberApi.Internal.ConsoleSystem.Ui
+namespace TimberApi.Internal.LoggingSystem.Ui
 {
     public class ConsoleSettingUi
     {

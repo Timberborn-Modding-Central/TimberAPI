@@ -1,55 +1,59 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
-using HarmonyLib;
+using System.Text;
+using MonoMod.RuntimeDetour;
 using TimberApi.Internal.Common;
-using TimberApi.Internal.ConfiguratorSystem;
-using TimberApi.Internal.LoggerSystem;
+using TimberApi.Internal.TimberApiVisualizer;
 using TimberApi.LoaderInterfaces;
 using Timberborn.Core;
+using Timberborn.MasterSceneLoading;
+using Timberborn.SceneLoading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 namespace TimberApi.Internal
 {
-    public class Test : MonoBehaviour
-    {
-        private void Awake()
-        {
-            File.WriteAllText("AAAA_LAST.txt", "AA");
-        }
-    }
-
     internal class TimberApiEntrypoint : ITimberApiPatcher
     {
         public void Initialize()
         {
-            TimberApiEnvironments.Load();
-            ConfiguratorBootstrapper.Initialize();
-            Harmony harmony = new Harmony("timberApi.patcher");
-            harmony.PatchAll();
-
-            ConsoleLogger.Instance.Log("Tobbert is kewl");
-            ConsoleLogger.Instance.Log("Tobbert is kewl");
-            ConsoleLogger.Instance.Log("Tobbert is kewl");
-            ConsoleLogger.Instance.Log("Tobbert is kewl");
-            ConsoleLogger.Instance.Log("Tobbert is kewl");
-            ConsoleLogger.Instance.Log("Tobbert is kewl");
-            ConsoleLogger.Instance.Log("Tobbert is kewl");
-            ConsoleLogger.Instance.Log("Tobbert is kewl");
-            ConsoleLogger.Instance.Log("Tobbert is kewl");
-        }
-    }
-
-    [HarmonyPatch]
-    static class FixLag
-    {
-        private static MethodInfo TargetMethod() {
-
-            return AccessTools.Method(typeof(GameStartLogger), "AppendDriveInfo");
+            Paths.Load();
+            SetupMonoHooks();
         }
 
-        private static bool Prefix()
+        public void SetupMonoHooks()
         {
-            return false;
+            var hook = new Hook(
+                typeof(GameStartLogger).GetMethod("GetModdingInfo", BindingFlags.Static | BindingFlags.NonPublic),
+                typeof(TimberApiEntrypoint).GetMethod(nameof(GetModdingInfoHook))
+            );
+
+            var fix = new Hook(
+                typeof(GameStartLogger).GetMethod("AppendDriveInfo", BindingFlags.Static | BindingFlags.NonPublic),
+                typeof(TimberApiEntrypoint).GetMethod(nameof(LagFix))
+            );
+        }
+
+        public static void LagFix(StringBuilder systemInfo) { }
+
+        public static string GetModdingInfoHook()
+        {
+            try
+            {
+                var timberApiManager = new GameObject("TimberApiManager");
+                timberApiManager.AddComponent<TimberApiBootstrapConfigurator>();
+                Object.DontDestroyOnLoad(timberApiManager);
+
+                ModResolver.TryGetMods(out string mods);
+                return "Modded: true, " + "TimberApi, " + mods;
+            }
+            catch (Exception e)
+            {
+                File.WriteAllText("Exception.txt", e.ToString());
+                throw;
+            }
         }
     }
 }

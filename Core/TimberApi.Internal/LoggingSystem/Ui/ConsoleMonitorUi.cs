@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace TimberApi.Internal.ConsoleSystem.Ui
+namespace TimberApi.Internal.LoggingSystem.Ui
 {
     public static class ConsoleMonitorUi
     {
@@ -48,7 +48,7 @@ namespace TimberApi.Internal.ConsoleSystem.Ui
                 multiline = true,
                 isReadOnly = true, style =
                 {
-                    fontSize = 20,
+                    fontSize = 25,
                     color = Color.white,
                     height = Length.Percent(100)
                 }

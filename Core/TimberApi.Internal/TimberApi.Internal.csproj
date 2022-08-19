@@ -21,19 +21,17 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Loaders\TimberApi.LoaderInterfaces\TimberApi.LoaderInterfaces.csproj" />
         <ProjectReference Include="..\TimberApi.Core\TimberApi.Core.csproj" />
+        <ProjectReference Include="..\TimberApiVersioning\TimberApiVersioning.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701" />
+        <PackageReference Include="MonoMod.RuntimeDetour" Version="21.12.13.1" />
         <PackageReference Include="MonoMod.Utils" Version="22.5.1.1" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
         <PackageReference Include="Unity.InputSystem" Version="1.5.0" />
         <PackageReference Include="UnityEngine.Modules" Version="2022.1.8" IncludeAssets="compile" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Bootstrapper" />
     </ItemGroup>
 
     <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild">

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace TimberApi.Internal.ConsoleSystem.Ui
+namespace TimberApi.Internal.LoggingSystem.Ui
 {
     public static class ConsoleLogItemUi
     {
@@ -14,7 +14,6 @@ namespace TimberApi.Internal.ConsoleSystem.Ui
                 text = message,
                 style =
                 {
-                    fontSize = 23,
                     color = Color.white,
                 }
             });

@@ -1,14 +1,13 @@
 ﻿using System.Linq;
-using TimberApi.Internal.ConsoleSystem.Ui;
-using TimberApi.Internal.LoggerSystem;
+using TimberApi.Internal.LoggingSystem.Ui;
 using Timberborn.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-namespace TimberApi.Internal.ConsoleSystem
+namespace TimberApi.Internal.LoggingSystem
 {
-    public class ConsoleMonitor : MonoBehaviour
+    public class ConsoleMonitor : MonoBehaviour, ILogListener
     {
         private ConsoleMonitorController _monitorController = null!;
 
@@ -18,29 +17,16 @@ namespace TimberApi.Internal.ConsoleSystem
 
         private void Awake()
         {
-            _keyboardController = gameObject.AddComponent<KeyboardController>();
-
+            _keyboardController = GetComponent<KeyboardController>();
             var uiDocument = GetComponent<UIDocument>();
             uiDocument.panelSettings = Resources.FindObjectsOfTypeAll<UIDocument>().First(document => document != uiDocument).panelSettings;
-            uiDocument.sortingOrder = 10000;
+            uiDocument.sortingOrder = float.MaxValue;
+
 
             VisualElement consoleMonitor = ConsoleMonitorUi.Create();
             uiDocument.rootVisualElement.Add(consoleMonitor);
 
             _monitorController = new ConsoleMonitorController(consoleMonitor);
-            _monitorController.ClearAndLoadHistory();
-        }
-
-
-
-        void OnEnable()
-        {
-            ConsoleLogger.Instance.LogMessageReceived += _monitorController.AddLog;
-        }
-
-        void OnDisable()
-        {
-            Application.logMessageReceived -= _monitorController.AddLog;
         }
 
         private void Update()
@@ -57,6 +43,11 @@ namespace TimberApi.Internal.ConsoleSystem
 
             _isGravePressed = true;
             _monitorController.ToggleConsole();
+        }
+
+        public void OnLogMessageReceived(string message, string stacktrace, LogType type)
+        {
+            _monitorController.AddLog(message, stacktrace, type);
         }
     }
 }

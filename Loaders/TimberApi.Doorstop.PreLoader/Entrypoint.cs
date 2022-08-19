@@ -23,27 +23,16 @@ namespace Doorstop
             "TimberApi.Internal.dll"
         };
 
-        // private static readonly string[] LibraryDlls =
-        // {
-        //     "Mono.Cecil.dll",
-        //     "Mono.Cecil.Mdb.dll",
-        //     "Mono.Cecil.Pdb.dll",
-        //     "Mono.Cecil.Rocks.dll",
-        //     "MonoMod.Utils.dll",
-        //     "0Harmony.dll",
-        //     "TimberApi.LoaderInterfaces.dll"
-        // };
-
         private static readonly string[] LibraryDlls =
         {
+            "0Harmony.dll",
             "Mono.Cecil.dll",
             "Mono.Cecil.Mdb.dll",
             "Mono.Cecil.Pdb.dll",
             "Mono.Cecil.Rocks.dll",
-            "MonoMod.Utils.dll",
             "MonoMod.RuntimeDetour.dll",
-            "0Harmony.dll",
-            "0Harmony20.dll",
+            "MonoMod.Utils.dll",
+            "TimberApiVersioning.dll",
             "TimberApi.LoaderInterfaces.dll"
         };
 
@@ -72,6 +61,7 @@ namespace Doorstop
                 throw;
             }
         }
+
 
         /// <summary>
         /// Sets environment variables to be used in other assemblies
