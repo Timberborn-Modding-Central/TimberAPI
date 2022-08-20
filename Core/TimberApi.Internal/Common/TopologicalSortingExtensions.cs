@@ -5,7 +5,7 @@ namespace TimberApi.Internal.Common
 {
     public static class TopologicalSortingExtensions
     {
-        public static IEnumerable<T> TopogicalSequenceDFS<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> deps)
+        public static IEnumerable<T> TopogicalSequenceDfs<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> deps)
         {
             HashSet<T> yielded = new HashSet<T>();
             HashSet<T> visited = new HashSet<T>();

@@ -7,7 +7,7 @@ using TimberApiVersioning;
 
 namespace TimberApi.Internal.ModLoaderSystem
 {
-    public class Mod : IMod
+    internal class Mod : IMod
     {
         public Mod(string name, Version version, string uniqueId, Version minimumApiVersion, Version minimumGameVersion, string entryDll, string specificationPath, string languagePath, IEnumerable<IModAsset> assets, IEnumerable<IModDependency> dependencies)
         {

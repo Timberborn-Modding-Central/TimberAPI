@@ -3,7 +3,7 @@ using TimberApi.Core.ModSystem;
 
 namespace TimberApi.Internal.ModLoaderSystem
 {
-    public class ModAsset : IModAsset
+    internal class ModAsset : IModAsset
     {
         public ModAsset(string prefix, IEnumerable<string> scenes, string path)
         {

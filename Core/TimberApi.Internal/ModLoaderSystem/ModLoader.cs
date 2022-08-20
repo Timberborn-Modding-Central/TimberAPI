@@ -18,7 +18,7 @@ using Version = TimberApiVersioning.Version;
 
 namespace TimberApi.Internal.ModLoaderSystem
 {
-    public class ModLoader
+    internal class ModLoader
     {
         private static readonly string ObjectSaveReaderWriterType = "Mod";
 
@@ -30,17 +30,14 @@ namespace TimberApi.Internal.ModLoaderSystem
 
         private readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
 
-        public readonly ImmutableArray<IMod> LoadedMods;
-
         public ModLoader(IConsoleWriter consoleWriter, ModObjectDeserializer modObjectDeserializer, ObjectSaveReaderWriter objectSaveReaderWriter)
         {
             _consoleWriter = consoleWriter;
             _modObjectDeserializer = modObjectDeserializer;
             _objectSaveReaderWriter = objectSaveReaderWriter;
-            LoadedMods = RunModLoader();
         }
 
-        public ImmutableArray<IMod> RunModLoader()
+        public ImmutableArray<IMod> Run()
         {
             var stopwatch = Stopwatch.StartNew();
             _consoleWriter.Log("Mod loading started");
@@ -177,7 +174,7 @@ namespace TimberApi.Internal.ModLoaderSystem
 
         private static IEnumerable<IMod> SortModsOnDependency(IMod[] loadableMods)
         {
-            return loadableMods.TopogicalSequenceDFS(mod => mod.Dependencies.Where(dependency => dependency.Mod != null).Select(dependency => dependency.Mod)!);
+            return loadableMods.TopogicalSequenceDfs(mod => mod.Dependencies.Where(dependency => dependency.Mod != null).Select(dependency => dependency.Mod)!);
         }
 
         private static void SetDependencyReferenceOnLoadableMods(IMod[] loadableMods)

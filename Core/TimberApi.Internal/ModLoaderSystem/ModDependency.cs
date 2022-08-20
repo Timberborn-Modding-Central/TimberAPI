@@ -3,7 +3,7 @@ using TimberApiVersioning;
 
 namespace TimberApi.Internal.ModLoaderSystem
 {
-    public class ModDependency : IModDependency
+    internal class ModDependency : IModDependency
     {
         public ModDependency(string uniqueId, Version minimumVersion, bool optional)
         {

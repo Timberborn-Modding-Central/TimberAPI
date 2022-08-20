@@ -20,8 +20,7 @@ namespace TimberApi.Internal.LoggingSystem
             _keyboardController = GetComponent<KeyboardController>();
             var uiDocument = GetComponent<UIDocument>();
             uiDocument.panelSettings = Resources.FindObjectsOfTypeAll<UIDocument>().First(document => document != uiDocument).panelSettings;
-            uiDocument.sortingOrder = float.MaxValue;
-
+            uiDocument.sortingOrder = 100000;
 
             VisualElement consoleMonitor = ConsoleMonitorUi.Create();
             uiDocument.rootVisualElement.Add(consoleMonitor);

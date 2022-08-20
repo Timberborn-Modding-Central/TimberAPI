@@ -1,4 +1,5 @@
 ﻿using Bindito.Core;
+using TimberApi.Core.ModSystem;
 using TimberApi.Internal.ModLoaderSystem.ObjectDeserializers;
 using Timberborn.WorldSerialization;
 
@@ -13,14 +14,9 @@ namespace TimberApi.Internal.ModLoaderSystem
             containerDefinition.Bind<ModDependencyObjectDeserializer>().AsSingleton();
             containerDefinition.Bind<ModLanguagePathObjectDeserializer>().AsSingleton();
 
-            // containerDefinition.Bind<LoadableModRepository>().AsSingleton();
             containerDefinition.Bind<ModLoader>().AsSingleton();
+            containerDefinition.Bind<ModRepository>().AsSingleton();
+            containerDefinition.Bind<IModRepository>().To<ModRepository>().AsSingleton();
         }
-
-        // public static void Prefab(GameObject parent)
-        // {
-        //     PrefabBuilder.Create<ModLoader>("ModLoaderConfigurator")
-        //         .FinishAndSetParent(parent);
-        // }
     }
 }

@@ -6,7 +6,7 @@ using Timberborn.Persistence;
 
 namespace TimberApi.Internal.ModLoaderSystem.ObjectDeserializers
 {
-    public class ModObjectDeserializer : IObjectSerializer<Mod>
+    internal class ModObjectDeserializer : IObjectSerializer<Mod>
     {
         private readonly ModDependencyObjectDeserializer _modDependencyObjectDeserializer;
 

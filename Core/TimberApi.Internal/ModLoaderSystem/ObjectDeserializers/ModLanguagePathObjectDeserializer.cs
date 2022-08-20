@@ -4,7 +4,7 @@ using Timberborn.Persistence;
 
 namespace TimberApi.Internal.ModLoaderSystem.ObjectDeserializers
 {
-    public class ModLanguagePathObjectDeserializer : IObjectSerializer<ModAsset>
+    internal class ModLanguagePathObjectDeserializer : IObjectSerializer<ModAsset>
     {
         public void Serialize(ModAsset value, IObjectSaver objectSaver)
         {

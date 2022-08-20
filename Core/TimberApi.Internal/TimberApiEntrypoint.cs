@@ -2,7 +2,9 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Bindito.Unity;
 using MonoMod.RuntimeDetour;
+using TimberApi.Internal.BootstrapSystem;
 using TimberApi.Internal.Common;
 using TimberApi.Internal.TimberApiVisualizer;
 using TimberApi.LoaderInterfaces;

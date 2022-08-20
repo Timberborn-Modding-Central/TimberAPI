@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace TimberApiVersioning
@@ -30,7 +31,7 @@ namespace TimberApiVersioning
             $",
             RegexOptions.IgnorePatternWhitespace);
 
-        public Version(int major, int minor, int patch, int revision, string preRelease)
+        public Version(int major, int minor, int patch, int revision = 0, string preRelease = "")
         {
             _major = major;
             _minor = minor;
@@ -98,6 +99,16 @@ namespace TimberApiVersioning
         public static bool operator <=(Version operand1, Version operand2)
         {
             return operand1.CompareTo(operand2) <= 0;
+        }
+
+        public static bool operator >(Version operand1, Version operand2)
+        {
+            return operand1.CompareTo(operand2) > 0;
+        }
+
+        public static bool operator <(Version operand1, Version operand2)
+        {
+            return operand1.CompareTo(operand2) < 0;
         }
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 using Bindito.Core;
 using TimberApi.Core.ConsoleSystem;
 using UnityEngine;
 
 namespace TimberApi.Internal.LoggingSystem
 {
-    public class ConsoleLogger : MonoBehaviour, IConsoleWriter
+    internal class ConsoleLogger : MonoBehaviour, IConsoleWriter
     {
         private ImmutableArray<ILogListener> _listeners;
 
@@ -28,7 +26,12 @@ namespace TimberApi.Internal.LoggingSystem
             SendLogToListeners(message, stacktrace, type);
         }
 
-        public void Log(string message)
+        public void SendLog(string senderTag, string message, string stacktrace, LogType type)
+        {
+            SendLogToListeners(message, "", LogType.Log);
+        }
+
+        public void SendLog(string senderTag, string message, string stacktrace, LogType type, Color color)
         {
             SendLogToListeners(message, "", LogType.Log);
         }
@@ -39,6 +42,11 @@ namespace TimberApi.Internal.LoggingSystem
             {
                 logListener.OnLogMessageReceived(message, stacktrace, type);
             }
+        }
+
+        public void Log(string message)
+        {
+            SendLogToListeners(message, "", LogType.Log);
         }
     }
 }
