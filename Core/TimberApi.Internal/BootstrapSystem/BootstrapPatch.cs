@@ -3,7 +3,10 @@ using System.IO;
 using Bindito.Core;
 using HarmonyLib;
 using TimberApi.Internal.Common;
+using TimberApi.Internal.SingletonSystem;
 using Timberborn.Bootstrapper;
+using Timberborn.MasterScene;
+using UnityEngine;
 
 namespace TimberApi.Internal.BootstrapSystem
 {
@@ -19,6 +22,11 @@ namespace TimberApi.Internal.BootstrapSystem
                     original: AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"),
                     prefix: new HarmonyMethod(AccessTools.Method(typeof(BootstrapPatch), nameof(BootstrapperConfiguratorPatch)))
                 );
+
+                harmony.Patch(
+                    original: AccessTools.Method(typeof(MasterSceneConfigurator), "Configure"),
+                    prefix: new HarmonyMethod(AccessTools.Method(typeof(BootstrapPatch), nameof(Pogs)))
+                );
             }
             catch (Exception e)
             {
@@ -27,20 +35,27 @@ namespace TimberApi.Internal.BootstrapSystem
             }
         }
 
+        private static void Pogs()
+        {
+            throw new Exception("AAAA");
+            Debug.Log("AAAA");
+        }
+
         /// <summary>
         /// Prefixes bootstrapper to install itself into bindito
         /// </summary>
         /// <param name="containerDefinition"></param>
         private static void BootstrapperConfiguratorPatch(IContainerDefinition containerDefinition)
         {
-            // When no hope is left, able to have a very specific loading order
-            // containerDefinition.Bind<ISingletonRepository>().To<SingletonRepository>().AsSingleton();
-            // SingletonListener instance = new SingletonListener();
-            // containerDefinition.Bind<SingletonListener>().ToInstance(instance);
-            // containerDefinition.AddInjectionListener(instance);
-            // containerDefinition.AddProvisionListener(instance);
+            // Timberborns singleton system replicated
+            containerDefinition.Bind<ISingletonRepository>().To<SingletonRepository>().AsSingleton();
+            SingletonListener instance = new SingletonListener();
+            containerDefinition.Bind<SingletonListener>().ToInstance(instance);
+            containerDefinition.AddInjectionListener(instance);
+            containerDefinition.AddProvisionListener(instance);
 
             containerDefinition.Install(TimberApiBootstrapConfigurator.Instance);
+
             containerDefinition.Bind<TimberApiRunner>().AsSingleton();
         }
     }

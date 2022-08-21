@@ -1,30 +1,40 @@
-﻿using System.IO;
-using TimberApi.Core.ConsoleSystem;
-using TimberApi.Internal.ModLoaderSystem;
+﻿using System;
+using System.Collections.Generic;
+using TimberApi.Internal.LoggingSystem;
+using TimberApi.Internal.SingletonSystem;
+using TimberApi.Internal.SingletonSystem.Singletons;
+
 
 namespace TimberApi.Internal
 {
     internal class TimberApiRunner
     {
-        private readonly IConsoleWriter _consoleWriter;
+        private readonly ISingletonRepository _singletonRepository;
 
-        private readonly ModLoader _modLoader;
+        private readonly IConsoleWriterInternal _consoleWriterInternal;
 
-        private readonly ModRepository _modRepository;
-
-        public TimberApiRunner(IConsoleWriter consoleWriter, ModLoader modLoader, ModRepository modRepository)
+        public TimberApiRunner(ISingletonRepository singletonRepository, IConsoleWriterInternal consoleWriterInternal)
         {
-            _consoleWriter = consoleWriter;
-            _modLoader = modLoader;
-            _modRepository = modRepository;
+            _singletonRepository = singletonRepository;
+            _consoleWriterInternal = consoleWriterInternal;
             Run();
         }
 
         public void Run()
         {
-            File.WriteAllText("keke.txt", _consoleWriter.ToString());
-            _consoleWriter.Log("[TimberAPI] Installing complete, starting version: " + TimberApiVersions.TimberApiVersion);
-            _modRepository.SetMods(_modLoader.Run());
+            _consoleWriterInternal.Log("Starting");
+            SingletonRunner(_singletonRepository.GetSingletons<IBootableSingleton>(), singleton => singleton.Boot());
+            SingletonRunner(_singletonRepository.GetSingletons<IPostBootableSingleton>(), singleton => singleton.PostBoot());
+            SingletonRunner(_singletonRepository.GetSingletons<ITimberApiLoadableSingleton>(), singleton => singleton.Load());
+            SingletonRunner(_singletonRepository.GetSingletons<ITimberApiPostLoadableSingleton>(), singleton => singleton.PostLoad());
+        }
+
+        private static void SingletonRunner<T>(IEnumerable<T> singletons, Action<T> action) where T : class
+        {
+            foreach (T singleton in singletons)
+            {
+                action(singleton);
+            }
         }
     }
 }

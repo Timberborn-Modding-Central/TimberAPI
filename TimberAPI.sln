@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.Internal", "Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApiVersioning", "Core\TimberApiVersioning\TimberApiVersioning.csproj", "{35816D23-761E-4C81-9CAD-C3E3956E4494}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMod", "Utilities\TestMod\TestMod.csproj", "{24F4AAE9-9AD3-4831-90FA-91EE40D8A9DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,12 @@ Global
 		{35816D23-761E-4C81-9CAD-C3E3956E4494}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35816D23-761E-4C81-9CAD-C3E3956E4494}.Default|Any CPU.ActiveCfg = Debug|Any CPU
 		{35816D23-761E-4C81-9CAD-C3E3956E4494}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{24F4AAE9-9AD3-4831-90FA-91EE40D8A9DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F4AAE9-9AD3-4831-90FA-91EE40D8A9DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F4AAE9-9AD3-4831-90FA-91EE40D8A9DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F4AAE9-9AD3-4831-90FA-91EE40D8A9DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24F4AAE9-9AD3-4831-90FA-91EE40D8A9DA}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F4AAE9-9AD3-4831-90FA-91EE40D8A9DA}.Default|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,5 +108,6 @@ Global
 		{DDA33927-1DDF-4027-9E5C-FF2DF61C145E} = {E3D7F842-4203-4D91-891A-E99B662DF831}
 		{465DE2B9-3531-4592-B158-837FEDC35D16} = {E3D7F842-4203-4D91-891A-E99B662DF831}
 		{35816D23-761E-4C81-9CAD-C3E3956E4494} = {E3D7F842-4203-4D91-891A-E99B662DF831}
+		{24F4AAE9-9AD3-4831-90FA-91EE40D8A9DA} = {9A44A47B-3198-4E72-B51B-32DBC60D4DBF}
 	EndGlobalSection
 EndGlobal

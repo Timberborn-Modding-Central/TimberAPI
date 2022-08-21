@@ -1,4 +1,4 @@
-﻿using TimberApi.Core.ConsoleSystem;
+﻿using TimberApi.Core.LoggerSystem;
 using TimberApi.Core.ModSystem;
 
 namespace TimberApi.Core.ModEntrySystem

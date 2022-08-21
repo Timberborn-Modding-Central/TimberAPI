@@ -15,28 +15,28 @@ namespace TimberApi.Internal.ConfiguratorSystem
         [HarmonyPatch(typeof(MasterSceneConfigurator), "Configure")]
         private static void PatchMasterSceneConfigurator(IContainerDefinition containerDefinition)
         {
-            InstallAllConfigurators(containerDefinition, ConfiguratorBootstrapper.InGameConfigurators);
+            InstallAllConfigurators(containerDefinition, ConfiguratorRepository.InGameConfigurators);
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(MainMenuSceneConfigurator), "Configure")]
         private static void PatchMainMenuSceneConfigurator(IContainerDefinition containerDefinition)
         {
-            InstallAllConfigurators(containerDefinition, ConfiguratorBootstrapper.MainMenuConfigurators);
+            InstallAllConfigurators(containerDefinition, ConfiguratorRepository.MainMenuConfigurators);
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(MapEditorSceneConfigurator), "Configure")]
         private static void PatchMapEditorSceneConfigurator(IContainerDefinition containerDefinition)
         {
-            InstallAllConfigurators(containerDefinition, ConfiguratorBootstrapper.MapEditorConfigurators);
+            InstallAllConfigurators(containerDefinition, ConfiguratorRepository.MapEditorConfigurators);
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BootstrapperConfigurator), "Configure")]
         private static void PatchBootstrapperConfigurator(IContainerDefinition containerDefinition)
         {
-            InstallAllConfigurators(containerDefinition, ConfiguratorBootstrapper.BootstrapConfigurators);
+            InstallAllConfigurators(containerDefinition, ConfiguratorRepository.BootstrapConfigurators);
         }
 
         private static void InstallAllConfigurators(IContainerDefinition containerDefinition, ImmutableArray<IConfigurator> configurators)

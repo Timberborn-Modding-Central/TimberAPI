@@ -5,20 +5,19 @@ namespace TimberApi.Internal.LoggingSystem.Ui
 {
     public static class ConsoleLogItemUi
     {
-        public static VisualElement Create(string message)
+        public static TextElement Create(string text, Color color)
         {
-            var item = new VisualElement() { style = { marginTop = -9 }};
-
-            item.Add(new Label()
+            return new TextElement()
             {
-                text = message,
+                pickingMode = PickingMode.Ignore,
+                text = text,
                 style =
                 {
-                    color = Color.white,
+                    textOverflow = TextOverflow.Ellipsis,
+                    fontSize = 23,
+                    color = color
                 }
-            });
-
-            return item;
+            };
         }
     }
 }

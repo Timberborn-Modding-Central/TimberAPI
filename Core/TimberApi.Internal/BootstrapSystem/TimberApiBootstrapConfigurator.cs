@@ -4,6 +4,7 @@ using System.Linq;
 using Bindito.Core;
 using Bindito.Unity;
 using TimberApi.Internal.Common;
+using TimberApi.Internal.ConfiguratorSystem;
 using TimberApi.Internal.DependencyContainerSystem;
 using TimberApi.Internal.LoggingSystem;
 using TimberApi.Internal.ModLoaderSystem;
@@ -26,6 +27,7 @@ namespace TimberApi.Internal.BootstrapSystem
             containerDefinition.Install(GetInstanceFromPrefab<LoggingConfigurator>());
             containerDefinition.Bind<Visualizer>().AsSingleton();
             containerDefinition.Install(new ModLoaderConfigurator());
+            containerDefinition.Install(new ConfiguratorConfigurator());
         }
 
         /// <summary>

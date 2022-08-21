@@ -38,9 +38,9 @@ namespace TimberApi.Internal.ModLoaderSystem
             return _uniqueIdMods.TryGetValue(uniqueId, out mod);
         }
 
-        public bool TryGetByAssembly(Assembly assembly, out IMod? mod)
+        public bool TryGetByAssembly(Assembly assembly, out IMod mod)
         {
-            return _assemblyMods.TryGetValue(assembly, out mod);
+            return _assemblyMods.TryGetValue(assembly, out mod!);
         }
     }
 }

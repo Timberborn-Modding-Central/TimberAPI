@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using TimberApi.Internal.Common;
+using TimberApi.Internal.LoggingSystem.Ui;
 using Timberborn.CoreUI;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,6 +12,8 @@ namespace TimberApi.Internal.LoggingSystem
 {
     public class ConsoleMonitorController
     {
+        private List<string> _logHistory;
+
         private bool _isConsoleVisible = true;
 
         private readonly VisualElement _root;
@@ -19,30 +24,26 @@ namespace TimberApi.Internal.LoggingSystem
 
         private bool _isSettingVisible;
 
-        private readonly TextField _logs;
-
         private readonly List<VisualElement> _pickingModeElements;
+
+        private string? _latestMessage;
+        private TextElement? _latestMessageElement;
+        private uint _latestMessageRepeat;
+
+        private string? _secondLatestMessage;
+        private TextElement? _secondLatestMessageElement;
+        private uint _secondLatestMessageRepeat;
 
         public ConsoleMonitorController(VisualElement root)
         {
-            try
-            {
-                _root = root;
-                _settingsWrapper = _root.Q<VisualElement>("settingsWrapper");
-                _logs = _root.Q<TextField>("LogTextField");
-                _logScrollView = _root.Q<TextField>("LogTextField").Q<ScrollView>();
-                _logScrollView.verticalScrollerVisibility = ScrollerVisibility.Hidden;
-
-                _pickingModeElements = new List<VisualElement>();
-                SetClickThroughElements();
-                InitializeEvents();
-                SetDefaults();
-            }
-            catch (Exception e)
-            {
-                File.WriteAllText("tex.txt", e.ToString());
-                throw;
-            }
+            _logHistory = new List<string>();
+            _root = root;
+            _settingsWrapper = _root.Q<VisualElement>("SettingsWrapper");
+            _logScrollView = _root.Q<ScrollView>("LogScrollView");
+            _pickingModeElements = new List<VisualElement>();
+            SetClickThroughElements();
+            InitializeEvents();
+            SetDefaults();
         }
 
         public void ToggleConsole()
@@ -53,7 +54,7 @@ namespace TimberApi.Internal.LoggingSystem
 
         private void SetDefaults()
         {
-            _root.Q<Toggle>("ClickThoughToggle").value = true;
+            _root.Q<Toggle>("ClickThroughToggle").value = true;
             _root.ToggleDisplayStyle(_isConsoleVisible);
         }
 
@@ -65,33 +66,20 @@ namespace TimberApi.Internal.LoggingSystem
         {
             _pickingModeElements.Add(_root.Q<VisualElement>("Monitor"));
             _pickingModeElements.Add(_root.Q<VisualElement>("HeaderWrapper"));
-            _pickingModeElements.Add(_root.Q<VisualElement>("contentWrapper"));
-            _pickingModeElements.Add(_root.Q<VisualElement>("settingsWrapper"));
-            //
-            // // LogTextField
-            var textField = _root.Q<TextField>("LogTextField");
-            _pickingModeElements.Add(textField);
-            var textFieldInput = textField.Q<TextField.TextInput>("unity-text-input");
-            _pickingModeElements.Add(textFieldInput);
-            var container = textFieldInput.Q<VisualElement>("unity-content-and-vertical-scroll-container");
-            _pickingModeElements.Add(container);
-            _pickingModeElements.Add(container.parent.contentContainer);
-            _pickingModeElements.Add(container.parent);
-            _pickingModeElements.Add(container.Q<TextElement>());
+            _pickingModeElements.Add(_root.Q<VisualElement>("ContentWrapper"));
+            _pickingModeElements.Add(_root.Q<VisualElement>("SettingsWrapper"));
+
+            // Scroll view
+            _pickingModeElements.Add(_logScrollView);
+            _pickingModeElements.Add(_logScrollView.contentContainer);
+            _pickingModeElements.Add(_logScrollView.Q("unity-content-and-vertical-scroll-container"));
         }
 
         private void InitializeEvents()
         {
             _root.Q<Button>("SettingsButton").clicked += OnSettingsButtonClick;
             _root.Q<Button>("CopyFullLogButton").clicked += OnCopyFullLogButtonClick;
-            _root.Q<Toggle>("ClickThoughToggle").RegisterValueChangedCallback(OnSeeTroughValidateValue);
-            _logs.RegisterValueChangedCallback(AutoScrollDownCallback);
-
-        }
-
-        private void AutoScrollDownCallback(ChangeEvent<string> evt)
-        {
-            _logScrollView.verticalScroller.value = _logScrollView.verticalScroller.highValue;
+            _root.Q<Toggle>("ClickThroughToggle").RegisterValueChangedCallback(OnSeeTroughValidateValue);
         }
 
         private void OnSeeTroughValidateValue(ChangeEvent<bool> isPickModeSeeThrough)
@@ -106,7 +94,7 @@ namespace TimberApi.Internal.LoggingSystem
 
         private void OnCopyFullLogButtonClick()
         {
-            GUIUtility.systemCopyBuffer = _logs.text;
+            GUIUtility.systemCopyBuffer = string.Join("\n", _logHistory);
         }
 
         private void OnSettingsButtonClick()
@@ -115,9 +103,45 @@ namespace TimberApi.Internal.LoggingSystem
             _settingsWrapper.ToggleDisplayStyle(_isSettingVisible);
         }
 
-        public void AddLog(string message, string stackTrace, LogType logType)
+        public void AddLog(string tagName, string message, string stackTrace, LogType logType, Color color)
         {
-            _logs.value += logType == LogType.Exception ? $"{message}\n{stackTrace}\n" : $"{message}\n";
+            string text = logType == LogType.Exception ? $"{message}\n{stackTrace}" : $"[{logType} : {tagName}] {message}";
+            if (TryMergeRepeatedMessage(text))
+            {
+                return;
+            }
+            TextElement newItem = ConsoleLogItemUi.Create(text, color);
+
+            _secondLatestMessage = _latestMessage;
+            _secondLatestMessageElement = _latestMessageElement;
+            _secondLatestMessageRepeat = 0;
+
+            _latestMessage = text;
+            _latestMessageElement = newItem;
+            _latestMessageRepeat = 0;
+
+            _logHistory.Add(text);
+            _logScrollView.Add(newItem);
+            _logScrollView.verticalScroller.value = _logScrollView.verticalScroller.highValue > 0 ? _logScrollView.verticalScroller.highValue : 0;
+        }
+
+        public bool TryMergeRepeatedMessage(string message)
+        {
+            if (_latestMessage != null && _latestMessage.Equals(message))
+            {
+                _latestMessageElement!.text = $"[Repeat: {_latestMessageRepeat}] " + message;
+                _latestMessageRepeat++;
+                return true;
+            }
+
+            if (_secondLatestMessage != null && _secondLatestMessage.Equals(message))
+            {
+                _secondLatestMessageElement!.text = $"[Repeat: {_secondLatestMessageRepeat}] " + message;
+                _secondLatestMessageRepeat++;
+                return true;
+            }
+
+            return false;
         }
     }
 }

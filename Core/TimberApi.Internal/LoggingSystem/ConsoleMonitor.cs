@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
+using TimberApi.Internal.Common;
 using TimberApi.Internal.LoggingSystem.Ui;
 using Timberborn.InputSystem;
 using UnityEngine;
@@ -17,15 +20,29 @@ namespace TimberApi.Internal.LoggingSystem
 
         private void Awake()
         {
-            _keyboardController = GetComponent<KeyboardController>();
-            var uiDocument = GetComponent<UIDocument>();
-            uiDocument.panelSettings = Resources.FindObjectsOfTypeAll<UIDocument>().First(document => document != uiDocument).panelSettings;
-            uiDocument.sortingOrder = 100000;
+            try
+            {
+                _keyboardController = GetComponent<KeyboardController>();
+                var uiDocument = GetComponent<UIDocument>();
+                uiDocument.panelSettings = Resources.FindObjectsOfTypeAll<UIDocument>().First(document => document != uiDocument).panelSettings;
+                uiDocument.sortingOrder = 100000;
 
-            VisualElement consoleMonitor = ConsoleMonitorUi.Create();
-            uiDocument.rootVisualElement.Add(consoleMonitor);
+                VisualElement consoleMonitor = ConsoleMonitorUi.Create();
+                uiDocument.rootVisualElement.Add(consoleMonitor);
 
-            _monitorController = new ConsoleMonitorController(consoleMonitor);
+                _monitorController = new ConsoleMonitorController(consoleMonitor);
+                Application.logMessageReceivedThreaded += OnUnityLogMessageReceived;
+            }
+            catch (Exception e)
+            {
+                File.WriteAllText(Path.Combine(Paths.Logs, "ConsoleMonitorException.txt"), e.ToString());
+                throw;
+            }
+        }
+
+        private void OnUnityLogMessageReceived(string message, string stacktrace, LogType type)
+        {
+            _monitorController.AddLog("Unity", message, stacktrace, type, Logger.LogColors[type]);
         }
 
         private void Update()
@@ -44,9 +61,9 @@ namespace TimberApi.Internal.LoggingSystem
             _monitorController.ToggleConsole();
         }
 
-        public void OnLogMessageReceived(string message, string stacktrace, LogType type)
+        public void OnLogMessageReceived(string tagName, string message, string stacktrace, LogType type, Color color)
         {
-            _monitorController.AddLog(message, stacktrace, type);
+            _monitorController.AddLog(tagName, message, stacktrace, type, color);
         }
     }
 }

@@ -6,12 +6,19 @@ using System.Reflection;
 using Bindito.Core;
 using TimberApi.Core.ConfiguratorSystem;
 using TimberApi.Internal.Common;
+using TimberApi.Internal.LoggingSystem;
+using TimberApi.Internal.SingletonSystem.Singletons;
 
 namespace TimberApi.Internal.ConfiguratorSystem
 {
-    internal static class ConfiguratorBootstrapper
+    internal class ConfiguratorRepository : ITimberApiLoadableSingleton
     {
-        public static bool IsInitialized { get; private set; }
+        public ConfiguratorRepository(IConsoleWriterInternal consoleWriterInternal)
+        {
+            _consoleWriterInternal = consoleWriterInternal;
+        }
+
+        public bool IsInitialized { get; private set; }
 
         public static ImmutableArray<IConfigurator> BootstrapConfigurators { get; private set; }
 
@@ -21,17 +28,21 @@ namespace TimberApi.Internal.ConfiguratorSystem
 
         public static ImmutableArray<IConfigurator> MapEditorConfigurators { get; private set; }
 
+        private readonly IConsoleWriterInternal _consoleWriterInternal;
+
         /// <summary>
         /// Searches and loads scene configurators
         /// </summary>
-        public static void Initialize()
+        public void Load()
         {
             if(IsInitialized)
             {
-                throw new Exception("ConfiguratorBootstrapper already initialized");
+                throw new Exception("ConfiguratorBootstrapper already loaded");
             }
 
             IsInitialized = true;
+
+            _consoleWriterInternal.Log("SWAG");
 
             ImmutableArray<IConfigurator> validatedConfigurators = ValidateAndCreateConfigurators(ReflectionHelper.GetTypesInAssemblyByAttribute<ConfiguratorAttribute>()).ToImmutableArray();
 
@@ -48,7 +59,7 @@ namespace TimberApi.Internal.ConfiguratorSystem
         /// <param name="configurators">validated configurators</param>
         /// <param name="sceneFlag">Filter based if attribute has set flag</param>
         /// <returns>Filtered configurators for specific flag</returns>
-        private static IEnumerable<IConfigurator> GetConfiguratorWithSceneFlag(IEnumerable<IConfigurator> configurators, SceneConfiguratorEntry sceneFlag)
+        private IEnumerable<IConfigurator> GetConfiguratorWithSceneFlag(IEnumerable<IConfigurator> configurators, SceneConfiguratorEntry sceneFlag)
         {
             return configurators.Where(configurator => configurator.GetType().GetCustomAttribute<ConfiguratorAttribute>().SceneConfiguratorEntry.HasFlag(sceneFlag));
         }
@@ -58,7 +69,7 @@ namespace TimberApi.Internal.ConfiguratorSystem
         /// </summary>
         /// <param name="configuratorTypes">Classes with ConfiguratorAttribute</param>
         /// <returns>Validated IConfigurator instances</returns>
-        private static IEnumerable<IConfigurator> ValidateAndCreateConfigurators(IEnumerable<Type> configuratorTypes)
+        private IEnumerable<IConfigurator> ValidateAndCreateConfigurators(IEnumerable<Type> configuratorTypes)
         {
             return configuratorTypes.Select(type =>
             {
@@ -73,7 +84,7 @@ namespace TimberApi.Internal.ConfiguratorSystem
         /// </summary>
         /// <param name="configuratorType"></param>
         /// <exception cref="ConfigurationValidationException">Configurator class type</exception>
-        private static void ValidateConfiguratorAttributeType(Type configuratorType)
+        private void ValidateConfiguratorAttributeType(Type configuratorType)
         {
 
             if(configuratorType.GetInterface(nameof(IConfigurator)) == null)

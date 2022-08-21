@@ -5,12 +5,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.ModEntrySystem;
 using TimberApi.Core.ModSystem;
 using TimberApi.Internal.Common;
+using TimberApi.Internal.LoggingSystem;
 using TimberApi.Internal.ModLoaderSystem.Exceptions;
 using TimberApi.Internal.ModLoaderSystem.ObjectDeserializers;
+using TimberApi.Internal.SingletonSystem.Singletons;
 using Timberborn.Persistence;
 using Timberborn.Versioning;
 using Timberborn.WorldSerialization;
@@ -18,33 +19,39 @@ using Version = TimberApiVersioning.Version;
 
 namespace TimberApi.Internal.ModLoaderSystem
 {
-    internal class ModLoader
+    internal class ModLoader : IBootableSingleton
     {
         private static readonly string ObjectSaveReaderWriterType = "Mod";
 
         private static readonly string ModFileName = "mod.json";
 
-        private readonly IConsoleWriter _consoleWriter;
+        private readonly IConsoleWriterInternal _consoleWriterInternal;
 
         private readonly ModObjectDeserializer _modObjectDeserializer;
 
         private readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
 
-        public ModLoader(IConsoleWriter consoleWriter, ModObjectDeserializer modObjectDeserializer, ObjectSaveReaderWriter objectSaveReaderWriter)
+        private readonly ModRepository _modRepository;
+
+        private readonly Logger _logger;
+
+        public ModLoader(IConsoleWriterInternal consoleWriterInternal, ModObjectDeserializer modObjectDeserializer, ObjectSaveReaderWriter objectSaveReaderWriter, Logger logger, ModRepository modRepository)
         {
-            _consoleWriter = consoleWriter;
+            _consoleWriterInternal = consoleWriterInternal;
             _modObjectDeserializer = modObjectDeserializer;
             _objectSaveReaderWriter = objectSaveReaderWriter;
+            _modRepository = modRepository;
+            _logger = logger;
         }
 
-        public ImmutableArray<IMod> Run()
+        public void Boot()
         {
             var stopwatch = Stopwatch.StartNew();
-            _consoleWriter.Log("Mod loading started");
+            _consoleWriterInternal.Log("Mod loading started");
             string[] modFilePaths = GetModFilePaths();
-            _consoleWriter.Log($"Found {modFilePaths.Length} mods");
+            _consoleWriterInternal.Log($"Found {modFilePaths.Length} mods");
             IMod[] deserializedMods = DeserializeMods(modFilePaths).ToArray();
-            _consoleWriter.Log($"Deserialized {deserializedMods.Length} mods");
+            _consoleWriterInternal.Log($"Deserialized {deserializedMods.Length} mods");
             IMod[] uniqueMods = FilterUniqueMods(deserializedMods).ToArray();
             SetDependencyReferenceOnLoadableMods(uniqueMods);
             IMod[] timberApiCompatibleMods = FilterGameCompatibleMods(uniqueMods).ToArray();
@@ -53,8 +60,8 @@ namespace TimberApi.Internal.ModLoaderSystem
             IMod[] sortedLoadableMods = SortModsOnDependency(loadableMods).ToArray();
             ImmutableArray<IMod> loadedMods = LoadMods(sortedLoadableMods).ToImmutableArray();
             stopwatch.Stop();
-            _consoleWriter.Log("Mod loading finished in: " + stopwatch.ElapsedMilliseconds + "ms, Loaded mods:" + sortedLoadableMods.Count(mod => mod.IsLoaded));
-            return loadedMods;
+            _modRepository.SetMods(loadedMods);
+            _consoleWriterInternal.Log("Mod loading finished in: " + stopwatch.ElapsedMilliseconds + "ms, Loaded mods:" + sortedLoadableMods.Count(mod => mod.IsLoaded));
         }
 
         private IEnumerable<IMod> LoadMods(IMod[] sortedLoadableMods)
@@ -67,7 +74,7 @@ namespace TimberApi.Internal.ModLoaderSystem
                 {
                     if(!NeededDependenciesAreLoaded(loadableMod.Dependencies, sortedLoadableMods, out IEnumerable<IModDependency> missingDependencies))
                     {
-                        _consoleWriter.Log($"Skipped \"{loadableMod.UniqueId}\" in \"{loadableMod.DirectoryName}\", message: Missing the following dependencies: {string.Join(", ", missingDependencies.Select(dependency => dependency.UniqueId))}");
+                        _consoleWriterInternal.Log($"Skipped \"{loadableMod.UniqueId}\" in \"{loadableMod.DirectoryName}\", message: Missing the following dependencies: {string.Join(", ", missingDependencies.Select(dependency => dependency.UniqueId))}");
                         continue;
                     }
 
@@ -81,7 +88,7 @@ namespace TimberApi.Internal.ModLoaderSystem
                 }
                 catch (Exception e)
                 {
-                    _consoleWriter.Log($"Failed to load \"{loadableMod.UniqueId}\" in \"{loadableMod.DirectoryName}\", message: {e.Message}");
+                    _consoleWriterInternal.Log($"Failed to load \"{loadableMod.UniqueId}\" in \"{loadableMod.DirectoryName}\", message: {e.Message}");
                 }
             }
 
@@ -111,15 +118,15 @@ namespace TimberApi.Internal.ModLoaderSystem
             }
             catch (MultiModEntrypointException e)
             {
-                _consoleWriter.Log($"Failed to load \"{mod.UniqueId}\" in \"{mod.DirectoryName}\", message: {e.Message}");
+                _consoleWriterInternal.Log($"Failed to load \"{mod.UniqueId}\" in \"{mod.DirectoryName}\", message: {e.Message}");
             }
             catch (ModEntrypointFailedException e)
             {
-                _consoleWriter.Log($"Failed to load entrypoint \"{mod.UniqueId}\" in \"{mod.DirectoryName}\", message: {e}");
+                _consoleWriterInternal.Log($"Failed to load entrypoint \"{mod.UniqueId}\" in \"{mod.DirectoryName}\", message: {e}");
             }
             catch (Exception e)
             {
-                _consoleWriter.Log($"Failed to load \"{mod.UniqueId}\" in \"{mod.DirectoryName}\", message: {e}");
+                _consoleWriterInternal.Log($"Failed to load \"{mod.UniqueId}\" in \"{mod.DirectoryName}\", message: {e}");
             }
 
             return false;
@@ -160,7 +167,7 @@ namespace TimberApi.Internal.ModLoaderSystem
                     return;
                 }
 
-                modEntrypoint.Entry(mod, _consoleWriter);
+                modEntrypoint.Entry(mod, new ManualConsoleWriter(_logger, mod));
             }
             catch (InvalidOperationException)
             {
@@ -199,7 +206,7 @@ namespace TimberApi.Internal.ModLoaderSystem
                 {
                     if (!NeededDependenciesAreLoadable(gameCompatibleMod.Dependencies, gameCompatibleMods, out IEnumerable<IModDependency> missingDependencies))
                     {
-                        _consoleWriter.Log($"Skipped \"{gameCompatibleMod.UniqueId}\" in \"{gameCompatibleMod.DirectoryName}\", message: Missing the following dependencies: {string.Join(", ", missingDependencies.Select(dependency => dependency.UniqueId))}");
+                        _consoleWriterInternal.Log($"Skipped \"{gameCompatibleMod.UniqueId}\" in \"{gameCompatibleMod.DirectoryName}\", message: Missing the following dependencies: {string.Join(", ", missingDependencies.Select(dependency => dependency.UniqueId))}");
                         removedMod = true;
                         continue;
                     }
@@ -257,7 +264,7 @@ namespace TimberApi.Internal.ModLoaderSystem
                 {
                     if (uniqueMod.MinimumGameVersion >= gameVersion)
                     {
-                        _consoleWriter.Log($"Skipped \"{uniqueMod.UniqueId}\" in \"{uniqueMod.DirectoryName}\", message: MinimumGameVersion is higher than GameVersion");
+                        _consoleWriterInternal.Log($"Skipped \"{uniqueMod.UniqueId}\" in \"{uniqueMod.DirectoryName}\", message: MinimumGameVersion is higher than GameVersion");
                         continue;
                     }
 
@@ -265,7 +272,7 @@ namespace TimberApi.Internal.ModLoaderSystem
                 }
                 catch (Exception e)
                 {
-                    _consoleWriter.Log($"Skipped \"{uniqueMod.UniqueId}\" in \"{uniqueMod.DirectoryName}\", message: {e.Message}");
+                    _consoleWriterInternal.Log($"Skipped \"{uniqueMod.UniqueId}\" in \"{uniqueMod.DirectoryName}\", message: {e.Message}");
                 }
             }
 
@@ -284,7 +291,7 @@ namespace TimberApi.Internal.ModLoaderSystem
                 }
                 catch (Exception e)
                 {
-                    _consoleWriter.Log($"Skipped \"{deserializedMod.UniqueId}\" in \"{deserializedMod.DirectoryName}\", message: {e.Message}");
+                    _consoleWriterInternal.Log($"Skipped \"{deserializedMod.UniqueId}\" in \"{deserializedMod.DirectoryName}\", message: {e.Message}");
                 }
             }
 
@@ -307,7 +314,7 @@ namespace TimberApi.Internal.ModLoaderSystem
                 }
                 catch (Exception e)
                 {
-                    _consoleWriter.Log($"Failed to deserialize mod in directory: {new DirectoryInfo(Path.GetDirectoryName(modFilePath)!).Name}, message: {e.Message}");
+                    _consoleWriterInternal.Log($"Failed to deserialize mod in directory: {new DirectoryInfo(Path.GetDirectoryName(modFilePath)!).Name}, message: {e.Message}");
                 }
             }
 

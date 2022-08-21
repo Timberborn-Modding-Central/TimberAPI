@@ -35,35 +35,18 @@ namespace TimberApi.Internal.LoggingSystem.Ui
 
             var contentWrapper = new VisualElement()
             {
-                name = "contentWrapper",
+                name = "ContentWrapper",
                 style =
                 {
                     backgroundColor = new Color(0.25f, 0.25f, 0.25f, 0.7f),
                     flexGrow = 1
                 }
             };
-            var textField = new TextField()
-            {
-                name = "LogTextField",
-                multiline = true,
-                isReadOnly = true, style =
-                {
-                    fontSize = 25,
-                    color = Color.white,
-                    height = Length.Percent(100)
-                }
-            };
-            var textInput = textField.Q<TextField.TextInput>("unity-text-input");
-            textInput.style.backgroundColor = new Color(0,0,0,0);
-            textInput.style.borderBottomWidth = 0;
-            textInput.style.borderTopWidth = 0;
-            textInput.style.borderLeftWidth = 0;
-            textInput.style.borderRightWidth = 0;
-            contentWrapper.Add(textField);
+            contentWrapper.Add(new ScrollView() { name = "LogScrollView", verticalScrollerVisibility = ScrollerVisibility.AlwaysVisible});
 
             var settingsWrapper = new VisualElement()
             {
-                name = "settingsWrapper",
+                name = "SettingsWrapper",
                 style =
                 {
                     display = DisplayStyle.None,
