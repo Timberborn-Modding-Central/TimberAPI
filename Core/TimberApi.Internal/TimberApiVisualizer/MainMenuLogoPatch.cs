@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using HarmonyLib;
-using TimberApi.Internal.Common;
+using TimberApi.Core.Common;
+using TimberApi.Core2.Common;
 using Timberborn.CoreUI;
-using Timberborn.MainMenuScene;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace TimberApi.Internal.TimberApiVisualizer
+namespace TimberApi.Core.TimberApiVisualizer
 {
     public class Visualizer
     {

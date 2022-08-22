@@ -5,22 +5,16 @@ using System.Linq;
 using System.Reflection;
 using Bindito.Core;
 using TimberApi.Core.ConfiguratorSystem;
+using TimberApi.Core.ConsoleSystem;
+using TimberApi.Core.SingletonSystem.Singletons;
+using TimberApi.Core2.ConfiguratorSystem;
 using TimberApi.Internal.Common;
-using TimberApi.Internal.LoggingSystem;
-using TimberApi.Internal.SingletonSystem.Singletons;
 
 namespace TimberApi.Internal.ConfiguratorSystem
 {
     internal class ConfiguratorRepository : ITimberApiLoadableSingleton
     {
-        public ConfiguratorRepository(IConsoleWriterInternal consoleWriterInternal)
-        {
-            _consoleWriterInternal = consoleWriterInternal;
-        }
-
-        public bool IsInitialized { get; private set; }
-
-        public static ImmutableArray<IConfigurator> BootstrapConfigurators { get; private set; }
+        private bool _isInitialized;
 
         public static ImmutableArray<IConfigurator> MainMenuConfigurators { get; private set; }
 
@@ -28,25 +22,29 @@ namespace TimberApi.Internal.ConfiguratorSystem
 
         public static ImmutableArray<IConfigurator> MapEditorConfigurators { get; private set; }
 
-        private readonly IConsoleWriterInternal _consoleWriterInternal;
+        private readonly IInternalConsoleWriter _consoleWriter;
+
+        public ConfiguratorRepository(IInternalConsoleWriter consoleWriter)
+        {
+            _consoleWriter = consoleWriter;
+        }
 
         /// <summary>
         /// Searches and loads scene configurators
         /// </summary>
         public void Load()
         {
-            if(IsInitialized)
+            if(_isInitialized)
             {
                 throw new Exception("ConfiguratorBootstrapper already loaded");
             }
 
-            IsInitialized = true;
+            _isInitialized = true;
 
-            _consoleWriterInternal.Log("SWAG");
+            _consoleWriter.Log("SWAG");
 
             ImmutableArray<IConfigurator> validatedConfigurators = ValidateAndCreateConfigurators(ReflectionHelper.GetTypesInAssemblyByAttribute<ConfiguratorAttribute>()).ToImmutableArray();
 
-            BootstrapConfigurators = GetConfiguratorWithSceneFlag(validatedConfigurators, SceneConfiguratorEntry.Global).ToImmutableArray();
             MainMenuConfigurators = GetConfiguratorWithSceneFlag(validatedConfigurators, SceneConfiguratorEntry.MainMenu).ToImmutableArray();
             InGameConfigurators = GetConfiguratorWithSceneFlag(validatedConfigurators, SceneConfiguratorEntry.InGame).ToImmutableArray();
             MapEditorConfigurators = GetConfiguratorWithSceneFlag(validatedConfigurators, SceneConfiguratorEntry.MapEditor).ToImmutableArray();
@@ -74,7 +72,7 @@ namespace TimberApi.Internal.ConfiguratorSystem
             return configuratorTypes.Select(type =>
             {
                 ValidateConfiguratorAttributeType(type);
-                return type.CreateInstance<IConfigurator>();
+                return (IConfigurator)Activator.CreateInstance(type);
             });
         }
 

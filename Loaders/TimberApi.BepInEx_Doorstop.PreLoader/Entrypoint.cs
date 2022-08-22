@@ -19,7 +19,7 @@ namespace TimberApi.PreLoader
 
         private static readonly string[] CoreDlls =
         {
-            "TimberApi.Core.dll"
+            "TimberApi.New.dll"
         };
 
         private static readonly string[] LibraryDlls =

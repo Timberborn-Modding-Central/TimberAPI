@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace TimberApi.Internal.ConfiguratorSystem
+namespace TimberApi.Core.ConfiguratorSystem
 {
     public class ConfigurationValidationException : Exception
     {

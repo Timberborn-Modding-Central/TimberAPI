@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -19,8 +20,8 @@ namespace Doorstop
 
         private static readonly string[] CoreDlls =
         {
-            "TimberApi.Core.dll",
-            "TimberApi.Internal.dll"
+            "TimberApi.New.dll",
+            "TimberApi.Core.dll"
         };
 
         private static readonly string[] LibraryDlls =
