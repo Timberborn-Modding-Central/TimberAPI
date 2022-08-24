@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using Bindito.Core;
 using Bindito.Unity;
 using TimberApi.Core.Common;
+using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem;
@@ -35,9 +37,10 @@ namespace TimberApi.Core.BootstrapSystem
             containerDefinition.AddProvisionListener(instance);
 
             // TimberAPI core features
-            containerDefinition.Install(GetInstanceFromPrefab<LoggingConfigurator>());
-            containerDefinition.Install(new ConsoleSystemConfigurator());
-            containerDefinition.Install(new ModLoaderSystemConfigurator());
+            containerDefinition.Install(new LoggingSystemConfigurator());
+            containerDefinition.Install(GetInstanceFromPrefab<ConsoleSystemConfigurator>());
+            containerDefinition.Install(GetInstanceFromPrefab<ModLoaderSystemConfigurator>());
+            containerDefinition.Install(new ConfigSystemConfigurator());
 
             // TimberAPI features
             LoadAndInstallTimberApiInternal(containerDefinition);
@@ -66,7 +69,8 @@ namespace TimberApi.Core.BootstrapSystem
         /// </summary>
         private void AddPrefabConfigurators()
         {
-            LoggingConfigurator.Prefab(gameObject);
+            ConsoleSystemConfigurator.Prefab(gameObject);
+            ModLoaderSystemConfigurator.Prefab(gameObject);
         }
 
         /// <summary>
@@ -76,6 +80,8 @@ namespace TimberApi.Core.BootstrapSystem
         {
             try
             {
+                TimberApiCore.StartupTimer = Stopwatch.StartNew();
+
                 if (Versions.GameVersion < Versions.MinimumGameVersion)
                 {
                     ShowCompatabilityErrorElement();

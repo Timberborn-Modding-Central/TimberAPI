@@ -4,6 +4,9 @@ using TimberApi.Core2.ModSystem;
 
 namespace TimberApi.Core.ModLoaderSystem
 {
+    /// <summary>
+    /// https://stackoverflow.com/a/51235189/10082425
+    /// </summary>
     internal class TopologicalSorter : IModDependencySorter
     {
         public IEnumerable<IMod> Sort(IEnumerable<IMod> source, Func<IMod, IEnumerable<IMod>> dependencies)
@@ -31,8 +34,10 @@ namespace TimberApi.Core.ModLoaderSystem
                             depPushed = true;
                             break;
                         }
-                        else if (!yielded.Contains(curr))
+                        if (!yielded.Contains(curr))
+                        {
                             throw new Exception("cycle");
+                        }
                     }
 
                     if (!depPushed)

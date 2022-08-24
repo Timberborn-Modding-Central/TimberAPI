@@ -16,7 +16,7 @@ namespace TimberApi.Core.LoggingSystem
 
         public static Dictionary<LogType, Color> Internal = new Dictionary<LogType, Color>()
         {
-            {LogType.Log, new Color(0.88f, 0.88f, 0.88f)},
+            {LogType.Log, new Color(0.65f, 0.65f, 0.65f)},
             {LogType.Assert, Color.yellow},
             {LogType.Warning, Color.yellow},
             {LogType.Error, Color.red},

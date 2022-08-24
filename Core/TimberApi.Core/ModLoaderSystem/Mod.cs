@@ -2,6 +2,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
+using TimberApi.Core2.ConfigSystem;
 using TimberApi.Core2.ModSystem;
 using TimberApiVersioning;
 
@@ -56,5 +57,7 @@ namespace TimberApi.Core.ModLoaderSystem
         public string DirectoryPath { get; set; } = null!;
 
         public string DirectoryName { get; set; } = null!;
+
+        public IConfigService Configs { get; set; } = null!;
     }
 }

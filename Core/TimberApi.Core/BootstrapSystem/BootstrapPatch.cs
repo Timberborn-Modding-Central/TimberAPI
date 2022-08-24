@@ -17,7 +17,7 @@ namespace TimberApi.Core.BootstrapSystem
         {
             try
             {
-                var harmony = new Harmony("timberApi.bootstrapper");
+                var harmony = new Harmony("TimberApi.bootstrapper");
 
                 harmony.Patch(
                     original: AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"),

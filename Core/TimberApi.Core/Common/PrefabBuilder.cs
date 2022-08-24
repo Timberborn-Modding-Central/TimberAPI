@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TimberApi.Core.Common
 {
-    internal class PrefabBuilder
+    public class PrefabBuilder
     {
         private readonly GameObject _root;
 

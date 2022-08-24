@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
-namespace TimberApi.Internal.Common
+namespace TimberApi.Core.Common
 {
-    internal static class ReflectionHelper
+    public static class ReflectionHelper
     {
         public static IEnumerable<Type> GetTypesInAssemblyByAttribute<TAttribute>() where TAttribute : class
         {
@@ -21,6 +22,5 @@ namespace TimberApi.Internal.Common
                 }
             }
         }
-
     }
 }

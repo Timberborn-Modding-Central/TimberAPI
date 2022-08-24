@@ -10,13 +10,17 @@ namespace Doorstop
 {
     internal class Entrypoint
     {
+        private static string _timberApiPath = string.Empty;
+
         private static string _timberApiLogPath = string.Empty;
 
         private static string _timberApiCorePath = string.Empty;
 
         private static string _timberApiPatchersPath = string.Empty;
 
-        private static string _timberApiModPath = string.Empty;
+        private static string _timberApiModsPath = string.Empty;
+
+        private static string _timberApiConfigsPath = string.Empty;
 
         private static readonly string[] CoreDlls =
         {
@@ -33,6 +37,7 @@ namespace Doorstop
             "Mono.Cecil.Rocks.dll",
             "MonoMod.RuntimeDetour.dll",
             "MonoMod.Utils.dll",
+            "GriffinPlus.Lib.FastActivator.dll",
             "TimberApiVersioning.dll",
             "TimberApi.LoaderInterfaces.dll"
         };
@@ -51,7 +56,7 @@ namespace Doorstop
             {
                 LoadTimberApiPaths(Path.GetDirectoryName(Environment.GetEnvironmentVariable("DOORSTOP_INVOKE_DLL_PATH")) ?? string.Empty);
                 SetTimberApiPathEnvironmentVariables();
-                EnsurePathsExists(_timberApiLogPath, _timberApiCorePath, _timberApiPatchersPath, _timberApiModPath);
+                EnsurePathsExists(_timberApiLogPath, _timberApiCorePath, _timberApiPatchersPath, _timberApiModsPath, _timberApiConfigsPath);
                 LoadLibraries();
                 LoadCore();
                 LoadPatchers();
@@ -70,10 +75,12 @@ namespace Doorstop
         private static void SetTimberApiPathEnvironmentVariables()
         {
             Environment.SetEnvironmentVariable("TIMBER_LOADER_TYPE", "TimberAPI");
+            Environment.SetEnvironmentVariable("TIMBER_API_PATH", _timberApiPath);
             Environment.SetEnvironmentVariable("TIMBER_API_LOG_PATH", _timberApiLogPath);
             Environment.SetEnvironmentVariable("TIMBER_API_CORE_PATH", _timberApiCorePath);
             Environment.SetEnvironmentVariable("TIMBER_API_PATCHERS_PATH", _timberApiPatchersPath);
-            Environment.SetEnvironmentVariable("TIMBER_API_MODS_PATH", _timberApiModPath);
+            Environment.SetEnvironmentVariable("TIMBER_API_MODS_PATH", _timberApiModsPath);
+            Environment.SetEnvironmentVariable("TIMBER_API_CONFIGS_PATH", _timberApiConfigsPath);
         }
 
         /// <summary>
@@ -129,10 +136,12 @@ namespace Doorstop
                 throw new DirectoryNotFoundException("Timberborn game location was not found");
             }
 
+            _timberApiPath = Path.Combine(gamePath, "TimberApi");
             _timberApiLogPath = Path.Combine(gamePath, "TimberApi", "logs");
             _timberApiCorePath = Path.Combine(gamePath, "TimberApi", "core");
             _timberApiPatchersPath = Path.Combine(gamePath, "TimberApi", "patchers");
-            _timberApiModPath = Path.Combine(gamePath, "TimberApi", "mods");
+            _timberApiModsPath = Path.Combine(gamePath, "TimberApi", "mods");
+            _timberApiConfigsPath = Path.Combine(gamePath, "TimberApi", "configs");
         }
 
         /// <summary>

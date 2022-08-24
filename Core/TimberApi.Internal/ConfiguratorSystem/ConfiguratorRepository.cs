@@ -4,11 +4,10 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using Bindito.Core;
-using TimberApi.Core.ConfiguratorSystem;
+using TimberApi.Core.Common;
 using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.SingletonSystem.Singletons;
 using TimberApi.Core2.ConfiguratorSystem;
-using TimberApi.Internal.Common;
 
 namespace TimberApi.Internal.ConfiguratorSystem
 {
@@ -40,8 +39,6 @@ namespace TimberApi.Internal.ConfiguratorSystem
             }
 
             _isInitialized = true;
-
-            _consoleWriter.Log("SWAG");
 
             ImmutableArray<IConfigurator> validatedConfigurators = ValidateAndCreateConfigurators(ReflectionHelper.GetTypesInAssemblyByAttribute<ConfiguratorAttribute>()).ToImmutableArray();
 
@@ -84,7 +81,6 @@ namespace TimberApi.Internal.ConfiguratorSystem
         /// <exception cref="ConfigurationValidationException">Configurator class type</exception>
         private void ValidateConfiguratorAttributeType(Type configuratorType)
         {
-
             if(configuratorType.GetInterface(nameof(IConfigurator)) == null)
             {
                 throw new ConfigurationValidationException($"{configuratorType.FullName} does not extend `IConfiguration`");
@@ -93,12 +89,6 @@ namespace TimberApi.Internal.ConfiguratorSystem
             if(configuratorType.IsAbstract)
             {
                 throw new ConfigurationValidationException($"{configuratorType.FullName} may not be a abstract class");
-            }
-
-            var configuratorAttribute = configuratorType.GetCustomAttribute<ConfiguratorAttribute>();
-            if(configuratorAttribute.SceneConfiguratorEntry.HasFlag(SceneConfiguratorEntry.Global) && configuratorAttribute.SceneConfiguratorEntry > (SceneConfiguratorEntry) 1)
-            {
-                throw new ConfigurationValidationException($"{configuratorType.FullName} tried to combine SceneConfiguratorEntry.Global with any other flags");
             }
         }
     }

@@ -23,5 +23,10 @@ namespace TimberApi.Core.ConsoleSystem
             Color logColor = color ?? LogTextColors.Internal[type];
             _logger.SendLogToListeners(tagName, message, "", type, logColor);
         }
+
+        public void LogAs(string tagName, string message, LogType type, Color? color = null)
+        {
+            _logger.SendLogToListeners(tagName, message, "", type, color);
+        }
     }
 }

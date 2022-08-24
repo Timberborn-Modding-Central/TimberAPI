@@ -25,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="GriffinPlus.Lib.FastActivator" Version="1.1.0" />
         <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701" />
         <PackageReference Include="MonoMod.RuntimeDetour" Version="21.12.13.1" />
         <PackageReference Include="MonoMod.Utils" Version="22.5.1.1" />

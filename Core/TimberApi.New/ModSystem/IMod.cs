@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Reflection;
+using TimberApi.Core2.ConfigSystem;
 using TimberApiVersioning;
 
 namespace TimberApi.Core2.ModSystem
@@ -23,7 +24,7 @@ namespace TimberApi.Core2.ModSystem
 
         string LanguagePath { get; set; }
 
-        ImmutableArray<IModAsset> Assets { get; set; }
+        ImmutableArray<IModAsset> Assets { get; }
 
         ImmutableArray<IModDependency> Dependencies { get; }
 
@@ -31,14 +32,16 @@ namespace TimberApi.Core2.ModSystem
 
         bool IsCodelessMod { get; }
 
-        bool IsLoaded { get; set; }
+        bool IsLoaded { get; }
 
         bool LoadFailed { get; set; }
 
-        Assembly? LoadedAssembly { get; set; }
+        Assembly? LoadedAssembly { get; }
 
         string DirectoryPath { get; }
 
         string DirectoryName { get; }
+
+        IConfigService Configs { get; }
     }
 }

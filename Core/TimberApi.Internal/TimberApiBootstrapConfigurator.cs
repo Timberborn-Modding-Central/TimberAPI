@@ -1,5 +1,6 @@
 ﻿using Bindito.Core;
 using TimberApi.Core.BootstrapSystem;
+using TimberApi.Internal.ConfiguratorSystem;
 
 namespace TimberApi.Internal
 {
@@ -7,6 +8,8 @@ namespace TimberApi.Internal
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            // containerDefinition.Bind<Test>().AsSingleton();
+            containerDefinition.Bind<TimberApiInternal>().AsSingleton();
+            containerDefinition.Install(new ConfiguratorSystemConfigurator());
         }
     }
+}

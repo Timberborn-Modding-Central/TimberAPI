@@ -7,6 +7,8 @@ namespace TimberApi.Core2.ModSystem
     {
         ImmutableArray<IMod> All();
 
+        ImmutableArray<IMod> GetCodeMods();
+
         bool TryGetByUniqueId(string uniqueId, out IMod mod);
 
         bool TryGetByAssembly(Assembly assembly, out IMod mod);

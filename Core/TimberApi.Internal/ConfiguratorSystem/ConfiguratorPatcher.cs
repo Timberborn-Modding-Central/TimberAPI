@@ -2,18 +2,17 @@
 using Bindito.Core;
 using HarmonyLib;
 using TimberApi.Core.SingletonSystem.Singletons;
-using TimberApi.Internal.ConfiguratorSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
 using Timberborn.MasterScene;
 
-namespace TimberApi.Core.ConfiguratorSystem
+namespace TimberApi.Internal.ConfiguratorSystem
 {
-    public class ConfiguratorPatcher
+    public class ConfiguratorPatcher : ITimberApiLoadableSingleton
     {
-        public void PostBoot()
+        public void Load()
         {
-            Harmony harmony = new Harmony("timberapi.configurators");
+            Harmony harmony = new Harmony("TimberApi.configurators");
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(MasterSceneConfigurator), "Configure"),
@@ -27,7 +26,7 @@ namespace TimberApi.Core.ConfiguratorSystem
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(MapEditorSceneConfigurator), "Configure"),
-                prefix:  new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMapEditorSceneConfigurator)))
+                prefix: new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMapEditorSceneConfigurator)))
             );
         }
 

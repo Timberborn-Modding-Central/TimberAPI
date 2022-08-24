@@ -2,7 +2,7 @@
 
 namespace TimberApi.Core.Common
 {
-    internal static class TypeExtensions
+    public static class TypeExtensions
     {
         public static T CreateInstance<T>(this Type type)
         {

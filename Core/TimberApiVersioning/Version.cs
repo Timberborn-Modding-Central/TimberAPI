@@ -62,7 +62,7 @@ namespace TimberApiVersioning
         public int CompareTo(Version? other)
         {
             if (other == null) return 1;
-            foreach (int compareResult in CompareParts(other))
+            foreach (int compareResult in CompareVersions(other))
             {
                 if (compareResult != 0)
                 {
@@ -73,7 +73,7 @@ namespace TimberApiVersioning
             return 0;
         }
 
-        public IEnumerable<int> CompareParts(Version other)
+        public IEnumerable<int> CompareVersions(Version other)
         {
             yield return _major.CompareTo(other._major);
             yield return _minor.CompareTo(other._minor);
