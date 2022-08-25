@@ -14,7 +14,13 @@ namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
         private static Shader _dirtShader;
         private static Shader _pathShader;
 
-        private static Shader Shader(Material mat)
+        private enum RenderQueueType
+        {
+            Dirt = 2999,
+            Path = 2998
+        }
+        
+        private static Shader GetShader(Material mat)
         {
            
             if (_buidlingShader == null)
@@ -26,10 +32,10 @@ namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
             
             switch (mat.renderQueue)
             {
-                case 2999:
+                case (int)RenderQueueType.Dirt:
                     return _dirtShader;
                 
-                case 2998:
+                case (int)RenderQueueType.Path:
                     return _pathShader;
                 
                 default:
@@ -68,13 +74,9 @@ namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
             {
                 foreach (Material mat in meshRenderer.materials)
                 {
-                    
-                    TimberAPIPlugin.Log.LogFatal(mat.renderQueue);
                     var matRenderQueue = mat.renderQueue; 
-                    mat.shader = Shader(mat);
+                    mat.shader = GetShader(mat);
                     mat.renderQueue = matRenderQueue;
-                    
-                    TimberAPIPlugin.Log.LogInfo(mat.renderQueue);
                 }
             }
 
