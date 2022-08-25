@@ -10,7 +10,7 @@ namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
     {
         private readonly IAssetLoader _assetLoader;
 
-        private static Shader _buidlingShader;
+        private static Shader _buildingShader;
         private static Shader _dirtShader;
         private static Shader _pathShader;
 
@@ -23,8 +23,8 @@ namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
         private static Shader GetShader(Material mat)
         {
            
-            if (_buidlingShader == null)
-                _buidlingShader = Resources.Load<GameObject>("Buildings/Paths/Platform/Platform.Full.Folktails").GetComponent<MeshRenderer>().materials[0].shader;
+            if (_buildingShader == null)
+                _buildingShader = Resources.Load<GameObject>("Buildings/Paths/Platform/Platform.Full.Folktails").GetComponent<MeshRenderer>().materials[0].shader;
             if (_dirtShader == null)
                 _dirtShader = Resources.Load<GameObject>("Buildings/Wellbeing/Carousel/CarouselConstructionSite5x5+3x1Dirt").GetComponentsInChildren<MeshRenderer>()[1].materials[0].shader;
             if (_pathShader == null)
@@ -39,7 +39,7 @@ namespace TimberbornAPI.AssetLoaderSystem.ResourceAssetPatch
                     return _pathShader;
                 
                 default:
-                    return _buidlingShader;
+                    return _buildingShader;
             }
         }
 
