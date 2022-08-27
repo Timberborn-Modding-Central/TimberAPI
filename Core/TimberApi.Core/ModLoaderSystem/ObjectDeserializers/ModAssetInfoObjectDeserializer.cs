@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TimberApi.Core.Common;
 using TimberApi.Core.ConsoleSystem;
@@ -8,11 +9,11 @@ using Timberborn.Persistence;
 
 namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
 {
-    internal class ModAssetObjectDeserializer : IObjectSerializer<ModAssetInfo>
+    internal class ModAssetInfoObjectDeserializer : IObjectSerializer<ModAssetInfo>
     {
         private readonly IInternalConsoleWriter _consoleWriter;
 
-        public ModAssetObjectDeserializer(IInternalConsoleWriter consoleWriter)
+        public ModAssetInfoObjectDeserializer(IInternalConsoleWriter consoleWriter)
         {
             _consoleWriter = consoleWriter;
         }
@@ -27,7 +28,7 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
             string prefix = objectLoader.Get(new PropertyKey<string>("Prefix"));
             SceneEntrypoint sceneEntrypoint = ConvertToFlag(objectLoader.Get(new ListKey<string>("Scenes")).Select(Enum.Parse<SceneEntrypoint>));
 
-            string path = objectLoader.GetValueOrDefault(new PropertyKey<string>("Path"), "assets");
+            string path = PathToCrossPlatformPath(objectLoader.GetValueOrDefault(new PropertyKey<string>("Path"), "assets"));
             return new ModAssetInfo(prefix, sceneEntrypoint, path);
         }
 
@@ -37,6 +38,11 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
                 throw new NotSupportedException($"{typeof(T)} must be an enumerated type");
 
             return (T)(object)flags.Cast<int>().Aggregate(0, (c, n) => c |= n);
+        }
+
+        private static string PathToCrossPlatformPath(string path)
+        {
+            return Path.Combine(path.Split("/"));
         }
     }
 }

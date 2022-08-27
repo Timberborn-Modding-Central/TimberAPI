@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using TimberApi.Core.Common;
 using TimberApi.Core2.ModSystem;
 using TimberApiVersioning;
@@ -10,12 +11,12 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
     {
         private readonly ModDependencyObjectDeserializer _modDependencyObjectDeserializer;
 
-        private readonly ModAssetObjectDeserializer _modAssetInfoObjectDeserializer;
+        private readonly ModAssetInfoObjectDeserializer _modAssetInfoInfoObjectDeserializer;
 
-        public ModObjectDeserializer(ModDependencyObjectDeserializer modDependencyObjectDeserializer, ModAssetObjectDeserializer modAssetInfoObjectDeserializer)
+        public ModObjectDeserializer(ModDependencyObjectDeserializer modDependencyObjectDeserializer, ModAssetInfoObjectDeserializer modAssetInfoInfoObjectDeserializer)
         {
             _modDependencyObjectDeserializer = modDependencyObjectDeserializer;
-            _modAssetInfoObjectDeserializer = modAssetInfoObjectDeserializer;
+            _modAssetInfoInfoObjectDeserializer = modAssetInfoInfoObjectDeserializer;
         }
 
         public void Serialize(Mod value, IObjectSaver objectSaver)
@@ -32,11 +33,16 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
             Version minimumGameVersion = Version.Parse(objectLoader.Get(new PropertyKey<string>("MinimumGameVersion")));
 
             string entryDll = objectLoader.GetValueOrDefault(new PropertyKey<string>("EntryDll"), "");
-            string specificationPath = objectLoader.GetValueOrDefault(new PropertyKey<string>("SpecificationPath"), "specifications");
-            string languagePath = objectLoader.GetValueOrDefault(new PropertyKey<string>("LanguagePath"), "lang");
-            IEnumerable<IModAssetInfo> assets = objectLoader.GetValueOrEmpty(new ListKey<ModAssetInfo>("Assets"), _modAssetInfoObjectDeserializer);
+            string specificationPath = PathToCrossPlatformPath(objectLoader.GetValueOrDefault(new PropertyKey<string>("SpecificationPath"), "specifications"));
+            string languagePath = PathToCrossPlatformPath(objectLoader.GetValueOrDefault(new PropertyKey<string>("LanguagePath"), "lang"));
+            IEnumerable<IModAssetInfo> assets = objectLoader.GetValueOrEmpty(new ListKey<ModAssetInfo>("Assets"), _modAssetInfoInfoObjectDeserializer);
             IEnumerable<ModDependency> modDependencies = objectLoader.GetValueOrEmpty(new ListKey<ModDependency>("Dependencies"), _modDependencyObjectDeserializer);
             return new Mod(name, version, uniqueId, minimumApiVersion, minimumGameVersion, entryDll, specificationPath, languagePath, assets, modDependencies);
+        }
+
+        private static string PathToCrossPlatformPath(string path)
+        {
+            return Path.Combine(path.Split("/"));
         }
     }
 }
