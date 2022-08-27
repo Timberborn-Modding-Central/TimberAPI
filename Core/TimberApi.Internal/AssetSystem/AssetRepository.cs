@@ -30,7 +30,7 @@ namespace TimberApi.Internal.AssetSystem
         {
             foreach (IModAssetInfo modAssetInfo in mod.Assets)
             {
-                Add(modAssetInfo.Prefix, modAssetInfo.SceneEntrypoint, mod.DirectoryPath, Path.Combine(modAssetInfo.Path.Split("/")));
+                Add(modAssetInfo.Prefix, modAssetInfo.SceneEntrypoint, mod.DirectoryPath, modAssetInfo.Path);
             }
         }
 
