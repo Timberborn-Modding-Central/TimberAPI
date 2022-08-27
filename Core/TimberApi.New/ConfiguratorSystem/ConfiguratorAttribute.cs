@@ -1,4 +1,5 @@
 ﻿using System;
+using TimberApi.Core2.Common;
 
 namespace TimberApi.Core2.ConfiguratorSystem
 {
@@ -13,14 +14,14 @@ namespace TimberApi.Core2.ConfiguratorSystem
         /// <summary>
         /// Default Timberborn scene configurator entry points
         /// </summary>
-        public SceneConfiguratorEntry SceneConfiguratorEntry;
+        public SceneEntrypoint SceneConfiguratorEntry;
 
         /// <summary>
         /// Specify in which scene or scenes you want the configurator to be installed.
         /// Global can not be combined with any other flag and will lead to a exception
         /// </summary>
         /// <param name="entryPoint">Entry point flag in what scene the configurator should be loaded</param>
-        public ConfiguratorAttribute(SceneConfiguratorEntry entryPoint)
+        public ConfiguratorAttribute(SceneEntrypoint entryPoint)
         {
             SceneConfiguratorEntry = entryPoint;
         }

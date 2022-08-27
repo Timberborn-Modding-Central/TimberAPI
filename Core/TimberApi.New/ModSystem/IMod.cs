@@ -24,7 +24,7 @@ namespace TimberApi.Core2.ModSystem
 
         string LanguagePath { get; set; }
 
-        ImmutableArray<IModAsset> Assets { get; }
+        ImmutableArray<IModAssetInfo> Assets { get; }
 
         ImmutableArray<IModDependency> Dependencies { get; }
 

@@ -27,7 +27,7 @@ namespace TimberApi.Core
             _consoleWriter = consoleWriter;
             _modLoader = modLoader;
             _modRepository = modRepository;
-            TimberApiCore.Configs = configServiceFactory.CreateWithAssemblyConfigs(typeof(TimberApiRunner).Assembly, Paths.TimberApi,"TimberAPI");
+            TimberApiCore.Configs = configServiceFactory.CreateWithAssemblyConfigs(typeof(TimberApiRunner).Assembly, Paths.TimberApi, "TimberAPI");
             Run();
             TimberApiCore.StartupTimer.Stop();
             _consoleWriter.Log($"Finished! Time elapsed: {TimberApiCore.StartupTimer.ElapsedMilliseconds:N0}ms, {TimberApiCore.StartupTimer.ElapsedMilliseconds / 1000d:N2}s");
@@ -39,6 +39,7 @@ namespace TimberApi.Core
             _modLoader.Run();
             _modRepository.LoadMods();
 
+            SingletonRunner(_singletonRepository.GetSingletons<ITimberApiSeeder>(), singleton => singleton.Run());
             SingletonRunner(_singletonRepository.GetSingletons<ITimberApiLoadableSingleton>(), singleton => singleton.Load());
             SingletonRunner(_singletonRepository.GetSingletons<ITimberApiPostLoadableSingleton>(), singleton => singleton.PostLoad());
         }

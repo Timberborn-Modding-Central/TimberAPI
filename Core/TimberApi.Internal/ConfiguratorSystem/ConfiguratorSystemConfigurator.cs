@@ -8,6 +8,7 @@ namespace TimberApi.Internal.ConfiguratorSystem
         {
             containerDefinition.Bind<ConfiguratorPatcher>().AsSingleton();
             containerDefinition.Bind<ConfiguratorRepository>().AsSingleton();
+            containerDefinition.Bind<ConfigurationSeeder>().AsSingleton();
         }
     }
 }

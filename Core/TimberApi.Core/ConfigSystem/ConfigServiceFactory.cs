@@ -43,7 +43,7 @@ namespace TimberApi.Core.ConfigSystem
                 if (!File.Exists(configFilePath))
                 {
                     _consoleWriter.LogAs(consoleTag, "Config (" + config.ConfigFileName + ") not found, saving a new one", LogType.Log);
-                    SaveConfigFile(consoleTag, configFilePath, configDirectoryPath, config);
+                    SaveConfigFile(consoleTag, configFilePath, config);
                 }
                 else
                 {
@@ -56,12 +56,12 @@ namespace TimberApi.Core.ConfigSystem
             return new ConfigService(_consoleWriter, configs, consoleTag);
         }
 
-        private void SaveConfigFile(string consoleTag, string configFilePath, string configDirectoryPath, IConfig config)
+        private void SaveConfigFile(string consoleTag, string configFilePath, IConfig config)
         {
             try
             {
-                if(!Directory.Exists(configDirectoryPath))
-                    Directory.CreateDirectory(configDirectoryPath);
+                if(!Directory.Exists(Path.GetDirectoryName(configFilePath)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(configFilePath)!);
                 File.WriteAllText(configFilePath, JsonConvert.SerializeObject(config));
             }
             catch (Exception e)

@@ -10,12 +10,12 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
     {
         private readonly ModDependencyObjectDeserializer _modDependencyObjectDeserializer;
 
-        private readonly ModLanguagePathObjectDeserializer _modLanguagePathObjectDeserializer;
+        private readonly ModAssetObjectDeserializer _modAssetInfoObjectDeserializer;
 
-        public ModObjectDeserializer(ModDependencyObjectDeserializer modDependencyObjectDeserializer, ModLanguagePathObjectDeserializer modLanguagePathObjectDeserializer)
+        public ModObjectDeserializer(ModDependencyObjectDeserializer modDependencyObjectDeserializer, ModAssetObjectDeserializer modAssetInfoObjectDeserializer)
         {
             _modDependencyObjectDeserializer = modDependencyObjectDeserializer;
-            _modLanguagePathObjectDeserializer = modLanguagePathObjectDeserializer;
+            _modAssetInfoObjectDeserializer = modAssetInfoObjectDeserializer;
         }
 
         public void Serialize(Mod value, IObjectSaver objectSaver)
@@ -34,7 +34,7 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
             string entryDll = objectLoader.GetValueOrDefault(new PropertyKey<string>("EntryDll"), "");
             string specificationPath = objectLoader.GetValueOrDefault(new PropertyKey<string>("SpecificationPath"), "specifications");
             string languagePath = objectLoader.GetValueOrDefault(new PropertyKey<string>("LanguagePath"), "lang");
-            IEnumerable<IModAsset> assets = objectLoader.GetValueOrEmpty(new ListKey<ModAsset>("Assets"), _modLanguagePathObjectDeserializer);
+            IEnumerable<IModAssetInfo> assets = objectLoader.GetValueOrEmpty(new ListKey<ModAssetInfo>("Assets"), _modAssetInfoObjectDeserializer);
             IEnumerable<ModDependency> modDependencies = objectLoader.GetValueOrEmpty(new ListKey<ModDependency>("Dependencies"), _modDependencyObjectDeserializer);
             return new Mod(name, version, uniqueId, minimumApiVersion, minimumGameVersion, entryDll, specificationPath, languagePath, assets, modDependencies);
         }

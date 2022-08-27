@@ -1,5 +1,6 @@
 ﻿using Bindito.Core;
 using TimberApi.Core.BootstrapSystem;
+using TimberApi.Internal.AssetSystem;
 using TimberApi.Internal.ConfiguratorSystem;
 
 namespace TimberApi.Internal
@@ -10,6 +11,7 @@ namespace TimberApi.Internal
         {
             containerDefinition.Bind<TimberApiInternal>().AsSingleton();
             containerDefinition.Install(new ConfiguratorSystemConfigurator());
+            containerDefinition.Install(new AssetSystemConfigurator());
         }
     }
 }
