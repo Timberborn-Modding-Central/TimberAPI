@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using TimberApi.Core.ConsoleSystem;
 using TimberApi.Internal.AssetSystem.Exceptions;
 using Object = UnityEngine.Object;
 
@@ -8,13 +7,10 @@ namespace TimberApi.Internal.AssetSystem
 {
     public class AssetLoader
     {
-        private readonly IInternalConsoleWriter _consoleWriter;
-
         private readonly AssetRepository _assetRepository;
 
-        public AssetLoader(IInternalConsoleWriter consoleWriter, AssetRepository assetRepository)
+        public AssetLoader(AssetRepository assetRepository)
         {
-            _consoleWriter = consoleWriter;
             _assetRepository = assetRepository;
         }
 
