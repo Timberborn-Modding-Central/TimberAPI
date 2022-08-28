@@ -33,10 +33,6 @@
       <ProjectReference Include="..\TimberApi.New\TimberApi.New.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Common" />
-    </ItemGroup>
-
     <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild">
         <Message Text="### Copying TimberApiCore ###" Importance="high" />
         <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core" />
