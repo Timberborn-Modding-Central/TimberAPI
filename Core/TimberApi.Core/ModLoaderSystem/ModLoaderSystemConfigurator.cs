@@ -15,7 +15,7 @@ namespace TimberApi.Core.ModLoaderSystem
             containerDefinition.Bind<ObjectSaveReaderWriter>().AsSingleton();
             containerDefinition.Bind<ModObjectDeserializer>().AsSingleton();
             containerDefinition.Bind<ModDependencyObjectDeserializer>().AsSingleton();
-            containerDefinition.Bind<ModAssetObjectDeserializer>().AsSingleton();
+            containerDefinition.Bind<ModAssetInfoObjectDeserializer>().AsSingleton();
 
             containerDefinition.Bind<IModDependencySorter>().To<TopologicalSorter>().AsSingleton();
             containerDefinition.Bind<ModLoader>().AsSingleton();
