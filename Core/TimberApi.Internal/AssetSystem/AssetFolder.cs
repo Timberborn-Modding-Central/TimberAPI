@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using TimberApi.Core2.Common;
 using TimberApi.Internal.AssetSystem.Exceptions;
+using TimberApi.Internal.Common;
 
 namespace TimberApi.Internal.AssetSystem
 {
@@ -58,26 +59,13 @@ namespace TimberApi.Internal.AssetSystem
             }
 
             string[] rootPath = _rootFolderPath.Split(Path.DirectorySeparatorChar);
-            foreach (string absoluteFilePath in GetAssetFiles(rootFolderPath))
+            foreach (string absoluteFilePath in FileService.GetFiles(rootFolderPath, "*", AllowedExtensions))
             {
                 string[] seperatedAbsoluteDirectoryPath = Path.GetDirectoryName(absoluteFilePath)!.Split(Path.DirectorySeparatorChar);
                 string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(absoluteFilePath);
                 string directoryPath = AbsolutePathToRelativePath(seperatedAbsoluteDirectoryPath, rootPath);
                 string lookupPath = Path.Combine(directoryPath, fileNameWithoutExtension).Replace(Path.DirectorySeparatorChar, '/').ToLower();
                 _assetBundles.Add(lookupPath, new ModAssetBundle(fileNameWithoutExtension, absoluteFilePath));
-            }
-        }
-
-        private static IEnumerable<string> GetAssetFiles(string rootFolderPath)
-        {
-            string[] files = Directory.GetFiles(rootFolderPath, "*", SearchOption.AllDirectories);
-            foreach (string file in files)
-            {
-                string extension = Path.GetExtension(file).ToLower();
-                if (AllowedExtensions.Contains(extension))
-                {
-                    yield return file;
-                }
             }
         }
 
