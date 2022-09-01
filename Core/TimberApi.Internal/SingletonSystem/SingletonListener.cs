@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Bindito.Core;
 
-namespace TimberApi.Core.SingletonSystem
+namespace TimberApi.Internal.SingletonSystem
 {
   /// <summary>
   /// Replicate from: Timberborn SingletonSystem

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TimberApi.Core.SingletonSystem
+namespace TimberApi.Internal.SingletonSystem
 {
     /// <summary>
     /// Replicate from: Timberborn SingletonSystem

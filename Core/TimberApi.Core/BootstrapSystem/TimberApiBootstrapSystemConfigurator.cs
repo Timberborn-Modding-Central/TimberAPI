@@ -10,11 +10,11 @@ using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem;
-using TimberApi.Core.SingletonSystem;
 using TimberApi.Core2;
 using TimberApi.Core2.Common;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Debug = UnityEngine.Debug;
 
 namespace TimberApi.Core.BootstrapSystem
 {
@@ -29,24 +29,17 @@ namespace TimberApi.Core.BootstrapSystem
         /// </summary>
         public override void Configure(IContainerDefinition containerDefinition)
         {
-            // Singleton system
-            containerDefinition.Bind<ISingletonRepository>().To<SingletonRepository>().AsSingleton();
-            SingletonListener instance = new SingletonListener();
-            containerDefinition.Bind<SingletonListener>().ToInstance(instance);
-            containerDefinition.AddInjectionListener(instance);
-            containerDefinition.AddProvisionListener(instance);
-
             // TimberAPI core features
             containerDefinition.Install(new LoggingSystemConfigurator());
             containerDefinition.Install(GetInstanceFromPrefab<ConsoleSystemConfigurator>());
             containerDefinition.Install(GetInstanceFromPrefab<ModLoaderSystemConfigurator>());
             containerDefinition.Install(new ConfigSystemConfigurator());
 
-            // TimberAPI features
-            LoadAndInstallTimberApiInternal(containerDefinition);
-
             // Start runner
             containerDefinition.Bind<TimberApiRunner>().AsSingleton();
+
+            // TimberAPI features
+            LoadAndInstallTimberApiInternal(containerDefinition);
         }
 
         /// <summary>
@@ -80,8 +73,6 @@ namespace TimberApi.Core.BootstrapSystem
         {
             try
             {
-                TimberApiCore.StartupTimer = Stopwatch.StartNew();
-
                 if (Versions.GameVersion < Versions.MinimumGameVersion)
                 {
                     ShowCompatabilityErrorElement();

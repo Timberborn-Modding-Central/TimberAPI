@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TimberApi.Core.SingletonSystem
+namespace TimberApi.Internal.SingletonSystem
 {
     /// <summary>
     /// Replicate from: Timberborn SingletonSystem

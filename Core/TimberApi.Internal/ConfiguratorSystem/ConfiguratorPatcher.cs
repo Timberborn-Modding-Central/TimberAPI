@@ -1,7 +1,8 @@
 ﻿using System.Collections.Immutable;
 using Bindito.Core;
 using HarmonyLib;
-using TimberApi.Core.SingletonSystem.Singletons;
+using TimberApi.Internal.SingletonSystem;
+using TimberApi.Internal.SingletonSystem.Singletons;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
 using Timberborn.MasterScene;
@@ -47,10 +48,18 @@ namespace TimberApi.Internal.ConfiguratorSystem
 
         private static void InstallAllConfigurators(IContainerDefinition containerDefinition, ImmutableArray<IConfigurator> configurators)
         {
+            containerDefinition.Bind<ISingletonRepository>().To<SingletonRepository>().AsSingleton();
+            var instance = new SingletonListener();
+            containerDefinition.Bind<SingletonListener>().ToInstance(instance);
+            containerDefinition.AddInjectionListener(instance);
+            containerDefinition.AddProvisionListener(instance);
+
             foreach (IConfigurator configurator in configurators)
             {
                 containerDefinition.Install(configurator);
             }
+
+            containerDefinition.Bind<SingletonRunner>().AsSingleton();
         }
     }
 }

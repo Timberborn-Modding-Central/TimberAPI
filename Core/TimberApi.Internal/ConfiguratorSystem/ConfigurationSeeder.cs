@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection;
 using Bindito.Core;
 using TimberApi.Core.Common;
-using TimberApi.Core.SingletonSystem.Singletons;
 using TimberApi.Core2.Common;
 using TimberApi.Core2.ConfiguratorSystem;
+using TimberApi.Internal.SingletonSystem.Singletons;
 
 namespace TimberApi.Internal.ConfiguratorSystem
 {
