@@ -7,6 +7,8 @@ namespace TimberApi.Internal
 {
     internal class TimberApiInternal
     {
+        public static readonly string ConsoleTag = "TimberAPI";
+
         public static ConfigService Configs = null!;
 
         public static IContainer Container = null!;
@@ -15,7 +17,7 @@ namespace TimberApi.Internal
 
         public TimberApiInternal(ConfigServiceFactory configServiceFactory, IInternalConsoleWriter internalConsoleWriter, IContainer container)
         {
-            Configs = configServiceFactory.CreateWithAssemblyConfigs(typeof(TimberApiInternal).Assembly, Paths.TimberApi, "TimberAPI");
+            Configs = configServiceFactory.CreateWithAssemblyConfigs(typeof(TimberApiInternal).Assembly, Paths.TimberApi, ConsoleTag);
             ConsoleWriter = internalConsoleWriter;
             Container = container;
         }
