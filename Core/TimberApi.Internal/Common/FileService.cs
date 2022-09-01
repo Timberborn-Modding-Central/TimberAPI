@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace TimberApi.Internal.Common
         /// </summary>
         public static IEnumerable<string> GetFiles(string path, string searchPattern, string[] allowedExtensions, SearchOption searchOption = SearchOption.AllDirectories)
         {
-            return Directory.GetFiles(path, searchPattern, searchOption).Where(file => allowedExtensions.Contains(Path.GetExtension(file))).ToList();
+            return !Directory.Exists(path) ? Array.Empty<string>() : Directory.GetFiles(path, searchPattern, searchOption).Where(file => allowedExtensions.Contains(Path.GetExtension(file)));
         }
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace TimberApi.Internal.Common
         /// </summary>
         public static IEnumerable<string> GetFiles(string path, string searchPattern, SearchOption searchOption = SearchOption.AllDirectories)
         {
-            return Directory.GetFiles(path, searchPattern, searchOption);
+            return !Directory.Exists(path) ? Array.Empty<string>() : Directory.GetFiles(path, searchPattern, searchOption);
         }
 
         /// <summary>
