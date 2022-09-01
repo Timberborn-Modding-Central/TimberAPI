@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace TimberApi.Internal.SpecificationSystem.Specifications
+namespace TimberApi.Internal.SpecificationSystem.SpecificationTypes
 {
     public class FileSpecification : ISpecification
     {

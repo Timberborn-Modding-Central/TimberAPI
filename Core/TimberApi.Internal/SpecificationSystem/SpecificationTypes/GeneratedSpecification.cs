@@ -1,4 +1,4 @@
-﻿namespace TimberApi.Internal.SpecificationSystem.Specifications
+﻿namespace TimberApi.Internal.SpecificationSystem.SpecificationTypes
 {
     public class GeneratedSpecification : ISpecification
     {

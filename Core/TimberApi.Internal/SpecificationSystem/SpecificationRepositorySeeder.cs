@@ -4,7 +4,7 @@ using System.Linq;
 using TimberApi.Core2.ModSystem;
 using TimberApi.Internal.Common;
 using TimberApi.Internal.SingletonSystem.Singletons;
-using TimberApi.Internal.SpecificationSystem.Specifications;
+using TimberApi.Internal.SpecificationSystem.SpecificationTypes;
 using UnityEngine;
 
 namespace TimberApi.Internal.SpecificationSystem
