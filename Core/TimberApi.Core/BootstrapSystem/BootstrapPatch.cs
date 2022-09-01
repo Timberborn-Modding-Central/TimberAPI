@@ -2,12 +2,8 @@
 using System.IO;
 using Bindito.Core;
 using HarmonyLib;
-using TimberApi.Core.Common;
-using TimberApi.Core.SingletonSystem;
 using TimberApi.Core2.Common;
 using Timberborn.Bootstrapper;
-using Timberborn.MasterScene;
-using UnityEngine;
 
 namespace TimberApi.Core.BootstrapSystem
 {

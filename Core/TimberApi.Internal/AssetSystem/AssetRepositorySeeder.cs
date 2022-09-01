@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using TimberApi.Core.ConsoleSystem;
-using TimberApi.Core.SingletonSystem.Singletons;
 using TimberApi.Core2.Common;
 using TimberApi.Core2.ModSystem;
+using TimberApi.Internal.SingletonSystem.Singletons;
 
 namespace TimberApi.Internal.AssetSystem
 {
