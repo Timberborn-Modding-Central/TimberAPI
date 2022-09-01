@@ -2,6 +2,7 @@
 using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core2.Common;
+using TimberApi.Core2.ConfiguratorSystem;
 
 namespace TimberApi.Internal
 {

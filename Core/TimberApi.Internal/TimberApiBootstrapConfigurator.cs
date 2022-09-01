@@ -4,6 +4,7 @@ using TimberApi.Internal.AssetSystem;
 using TimberApi.Internal.ConfiguratorSystem;
 using TimberApi.Internal.SingletonSystem;
 using TimberApi.Internal.SpecificationSystem;
+using TimberApi.Internal.SpecificationSystem.CustomSpecifications.Golems;
 
 namespace TimberApi.Internal
 {
@@ -21,7 +22,7 @@ namespace TimberApi.Internal
             containerDefinition.Install(new ConfiguratorSystemConfigurator());
             containerDefinition.Install(new AssetSystemConfigurator());
             containerDefinition.Install(new SpecificationGlobalConfigurator());
-
+            containerDefinition.Install(new GolemFactionPatchConfigurator());
 
             // Needs to be last at all times, will activate on instantiation to run TimberAPI singletons
             containerDefinition.Bind<SingletonRunner>().AsSingleton();
