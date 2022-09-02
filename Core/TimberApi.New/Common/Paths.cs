@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace TimberApi.Core2.Common
 {
@@ -17,5 +18,7 @@ namespace TimberApi.Core2.Common
         public static string Mods { get; } = Environment.GetEnvironmentVariable("TIMBER_API_MODS_PATH") ?? string.Empty;
 
         public static string Configs { get; } = Environment.GetEnvironmentVariable("TIMBER_API_CONFIGS_PATH") ?? string.Empty;
+
+        public static string BepInExPlugins { get; } = Path.Combine(Environment.GetEnvironmentVariable("TIMBER_API_PATH")!, "..", "BepInEx", "plugins");
     }
 }

@@ -400,7 +400,20 @@ namespace TimberApi.Core.ModLoaderSystem
         /// </summary>
         private static string[] GetModFilePaths()
         {
-            return Directory.GetDirectories(Paths.Mods).Select(modDirectory => Path.Combine(modDirectory, ModFileName)).Where(File.Exists).ToArray();
+            return Directory.GetDirectories(Paths.Mods).Select(modDirectory => Path.Combine(modDirectory, ModFileName)).Where(File.Exists).Concat(GetBepInExModFilePaths()).ToArray();
+        }
+
+        /// <summary>
+        /// ThunderStoreManager fix, should be removed when going to MOD.IO
+        /// </summary>
+        private static IEnumerable<string> GetBepInExModFilePaths()
+        {
+            if (!Directory.Exists(Paths.BepInExPlugins))
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            return Directory.GetDirectories(Paths.BepInExPlugins).Select(modDirectory => Path.Combine(modDirectory, ModFileName)).Where(File.Exists);
         }
     }
 }
