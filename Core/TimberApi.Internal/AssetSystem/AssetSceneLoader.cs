@@ -3,11 +3,11 @@ using TimberApi.Internal.SingletonSystem.Singletons;
 
 namespace TimberApi.Internal.AssetSystem
 {
-    public class AssetScenePatcher : ITimberApiLoadableSingleton
+    public class AssetSceneLoader : ITimberApiLoadableSingleton
     {
         private readonly AssetBundleLoader _assetBundleLoader;
 
-        public AssetScenePatcher(AssetBundleLoader assetBundleLoader)
+        public AssetSceneLoader(AssetBundleLoader assetBundleLoader)
         {
             _assetBundleLoader = assetBundleLoader;
         }

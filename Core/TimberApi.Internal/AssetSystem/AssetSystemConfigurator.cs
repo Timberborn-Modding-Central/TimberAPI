@@ -11,7 +11,7 @@ namespace TimberApi.Internal.AssetSystem
         public void Configure(IContainerDefinition containerDefinition)
         {
             containerDefinition.Bind<IAssetLoader>().To<AssetLoader>().AsSingleton();
-            containerDefinition.Bind<AssetScenePatcher>().AsSingleton();
+            containerDefinition.Bind<AssetSceneLoader>().AsSingleton();
         }
     }
 
@@ -22,7 +22,6 @@ namespace TimberApi.Internal.AssetSystem
             containerDefinition.Bind<AssetBundleLoader>().AsSingleton();
             containerDefinition.Bind<AssetRepository>().AsSingleton();
             containerDefinition.Bind<AssetRepositorySeeder>().AsSingleton();
-            // containerDefinition.Bind<AssetScenePatcher>().AsSingleton();
         }
     }
 }

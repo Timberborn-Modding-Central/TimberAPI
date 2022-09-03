@@ -1,7 +1,6 @@
-﻿using TimberApi.Internal.AssetShaderSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace TimberApi.Internal.AssetSystem.ShaderFix
+namespace TimberApi.Internal.AssetShaderSystem.ShaderFix
 {
     public class DirtShaderFixApplier : IShaderFixApplier
     {
