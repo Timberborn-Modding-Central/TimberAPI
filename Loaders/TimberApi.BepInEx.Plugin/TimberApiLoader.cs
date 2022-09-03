@@ -1,36 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using TimberApi.LoaderInterfaces;
+using BepInEx;
 
-namespace TimberApi.PreLoader
+namespace TimberApi.BepInExPlugin
 {
-    internal static class Entrypoint
+    public static class TimberApiLoader
     {
+        private static string _timberApiPath = string.Empty;
+
         private static string _timberApiLogPath = string.Empty;
 
         private static string _timberApiCorePath = string.Empty;
 
         private static string _timberApiPatchersPath = string.Empty;
 
-        private static string _timberApiModPath = string.Empty;
+        private static string _timberApiModsPath = string.Empty;
+
+        private static string _timberApiConfigsPath = string.Empty;
+
+        private static string _bepInExPluginPath = string.Empty;
 
         private static readonly string[] CoreDlls =
         {
-            "TimberApi.New.dll"
+            "TimberApi.Core.dll"
         };
 
         private static readonly string[] LibraryDlls =
         {
-            "Mono.Cecil.dll",
-            "Mono.Cecil.Mdb.dll",
-            "Mono.Cecil.Pdb.dll",
-            "Mono.Cecil.Rocks.dll",
-            "MonoMod.Common.dll",
-            "0Harmony.dll"
+            "GriffinPlus.Lib.FastActivator.dll",
+            "TimberApiVersioning.dll",
+            "TimberApi.LoaderInterfaces.dll",
+            "TimberApi.New.dll"
         };
+
 
         /// <summary>
         /// Doorstop entry point
@@ -39,16 +42,15 @@ namespace TimberApi.PreLoader
         /// 2. TimberApi core
         /// 3. Additional patchers
         /// </summary>
-        public static void Main()
+        public static void Start()
         {
             try
             {
-                LoadTimberApiPaths(Path.GetDirectoryName(Environment.GetEnvironmentVariable("DOORSTOP_INVOKE_DLL_PATH")) ?? string.Empty);
+                LoadTimberApiPaths();
                 SetTimberApiPathEnvironmentVariables();
-                EnsurePathsExists(_timberApiLogPath, _timberApiCorePath, _timberApiPatchersPath, _timberApiModPath);
+                EnsurePathsExists(_timberApiLogPath, _timberApiCorePath, _timberApiPatchersPath, _timberApiModsPath, _timberApiConfigsPath);
                 LoadLibraries();
                 LoadCore();
-                LoadPatchers();
             }
             catch (Exception e)
             {
@@ -57,16 +59,20 @@ namespace TimberApi.PreLoader
             }
         }
 
+
         /// <summary>
         /// Sets environment variables to be used in other assemblies
         /// </summary>
         private static void SetTimberApiPathEnvironmentVariables()
         {
             Environment.SetEnvironmentVariable("TIMBER_LOADER_TYPE", "TimberAPI");
+            Environment.SetEnvironmentVariable("TIMBER_API_PATH", _timberApiPath);
             Environment.SetEnvironmentVariable("TIMBER_API_LOG_PATH", _timberApiLogPath);
             Environment.SetEnvironmentVariable("TIMBER_API_CORE_PATH", _timberApiCorePath);
             Environment.SetEnvironmentVariable("TIMBER_API_PATCHERS_PATH", _timberApiPatchersPath);
-            Environment.SetEnvironmentVariable("TIMBER_API_MODS_PATH", _timberApiModPath);
+            Environment.SetEnvironmentVariable("TIMBER_API_MODS_PATH", _timberApiModsPath);
+            Environment.SetEnvironmentVariable("TIMBER_API_CONFIGS_PATH", _timberApiConfigsPath);
+            Environment.SetEnvironmentVariable("BEP_IN_EX_PLUGIN_PATH", _bepInExPluginPath);
         }
 
         /// <summary>
@@ -95,37 +101,20 @@ namespace TimberApi.PreLoader
         }
 
         /// <summary>
-        /// Loads all assemblies in side the patcher folder and initializes
-        /// </summary>
-        private static void LoadPatchers()
-        {
-            foreach (string dependencyDll in Directory.GetFiles(Path.Combine(_timberApiPatchersPath), "*.dll"))
-            {
-                Assembly assembly = Assembly.LoadFile(Path.Combine(_timberApiPatchersPath, dependencyDll));
-                InitializePatchersInAssembly(assembly);
-            }
-        }
-
-        /// <summary>
         /// Loads all absolute api paths
         /// </summary>
-        /// <param name="invokeDllPath">Absolute preloader path</param>
         /// <exception cref="DirectoryNotFoundException">Throws exception when game directory could not be loaded</exception>
-        private static void LoadTimberApiPaths(string invokeDllPath)
+        private static void LoadTimberApiPaths()
         {
-            DirectoryInfo timberApiPath = Directory.GetParent(invokeDllPath)!;
+            string timberApiRootPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "..");
 
-            string gamePath = timberApiPath.Parent?.FullName ?? string.Empty;
-
-            if(gamePath == string.Empty)
-            {
-                throw new DirectoryNotFoundException("Timberborn game location was not found");
-            }
-
-            _timberApiLogPath = Path.Combine(gamePath, "TimberApi", "logs");
-            _timberApiCorePath = Path.Combine(gamePath, "TimberApi", "core");
-            _timberApiPatchersPath = Path.Combine(gamePath, "TimberApi", "patchers");
-            _timberApiModPath = Path.Combine(gamePath, "TimberApi", "mods");
+            _timberApiPath = Path.Combine(timberApiRootPath);
+            _timberApiLogPath = Path.Combine(timberApiRootPath, "logs");
+            _timberApiCorePath = Path.Combine(timberApiRootPath, "core");
+            _timberApiPatchersPath = Path.Combine(timberApiRootPath, "patchers");
+            _timberApiModsPath = Path.Combine(timberApiRootPath, "mods");
+            _timberApiConfigsPath = Path.Combine(timberApiRootPath, "configs");
+            _bepInExPluginPath = Paths.PluginPath;
         }
 
         /// <summary>
@@ -147,7 +136,7 @@ namespace TimberApi.PreLoader
             foreach (string coreDll in CoreDlls)
             {
                 Assembly assembly = Assembly.LoadFile(Path.Combine(_timberApiCorePath, coreDll));
-                InitializePatchersInAssembly(assembly);
+                InitializeCoreEntrypoint(assembly);
             }
         }
 
@@ -156,17 +145,13 @@ namespace TimberApi.PreLoader
         /// Used for loading TimberAPI patchers
         /// </summary>
         /// <param name="assembly"></param>
-        private static void InitializePatchersInAssembly(Assembly assembly)
+        private static void InitializeCoreEntrypoint(Assembly assembly)
         {
-            IEnumerable<ITimberApiPatcher> patcherInstances = assembly
-                .GetTypes()
-                .Where(type => type.GetInterfaces().Contains(typeof(ITimberApiPatcher)) && type.GetConstructor(Type.EmptyTypes) != null)
-                .Select(type => Activator.CreateInstance(type) as ITimberApiPatcher)!;
-
-            foreach (ITimberApiPatcher timberApiPatcher in patcherInstances)
-            {
-                timberApiPatcher.Initialize();
-            }
+            assembly
+                .GetType("TimberApi.Core.TimberApiEntrypoint")
+                .GetMethod("LoadTimberApiManager", BindingFlags.Public | BindingFlags.Static)!
+                .Invoke(null, null);
         }
+
     }
 }

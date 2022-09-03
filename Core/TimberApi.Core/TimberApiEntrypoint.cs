@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using MonoMod.RuntimeDetour;
 using TimberApi.Core.BootstrapSystem;
-using TimberApi.Core.Common;
-using TimberApi.Core2.Common;
 using TimberApi.LoaderInterfaces;
 using Timberborn.Core;
 using UnityEngine;
@@ -27,23 +23,13 @@ namespace TimberApi.Core
                 typeof(GameStartLogger).GetMethod("GetModdingInfo", BindingFlags.Static | BindingFlags.NonPublic),
                 typeof(TimberApiEntrypoint).GetMethod(nameof(GetModdingInfoHook))
             );
-
-            var fix = new Hook(
-                typeof(GameStartLogger).GetMethod("AppendDriveInfo", BindingFlags.Static | BindingFlags.NonPublic),
-                typeof(TimberApiEntrypoint).GetMethod(nameof(LagFix))
-            );
         }
-
-        public static void LagFix(StringBuilder systemInfo) { }
 
         public static string GetModdingInfoHook()
         {
             try
             {
-                var timberApiManager = new GameObject("TimberApiManager");
-                timberApiManager.AddComponent<TimberApiBootstrapSystemConfigurator>();
-                Object.DontDestroyOnLoad(timberApiManager);
-
+                LoadTimberApiManager();
                 ModResolver.TryGetMods(out string mods);
                 return "Modded: true, " + "TimberApi, " + mods;
             }
@@ -52,6 +38,13 @@ namespace TimberApi.Core
                 File.WriteAllText("Exception.txt", e.ToString());
                 throw;
             }
+        }
+
+        public static void LoadTimberApiManager()
+        {
+            var timberApiManager = new GameObject("TimberApiManager");
+            timberApiManager.AddComponent<TimberApiBootstrapSystemConfigurator>();
+            Object.DontDestroyOnLoad(timberApiManager);
         }
     }
 }
