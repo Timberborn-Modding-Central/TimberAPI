@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core2.Common;
@@ -36,6 +37,7 @@ namespace TimberApi.Internal.AssetSystem
                 assetFolder.Load();
                 prefixesLoaded++;
             }
+
             _consoleWriter.Log($"Assets loaded for {sceneEntrypoint}, Total prefixes loaded: {prefixesLoaded}");
         }
 

@@ -1,4 +1,5 @@
-﻿using TimberApi.Internal.AssetSystem.Exceptions;
+﻿using System.Diagnostics;
+using TimberApi.Internal.AssetSystem.Exceptions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -27,7 +28,7 @@ namespace TimberApi.Internal.AssetSystem
             return _assetBundle!.LoadAsset<T>(path);
         }
 
-        public T[] LoadAll<T>(string path) where T : Object
+        public T[] LoadAll<T>() where T : Object
         {
             if (_assetBundle == null)
             {
@@ -42,6 +43,7 @@ namespace TimberApi.Internal.AssetSystem
             {
                 throw new ModAssetBundleAlreadyLoadedException(_assetBundleName);
             }
+
             _assetBundle = AssetBundle.LoadFromFile(_assetBundlePath);
         }
 
