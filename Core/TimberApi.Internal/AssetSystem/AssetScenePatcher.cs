@@ -16,7 +16,7 @@ namespace TimberApi.Internal.AssetSystem
         {
             if (ConfiguratorPatcher.PreviousScene != 0)
             {
-                _assetBundleLoader.UnloadAll(ConfiguratorPatcher.CurrentScene);
+                _assetBundleLoader.UnloadAll(ConfiguratorPatcher.PreviousScene);
             }
             _assetBundleLoader.LoadAll(ConfiguratorPatcher.CurrentScene);
         }
