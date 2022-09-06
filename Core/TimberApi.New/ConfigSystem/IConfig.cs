@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TimberApi.Core2.ConfigSystem
+namespace TimberApi.New.ConfigSystem
 {
     public interface IConfig
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TimberApi.Core2.ConsoleSystem
+namespace TimberApi.New.ConsoleSystem
 {
     public interface IConsoleWriter
     {

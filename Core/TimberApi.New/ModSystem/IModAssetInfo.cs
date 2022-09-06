@@ -1,6 +1,6 @@
-﻿using TimberApi.Core2.Common;
+﻿using TimberApi.New.Common;
 
-namespace TimberApi.Core2.ModSystem
+namespace TimberApi.New.ModSystem
 {
     public interface IModAssetInfo
     {

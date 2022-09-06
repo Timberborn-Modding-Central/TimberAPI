@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
 
-namespace TimberApi.Core2.ModSystem
+namespace TimberApi.New.ModSystem
 {
     public interface IModRepository
     {

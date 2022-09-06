@@ -2,12 +2,12 @@
 using System.IO;
 using Bindito.Core;
 using HarmonyLib;
-using TimberApi.Core2.Common;
+using TimberApi.New.Common;
 using Timberborn.Bootstrapper;
 
 namespace TimberApi.Core.BootstrapSystem
 {
-    public static class BootstrapPatch
+    internal static class BootstrapPatch
     {
         public static void Apply()
         {

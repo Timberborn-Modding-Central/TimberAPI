@@ -1,14 +1,14 @@
 ﻿using Bindito.Core;
 using Bindito.Unity;
-using TimberApi.Core.Common;
+using TimberApi.Common.Helpers;
 using TimberApi.Core.ModLoaderSystem.ObjectDeserializers;
-using TimberApi.Core2.ModSystem;
+using TimberApi.New.ModSystem;
 using Timberborn.WorldSerialization;
 using UnityEngine;
 
 namespace TimberApi.Core.ModLoaderSystem
 {
-    public class ModLoaderSystemConfigurator : PrefabConfigurator
+    internal class ModLoaderSystemConfigurator : PrefabConfigurator
     {
         public override void Configure(IContainerDefinition containerDefinition)
         {

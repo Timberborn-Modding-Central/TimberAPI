@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using Bindito.Core;
-using TimberApi.Core2.ModSystem;
+using TimberApi.New.ModSystem;
 using UnityEngine;
 
 namespace TimberApi.Core.ModLoaderSystem

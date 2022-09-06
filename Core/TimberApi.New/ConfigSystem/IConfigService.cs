@@ -1,4 +1,4 @@
-﻿namespace TimberApi.Core2.ConfigSystem
+﻿namespace TimberApi.New.ConfigSystem
 {
     public interface IConfigService
     {

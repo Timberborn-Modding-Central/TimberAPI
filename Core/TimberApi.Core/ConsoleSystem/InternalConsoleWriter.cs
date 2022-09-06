@@ -1,4 +1,5 @@
-﻿using TimberApi.Core.LoggingSystem;
+﻿using TimberApi.Common.ConsoleSystem;
+using TimberApi.Core.LoggingSystem;
 using UnityEngine;
 using Logger = TimberApi.Core.LoggingSystem.Logger;
 

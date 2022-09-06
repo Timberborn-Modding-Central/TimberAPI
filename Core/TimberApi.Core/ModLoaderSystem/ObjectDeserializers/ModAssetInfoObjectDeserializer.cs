@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TimberApi.Core.Common;
+using TimberApi.Common.ConsoleSystem;
 using TimberApi.Core.ConsoleSystem;
-using TimberApi.Core2.Common;
+using TimberApi.New.Common;
+using TimberApi.New.Common.Extensions;
 using Timberborn.Persistence;
 
 namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers

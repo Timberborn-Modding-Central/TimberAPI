@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using TimberApi.Common.LoggingSystem;
 using UnityEngine;
 
 namespace TimberApi.Core.LoggingSystem

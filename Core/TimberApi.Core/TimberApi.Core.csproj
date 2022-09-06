@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <TimberApiPath>$(SolutionDir)Timberborn\TimberAPI</TimberApiPath>
+        <TimberApiPath>C:\Program Files (x86)\Steam\steamapps\common\Timberborn\BepInEx\plugins\Timberborn_Central-TimberAPI</TimberApiPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,6 +20,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Loaders\TimberApi.LoaderInterfaces\TimberApi.LoaderInterfaces.csproj" />
+        <ProjectReference Include="..\TimberApi.Common\TimberApi.Common.csproj" />
         <ProjectReference Include="..\TimberApi.New\TimberApi.New.csproj" />
         <ProjectReference Include="..\TimberApiVersioning\TimberApiVersioning.csproj" />
     </ItemGroup>

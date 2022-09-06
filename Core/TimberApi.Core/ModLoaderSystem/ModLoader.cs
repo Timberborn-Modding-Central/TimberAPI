@@ -5,19 +5,20 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using TimberApi.Core.Common;
+using TimberApi.Common.ConsoleSystem;
 using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem.Exceptions;
 using TimberApi.Core.ModLoaderSystem.ObjectDeserializers;
-using TimberApi.Core2;
-using TimberApi.Core2.Common;
-using TimberApi.Core2.ModEntrySystem;
-using TimberApi.Core2.ModSystem;
+using TimberApi.New;
+using TimberApi.New.Common;
+using TimberApi.New.Common.Helpers;
+using TimberApi.New.ModSystem;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 using Logger = TimberApi.Core.LoggingSystem.Logger;
 
 namespace TimberApi.Core.ModLoaderSystem

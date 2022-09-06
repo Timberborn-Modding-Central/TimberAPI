@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.Core.ConsoleSystemUi
 {
-    public class ConsoleSettingUi
+    internal class ConsoleSettingUi
     {
         public static VisualElement Create()
         {

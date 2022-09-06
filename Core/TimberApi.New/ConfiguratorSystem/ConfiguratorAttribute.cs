@@ -1,7 +1,7 @@
 ﻿using System;
-using TimberApi.Core2.Common;
+using TimberApi.New.Common;
 
-namespace TimberApi.Core2.ConfiguratorSystem
+namespace TimberApi.New.ConfiguratorSystem
 {
     /// <summary>
     /// Attribute to register configurators

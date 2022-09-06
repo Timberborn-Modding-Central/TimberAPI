@@ -1,6 +1,6 @@
-﻿using TimberApiVersioning;
+﻿using TimberApi.Common.VersionSystem;
 
-namespace TimberApi.Core2.ModSystem
+namespace TimberApi.New.ModSystem
 {
     public interface IModDependency
     {

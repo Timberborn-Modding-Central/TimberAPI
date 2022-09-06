@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
-using TimberApi.Core.Common;
-using TimberApi.Core.ConsoleSystem;
-using TimberApi.Core2.ConfigSystem;
+using TimberApi.Common.ConsoleSystem;
+using TimberApi.Common.Extensions;
+using TimberApi.New.ConfigSystem;
 using UnityEngine;
 
 namespace TimberApi.Core.ConfigSystem
 {
-    public class ConfigServiceFactory
+    internal class ConfigServiceFactory : IConfigServiceFactory
     {
         private static readonly string _configFolder = "configs";
 
@@ -30,7 +30,7 @@ namespace TimberApi.Core.ConfigSystem
             };
         }
 
-        public ConfigService CreateWithAssemblyConfigs(Assembly assembly, string configDirectoryPath, string consoleTag)
+        public IConfigService CreateWithAssemblyConfigs(Assembly assembly, string configDirectoryPath, string consoleTag)
         {
             List<IConfig> configs = new List<IConfig>();
 

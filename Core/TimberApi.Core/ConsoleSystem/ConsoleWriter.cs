@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
-using TimberApi.Core2.ConsoleSystem;
-using TimberApi.Core2.ModSystem;
+using TimberApi.Common.ConsoleSystem;
+using TimberApi.New.ConsoleSystem;
+using TimberApi.New.ModSystem;
 using UnityEngine;
 
 namespace TimberApi.Core.ConsoleSystem
 {
-    public class ConsoleWriter : IConsoleWriter
+    internal class ConsoleWriter : IConsoleWriter
     {
         private readonly IModRepository _modRepository;
 

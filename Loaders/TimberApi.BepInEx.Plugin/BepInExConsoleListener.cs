@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BepInEx.Logging;
 using UnityEngine;
-using ILogListener = TimberApi.Core.LoggingSystem.ILogListener;
+using ILogListener = TimberApi.Common.LoggingSystem.ILogListener;
 
 namespace TimberApi.BepInExPlugin
 {

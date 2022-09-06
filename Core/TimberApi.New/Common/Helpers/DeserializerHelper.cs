@@ -1,4 +1,4 @@
-﻿namespace TimberApi.Core.Common
+﻿namespace TimberApi.New.Common.Helpers
 {
     public static class DeserializerHelper
     {

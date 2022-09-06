@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.Core.ConsoleSystem
 {
-    public class ConsoleMonitorController
+    internal class ConsoleMonitorController
     {
         private readonly List<string> _logHistory;
 

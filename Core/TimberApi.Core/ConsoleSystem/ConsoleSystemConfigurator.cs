@@ -1,8 +1,10 @@
 ﻿using Bindito.Core;
 using Bindito.Unity;
-using TimberApi.Core.Common;
+using TimberApi.Common.ConsoleSystem;
+using TimberApi.Common.Helpers;
+using TimberApi.Common.LoggingSystem;
 using TimberApi.Core.LoggingSystem;
-using TimberApi.Core2.ConsoleSystem;
+using TimberApi.New.ConsoleSystem;
 using Timberborn.InputSystem;
 using UnityEngine;
 using UnityEngine.UIElements;

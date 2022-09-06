@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TimberApi.Core2.ConfigSystem;
+using TimberApi.New.ConfigSystem;
 
 namespace TimberApi.Core.ConfigSystem
 {
-    public class ConfigRepository
+    internal class ConfigRepository
     {
         private readonly Dictionary<Type, IConfig> _configs;
 

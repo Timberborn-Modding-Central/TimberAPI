@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using Bindito.Core;
 using HarmonyLib;
+using TimberApi.Common.LoggingSystem;
 using TimberApi.Core.LoggingSystem;
 using Timberborn.Bootstrapper;
 

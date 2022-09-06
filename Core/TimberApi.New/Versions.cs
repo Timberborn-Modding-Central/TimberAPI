@@ -1,13 +1,13 @@
-﻿using TimberApiVersioning;
+﻿using TimberApi.Common.VersionSystem;
 
-namespace TimberApi.Core2
+namespace TimberApi.New
 {
     public class Versions
     {
         public static Version TimberApiVersion { get; } = new Version(0,7,0,0);
 
-        public static Version MinimumGameVersion { get; } = new Version(0,2,4,0);
+        public static Version TimberApiMinimumGameVersion { get; } = new Version(0,2,4,0);
 
-        public static Version GameVersion  { get; } = Version.Parse(Timberborn.Versioning.Versions.VersionNumber);
+        public static readonly Version GameVersion   = Version.Parse(Timberborn.Versioning.Versions.VersionNumber);
     }
 }

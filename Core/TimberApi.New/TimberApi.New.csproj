@@ -2,8 +2,8 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
-        <LangVersion>8</LangVersion>
-        <RootNamespace>TimberApi.Core2</RootNamespace>
+        <LangVersion>9</LangVersion>
+        <RootNamespace>TimberApi.New</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -18,7 +18,11 @@
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
     </ItemGroup>
-
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>TimberApi.Core</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701" />
         <PackageReference Include="MonoMod.Utils" Version="22.5.1.1" />
@@ -28,6 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\TimberApi.Common\TimberApi.Common.csproj" />
       <ProjectReference Include="..\TimberApiVersioning\TimberApiVersioning.csproj" />
     </ItemGroup>
 

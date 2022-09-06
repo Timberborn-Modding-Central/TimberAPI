@@ -2,7 +2,7 @@
 
 namespace TimberApi.Core.ConfigSystem
 {
-    public class ConfigSystemConfigurator : IConfigurator
+    internal class ConfigSystemConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

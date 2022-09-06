@@ -28,7 +28,7 @@ namespace TimberApi.BepInExPlugin
 
         private static readonly string[] LibraryDlls =
         {
-            "GriffinPlus.Lib.FastActivator.dll",
+            "TimberApi.Common.dll",
             "TimberApiVersioning.dll",
             "TimberApi.LoaderInterfaces.dll",
             "TimberApi.New.dll"

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
 
-namespace TimberApi.Core2.Common
+namespace TimberApi.New.Common
 {
     public static class Paths
     {
@@ -19,6 +18,6 @@ namespace TimberApi.Core2.Common
 
         public static string Configs { get; } = Environment.GetEnvironmentVariable("TIMBER_API_CONFIGS_PATH") ?? string.Empty;
 
-        public static string BepInExPlugins { get; } = Path.Combine(Environment.GetEnvironmentVariable("TIMBER_API_PATH")!, "..", "BepInEx", "plugins");
+        public static string BepInExPlugins { get; } = Environment.GetEnvironmentVariable("BEP_IN_EX_PLUGIN_PATH") ?? string.Empty;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine.UIElements;
 
-namespace TimberApi.Core2.UiBuilderSystem
+namespace TimberApi.New.UiBuilderSystem
 {
     public struct Padding
     {

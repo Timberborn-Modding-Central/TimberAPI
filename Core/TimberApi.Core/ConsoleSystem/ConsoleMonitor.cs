@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using TimberApi.Common.LoggingSystem;
 using TimberApi.Core.ConsoleSystemUi;
 using TimberApi.Core.LoggingSystem;
-using TimberApi.Core2.Common;
+using TimberApi.New.Common;
 using Timberborn.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.Core.ConsoleSystem
 {
-    public class ConsoleMonitor : MonoBehaviour, ILogListener
+    internal class ConsoleMonitor : MonoBehaviour, ILogListener
     {
         private ConsoleMonitorController _monitorController = null!;
 

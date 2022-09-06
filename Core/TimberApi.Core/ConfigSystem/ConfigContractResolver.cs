@@ -4,7 +4,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace TimberApi.Core.ConfigSystem
 {
-    public class ConfigContractResolver : DefaultContractResolver
+    internal class ConfigContractResolver : DefaultContractResolver
     {
         protected override JsonObjectContract CreateObjectContract(Type objectType)
         {

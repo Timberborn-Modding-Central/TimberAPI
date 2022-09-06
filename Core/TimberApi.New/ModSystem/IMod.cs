@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Reflection;
-using TimberApi.Core2.ConfigSystem;
-using TimberApiVersioning;
+using TimberApi.Common.VersionSystem;
+using TimberApi.New.ConfigSystem;
 
-namespace TimberApi.Core2.ModSystem
+namespace TimberApi.New.ModSystem
 {
     public interface IMod
     {

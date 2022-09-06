@@ -1,9 +1,9 @@
-﻿using TimberApi.Core.ConfigSystem;
+﻿using TimberApi.New.ConfigSystem;
 
 namespace TimberApi.Core
 {
     internal static class TimberApiCore
     {
-        public static ConfigService Configs = null!;
+        public static IConfigService Configs = null!;
     }
 }

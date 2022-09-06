@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using TimberApi.Core.Common;
-using TimberApi.Core.ConsoleSystem;
-using TimberApi.Core2.ConfigSystem;
-using TimberApi.Core2.ModSystem;
+using TimberApi.Common.ConsoleSystem;
+using TimberApi.New.ConfigSystem;
 using UnityEngine;
 
 namespace TimberApi.Core.ConfigSystem
 {
-    public class ConfigService : IConfigService
+    internal class ConfigService : IConfigService
     {
         private readonly string _consoleTag;
 
