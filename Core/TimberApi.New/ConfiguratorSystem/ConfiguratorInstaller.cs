@@ -1,6 +1,6 @@
 ﻿using Bindito.Core;
 using TimberApi.Common.SingletonSystem;
-using TimberApi.New.Common;
+using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.ConfiguratorSystem
 {

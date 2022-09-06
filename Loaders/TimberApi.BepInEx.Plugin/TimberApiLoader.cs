@@ -29,7 +29,6 @@ namespace TimberApi.BepInExPlugin
         private static readonly string[] LibraryDlls =
         {
             "TimberApi.Common.dll",
-            "TimberApiVersioning.dll",
             "TimberApi.LoaderInterfaces.dll",
             "TimberApi.New.dll"
         };

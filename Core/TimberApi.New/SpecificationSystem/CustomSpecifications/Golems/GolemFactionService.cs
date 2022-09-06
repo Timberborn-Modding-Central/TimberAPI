@@ -35,7 +35,7 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
             if (golemFactionSpecification != null)
                 return golemFactionSpecification.GolemId;
 
-            TimberApiInternal.ConsoleWriter.Log("Golems for faction " + factionId + " doesn't exists, falling back to " + _factionSpecificationService.StartingFaction.Id);
+            TimberApi.ConsoleWriter.Log("Golems for faction " + factionId + " doesn't exists, falling back to " + _factionSpecificationService.StartingFaction.Id);
             return _factionSpecificationService.StartingFaction.Id;
         }
     }

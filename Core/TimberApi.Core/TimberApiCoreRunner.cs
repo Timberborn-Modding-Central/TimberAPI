@@ -2,8 +2,8 @@
 using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.ModLoaderSystem;
 using UnityEngine;
-using Paths = TimberApi.New.Common.Paths;
-using Versions = TimberApi.New.Versions;
+using Paths = TimberApi.Common.Paths;
+using Versions = TimberApi.Common.Versions;
 
 namespace TimberApi.Core
 {

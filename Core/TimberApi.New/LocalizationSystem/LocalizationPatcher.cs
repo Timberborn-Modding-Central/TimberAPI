@@ -1,48 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using HarmonyLib;
-using TimberApi.Internal;
+using TimberApi.Common.SingletonSystem.Singletons;
 using Timberborn.Common;
 using UnityEngine;
+// ReSharper disable InconsistentNaming
 
-namespace TimberApi.Internal.LocalizationSystem
+namespace TimberApi.New.LocalizationSystem
 {
     [HarmonyPatch]
-    public class LocalizationPatcher
+    public class LocalizationPatcher : ITimberApiLoadableSingleton
     {
 
-        [HarmonyPatch]
-        public static class LocalizationPatch
+        public void Load()
         {
-            /// <summary>
-            /// Set the target method using reflection
-            /// </summary>
-            /// <returns></returns>
-            private static MethodInfo TargetMethod()
-            {
-                return AccessTools.TypeByName("Timberborn.Localization.LocalizationRepository").GetMethod("GetLocalization");
-            }
+            Harmony harmony = new Harmony("TimberApi.Localization");
 
-            /// <summary>
-            /// Adds custom localization
-            /// Code localization, applies to all languages
-            /// File localization, overwrites code localization, has any localization
-            /// Missing file localization, defaults back to enUS, overwrites code localization
-            /// </summary>
-            private static void Postfix(string localizationKey, ref IDictionary<string, string> __result)
+            harmony.Patch(
+                original: AccessTools.TypeByName("Timberborn.Localization.LocalizationRepository").GetMethod("GetLocalization"),
+                postfix: new HarmonyMethod(AccessTools.Method(typeof(LocalizationPatcher), nameof(GetLocalizationPatch)))
+            );
+        }
+
+        public static void GetLocalizationPatch(string localizationKey, ref IDictionary<string, string> __result)
+        {
+            IDictionary<string, string> localization = LocalizationFetcher.GetLocalization(localizationKey);
+            try
             {
-                IDictionary<string, string> localization = LocalizationFetcher.GetLocalization(localizationKey);
-                try
-                {
-                    __result.AddRange(localization);
-                    TimberApiInternal.ConsoleWriter.Log($"Loaded {localization.Count} custom labels");
-                }
-                catch (Exception e)
-                {
-                    TimberApiInternal.ConsoleWriter.Log(e.ToString(), LogType.Error);
-                    throw;
-                }
+                __result.AddRange(localization);
+                TimberApi.ConsoleWriter.Log($"Loaded {localization.Count} custom labels");
+            }
+            catch (Exception e)
+            {
+                TimberApi.ConsoleWriter.Log(e.ToString(), LogType.Error);
+                throw;
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TimberApi.New.Common
+namespace TimberApi.New.SceneSystem
 {
     [Flags]
     public enum SceneEntrypoint

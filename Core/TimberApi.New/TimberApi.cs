@@ -1,11 +1,11 @@
 ﻿using Bindito.Core;
+using TimberApi.Common;
 using TimberApi.Common.ConsoleSystem;
-using TimberApi.New.Common;
 using TimberApi.New.ConfigSystem;
 
 namespace TimberApi.New
 {
-    internal class TimberApiInternal
+    internal class TimberApi
     {
         public static readonly string ConsoleTag = "TimberAPI";
 
@@ -15,18 +15,11 @@ namespace TimberApi.New
 
         public static IInternalConsoleWriter ConsoleWriter = null!;
 
-        public TimberApiInternal(IConfigServiceFactory configServiceFactory, IInternalConsoleWriter internalConsoleWriter, IContainer container)
+        public TimberApi(IConfigServiceFactory configServiceFactory, IInternalConsoleWriter internalConsoleWriter, IContainer container)
         {
-            Configs = configServiceFactory.CreateWithAssemblyConfigs(typeof(TimberApiInternal).Assembly, Paths.TimberApi, ConsoleTag);
+            Configs = configServiceFactory.CreateWithAssemblyConfigs(typeof(TimberApi).Assembly, Paths.TimberApi, ConsoleTag);
             ConsoleWriter = internalConsoleWriter;
             Container = container;
-
-
-
-
-
-
-
         }
 
         public static class AssetInfo

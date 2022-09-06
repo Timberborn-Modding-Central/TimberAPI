@@ -1,7 +1,6 @@
 ﻿using Bindito.Core;
 using HarmonyLib;
 using TimberApi.Common.SingletonSystem.Singletons;
-using TimberApi.New.Common;
 using TimberApi.New.ConfiguratorSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;

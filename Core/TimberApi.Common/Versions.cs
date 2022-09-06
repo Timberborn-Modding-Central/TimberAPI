@@ -1,6 +1,6 @@
 ﻿using TimberApi.Common.VersionSystem;
 
-namespace TimberApi.New
+namespace TimberApi.Common
 {
     public class Versions
     {

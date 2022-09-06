@@ -2,17 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Timberborn.Localization;
 using LINQtoCSV;
-using TimberApi.Core2.ModSystem;
+using TimberApi.New.ModSystem;
+using Timberborn.Localization;
 using UnityEngine;
 
-namespace TimberApi.Internal.LocalizationSystem
+namespace TimberApi.New.LocalizationSystem
 {
     internal static class LocalizationFetcher
     {
-        public const string LocalizationPathKey = "lang";
-
         /// <summary>
         /// Modified timberborn method Timberborn.Localization.LocalizationRepository.GetLocalization
         /// </summary>
@@ -42,7 +40,7 @@ namespace TimberApi.Internal.LocalizationSystem
         /// <returns></returns>
         private static IEnumerable<LocalizationRecord> GetLocalizationRecordsFromFiles(string localization, IEnumerable<string> filePaths)
         {
-            List<LocalizationRecord> records = new List<LocalizationRecord>();
+            List<LocalizationRecord> records = new ();
             foreach (string path in filePaths)
             {
                 records.AddRange(TryToReadRecords(localization, path));
@@ -71,7 +69,7 @@ namespace TimberApi.Internal.LocalizationSystem
                     message = message + " First error: " + aggregatedException.m_InnerExceptionsList[0].Message;
                 if (localization == LocalizationCodes.Default)
                     throw new InvalidDataException(message, ex);
-                TimberApiInternal.ConsoleWriter.Log(message, LogType.Error);
+                TimberApi.ConsoleWriter.Log(message, LogType.Error);
                 return new List<LocalizationRecord>();
             }
         }
@@ -89,7 +87,7 @@ namespace TimberApi.Internal.LocalizationSystem
         private static List<string> GetLocalizationFilePathsFromDependencies(string localizationKey)
         {
             List<string> localizationFilePaths = new List<string>();
-            foreach (IMod mod in TimberApiInternal.Container.GetInstance<IModRepository>().All())
+            foreach (IMod mod in TimberApi.Container.GetInstance<IModRepository>().All())
             {
                 string pluginLocalizationPath = Path.Combine(mod.DirectoryPath, mod.LanguagePath);
                 (bool hasLocalization, string localizationName) = LocalizationNameOrDefault(pluginLocalizationPath, localizationKey);

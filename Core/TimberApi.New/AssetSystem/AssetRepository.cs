@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using TimberApi.Common.ConsoleSystem;
 using TimberApi.New.AssetSystem.Exceptions;
-using TimberApi.New.Common;
 using TimberApi.New.ModSystem;
+using TimberApi.New.SceneSystem;
 using UnityEngine;
 
 namespace TimberApi.New.AssetSystem
@@ -15,13 +15,10 @@ namespace TimberApi.New.AssetSystem
     {
         private readonly List<string> _usedAssetRootFolderPaths;
 
-        private readonly IInternalConsoleWriter _consoleWriter;
-
         private readonly Dictionary<string, AssetFolder> _modAssets;
 
-        public AssetRepository(IInternalConsoleWriter consoleWriter)
+        public AssetRepository()
         {
-            _consoleWriter = consoleWriter;
             _modAssets = new Dictionary<string, AssetFolder>();
             _usedAssetRootFolderPaths = new List<string>();
         }
@@ -54,12 +51,12 @@ namespace TimberApi.New.AssetSystem
             }
             catch (PrefixAlreadyExistsException e)
             {
-                _consoleWriter.Log($"Failed to add prefix: " + e.Message, LogType.Exception);
+                TimberApi.ConsoleWriter.Log($"Failed to add prefix: " + e.Message, LogType.Exception);
                 throw;
             }
             catch (Exception e)
             {
-                _consoleWriter.Log($"Failed to add prefix ({prefix}), Exception: " + e, LogType.Exception);
+                TimberApi.ConsoleWriter.Log($"Failed to add prefix ({prefix}), Exception: " + e, LogType.Exception);
                 throw;
             }
         }

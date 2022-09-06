@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Timberborn.Persistence;
 using UnityEngine;
 
-namespace TimberApi.New.Common.Extensions
+namespace TimberApi.Common.Extensions
 {
     // ReSharper disable once InconsistentNaming
     public static class IObjectLoaderExtensions

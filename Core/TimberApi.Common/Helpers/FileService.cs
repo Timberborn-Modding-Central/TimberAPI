@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace TimberApi.New.Common
+namespace TimberApi.Common.Helpers
 {
     public static class FileService
     {

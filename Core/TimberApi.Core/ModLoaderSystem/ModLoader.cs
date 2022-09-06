@@ -5,20 +5,16 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using TimberApi.Common;
 using TimberApi.Common.ConsoleSystem;
 using TimberApi.Core.ConfigSystem;
-using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem.Exceptions;
 using TimberApi.Core.ModLoaderSystem.ObjectDeserializers;
-using TimberApi.New;
-using TimberApi.New.Common;
-using TimberApi.New.Common.Helpers;
 using TimberApi.New.ModSystem;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
 using UnityEngine;
-using Debug = System.Diagnostics.Debug;
 using Logger = TimberApi.Core.LoggingSystem.Logger;
 
 namespace TimberApi.Core.ModLoaderSystem
@@ -240,7 +236,7 @@ namespace TimberApi.Core.ModLoaderSystem
         {
             while (true)
             {
-                List<IMod> loadableMod = new List<IMod>();
+                List<IMod> loadableMod = new();
                 var removedMod = false;
 
                 foreach (IMod gameCompatibleMod in gameCompatibleMods)
@@ -297,7 +293,7 @@ namespace TimberApi.Core.ModLoaderSystem
         /// </summary>
         private IEnumerable<IMod> FilterTimberApiCompatibleMods(IEnumerable<IMod> uniqueMods)
         {
-            List<IMod> timberApiCompatibleMods = new List<IMod>();
+            List<IMod> timberApiCompatibleMods = new();
 
             foreach (IMod uniqueMod in uniqueMods)
             {
@@ -325,7 +321,7 @@ namespace TimberApi.Core.ModLoaderSystem
         /// </summary>
         private IEnumerable<IMod> FilterGameCompatibleMods(IEnumerable<IMod> uniqueMods)
         {
-            List<IMod> gameCompatibleMods = new List<IMod>();
+            List<IMod> gameCompatibleMods = new();
 
             foreach (IMod uniqueMod in uniqueMods)
             {
@@ -353,7 +349,7 @@ namespace TimberApi.Core.ModLoaderSystem
         /// </summary>
         private IEnumerable<IMod> FilterUniqueMods(IEnumerable<IMod> deserializedMods)
         {
-            Dictionary<string, IMod> uniqueMods = new Dictionary<string, IMod>();
+            Dictionary<string, IMod> uniqueMods = new();
 
             foreach (IMod deserializedMod in deserializedMods)
             {
@@ -381,7 +377,7 @@ namespace TimberApi.Core.ModLoaderSystem
             {
                 try
                 {
-                    ObjectSave wrappedModJson = _objectSaveReaderWriter.ReadJson(DeserializerHelper.Wrap(ObjectSaveReaderWriterType, File.ReadAllText(modFilePath)));
+                    ObjectSave wrappedModJson = _objectSaveReaderWriter.ReadJson(Wrap(ObjectSaveReaderWriterType, File.ReadAllText(modFilePath)));
                     Mod mod = ObjectLoader.CreateBasicLoader(wrappedModJson).Get(new PropertyKey<Mod>(ObjectSaveReaderWriterType), _modObjectDeserializer);
                     mod.DirectoryPath = Path.GetDirectoryName(modFilePath)!;
                     mod.DirectoryName = new DirectoryInfo(mod.DirectoryPath).Name;
@@ -416,5 +412,7 @@ namespace TimberApi.Core.ModLoaderSystem
 
             return Directory.GetDirectories(Paths.BepInExPlugins).Select(modDirectory => Path.Combine(modDirectory, ModFileName)).Where(File.Exists);
         }
+
+        private static string Wrap(string assetText, string type) => "{\"" + type + "\":" + assetText + "}";
     }
 }

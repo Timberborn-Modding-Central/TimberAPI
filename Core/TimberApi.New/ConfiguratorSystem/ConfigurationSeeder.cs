@@ -6,7 +6,7 @@ using System.Reflection;
 using Bindito.Core;
 using TimberApi.Common.Extensions;
 using TimberApi.Common.SingletonSystem.Singletons;
-using TimberApi.New.Common;
+using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.ConfiguratorSystem
 {

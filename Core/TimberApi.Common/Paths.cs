@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TimberApi.New.Common
+namespace TimberApi.Common
 {
     public static class Paths
     {

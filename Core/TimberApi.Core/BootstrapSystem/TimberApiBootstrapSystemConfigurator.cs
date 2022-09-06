@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Bindito.Core;
 using Bindito.Unity;
+using TimberApi.Common;
 using TimberApi.Common.Extensions;
 using TimberApi.Common.SingletonSystem;
 using TimberApi.Core.ConfigSystem;
@@ -12,7 +13,6 @@ using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem;
 using TimberApi.New;
-using TimberApi.New.Common;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
@@ -21,8 +21,6 @@ namespace TimberApi.Core.BootstrapSystem
 {
     internal class TimberApiBootstrapSystemConfigurator : PrefabConfigurator
     {
-        private static string _timberApiInternalDll = "TimberApi.Internal.dll";
-
         public static TimberApiBootstrapSystemConfigurator Instance = null!;
 
         /// <summary>
@@ -39,26 +37,16 @@ namespace TimberApi.Core.BootstrapSystem
             // Start runner
             containerDefinition.Bind<TimberApiCoreRunner>().AsSingleton();
 
-            // TimberAPI features
+            // TimberAPI.New Initialization
             containerDefinition.Bind<ISingletonRepository>().To<SingletonRepository>().AsSingleton();
             var instance = new SingletonListener();
             containerDefinition.Bind<SingletonListener>().ToInstance(instance);
             containerDefinition.AddInjectionListener(instance);
             containerDefinition.AddProvisionListener(instance);
 
-            LoadAndInstallTimberApiInternal(containerDefinition);
+            containerDefinition.Install(new BootstrapConfigurator());
 
             containerDefinition.Bind<SingletonRunner>().AsSingleton();
-        }
-
-        /// <summary>
-        /// Separating core functionalities with features
-        /// </summary>
-        /// <param name="containerDefinition"></param>
-        private static void LoadAndInstallTimberApiInternal(IContainerDefinition containerDefinition)
-        {
-            Assembly.LoadFile(Path.Combine(Paths.Core, _timberApiInternalDll));
-            BootstrapConfigurator.Configure(containerDefinition);
         }
 
         /// <summary>

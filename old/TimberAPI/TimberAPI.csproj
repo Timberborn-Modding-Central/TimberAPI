@@ -18,7 +18,7 @@
     <PackageReference Include="BepInEx.Core" Version="5.4.19" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="UnityEngine.Modules" Version="2022.1.8" IncludeAssets="compile" />
+    <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" IncludeAssets="compile" />
     <PackageReference Include="Timberborn.GameLibs" Version="2022.7.21-r.0" />
     <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
     <PackageReference Include="Threenine.LinqToCsv" Version="1.6.0" />

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Bindito.Core;
-using TimberApi.New.Common;
+using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.ConfiguratorSystem
 {

@@ -25,7 +25,7 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
 
         public static bool PrefixGolemPrefab(ref Golem ____golemPrefab, ObjectCollectionService ____objectCollectionService, FactionService ____factionService)
         {
-            GolemFactionService golemFactionService = TimberApiInternal.Container.GetInstance<GolemFactionService>();
+            GolemFactionService golemFactionService = TimberApi.Container.GetInstance<GolemFactionService>();
             string golemFactionId = golemFactionService.GetGolemFactionIdByFactionId(____factionService.Current.Id);
             ____golemPrefab = ____objectCollectionService.GetAllMonoBehaviours<Golem>().Single(golem => golem.GetComponent<Prefab>().PrefabName.Contains(golemFactionId));
             return false;

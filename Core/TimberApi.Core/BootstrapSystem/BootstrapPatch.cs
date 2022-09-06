@@ -2,7 +2,8 @@
 using System.IO;
 using Bindito.Core;
 using HarmonyLib;
-using TimberApi.New.Common;
+using TimberApi.Common;
+using TimberApi.New;
 using Timberborn.Bootstrapper;
 
 namespace TimberApi.Core.BootstrapSystem
@@ -33,7 +34,7 @@ namespace TimberApi.Core.BootstrapSystem
         /// <param name="containerDefinition"></param>
         private static void BootstrapperConfiguratorPatch(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Install(TimberApiBootstrapSystemConfigurator.Instance);
+            // containerDefinition.Install(TimberApiBootstrapSystemConfigurator.Instance);
         }
     }
 }

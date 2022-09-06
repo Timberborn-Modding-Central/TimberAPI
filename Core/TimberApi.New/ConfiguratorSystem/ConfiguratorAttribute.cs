@@ -1,5 +1,5 @@
 ﻿using System;
-using TimberApi.New.Common;
+using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.ConfiguratorSystem
 {

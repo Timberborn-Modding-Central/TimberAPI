@@ -8,11 +8,11 @@ using TimberApi.New.SpecificationSystem.CustomSpecifications.Golems;
 
 namespace TimberApi.New
 {
-    internal static class BootstrapConfigurator
+    internal class BootstrapConfigurator : IConfigurator
     {
-        public static void Configure(IContainerDefinition containerDefinition)
+        public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Bind<TimberApiInternal>().AsSingleton();
+            containerDefinition.Bind<TimberApi>().AsSingleton();
             containerDefinition.Bind<SceneListener>().AsSingleton();
             containerDefinition.Install(new ConfiguratorSystemConfigurator());
             containerDefinition.Install(new AssetSystemGlobalConfigurator());

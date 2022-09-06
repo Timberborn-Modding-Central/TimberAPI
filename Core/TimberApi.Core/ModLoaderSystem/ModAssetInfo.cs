@@ -1,5 +1,5 @@
-﻿using TimberApi.New.Common;
-using TimberApi.New.ModSystem;
+﻿using TimberApi.New.ModSystem;
+using TimberApi.New.SceneSystem;
 
 namespace TimberApi.Core.ModLoaderSystem
 {

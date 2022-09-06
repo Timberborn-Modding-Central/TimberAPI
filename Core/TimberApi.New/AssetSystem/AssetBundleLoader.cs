@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using TimberApi.Common.ConsoleSystem;
 using TimberApi.New.AssetSystem.Exceptions;
-using TimberApi.New.Common;
+using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.AssetSystem
 {
@@ -9,12 +9,9 @@ namespace TimberApi.New.AssetSystem
     {
         private readonly AssetRepository _assetRepository;
 
-        private readonly IInternalConsoleWriter _consoleWriter;
-
-        public AssetBundleLoader(AssetRepository assetRepository, IInternalConsoleWriter consoleWriter)
+        public AssetBundleLoader(AssetRepository assetRepository)
         {
             _assetRepository = assetRepository;
-            _consoleWriter = consoleWriter;
         }
 
         public void Load(string prefix)
@@ -24,7 +21,7 @@ namespace TimberApi.New.AssetSystem
                 throw new PrefixNotFoundException(prefix);
             }
             assetFolder.Load();
-            _consoleWriter.Log($"Assets of prefix:{prefix} loaded");
+            TimberApi.ConsoleWriter.Log($"Assets of prefix:{prefix} loaded");
         }
 
         public void LoadAll(SceneEntrypoint sceneEntrypoint)
@@ -36,7 +33,7 @@ namespace TimberApi.New.AssetSystem
                 prefixesLoaded++;
             }
 
-            _consoleWriter.Log($"Assets loaded for {sceneEntrypoint}, Total prefixes loaded: {prefixesLoaded}");
+            TimberApi.ConsoleWriter.Log($"Assets loaded for {sceneEntrypoint}, Total prefixes loaded: {prefixesLoaded}");
         }
 
         public void Unload(string prefix)
@@ -46,18 +43,18 @@ namespace TimberApi.New.AssetSystem
                 throw new PrefixNotFoundException(prefix);
             }
             assetFolder.Unload();
-            _consoleWriter.Log($"Assets of prefix:{prefix} unloaded");
+            TimberApi.ConsoleWriter.Log($"Assets of prefix:{prefix} unloaded");
 
         }
 
         public void UnloadAll(SceneEntrypoint sceneEntrypoint)
         {
-            _consoleWriter.Log(_assetRepository.GetByEntrypoint(sceneEntrypoint).Count().ToString());
+            TimberApi.ConsoleWriter.Log(_assetRepository.GetByEntrypoint(sceneEntrypoint).Count().ToString());
             foreach (AssetFolder assetFolder in _assetRepository.GetByEntrypoint(sceneEntrypoint))
             {
                 assetFolder.Unload();
             }
-            _consoleWriter.Log($"Assets unloaded for {sceneEntrypoint}");
+            TimberApi.ConsoleWriter.Log($"Assets unloaded for {sceneEntrypoint}");
         }
     }
 }
