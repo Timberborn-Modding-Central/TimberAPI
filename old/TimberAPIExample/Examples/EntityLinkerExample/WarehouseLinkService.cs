@@ -1,11 +1,4 @@
-﻿using System.Linq;
-using Timberborn.Buildings;
-using Timberborn.Goods;
-using Timberborn.TickSystem;
-using Timberborn.Warehouses;
-using TimberbornAPI.EntityLinkerSystem;
-
-namespace TimberAPIExample.Examples.EntityLinkerExample
+﻿namespace TimberAPIExample.Examples.EntityLinkerExample
 {
     /// <summary>
     /// Custom class that inherits from TickacleComponent so we can

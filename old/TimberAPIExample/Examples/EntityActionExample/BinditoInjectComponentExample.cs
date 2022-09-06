@@ -1,7 +1,4 @@
 using System;
-using Bindito.Core;
-using Timberborn.Localization;
-using UnityEngine;
 
 namespace TimberAPIExample.Examples.EntityActionExample
 {

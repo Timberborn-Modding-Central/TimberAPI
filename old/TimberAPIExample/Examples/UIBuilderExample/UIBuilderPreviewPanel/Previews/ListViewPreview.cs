@@ -1,10 +1,4 @@
 using System.Collections.Generic;
-using TimberbornAPI.Common;
-using TimberbornAPI.UIBuilderSystem;
-using TimberbornAPI.UIBuilderSystem.ElementSystem;
-using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.UIElements.Length.Unit;
 using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previews

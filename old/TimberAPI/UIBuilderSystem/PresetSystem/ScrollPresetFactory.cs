@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Timberborn.AssetSystem;
 using TimberbornAPI.UIBuilderSystem.ElementSystem;
 using UnityEngine;
 using UnityEngine.UIElements;

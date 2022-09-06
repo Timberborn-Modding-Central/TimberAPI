@@ -1,10 +1,4 @@
-﻿using TimberbornAPI.Common;
-using TimberbornAPI.UIBuilderSystem;
-using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.UIElements.Length.Unit;
-
-namespace TimberAPIExample.Examples.EntityLinkerExample.UI
+﻿namespace TimberAPIExample.Examples.EntityLinkerExample.UI
 {
     /// <summary>
     /// Factory for creating small UI views for existing Links

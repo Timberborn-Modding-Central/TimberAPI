@@ -1,4 +1,3 @@
-using Timberborn.ToolSystem;
 using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.AssetLoaderExample

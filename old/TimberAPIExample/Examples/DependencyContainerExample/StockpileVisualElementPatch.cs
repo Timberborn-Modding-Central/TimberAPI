@@ -1,9 +1,3 @@
-using HarmonyLib;
-using Timberborn.WarehousesUI;
-using TimberbornAPI;
-using TimberbornAPI.UIBuilderSystem;
-using UnityEngine.UIElements;
-
 namespace TimberAPIExample.Examples.DependencyContainerExample
 {
     

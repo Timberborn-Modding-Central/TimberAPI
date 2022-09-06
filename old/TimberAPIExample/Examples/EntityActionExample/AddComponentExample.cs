@@ -1,8 +1,3 @@
-using Bindito.Unity;
-using Timberborn.GameDistricts;
-using TimberbornAPI.EntityActionSystem;
-using UnityEngine;
-
 namespace TimberAPIExample.Examples.EntityActionExample
 {
     public class AddComponentActionExample : IEntityAction

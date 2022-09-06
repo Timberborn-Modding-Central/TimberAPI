@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Bindito.Core;
 using Bindito.Unity;
 using TimberApi.Common;
-using TimberApi.Common.Extensions;
 using TimberApi.Common.SingletonSystem;
 using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.ConsoleSystem;
@@ -15,7 +12,6 @@ using TimberApi.Core.ModLoaderSystem;
 using TimberApi.New;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Debug = UnityEngine.Debug;
 
 namespace TimberApi.Core.BootstrapSystem
 {

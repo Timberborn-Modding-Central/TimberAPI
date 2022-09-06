@@ -1,6 +1,3 @@
-using Bindito.Core;
-using TimberbornAPI.EntityActionSystem;
-
 namespace TimberAPIExample.Examples.EntityActionExample
 {
     public class EntityActionExampleConfigurator : IConfigurator

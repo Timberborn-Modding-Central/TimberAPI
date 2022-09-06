@@ -1,9 +1,4 @@
-﻿using Timberborn.Warehouses;
-using TimberbornAPI.EntityActionSystem;
-using TimberbornAPI.EntityLinkerSystem;
-using UnityEngine;
-
-namespace TimberAPIExample.Examples.EntityLinkerExample
+﻿namespace TimberAPIExample.Examples.EntityLinkerExample
 {
     internal class EntityActions : IEntityAction
     {

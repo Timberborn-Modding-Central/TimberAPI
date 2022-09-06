@@ -1,12 +1,4 @@
-using Bindito.Core;
-using HarmonyLib;
 using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previews;
-using Timberborn.MainMenuScene;
-using Timberborn.Options;
-using TimberbornAPI;
-using TimberbornAPI.UIBuilderSystem;
-using TimberbornAPI.UIBuilderSystem.CustomElements;
-using UnityEngine.UIElements;
 
 namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
 {

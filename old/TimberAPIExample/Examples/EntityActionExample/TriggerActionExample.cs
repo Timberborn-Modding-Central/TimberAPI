@@ -1,7 +1,3 @@
-using Timberborn.EnterableSystem;
-using TimberbornAPI.EntityActionSystem;
-using UnityEngine;
-
 namespace TimberAPIExample.Examples.EntityActionExample
 {
     public class TriggerActionExample : IEntityAction

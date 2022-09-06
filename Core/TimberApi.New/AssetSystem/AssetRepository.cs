@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using TimberApi.Common.ConsoleSystem;
 using TimberApi.New.AssetSystem.Exceptions;
 using TimberApi.New.ModSystem;
 using TimberApi.New.SceneSystem;

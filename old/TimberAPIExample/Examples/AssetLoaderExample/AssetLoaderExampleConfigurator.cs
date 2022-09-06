@@ -1,6 +1,3 @@
-using Bindito.Core;
-using Timberborn.BottomBarSystem;
-
 namespace TimberAPIExample.Examples.AssetLoaderExample
 {
     public class AssetLoaderExampleConfigurator : IConfigurator

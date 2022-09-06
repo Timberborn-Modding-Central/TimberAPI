@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
-using TimberbornAPI.AssetLoaderSystem.AssetSystem;
 using TimberbornAPI.UIBuilderSystem.PresetSystem;
 using UnityEngine.UIElements;
 using LocalizableSliderInt = TimberbornAPI.UIBuilderSystem.CustomElements.LocalizableSliderInt;

@@ -3,7 +3,6 @@ using System.IO;
 using Bindito.Core;
 using HarmonyLib;
 using TimberApi.Common;
-using TimberApi.New;
 using Timberborn.Bootstrapper;
 
 namespace TimberApi.Core.BootstrapSystem

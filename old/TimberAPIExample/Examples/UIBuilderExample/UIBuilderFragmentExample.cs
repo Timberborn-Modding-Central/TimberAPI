@@ -1,10 +1,3 @@
-using Timberborn.CoreUI;
-using Timberborn.EntityPanelSystem;
-using TimberbornAPI.Common;
-using TimberbornAPI.UIBuilderSystem;
-using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.UIElements.Length.Unit;
 using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.UIBuilderExample

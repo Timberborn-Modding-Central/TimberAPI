@@ -1,8 +1,3 @@
-using Timberborn.BottomBarSystem;
-using Timberborn.ToolSystem;
-using TimberbornAPI.AssetLoaderSystem.AssetSystem;
-using UnityEngine;
-
 namespace TimberAPIExample.Examples.AssetLoaderExample
 {
     public class AssetLoaderExampleButton : IBottomBarElementProvider

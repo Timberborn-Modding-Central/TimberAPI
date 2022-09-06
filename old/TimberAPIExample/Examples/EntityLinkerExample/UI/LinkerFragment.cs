@@ -1,17 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Timberborn.CoreUI;
-using Timberborn.EntityPanelSystem;
-using Timberborn.EntitySystem;
-using Timberborn.Localization;
-using Timberborn.SelectionSystem;
-using TimberbornAPI.UIBuilderSystem;
-using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.UIElements.Length.Unit;
-using TimberbornAPI.EntityLinkerSystem;
-using Timberborn.Warehouses;
-using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample.UI
 {

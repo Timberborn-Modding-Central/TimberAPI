@@ -1,8 +1,4 @@
 using System.Reflection;
-using TimberbornAPI.UIBuilderSystem;
-using TimberbornAPI.UIBuilderSystem.ElementSystem;
-using UnityEngine.UIElements;
-using static UnityEngine.UIElements.Length.Unit;
 
 namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previews
 {

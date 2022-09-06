@@ -1,8 +1,4 @@
-﻿using Bindito.Core;
-using TimberAPIExample.Examples.EntityLinkerExample.UI;
-using Timberborn.Buildings;
-using Timberborn.EntityPanelSystem;
-using TimberbornAPI.EntityActionSystem;
+﻿using TimberAPIExample.Examples.EntityLinkerExample.UI;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample
 {

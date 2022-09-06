@@ -1,12 +1,4 @@
 ﻿using System;
-using Timberborn.EntitySystem;
-using Timberborn.Localization;
-using Timberborn.PickObjectToolSystem;
-using Timberborn.SelectionSystem;
-using Timberborn.ToolSystem;
-using TimberbornAPI.EntityLinkerSystem;
-using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample.UI
 {

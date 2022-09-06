@@ -1,5 +1,3 @@
-using UnityEngine.Rendering;
-
 namespace TimberbornAPI.UIBuilderSystem
 {
     public static class TimberApiStyle

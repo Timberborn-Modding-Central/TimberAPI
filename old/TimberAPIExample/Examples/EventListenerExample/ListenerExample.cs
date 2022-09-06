@@ -1,10 +1,4 @@
-﻿using Timberborn.FactionSystem;
-using Timberborn.SingletonSystem;
-using Timberborn.TimeSystem;
-using Timberborn.ToolSystem;
-using Timberborn.WeatherSystem;
-using TimberbornAPI.EventSystem;
-using static TimberAPIExample.TimberAPIExamplePlugin;
+﻿using static TimberAPIExample.TimberAPIExamplePlugin;
 
 namespace TimberAPIExample.Examples.EventListenerExample
 {

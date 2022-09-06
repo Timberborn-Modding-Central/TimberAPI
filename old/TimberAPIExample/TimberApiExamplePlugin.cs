@@ -1,10 +1,4 @@
-﻿using BepInEx;
-using BepInEx.Logging;
-using Bindito.Core;
-using HarmonyLib;
-using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel;
-using TimberbornAPI;
-using TimberbornAPI.Common;
+﻿using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel;
 using TimberAPIExample.Examples.EntityActionExample;
 using TimberAPIExample.Examples.AssetLoaderExample;
 using TimberAPIExample.Examples.UIBuilderExample;

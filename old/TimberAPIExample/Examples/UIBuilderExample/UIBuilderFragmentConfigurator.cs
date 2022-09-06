@@ -1,7 +1,3 @@
-using Bindito.Core;
-using Timberborn.EntityPanelSystem;
-using TimberbornAPI.DependencySystem;
-
 namespace TimberAPIExample.Examples.UIBuilderExample
 {
     public class UIBuilderFragmentConfigurator : IConfigurator

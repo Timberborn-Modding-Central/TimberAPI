@@ -1,13 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previews;
-using Timberborn.CoreUI;
-using TimberbornAPI.Common;
-using TimberbornAPI.UIBuilderSystem;
-using UnityEngine.UIElements;
-using static UnityEngine.UIElements.Length.Unit;
 
 namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel
 {

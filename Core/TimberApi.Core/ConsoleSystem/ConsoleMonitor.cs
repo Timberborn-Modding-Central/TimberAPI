@@ -5,7 +5,6 @@ using TimberApi.Common;
 using TimberApi.Common.LoggingSystem;
 using TimberApi.Core.ConsoleSystemUi;
 using TimberApi.Core.LoggingSystem;
-using TimberApi.New;
 using Timberborn.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
