@@ -106,6 +106,7 @@ namespace TimberApi.Core.ConsoleSystem
             {
                 return;
             }
+
             TextElement newItem = ConsoleLogItemUi.Create(text, color);
 
             _secondLatestMessage = _latestMessage;

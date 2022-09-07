@@ -7,15 +7,14 @@ namespace TimberApi.BepInExPlugin
 {
     public class BepInExConsoleListener : ILogListener
     {
-        private readonly Dictionary<LogType, LogLevel> _logLevelDirectory = new Dictionary<LogType, LogLevel>()
+        private readonly Dictionary<LogType, LogLevel> _logLevelDirectory = new()
         {
-            { LogType.Assert, LogLevel.Debug },
-            { LogType.Error, LogLevel.Error },
-            { LogType.Exception, LogLevel.Fatal },
-            { LogType.Log, LogLevel.Info },
-            { LogType.Warning, LogLevel.Warning },
+            {LogType.Assert, LogLevel.Debug},
+            {LogType.Error, LogLevel.Error},
+            {LogType.Exception, LogLevel.Fatal},
+            {LogType.Log, LogLevel.Info},
+            {LogType.Warning, LogLevel.Warning},
         };
-
 
         public void OnLogMessageReceived(string tagName, string message, string stacktrace, LogType type, Color color)
         {

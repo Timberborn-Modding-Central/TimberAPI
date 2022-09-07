@@ -49,7 +49,7 @@ namespace TimberApi.Core.ConsoleSystem
 
         private void Update()
         {
-            if(!_keyboardController.IsKeyHeld(Key.Backquote))
+            if (!_keyboardController.IsKeyHeld(Key.Backquote))
             {
                 _isGravePressed = false;
             }
