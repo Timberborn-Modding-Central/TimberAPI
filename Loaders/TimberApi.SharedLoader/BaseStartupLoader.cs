@@ -38,7 +38,6 @@ namespace TimberApi.SharedLoader
             if(libraryDlls != null)
             {
                 _libraryDlls = _libraryDlls.AddRangeToArray(libraryDlls);
-                File.WriteAllText("text.txt", _libraryDlls.Length.ToString());
             }
         }
 
