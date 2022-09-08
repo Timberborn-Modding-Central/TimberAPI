@@ -6,7 +6,7 @@ namespace TimberApi.Common
     {
         public static Version TimberApiVersion { get; } = new Version(0,7,0,0);
 
-        public static Version TimberApiMinimumGameVersion { get; } = new Version(0,2,4,0);
+        public static Version TimberApiMinimumGameVersion { get; } = new Version(0,2,7,0);
 
         public static readonly Version GameVersion   = Version.Parse(Timberborn.Versioning.Versions.VersionNumber);
     }

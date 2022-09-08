@@ -25,7 +25,7 @@ namespace TimberApi.Core
 
         private static bool IsTimberApiCompatibleWithGame()
         {
-            return Versions.GameVersion < Versions.TimberApiMinimumGameVersion;
+            return Versions.GameVersion >= Versions.TimberApiMinimumGameVersion;
         }
 
     }
