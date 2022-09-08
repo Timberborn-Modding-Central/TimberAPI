@@ -45,8 +45,12 @@
     <!--        <TimberApiPath>$(SolutionDir)Timberborn\BepInEx\plugins\$(SolutionName)</TimberApiPath>-->
     <!--    </PropertyGroup>-->
 
-    <!--    <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild">-->
-    <!--        <Message Text="### Copy TimberApi common ###" Importance="high"/>-->
-    <!--        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core"/>-->
-    <!--    </Target>-->
+        <PropertyGroup>
+            <TimberApiPath>$(SolutionDir)Timberborn\BepInEx\plugins\$(SolutionName)</TimberApiPath>
+        </PropertyGroup>
+
+        <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild">
+            <Message Text="### Copy TimberApi common ###" Importance="high" />
+            <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core" />
+        </Target>
 </Project>

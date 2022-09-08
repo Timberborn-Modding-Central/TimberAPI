@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using TimberApi.Common.ConsoleSystem;
 using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.ModLoaderSystem;

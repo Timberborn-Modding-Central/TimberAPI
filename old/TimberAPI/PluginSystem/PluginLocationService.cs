@@ -96,7 +96,7 @@ namespace TimberbornAPI.PluginSystem
         /// <returns></returns>
         public IEnumerable<string> GetDependentPluginFiles(string pluginGuid, string[] relativeDirectory, bool searchSubDirectories, string[] allowedExtensions, string searchPattern, bool includeSelf)
         {
-            List<string> filePaths = new List<string>();
+            List<string> filePaths = new();
 
             foreach (string pluginPath in GetDependentPluginPaths(pluginGuid, includeSelf))
             {
@@ -116,7 +116,7 @@ namespace TimberbornAPI.PluginSystem
 
         private IEnumerable<string> RecursiveFilePathSearch(string path, string searchPattern, string[] allowedExtensions)
         {
-            List<string> filePaths = new List<string>();
+            List<string> filePaths = new();
 
             filePaths.AddRange(GetFiles(path, searchPattern, allowedExtensions));
 
@@ -133,7 +133,7 @@ namespace TimberbornAPI.PluginSystem
             if (allowedExtensions == default)
                 return Directory.GetFiles(path, searchPattern);
 
-            List<string> filePaths = new List<string>();
+            List<string> filePaths = new();
 
             foreach (string file in Directory.GetFiles(path, searchPattern))
             {

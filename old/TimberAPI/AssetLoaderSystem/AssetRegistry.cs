@@ -125,7 +125,7 @@ namespace TimberbornAPI.AssetLoaderSystem
         /// <returns></returns>
         private List<string> RecursiveAssetSearch(string absolutePath)
         {
-            List<string> assetLocations = new List<string>();
+            List<string> assetLocations = new();
             assetLocations.AddRange(AssetsInFolder(absolutePath));
             foreach (string directory in Directory.GetDirectories(absolutePath))
             {

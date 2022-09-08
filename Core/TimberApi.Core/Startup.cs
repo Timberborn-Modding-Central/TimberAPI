@@ -27,6 +27,5 @@ namespace TimberApi.Core
         {
             return Versions.GameVersion >= Versions.TimberApiMinimumGameVersion;
         }
-
     }
 }

@@ -12,11 +12,11 @@ namespace TimberApi.Common.SingletonSystem
   /// </summary>
   public class SingletonListener : IInjectionListener, IProvisionListener
   {
-    private readonly List<object> _providedSingletons = new List<object>();
-    private readonly List<object> _injectedSingletons = new List<object>();
+    private readonly List<object> _providedSingletons = new();
+    private readonly List<object> _injectedSingletons = new();
     private bool _collected;
     private ImmutableArray<object> _allSingletons;
-    private readonly Dictionary<Type, bool> _typeCache = new Dictionary<Type, bool>();
+    private readonly Dictionary<Type, bool> _typeCache = new();
 
     public IEnumerable<object> Collect()
     {

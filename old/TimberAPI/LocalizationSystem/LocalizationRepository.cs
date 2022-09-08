@@ -21,7 +21,7 @@ namespace TimberbornAPI.LocalizationSystem
         /// <returns></returns>
         public static Dictionary<string, string> GetLocalization(string localizationKey)
         {
-            Dictionary<string, string> dictionary1 = new Dictionary<string, string>();
+            Dictionary<string, string> dictionary1 = new();
             Dictionary<string, string> dictionary2 = GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey)).ToDictionary(record => record.Id, record => record.Text);
 
             foreach (LocalizationRecord localizationRecord in GetDefaultLocalization())
@@ -48,7 +48,7 @@ namespace TimberbornAPI.LocalizationSystem
         /// <returns></returns>
         private static IEnumerable<LocalizationRecord> GetLocalizationRecordsFromFiles(string localization, IEnumerable<string> filePaths)
         {
-            List<LocalizationRecord> records = new List<LocalizationRecord>();
+            List<LocalizationRecord> records = new();
             foreach (string path in filePaths)
             {
                 records.AddRange(TryToReadRecords(localization, path));
@@ -95,7 +95,7 @@ namespace TimberbornAPI.LocalizationSystem
         private static List<string> GetLocalizationFilePathsFromDependencies(string localizationKey)
         {
             PluginLocationService pluginLocationService = TimberAPI.DependencyContainer.GetInstance<PluginLocationService>();
-            List<string> localizationFilePaths = new List<string>();
+            List<string> localizationFilePaths = new();
             foreach (string pluginLocation in pluginLocationService.GetDependentPluginPaths(TimberAPIPlugin.Guid, true))
             {
                 string pluginLocalizationPath = Path.Combine(pluginLocation ?? string.Empty, LocalizationPathKey);

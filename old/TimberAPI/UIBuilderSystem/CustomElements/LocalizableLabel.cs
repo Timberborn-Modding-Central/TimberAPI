@@ -18,7 +18,7 @@ namespace TimberbornAPI.UIBuilderSystem.CustomElements
             }
         }
 
-        private readonly NineSliceBackground _nineSliceBackground = new NineSliceBackground();
+        private readonly NineSliceBackground _nineSliceBackground = new();
 
         public LocalizableLabel()
         {

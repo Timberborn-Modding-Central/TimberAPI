@@ -74,7 +74,7 @@ namespace TimberApi.Core.ModLoaderSystem
         /// </summary>
         private IEnumerable<IMod> LoadMods(IMod[] sortedLoadableMods)
         {
-            List<Mod> loadedMods = new List<Mod>();
+            List<Mod> loadedMods = new();
 
             foreach (IMod loadableIMod in sortedLoadableMods)
             {
@@ -158,7 +158,7 @@ namespace TimberApi.Core.ModLoaderSystem
         /// </summary>
         private static bool NeededDependenciesAreLoaded(IEnumerable<IModDependency> modDependencies, IMod[] mods, out IEnumerable<IModDependency> missingDependencies)
         {
-            List<IModDependency> missingDependenciesList = new List<IModDependency>();
+            List<IModDependency> missingDependenciesList = new();
             var neededDependencyLoaded = true;
 
             foreach (IModDependency modDependency in modDependencies)
@@ -266,7 +266,7 @@ namespace TimberApi.Core.ModLoaderSystem
         /// </summary>
         private static bool NeededDependenciesAreLoadable(IEnumerable<IModDependency> modDependencies, IMod[] gameCompatibleMods, out IEnumerable<IModDependency> missingDependencies)
         {
-            List<IModDependency> missingDependenciesList = new List<IModDependency>();
+            List<IModDependency> missingDependenciesList = new();
             var missingDependency = true;
 
             foreach (IModDependency modDependency in modDependencies)
@@ -371,7 +371,7 @@ namespace TimberApi.Core.ModLoaderSystem
         /// </summary>
         private IEnumerable<IMod> DeserializeMods(IEnumerable<string> modFilePaths)
         {
-            List<Mod> deSerializedMods = new List<Mod>();
+            List<Mod> deSerializedMods = new();
 
             foreach (string modFilePath in modFilePaths)
             {

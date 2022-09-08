@@ -32,7 +32,7 @@ namespace TimberApi.Core.ConfigSystem
 
         public IConfigService CreateWithAssemblyConfigs(Assembly assembly, string configDirectoryPath, string consoleTag)
         {
-            List<IConfig> configs = new List<IConfig>();
+            List<IConfig> configs = new();
 
             foreach (Type type in assembly.GetTypesWithInterface<IConfig>()!)
             {

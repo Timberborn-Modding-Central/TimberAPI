@@ -11,9 +11,9 @@ namespace TimberApi.Core.ModLoaderSystem
     {
         public IEnumerable<IMod> Sort(IEnumerable<IMod> source, Func<IMod, IEnumerable<IMod>> dependencies)
         {
-            HashSet<IMod> yielded = new HashSet<IMod>();
-            HashSet<IMod> visited = new HashSet<IMod>();
-            Stack<KeyValuePair<IMod, IEnumerator<IMod>>> stack = new Stack<KeyValuePair<IMod, IEnumerator<IMod>>>();
+            HashSet<IMod> yielded = new();
+            HashSet<IMod> visited = new();
+            Stack<KeyValuePair<IMod, IEnumerator<IMod>>> stack = new();
 
             foreach (IMod t in source)
             {

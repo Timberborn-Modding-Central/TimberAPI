@@ -18,7 +18,7 @@ namespace TimberApi.Common.VersionSystem
 
         public bool IsPreRelease => !string.IsNullOrEmpty(_preRelease);
 
-        private static Regex _versionRegex = new Regex(@"^
+        private static Regex _versionRegex = new(@"^
             ([0-9]+)                                    # Major
             \.
             ([0-9]+)                                    # Minor
