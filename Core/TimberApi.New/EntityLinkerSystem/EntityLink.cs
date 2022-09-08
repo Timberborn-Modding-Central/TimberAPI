@@ -1,4 +1,4 @@
-﻿namespace TimberbornAPI.EntityLinkerSystem
+﻿namespace TimberApi.New.EntityLinkerSystem
 {
     /// <summary>
     /// Represent a link between two entities. A Link is used when two entities should

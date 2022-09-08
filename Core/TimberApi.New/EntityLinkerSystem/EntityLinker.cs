@@ -1,13 +1,12 @@
-﻿using Bindito.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bindito.Core;
 using Timberborn.ConstructibleSystem;
 using Timberborn.Persistence;
 using UnityEngine;
-using static TimberbornAPI.Internal.TimberAPIPlugin;
 
-namespace TimberbornAPI.EntityLinkerSystem
+namespace TimberApi.New.EntityLinkerSystem
 {
     /// <summary>
     /// Defines the behaviour of Linkers. TimberAPI adds an instance of Entitylinker to
@@ -19,19 +18,19 @@ namespace TimberbornAPI.EntityLinkerSystem
     public class EntityLinker : MonoBehaviour, IFinishedStateListener, IPersistentEntity
     {
         //Keys for saving/loading
-        protected static readonly ComponentKey EntityLinkerKey = new ComponentKey("EntityLinker");
-        protected static readonly ListKey<EntityLink> EntityLinksKey = new ListKey<EntityLink>(nameof(EntityLinks));
+        protected static readonly ComponentKey EntityLinkerKey = new("EntityLinker");
+        protected static readonly ListKey<EntityLink> EntityLinksKey = new(nameof(EntityLinks));
 
-        internal readonly List<EntityLink> _entityLinks = new List<EntityLink>();
+        internal readonly List<EntityLink> _entityLinks = new();
         public IReadOnlyCollection<EntityLink> EntityLinks { get; private set; }
 
-        private EntityLinkSerializer _entityLinkSerializer;
+        private EntityLinkObjectSerializer _entityLinkObjectSerializer;
 
 
         [Inject]
-        public void InjectDependencies(EntityLinkSerializer entityLinkSerializer)
+        public void InjectDependencies(EntityLinkObjectSerializer entityLinkObjectSerializer)
         {
-            _entityLinkSerializer = entityLinkSerializer;
+            _entityLinkObjectSerializer = entityLinkObjectSerializer;
         }
 
 
@@ -47,7 +46,7 @@ namespace TimberbornAPI.EntityLinkerSystem
         public virtual void Save(IEntitySaver entitySaver)
         {
             IObjectSaver component = entitySaver.GetComponent(EntityLinkerKey);
-            component.Set(EntityLinksKey, EntityLinks, _entityLinkSerializer);
+            component.Set(EntityLinksKey, EntityLinks, _entityLinkObjectSerializer);
         }
 
         /// <summary>
@@ -63,7 +62,7 @@ namespace TimberbornAPI.EntityLinkerSystem
             IObjectLoader component = entityLoader.GetComponent(EntityLinkerKey);
             if (component.Has(EntityLinksKey))
             {
-                var links = component.Get(EntityLinksKey, _entityLinkSerializer);
+                var links = component.Get(EntityLinksKey, _entityLinkObjectSerializer);
                 if (links == null)
                 {
                     return;

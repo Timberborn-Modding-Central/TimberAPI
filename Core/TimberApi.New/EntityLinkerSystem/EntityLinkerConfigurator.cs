@@ -1,14 +1,17 @@
 ﻿using Bindito.Core;
+using TimberApi.New.ConfiguratorSystem;
+using TimberApi.New.SceneSystem;
 using Timberborn.Buildings;
 using Timberborn.TemplateSystem;
 
-namespace TimberbornAPI.EntityLinkerSystem
+namespace TimberApi.New.EntityLinkerSystem
 {
+    [Configurator(SceneEntrypoint.InGame)]
     public class EntityLinkerConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Bind<EntityLinkSerializer>().AsSingleton();
+            containerDefinition.Bind<EntityLinkObjectSerializer>().AsSingleton();
             containerDefinition.MultiBind<TemplateModule>().ToProvider(ProvideTemplateModule).AsSingleton();
         }
 

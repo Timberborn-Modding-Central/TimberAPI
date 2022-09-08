@@ -1,15 +1,15 @@
 ﻿using Timberborn.Persistence;
 
-namespace TimberbornAPI.EntityLinkerSystem
+namespace TimberApi.New.EntityLinkerSystem
 {
     /// <summary>
     /// Defines how and instance of EntityLink should be serialized.
     /// Used when an EntityLinker which contains EntityLinks is saved/loaded
     /// </summary>
-    public class EntityLinkSerializer : IObjectSerializer<EntityLink>
+    public class EntityLinkObjectSerializer : IObjectSerializer<EntityLink>
     {
-        protected static readonly PropertyKey<EntityLinker> LinkerKey = new PropertyKey<EntityLinker>("Linker");
-        protected static readonly PropertyKey<EntityLinker> LinkeeKey = new PropertyKey<EntityLinker>("Linkee");
+        protected static readonly PropertyKey<EntityLinker> LinkerKey = new("Linker");
+        protected static readonly PropertyKey<EntityLinker> LinkeeKey = new("Linkee");
 
         public virtual Obsoletable<EntityLink> Deserialize(IObjectLoader objectLoader)
         {
