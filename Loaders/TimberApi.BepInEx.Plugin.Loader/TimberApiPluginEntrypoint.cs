@@ -6,7 +6,7 @@ using HarmonyLib;
 using TimberApi.Common.LoggingSystem;
 using Timberborn.Bootstrapper;
 
-namespace TimberApi.BepInExPlugin
+namespace TimberApi.BepInEx.Plugin.Loader
 {
     [BepInPlugin("timberapi.bepinex.entrypoint", "TimberAPI BepInEx Entrypoint", "1.0.0")]
     public class TimberApiPluginEntrypoint : BaseUnityPlugin
@@ -15,7 +15,6 @@ namespace TimberApi.BepInExPlugin
 
         public void Awake()
         {
-
             new Harmony("TimberApi.BepInExEntry").Patch(
                 original: AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"),
                 prefix: new HarmonyMethod(AccessTools.Method(typeof(TimberApiPluginEntrypoint), nameof(BootstrapperConfiguratorPatch)))

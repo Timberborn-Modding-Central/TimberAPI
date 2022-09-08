@@ -19,15 +19,11 @@ namespace TimberApi.SharedLoader
 
         private readonly string _timberApiLoaderType;
 
-        private readonly string[] _coreDlls =
-        {
-            "TimberApi.Core.dll"
-        };
+        private const string CoreDll = "TimberApi.Core.dll";
 
         private readonly string[] _libraryDlls =
         {
             "TimberApi.Common.dll",
-            "TimberApi.LoaderInterfaces.dll",
             "TimberApi.New.dll"
         };
 
@@ -42,24 +38,17 @@ namespace TimberApi.SharedLoader
             if(libraryDlls != null)
             {
                 _libraryDlls = _libraryDlls.AddRangeToArray(libraryDlls);
+                File.WriteAllText("text.txt", _libraryDlls.Length.ToString());
             }
         }
 
-        /// <summary>
-        /// Doorstop entry point
-        /// Load order:
-        /// 1. Libraries
-        /// 2. TimberApi core
-        /// 3. Additional patchers
-        /// </summary>
-        public void Run()
+        public void StartLoader()
         {
             try
             {
                 SetTimberApiPathEnvironmentVariables();
                 EnsurePathsExists(_timberApiPath, _timberApiLogsPath, _timberApiCorePath, _timberApiModsPath, _timberApiConfigsPath);
                 LoadLibraries();
-                LoadCore();
             }
             catch (Exception e)
             {
@@ -68,23 +57,22 @@ namespace TimberApi.SharedLoader
             }
         }
 
-        /// <summary>
-        /// Sets environment variables to be used in other assemblies
-        /// </summary>
-        private void SetTimberApiPathEnvironmentVariables()
+        public void LoadAndInitializeCoreStartup()
         {
-            Environment.SetEnvironmentVariable("TIMBER_LOADER_TYPE", _timberApiLoaderType);
-            Environment.SetEnvironmentVariable("TIMBER_API_PATH", _timberApiPath);
-            Environment.SetEnvironmentVariable("TIMBER_API_LOG_PATH", _timberApiLogsPath);
-            Environment.SetEnvironmentVariable("TIMBER_API_CORE_PATH", _timberApiCorePath);
-            Environment.SetEnvironmentVariable("TIMBER_API_MODS_PATH", _timberApiModsPath);
-            Environment.SetEnvironmentVariable("TIMBER_API_CONFIGS_PATH", _timberApiConfigsPath);
+            Assembly assembly = Assembly.LoadFile(Path.Combine(_timberApiCorePath, CoreDll));
+            assembly.GetType("TimberApi.Core.Startup").GetMethod("Run", BindingFlags.Public | BindingFlags.Static)!.Invoke(null, null);
         }
 
-        /// <summary>
-        /// Creates directories when they don't exist
-        /// </summary>
-        /// <param name="paths">Absolute path to directory</param>
+        private void SetTimberApiPathEnvironmentVariables()
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariable.TimberLoaderType, _timberApiLoaderType);
+            Environment.SetEnvironmentVariable(EnvironmentVariable.TimberApiPath, _timberApiPath);
+            Environment.SetEnvironmentVariable(EnvironmentVariable.TimberApiLogsPath, _timberApiLogsPath);
+            Environment.SetEnvironmentVariable(EnvironmentVariable.TimberApiCorePath, _timberApiCorePath);
+            Environment.SetEnvironmentVariable(EnvironmentVariable.TimberApiModsPath, _timberApiModsPath);
+            Environment.SetEnvironmentVariable(EnvironmentVariable.TimberApiConfigsPath, _timberApiConfigsPath);
+        }
+
         private static void EnsurePathsExists(params string[] paths)
         {
             foreach (string path in paths)
@@ -96,50 +84,17 @@ namespace TimberApi.SharedLoader
             }
         }
 
-        /// <summary>
-        /// Reusable exception logger
-        /// This will log all exceptions thrown in all loaded assemblies: mods & libraries
-        /// </summary>
-        /// <param name="exception"></param>
         private void HandleException(Exception exception)
         {
             File.WriteAllText(Path.Combine(_timberApiLogsPath, $"Exception-{DateTime.Now:yyyy-MM-dd-HH\\hmm\\mss\\s}.log"), exception.ToString());
         }
 
-        /// <summary>
-        /// Loads essential assemblies for TimberAPI
-        /// </summary>
         private void LoadLibraries()
         {
             foreach (string libraryDll in _libraryDlls)
             {
                 Assembly.LoadFile(Path.Combine(_timberApiCorePath, libraryDll));
             }
-        }
-
-        /// <summary>
-        /// Loads TimberAPI Patcher
-        /// </summary>
-        private void LoadCore()
-        {
-            foreach (string coreDll in _coreDlls)
-            {
-                Assembly assembly = Assembly.LoadFile(Path.Combine(_timberApiCorePath, coreDll));
-                InitializeCoreEntrypoint(assembly);
-            }
-        }
-
-        /// <summary>
-        /// Searches if the assembly has any class that depends on `ITimberApiPatcher` and initializes it
-        /// Used for loading TimberAPI patchers
-        /// </summary>
-        /// <param name="assembly"></param>
-        private static void InitializeCoreEntrypoint(Assembly assembly)
-        {
-            assembly
-                .GetType("TimberApi.Core.TimberApiEntrypoint")
-                .GetMethod("LoadTimberApiManager", BindingFlags.Public | BindingFlags.Static)!
-                .Invoke(null, null);
         }
     }
 }

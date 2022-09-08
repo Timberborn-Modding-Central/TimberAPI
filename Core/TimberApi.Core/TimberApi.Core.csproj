@@ -20,7 +20,7 @@
         <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
         <PackageReference Include="Unity.InputSystem" Version="1.5.0" />
         <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" />
-        <PackageReference Include="Timberborn.GameLibs" Version="2022.8.4-r.0"/>
+        <!--        <PackageReference Include="Timberborn.GameLibs" Version="2022.8.4-r.0"/>-->
     </ItemGroup>
 
     <!--    Import dll's from Timberborn's symlink in solution folder-->
@@ -34,16 +34,16 @@
     <!--    </ItemGroup>-->
 
     <!--    Used for automaticly transfer dll to Timberborn location, make a symlink `Timberborn` in the solution folder -->
-    <!--        <PropertyGroup>-->
-    <!--            <TimberApiPath>$(SolutionDir)Timberborn\TimberAPI</TimberApiPath>-->
-    <!--        </PropertyGroup>-->
+            <PropertyGroup>
+                <TimberApiPath>$(SolutionDir)Timberborn\TimberAPI</TimberApiPath>
+            </PropertyGroup>
 
     <!--    <PropertyGroup>-->
     <!--        <TimberApiPath>$(SolutionDir)Timberborn\BepInEx\plugins\$(SolutionName)</TimberApiPath>-->
     <!--    </PropertyGroup>-->
 
-    <!--    <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild">-->
-    <!--        <Message Text="### Copy TimberApi core ###" Importance="high"/>-->
-    <!--        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core"/>-->
-    <!--    </Target>-->
+    <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild">
+        <Message Text="### Copy TimberApi core ###" Importance="high" />
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core" />
+    </Target>
 </Project>

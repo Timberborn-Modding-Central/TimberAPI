@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BaseStartupLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EnvironmentVariable.cs" />
   </ItemGroup>
 </Project>

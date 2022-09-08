@@ -3,11 +3,13 @@ using BepInEx.Logging;
 using UnityEngine;
 using ILogListener = TimberApi.Common.LoggingSystem.ILogListener;
 
-namespace TimberApi.BepInExPlugin
+namespace TimberApi.BepInEx.Plugin.Loader
 {
     public class BepInExConsoleListener : ILogListener
     {
-        private readonly Dictionary<LogType, LogLevel> _logLevelDirectory = new()
+        private readonly Dictionary<string, ManualLogSource> _logSourceCache = new();
+
+        private readonly Dictionary<LogType, LogLevel> _logLevel = new()
         {
             {LogType.Assert, LogLevel.Debug},
             {LogType.Error, LogLevel.Error},
@@ -18,7 +20,12 @@ namespace TimberApi.BepInExPlugin
 
         public void OnLogMessageReceived(string tagName, string message, string stacktrace, LogType type, Color color)
         {
-            BepInEx.Logging.Logger.CreateLogSource(tagName).Log(_logLevelDirectory[type], message);
+            if (!_logSourceCache.ContainsKey(tagName))
+            {
+                _logSourceCache.Add(tagName, BepInEx.Logging.Logger.CreateLogSource(tagName));
+            }
+
+            _logSourceCache[tagName].Log(_logLevel[type], message);
         }
     }
 }

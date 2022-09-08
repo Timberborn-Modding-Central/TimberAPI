@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using TimberApi.SharedLoader;
 
-namespace TimberApi.BepInExPlugin
+namespace TimberApi.BepInEx.Plugin.Loader
 {
     public class BepInExStartupLoader : BaseStartupLoader
     {
@@ -14,7 +14,9 @@ namespace TimberApi.BepInExPlugin
 
         public static void Run(string timberApiRootPath)
         {
-            new BepInExStartupLoader(timberApiRootPath).Run();
+            var startLoader = new BepInExStartupLoader(timberApiRootPath);
+            startLoader.StartLoader();
+            startLoader.LoadAndInitializeCoreStartup();
         }
     }
 }

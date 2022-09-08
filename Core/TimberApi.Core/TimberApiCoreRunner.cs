@@ -1,4 +1,6 @@
-﻿using TimberApi.Common.ConsoleSystem;
+﻿using System;
+using System.IO;
+using TimberApi.Common.ConsoleSystem;
 using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.ModLoaderSystem;
 using UnityEngine;
@@ -26,7 +28,7 @@ namespace TimberApi.Core
 
         public void Run()
         {
-            _consoleWriter.Log("TimberAPI Core", $"TimberAPI {Versions.TimberApiVersion} - Timberborn {Versions.GameVersion}", LogType.Log);
+            _consoleWriter.Log("TimberAPI Core", $"TimberAPI {Versions.TimberApiVersion} - Timberborn {Versions.GameVersion}, loader: {Environment.GetEnvironmentVariable("TIMBER_LOADER_TYPE")}", LogType.Log);
             _modLoader.Run();
             _modRepository.LoadMods();
         }

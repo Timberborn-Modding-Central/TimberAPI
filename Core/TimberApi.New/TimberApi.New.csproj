@@ -37,9 +37,9 @@
     <!--    </ItemGroup>-->
 
     <!--    Used for automaticly transfer dll to Timberborn location, make a symlink `Timberborn` in the solution folder -->
-    <!--        <PropertyGroup>-->
-    <!--            <TimberApiPath>$(SolutionDir)Timberborn\TimberAPI</TimberApiPath>-->
-    <!--        </PropertyGroup>-->
+            <PropertyGroup>
+                <TimberApiPath>$(SolutionDir)Timberborn\TimberAPI</TimberApiPath>
+            </PropertyGroup>
 
     <!--    <PropertyGroup>-->
     <!--        <TimberApiPath>$(SolutionDir)Timberborn\BepInEx\plugins\$(SolutionName)</TimberApiPath>-->
