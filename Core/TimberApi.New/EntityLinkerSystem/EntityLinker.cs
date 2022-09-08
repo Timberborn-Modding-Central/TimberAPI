@@ -21,10 +21,10 @@ namespace TimberApi.New.EntityLinkerSystem
         protected static readonly ComponentKey EntityLinkerKey = new("EntityLinker");
         protected static readonly ListKey<EntityLink> EntityLinksKey = new(nameof(EntityLinks));
 
-        internal readonly List<EntityLink> _entityLinks = new();
-        public IReadOnlyCollection<EntityLink> EntityLinks { get; private set; }
+        private readonly List<EntityLink> _entityLinks = new();
+        public IReadOnlyCollection<EntityLink> EntityLinks { get; private set; } = null!;
 
-        private EntityLinkObjectSerializer _entityLinkObjectSerializer;
+        private EntityLinkObjectSerializer _entityLinkObjectSerializer = null!;
 
 
         [Inject]
@@ -97,7 +97,7 @@ namespace TimberApi.New.EntityLinkerSystem
         {
             if(linkee == this)
             {
-                Log.LogWarning($"Tried to link entity with itself. Stopped linking.");
+                TimberApi.ConsoleWriter.Log("Tried to link entity with itself. Stopped linking.", LogType.Warning);
                 return;
             }
             var link = new EntityLink(this, linkee);
