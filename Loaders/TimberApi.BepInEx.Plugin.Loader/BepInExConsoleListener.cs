@@ -3,7 +3,7 @@ using BepInEx.Logging;
 using UnityEngine;
 using ILogListener = TimberApi.Common.LoggingSystem.ILogListener;
 
-namespace TimberApi.BepInEx.Plugin.Loader
+namespace TimberApi.BepInExPlugin.Loader
 {
     public class BepInExConsoleListener : ILogListener
     {

@@ -3,6 +3,7 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
         <LangVersion>9</LangVersion>
+        <RootNamespace>TimberApi.BepInExPlugin.Loader</RootNamespace>
     </PropertyGroup>
 
     <Import Project="..\TimberApi.SharedLoader\TimberApi.SharedLoader.projitems" Label="Shared"/>
