@@ -8,16 +8,15 @@ using LocalizableSlider = TimberApi.New.UiBuilderSystem.CustomElements.Localizab
 
 namespace TimberApi.New.UiBuilderSystem.ElementSystem
 {
-    public class SliderBuilder : BaseElementBuilder<CustomElements.LocalizableSlider, SliderBuilder>
+    public class SliderBuilder : BaseElementBuilder<LocalizableSlider, SliderBuilder>
     {
-        protected override SliderBuilder BuilderInstance => this;
-        
-        public SliderBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) 
-            : base(new LocalizableSlider(), visualElementInitializer, assetLoader, uiPresetFactory)
+        public SliderBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) : base(new LocalizableSlider(), visualElementInitializer,
+            assetLoader, uiPresetFactory)
         {
-
         }
-        
+
+        protected override SliderBuilder BuilderInstance => this;
+
         public SliderBuilder SetLabelLocKey(string locKey)
         {
             Root.TextLocKey = locKey;
@@ -29,19 +28,19 @@ namespace TimberApi.New.UiBuilderSystem.ElementSystem
             Root.label = text;
             return this;
         }
-        
+
         public SliderBuilder SetLowValue(float value)
         {
             Root.lowValue = value;
             return this;
         }
-        
+
         public SliderBuilder SetHighValue(float value)
         {
             Root.highValue = value;
             return this;
         }
-        
+
         public SliderBuilder SetValue(float value)
         {
             Root.value = value;
@@ -54,20 +53,20 @@ namespace TimberApi.New.UiBuilderSystem.ElementSystem
             modifyScroller.Invoke(Root.dragContainer);
             return this;
         }
-        
+
         [SuppressMessage("", "Publicizer001")]
         public SliderBuilder ModifyDragElement(Action<VisualElement> modifyScroller)
         {
             modifyScroller.Invoke(Root.dragElement);
             return this;
         }
-        
+
         public SliderBuilder ModifyLabelElement(Action<VisualElement> modifyScroller)
         {
             modifyScroller.Invoke(Root.labelElement);
             return this;
         }
-        
+
         public SliderBuilder ModifyTracker(Action<VisualElement> modifyScroller)
         {
             modifyScroller.Invoke(Root.Q<VisualElement>("unity-tracker"));

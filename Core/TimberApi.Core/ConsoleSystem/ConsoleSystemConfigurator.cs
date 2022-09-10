@@ -22,10 +22,7 @@ namespace TimberApi.Core.ConsoleSystem
         public static void Prefab(GameObject parent)
         {
             PrefabBuilder.Create<ConsoleSystemConfigurator>("ConsoleSystemConfigurator")
-                .AddGameObject("ConsoleMonitor", consoleMonitor => consoleMonitor
-                    .AddComponent<UIDocument>()
-                    .AddComponent<KeyboardController>()
-                    .AddComponent<ConsoleMonitor>())
+                .AddGameObject("ConsoleMonitor", consoleMonitor => consoleMonitor.AddComponent<UIDocument>().AddComponent<KeyboardController>().AddComponent<ConsoleMonitor>())
                 .FinishAndSetParent(parent);
         }
     }

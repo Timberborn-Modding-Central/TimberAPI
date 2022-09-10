@@ -9,15 +9,15 @@ using UnityEngine;
 
 namespace TimberApi.New.SpecificationSystem
 {
-    public class SpecificationRepositorySeeder : ITimberApiSeeder
+    internal class SpecificationRepositorySeeder : ITimberApiSeeder
     {
         private static readonly string TimberbornSpecificationPath = "Specifications";
 
         private readonly IModRepository _modRepository;
 
-        private readonly SpecificationRepository _specificationRepository;
-
         private readonly IEnumerable<ISpecificationGenerator> _specificationGenerators;
+
+        private readonly SpecificationRepository _specificationRepository;
 
         public SpecificationRepositorySeeder(IModRepository modRepository, SpecificationRepository specificationRepository, IEnumerable<ISpecificationGenerator> specificationGenerators)
         {
@@ -28,9 +28,10 @@ namespace TimberApi.New.SpecificationSystem
 
         public void Run()
         {
-            List<ISpecification> specifications = new List<ISpecification>();
+            List<ISpecification> specifications = new();
 
-            specifications.AddRange(FileService.GetFiles(_modRepository.All().Select(mod => Path.Combine(mod.DirectoryPath, mod.SpecificationPath)), "*.json").Select(filePath => new FileSpecification(filePath)));
+            specifications.AddRange(FileService.GetFiles(_modRepository.All().Select(mod => Path.Combine(mod.DirectoryPath, mod.SpecificationPath)), "*.json")
+                .Select(filePath => new FileSpecification(filePath)));
 
             specifications.AddRange(Resources.LoadAll<TextAsset>(TimberbornSpecificationPath).Select(asset => new TimberbornSpecification(asset)));
 

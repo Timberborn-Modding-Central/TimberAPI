@@ -10,17 +10,17 @@ namespace TimberApi.Core.ConsoleSystem
     {
         private readonly List<LogItem> _logHistory;
 
-        private bool _isConsoleVisible = true;
+        private readonly ListView _logLogListView;
+
+        private readonly List<VisualElement> _pickingModeElements;
 
         private readonly VisualElement _root;
 
-        private readonly ListView _logLogListView;
-
         private readonly VisualElement _settingsWrapper;
 
-        private bool _isSettingVisible;
+        private bool _isConsoleVisible = true;
 
-        private readonly List<VisualElement> _pickingModeElements;
+        private bool _isSettingVisible;
 
         private string? _latestMessage;
         private uint _latestMessageRepeatAmount;
@@ -44,8 +44,9 @@ namespace TimberApi.Core.ConsoleSystem
         }
 
         /// <summary>
-        /// Listview requirements
-        /// Adding item and clearing them after adding the source is to remove the list is empty without needing to rebuild the whole list every message
+        ///     Listview requirements
+        ///     Adding item and clearing them after adding the source is to remove the list is empty without needing to rebuild the
+        ///     whole list every message
         /// </summary>
         private void SetupListView()
         {
@@ -59,7 +60,7 @@ namespace TimberApi.Core.ConsoleSystem
         private void LogLogListViewOnonSelectionChanged(IEnumerable<object> obj)
         {
             TextElement[] textElements = _logLogListView.Query<TextElement>().Build().ToArray();
-            for (int i = 0; i < textElements.Length; i++)
+            for (var i = 0; i < textElements.Length; i++)
             {
                 textElements[i].style.backgroundColor = _logLogListView.selectedIndices.Contains(i) ? new Color(0f, 0f, 0f, 0.39f) : Color.clear;
             }
@@ -85,7 +86,7 @@ namespace TimberApi.Core.ConsoleSystem
         }
 
         /// <summary>
-        /// Provide all elements that should be click through, used to show the console while still able to click in game
+        ///     Provide all elements that should be click through, used to show the console while still able to click in game
         /// </summary>
         private void SetClickThroughElements()
         {
@@ -126,7 +127,7 @@ namespace TimberApi.Core.ConsoleSystem
 
         private void OnCopySelectionButtonClick()
         {
-            GUIUtility.systemCopyBuffer = string.Join("\n", _logLogListView.selectedItems.Select(item => ((LogItem)item).Text));
+            GUIUtility.systemCopyBuffer = string.Join("\n", _logLogListView.selectedItems.Select(item => ((LogItem) item).Text));
         }
 
         private void OnSettingsButtonClick()

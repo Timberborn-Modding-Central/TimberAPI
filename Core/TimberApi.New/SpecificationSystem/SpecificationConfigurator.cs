@@ -6,7 +6,7 @@ using Timberborn.Persistence;
 namespace TimberApi.New.SpecificationSystem
 {
     [Configurator(SceneEntrypoint.All)]
-    public class SpecificationConfigurator : IConfigurator
+    internal class SpecificationConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
@@ -17,9 +17,9 @@ namespace TimberApi.New.SpecificationSystem
     }
 
     /// <summary>
-    /// registered in global container, `ISpecificationService` called before seeder was loaded
+    ///     registered in global container, `ISpecificationService` called before seeder was loaded
     /// </summary>
-    public class SpecificationGlobalConfigurator : IConfigurator
+    internal class SpecificationGlobalConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

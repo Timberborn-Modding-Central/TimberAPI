@@ -9,7 +9,6 @@ namespace TimberApi.BepInExPlugin.Loader
 
         public BepInExStartupLoader(string timberApiRootPath) : base(LoaderType, timberApiRootPath, Paths.PluginPath)
         {
-
         }
 
         public static void Run(string timberApiRootPath)

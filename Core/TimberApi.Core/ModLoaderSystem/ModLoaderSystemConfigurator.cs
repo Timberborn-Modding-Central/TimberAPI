@@ -25,9 +25,7 @@ namespace TimberApi.Core.ModLoaderSystem
 
         public static void Prefab(GameObject parent)
         {
-            PrefabBuilder.Create<ModLoaderSystemConfigurator>("ModLoaderSystemConfigurator")
-                .AddGameObject<ModRepository>("ModRepository")
-                .FinishAndSetParent(parent);
+            PrefabBuilder.Create<ModLoaderSystemConfigurator>("ModLoaderSystemConfigurator").AddGameObject<ModRepository>("ModRepository").FinishAndSetParent(parent);
         }
     }
 }

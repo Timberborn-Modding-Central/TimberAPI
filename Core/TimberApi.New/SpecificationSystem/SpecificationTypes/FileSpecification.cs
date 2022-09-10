@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TimberApi.New.SpecificationSystem.SpecificationTypes
 {
-    public class FileSpecification : ISpecification
+    internal class FileSpecification : ISpecification
     {
         public FileSpecification(string filePath)
         {

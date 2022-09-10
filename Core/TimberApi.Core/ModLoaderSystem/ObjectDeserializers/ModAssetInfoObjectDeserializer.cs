@@ -20,7 +20,6 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
 
         public void Serialize(ModAssetInfo value, IObjectSaver objectSaver)
         {
-            throw new System.NotImplementedException();
         }
 
         public Obsoletable<ModAssetInfo> Deserialize(IObjectLoader objectLoader)
@@ -35,9 +34,11 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
         private static T ConvertToFlag<T>(IEnumerable<T> flags) where T : struct, IConvertible
         {
             if (!typeof(T).IsEnum)
+            {
                 throw new NotSupportedException($"{typeof(T)} must be an enumerated type");
+            }
 
-            return (T)(object)flags.Cast<int>().Aggregate(0, (c, n) => c |= n);
+            return (T) (object) flags.Cast<int>().Aggregate(0, (c, n) => c |= n);
         }
 
         private static string PathToCrossPlatformPath(string path)

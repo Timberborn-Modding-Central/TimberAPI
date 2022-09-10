@@ -3,7 +3,7 @@ using Timberborn.Persistence;
 
 namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
 {
-    public class GolemFactionSpecificationObjectDeserializer : IObjectSerializer<GolemFactionSpecification>
+    internal class GolemFactionSpecificationObjectDeserializer : IObjectSerializer<GolemFactionSpecification>
     {
         public void Serialize(GolemFactionSpecification value, IObjectSaver objectSaver)
         {

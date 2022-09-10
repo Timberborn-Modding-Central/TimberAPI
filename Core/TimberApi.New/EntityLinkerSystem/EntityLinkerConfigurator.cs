@@ -17,7 +17,7 @@ namespace TimberApi.New.EntityLinkerSystem
 
         private static TemplateModule ProvideTemplateModule()
         {
-            TemplateModule.Builder builder = new TemplateModule.Builder();
+            var builder = new TemplateModule.Builder();
             builder.AddDecorator<Building, EntityLinker>();
             return builder.Build();
         }

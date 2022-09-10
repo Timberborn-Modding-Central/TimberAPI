@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace TimberApi.New.AssetSystem
 {
-    public class AssetLoader : IAssetLoader
+    internal class AssetLoader : IAssetLoader
     {
         private readonly AssetRepository _assetRepository;
 
@@ -42,9 +42,10 @@ namespace TimberApi.New.AssetSystem
                 throw new PrefixNotFoundException(prefix);
             }
 
-            T asset = assetFolder.GetAssetBundleAtPath(pathToFile).Load<T>(name) ?? throw new InvalidOperationException($"Failed to load asset at {prefix}/{pathToFile}/{name}. Asset name does not exists inside bundle");
+            T asset = assetFolder.GetAssetBundleAtPath(pathToFile).Load<T>(name) ??
+                      throw new InvalidOperationException($"Failed to load asset at {prefix}/{pathToFile}/{name}. Asset name does not exists inside bundle");
 
-            if(asset is not GameObject gameObject)
+            if (asset is not GameObject gameObject)
             {
                 return asset;
             }

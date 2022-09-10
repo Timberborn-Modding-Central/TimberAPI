@@ -4,22 +4,20 @@ using HarmonyLib;
 using TimberApi.Common.SingletonSystem.Singletons;
 using Timberborn.Common;
 using UnityEngine;
+
 // ReSharper disable InconsistentNaming
 
 namespace TimberApi.New.LocalizationSystem
 {
     [HarmonyPatch]
-    public class LocalizationPatcher : ITimberApiLoadableSingleton
+    internal class LocalizationPatcher : ITimberApiLoadableSingleton
     {
-
         public void Load()
         {
-            Harmony harmony = new Harmony("TimberApi.Localization");
+            var harmony = new Harmony("TimberApi.Localization");
 
-            harmony.Patch(
-                original: AccessTools.TypeByName("Timberborn.Localization.LocalizationRepository").GetMethod("GetLocalization"),
-                postfix: new HarmonyMethod(AccessTools.Method(typeof(LocalizationPatcher), nameof(GetLocalizationPatch)))
-            );
+            harmony.Patch(AccessTools.TypeByName("Timberborn.Localization.LocalizationRepository").GetMethod("GetLocalization"),
+                postfix: new HarmonyMethod(AccessTools.Method(typeof(LocalizationPatcher), nameof(GetLocalizationPatch))));
         }
 
         public static void GetLocalizationPatch(string localizationKey, ref IDictionary<string, string> __result)

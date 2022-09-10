@@ -1,6 +1,6 @@
 ﻿namespace TimberApi.New.SpecificationSystem.SpecificationTypes
 {
-    public class GeneratedSpecification : ISpecification
+    internal class GeneratedSpecification : ISpecification
     {
         private readonly string _json;
 
@@ -15,6 +15,7 @@
         public string FullName { get; }
         public string SpecificationName { get; }
         public bool IsOriginal { get; }
+
         public string LoadJson()
         {
             return _json;

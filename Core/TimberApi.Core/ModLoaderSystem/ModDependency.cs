@@ -1,5 +1,5 @@
-﻿using TimberApi.Common.VersionSystem;
-using TimberApi.New.ModSystem;
+﻿using TimberApi.New.ModSystem;
+using TimberApi.New.VersionSystem;
 
 namespace TimberApi.Core.ModLoaderSystem
 {
@@ -12,7 +12,7 @@ namespace TimberApi.Core.ModLoaderSystem
             Optional = optional;
         }
 
-        public bool IsLoaded => Mod is { IsLoaded: true };
+        public bool IsLoaded => Mod is {IsLoaded: true};
 
         public IMod? Mod { get; set; }
 

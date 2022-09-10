@@ -16,16 +16,20 @@ namespace TimberApi.New.UiBuilderSystem.CustomElements
             set
             {
                 if (string.IsNullOrWhiteSpace(_textLocKey))
+                {
                     _textLocKey = value;
+                }
             }
         }
 
         public void Localize(ILoc loc)
         {
-            if(_textLocKey == null)
+            if (_textLocKey == null)
+            {
                 return;
+            }
+
             label = loc.T(_textLocKey);
         }
-
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TimberApi.New.SpecificationSystem
 {
-    public class SpecificationRepository
+    internal class SpecificationRepository
     {
         private bool _isInitialized;
 

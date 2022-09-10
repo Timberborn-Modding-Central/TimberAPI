@@ -2,7 +2,7 @@
 
 namespace TimberApi.New.DependencyContainerSystem
 {
-    public class DependencyContainerSetter
+    internal class DependencyContainerSetter
     {
         public DependencyContainerSetter(IContainer container)
         {

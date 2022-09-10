@@ -14,11 +14,10 @@ namespace TimberApi.Core.ConsoleSystem
 {
     internal class ConsoleMonitor : MonoBehaviour, ILogListener
     {
-        private ConsoleMonitorController _monitorController = null!;
+        private bool _isGravePressed;
 
         private KeyboardController _keyboardController = null!;
-
-        private bool _isGravePressed;
+        private ConsoleMonitorController _monitorController = null!;
 
         private void Awake()
         {
@@ -42,11 +41,6 @@ namespace TimberApi.Core.ConsoleSystem
             }
         }
 
-        private void OnUnityLogMessageReceived(string message, string stacktrace, LogType type)
-        {
-            _monitorController.AddLog("Unity", message, stacktrace, type, LogTextColors.Internal[type]);
-        }
-
         private void Update()
         {
             if (!_keyboardController.IsKeyHeld(Key.Backquote))
@@ -66,6 +60,11 @@ namespace TimberApi.Core.ConsoleSystem
         public void OnLogMessageReceived(string tagName, string message, string stacktrace, LogType type, Color color)
         {
             _monitorController.AddLog(tagName, message, stacktrace, type, color);
+        }
+
+        private void OnUnityLogMessageReceived(string message, string stacktrace, LogType type)
+        {
+            _monitorController.AddLog("Unity", message, stacktrace, type, LogTextColors.Internal[type]);
         }
     }
 }

@@ -8,11 +8,10 @@ namespace TimberApi.Core.ConfigSystem
 {
     internal class ConfigService : IConfigService
     {
+        private readonly ConfigRepository _configRepository;
         private readonly string _consoleTag;
 
         private readonly IInternalConsoleWriter _consoleWriter;
-
-        private readonly ConfigRepository _configRepository;
 
         public ConfigService(IInternalConsoleWriter consoleWriter, IEnumerable<IConfig> configs, string consoleTag)
         {
@@ -29,7 +28,7 @@ namespace TimberApi.Core.ConfigSystem
             }
             catch (Exception e)
             {
-                _consoleWriter.LogAs(_consoleTag,  "Failed to retrieve config, returning default", LogType.Warning);
+                _consoleWriter.LogAs(_consoleTag, "Failed to retrieve config, returning default", LogType.Warning);
                 _consoleWriter.LogAs(_consoleTag, "Failed config reason: " + e.Message, LogType.Error);
                 return new T();
             }

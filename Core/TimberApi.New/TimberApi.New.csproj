@@ -20,16 +20,16 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\TimberApi.Common\TimberApi.Common.csproj" />
+        <ProjectReference Include="..\TimberApi.Common\TimberApi.Common.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701" />
-        <PackageReference Include="Threenine.LinqToCsv" Version="1.6.0" />
-        <PackageReference Include="MonoMod.Utils" Version="22.5.1.1" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-        <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
-        <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" IncludeAssets="compile" />
+        <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701"/>
+        <PackageReference Include="Threenine.LinqToCsv" Version="1.6.0"/>
+        <PackageReference Include="MonoMod.Utils" Version="22.5.1.1"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+        <PackageReference Include="System.Collections.Immutable" Version="6.0.0"/>
+        <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" IncludeAssets="compile"/>
         <PackageReference Include="Timberborn.GameLibs" Version="2022.8.4-r.0" Condition="$(UseLocalTimberbornSource) == false"/>
     </ItemGroup>
 

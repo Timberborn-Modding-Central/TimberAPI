@@ -7,10 +7,10 @@ using System.Linq;
 using System.Reflection;
 using TimberApi.Common;
 using TimberApi.Common.ConsoleSystem;
-using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem.Exceptions;
 using TimberApi.Core.ModLoaderSystem.ObjectDeserializers;
+using TimberApi.New;
 using TimberApi.New.ConfigSystem;
 using TimberApi.New.ModSystem;
 using Timberborn.Persistence;
@@ -26,21 +26,22 @@ namespace TimberApi.Core.ModLoaderSystem
 
         private static readonly string ModFileName = "mod.json";
 
+        private readonly IConfigServiceFactory _configServiceFactory;
+
         private readonly IInternalConsoleWriter _consoleWriter;
+
+        private readonly IModDependencySorter _dependencySorter;
+
+        private readonly Logger _logger;
 
         private readonly ModObjectDeserializer _modObjectDeserializer;
 
         private readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
 
-        private readonly IConfigServiceFactory _configServiceFactory;
-
-        private readonly Logger _logger;
-
-        private readonly IModDependencySorter _dependencySorter;
-
         public ImmutableArray<IMod> LoadedMods;
 
-        public ModLoader(IInternalConsoleWriter consoleWriter, ModObjectDeserializer modObjectDeserializer, ObjectSaveReaderWriter objectSaveReaderWriter, Logger logger, IModDependencySorter dependencySorter, IConfigServiceFactory configServiceFactory)
+        public ModLoader(IInternalConsoleWriter consoleWriter, ModObjectDeserializer modObjectDeserializer, ObjectSaveReaderWriter objectSaveReaderWriter, Logger logger,
+            IModDependencySorter dependencySorter, IConfigServiceFactory configServiceFactory)
         {
             _consoleWriter = consoleWriter;
             _modObjectDeserializer = modObjectDeserializer;
@@ -52,7 +53,6 @@ namespace TimberApi.Core.ModLoaderSystem
 
         public void Run()
         {
-            _consoleWriter.Log("AAAAAAAAAAAAAAAAAAAA");
             var stopwatch = Stopwatch.StartNew();
             _consoleWriter.Log("Mod loading started");
             string[] modFilePaths = GetModFilePaths();
@@ -71,8 +71,8 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Load code and codeless mods, skipped if dependency failed to load
-        /// List must be ordered on dependencies
+        ///     Load code and codeless mods, skipped if dependency failed to load
+        ///     List must be ordered on dependencies
         /// </summary>
         private IEnumerable<IMod> LoadMods(IMod[] sortedLoadableMods)
         {
@@ -80,16 +80,16 @@ namespace TimberApi.Core.ModLoaderSystem
 
             foreach (IMod loadableIMod in sortedLoadableMods)
             {
-                var loadableMod = (Mod)loadableIMod;
+                var loadableMod = (Mod) loadableIMod;
                 try
                 {
-                    if(!NeededDependenciesAreLoaded(loadableMod.Dependencies, sortedLoadableMods, out IEnumerable<IModDependency> missingDependencies))
+                    if (!NeededDependenciesAreLoaded(loadableMod.Dependencies, sortedLoadableMods, out IEnumerable<IModDependency> missingDependencies))
                     {
                         _consoleWriter.LogAs(loadableMod.Name, $"Skipped: Missing dependencies: {string.Join(", ", missingDependencies.Select(dependency => dependency.UniqueId))}", LogType.Warning);
                         continue;
                     }
 
-                    if(!loadableMod.IsCodelessMod && !TryLoadCodeMod(loadableMod))
+                    if (!loadableMod.IsCodelessMod && !TryLoadCodeMod(loadableMod))
                     {
                         continue;
                     }
@@ -100,7 +100,7 @@ namespace TimberApi.Core.ModLoaderSystem
                 }
                 catch (Exception e)
                 {
-                    _consoleWriter.LogAs(loadableMod.Name,"Failed: " + e.Message, LogType.Error);
+                    _consoleWriter.LogAs(loadableMod.Name, "Failed: " + e.Message, LogType.Error);
                 }
             }
 
@@ -108,8 +108,8 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Loads entryDll, if exceptions are throw mod load is set to true, modders can do this manual too.
-        /// Dll cannot be unloaded, except if they all get their own Domain.
+        ///     Loads entryDll, if exceptions are throw mod load is set to true, modders can do this manual too.
+        ///     Dll cannot be unloaded, except if they all get their own Domain.
         /// </summary>
         private bool TryLoadCodeMod(Mod mod)
         {
@@ -135,19 +135,19 @@ namespace TimberApi.Core.ModLoaderSystem
             }
             catch (ModEntrypointFailedException e)
             {
-                _consoleWriter.LogAs(mod.Name,"Entrypoint failed: " + e.Message, LogType.Error);
+                _consoleWriter.LogAs(mod.Name, "Entrypoint failed: " + e.Message, LogType.Error);
             }
             catch (Exception e)
             {
-                _consoleWriter.LogAs(mod.Name,"Failed: " + e.Message, LogType.Error);
+                _consoleWriter.LogAs(mod.Name, "Failed: " + e.Message, LogType.Error);
             }
 
             return false;
         }
 
         /// <summary>
-        /// Creating a config service and binding it to the mod
-        /// Has to be inside the mod loader else the entry point is already loaded
+        ///     Creating a config service and binding it to the mod
+        ///     Has to be inside the mod loader else the entry point is already loaded
         /// </summary>
         private void SetModConfig(Mod mod, Assembly modAssembly)
         {
@@ -155,8 +155,8 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Checks if needed dependencies are loaded
-        /// Returns list of dependencies that were missing
+        ///     Checks if needed dependencies are loaded
+        ///     Returns list of dependencies that were missing
         /// </summary>
         private static bool NeededDependenciesAreLoaded(IEnumerable<IModDependency> modDependencies, IMod[] mods, out IEnumerable<IModDependency> missingDependencies)
         {
@@ -168,7 +168,6 @@ namespace TimberApi.Core.ModLoaderSystem
                 if (mods.Any(mod => modDependency.Optional || (mod.UniqueId == modDependency.UniqueId && mod.IsLoaded)))
                 {
                     continue;
-
                 }
 
                 missingDependenciesList.Add(modDependency);
@@ -180,17 +179,14 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Creates a instance of the entrypoint class and invokes the entrypoint method
+        ///     Creates a instance of the entrypoint class and invokes the entrypoint method
         /// </summary>
         private void InitializeEntrypointInAssembly(Assembly assembly, IMod mod)
         {
             try
             {
-                IModEntrypoint? modEntrypoint = assembly
-                    .GetTypes()
-                    .Where(type => type.GetInterfaces().Contains(typeof(IModEntrypoint)) && type.GetConstructor(Type.EmptyTypes) != null)
-                    .Select(type => Activator.CreateInstance(type) as IModEntrypoint)!
-                    .Single();
+                IModEntrypoint? modEntrypoint = assembly.GetTypes().Where(type => type.GetInterfaces().Contains(typeof(IModEntrypoint)) && type.GetConstructor(Type.EmptyTypes) != null)
+                    .Select(type => Activator.CreateInstance(type) as IModEntrypoint)!.Single();
 
                 if (modEntrypoint == null)
                 {
@@ -210,8 +206,8 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Sorts the list based on dependencies
-        /// Makes sure that mods that need a dependency are loaded later
+        ///     Sorts the list based on dependencies
+        ///     Makes sure that mods that need a dependency are loaded later
         /// </summary>
         private IEnumerable<IMod> SortModsOnDependency(IEnumerable<IMod> loadableMods)
         {
@@ -221,16 +217,14 @@ namespace TimberApi.Core.ModLoaderSystem
         private static void SetDependencyReferenceOnLoadableMods(IMod[] loadableMods)
         {
             foreach (IMod loadableMod in loadableMods)
+            foreach (IModDependency loadableModDependency in loadableMod.Dependencies)
             {
-                foreach (IModDependency loadableModDependency in loadableMod.Dependencies)
-                {
-                    loadableModDependency.Mod = loadableMods.FirstOrDefault(mod => mod.UniqueId == loadableModDependency.UniqueId);
-                }
+                loadableModDependency.Mod = loadableMods.FirstOrDefault(mod => mod.UniqueId == loadableModDependency.UniqueId);
             }
         }
 
         /// <summary>
-        /// Removes mods with missing dependencies
+        ///     Removes mods with missing dependencies
         /// </summary>
         /// <param name="gameCompatibleMods"></param>
         /// <returns></returns>
@@ -245,7 +239,8 @@ namespace TimberApi.Core.ModLoaderSystem
                 {
                     if (!NeededDependenciesAreLoadable(gameCompatibleMod.Dependencies, gameCompatibleMods, out IEnumerable<IModDependency> missingDependencies))
                     {
-                        _consoleWriter.LogAs(gameCompatibleMod.Name, $"Missing the following dependencies: {string.Join(", ", missingDependencies.Select(dependency => dependency.UniqueId))}", LogType.Warning);
+                        _consoleWriter.LogAs(gameCompatibleMod.Name, $"Missing the following dependencies: {string.Join(", ", missingDependencies.Select(dependency => dependency.UniqueId))}",
+                            LogType.Warning);
                         removedMod = true;
                         continue;
                     }
@@ -263,8 +258,8 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Checks if the needed dependencies are loadable
-        /// Returns a list of needed dependencies that are not loadable
+        ///     Checks if the needed dependencies are loadable
+        ///     Returns a list of needed dependencies that are not loadable
         /// </summary>
         private static bool NeededDependenciesAreLoadable(IEnumerable<IModDependency> modDependencies, IMod[] gameCompatibleMods, out IEnumerable<IModDependency> missingDependencies)
         {
@@ -273,11 +268,7 @@ namespace TimberApi.Core.ModLoaderSystem
 
             foreach (IModDependency modDependency in modDependencies)
             {
-                if (gameCompatibleMods.Any(mod =>
-                        (mod.UniqueId == modDependency.UniqueId &&
-                         !(modDependency.Mod == null || modDependency.Mod.LoadFailed)) ||
-                        modDependency.Optional)
-                   )
+                if (gameCompatibleMods.Any(mod => (mod.UniqueId == modDependency.UniqueId && !(modDependency.Mod == null || modDependency.Mod.LoadFailed)) || modDependency.Optional))
                 {
                     continue;
                 }
@@ -291,7 +282,7 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Minimum timberApi version check
+        ///     Minimum timberApi version check
         /// </summary>
         private IEnumerable<IMod> FilterTimberApiCompatibleMods(IEnumerable<IMod> uniqueMods)
         {
@@ -303,7 +294,8 @@ namespace TimberApi.Core.ModLoaderSystem
                 {
                     if (uniqueMod.MinimumApiVersion >= Versions.TimberApiVersion)
                     {
-                        _consoleWriter.LogAs(uniqueMod.Name,$"Skipped: Minimum TimberAPI version required: {uniqueMod.MinimumApiVersion}, current TimberAPI version: {Versions.TimberApiVersion}", LogType.Warning);
+                        _consoleWriter.LogAs(uniqueMod.Name, $"Skipped: Minimum TimberAPI version required: {uniqueMod.MinimumApiVersion}, current TimberAPI version: {Versions.TimberApiVersion}",
+                            LogType.Warning);
                         continue;
                     }
 
@@ -311,7 +303,7 @@ namespace TimberApi.Core.ModLoaderSystem
                 }
                 catch (Exception e)
                 {
-                    _consoleWriter.LogAs(uniqueMod.Name,"Failed: " + e, LogType.Error);
+                    _consoleWriter.LogAs(uniqueMod.Name, "Failed: " + e, LogType.Error);
                 }
             }
 
@@ -319,7 +311,7 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Minimum game version check
+        ///     Minimum game version check
         /// </summary>
         private IEnumerable<IMod> FilterGameCompatibleMods(IEnumerable<IMod> uniqueMods)
         {
@@ -331,7 +323,7 @@ namespace TimberApi.Core.ModLoaderSystem
                 {
                     if (uniqueMod.MinimumGameVersion >= Versions.GameVersion)
                     {
-                        _consoleWriter.LogAs(uniqueMod.Name,$"Skipped: Minimum game version required: {uniqueMod.MinimumGameVersion}, current game version: {Versions.GameVersion}", LogType.Warning);
+                        _consoleWriter.LogAs(uniqueMod.Name, $"Skipped: Minimum game version required: {uniqueMod.MinimumGameVersion}, current game version: {Versions.GameVersion}", LogType.Warning);
                         continue;
                     }
 
@@ -339,7 +331,7 @@ namespace TimberApi.Core.ModLoaderSystem
                 }
                 catch (Exception e)
                 {
-                    _consoleWriter.LogAs(uniqueMod.Name,"Failed: " + e, LogType.Error);
+                    _consoleWriter.LogAs(uniqueMod.Name, "Failed: " + e, LogType.Error);
                 }
             }
 
@@ -347,7 +339,7 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Removes all duplicated unique ID mods
+        ///     Removes all duplicated unique ID mods
         /// </summary>
         private IEnumerable<IMod> FilterUniqueMods(IEnumerable<IMod> deserializedMods)
         {
@@ -361,7 +353,7 @@ namespace TimberApi.Core.ModLoaderSystem
                 }
                 catch (Exception e)
                 {
-                    _consoleWriter.LogAs(deserializedMod.Name,"Skipped: " + e.Message, LogType.Warning);
+                    _consoleWriter.LogAs(deserializedMod.Name, "Skipped: " + e.Message, LogType.Warning);
                 }
             }
 
@@ -369,7 +361,7 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Deserializing mod.json files
+        ///     Deserializing mod.json files
         /// </summary>
         private IEnumerable<IMod> DeserializeMods(IEnumerable<string> modFilePaths)
         {
@@ -395,13 +387,16 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        /// Searches for mod.json files inside any subdirectory in mods
+        ///     Searches for mod.json files inside any subdirectory in mods
         /// </summary>
         private static string[] GetModFilePaths()
         {
             return Directory.GetDirectories(Paths.Mods).Select(modDirectory => Path.Combine(modDirectory, ModFileName)).Where(File.Exists).ToArray();
         }
 
-        private static string Wrap(string assetText, string type) => "{\"" + type + "\":" + assetText + "}";
+        private static string Wrap(string assetText, string type)
+        {
+            return "{\"" + type + "\":" + assetText + "}";
+        }
     }
 }

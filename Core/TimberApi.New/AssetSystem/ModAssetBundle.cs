@@ -1,14 +1,12 @@
 ﻿using TimberApi.New.AssetSystem.Exceptions;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace TimberApi.New.AssetSystem
 {
-    public class ModAssetBundle
+    internal class ModAssetBundle
     {
-        private readonly string _assetBundlePath;
-
         private readonly string _assetBundleName;
+        private readonly string _assetBundlePath;
 
         private AssetBundle? _assetBundle;
 
@@ -24,6 +22,7 @@ namespace TimberApi.New.AssetSystem
             {
                 throw new ModAssetNotLoadedException(_assetBundleName);
             }
+
             return _assetBundle!.LoadAsset<T>(path);
         }
 
@@ -33,6 +32,7 @@ namespace TimberApi.New.AssetSystem
             {
                 throw new ModAssetNotLoadedException(_assetBundleName);
             }
+
             return _assetBundle!.LoadAllAssets<T>();
         }
 
@@ -52,6 +52,7 @@ namespace TimberApi.New.AssetSystem
             {
                 throw new ModAssetBundleAlreadyUnloadedException(_assetBundleName);
             }
+
             _assetBundle.Unload(true);
             _assetBundle = null;
         }

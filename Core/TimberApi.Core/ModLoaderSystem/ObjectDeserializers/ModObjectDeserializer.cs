@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using TimberApi.Common.Extensions;
-using TimberApi.Common.VersionSystem;
 using TimberApi.New.ModSystem;
 using Timberborn.Persistence;
+using Version = TimberApi.New.VersionSystem.Version;
 
 namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
 {
     internal class ModObjectDeserializer : IObjectSerializer<Mod>
     {
-        private readonly ModDependencyObjectDeserializer _modDependencyObjectDeserializer;
-
         private readonly ModAssetInfoObjectDeserializer _modAssetInfoInfoObjectDeserializer;
+        private readonly ModDependencyObjectDeserializer _modDependencyObjectDeserializer;
 
         public ModObjectDeserializer(ModDependencyObjectDeserializer modDependencyObjectDeserializer, ModAssetInfoObjectDeserializer modAssetInfoInfoObjectDeserializer)
         {
@@ -21,7 +21,6 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
 
         public void Serialize(Mod value, IObjectSaver objectSaver)
         {
-            throw new System.NotImplementedException();
         }
 
         public Obsoletable<Mod> Deserialize(IObjectLoader objectLoader)

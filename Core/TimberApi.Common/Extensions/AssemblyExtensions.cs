@@ -9,9 +9,7 @@ namespace TimberApi.Common.Extensions
     {
         public static IEnumerable<Type> GetTypesWithInterface<TInterface>(this Assembly assembly)
         {
-            return assembly
-                .GetTypes()
-                .Where(x => typeof(TInterface).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
+            return assembly.GetTypes().Where(x => typeof(TInterface).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
         }
     }
 }

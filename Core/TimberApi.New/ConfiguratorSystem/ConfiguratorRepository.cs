@@ -8,7 +8,7 @@ namespace TimberApi.New.ConfiguratorSystem
 {
     internal class ConfiguratorRepository
     {
-        public static Dictionary<SceneEntrypoint, ImmutableArray<IConfigurator>> SceneConfigurators = new ();
+        public static Dictionary<SceneEntrypoint, ImmutableArray<IConfigurator>> SceneConfigurators = new();
 
         public void SetSceneConfigurators(SceneEntrypoint sceneEntrypoint, IEnumerable<IConfigurator> configurators)
         {

@@ -13,6 +13,5 @@ namespace TimberApi.Common
         public static string Mods { get; } = Environment.GetEnvironmentVariable("TIMBER_API_MODS_PATH") ?? string.Empty;
 
         public static string Configs { get; } = Environment.GetEnvironmentVariable("TIMBER_API_CONFIGS_PATH") ?? string.Empty;
-
     }
 }

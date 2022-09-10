@@ -6,7 +6,7 @@ namespace TimberApi.New.ModSystem
     {
         string Prefix { get; }
 
-        SceneEntrypoint  SceneEntrypoint { get; }
+        SceneEntrypoint SceneEntrypoint { get; }
 
         string Path { get; }
     }

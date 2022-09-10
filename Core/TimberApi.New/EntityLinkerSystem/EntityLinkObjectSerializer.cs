@@ -3,8 +3,8 @@
 namespace TimberApi.New.EntityLinkerSystem
 {
     /// <summary>
-    /// Defines how and instance of EntityLink should be serialized.
-    /// Used when an EntityLinker which contains EntityLinks is saved/loaded
+    ///     Defines how and instance of EntityLink should be serialized.
+    ///     Used when an EntityLinker which contains EntityLinks is saved/loaded
     /// </summary>
     public class EntityLinkObjectSerializer : IObjectSerializer<EntityLink>
     {
@@ -13,8 +13,8 @@ namespace TimberApi.New.EntityLinkerSystem
 
         public virtual Obsoletable<EntityLink> Deserialize(IObjectLoader objectLoader)
         {
-            var linker = objectLoader.Get(LinkerKey);
-            var linkee = objectLoader.Get(LinkeeKey);
+            EntityLinker? linker = objectLoader.Get(LinkerKey);
+            EntityLinker? linkee = objectLoader.Get(LinkeeKey);
             var link = new EntityLink(linker, linkee);
             return link;
         }

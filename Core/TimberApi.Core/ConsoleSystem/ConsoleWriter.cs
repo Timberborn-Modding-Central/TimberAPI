@@ -8,23 +8,13 @@ namespace TimberApi.Core.ConsoleSystem
 {
     internal class ConsoleWriter : IConsoleWriter
     {
-        private readonly IModRepository _modRepository;
-
         private readonly IInternalConsoleWriter _consoleWriter;
+        private readonly IModRepository _modRepository;
 
         public ConsoleWriter(IModRepository modRepository, IInternalConsoleWriter consoleWriter)
         {
             _modRepository = modRepository;
             _consoleWriter = consoleWriter;
-        }
-
-        private void Log(Assembly modAssembly, string message, LogType type, Color? color = null)
-        {
-            if (!_modRepository.TryGetByAssembly(modAssembly, out IMod mod))
-            {
-                return;
-            }
-            _consoleWriter.LogAs(mod.Name, message, type, color);
         }
 
         public void Log(string message, LogType type, Color color)
@@ -55,6 +45,16 @@ namespace TimberApi.Core.ConsoleSystem
         public void LogError(string message)
         {
             Log(Assembly.GetCallingAssembly(), message, LogType.Error);
+        }
+
+        private void Log(Assembly modAssembly, string message, LogType type, Color? color = null)
+        {
+            if (!_modRepository.TryGetByAssembly(modAssembly, out IMod mod))
+            {
+                return;
+            }
+
+            _consoleWriter.LogAs(mod.Name, message, type, color);
         }
     }
 }

@@ -26,7 +26,6 @@ namespace TimberApi.New
             public static string Prefix = "TimberAPI";
 
             public static string Folder = "assets";
-
         }
     }
 }

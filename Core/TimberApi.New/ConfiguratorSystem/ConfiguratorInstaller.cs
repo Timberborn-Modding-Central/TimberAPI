@@ -4,7 +4,7 @@ using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.ConfiguratorSystem
 {
-    public static class ConfiguratorInstaller
+    internal static class ConfiguratorInstaller
     {
         public static void Install(IContainerDefinition containerDefinition, SceneEntrypoint sceneEntrypoint)
         {

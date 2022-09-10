@@ -2,7 +2,7 @@
 
 namespace TimberApi.New.ResourceAssetSystem
 {
-    public class ResourceAssetSystemConfigurator : IConfigurator
+    internal class ResourceAssetSystemConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

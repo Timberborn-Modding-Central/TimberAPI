@@ -5,7 +5,7 @@ using TimberApi.New.ModSystem;
 namespace TimberApi.Core.ModLoaderSystem
 {
     /// <summary>
-    /// https://stackoverflow.com/a/51235189/10082425
+    ///     https://stackoverflow.com/a/51235189/10082425
     /// </summary>
     internal class TopologicalSorter : IModDependencySorter
     {
@@ -19,21 +19,24 @@ namespace TimberApi.Core.ModLoaderSystem
             {
                 stack.Clear();
                 if (visited.Add(t))
+                {
                     stack.Push(new KeyValuePair<IMod, IEnumerator<IMod>>(t, dependencies(t).GetEnumerator()));
+                }
 
                 while (stack.Count > 0)
                 {
-                    var p = stack.Peek();
-                    bool depPushed = false;
+                    KeyValuePair<IMod, IEnumerator<IMod>> p = stack.Peek();
+                    var depPushed = false;
                     while (p.Value.MoveNext())
                     {
-                        var curr = p.Value.Current;
+                        IMod? curr = p.Value.Current;
                         if (visited.Add(curr))
                         {
                             stack.Push(new KeyValuePair<IMod, IEnumerator<IMod>>(curr, dependencies(curr).GetEnumerator()));
                             depPushed = true;
                             break;
                         }
+
                         if (!yielded.Contains(curr))
                         {
                             throw new Exception("cycle");
@@ -44,7 +47,10 @@ namespace TimberApi.Core.ModLoaderSystem
                     {
                         p = stack.Pop();
                         if (!yielded.Add(p.Key))
+                        {
                             throw new Exception("bug");
+                        }
+
                         yield return p.Key;
                     }
                 }

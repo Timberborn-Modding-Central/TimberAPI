@@ -7,15 +7,15 @@ using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.AssetSystem
 {
-    public class AssetFolder
+    internal class AssetFolder
     {
-        private static readonly string[] AllowedExtensions = { "", ".bundle", ".asset" };
+        private static readonly string[] AllowedExtensions = {"", ".bundle", ".asset"};
 
-        public readonly SceneEntrypoint SceneEntrypoint;
+        private readonly Dictionary<string, ModAssetBundle> _assetBundles;
 
         private readonly string _rootFolderPath;
 
-        private readonly Dictionary<string, ModAssetBundle> _assetBundles;
+        public readonly SceneEntrypoint SceneEntrypoint;
 
         public AssetFolder(SceneEntrypoint sceneEntrypoint, string rootFolderPath)
         {
@@ -27,7 +27,7 @@ namespace TimberApi.New.AssetSystem
 
         public ModAssetBundle GetAssetBundleAtPath(string filePath)
         {
-            if(!_assetBundles.TryGetValue(filePath.ToLower(), out ModAssetBundle modAssetBundle))
+            if (!_assetBundles.TryGetValue(filePath.ToLower(), out ModAssetBundle modAssetBundle))
             {
                 throw new AssetFilePathNotFoundException(Path.Combine(_rootFolderPath, filePath));
             }
@@ -53,7 +53,7 @@ namespace TimberApi.New.AssetSystem
 
         private void FillAssetBundleDirectory(string rootFolderPath)
         {
-            if(!Directory.Exists(rootFolderPath))
+            if (!Directory.Exists(rootFolderPath))
             {
                 return;
             }

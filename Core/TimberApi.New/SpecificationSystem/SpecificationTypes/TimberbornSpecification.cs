@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TimberApi.New.SpecificationSystem.SpecificationTypes
 {
-    public class TimberbornSpecification : ISpecification
+    internal class TimberbornSpecification : ISpecification
     {
         public TimberbornSpecification(TextAsset specificationAsset)
         {

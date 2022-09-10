@@ -7,9 +7,8 @@ namespace TimberApi.Core.ModLoaderSystem
 {
     internal class ManualModConsoleWriter : IConsoleWriter
     {
-        private readonly IMod _mod;
-
         private readonly Logger _logger;
+        private readonly IMod _mod;
 
         public ManualModConsoleWriter(Logger logger, IMod mod)
         {

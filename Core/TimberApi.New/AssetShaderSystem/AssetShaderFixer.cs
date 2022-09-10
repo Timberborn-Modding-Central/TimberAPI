@@ -5,11 +5,16 @@ using UnityEngine;
 
 namespace TimberApi.New.AssetShaderSystem
 {
-    public class AssetShaderFixer
+    internal class AssetShaderFixer
     {
         private readonly ImmutableArray<IShaderFixApplier> _shaderFixAppliers;
 
         private Shader _shader = null!;
+
+        public AssetShaderFixer(IEnumerable<IShaderFixApplier> shaderFixAppliers)
+        {
+            _shaderFixAppliers = shaderFixAppliers.ToImmutableArray();
+        }
 
 
         private Shader Shader
@@ -17,14 +22,12 @@ namespace TimberApi.New.AssetShaderSystem
             get
             {
                 if (_shader == null)
+                {
                     _shader = Resources.Load<GameObject>("Buildings/Paths/Platform/Platform.Full.Folktails").GetComponent<MeshRenderer>().materials[0].shader;
+                }
+
                 return _shader;
             }
-        }
-
-        public AssetShaderFixer(IEnumerable<IShaderFixApplier> shaderFixAppliers)
-        {
-            _shaderFixAppliers = shaderFixAppliers.ToImmutableArray();
         }
 
         public void FixShaders(GameObject gameObject)
@@ -39,6 +42,7 @@ namespace TimberApi.New.AssetShaderSystem
                     {
                         ApplyFallbackShaderFix(material);
                     }
+
                     material.renderQueue = matRenderQueue;
                 }
             }

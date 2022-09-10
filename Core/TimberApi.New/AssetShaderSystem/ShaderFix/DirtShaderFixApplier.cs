@@ -2,7 +2,7 @@
 
 namespace TimberApi.New.AssetShaderSystem.ShaderFix
 {
-    public class DirtShaderFixApplier : IShaderFixApplier
+    internal class DirtShaderFixApplier : IShaderFixApplier
     {
         private Shader _dirtShader = null!;
 

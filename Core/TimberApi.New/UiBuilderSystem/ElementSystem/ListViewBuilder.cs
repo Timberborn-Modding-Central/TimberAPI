@@ -11,16 +11,12 @@ namespace TimberApi.New.UiBuilderSystem.ElementSystem
 {
     public class ListViewBuilder : BaseElementBuilder<ListView, ListViewBuilder>, IScrollableBuilder<ListViewBuilder>
     {
-        protected override ListViewBuilder BuilderInstance => this;
-
-        public ListViewBuilder(
-            VisualElementInitializer visualElementInitializer,
-            IAssetLoader assetLoader,
-            UiPresetFactory uiPresetFactory)
-            : base(new ListView(), visualElementInitializer, assetLoader, uiPresetFactory)
+        public ListViewBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) : base(new ListView(), visualElementInitializer,
+            assetLoader, uiPresetFactory)
         {
-            
         }
+
+        protected override ListViewBuilder BuilderInstance => this;
 
         [SuppressMessage("Member Access", "Publicizer001:Accessing a member that was not originally public")]
         public ListViewBuilder ModifyVerticalScroller(Action<Scroller> modifyScroller)
@@ -41,25 +37,25 @@ namespace TimberApi.New.UiBuilderSystem.ElementSystem
             Root.makeItem = visualElement;
             return this;
         }
-        
+
         public ListViewBuilder SetItemSource(IList itemSource)
         {
             Root.itemsSource = itemSource;
             return this;
         }
-        
+
         public ListViewBuilder SetBindItem(Action<VisualElement, int> bindItem)
         {
             Root.bindItem = bindItem;
             return this;
         }
-        
+
         public ListViewBuilder SetSelectionChange(Action<IEnumerable<object>> selectionChange)
         {
             Root.onSelectionChange += selectionChange;
             return this;
         }
-        
+
         public ListViewBuilder SetSelectionType(SelectionType selectionType)
         {
             Root.selectionType = selectionType;
@@ -67,4 +63,3 @@ namespace TimberApi.New.UiBuilderSystem.ElementSystem
         }
     }
 }
-

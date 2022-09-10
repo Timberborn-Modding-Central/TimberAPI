@@ -29,6 +29,9 @@
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
     </ItemGroup>
+    <ItemGroup>
+        <Folder Include="VersionSystem"/>
+    </ItemGroup>
 
     <!--    Used for automaticly transfer dll to Timberborn location, make a symlink `Timberborn` in the solution folder -->
     <PropertyGroup Condition="$(CopyDllToPath) == 'timberapi'">

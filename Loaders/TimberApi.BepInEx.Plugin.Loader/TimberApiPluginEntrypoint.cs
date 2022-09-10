@@ -15,10 +15,8 @@ namespace TimberApi.BepInExPlugin.Loader
 
         public void Awake()
         {
-            new Harmony("TimberApi.BepInExEntry").Patch(
-                original: AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"),
-                prefix: new HarmonyMethod(AccessTools.Method(typeof(TimberApiPluginEntrypoint), nameof(BootstrapperConfiguratorPatch)))
-            );
+            new Harmony("TimberApi.BepInExEntry").Patch(AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"),
+                new HarmonyMethod(AccessTools.Method(typeof(TimberApiPluginEntrypoint), nameof(BootstrapperConfiguratorPatch))));
 
             BepInExStartupLoader.Run(TimberApiRootPath);
         }

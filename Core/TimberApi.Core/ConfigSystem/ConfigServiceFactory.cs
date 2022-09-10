@@ -16,14 +16,14 @@ namespace TimberApi.Core.ConfigSystem
 
         private static readonly string _configExtension = ".json";
 
-        private readonly JsonSerializerSettings _jsonSerializerSettings;
-
         private readonly IInternalConsoleWriter _consoleWriter;
+
+        private readonly JsonSerializerSettings _jsonSerializerSettings;
 
         public ConfigServiceFactory(IInternalConsoleWriter consoleWriter)
         {
             _consoleWriter = consoleWriter;
-            _jsonSerializerSettings = new JsonSerializerSettings()
+            _jsonSerializerSettings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
                 ContractResolver = new ConfigContractResolver()
@@ -36,7 +36,7 @@ namespace TimberApi.Core.ConfigSystem
 
             foreach (Type type in assembly.GetTypesWithInterface<IConfig>()!)
             {
-                var config = (IConfig)Activator.CreateInstance(type);
+                var config = (IConfig) Activator.CreateInstance(type);
 
                 string configFilePath = Path.Combine(configDirectoryPath, _configFolder, config.ConfigFileName + _configExtension);
 
@@ -60,8 +60,11 @@ namespace TimberApi.Core.ConfigSystem
         {
             try
             {
-                if(!Directory.Exists(Path.GetDirectoryName(configFilePath)))
+                if (!Directory.Exists(Path.GetDirectoryName(configFilePath)))
+                {
                     Directory.CreateDirectory(Path.GetDirectoryName(configFilePath)!);
+                }
+
                 File.WriteAllText(configFilePath, JsonConvert.SerializeObject(config));
             }
             catch (Exception e)

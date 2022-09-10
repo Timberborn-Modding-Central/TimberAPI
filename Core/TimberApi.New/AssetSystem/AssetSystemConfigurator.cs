@@ -6,7 +6,7 @@ using TimberApi.New.SceneSystem;
 namespace TimberApi.New.AssetSystem
 {
     [Configurator(SceneEntrypoint.All)]
-    public class AssetSystemConfigurator : IConfigurator
+    internal class AssetSystemConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
@@ -15,7 +15,7 @@ namespace TimberApi.New.AssetSystem
         }
     }
 
-    public class AssetSystemGlobalConfigurator : IConfigurator
+    internal class AssetSystemGlobalConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

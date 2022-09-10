@@ -53,9 +53,8 @@ namespace TimberApi.New.UiBuilderSystem
             public static string BgSquareLarge6 = "tba-bg-square-large-6";
 
             public static string ScrollBar = "tba-scroll-bar";
-            
+
             public static string ScrollButton = "tba-scroll-button";
-            
         }
 
         public static class Scales
@@ -749,30 +748,29 @@ namespace TimberApi.New.UiBuilderSystem
                 }
             }
         }
-        
+
         public static class ListViews
         {
             public static class Selected
             {
                 public static string ScrollTabSelected = "tba-scroll-tab-selected";
-                
+
                 public static string BgPixel1Selected = "tba-bg-pixel-1-selected";
-                
+
                 public static string BgPixel2Selected = "tba-bg-pixel-2-selected";
-                
+
                 public static string BgPixel3Selected = "tba-bg-pixel-3-selected";
             }
-            
+
             public static class Hover
             {
                 public static string ScrollTabHover = "tba-scroll-tab-hover";
 
                 public static string BgPixel1Hover = "tba-bg-pixel-1-hover";
-                
+
                 public static string BgPixel2Hover = "tba-bg-pixel-2-hover";
-                
+
                 public static string BgPixel3Hover = "tba-bg-pixel-3-hover";
-                
             }
         }
     }

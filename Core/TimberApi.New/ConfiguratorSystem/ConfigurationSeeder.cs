@@ -20,7 +20,7 @@ namespace TimberApi.New.ConfiguratorSystem
         }
 
         /// <summary>
-        /// Searches for configurators to fill repository
+        ///     Searches for configurators to fill repository
         /// </summary>
         public void Run()
         {
@@ -32,8 +32,8 @@ namespace TimberApi.New.ConfiguratorSystem
         }
 
         /// <summary>
-        /// Configurator filter based on flag
-        /// Removes duplicated code
+        ///     Configurator filter based on flag
+        ///     Removes duplicated code
         /// </summary>
         /// <param name="configurators">validated configurators</param>
         /// <param name="sceneFlag">Filter based if attribute has set flag</param>
@@ -44,7 +44,7 @@ namespace TimberApi.New.ConfiguratorSystem
         }
 
         /// <summary>
-        /// Creates and validates list of configurators
+        ///     Creates and validates list of configurators
         /// </summary>
         /// <param name="configuratorTypes">Classes with ConfiguratorAttribute</param>
         /// <returns>Validated IConfigurator instances</returns>
@@ -53,28 +53,27 @@ namespace TimberApi.New.ConfiguratorSystem
             return configuratorTypes.Select(type =>
             {
                 ValidateConfiguratorAttributeType(type);
-                return (IConfigurator)Activator.CreateInstance(type);
+                return (IConfigurator) Activator.CreateInstance(type);
             });
         }
 
         /// <summary>
-        /// Validates if the class is a valid class for a `IConfigurator`
-        /// Without validation unexpected errors may occur making it hard to debug
+        ///     Validates if the class is a valid class for a `IConfigurator`
+        ///     Without validation unexpected errors may occur making it hard to debug
         /// </summary>
         /// <param name="configuratorType"></param>
         /// <exception cref="ConfigurationValidationException">Configurator class type</exception>
         private void ValidateConfiguratorAttributeType(Type configuratorType)
         {
-            if(configuratorType.GetInterface(nameof(IConfigurator)) == null)
+            if (configuratorType.GetInterface(nameof(IConfigurator)) == null)
             {
                 throw new ConfigurationValidationException($"{configuratorType.FullName} does not extend `IConfiguration`");
             }
 
-            if(configuratorType.IsAbstract)
+            if (configuratorType.IsAbstract)
             {
                 throw new ConfigurationValidationException($"{configuratorType.FullName} may not be a abstract class");
             }
         }
-
     }
 }

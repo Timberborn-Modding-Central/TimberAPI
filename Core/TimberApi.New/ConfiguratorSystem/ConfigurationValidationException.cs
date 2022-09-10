@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace TimberApi.New.ConfiguratorSystem
 {
-    public class ConfigurationValidationException : Exception
+    internal class ConfigurationValidationException : Exception
     {
         public ConfigurationValidationException()
         {

@@ -10,11 +10,10 @@ using UnityEngine;
 
 namespace TimberApi.New.AssetSystem
 {
-    public class AssetRepository
+    internal class AssetRepository
     {
-        private readonly List<string> _usedAssetRootFolderPaths;
-
         private readonly Dictionary<string, AssetFolder> _modAssets;
+        private readonly List<string> _usedAssetRootFolderPaths;
 
         public AssetRepository()
         {
@@ -50,7 +49,7 @@ namespace TimberApi.New.AssetSystem
             }
             catch (PrefixAlreadyExistsException e)
             {
-                TimberApi.ConsoleWriter.Log($"Failed to add prefix: " + e.Message, LogType.Exception);
+                TimberApi.ConsoleWriter.Log("Failed to add prefix: " + e.Message, LogType.Exception);
                 throw;
             }
             catch (Exception e)

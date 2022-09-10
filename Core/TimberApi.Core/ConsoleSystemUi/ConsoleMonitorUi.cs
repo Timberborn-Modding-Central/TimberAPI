@@ -16,11 +16,11 @@ namespace TimberApi.Core.ConsoleSystemUi
                     left = 0,
                     top = 0,
                     right = 0,
-                    bottom = 0,
+                    bottom = 0
                 }
             };
 
-            var headerWrapper = new VisualElement()
+            var headerWrapper = new VisualElement
             {
                 name = "HeaderWrapper",
                 style =
@@ -28,23 +28,23 @@ namespace TimberApi.Core.ConsoleSystemUi
                     backgroundColor = new Color(0.06f, 0.06f, 0.06f, 0.7f),
                     flexDirection = FlexDirection.Column,
                     justifyContent = Justify.Center,
-                    height = 40,
+                    height = 40
                 }
             };
             headerWrapper.Add(ConsoleHeaderUi.Create());
 
-            var contentWrapper = new VisualElement()
+            var contentWrapper = new VisualElement
             {
                 name = "ContentWrapper",
                 style =
                 {
                     backgroundColor = new Color(0.25f, 0.25f, 0.25f, 0.7f),
-                    flexGrow = 1,
+                    flexGrow = 1
                 }
             };
             contentWrapper.Add(ConsoleLogListView.Create());
 
-            var settingsWrapper = new VisualElement()
+            var settingsWrapper = new VisualElement
             {
                 name = "SettingsWrapper",
                 style =

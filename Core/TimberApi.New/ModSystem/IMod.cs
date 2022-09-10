@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Reflection;
-using TimberApi.Common.VersionSystem;
 using TimberApi.New.ConfigSystem;
+using TimberApi.New.VersionSystem;
 
 namespace TimberApi.New.ModSystem
 {

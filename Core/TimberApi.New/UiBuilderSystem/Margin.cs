@@ -8,7 +8,7 @@ namespace TimberApi.New.UiBuilderSystem
         public Length Right;
         public Length Bottom;
         public Length Left;
-        
+
         public Margin(Length margin)
         {
             Top = margin;
@@ -32,12 +32,14 @@ namespace TimberApi.New.UiBuilderSystem
             Bottom = bottom;
             Left = left;
         }
-        
-        public static implicit operator Margin(int value) {
+
+        public static implicit operator Margin(int value)
+        {
             return new Margin(value);
         }
-        
-        public static implicit operator Margin(Length value) {
+
+        public static implicit operator Margin(Length value)
+        {
             return new Margin(value);
         }
     }

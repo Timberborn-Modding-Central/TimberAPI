@@ -1,6 +1,6 @@
 namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
 {
-    public class GolemFactionSpecification
+    internal class GolemFactionSpecification
     {
         public GolemFactionSpecification(string factionId, string golemId)
         {
@@ -9,7 +9,7 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
         }
 
         public string FactionId { get; set; }
-        
+
         public string GolemId { get; set; }
     }
 }

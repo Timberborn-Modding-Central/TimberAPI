@@ -3,7 +3,7 @@ using TimberApi.New.SpecificationSystem.SpecificationTypes;
 
 namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
 {
-    public class GolemSpecificationGenerator : ISpecificationGenerator
+    internal class GolemSpecificationGenerator : ISpecificationGenerator
     {
         private static readonly string SpecificationName = "GolemFactionSpecification";
 

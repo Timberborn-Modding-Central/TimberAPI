@@ -6,7 +6,7 @@ using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.AssetSystem
 {
-    public class AssetRepositorySeeder : ITimberApiSeeder
+    internal class AssetRepositorySeeder : ITimberApiSeeder
     {
         private readonly AssetRepository _assetRepository;
 

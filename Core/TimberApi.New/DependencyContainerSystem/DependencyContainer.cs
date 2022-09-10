@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Bindito.Core;
 
 namespace TimberApi.New.DependencyContainerSystem
 {
     public static class DependencyContainer
     {
-        internal static Bindito.Core.IContainer Container = null!;
+        internal static IContainer Container = null!;
 
         public static T GetInstance<T>()
         {

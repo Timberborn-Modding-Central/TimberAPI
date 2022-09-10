@@ -19,7 +19,7 @@ namespace TimberApi.Doorstop.Loader
             "Mono.Cecil.Pdb.dll",
             "Mono.Cecil.Rocks.dll",
             "MonoMod.RuntimeDetour.dll",
-            "MonoMod.Utils.dll",
+            "MonoMod.Utils.dll"
         };
 
         public DoorstopLoader(string timberApiRootPath, string modsPath) : base(LoaderType, timberApiRootPath, modsPath, LibraryDlls)
@@ -31,10 +31,8 @@ namespace TimberApi.Doorstop.Loader
         {
             new DoorstopLoader(timberApiRootPath, modsPath).StartLoader();
 
-            var hook = new Hook(
-                typeof(GameStartLogger).GetMethod("GetModdingInfo", BindingFlags.Static | BindingFlags.NonPublic),
-                typeof(DoorstopLoader).GetMethod(nameof(GetModdingInfoHook), BindingFlags.Static | BindingFlags.NonPublic)
-            );
+            var hook = new Hook(typeof(GameStartLogger).GetMethod("GetModdingInfo", BindingFlags.Static | BindingFlags.NonPublic),
+                typeof(DoorstopLoader).GetMethod(nameof(GetModdingInfoHook), BindingFlags.Static | BindingFlags.NonPublic));
         }
 
         private static string GetModdingInfoHook()

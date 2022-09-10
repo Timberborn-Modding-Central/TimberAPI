@@ -3,7 +3,7 @@
 namespace TimberApi.Common.SingletonSystem
 {
     /// <summary>
-    /// Replicate from: Timberborn SingletonSystem
+    ///     Replicate from: Timberborn SingletonSystem
     /// </summary>
     public interface ISingletonRepository
     {

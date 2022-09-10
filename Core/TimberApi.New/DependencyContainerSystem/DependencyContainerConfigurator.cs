@@ -5,7 +5,7 @@ using TimberApi.New.SceneSystem;
 namespace TimberApi.New.DependencyContainerSystem
 {
     [Configurator(SceneEntrypoint.All)]
-    public class DependencyContainerConfigurator : IConfigurator
+    internal class DependencyContainerConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

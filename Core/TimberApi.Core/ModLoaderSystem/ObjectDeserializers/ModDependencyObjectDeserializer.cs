@@ -1,6 +1,7 @@
-﻿using TimberApi.Common.Extensions;
-using TimberApi.Common.VersionSystem;
+﻿using System;
+using TimberApi.Common.Extensions;
 using Timberborn.Persistence;
+using Version = TimberApi.New.VersionSystem.Version;
 
 namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
 {
@@ -8,7 +9,6 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
     {
         public void Serialize(ModDependency value, IObjectSaver objectSaver)
         {
-            throw new System.NotImplementedException();
         }
 
         public Obsoletable<ModDependency> Deserialize(IObjectLoader objectLoader)

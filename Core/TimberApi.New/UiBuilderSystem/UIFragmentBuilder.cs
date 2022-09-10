@@ -13,7 +13,7 @@ namespace TimberApi.New.UiBuilderSystem
         private string _backgroundClass;
 
         private string _scale;
-        
+
         public UIFragmentBuilder(ComponentBuilder componentBuilder)
         {
             _wrapper = componentBuilder.CreateVisualElement();
@@ -21,13 +21,13 @@ namespace TimberApi.New.UiBuilderSystem
             _scale = TimberApiStyle.Scales.Scale5;
             _wrapper.SetPadding(new Padding(new Length(12, Pixel), new Length(8, Pixel)));
         }
-        
+
         public UIFragmentBuilder SetBackground(string className)
         {
             _backgroundClass = className;
             return this;
         }
-        
+
         public UIFragmentBuilder SetScale(string scaleClass)
         {
             _scale = scaleClass;
@@ -51,7 +51,7 @@ namespace TimberApi.New.UiBuilderSystem
             _wrapper.AddPreset(presetFactory);
             return this;
         }
-        
+
         public UIFragmentBuilder ModifyWrapper(Action<VisualElementBuilder> builder)
         {
             builder.Invoke(_wrapper);

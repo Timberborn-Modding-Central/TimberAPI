@@ -1,8 +1,9 @@
 ﻿using TimberApi.Common.SingletonSystem.Singletons;
+using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.AssetSystem
 {
-    public class AssetSceneLoader : ITimberApiLoadableSingleton
+    internal class AssetSceneLoader : ITimberApiLoadableSingleton
     {
         private readonly AssetBundleLoader _assetBundleLoader;
 
@@ -13,11 +14,12 @@ namespace TimberApi.New.AssetSystem
 
         public void Load()
         {
-            // if (ConfiguratorPatcher.PreviousScene != 0)
-            // {
-            //     _assetBundleLoader.UnloadAll(ConfiguratorPatcher.PreviousScene);
-            // }
-            // _assetBundleLoader.LoadAll(ConfiguratorPatcher.CurrentScene);
+            if (TimberApiSceneManager.PreviousScene != 0)
+            {
+                _assetBundleLoader.UnloadAll(TimberApiSceneManager.PreviousScene);
+            }
+
+            _assetBundleLoader.LoadAll(TimberApiSceneManager.CurrentScene);
         }
     }
 }

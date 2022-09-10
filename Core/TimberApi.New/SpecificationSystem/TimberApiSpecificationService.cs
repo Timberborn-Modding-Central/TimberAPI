@@ -6,13 +6,12 @@ using Timberborn.WorldSerialization;
 
 namespace TimberApi.New.SpecificationSystem
 {
-    public class TimberApiSpecificationService : ISpecificationService
+    internal class TimberApiSpecificationService : ISpecificationService
     {
-        private readonly SpecificationRepository _specificationRepository;
-
         private readonly JsonMergeSettings _jsonMergeSettings;
 
         private readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
+        private readonly SpecificationRepository _specificationRepository;
 
         public TimberApiSpecificationService(ObjectSaveReaderWriter objectSaveReaderWriter, SpecificationRepository specificationRepository)
         {
@@ -26,13 +25,14 @@ namespace TimberApi.New.SpecificationSystem
 
         public IEnumerable<T> GetSpecifications<T>(IObjectSerializer<T> serializer)
         {
-            string specificationType = typeof (T).Name;
+            string specificationType = typeof(T).Name;
             IEnumerable<ISpecification> typeSpecification = _specificationRepository.GetBySpecification(specificationType).ToArray();
 
 
             foreach (ISpecification originalSpecification in typeSpecification.Where(specification => specification.IsOriginal))
             {
-                IEnumerable<ISpecification> mergeSpecifications = typeSpecification.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName));
+                IEnumerable<ISpecification> mergeSpecifications =
+                    typeSpecification.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName));
                 string mergedJson = Wrap(MergeSpecifications(originalSpecification, mergeSpecifications), specificationType);
                 yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJson(mergedJson)).Get(new PropertyKey<T>(specificationType), serializer);
             }
@@ -50,6 +50,9 @@ namespace TimberApi.New.SpecificationSystem
             return mergeSpecifications.Aggregate(json, MergeSpecification).ToString();
         }
 
-        private static string Wrap(string assetText, string type) => "{\"" + type + "\":" + assetText + "}";
+        private static string Wrap(string assetText, string type)
+        {
+            return "{\"" + type + "\":" + assetText + "}";
+        }
     }
 }

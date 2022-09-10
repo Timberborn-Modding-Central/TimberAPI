@@ -2,7 +2,7 @@
 
 namespace TimberApi.New.AssetShaderSystem.ShaderFix
 {
-    public class PathShaderFixApplier : IShaderFixApplier
+    internal class PathShaderFixApplier : IShaderFixApplier
     {
         private Shader _pathShader = null!;
 

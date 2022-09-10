@@ -7,17 +7,17 @@ using Timberborn.SingletonSystem;
 
 namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
 {
-    public class GolemFactionService : ILoadableSingleton
+    internal class GolemFactionService : ILoadableSingleton
     {
-        private readonly GolemFactionSpecificationObjectDeserializer _golemFactionSpecificationObjectDeserializer;
-
         private readonly FactionSpecificationService _factionSpecificationService;
+        private readonly GolemFactionSpecificationObjectDeserializer _golemFactionSpecificationObjectDeserializer;
 
         private readonly ISpecificationService _specificationService;
 
         private ImmutableArray<GolemFactionSpecification> _golemFactions;
 
-        public GolemFactionService(FactionService factionService, ISpecificationService specificationService, FactionSpecificationService factionSpecificationService, GolemFactionSpecificationObjectDeserializer golemFactionSpecificationObjectDeserializer)
+        public GolemFactionService(FactionService factionService, ISpecificationService specificationService, FactionSpecificationService factionSpecificationService,
+            GolemFactionSpecificationObjectDeserializer golemFactionSpecificationObjectDeserializer)
         {
             _specificationService = specificationService;
             _factionSpecificationService = factionSpecificationService;
@@ -33,7 +33,9 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
         {
             GolemFactionSpecification? golemFactionSpecification = _golemFactions.FirstOrDefault(specification => specification.FactionId.Equals(factionId));
             if (golemFactionSpecification != null)
+            {
                 return golemFactionSpecification.GolemId;
+            }
 
             TimberApi.ConsoleWriter.Log("Golems for faction " + factionId + " doesn't exists, falling back to " + _factionSpecificationService.StartingFaction.Id);
             return _factionSpecificationService.StartingFaction.Id;

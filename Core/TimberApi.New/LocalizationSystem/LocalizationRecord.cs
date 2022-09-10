@@ -3,9 +3,9 @@ using LINQtoCSV;
 namespace TimberApi.New.LocalizationSystem
 {
     /// <summary>
-    /// Timberborn code Timberborn.Localization.LocalizationRecord
+    ///     Timberborn code Timberborn.Localization.LocalizationRecord
     /// </summary>
-    public class LocalizationRecord
+    internal class LocalizationRecord
     {
         [CsvColumn(Name = "ID")]
         public string Id { get; set; } = null!;

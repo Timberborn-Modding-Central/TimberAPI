@@ -6,7 +6,7 @@ using TimberApi.New.SceneSystem;
 namespace TimberApi.New.AssetShaderSystem
 {
     [Configurator(SceneEntrypoint.InGame | SceneEntrypoint.MapEditor)]
-    public class ShaderFixSystemConfigurator : IConfigurator
+    internal class ShaderFixSystemConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
@@ -16,7 +16,7 @@ namespace TimberApi.New.AssetShaderSystem
     }
 
     [Configurator(SceneEntrypoint.All)]
-    public class ShaderSystemConfigurator : IConfigurator
+    internal class ShaderSystemConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

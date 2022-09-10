@@ -8,7 +8,7 @@ namespace TimberApi.Common.Helpers
     public static class FileService
     {
         /// <summary>
-        /// Gets files that are filtered with multiple extensions
+        ///     Gets files that are filtered with multiple extensions
         /// </summary>
         public static IEnumerable<string> GetFiles(string path, string searchPattern, string[] allowedExtensions, SearchOption searchOption = SearchOption.AllDirectories)
         {
@@ -16,7 +16,7 @@ namespace TimberApi.Common.Helpers
         }
 
         /// <summary>
-        /// Gets files from an array of base paths that are filtered with multiple extensions
+        ///     Gets files from an array of base paths that are filtered with multiple extensions
         /// </summary>
         public static IEnumerable<string> GetFiles(IEnumerable<string> paths, string searchPattern, string[] allowedExtensions, SearchOption searchOption = SearchOption.AllDirectories)
         {
@@ -24,7 +24,7 @@ namespace TimberApi.Common.Helpers
         }
 
         /// <summary>
-        /// Base use of `Directory.GetFiles`
+        ///     Base use of `Directory.GetFiles`
         /// </summary>
         public static IEnumerable<string> GetFiles(string path, string searchPattern, SearchOption searchOption = SearchOption.AllDirectories)
         {
@@ -32,7 +32,7 @@ namespace TimberApi.Common.Helpers
         }
 
         /// <summary>
-        /// Gets files from an array of base paths, with default `Directory.GetFiles` parameters
+        ///     Gets files from an array of base paths, with default `Directory.GetFiles` parameters
         /// </summary>
         public static IEnumerable<string> GetFiles(IEnumerable<string> paths, string searchPattern, SearchOption searchOption = SearchOption.AllDirectories)
         {

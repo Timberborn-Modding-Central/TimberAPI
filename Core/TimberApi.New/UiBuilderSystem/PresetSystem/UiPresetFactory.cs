@@ -4,17 +4,17 @@ namespace TimberApi.New.UiBuilderSystem.PresetSystem
     {
         private readonly ButtonPresetFactory _buttonPresetFactory;
 
-        private readonly TogglePresetFactory _togglePresetFactory;
-
-        private readonly ScrollPresetFactory _scrollPresetFactory;
-        
         private readonly LabelPresetFactory _labelPresetFactory;
-        
-        private readonly SliderPresetFactory _sliderPresetFactory;
-        
-        private readonly TextFieldPresetFactory _textFieldPresetFactory;
 
         private readonly ListViewPresetFactory _listViewPresetFactory;
+
+        private readonly ScrollPresetFactory _scrollPresetFactory;
+
+        private readonly SliderPresetFactory _sliderPresetFactory;
+
+        private readonly TextFieldPresetFactory _textFieldPresetFactory;
+
+        private readonly TogglePresetFactory _togglePresetFactory;
 
         public UiPresetFactory(ComponentBuilder componentBuilder)
         {
@@ -26,37 +26,37 @@ namespace TimberApi.New.UiBuilderSystem.PresetSystem
             _sliderPresetFactory = new SliderPresetFactory(componentBuilder);
             _scrollPresetFactory = new ScrollPresetFactory(componentBuilder);
         }
-        
+
         public ButtonPresetFactory Buttons()
         {
             return _buttonPresetFactory;
         }
-        
+
         public TogglePresetFactory Toggles()
         {
             return _togglePresetFactory;
         }
-        
+
         public ScrollPresetFactory ScrollViews()
         {
             return _scrollPresetFactory;
         }
-        
+
         public LabelPresetFactory Labels()
         {
             return _labelPresetFactory;
         }
-        
+
         public SliderPresetFactory Sliders()
         {
             return _sliderPresetFactory;
         }
-        
+
         public TextFieldPresetFactory TextFields()
         {
             return _textFieldPresetFactory;
         }
-        
+
         public ListViewPresetFactory ListViews()
         {
             return _listViewPresetFactory;

@@ -7,15 +7,14 @@ using LocalizableButton = TimberApi.New.UiBuilderSystem.CustomElements.Localizab
 
 namespace TimberApi.New.UiBuilderSystem.ElementSystem
 {
-    public class ButtonBuilder : BaseElementBuilder<CustomElements.LocalizableButton, ButtonBuilder>, ITextElementBuilder<ButtonBuilder>
+    public class ButtonBuilder : BaseElementBuilder<LocalizableButton, ButtonBuilder>, ITextElementBuilder<ButtonBuilder>
     {
-        protected override ButtonBuilder BuilderInstance => this;
-        
-        public ButtonBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) 
-            : base(new LocalizableButton(), visualElementInitializer, assetLoader, uiPresetFactory)
+        public ButtonBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) : base(new LocalizableButton(), visualElementInitializer,
+            assetLoader, uiPresetFactory)
         {
-            
         }
+
+        protected override ButtonBuilder BuilderInstance => this;
 
         public ButtonBuilder SetText(string text)
         {
@@ -28,19 +27,19 @@ namespace TimberApi.New.UiBuilderSystem.ElementSystem
             Root.TextLocKey = key;
             return this;
         }
-        
+
         public ButtonBuilder SetColor(StyleColor color)
         {
             Root.style.color = color;
             return this;
         }
-        
+
         public ButtonBuilder SetFontSize(Length size)
         {
             Root.style.fontSize = size;
             return this;
         }
-        
+
         public ButtonBuilder SetFontStyle(FontStyle style)
         {
             Root.style.unityFontStyleAndWeight = style;

@@ -9,11 +9,11 @@ using UnityEngine;
 namespace TimberApi.New.EntityLinkerSystem
 {
     /// <summary>
-    /// Defines the behaviour of Linkers. TimberAPI adds an instance of Entitylinker to
-    /// all Building entities. EntityLinker is used to create new EntityLinks between two entities.
-    /// If you want to create a new Link between EntityLinkers, use the CreateLink() method.
-    /// If can be called in code or you could for example create an in game button
-    /// which can make the call.
+    ///     Defines the behaviour of Linkers. TimberAPI adds an instance of Entitylinker to
+    ///     all Building entities. EntityLinker is used to create new EntityLinks between two entities.
+    ///     If you want to create a new Link between EntityLinkers, use the CreateLink() method.
+    ///     If can be called in code or you could for example create an in game button
+    ///     which can make the call.
     /// </summary>
     public class EntityLinker : MonoBehaviour, IFinishedStateListener, IPersistentEntity
     {
@@ -22,16 +22,9 @@ namespace TimberApi.New.EntityLinkerSystem
         protected static readonly ListKey<EntityLink> EntityLinksKey = new(nameof(EntityLinks));
 
         private readonly List<EntityLink> _entityLinks = new();
-        public IReadOnlyCollection<EntityLink> EntityLinks { get; private set; } = null!;
 
         private EntityLinkObjectSerializer _entityLinkObjectSerializer = null!;
-
-
-        [Inject]
-        public void InjectDependencies(EntityLinkObjectSerializer entityLinkObjectSerializer)
-        {
-            _entityLinkObjectSerializer = entityLinkObjectSerializer;
-        }
+        public IReadOnlyCollection<EntityLink> EntityLinks { get; private set; } = null!;
 
 
         public virtual void Awake()
@@ -39,8 +32,21 @@ namespace TimberApi.New.EntityLinkerSystem
             EntityLinks = _entityLinks.AsReadOnly();
         }
 
+        public virtual void OnEnterFinishedState()
+        {
+            //Nothing to do here?
+        }
+
         /// <summary>
-        /// Save existing Links
+        ///     When entity is deleted, remove all links
+        /// </summary>
+        public virtual void OnExitFinishedState()
+        {
+            RemoveAllLinks();
+        }
+
+        /// <summary>
+        ///     Save existing Links
         /// </summary>
         /// <param name="entitySaver"></param>
         public virtual void Save(IEntitySaver entitySaver)
@@ -50,7 +56,7 @@ namespace TimberApi.New.EntityLinkerSystem
         }
 
         /// <summary>
-        /// Load saves Links
+        ///     Load saves Links
         /// </summary>
         /// <param name="entityLoader"></param>
         public virtual void Load(IEntityLoader entityLoader)
@@ -59,54 +65,52 @@ namespace TimberApi.New.EntityLinkerSystem
             {
                 return;
             }
+
             IObjectLoader component = entityLoader.GetComponent(EntityLinkerKey);
             if (component.Has(EntityLinksKey))
             {
-                var links = component.Get(EntityLinksKey, _entityLinkObjectSerializer);
+                List<EntityLink>? links = component.Get(EntityLinksKey, _entityLinkObjectSerializer);
                 if (links == null)
                 {
                     return;
                 }
-                var linkerLinks = links.Where(x => x.Linker == this).ToList(); 
-                foreach (var link in linkerLinks)
+
+                List<EntityLink> linkerLinks = links.Where(x => x.Linker == this).ToList();
+                foreach (EntityLink? link in linkerLinks)
                 {
                     AddLinkInLinkee(link);
                 }
+
                 _entityLinks.AddRange(linkerLinks);
             }
         }
 
-        public virtual void OnEnterFinishedState()
+
+        [Inject]
+        public void InjectDependencies(EntityLinkObjectSerializer entityLinkObjectSerializer)
         {
-            //Nothing to do here?
+            _entityLinkObjectSerializer = entityLinkObjectSerializer;
         }
 
         /// <summary>
-        /// When entity is deleted, remove all links
-        /// </summary>
-        public virtual void OnExitFinishedState()
-        {
-            RemoveAllLinks();
-        }
-
-        /// <summary>
-        /// Creates a new link where this in the Linker
+        ///     Creates a new link where this in the Linker
         /// </summary>
         /// <param name="linkee"></param>
         public virtual void CreateLink(EntityLinker linkee)
         {
-            if(linkee == this)
+            if (linkee == this)
             {
                 TimberApi.ConsoleWriter.Log("Tried to link entity with itself. Stopped linking.", LogType.Warning);
                 return;
             }
+
             var link = new EntityLink(this, linkee);
             AddLink(link);
             AddLinkInLinkee(link);
         }
 
         /// <summary>
-        /// Adds a new Link where this is the Linkee
+        ///     Adds a new Link where this is the Linkee
         /// </summary>
         /// <param name="link"></param>
         public virtual void AddLink(EntityLink link)
@@ -115,7 +119,7 @@ namespace TimberApi.New.EntityLinkerSystem
         }
 
         /// <summary>
-        /// Add the Link on the Linkee
+        ///     Add the Link on the Linkee
         /// </summary>
         /// <param name="link"></param>
         private void AddLinkInLinkee(EntityLink link)
@@ -124,7 +128,7 @@ namespace TimberApi.New.EntityLinkerSystem
         }
 
         /// <summary>
-        /// Deletes a Link and calls to remove the Link from the Linkee
+        ///     Deletes a Link and calls to remove the Link from the Linkee
         /// </summary>
         /// <param name="link"></param>
         /// <exception cref="InvalidOperationException"></exception>
@@ -134,12 +138,13 @@ namespace TimberApi.New.EntityLinkerSystem
             {
                 throw new InvalidOperationException($"Couldn't remove {link} from {this}, it wasn't added.");
             }
+
             DeleteLinkFromLinkee(link);
         }
 
 
         /// <summary>
-        /// Removes the Link from Linkee too
+        ///     Removes the Link from Linkee too
         /// </summary>
         /// <param name="link"></param>
         private void DeleteLinkFromLinkee(EntityLink link)
@@ -148,7 +153,7 @@ namespace TimberApi.New.EntityLinkerSystem
         }
 
         /// <summary>
-        /// Removes a Link from the list
+        ///     Removes a Link from the list
         /// </summary>
         /// <param name="link"></param>
         public virtual void RemoveLink(EntityLink link)
@@ -157,13 +162,13 @@ namespace TimberApi.New.EntityLinkerSystem
         }
 
         /// <summary>
-        /// Remvoes all existing Links
+        ///     Remvoes all existing Links
         /// </summary>
         public virtual void RemoveAllLinks()
         {
-            foreach (var link in EntityLinks)
+            foreach (EntityLink? link in EntityLinks)
             {
-                if(link.Linker == this)
+                if (link.Linker == this)
                 {
                     link.Linkee.RemoveLink(link);
                 }
@@ -172,6 +177,7 @@ namespace TimberApi.New.EntityLinkerSystem
                     link.Linker.RemoveLink(link);
                 }
             }
+
             _entityLinks.Clear();
         }
     }

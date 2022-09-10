@@ -4,7 +4,7 @@ using TimberApi.New.SceneSystem;
 
 namespace TimberApi.New.AssetSystem
 {
-    public class AssetBundleLoader
+    internal class AssetBundleLoader
     {
         private readonly AssetRepository _assetRepository;
 
@@ -19,6 +19,7 @@ namespace TimberApi.New.AssetSystem
             {
                 throw new PrefixNotFoundException(prefix);
             }
+
             assetFolder.Load();
             TimberApi.ConsoleWriter.Log($"Assets of prefix:{prefix} loaded");
         }
@@ -41,9 +42,9 @@ namespace TimberApi.New.AssetSystem
             {
                 throw new PrefixNotFoundException(prefix);
             }
+
             assetFolder.Unload();
             TimberApi.ConsoleWriter.Log($"Assets of prefix:{prefix} unloaded");
-
         }
 
         public void UnloadAll(SceneEntrypoint sceneEntrypoint)
@@ -53,6 +54,7 @@ namespace TimberApi.New.AssetSystem
             {
                 assetFolder.Unload();
             }
+
             TimberApi.ConsoleWriter.Log($"Assets unloaded for {sceneEntrypoint}");
         }
     }

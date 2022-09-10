@@ -7,18 +7,6 @@ namespace TimberApi.SharedLoader
 {
     public class BaseStartupLoader
     {
-        private readonly string _timberApiPath;
-
-        private readonly string _timberApiLogsPath;
-
-        private readonly string _timberApiCorePath;
-
-        private readonly string _timberApiModsPath;
-
-        private readonly string _timberApiConfigsPath;
-
-        private readonly string _timberApiLoaderType;
-
         private const string CoreDll = "TimberApi.Core.dll";
 
         private readonly string[] _libraryDlls =
@@ -26,6 +14,17 @@ namespace TimberApi.SharedLoader
             "TimberApi.Common.dll",
             "TimberApi.New.dll"
         };
+
+        private readonly string _timberApiConfigsPath;
+
+        private readonly string _timberApiCorePath;
+
+        private readonly string _timberApiLoaderType;
+
+        private readonly string _timberApiLogsPath;
+
+        private readonly string _timberApiModsPath;
+        private readonly string _timberApiPath;
 
         public BaseStartupLoader(string loaderType, string timberApiRootPath, string modsPath, string[]? libraryDlls = null)
         {
@@ -35,7 +34,7 @@ namespace TimberApi.SharedLoader
             _timberApiLogsPath = Path.Combine(timberApiRootPath, "logs");
             _timberApiCorePath = Path.Combine(timberApiRootPath, "core");
             _timberApiConfigsPath = Path.Combine(timberApiRootPath, "configs");
-            if(libraryDlls != null)
+            if (libraryDlls != null)
             {
                 _libraryDlls = _libraryDlls.AddRangeToArray(libraryDlls);
             }
@@ -46,7 +45,7 @@ namespace TimberApi.SharedLoader
             try
             {
                 SetTimberApiPathEnvironmentVariables();
-                EnsurePathsExists(_timberApiPath, _timberApiLogsPath, _timberApiCorePath, _timberApiModsPath, _timberApiConfigsPath);
+                EnsurePathsExists(_timberApiPath, _timberApiLogsPath, _timberApiCorePath, _timberApiModsPath);
                 LoadLibraries();
             }
             catch (Exception e)

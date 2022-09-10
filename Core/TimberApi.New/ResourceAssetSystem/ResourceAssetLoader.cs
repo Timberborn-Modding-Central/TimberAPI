@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TimberApi.New.ResourceAssetSystem
 {
-    public class ResourceAssetLoader : IResourceAssetLoader
+    internal class ResourceAssetLoader : IResourceAssetLoader
     {
         private readonly IAssetLoader _assetLoader;
 
@@ -20,7 +20,8 @@ namespace TimberApi.New.ResourceAssetSystem
 
         public T[] LoadAll<T>(string path) where T : Object
         {
-            return Resources.LoadAll<T>(path) ?? _assetLoader.LoadAll<T>(path);;
+            return Resources.LoadAll<T>(path) ?? _assetLoader.LoadAll<T>(path);
+            ;
         }
     }
 }

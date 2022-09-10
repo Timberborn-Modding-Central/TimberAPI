@@ -6,7 +6,7 @@ namespace TimberApi.Common.Extensions
     {
         public static T CreateInstance<T>(this Type type)
         {
-            return (T)Activator.CreateInstance(type);
+            return (T) Activator.CreateInstance(type);
         }
     }
 }

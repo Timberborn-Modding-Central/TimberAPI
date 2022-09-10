@@ -15,10 +15,7 @@ namespace TimberApi.Core.BootstrapSystem
             {
                 var harmony = new Harmony("TimberApi.bootstrapper");
 
-                harmony.Patch(
-                    original: AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"),
-                    prefix: new HarmonyMethod(AccessTools.Method(typeof(BootstrapPatch), nameof(BootstrapperConfiguratorPatch)))
-                );
+                harmony.Patch(AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"), new HarmonyMethod(AccessTools.Method(typeof(BootstrapPatch), nameof(BootstrapperConfiguratorPatch))));
             }
             catch (Exception e)
             {
@@ -28,7 +25,7 @@ namespace TimberApi.Core.BootstrapSystem
         }
 
         /// <summary>
-        /// Prefixes bootstrapper to install itself into bindito
+        ///     Prefixes bootstrapper to install itself into bindito
         /// </summary>
         /// <param name="containerDefinition"></param>
         private static void BootstrapperConfiguratorPatch(IContainerDefinition containerDefinition)

@@ -6,13 +6,13 @@ namespace TimberApi.Core.ConsoleSystemUi
     {
         public static VisualElement Create()
         {
-            return new TextElement()
+            return new TextElement
             {
                 pickingMode = PickingMode.Ignore,
                 style =
                 {
                     textOverflow = TextOverflow.Ellipsis,
-                    fontSize = 21,
+                    fontSize = 21
                 }
             };
         }

@@ -5,7 +5,7 @@ using TimberApi.New.SceneSystem;
 namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
 {
     [Configurator(SceneEntrypoint.InGame)]
-    public class GolemFactionConfigurator : IConfigurator
+    internal class GolemFactionConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
@@ -15,7 +15,7 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Golems
         }
     }
 
-    public class GolemFactionPatchConfigurator : IConfigurator
+    internal class GolemFactionPatchConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
