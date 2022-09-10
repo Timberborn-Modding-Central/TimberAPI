@@ -34,7 +34,7 @@ namespace TimberApi.Core.ConfigSystem
         {
             List<IConfig> configs = new();
 
-            foreach (Type type in assembly.GetTypesWithInterface<IConfig>()!)
+            foreach (Type type in assembly.GetTypesWithInterface<IConfig>())
             {
                 var config = (IConfig) Activator.CreateInstance(type);
 
