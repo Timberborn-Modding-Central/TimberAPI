@@ -1,6 +1,7 @@
 ﻿using Bindito.Core;
 using TimberApi.New.AssetSystem;
 using TimberApi.New.ConfiguratorSystem;
+using TimberApi.New.LocalizationSystem;
 using TimberApi.New.ResourceAssetSystem;
 using TimberApi.New.SceneSystem;
 using TimberApi.New.SpecificationSystem;
@@ -19,6 +20,7 @@ namespace TimberApi.New
             containerDefinition.Install(new SpecificationGlobalConfigurator());
             containerDefinition.Install(new GolemFactionPatchConfigurator());
             containerDefinition.Install(new ResourceAssetSystemConfigurator());
+            containerDefinition.Install(new LocalizationConfigurator());
         }
     }
 }
