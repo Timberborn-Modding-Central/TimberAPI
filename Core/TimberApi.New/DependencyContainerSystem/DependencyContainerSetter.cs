@@ -1,6 +1,6 @@
 ﻿using Bindito.Core;
 
-namespace TimberApi.New.DependencyContainer
+namespace TimberApi.New.DependencyContainerSystem
 {
     public class DependencyContainerSetter
     {

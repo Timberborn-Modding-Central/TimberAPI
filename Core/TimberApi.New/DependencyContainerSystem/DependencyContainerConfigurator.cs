@@ -2,7 +2,7 @@
 using TimberApi.New.ConfiguratorSystem;
 using TimberApi.New.SceneSystem;
 
-namespace TimberApi.New.DependencyContainer
+namespace TimberApi.New.DependencyContainerSystem
 {
     [Configurator(SceneEntrypoint.All)]
     public class DependencyContainerConfigurator : IConfigurator

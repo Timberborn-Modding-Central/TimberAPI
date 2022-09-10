@@ -33,7 +33,7 @@ namespace TimberApi.Core.BootstrapSystem
         /// <param name="containerDefinition"></param>
         private static void BootstrapperConfiguratorPatch(IContainerDefinition containerDefinition)
         {
-            // containerDefinition.Install(TimberApiBootstrapSystemConfigurator.Instance);
+            containerDefinition.Install(TimberApiBootstrapSystemConfigurator.Instance);
         }
     }
 }

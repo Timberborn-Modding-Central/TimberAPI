@@ -1,4 +1,5 @@
 ﻿using Bindito.Core;
+using TimberApi.New.ConfigSystem;
 
 namespace TimberApi.Core.ConfigSystem
 {
@@ -6,7 +7,7 @@ namespace TimberApi.Core.ConfigSystem
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Bind<ConfigServiceFactory>().AsSingleton();
+            containerDefinition.Bind<IConfigServiceFactory>().To<ConfigServiceFactory>().AsSingleton();
         }
     }
 }

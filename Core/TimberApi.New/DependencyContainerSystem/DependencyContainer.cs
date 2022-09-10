@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TimberApi.New.DependencyContainer
+namespace TimberApi.New.DependencyContainerSystem
 {
     public static class DependencyContainer
     {

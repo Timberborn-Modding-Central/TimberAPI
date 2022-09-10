@@ -11,6 +11,7 @@ using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem.Exceptions;
 using TimberApi.Core.ModLoaderSystem.ObjectDeserializers;
+using TimberApi.New.ConfigSystem;
 using TimberApi.New.ModSystem;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
@@ -31,7 +32,7 @@ namespace TimberApi.Core.ModLoaderSystem
 
         private readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
 
-        private readonly ConfigServiceFactory _configServiceFactory;
+        private readonly IConfigServiceFactory _configServiceFactory;
 
         private readonly Logger _logger;
 
@@ -39,7 +40,7 @@ namespace TimberApi.Core.ModLoaderSystem
 
         public ImmutableArray<IMod> LoadedMods;
 
-        public ModLoader(IInternalConsoleWriter consoleWriter, ModObjectDeserializer modObjectDeserializer, ObjectSaveReaderWriter objectSaveReaderWriter, Logger logger, IModDependencySorter dependencySorter, ConfigServiceFactory configServiceFactory)
+        public ModLoader(IInternalConsoleWriter consoleWriter, ModObjectDeserializer modObjectDeserializer, ObjectSaveReaderWriter objectSaveReaderWriter, Logger logger, IModDependencySorter dependencySorter, IConfigServiceFactory configServiceFactory)
         {
             _consoleWriter = consoleWriter;
             _modObjectDeserializer = modObjectDeserializer;
@@ -51,6 +52,7 @@ namespace TimberApi.Core.ModLoaderSystem
 
         public void Run()
         {
+            _consoleWriter.Log("AAAAAAAAAAAAAAAAAAAA");
             var stopwatch = Stopwatch.StartNew();
             _consoleWriter.Log("Mod loading started");
             string[] modFilePaths = GetModFilePaths();

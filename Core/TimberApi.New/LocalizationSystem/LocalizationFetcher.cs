@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using LINQtoCSV;
+using TimberApi.New.DependencyContainerSystem;
 using TimberApi.New.ModSystem;
 using Timberborn.Localization;
 using UnityEngine;
@@ -87,7 +88,7 @@ namespace TimberApi.New.LocalizationSystem
         private static List<string> GetLocalizationFilePathsFromDependencies(string localizationKey)
         {
             List<string> localizationFilePaths = new List<string>();
-            foreach (IMod mod in TimberApi.Container.GetInstance<IModRepository>().All())
+            foreach (IMod mod in DependencyContainer.GetInstance<IModRepository>().All())
             {
                 string pluginLocalizationPath = Path.Combine(mod.DirectoryPath, mod.LanguagePath);
                 (bool hasLocalization, string localizationName) = LocalizationNameOrDefault(pluginLocalizationPath, localizationKey);
