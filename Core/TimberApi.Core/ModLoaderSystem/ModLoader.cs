@@ -292,7 +292,7 @@ namespace TimberApi.Core.ModLoaderSystem
             {
                 try
                 {
-                    if (uniqueMod.MinimumApiVersion >= Versions.TimberApiVersion)
+                    if (uniqueMod.MinimumApiVersion > Versions.TimberApiVersion)
                     {
                         _consoleWriter.LogAs(uniqueMod.Name, $"Skipped: Minimum TimberAPI version required: {uniqueMod.MinimumApiVersion}, current TimberAPI version: {Versions.TimberApiVersion}",
                             LogType.Warning);
@@ -394,7 +394,7 @@ namespace TimberApi.Core.ModLoaderSystem
             return Directory.GetDirectories(Paths.Mods).Select(modDirectory => Path.Combine(modDirectory, ModFileName)).Where(File.Exists).ToArray();
         }
 
-        private static string Wrap(string assetText, string type)
+        private static string Wrap(string type, string assetText)
         {
             return "{\"" + type + "\":" + assetText + "}";
         }
