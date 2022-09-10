@@ -20,6 +20,7 @@ namespace TimberApi.Core.ConsoleSystemUi
             actionBox.Add(tagSearchWrapper);
 
             actionBox.Add(new Button() {name = "CopyFullLogButton", text = "Copy log", style = {width = 200, height = 40, fontSize = 25, color = Color.white}});
+            actionBox.Add(new Button() {name = "CopySelectionButton", text = "Copy selection", style = {width = 200, height = 40, fontSize = 25, color = Color.white}});
 
             header.Add(actionBox);
             header.Add(settingsBox);

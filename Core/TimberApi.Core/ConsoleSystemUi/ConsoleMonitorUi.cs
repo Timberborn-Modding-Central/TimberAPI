@@ -39,10 +39,10 @@ namespace TimberApi.Core.ConsoleSystemUi
                 style =
                 {
                     backgroundColor = new Color(0.25f, 0.25f, 0.25f, 0.7f),
-                    flexGrow = 1
+                    flexGrow = 1,
                 }
             };
-            contentWrapper.Add(new ScrollView() { name = "LogScrollView", verticalScrollerVisibility = ScrollerVisibility.AlwaysVisible});
+            contentWrapper.Add(ConsoleLogListView.Create());
 
             var settingsWrapper = new VisualElement()
             {

@@ -1,21 +1,18 @@
-﻿using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine.UIElements;
 
 namespace TimberApi.Core.ConsoleSystemUi
 {
     internal static class ConsoleLogItemUi
     {
-        public static TextElement Create(string text, Color color)
+        public static VisualElement Create()
         {
             return new TextElement()
             {
                 pickingMode = PickingMode.Ignore,
-                text = text,
                 style =
                 {
                     textOverflow = TextOverflow.Ellipsis,
-                    fontSize = 23,
-                    color = color
+                    fontSize = 21,
                 }
             };
         }

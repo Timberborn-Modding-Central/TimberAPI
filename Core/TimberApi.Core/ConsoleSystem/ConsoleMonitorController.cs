@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TimberApi.Core.ConsoleSystemUi;
+using System.Linq;
 using Timberborn.CoreUI;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,13 +8,13 @@ namespace TimberApi.Core.ConsoleSystem
 {
     internal class ConsoleMonitorController
     {
-        private readonly List<string> _logHistory;
+        private readonly List<LogItem> _logHistory;
 
         private bool _isConsoleVisible = true;
 
         private readonly VisualElement _root;
 
-        private readonly ScrollView _logScrollView;
+        private readonly ListView _logLogListView;
 
         private readonly VisualElement _settingsWrapper;
 
@@ -23,23 +23,53 @@ namespace TimberApi.Core.ConsoleSystem
         private readonly List<VisualElement> _pickingModeElements;
 
         private string? _latestMessage;
-        private TextElement? _latestMessageElement;
-        private uint _latestMessageRepeat;
+        private uint _latestMessageRepeatAmount;
 
         private string? _secondLatestMessage;
-        private TextElement? _secondLatestMessageElement;
-        private uint _secondLatestMessageRepeat;
+        private uint _secondLatestMessageRepeatAmount;
 
         public ConsoleMonitorController(VisualElement root)
         {
-            _logHistory = new List<string>();
             _root = root;
-            _settingsWrapper = _root.Q<VisualElement>("SettingsWrapper");
-            _logScrollView = _root.Q<ScrollView>("LogScrollView");
+            _logHistory = new List<LogItem>();
             _pickingModeElements = new List<VisualElement>();
+
+            _settingsWrapper = _root.Q<VisualElement>("SettingsWrapper");
+            _logLogListView = _root.Q<ListView>("LogListView");
+
+            SetupListView();
             SetClickThroughElements();
             InitializeEvents();
             SetDefaults();
+        }
+
+        /// <summary>
+        /// Listview requirements
+        /// Adding item and clearing them after adding the source is to remove the list is empty without needing to rebuild the whole list every message
+        /// </summary>
+        private void SetupListView()
+        {
+            _logHistory.Add(new LogItem("Fake", Color.black));
+            _logLogListView.itemsSource = _logHistory;
+            _logLogListView.bindItem = BindItem;
+            _logLogListView.onSelectionChange += LogLogListViewOnonSelectionChanged;
+            _logHistory.Clear();
+        }
+
+        private void LogLogListViewOnonSelectionChanged(IEnumerable<object> obj)
+        {
+            TextElement[] textElements = _logLogListView.Query<TextElement>().Build().ToArray();
+            for (int i = 0; i < textElements.Length; i++)
+            {
+                textElements[i].style.backgroundColor = _logLogListView.selectedIndices.Contains(i) ? new Color(0f, 0f, 0f, 0.39f) : Color.clear;
+            }
+        }
+
+        private void BindItem(VisualElement label, int logItemIndex)
+        {
+            LogItem logItem = _logHistory[logItemIndex];
+            (label as TextElement)!.text = logItem.Text;
+            (label as TextElement)!.style.color = logItem.Color;
         }
 
         public void ToggleConsole()
@@ -55,8 +85,7 @@ namespace TimberApi.Core.ConsoleSystem
         }
 
         /// <summary>
-        /// Making the console click through is a mess
-        /// All elements that should not block the click should be listed here
+        /// Provide all elements that should be click through, used to show the console while still able to click in game
         /// </summary>
         private void SetClickThroughElements()
         {
@@ -66,15 +95,17 @@ namespace TimberApi.Core.ConsoleSystem
             _pickingModeElements.Add(_root.Q<VisualElement>("SettingsWrapper"));
 
             // Scroll view
-            _pickingModeElements.Add(_logScrollView);
-            _pickingModeElements.Add(_logScrollView.contentContainer);
-            _pickingModeElements.Add(_logScrollView.Q("unity-content-and-vertical-scroll-container"));
+            _pickingModeElements.Add(_logLogListView);
+            _pickingModeElements.Add(_logLogListView.Q<ScrollView>());
+            _pickingModeElements.Add(_logLogListView.Q<ScrollView>().contentContainer);
+            _pickingModeElements.Add(_logLogListView.Q("unity-content-and-vertical-scroll-container"));
         }
 
         private void InitializeEvents()
         {
             _root.Q<Button>("SettingsButton").clicked += OnSettingsButtonClick;
             _root.Q<Button>("CopyFullLogButton").clicked += OnCopyFullLogButtonClick;
+            _root.Q<Button>("CopySelectionButton").clicked += OnCopySelectionButtonClick;
             _root.Q<Toggle>("ClickThroughToggle").RegisterValueChangedCallback(OnSeeTroughValidateValue);
         }
 
@@ -93,6 +124,11 @@ namespace TimberApi.Core.ConsoleSystem
             GUIUtility.systemCopyBuffer = string.Join("\n", _logHistory);
         }
 
+        private void OnCopySelectionButtonClick()
+        {
+            GUIUtility.systemCopyBuffer = string.Join("\n", _logLogListView.selectedItems.Select(item => ((LogItem)item).Text));
+        }
+
         private void OnSettingsButtonClick()
         {
             _isSettingVisible = !_isSettingVisible;
@@ -107,38 +143,47 @@ namespace TimberApi.Core.ConsoleSystem
                 return;
             }
 
-            TextElement newItem = ConsoleLogItemUi.Create(text, color);
+            var logItem = new LogItem(text, color);
 
             _secondLatestMessage = _latestMessage;
-            _secondLatestMessageElement = _latestMessageElement;
-            _secondLatestMessageRepeat = 0;
+            _secondLatestMessageRepeatAmount = 1;
 
             _latestMessage = text;
-            _latestMessageElement = newItem;
-            _latestMessageRepeat = 0;
+            _latestMessageRepeatAmount = 1;
 
-            _logHistory.Add(text);
-            _logScrollView.Add(newItem);
-            _logScrollView.verticalScroller.value = _logScrollView.verticalScroller.highValue > 0 ? _logScrollView.verticalScroller.highValue : 0;
+            _logHistory.Add(logItem);
         }
 
         public bool TryMergeRepeatedMessage(string message)
         {
             if (_latestMessage != null && _latestMessage.Equals(message))
             {
-                _latestMessageElement!.text = $"[Repeat: {_latestMessageRepeat}] " + message;
-                _latestMessageRepeat++;
+                _logHistory.Last().Text = $"[Repeat: {_latestMessageRepeatAmount}] " + message;
+                _latestMessageRepeatAmount++;
                 return true;
             }
 
             if (_secondLatestMessage != null && _secondLatestMessage.Equals(message))
             {
-                _secondLatestMessageElement!.text = $"[Repeat: {_secondLatestMessageRepeat}] " + message;
-                _secondLatestMessageRepeat++;
+                _logHistory[^1].Text = $"[Repeat: {_secondLatestMessageRepeatAmount}] " + message;
+                _secondLatestMessageRepeatAmount++;
                 return true;
             }
 
             return false;
+        }
+
+        private class LogItem
+        {
+            public LogItem(string text, Color color)
+            {
+                Text = text;
+                Color = color;
+            }
+
+            public string Text { get; set; }
+
+            public Color Color { get; }
         }
     }
 }

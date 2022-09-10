@@ -2,7 +2,7 @@
 
 namespace TimberApi.New.ConfigSystem
 {
-    public interface IConfigServiceFactory
+    internal interface IConfigServiceFactory
     {
         IConfigService CreateWithAssemblyConfigs(Assembly assembly, string configDirectoryPath, string consoleTag);
     }
