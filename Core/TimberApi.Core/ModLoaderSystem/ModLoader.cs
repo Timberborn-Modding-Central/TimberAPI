@@ -16,6 +16,7 @@ using TimberApi.New.ModSystem;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 using Logger = TimberApi.Core.LoggingSystem.Logger;
 
 namespace TimberApi.Core.ModLoaderSystem
@@ -25,6 +26,8 @@ namespace TimberApi.Core.ModLoaderSystem
         private static readonly string ObjectSaveReaderWriterType = "Mod";
 
         private static readonly string ModFileName = "mod.json";
+
+        private static readonly SearchOption _searchOption = Environment.GetEnvironmentVariable("TIMBER_LOADER_TYPE") == "BepInEx" ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
         private readonly IConfigServiceFactory _configServiceFactory;
 
@@ -387,11 +390,11 @@ namespace TimberApi.Core.ModLoaderSystem
         }
 
         /// <summary>
-        ///     Searches for mod.json files inside any subdirectory in mods
+        ///     Searches for mod.json files inside any subdirectory in the mods fodler
         /// </summary>
         private static string[] GetModFilePaths()
         {
-            return Directory.GetDirectories(Paths.Mods).Select(modDirectory => Path.Combine(modDirectory, ModFileName)).Where(File.Exists).ToArray();
+            return Directory.GetFiles(Paths.Mods, ModFileName, _searchOption);
         }
 
         private static string Wrap(string type, string assetText)

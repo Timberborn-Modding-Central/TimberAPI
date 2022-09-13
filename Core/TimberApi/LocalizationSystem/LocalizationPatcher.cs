@@ -9,7 +9,6 @@ using UnityEngine;
 
 namespace TimberApi.New.LocalizationSystem
 {
-    [HarmonyPatch]
     internal class LocalizationPatcher : ITimberApiLoadableSingleton
     {
         public void Load()

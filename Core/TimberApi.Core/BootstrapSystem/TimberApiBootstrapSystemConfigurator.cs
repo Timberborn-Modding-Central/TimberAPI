@@ -42,7 +42,7 @@ namespace TimberApi.Core.BootstrapSystem
             // Start runner
             containerDefinition.Bind<TimberApiCoreRunner>().AsSingleton();
 
-            // TimberAPI.New Initialization
+            // TimberAPI Initialization
             containerDefinition.Bind<ISingletonRepository>().To<SingletonRepository>().AsSingleton();
             var instance = new SingletonListener();
             containerDefinition.Bind<SingletonListener>().ToInstance(instance);
