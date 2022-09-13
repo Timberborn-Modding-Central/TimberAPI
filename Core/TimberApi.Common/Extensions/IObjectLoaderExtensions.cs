@@ -77,5 +77,30 @@ namespace TimberApi.Common.Extensions
         {
             return !objectLoader.Has(key) ? new List<T>() : objectLoader.Get(key, serializer);
         }
+
+        public static List<int> GetValueOrEmpty(this IObjectLoader objectLoader, ListKey<int> key)
+        {
+            return !objectLoader.Has(key) ? new List<int>() : objectLoader.Get(key);
+        }
+
+        public static List<float> GetValueOrEmpty(this IObjectLoader objectLoader, ListKey<float> key)
+        {
+            return !objectLoader.Has(key) ? new List<float>() : objectLoader.Get(key);
+        }
+
+        public static List<bool> GetValueOrEmpty(this IObjectLoader objectLoader, ListKey<bool> key)
+        {
+            return !objectLoader.Has(key) ? new List<bool>() : objectLoader.Get(key);
+        }
+
+        public static List<string> GetValueOrEmpty(this IObjectLoader objectLoader, ListKey<string> key)
+        {
+            return !objectLoader.Has(key) ? new List<string>() : objectLoader.Get(key);
+        }
+
+        public static List<char> GetValueOrEmpty(this IObjectLoader objectLoader, ListKey<char> key)
+        {
+            return !objectLoader.Has(key) ? new List<char>() : objectLoader.Get(key);
+        }
     }
 }
