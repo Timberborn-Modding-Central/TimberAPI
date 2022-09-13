@@ -8,7 +8,7 @@ using Timberborn.MechanicalSystem;
 using Timberborn.SingletonSystem;
 using Timberborn.Workshops;
 
-namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
+namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
     public class BuildingChanger : ILoadableSingleton
     {
