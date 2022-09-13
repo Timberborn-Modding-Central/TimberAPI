@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using LINQtoCSV;
-using TimberApi.New.DependencyContainerSystem;
-using TimberApi.New.ModSystem;
+using TimberApi.DependencyContainerSystem;
+using TimberApi.ModSystem;
 using Timberborn.Localization;
 using UnityEngine;
 
-namespace TimberApi.New.LocalizationSystem
+namespace TimberApi.LocalizationSystem
 {
     internal static class LocalizationFetcher
     {

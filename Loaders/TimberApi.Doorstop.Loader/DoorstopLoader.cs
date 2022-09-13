@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using MonoMod.RuntimeDetour;
-using TimberApi.SharedLoader;
+using TimberApi.BepInExPlugin.Loader;
 using Timberborn.Core;
 
 namespace TimberApi.Doorstop.Loader

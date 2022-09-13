@@ -14,20 +14,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\TimberApi.Common\TimberApi.Common.csproj"/>
-        <ProjectReference Include="..\TimberApi.New\TimberApi.New.csproj"/>
+        <ProjectReference Include="..\TimberApi.Common\TimberApi.Common.csproj" />
+        <ProjectReference Include="..\TimberApi\TimberApi.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="GriffinPlus.Lib.FastActivator" Version="1.1.0"/>
-        <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701"/>
-        <PackageReference Include="MonoMod.RuntimeDetour" Version="21.12.13.1"/>
-        <PackageReference Include="MonoMod.Utils" Version="22.5.1.1"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
-        <PackageReference Include="System.Collections.Immutable" Version="6.0.0"/>
-        <PackageReference Include="Unity.InputSystem" Version="1.5.0"/>
-        <PackageReference Include="UnityEngine.Modules" Version="2022.1.6"/>
-        <PackageReference Include="Timberborn.GameLibs" Version="2022.8.4-r.0" Condition="$(UseLocalTimberbornSource) == false"/>
+        <PackageReference Include="GriffinPlus.Lib.FastActivator" Version="1.1.0" />
+        <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701" />
+        <PackageReference Include="MonoMod.RuntimeDetour" Version="21.12.13.1" />
+        <PackageReference Include="MonoMod.Utils" Version="22.5.1.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+        <PackageReference Include="Unity.InputSystem" Version="1.5.0" />
+        <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" />
+        <PackageReference Include="Timberborn.GameLibs" Version="2022.8.4-r.0" Condition="$(UseLocalTimberbornSource) == false" />
     </ItemGroup>
 
     <!--    Import dll's from Timberborn's symlink in solution folder-->
@@ -50,7 +50,7 @@
     </PropertyGroup>
 
     <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath) != 'none'">
-        <Message Text="### Copy TimberApi common ###" Importance="high"/>
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core"/>
+        <Message Text="### Copy TimberApi common ###" Importance="high" />
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core" />
     </Target>
 </Project>

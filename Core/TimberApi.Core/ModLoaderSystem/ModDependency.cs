@@ -1,5 +1,5 @@
-﻿using TimberApi.New.ModSystem;
-using TimberApi.New.VersionSystem;
+﻿using TimberApi.ModSystem;
+using TimberApi.VersionSystem;
 
 namespace TimberApi.Core.ModLoaderSystem
 {

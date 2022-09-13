@@ -7,7 +7,7 @@ using UnityEngine;
 
 // ReSharper disable InconsistentNaming
 
-namespace TimberApi.New.LocalizationSystem
+namespace TimberApi.LocalizationSystem
 {
     internal class LocalizationPatcher : ITimberApiLoadableSingleton
     {

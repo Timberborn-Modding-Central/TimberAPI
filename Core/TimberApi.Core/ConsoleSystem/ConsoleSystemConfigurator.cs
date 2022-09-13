@@ -3,7 +3,7 @@ using Bindito.Unity;
 using TimberApi.Common.ConsoleSystem;
 using TimberApi.Common.Helpers;
 using TimberApi.Common.LoggingSystem;
-using TimberApi.New.ConsoleSystem;
+using TimberApi.ConsoleSystem;
 using Timberborn.InputSystem;
 using UnityEngine;
 using UnityEngine.UIElements;

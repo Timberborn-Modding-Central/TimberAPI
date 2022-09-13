@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using TimberApi.Common.ConsoleSystem;
 using TimberApi.Common.Extensions;
-using TimberApi.New.SceneSystem;
+using TimberApi.SceneSystem;
 using Timberborn.Persistence;
 
 namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers

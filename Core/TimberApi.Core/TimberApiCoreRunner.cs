@@ -1,9 +1,8 @@
 ﻿using System;
 using TimberApi.Common;
 using TimberApi.Common.ConsoleSystem;
+using TimberApi.ConfigSystem;
 using TimberApi.Core.ModLoaderSystem;
-using TimberApi.New;
-using TimberApi.New.ConfigSystem;
 using UnityEngine;
 
 namespace TimberApi.Core

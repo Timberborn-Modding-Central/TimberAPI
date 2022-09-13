@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TimberApi.New.ModSystem;
+using TimberApi.ModSystem;
 
 namespace TimberApi.Core.ModLoaderSystem
 {

@@ -1,6 +1,5 @@
 ﻿using TimberApi.Core.BootstrapSystem;
 using TimberApi.Core.CompatibilitySystem;
-using TimberApi.New;
 using UnityEngine;
 
 namespace TimberApi.Core

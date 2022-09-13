@@ -1,5 +1,4 @@
 ﻿using BepInEx;
-using TimberApi.SharedLoader;
 
 namespace TimberApi.BepInExPlugin.Loader
 {

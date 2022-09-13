@@ -1,5 +1,5 @@
 ﻿using Bindito.Core;
-using TimberApi.New.ConfigSystem;
+using TimberApi.ConfigSystem;
 
 namespace TimberApi.Core.ConfigSystem
 {

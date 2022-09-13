@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using TimberApi.Common.Extensions;
-using TimberApi.New.ModSystem;
-using TimberApi.New.VersionSystem;
+using TimberApi.ModSystem;
+using TimberApi.VersionSystem;
 using Timberborn.Persistence;
 
 namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers

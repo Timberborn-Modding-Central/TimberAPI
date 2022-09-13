@@ -1,4 +1,4 @@
-﻿namespace TimberApi.SharedLoader
+﻿namespace TimberApi.BepInExPlugin.Loader
 {
     public static class EnvironmentVariable
     {

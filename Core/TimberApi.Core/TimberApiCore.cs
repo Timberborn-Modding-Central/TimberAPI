@@ -1,4 +1,4 @@
-﻿using TimberApi.New.ConfigSystem;
+﻿using TimberApi.ConfigSystem;
 
 namespace TimberApi.Core
 {

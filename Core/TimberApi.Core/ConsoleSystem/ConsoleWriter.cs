@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using TimberApi.Common.ConsoleSystem;
-using TimberApi.New.ConsoleSystem;
-using TimberApi.New.ModSystem;
+using TimberApi.ConsoleSystem;
+using TimberApi.ModSystem;
 using UnityEngine;
 
 namespace TimberApi.Core.ConsoleSystem

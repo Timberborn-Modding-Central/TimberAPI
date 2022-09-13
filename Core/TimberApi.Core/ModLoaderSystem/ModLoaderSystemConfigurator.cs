@@ -2,7 +2,7 @@
 using Bindito.Unity;
 using TimberApi.Common.Helpers;
 using TimberApi.Core.ModLoaderSystem.ObjectDeserializers;
-using TimberApi.New.ModSystem;
+using TimberApi.ModSystem;
 using Timberborn.WorldSerialization;
 using UnityEngine;
 

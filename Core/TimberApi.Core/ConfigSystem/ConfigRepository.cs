@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TimberApi.New.ConfigSystem;
+using TimberApi.ConfigSystem;
 
 namespace TimberApi.Core.ConfigSystem
 {

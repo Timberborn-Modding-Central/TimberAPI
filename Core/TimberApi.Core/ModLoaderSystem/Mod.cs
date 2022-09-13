@@ -2,9 +2,9 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
-using TimberApi.New.ConfigSystem;
-using TimberApi.New.ModSystem;
-using TimberApi.New.VersionSystem;
+using TimberApi.ConfigSystem;
+using TimberApi.ModSystem;
+using TimberApi.VersionSystem;
 
 namespace TimberApi.Core.ModLoaderSystem
 {

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
-using TimberApi.Doorstop.Loader;
 
-namespace Doorstop
+namespace TimberApi.Doorstop.Loader
 {
     internal class Entrypoint
     {

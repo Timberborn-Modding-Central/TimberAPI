@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using HarmonyLib;
 
-namespace TimberApi.SharedLoader
+namespace TimberApi.BepInExPlugin.Loader
 {
     public class BaseStartupLoader
     {
@@ -12,7 +12,7 @@ namespace TimberApi.SharedLoader
         private readonly string[] _libraryDlls =
         {
             "TimberApi.Common.dll",
-            "TimberApi.New.dll"
+            "TimberApi.dll"
         };
 
         private readonly string _timberApiConfigsPath;

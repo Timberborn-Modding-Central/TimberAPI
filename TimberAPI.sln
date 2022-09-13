@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.810.11
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberAPIExample", "old\TimberAPIExample\TimberAPIExample.csproj", "{018FC7B7-A51D-4078-95FD-6419BF3C7FCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.New", "Core\TimberApi.New\TimberApi.New.csproj", "{465DE2B9-3531-4592-B158-837FEDC35D16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi", "Core\TimberApi\TimberApi.csproj", "{465DE2B9-3531-4592-B158-837FEDC35D16}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Loaders", "Loaders", "{D914C445-F4DC-415F-94F1-C0B4E89D8157}"
 EndProject

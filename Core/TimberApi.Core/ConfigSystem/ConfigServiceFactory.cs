@@ -5,7 +5,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using TimberApi.Common.ConsoleSystem;
 using TimberApi.Common.Extensions;
-using TimberApi.New.ConfigSystem;
+using TimberApi.ConfigSystem;
 using UnityEngine;
 
 namespace TimberApi.Core.ConfigSystem

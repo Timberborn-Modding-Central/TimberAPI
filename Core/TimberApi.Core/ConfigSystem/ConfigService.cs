@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TimberApi.Common.ConsoleSystem;
-using TimberApi.New.ConfigSystem;
+using TimberApi.ConfigSystem;
 using UnityEngine;
 
 namespace TimberApi.Core.ConfigSystem

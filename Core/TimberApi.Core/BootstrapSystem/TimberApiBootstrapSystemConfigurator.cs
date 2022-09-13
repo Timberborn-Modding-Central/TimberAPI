@@ -8,7 +8,6 @@ using TimberApi.Core.ConfigSystem;
 using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem;
-using TimberApi.New;
 
 namespace TimberApi.Core.BootstrapSystem
 {

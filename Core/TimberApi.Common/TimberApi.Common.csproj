@@ -13,11 +13,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Unity.InputSystem" Version="1.5.0"/>
-        <PackageReference Include="UnityEngine.Modules" Version="2022.1.6"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
-        <PackageReference Include="System.Collections.Immutable" Version="6.0.0"/>
-        <PackageReference Include="Timberborn.GameLibs" Version="2022.8.4-r.0" Condition="$(UseLocalTimberbornSource) == false"/>
+        <PackageReference Include="Unity.InputSystem" Version="1.5.0" />
+        <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+        <PackageReference Include="Timberborn.GameLibs" Version="2022.8.4-r.0" Condition="$(UseLocalTimberbornSource) == false" />
     </ItemGroup>
 
     <!--    Import dll's from Timberborn's symlink in solution folder-->
@@ -28,9 +28,6 @@
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="VersionSystem"/>
     </ItemGroup>
 
     <!--    Used for automaticly transfer dll to Timberborn location, make a symlink `Timberborn` in the solution folder -->
@@ -43,7 +40,7 @@
     </PropertyGroup>
 
     <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath) != 'none'">
-        <Message Text="### Copy TimberApi common ###" Importance="high"/>
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core"/>
+        <Message Text="### Copy TimberApi common ###" Importance="high" />
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core" />
     </Target>
 </Project>
