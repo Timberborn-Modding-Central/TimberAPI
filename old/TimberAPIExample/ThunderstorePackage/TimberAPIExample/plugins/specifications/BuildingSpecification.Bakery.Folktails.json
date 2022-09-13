@@ -1,0 +1,27 @@
+{
+	"Building": {
+		"ScienceCost": 9999,
+		"BuildingCost": [
+			{
+				"GoodId": "Log",
+				"Amount": 99
+			},
+			{
+				"GoodId": "Plank",
+				"Amount": 99
+			},
+			{
+				"GoodId": "Gear",
+				"Amount": 99
+			}
+		]
+	},
+	"Recipes": [
+		{
+			"RecipeId": "Explosives"
+		},
+		{
+			"RecipeId": "Water"
+		}
+	]
+}

@@ -1,0 +1,34 @@
+{
+	"Recipes": [
+		{
+			"RecipeId": "GrilledPotato"
+		},
+		{
+			"RecipeId": "GrilledChestnut"
+		},
+		{
+			"RecipeId": "GrilledSpadderdock"
+		},
+		{
+			"RecipeId": "Bread"
+		},
+		{
+			"RecipeId": "Plank"
+		},
+		{
+			"RecipeId": "Water"
+		},
+		{
+			"RecipeId": "Book"
+		},
+		{
+			"RecipeId": "CattailCracker"
+		},
+		{
+			"RecipeId": "Explosives"
+		},
+		{
+			"RecipeId": "ForbiddenTech"
+		}
+	]
+}
