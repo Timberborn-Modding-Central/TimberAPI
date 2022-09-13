@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
+using Timberborn.Buildings;
 using Timberborn.EntitySystem;
 using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
@@ -7,7 +8,7 @@ using Timberborn.SingletonSystem;
 namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
 {
     /// <summary>
-    /// This service fetches BuildingSpecifications
+    ///     This service fetches BuildingSpecifications
     /// </summary>
     public class BuildingSpecificationService : ILoadableSingleton
     {
@@ -24,14 +25,14 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
         }
 
         /// <summary>
-        /// Fetches all BuildingSpecifications on load and stores them
+        ///     Fetches all BuildingSpecifications on load and stores them
         /// </summary>
         public void Load()
         {
             _buildingSpecifications = _specificationService.GetSpecifications(_buildingRecipeSpecificationObjectDeserializer).ToImmutableArray();
         }
 
-        public BuildingSpecification? GetBuildingSpecificationByBuilding(Timberborn.Buildings.Building building)
+        public BuildingSpecification? GetBuildingSpecificationByBuilding(Building building)
         {
             var prefab = building.GetComponent<Prefab>();
             string prefabName = prefab.PrefabName.ToLower();

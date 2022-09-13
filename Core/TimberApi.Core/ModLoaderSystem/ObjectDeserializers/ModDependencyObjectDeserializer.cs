@@ -1,7 +1,6 @@
-﻿using System;
-using TimberApi.Common.Extensions;
+﻿using TimberApi.Common.Extensions;
+using TimberApi.New.VersionSystem;
 using Timberborn.Persistence;
-using Version = TimberApi.New.VersionSystem.Version;
 
 namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
 {

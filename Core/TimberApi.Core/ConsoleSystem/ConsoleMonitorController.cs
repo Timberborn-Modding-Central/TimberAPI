@@ -18,7 +18,7 @@ namespace TimberApi.Core.ConsoleSystem
 
         private readonly VisualElement _settingsWrapper;
 
-        private bool _isConsoleVisible = false;
+        private bool _isConsoleVisible;
 
         private bool _isSettingVisible;
 

@@ -9,8 +9,10 @@ These specifications provide a workaround to certain features to improve the mod
 **Why:** GolemId is hardcode to the factionId
 
 ## Building Specifications
+
 Building Specifications are custom specification that enable changing some things on existing buildings.
 The changeable things are:
+
 * Buildings costs
 * Recipes
 * Power input/output values

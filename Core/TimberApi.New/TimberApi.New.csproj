@@ -53,7 +53,7 @@
     </PropertyGroup>
 
     <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath) != 'none'">
-        <Message Text="### Copy TimberApi common ###" Importance="high" />
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core" />
+        <Message Text="### Copy TimberApi common ###" Importance="high"/>
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core"/>
     </Target>
 </Project>

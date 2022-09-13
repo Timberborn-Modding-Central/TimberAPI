@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TimberApi.Common.Extensions;
+using Timberborn.Buildings;
 using Timberborn.EntitySystem;
 using Timberborn.Goods;
 using Timberborn.MechanicalSystem;
@@ -11,9 +12,8 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
 {
     public class BuildingChanger : ILoadableSingleton
     {
-        private readonly ObjectCollectionService _objectCollectionService;
-
         private readonly BuildingSpecificationService _buildingSpecificationService;
+        private readonly ObjectCollectionService _objectCollectionService;
 
         public BuildingChanger(ObjectCollectionService objectCollectionService, BuildingSpecificationService buildingSpecificationService)
         {
@@ -23,7 +23,7 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
 
         public void Load()
         {
-            foreach (Timberborn.Buildings.Building building in _objectCollectionService.GetAllMonoBehaviours<Timberborn.Buildings.Building>())
+            foreach (Building building in _objectCollectionService.GetAllMonoBehaviours<Building>())
             {
                 BuildingSpecification? buildingSpecification = _buildingSpecificationService.GetBuildingSpecificationByBuilding(building);
 
@@ -64,7 +64,7 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
             manufactory.SetPrivateInstanceFieldValue("_productionRecipeIds", buildingSpecification.RecipeIds.Distinct().ToArray());
         }
 
-        private static void ChangeBuildingProperties(Timberborn.Buildings.Building building, BuildingSpecification buildingSpecification)
+        private static void ChangeBuildingProperties(Building building, BuildingSpecification buildingSpecification)
         {
             if (buildingSpecification.ScienceCost != null)
             {

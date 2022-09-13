@@ -7,19 +7,18 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
 {
     public class BuildingSpecificationDeserializer : IObjectSerializer<BuildingSpecification>
     {
-        private readonly PropertyKey<string> _buildingIdKey = new PropertyKey<string>("BuildingId");
-
-        private readonly PropertyKey<int> _scienceCostKey = new PropertyKey<int>("ScienceCost");
-
-        private readonly PropertyKey<int> _powerInputKey = new PropertyKey<int>("PowerInput");
-
-        private readonly PropertyKey<int> _powerOutputKey = new PropertyKey<int>("PowerOutput");
-
-        private readonly ListKey<string> _recipeIdsKey = new ListKey<string>("RecipeIds");
-
-        private readonly ListKey<BuildingCost> _buildingCosts = new ListKey<BuildingCost>("BuildingCosts");
-
         private readonly BuildingCostDeserializer _buildingCostDeserializer;
+
+        private readonly ListKey<BuildingCost> _buildingCosts = new("BuildingCosts");
+        private readonly PropertyKey<string> _buildingIdKey = new("BuildingId");
+
+        private readonly PropertyKey<int> _powerInputKey = new("PowerInput");
+
+        private readonly PropertyKey<int> _powerOutputKey = new("PowerOutput");
+
+        private readonly ListKey<string> _recipeIdsKey = new("RecipeIds");
+
+        private readonly PropertyKey<int> _scienceCostKey = new("ScienceCost");
 
         public BuildingSpecificationDeserializer(BuildingCostDeserializer buildingCostDeserializer)
         {
@@ -27,7 +26,7 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
         }
 
         /// <summary>
-        /// This class only deserializes specification jsons, so this is not used
+        ///     This class only deserializes specification jsons, so this is not used
         /// </summary>
         /// <param name="value"></param>
         /// <param name="objectSaver"></param>

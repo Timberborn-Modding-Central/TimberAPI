@@ -1,8 +1,8 @@
 ﻿namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
 {
     /// <summary>
-    /// Stripped version of Timberborn.Goods.GoodAmountSpecification.
-    /// Only contains relevant fields
+    ///     Stripped version of Timberborn.Goods.GoodAmountSpecification.
+    ///     Only contains relevant fields
     /// </summary>
     public class BuildingCost
     {

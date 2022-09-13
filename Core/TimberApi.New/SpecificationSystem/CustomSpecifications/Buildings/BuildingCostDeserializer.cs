@@ -5,11 +5,11 @@ namespace TimberApi.New.SpecificationSystem.CustomSpecifications.Buildings
 {
     public class BuildingCostDeserializer : IObjectSerializer<BuildingCost>
     {
-        private readonly PropertyKey<string> _goodIdKey = new PropertyKey<string>("GoodId");
-        private readonly PropertyKey<int> _amountKey = new PropertyKey<int>("Amount");
+        private readonly PropertyKey<int> _amountKey = new("Amount");
+        private readonly PropertyKey<string> _goodIdKey = new("GoodId");
 
         /// <summary>
-        /// This class only deserializes specification jsons, so this is not used
+        ///     This class only deserializes specification jsons, so this is not used
         /// </summary>
         /// <param name="value"></param>
         /// <param name="objectSaver"></param>
