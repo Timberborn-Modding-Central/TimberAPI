@@ -2,7 +2,7 @@
 
 namespace TimberApi.LocalizationSystem
 {
-    public class LocalizationConfigurator : IConfigurator
+    public class LocalizationSystemConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

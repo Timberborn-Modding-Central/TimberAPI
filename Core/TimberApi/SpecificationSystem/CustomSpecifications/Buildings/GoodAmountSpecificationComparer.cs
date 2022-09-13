@@ -3,7 +3,7 @@ using Timberborn.Goods;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    public class GoodAmountSpecificationComparer : IEqualityComparer<GoodAmountSpecification>
+    internal class GoodAmountSpecificationComparer : IEqualityComparer<GoodAmountSpecification>
     {
         public bool Equals(GoodAmountSpecification gas1, GoodAmountSpecification gas2)
         {

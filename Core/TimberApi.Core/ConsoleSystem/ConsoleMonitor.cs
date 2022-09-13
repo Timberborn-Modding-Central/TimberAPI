@@ -14,7 +14,8 @@ namespace TimberApi.Core.ConsoleSystem
 {
     internal class ConsoleMonitor : MonoBehaviour, ILogListener
     {
-        private bool _isGravePressed;
+        private static readonly Key ConsoleKey = Key.Tab;
+        private bool _isConsoleKeyPressed;
 
         private KeyboardController _keyboardController = null!;
         private ConsoleMonitorController _monitorController = null!;
@@ -43,17 +44,17 @@ namespace TimberApi.Core.ConsoleSystem
 
         private void Update()
         {
-            if (!_keyboardController.IsKeyHeld(Key.Backquote))
+            if (!_keyboardController.IsKeyHeld(ConsoleKey))
             {
-                _isGravePressed = false;
+                _isConsoleKeyPressed = false;
             }
 
-            if (!_keyboardController.IsKeyHeld(Key.Backquote) || _isGravePressed)
+            if (!_keyboardController.IsKeyHeld(ConsoleKey) || _isConsoleKeyPressed)
             {
                 return;
             }
 
-            _isGravePressed = true;
+            _isConsoleKeyPressed = true;
             _monitorController.ToggleConsole();
         }
 

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    public class BuildingSpecificationGenerator : ISpecificationGenerator
+    internal class BuildingSpecificationGenerator : ISpecificationGenerator
     {
         private static readonly string BuildingsPath = "Buildings";
 

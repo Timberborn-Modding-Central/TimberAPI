@@ -7,7 +7,7 @@ using Timberborn.TemplateSystem;
 namespace TimberApi.EntityLinkerSystem
 {
     [Configurator(SceneEntrypoint.InGame)]
-    public class EntityLinkerConfigurator : IConfigurator
+    public class EntityLinkerSystemConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

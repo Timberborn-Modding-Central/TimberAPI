@@ -10,18 +10,18 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
     /// <summary>
     ///     This service fetches BuildingSpecifications
     /// </summary>
-    public class BuildingSpecificationService : ILoadableSingleton
+    internal class BuildingSpecificationService : ILoadableSingleton
     {
-        private readonly BuildingSpecificationDeserializer _buildingRecipeSpecificationObjectDeserializer;
+        private readonly BuildingSpecificationObjectDeserializer _buildingRecipeSpecificationObjectObjectDeserializer;
         private readonly ISpecificationService _specificationService;
         private ImmutableArray<BuildingSpecification> _buildingSpecifications;
 
         public BuildingSpecificationService(
             ISpecificationService specificationService,
-            BuildingSpecificationDeserializer buildingRecipeSpecificationObjectDeserializer)
+            BuildingSpecificationObjectDeserializer buildingRecipeSpecificationObjectObjectDeserializer)
         {
             _specificationService = specificationService;
-            _buildingRecipeSpecificationObjectDeserializer = buildingRecipeSpecificationObjectDeserializer;
+            _buildingRecipeSpecificationObjectObjectDeserializer = buildingRecipeSpecificationObjectObjectDeserializer;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
         /// </summary>
         public void Load()
         {
-            _buildingSpecifications = _specificationService.GetSpecifications(_buildingRecipeSpecificationObjectDeserializer).ToImmutableArray();
+            _buildingSpecifications = _specificationService.GetSpecifications(_buildingRecipeSpecificationObjectObjectDeserializer).ToImmutableArray();
         }
 
         public BuildingSpecification? GetBuildingSpecificationByBuilding(Building building)

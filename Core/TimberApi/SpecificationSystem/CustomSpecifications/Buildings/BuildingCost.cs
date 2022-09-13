@@ -4,7 +4,7 @@
     ///     Stripped version of Timberborn.Goods.GoodAmountSpecification.
     ///     Only contains relevant fields
     /// </summary>
-    public class BuildingCost
+    internal class BuildingCost
     {
         public BuildingCost(string goodId, int amount)
         {

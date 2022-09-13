@@ -5,9 +5,9 @@ using Timberborn.Persistence;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    public class BuildingSpecificationDeserializer : IObjectSerializer<BuildingSpecification>
+    internal class BuildingSpecificationObjectDeserializer : IObjectSerializer<BuildingSpecification>
     {
-        private readonly BuildingCostDeserializer _buildingCostDeserializer;
+        private readonly BuildingCostObjectDeserializer _buildingCostObjectDeserializer;
 
         private readonly ListKey<BuildingCost> _buildingCosts = new("BuildingCosts");
         private readonly PropertyKey<string> _buildingIdKey = new("BuildingId");
@@ -20,9 +20,9 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 
         private readonly PropertyKey<int> _scienceCostKey = new("ScienceCost");
 
-        public BuildingSpecificationDeserializer(BuildingCostDeserializer buildingCostDeserializer)
+        public BuildingSpecificationObjectDeserializer(BuildingCostObjectDeserializer buildingCostObjectDeserializer)
         {
-            _buildingCostDeserializer = buildingCostDeserializer;
+            _buildingCostObjectDeserializer = buildingCostObjectDeserializer;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
             int? powerInput = objectLoader.GetValueOrNullable(_powerInputKey);
             int? powerOutput = objectLoader.GetValueOrNullable(_powerOutputKey);
             List<string> recipeIds = objectLoader.GetValueOrEmpty(_recipeIdsKey);
-            List<BuildingCost> buildingCosts = objectLoader.GetValueOrEmpty(_buildingCosts, _buildingCostDeserializer);
+            List<BuildingCost> buildingCosts = objectLoader.GetValueOrEmpty(_buildingCosts, _buildingCostObjectDeserializer);
 
             return new BuildingSpecification(buildingId, scienceCost, powerInput, powerOutput, recipeIds, buildingCosts);
         }

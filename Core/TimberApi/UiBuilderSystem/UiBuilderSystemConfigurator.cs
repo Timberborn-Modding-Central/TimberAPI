@@ -6,7 +6,7 @@ using TimberApi.UiBuilderSystem.PresetSystem;
 namespace TimberApi.UiBuilderSystem
 {
     [Configurator(SceneEntrypoint.All)]
-    public class UIBuilderConfigurator : IConfigurator
+    public class UiBuilderSystemConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

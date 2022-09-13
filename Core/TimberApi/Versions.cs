@@ -7,8 +7,8 @@ namespace TimberApi
     {
         public static readonly Version GameVersion = Version.Parse(Timberborn.Versioning.Versions.VersionNumber);
 
-        public static Version TimberApiVersion { get; } = Version.Parse("TIMBERAPI_VERSION_PLACEHOLDER".ConvertVersionPlaceholder());
+        public static Version TimberApiVersion { get; } = Version.Parse("0.5.0.0".ConvertVersionPlaceholder());
 
-        internal static Version TimberApiMinimumGameVersion { get; } = new(0, 2, 7);
+        internal static Version TimberApiMinimumGameVersion { get; } = new(0, 2, 8, 1);
     }
 }

@@ -17,10 +17,10 @@ namespace TimberApi
             containerDefinition.Bind<SceneListener>().AsSingleton();
             containerDefinition.Install(new ConfiguratorSystemConfigurator());
             containerDefinition.Install(new AssetSystemGlobalConfigurator());
-            containerDefinition.Install(new SpecificationGlobalConfigurator());
+            containerDefinition.Install(new SpecificationSystemGlobalConfigurator());
             containerDefinition.Install(new GolemFactionPatchConfigurator());
             containerDefinition.Install(new ResourceAssetSystemConfigurator());
-            containerDefinition.Install(new LocalizationConfigurator());
+            containerDefinition.Install(new LocalizationSystemConfigurator());
         }
     }
 }
