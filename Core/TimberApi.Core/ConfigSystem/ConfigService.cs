@@ -29,7 +29,7 @@ namespace TimberApi.Core.ConfigSystem
             catch (Exception e)
             {
                 _consoleWriter.LogAs(_consoleTag, "Failed to retrieve config, returning default", LogType.Warning);
-                _consoleWriter.LogAs(_consoleTag, "Failed config reason: " + e.Message, LogType.Error);
+                _consoleWriter.LogAs(_consoleTag, "Failed config reason: " + e.Message, LogType.Warning);
                 return new T();
             }
         }
