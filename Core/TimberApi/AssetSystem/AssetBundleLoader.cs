@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using TimberApi.AssetSystem.Exceptions;
+﻿using TimberApi.AssetSystem.Exceptions;
 using TimberApi.SceneSystem;
 
 namespace TimberApi.AssetSystem
@@ -49,7 +48,6 @@ namespace TimberApi.AssetSystem
 
         public void UnloadAll(SceneEntrypoint sceneEntrypoint)
         {
-            TimberApi.ConsoleWriter.Log(_assetRepository.GetByEntrypoint(sceneEntrypoint).Count().ToString());
             foreach (AssetFolder assetFolder in _assetRepository.GetByEntrypoint(sceneEntrypoint))
             {
                 assetFolder.Unload();
