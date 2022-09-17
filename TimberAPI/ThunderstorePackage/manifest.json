@@ -1,9 +1,0 @@
-{
-    "name": "TimberAPI",
-    "version_number": "VERSION",
-    "website_url": "https://timberapi.com",
-    "description": "Unofficial API to enable easier Timberborn modding",
-    "dependencies": [
-        "BepInEx-BepInExPack_Timberborn-5.4.19"
-    ]
-}
