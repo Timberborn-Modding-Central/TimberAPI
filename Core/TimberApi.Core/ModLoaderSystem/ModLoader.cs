@@ -15,7 +15,6 @@ using TimberApi.ModSystem;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 using Logger = TimberApi.Core.LoggingSystem.Logger;
 
 namespace TimberApi.Core.ModLoaderSystem
@@ -323,7 +322,7 @@ namespace TimberApi.Core.ModLoaderSystem
             {
                 try
                 {
-                    if (uniqueMod.MinimumGameVersion >= Versions.GameVersion)
+                    if (uniqueMod.MinimumGameVersion > Versions.GameVersion)
                     {
                         _consoleWriter.LogAs(uniqueMod.Name, $"Skipped: Minimum game version required: {uniqueMod.MinimumGameVersion}, current game version: {Versions.GameVersion}", LogType.Warning);
                         continue;
