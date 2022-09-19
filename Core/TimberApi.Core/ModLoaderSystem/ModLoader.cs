@@ -97,7 +97,7 @@ namespace TimberApi.Core.ModLoaderSystem
 
                     loadableMod.IsLoaded = true;
                     loadedMods.Add(loadableMod);
-                    _consoleWriter.LogAs(loadableMod.Name, "Loaded!", LogType.Log);
+                    _consoleWriter.LogAs(loadableMod.Name, $"Loaded version {loadableMod.Version}", LogType.Log);
                 }
                 catch (Exception e)
                 {
