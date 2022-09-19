@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
-using TimberApi.Common.SingletonSystem.Singletons;
+using TimberApi.Common.SingletonSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.Persistence;
 

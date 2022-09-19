@@ -1,6 +1,6 @@
 ﻿using Bindito.Core;
 using HarmonyLib;
-using TimberApi.Common.SingletonSystem.Singletons;
+using TimberApi.Common.SingletonSystem;
 using Timberborn.AssetSystem;
 
 namespace TimberApi.ResourceAssetSystem

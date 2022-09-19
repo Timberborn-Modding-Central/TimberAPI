@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TimberApi.Common.SingletonSystem.Singletons;
+using TimberApi.Common.SingletonSystem;
 using TimberApi.DependencyContainerSystem;
 using Timberborn.EntitySystem;
 using Timberborn.FactionSystemGame;

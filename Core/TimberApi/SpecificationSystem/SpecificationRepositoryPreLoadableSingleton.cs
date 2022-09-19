@@ -2,14 +2,14 @@
 using System.IO;
 using System.Linq;
 using TimberApi.Common.Helpers;
-using TimberApi.Common.SingletonSystem.Singletons;
+using TimberApi.Common.SingletonSystem;
 using TimberApi.ModSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using UnityEngine;
 
 namespace TimberApi.SpecificationSystem
 {
-    internal class SpecificationRepositorySeeder : ITimberApiSeeder
+    internal class SpecificationRepositoryPreLoadableSingleton : ITimberApiPreLoadableSingleton
     {
         private static readonly string TimberbornSpecificationPath = "Specifications";
 
@@ -19,14 +19,14 @@ namespace TimberApi.SpecificationSystem
 
         private readonly SpecificationRepository _specificationRepository;
 
-        public SpecificationRepositorySeeder(IModRepository modRepository, SpecificationRepository specificationRepository, IEnumerable<ISpecificationGenerator> specificationGenerators)
+        public SpecificationRepositoryPreLoadableSingleton(IModRepository modRepository, SpecificationRepository specificationRepository, IEnumerable<ISpecificationGenerator> specificationGenerators)
         {
             _modRepository = modRepository;
             _specificationRepository = specificationRepository;
             _specificationGenerators = specificationGenerators;
         }
 
-        public void Run()
+        public void PreLoad()
         {
             List<ISpecification> specifications = new();
 

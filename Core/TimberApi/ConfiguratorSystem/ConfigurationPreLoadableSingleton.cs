@@ -5,16 +5,16 @@ using System.Linq;
 using System.Reflection;
 using Bindito.Core;
 using TimberApi.Common.Extensions;
-using TimberApi.Common.SingletonSystem.Singletons;
+using TimberApi.Common.SingletonSystem;
 using TimberApi.SceneSystem;
 
 namespace TimberApi.ConfiguratorSystem
 {
-    internal class ConfigurationSeeder : ITimberApiSeeder
+    internal class ConfigurationPreLoadableSingleton : ITimberApiPreLoadableSingleton
     {
         private readonly ConfiguratorRepository _configuratorRepository;
 
-        public ConfigurationSeeder(ConfiguratorRepository configuratorRepository)
+        public ConfigurationPreLoadableSingleton(ConfiguratorRepository configuratorRepository)
         {
             _configuratorRepository = configuratorRepository;
         }
@@ -22,7 +22,7 @@ namespace TimberApi.ConfiguratorSystem
         /// <summary>
         ///     Searches for configurators to fill repository
         /// </summary>
-        public void Run()
+        public void PreLoad()
         {
             ImmutableArray<IConfigurator> validatedConfigurators = ValidateAndCreateConfigurators(AppDomain.CurrentDomain.GetTypesInDomainByAttribute<ConfiguratorAttribute>()).ToImmutableArray();
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HarmonyLib;
-using TimberApi.Common.SingletonSystem.Singletons;
+using TimberApi.Common.SingletonSystem;
 using Timberborn.Common;
 using UnityEngine;
 

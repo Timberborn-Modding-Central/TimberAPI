@@ -1,4 +1,4 @@
-﻿using TimberApi.Common.SingletonSystem.Singletons;
+﻿using TimberApi.Common.SingletonSystem;
 using TimberApi.SceneSystem;
 
 namespace TimberApi.AssetSystem
