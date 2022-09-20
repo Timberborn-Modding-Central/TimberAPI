@@ -2,6 +2,7 @@ using System;
 using TimberApi.UiBuilderSystem.ElementSystem;
 using TimberApi.UiBuilderSystem.PresetSystem;
 using Timberborn.AssetSystem;
+using Timberborn.SingletonSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
@@ -10,7 +11,7 @@ using static UnityEngine.UIElements.Length.Unit;
 
 namespace TimberApi.UiBuilderSystem
 {
-    public class UIBoxBuilder
+    public class UIBoxBuilder : ILoadableSingleton
     {
         private readonly VisualElementBuilder _box;
 
@@ -28,6 +29,11 @@ namespace TimberApi.UiBuilderSystem
             _centerWrapper = componentBuilder.CreateVisualElement();
             _box = componentBuilder.CreateVisualElement().AddClass(TimberApiStyle.Backgrounds.BorderTransparent).AddClass(TimberApiStyle.Scales.Scale5).SetPadding(new Length(45, Pixel));
             _scrollView = componentBuilder.CreateVisualElement();
+        }
+
+        public void Load()
+        {
+            TimberApi.ConsoleWriter.Log("AAAAAAAAAAAAAAAAAAAAAAAA");
         }
 
         public UIBoxBuilder SetBoxInCenter()

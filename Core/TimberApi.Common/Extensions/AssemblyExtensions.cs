@@ -11,5 +11,10 @@ namespace TimberApi.Common.Extensions
         {
             return assembly.GetTypes().Where(x => typeof(TInterface).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
         }
+
+        public static IEnumerable<Type> GetTypesByAttribute<TAttribute>(this Assembly assembly) where TAttribute : class
+        {
+            return assembly.GetTypes().Where(type => type.IsDefined(typeof(TAttribute)));
+        }
     }
 }
