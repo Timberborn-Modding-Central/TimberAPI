@@ -3,6 +3,10 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
         <LangVersion>9</LangVersion>
+        <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
+        <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
+        <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+        <PackageVersion>0.5-beta</PackageVersion>
     </PropertyGroup>
 
     <PropertyGroup>
