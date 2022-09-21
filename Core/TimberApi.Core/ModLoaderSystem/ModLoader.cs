@@ -187,7 +187,7 @@ namespace TimberApi.Core.ModLoaderSystem
             try
             {
                 IModEntrypoint? modEntrypoint = assembly.GetTypes().Where(type => type.GetInterfaces().Contains(typeof(IModEntrypoint)) && type.GetConstructor(Type.EmptyTypes) != null)
-                    .Select(type => Activator.CreateInstance(type) as IModEntrypoint).Single();
+                    .Select(type => Activator.CreateInstance(type) as IModEntrypoint).SingleOrDefault();
 
                 if (modEntrypoint == null)
                 {
