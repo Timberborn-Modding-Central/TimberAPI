@@ -11,19 +11,8 @@ namespace TimberApi.SpecificationSystem
         public void Configure(IContainerDefinition containerDefinition)
         {
             containerDefinition.Bind<SpecificationRepository>().AsSingleton();
-            containerDefinition.Bind<SpecificationRepositorySeeder>().AsSingleton();
+            containerDefinition.Bind<SpecificationRepositoryPreLoadableSingleton>().AsSingleton();
             containerDefinition.Bind<ISpecificationService>().To<TimberApiSpecificationService>().AsSingleton();
-        }
-    }
-
-    /// <summary>
-    ///     registered in global container, `ISpecificationService` called before seeder was loaded
-    /// </summary>
-    internal class SpecificationSystemGlobalConfigurator : IConfigurator
-    {
-        public void Configure(IContainerDefinition containerDefinition)
-        {
-            containerDefinition.Bind<SpecificationPatcher>().AsSingleton();
         }
     }
 }

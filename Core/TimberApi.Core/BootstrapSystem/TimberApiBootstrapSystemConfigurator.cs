@@ -3,11 +3,14 @@ using System.IO;
 using Bindito.Core;
 using Bindito.Unity;
 using TimberApi.Common;
-using TimberApi.Common.SingletonSystem;
 using TimberApi.Core.ConfigSystem;
+using TimberApi.Core.ConfiguratorSystem;
 using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem;
+using TimberApi.Core.SingletonSystem;
+using TimberApi.LocalizationSystem;
+using TimberApi.SpecificationSystem;
 
 namespace TimberApi.Core.BootstrapSystem
 {
@@ -21,7 +24,11 @@ namespace TimberApi.Core.BootstrapSystem
             {
                 Instance = this;
                 AddPrefabConfigurators();
-                BootstrapPatch.Apply();
+                BootstrapPatcher.Patch();
+                ConfiguratorPatcher.Patch();
+                LocalizationPatcher.Patch();
+                SpecificationPatcher.Patch();
+                SingletonSystemPatcher.Patch();
             }
             catch (Exception e)
             {
@@ -37,20 +44,13 @@ namespace TimberApi.Core.BootstrapSystem
             containerDefinition.Install(GetInstanceFromPrefab<ConsoleSystemConfigurator>());
             containerDefinition.Install(GetInstanceFromPrefab<ModLoaderSystemConfigurator>());
             containerDefinition.Install(new ConfigSystemConfigurator());
+            containerDefinition.Install(new ConfiguratorSystemConfigurator());
 
             // Start runner
             containerDefinition.Bind<TimberApiCoreRunner>().AsSingleton();
 
             // TimberAPI Initialization
-            containerDefinition.Bind<ISingletonRepository>().To<SingletonRepository>().AsSingleton();
-            var instance = new SingletonListener();
-            containerDefinition.Bind<SingletonListener>().ToInstance(instance);
-            containerDefinition.AddInjectionListener(instance);
-            containerDefinition.AddProvisionListener(instance);
-
             containerDefinition.Install(new BootstrapConfigurator());
-
-            containerDefinition.Bind<SingletonRunner>().AsSingleton();
         }
 
         private void AddPrefabConfigurators()

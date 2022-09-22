@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using TimberApi.Common.SingletonSystem;
 using UnityEngine;
 
 namespace TimberApi.AssetShaderSystem
 {
-    internal class AssetShaderFixer
+    internal class AssetShaderFixer : ITimberApiPreLoadableSingleton
     {
         private readonly ImmutableArray<IShaderFixApplier> _shaderFixAppliers;
 
@@ -27,6 +28,14 @@ namespace TimberApi.AssetShaderSystem
                 }
 
                 return _shader;
+            }
+        }
+
+        public void PreLoad()
+        {
+            foreach (IShaderFixApplier shaderFixApplier in _shaderFixAppliers)
+            {
+                shaderFixApplier.LoadShader();
             }
         }
 

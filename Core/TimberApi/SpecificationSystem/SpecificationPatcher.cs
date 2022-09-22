@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
-using TimberApi.Common.SingletonSystem.Singletons;
 using Timberborn.MainMenuScene;
 using Timberborn.Persistence;
 
 namespace TimberApi.SpecificationSystem
 {
-    internal class SpecificationPatcher : ITimberApiLoadableSingleton
+    internal static class SpecificationPatcher
     {
-        public void Load()
+        public static void Patch()
         {
             var harmony = new Harmony("TimberApi.specification");
 

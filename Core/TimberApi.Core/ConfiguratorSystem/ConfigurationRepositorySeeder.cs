@@ -5,18 +5,22 @@ using System.Linq;
 using System.Reflection;
 using Bindito.Core;
 using TimberApi.Common.Extensions;
-using TimberApi.Common.SingletonSystem.Singletons;
+using TimberApi.ConfiguratorSystem;
+using TimberApi.ModSystem;
 using TimberApi.SceneSystem;
 
-namespace TimberApi.ConfiguratorSystem
+namespace TimberApi.Core.ConfiguratorSystem
 {
-    internal class ConfigurationSeeder : ITimberApiSeeder
+    internal class ConfigurationRepositorySeeder
     {
         private readonly ConfiguratorRepository _configuratorRepository;
 
-        public ConfigurationSeeder(ConfiguratorRepository configuratorRepository)
+        private readonly IModRepository _modRepository;
+
+        public ConfigurationRepositorySeeder(ConfiguratorRepository configuratorRepository, IModRepository modRepository)
         {
             _configuratorRepository = configuratorRepository;
+            _modRepository = modRepository;
         }
 
         /// <summary>
@@ -24,11 +28,22 @@ namespace TimberApi.ConfiguratorSystem
         /// </summary>
         public void Run()
         {
-            ImmutableArray<IConfigurator> validatedConfigurators = ValidateAndCreateConfigurators(AppDomain.CurrentDomain.GetTypesInDomainByAttribute<ConfiguratorAttribute>()).ToImmutableArray();
+            AddConfiguratorsFromAssemblyToRepository(typeof(TimberApi).Assembly);
 
-            _configuratorRepository.SetSceneConfigurators(SceneEntrypoint.MainMenu, GetConfiguratorWithSceneFlag(validatedConfigurators, SceneEntrypoint.MainMenu));
-            _configuratorRepository.SetSceneConfigurators(SceneEntrypoint.InGame, GetConfiguratorWithSceneFlag(validatedConfigurators, SceneEntrypoint.InGame));
-            _configuratorRepository.SetSceneConfigurators(SceneEntrypoint.MapEditor, GetConfiguratorWithSceneFlag(validatedConfigurators, SceneEntrypoint.MapEditor));
+            foreach (IMod mod in _modRepository.GetCodeMods())
+            {
+                AddConfiguratorsFromAssemblyToRepository(mod.LoadedAssembly!);
+            }
+        }
+
+        public void AddConfiguratorsFromAssemblyToRepository(Assembly assembly)
+        {
+            IEnumerable<Type> configuratorTypes = assembly.GetTypesByAttribute<ConfiguratorAttribute>();
+            ImmutableArray<IConfigurator> configurators = ValidateAndCreateConfigurators(configuratorTypes).ToImmutableArray();
+
+            _configuratorRepository.AddRange(SceneEntrypoint.MainMenu, GetConfiguratorWithSceneFlag(configurators, SceneEntrypoint.MainMenu));
+            _configuratorRepository.AddRange(SceneEntrypoint.InGame, GetConfiguratorWithSceneFlag(configurators, SceneEntrypoint.InGame));
+            _configuratorRepository.AddRange(SceneEntrypoint.MapEditor, GetConfiguratorWithSceneFlag(configurators, SceneEntrypoint.MapEditor));
         }
 
         /// <summary>
@@ -38,7 +53,7 @@ namespace TimberApi.ConfiguratorSystem
         /// <param name="configurators">validated configurators</param>
         /// <param name="sceneFlag">Filter based if attribute has set flag</param>
         /// <returns>Filtered configurators for specific flag</returns>
-        private IEnumerable<IConfigurator> GetConfiguratorWithSceneFlag(IEnumerable<IConfigurator> configurators, SceneEntrypoint sceneFlag)
+        private static IEnumerable<IConfigurator> GetConfiguratorWithSceneFlag(IEnumerable<IConfigurator> configurators, SceneEntrypoint sceneFlag)
         {
             return configurators.Where(configurator => configurator.GetType().GetCustomAttribute<ConfiguratorAttribute>().SceneConfiguratorEntry.HasFlag(sceneFlag));
         }
@@ -48,7 +63,7 @@ namespace TimberApi.ConfiguratorSystem
         /// </summary>
         /// <param name="configuratorTypes">Classes with ConfiguratorAttribute</param>
         /// <returns>Validated IConfigurator instances</returns>
-        private IEnumerable<IConfigurator> ValidateAndCreateConfigurators(IEnumerable<Type> configuratorTypes)
+        private static IEnumerable<IConfigurator> ValidateAndCreateConfigurators(IEnumerable<Type> configuratorTypes)
         {
             return configuratorTypes.Select(type =>
             {
@@ -63,7 +78,7 @@ namespace TimberApi.ConfiguratorSystem
         /// </summary>
         /// <param name="configuratorType"></param>
         /// <exception cref="ConfigurationValidationException">Configurator class type</exception>
-        private void ValidateConfiguratorAttributeType(Type configuratorType)
+        private static void ValidateConfiguratorAttributeType(Type configuratorType)
         {
             if (configuratorType.GetInterface(nameof(IConfigurator)) == null)
             {

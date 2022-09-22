@@ -1,24 +1,24 @@
 ﻿using System.Linq;
 using TimberApi.Common;
-using TimberApi.Common.SingletonSystem.Singletons;
+using TimberApi.Common.SingletonSystem;
 using TimberApi.ModSystem;
 using TimberApi.SceneSystem;
 
 namespace TimberApi.AssetSystem
 {
-    internal class AssetRepositorySeeder : ITimberApiSeeder
+    internal class AssetRepositoryPreLoadableSingleton : ITimberApiPreLoadableSingleton
     {
         private readonly AssetRepository _assetRepository;
 
         private readonly IModRepository _modRepository;
 
-        public AssetRepositorySeeder(AssetRepository assetRepository, IModRepository modRepository)
+        public AssetRepositoryPreLoadableSingleton(AssetRepository assetRepository, IModRepository modRepository)
         {
             _assetRepository = assetRepository;
             _modRepository = modRepository;
         }
 
-        public void Run()
+        public void PreLoad()
         {
             SetTimberApiAssets();
             SetModAssets();

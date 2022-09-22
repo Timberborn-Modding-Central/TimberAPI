@@ -20,7 +20,7 @@ namespace TimberApi.AssetSystem
         {
             containerDefinition.Bind<AssetBundleLoader>().AsSingleton();
             containerDefinition.Bind<AssetRepository>().AsSingleton();
-            containerDefinition.Bind<AssetRepositorySeeder>().AsSingleton();
+            containerDefinition.Bind<AssetRepositoryPreLoadableSingleton>().AsSingleton();
         }
     }
 }

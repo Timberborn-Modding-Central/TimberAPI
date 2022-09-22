@@ -1,13 +1,14 @@
 ﻿using Bindito.Core;
 
-namespace TimberApi.ConfiguratorSystem
+namespace TimberApi.Core.ConfiguratorSystem
 {
     internal class ConfiguratorSystemConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
             containerDefinition.Bind<ConfiguratorRepository>().AsSingleton();
-            containerDefinition.Bind<ConfigurationSeeder>().AsSingleton();
+            containerDefinition.Bind<ConfigurationRepositorySeeder>().AsSingleton();
+            containerDefinition.Bind<ConfiguratorInstaller>().AsSingleton();
         }
     }
 }

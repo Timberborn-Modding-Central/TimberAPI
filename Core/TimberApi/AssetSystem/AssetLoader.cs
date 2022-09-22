@@ -42,7 +42,7 @@ namespace TimberApi.AssetSystem
             }
 
             T asset = assetFolder.GetAssetBundleAtPath(pathToFile).Load<T>(name) ??
-                      throw new InvalidOperationException($"Failed to load asset at {prefix}/{pathToFile}/{name}. Asset name does not exists inside bundle");
+                      throw new InvalidOperationException($"Failed to load asset ({prefix}/{pathToFile}/{name}). Asset name does not exists inside bundle");
 
             if (asset is not GameObject gameObject)
             {

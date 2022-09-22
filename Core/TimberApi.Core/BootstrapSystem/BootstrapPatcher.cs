@@ -7,15 +7,16 @@ using Timberborn.Bootstrapper;
 
 namespace TimberApi.Core.BootstrapSystem
 {
-    internal static class BootstrapPatch
+    internal static class BootstrapPatcher
     {
-        public static void Apply()
+        public static void Patch()
         {
             try
             {
                 var harmony = new Harmony("TimberApi.bootstrapper");
 
-                harmony.Patch(AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"), new HarmonyMethod(AccessTools.Method(typeof(BootstrapPatch), nameof(BootstrapperConfiguratorPatch))));
+                harmony.Patch(AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"),
+                    new HarmonyMethod(AccessTools.Method(typeof(BootstrapPatcher), nameof(BootstrapperConfiguratorPatch))));
             }
             catch (Exception e)
             {

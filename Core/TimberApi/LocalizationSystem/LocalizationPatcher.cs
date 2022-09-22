@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using HarmonyLib;
-using TimberApi.Common.SingletonSystem.Singletons;
 using Timberborn.Common;
 using UnityEngine;
 
@@ -9,9 +8,9 @@ using UnityEngine;
 
 namespace TimberApi.LocalizationSystem
 {
-    internal class LocalizationPatcher : ITimberApiLoadableSingleton
+    internal static class LocalizationPatcher
     {
-        public void Load()
+        public static void Patch()
         {
             var harmony = new Harmony("TimberApi.Localization");
 
