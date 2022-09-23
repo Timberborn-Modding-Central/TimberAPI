@@ -265,21 +265,23 @@ namespace TimberApi.Core.ModLoaderSystem
         private static bool NeededDependenciesAreLoadable(IEnumerable<IModDependency> modDependencies, IMod[] gameCompatibleMods, out IEnumerable<IModDependency> missingDependencies)
         {
             List<IModDependency> missingDependenciesList = new();
-            var missingDependency = true;
+            var neededDependenciesAreLoadable = true;
 
             foreach (IModDependency modDependency in modDependencies)
             {
-                if (gameCompatibleMods.Any(mod => (mod.UniqueId == modDependency.UniqueId && !(modDependency.Mod == null || modDependency.Mod.LoadFailed)) || modDependency.Optional))
+                if (gameCompatibleMods.Any(mod =>
+                        (mod.UniqueId == modDependency.UniqueId && !(modDependency.Mod == null || modDependency.Mod.LoadFailed || modDependency.MinimumVersion > mod.Version)) ||
+                        modDependency.Optional))
                 {
                     continue;
                 }
 
                 missingDependenciesList.Add(modDependency);
-                missingDependency = false;
+                neededDependenciesAreLoadable = false;
             }
 
             missingDependencies = missingDependenciesList;
-            return missingDependency;
+            return neededDependenciesAreLoadable;
         }
 
         /// <summary>
