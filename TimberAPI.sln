@@ -77,7 +77,7 @@ Global
 		SolutionGuid = {63F8DD95-B36E-453C-B23B-D898ED1A3E27}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		version = 0.3.1
+		version = 0.5.1
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{018FC7B7-A51D-4078-95FD-6419BF3C7FCD} = {3FA13516-23D4-4AEA-ABA9-A805C41508CF}

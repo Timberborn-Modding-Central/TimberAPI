@@ -6,16 +6,19 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>9.0</LangVersion>
         <ReleaseVersion>0.3.1</ReleaseVersion>
-        <ReleaseVersion>TIMBER_API_EXAMPLE_VERSION</ReleaseVersion>
+        <ReleaseVersion>0.5.1</ReleaseVersion>
         <PackageId>TimberAPIExample</PackageId>
         <RootNamespace>TimberAPIExample</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\TimberAPI.Old\TimberAPI.Old.csproj"/>
+        <ProjectReference Include="..\TimberAPI.Old\TimberAPI.Old.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Timberborn.GameLibs" Version="0.2.8.1-r.0" />
     </ItemGroup>
 </Project>
