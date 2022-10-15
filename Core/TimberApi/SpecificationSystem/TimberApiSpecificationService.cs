@@ -9,6 +9,7 @@ namespace TimberApi.SpecificationSystem
     internal class TimberApiSpecificationService : ISpecificationService
     {
         private readonly JsonMergeSettings _jsonMergeSettings;
+        private readonly JsonMergeSettings _jsonMergeSettingsReplace;
 
         private readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
         private readonly SpecificationRepository _specificationRepository;
@@ -21,6 +22,10 @@ namespace TimberApi.SpecificationSystem
             {
                 MergeArrayHandling = MergeArrayHandling.Union
             };
+            _jsonMergeSettingsReplace = new JsonMergeSettings
+            {
+                MergeArrayHandling = MergeArrayHandling.Replace
+            };
         }
 
         public IEnumerable<T> GetSpecifications<T>(IObjectSerializer<T> serializer)
@@ -28,13 +33,16 @@ namespace TimberApi.SpecificationSystem
             string specificationType = typeof(T).Name;
             IEnumerable<ISpecification> typeSpecification = _specificationRepository.GetBySpecification(specificationType).ToArray();
 
-
             foreach (ISpecification originalSpecification in typeSpecification.Where(specification => specification.IsOriginal))
             {
                 IEnumerable<ISpecification> mergeSpecifications =
-                    typeSpecification.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName));
-                string mergedJson = Wrap(MergeSpecifications(originalSpecification, mergeSpecifications), specificationType);
-                yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJson(mergedJson)).Get(new PropertyKey<T>(specificationType), serializer);
+                    typeSpecification.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName) && specification.IsReplace == false);
+
+                IEnumerable<ISpecification> replaceSpecifications =
+                    typeSpecification.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName) && specification.IsReplace == true);
+                var mergedJson = MergeSpecifications(originalSpecification, mergeSpecifications);
+                var replacedJson = Wrap(ReplaceSpecifications(mergedJson, replaceSpecifications).ToString(), specificationType);
+                yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJson(replacedJson)).Get(new PropertyKey<T>(specificationType), serializer);
             }
         }
 
@@ -44,10 +52,21 @@ namespace TimberApi.SpecificationSystem
             return originalSpecification;
         }
 
-        private string MergeSpecifications(ISpecification originalSpecification, IEnumerable<ISpecification> mergeSpecifications)
+        private JObject ReplaceSpecification(JObject mergedSpecification, ISpecification replaceSpecification)
+        {
+            mergedSpecification.Merge(JObject.Parse(replaceSpecification.LoadJson()), _jsonMergeSettingsReplace);
+            return mergedSpecification;
+        }
+
+        private JObject MergeSpecifications(ISpecification originalSpecification, IEnumerable<ISpecification> mergeSpecifications)
         {
             JObject json = JObject.Parse(originalSpecification.LoadJson());
-            return mergeSpecifications.Aggregate(json, MergeSpecification).ToString();
+            return mergeSpecifications.Aggregate(json, MergeSpecification);
+        }
+
+        private JObject ReplaceSpecifications(JObject mergedSpecification, IEnumerable<ISpecification> replaceSpecifications)
+        {
+            return replaceSpecifications.Aggregate(mergedSpecification, ReplaceSpecification);
         }
 
         private static string Wrap(string assetText, string type)
