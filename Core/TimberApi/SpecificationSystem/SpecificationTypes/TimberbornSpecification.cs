@@ -21,6 +21,8 @@ namespace TimberApi.SpecificationSystem.SpecificationTypes
 
         public bool IsOriginal { get; }
 
+        public bool IsReplace { get; }
+
         public string LoadJson()
         {
             return SpecificationAsset.text;

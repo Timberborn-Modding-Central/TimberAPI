@@ -8,6 +8,8 @@ namespace TimberApi.SpecificationSystem
 
         bool IsOriginal { get; }
 
+        public bool IsReplace { get; }
+
         string LoadJson();
     }
 }
