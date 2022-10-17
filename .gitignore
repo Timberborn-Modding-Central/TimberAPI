@@ -403,3 +403,4 @@ libs
 manifest/
 *.dll
 Timberborn
+/Core/TimberApi/ThunderstorePackage/TimberAPI.zip
