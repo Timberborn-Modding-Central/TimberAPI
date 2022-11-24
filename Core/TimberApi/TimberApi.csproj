@@ -7,7 +7,8 @@
         <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
         <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
         <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
-        <PackageVersion>0.5-beta</PackageVersion>
+        <PackageVersion>0.5.1</PackageVersion>
+        <ReleaseVersion>0.5.1</ReleaseVersion>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -34,7 +35,7 @@
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
         <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" IncludeAssets="compile" />
-        <PackageReference Include="Timberborn.GameLibs" Version="2022.8.4-r.0" Condition="$(UseLocalTimberbornSource) == false" />
+        <PackageReference Include="Timberborn.GameLibs" Version="0.2.8.1-r.0" Condition="$(UseLocalTimberbornSource) == false" />
     </ItemGroup>
 
     <!--    Import dll's from Timberborn's symlink in solution folder-->
@@ -45,6 +46,9 @@
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="ThunderstorePackage\" />
     </ItemGroup>
 
     <!--    Used for automaticly transfer dll to Timberborn location, make a symlink `Timberborn` in the solution folder -->

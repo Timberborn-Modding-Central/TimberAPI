@@ -16,6 +16,8 @@
         public string SpecificationName { get; }
         public bool IsOriginal { get; }
 
+        public bool IsReplace { get; }
+
         public string LoadJson()
         {
             return _json;

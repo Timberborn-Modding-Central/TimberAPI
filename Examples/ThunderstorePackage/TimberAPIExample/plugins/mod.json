@@ -1,0 +1,16 @@
+{
+  "Name": "TimberAPIExample",
+  "Version": "0.5.2",
+  "UniqueId": "com.timberapi.example",
+  "MinimumApiVersion": "0.5.0",
+  "MinimumGameVersion": "0.2.8",
+  "EntryDll": "TimberAPIExample.dll",
+  "Assets": [
+    {
+      "Prefix": "TimberAPIExample",
+      "Scenes": [
+        "InGame"
+      ]
+    }
+  ]
+}
