@@ -3,8 +3,8 @@ using HarmonyLib;
 using TimberApi.Common.SingletonSystem;
 using TimberApi.DependencyContainerSystem;
 using Timberborn.Bots;
-using Timberborn.EntitySystem;
 using Timberborn.FactionSystemGame;
+using Timberborn.PrefabSystem;
 
 // ReSharper disable RedundantAssignment
 // ReSharper disable IdentifierTypo

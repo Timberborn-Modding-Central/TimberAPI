@@ -4,8 +4,8 @@ using System.Linq;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.Buildings;
-using Timberborn.EntitySystem;
 using Timberborn.MechanicalSystem;
+using Timberborn.PrefabSystem;
 using Timberborn.Workshops;
 using UnityEngine;
 
