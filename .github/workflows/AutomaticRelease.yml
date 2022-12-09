@@ -173,13 +173,13 @@ jobs:
 
       - name: Cope asset bundle
         run: cp ${{ env.timber_api_assets_folder }}/timber_api ${{ env.timber_api_package_assets_folder }} 
-
-      - name: Zip Release
-        uses: TheDoctor0/zip-release@0.6.2
-        with:
-          filename: TimberApi.zip
-          path: ${{ env.timber_api_package_folder }}
-          directory: .
+#
+#      - name: Zip Release
+#        uses: TheDoctor0/zip-release@0.6.2
+#        with:
+#          filename: TimberApi.zip
+#          path: ${{ env.timber_api_package_folder }}
+#          directory: .
 
 #      - name: Pack TimberAPI
 #        run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
@@ -191,7 +191,7 @@ jobs:
         uses: actions/upload-artifact@v3.0.0
         with:
           name: TimberAPI_NugetPackage
-          path: ./TimberApi.zip
+          path: ./${{ env.timber_api_package_folder }}
 
 #      - name: Push NuGet Package
 #        if: github.event.inputs.DoPrerelease != 'true'
