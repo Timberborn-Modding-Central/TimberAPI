@@ -108,7 +108,7 @@ jobs:
  #         version-fragment: ${{ github.event.inputs.timber_api_example_update_type }}
 
   publish_timber_api_nuget:
-    if: ${{ github.event.inputs.timber_api_example_update_type == 'major' || github.event.inputs.timber_api_example_update_type == 'feature' || github.event.inputs.timber_api_example_update_type == 'bug'}}
+    if: ${{ github.event.inputs.update_timber_api == 'major' || github.event.inputs.update_timber_api == 'feature' || github.event.inputs.update_timber_api == 'bug'}}
     runs-on: ubuntu-latest
 #    needs: [versions, create_timber_api_thunderstore_pack]
     needs: [versions]
