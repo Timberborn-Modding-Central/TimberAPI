@@ -188,7 +188,7 @@ jobs:
         uses: actions/upload-artifact@v3.0.0
         with:
           name: TimberAPI_NugetPackage
-          path: ./*.zip
+          path: TimberApi.zip
 
 #      - name: Push NuGet Package
 #        if: github.event.inputs.DoPrerelease != 'true'
