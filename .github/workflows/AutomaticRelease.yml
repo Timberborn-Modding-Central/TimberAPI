@@ -184,6 +184,9 @@ jobs:
 #      - name: Pack TimberAPI
 #        run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
 
+      - name: Foo
+        run: ls -l
+
       - name: Upload TimberAPI Build Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
