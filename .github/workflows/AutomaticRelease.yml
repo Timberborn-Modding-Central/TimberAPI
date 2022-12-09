@@ -298,7 +298,8 @@ jobs:
 
   update_version:
     runs-on: ubuntu-latest
-    needs: [versions, create_timber_api_thunderstore_pack, create_timber_api_example_thunderstore_pack]
+#    needs: [versions, create_timber_api_thunderstore_pack, create_timber_api_example_thunderstore_pack]
+    needs: [versions]
     if: always() && (needs.create_timber_api_thunderstore_pack.result == 'success' || needs.create_timber_api_example_thunderstore_pack.result == 'success')
     steps:
       - uses: actions/checkout@v2
