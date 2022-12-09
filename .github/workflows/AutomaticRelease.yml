@@ -154,10 +154,10 @@ jobs:
         run: mkdir ${{ env.timber_api_package_folder }}
 
       - name: Create TimberAPi dll folder
-        run: mkdir ${{ env.timber_api_package_dll_folder }}
+        run: mkdir ${{ env.timber_api_package_dll_folder }} -p
 
       - name: Create TimberAPi assets folder
-        run: mkdir ${{ env.timber_api_package_assets_folder }}
+        run: mkdir ${{ env.timber_api_package_assets_folder }} -p
 
       - name: Copy TimberApi.Common
         run: cp ${{ env.timber_api_core_output_path }}/TimberApi.Common.dll ${{ env.timber_api_package_dll_folder }} 
