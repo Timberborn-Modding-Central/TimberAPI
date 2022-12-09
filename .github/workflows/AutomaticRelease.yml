@@ -47,9 +47,9 @@ env:
   timber_api_nuget_path: "TimberAPI/bin/RELEASE"
 
   timber_api_core_project_path: "Core/TimberApi.Core/TimberApi.Core.csproj"
-  timber_api_core_output_path: "Core/TimberApi.Core/bin/Release/netstandard2.1"
+  timber_api_core_output_path: "Core/TimberApi.Core/bin/RELEASE/netstandard2.1"
   timber_api_loaders_project_path: "Loaders/TimberApi.BepInEx.Plugin.Loader"
-  timber_api_loaders_output_path: "Loaders/TimberApi.BepInEx.Plugin.Loader/bin/Release/netstandard2.1"
+  timber_api_loaders_output_path: "Loaders/TimberApi.BepInEx.Plugin.Loader/bin/RELEASE/netstandard2.1"
 
   timber_api_assets_folder: "Assets"
 
