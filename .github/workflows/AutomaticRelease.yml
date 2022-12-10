@@ -297,13 +297,13 @@ jobs:
   update_version:
     runs-on: ubuntu-latest
 #    needs: [versions, create_timber_api_thunderstore_pack, create_timber_api_example_thunderstore_pack]
-    needs: [versions, create_timber_api_thunderstore_pack]
+    needs: [versions, create_timber_api_modio_pack]
     if: always() && (needs.create_timber_api_modio_pack.result == 'success' || needs.create_timber_api_example_thunderstore_pack.result == 'success')
     steps:
       - uses: actions/checkout@v2
 
       - name: Modify timber api version number
-        if: needs.create_timber_api_thunderstore_pack.result == 'success'
+        if: needs.create_timber_api_modio_pack.result == 'success'
         uses: mingjun97/file-regex-replace@v1
         with:
           regex: '(?<=TIMBER_API=).*'
