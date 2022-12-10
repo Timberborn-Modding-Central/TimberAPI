@@ -241,7 +241,7 @@ jobs:
         uses: actions/upload-artifact@v3.0.0
         with:
           name: TimberAPI_ModioPackage
-          path: .*/${{ env.timber_api_package_folder }}
+          path: .**/${{ env.timber_api_package_folder }}
 
 #  create_timber_api_example_thunderstore_pack:
 #    if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
