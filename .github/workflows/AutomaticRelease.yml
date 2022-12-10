@@ -41,15 +41,10 @@ on:
 env:
   #Timber API
   timber_api_release_name: "TimberAPI"
-
-#  timber_api_project_path: "TimberAPI/TimberAPI.csproj"
+  
   timber_api_project_path: "Core/TimberApi/TimberApi.csproj"
   timber_api_output_path: "Core/TimberApi/bin/RELEASE/netstandard2.1"
   timber_api_nuget_path: "Core/TimberApi/bin/RELEASE"
-
-#  timber_api_output_path: "TimberAPI/bin/RELEASE/netstandard2.1"
-  timber_api_package_dir: "TimberAPI/ThunderstorePackage"
-  #timber_api_nuget_path: "TimberAPI/bin/RELEASE"
 
   timber_api_core_project_path: "Core/TimberApi.Core/TimberApi.Core.csproj"
   timber_api_core_output_path: "Core/TimberApi.Core/bin/RELEASE/netstandard2.1"
@@ -57,8 +52,6 @@ env:
   timber_api_loaders_output_path: "Loaders/TimberApi.BepInEx.Plugin.Loader/bin/RELEASE/netstandard2.1"
 
   timber_api_assets_folder: "Assets"
-
-
   timber_api_package_folder: "ModIoPackage"
   timber_api_package_dll_folder: "ModIoPackage/TimberApi/plugins/core"
   timber_api_package_assets_folder: "ModIoPackage/TimberApi/plugins/core/assets"
@@ -287,10 +280,10 @@ jobs:
 #      - name: Modify README for TimberAPIExample
 #        run: sed -i 's/Currently supported features/Shows the following features/' ${{ env.timber_api_example_package_dir }}/README.md
 
-      - name: Upload TimberAPIExample Thunderstore Build Artifact
+      - name: Upload TimberAPIExample Mod.io Build Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
-          name: TimberAPIExample_ThunderStorePackage
+          name: TimberAPIExample_ModioPackage
           path: ${{ env.timber_api_example_package_dir }}
 
   update_version:
