@@ -41,10 +41,15 @@ on:
 env:
   #Timber API
   timber_api_release_name: "TimberAPI"
-  timber_api_project_path: "TimberAPI/TimberAPI.csproj"
-  timber_api_output_path: "TimberAPI/bin/RELEASE/netstandard2.1"
+
+#  timber_api_project_path: "TimberAPI/TimberAPI.csproj"
+  timber_api_project_path: "Core/TimberAPI/TimberAPI.csproj"
+  timber_api_output_path: "Core/TimberAPI/bin/RELEASE/netstandard2.1"
+  timber_api_nuget_path: "Core/TimberAPI/bin/RELEASE"
+
+#  timber_api_output_path: "TimberAPI/bin/RELEASE/netstandard2.1"
   timber_api_package_dir: "TimberAPI/ThunderstorePackage"
-  timber_api_nuget_path: "TimberAPI/bin/RELEASE"
+  #timber_api_nuget_path: "TimberAPI/bin/RELEASE"
 
   timber_api_core_project_path: "Core/TimberApi.Core/TimberApi.Core.csproj"
   timber_api_core_output_path: "Core/TimberApi.Core/bin/RELEASE/netstandard2.1"
@@ -135,11 +140,8 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build TimberAPICore
-        run: dotnet build ${{env.timber_api_core_project_path}} --no-restore --configuration RELEASE
-
-      - name: Build Loader
-        run: dotnet build ${{env.timber_api_loaders_project_path}} --no-restore --configuration RELEASE
+      - name: Build TimberAPI
+        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
 
       - name: Test
         run: dotnet test --no-build --verbosity normal
@@ -150,6 +152,58 @@ jobs:
         with:
           PROJ_FILE: ${{env.timber_api_core_project_path}}
 
+      - name: Pack TimberAPI
+        run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
+#
+#      - name: Upload TimberAPI Build Artifact
+#        uses: actions/upload-artifact@v3.0.0
+#        with:
+#          name: TimberAPI_NugetPackage
+#          path: ./${{ env.timber_api_package_folder }}
+
+      - name: Upload TimberAPI Build Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: TimberAPI_NugetPackage
+          path: ${{env.timber_api_nuget_path}}/*.nupkg
+
+#      - name: Push NuGet Package
+#        if: github.event.inputs.DoPrerelease != 'true'
+#        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
+
+  create_timber_api_thunderstore_pack:
+    if: ${{ github.event.inputs.update_timber_api == 'true' }}
+    needs: [versions]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+
+      - name: Find and Replace TIMBER_API_VERSION
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "TIMBER_API_VERSION"
+          replace: ${{ needs.versions.outputs.timber_api }}
+          regex: false
+
+#      - name: Replace TIMBER_API_EXAMPLE_VERSION
+#        uses: jacobtomlinson/gha-find-replace@v2
+#        with:
+#          find: "TIMBER_API_EXAMPLE_VERSION"
+#          replace: ${{ needs.versions.outputs.timber_api_example }}
+#          regex: false
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build TimberAPICore
+        run: dotnet build ${{env.timber_api_core_project_path}} --no-restore --configuration RELEASE
+
+      - name: Build Loader
+        run: dotnet build ${{env.timber_api_loaders_project_path}} --no-restore --configuration RELEASE
+      
       - name: Create TimberAPi folder
         run: mkdir ${{ env.timber_api_package_folder }}
 
@@ -174,59 +228,6 @@ jobs:
       - name: Cope asset bundle
         run: cp ${{ env.timber_api_assets_folder }}/timber_api ${{ env.timber_api_package_assets_folder }} 
 #
-#      - name: Zip Release
-#        uses: TheDoctor0/zip-release@0.6.2
-#        with:
-#          filename: TimberApi.zip
-#          path: ${{ env.timber_api_package_folder }}
-#          directory: .
-
-#      - name: Pack TimberAPI
-#        run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
-
-      - name: Foo
-        run: ls -l
-
-      - name: Upload TimberAPI Build Artifact
-        uses: actions/upload-artifact@v3.0.0
-        with:
-          name: TimberAPI_NugetPackage
-          path: ./${{ env.timber_api_package_folder }}
-
-#      - name: Push NuGet Package
-#        if: github.event.inputs.DoPrerelease != 'true'
-#        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
-
-#  create_timber_api_thunderstore_pack:
-#    if: ${{ github.event.inputs.update_timber_api == 'true' }}
-#    needs: [versions]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#
-#      - name: Setup .NET
-#        uses: actions/setup-dotnet@v2
-#
-#      - name: Find and Replace
-#        uses: jacobtomlinson/gha-find-replace@v2
-#        with:
-#          find: "TIMBER_API_VERSION"
-#          replace: ${{ needs.versions.outputs.timber_api }}
-#          regex: false
-#
-#      - name: Replace TIMBER_API_EXAMPLE_VERSION
-#        uses: jacobtomlinson/gha-find-replace@v2
-#        with:
-#          find: "TIMBER_API_EXAMPLE_VERSION"
-#          replace: ${{ needs.versions.outputs.timber_api_example }}
-#          regex: false
-#
-#      - name: Restore dependencies
-#        run: dotnet restore
-#
-#      - name: Build TimberAPI
-#        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
-#
 #      - name: Copy TimberAPI.dll to package folder
 #        run: cp ${{ env.timber_api_output_path }}/TimberAPI.dll ${{ env.timber_api_package_dir }}/TimberAPI/plugins
 #
@@ -241,7 +242,7 @@ jobs:
 #        with:
 #          name: TimberAPI_ThunderStorePackage
 #          path: ${{ env.timber_api_package_dir }}
-#
+
 #  create_timber_api_example_thunderstore_pack:
 #    if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
 #    needs: versions
