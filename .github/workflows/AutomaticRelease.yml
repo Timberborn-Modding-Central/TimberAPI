@@ -171,7 +171,7 @@ jobs:
 #        if: github.event.inputs.DoPrerelease != 'true'
 #        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
 
-  create_timber_api_thunderstore_pack:
+  create_timber_api_modio_pack:
     if: ${{ github.event.inputs.update_timber_api == 'true' }}
     needs: [versions]
     runs-on: ubuntu-latest
@@ -237,11 +237,11 @@ jobs:
 #      - name: Copy README to package folder
 #        run: cp README.md ${{ env.timber_api_package_dir }}
 #
-#      - name: Upload TimberAPI Thunderstore Build Artifact
-#        uses: actions/upload-artifact@v3.0.0
-#        with:
-#          name: TimberAPI_ThunderStorePackage
-#          path: ${{ env.timber_api_package_dir }}
+      - name: Upload TimberAPI Mod.io Build Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: TimberAPI_ModioPackage
+          path: ./${{ env.timber_api_package_folder }}
 
 #  create_timber_api_example_thunderstore_pack:
 #    if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
