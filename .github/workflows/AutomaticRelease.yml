@@ -114,7 +114,7 @@ jobs:
  #         version-fragment: ${{ github.event.inputs.timber_api_example_update_type }}
 
   publish_timber_api_nuget:
- #   if: ${{ github.event.inputs.update_timber_api == 'major' || github.event.inputs.update_timber_api == 'feature' || github.event.inputs.update_timber_api == 'bug'}}
+    if: ${{ github.event.inputs.update_timber_api == 'major' || github.event.inputs.update_timber_api == 'feature' || github.event.inputs.update_timber_api == 'bug'}}
     runs-on: ubuntu-latest
 #    needs: [versions, create_timber_api_thunderstore_pack]
     needs: [versions]
@@ -155,12 +155,6 @@ jobs:
 
       - name: Pack TimberAPI
         run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
-#
-#      - name: Upload TimberAPI Build Artifact
-#        uses: actions/upload-artifact@v3.0.0
-#        with:
-#          name: TimberAPI_NugetPackage
-#          path: ./${{ env.timber_api_package_folder }}
 
       - name: Upload TimberAPI Build Artifact
         uses: actions/upload-artifact@v3.0.0
@@ -200,10 +194,10 @@ jobs:
         run: dotnet restore
 
       - name: Build TimberAPICore
-        run: dotnet build ${{env.timber_api_core_project_path}} --no-restore --configuration RELEASE
+        run: dotnet build ${{env.timber_api_core_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
 
       - name: Build Loader
-        run: dotnet build ${{env.timber_api_loaders_project_path}} --no-restore --configuration RELEASE
+        run: dotnet build ${{env.timber_api_loaders_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
       
       - name: Create TimberAPi folder
         run: mkdir ${{ env.timber_api_package_folder }}
@@ -229,20 +223,19 @@ jobs:
       - name: Cope asset bundle
         run: cp ${{ env.timber_api_assets_folder }}/timber_api ${{ env.timber_api_package_assets_folder }} 
 #
-#      - name: Copy TimberAPI.dll to package folder
-#        run: cp ${{ env.timber_api_output_path }}/TimberAPI.dll ${{ env.timber_api_package_dir }}/TimberAPI/plugins
-#
-#      - name: Edit Version number in manifest
-#        run: sed -i 's/VERSION/${{ needs.versions.outputs.timber_api }}/' ${{ env.timber_api_package_dir }}/manifest.json
-#
-#      - name: Copy README to package folder
-#        run: cp README.md ${{ env.timber_api_package_dir }}
-#
       - name: Upload TimberAPI Mod.io Build Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: TimberAPI_ModioPackage
           path: ${{ env.timber_api_package_folder }}
+
+#      - uses: nickelc/upload-to-modio@v2.0.0
+#        with:
+#          token: ${{ secrets.MODIO_TOKEN }}
+#          game: 3659
+#          mod: 2463537
+#          version: ${{ needs.versions.outputs.timber_api }}
+#          path: ${{ env.timber_api_package_folder }}/*.zip
 
 #  create_timber_api_example_thunderstore_pack:
 #    if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
@@ -305,7 +298,7 @@ jobs:
     runs-on: ubuntu-latest
 #    needs: [versions, create_timber_api_thunderstore_pack, create_timber_api_example_thunderstore_pack]
     needs: [versions]
-    if: always() && (needs.create_timber_api_thunderstore_pack.result == 'success' || needs.create_timber_api_example_thunderstore_pack.result == 'success')
+    if: always() && (needs.create_timber_api_modio_pack.result == 'success' || needs.create_timber_api_example_thunderstore_pack.result == 'success')
     steps:
       - uses: actions/checkout@v2
 
