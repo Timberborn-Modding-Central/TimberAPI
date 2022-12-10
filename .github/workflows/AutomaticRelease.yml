@@ -58,9 +58,10 @@ env:
 
   timber_api_assets_folder: "Assets"
 
-  timber_api_package_folder: "TimberApi"
-  timber_api_package_dll_folder: "TimberApi/plugins/core"
-  timber_api_package_assets_folder: "TimberApi/plugins/core/assets"
+
+  timber_api_package_folder: "ModIoPackage"
+  timber_api_package_dll_folder: "ModIoPackage/TimberApi/plugins/core"
+  timber_api_package_assets_folder: "ModIoPackage/TimberApi/plugins/core/assets"
   #Timber API Example
   timber_api_example_release_name: "TimberAPI Example"
   timber_api_example_project_path: "TimberAPIExample/TimberAPIExample.csproj"
