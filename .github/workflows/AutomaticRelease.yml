@@ -43,9 +43,9 @@ env:
   timber_api_release_name: "TimberAPI"
 
 #  timber_api_project_path: "TimberAPI/TimberAPI.csproj"
-  timber_api_project_path: "Core/TimberAPI/TimberAPI.csproj"
-  timber_api_output_path: "Core/TimberAPI/bin/RELEASE/netstandard2.1"
-  timber_api_nuget_path: "Core/TimberAPI/bin/RELEASE"
+  timber_api_project_path: "Core/TimberApi/TimberApi.csproj"
+  timber_api_output_path: "Core/TimberApi/bin/RELEASE/netstandard2.1"
+  timber_api_nuget_path: "Core/TimberApi/bin/RELEASE"
 
 #  timber_api_output_path: "TimberAPI/bin/RELEASE/netstandard2.1"
   timber_api_package_dir: "TimberAPI/ThunderstorePackage"
