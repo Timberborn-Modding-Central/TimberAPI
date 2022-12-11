@@ -236,6 +236,9 @@ jobs:
           path: ${{ env.timber_api_package_folder }}
           directory: .
 
+      - name: Modify Release notes string
+        run: ${{ github.event.inputs.release_notes }} | sed 's/\./\n/g' > release_notes.txt
+
       - uses: nickelc/upload-to-modio@v2.0.0
         with:
           token: ${{ secrets.MODIO_TOKEN }}
@@ -244,7 +247,8 @@ jobs:
           version: ${{ needs.versions.outputs.timber_api }}
           path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
           active: ${{ github.event.inputs.make_active_file_in_modio }}
-          changelog: ${{ github.event.inputs.release_notes }} | sed 's/\./\n/g'
+          changelog-path: release_notes.txt
+#          changelog: ${{ github.event.inputs.release_notes }} | sed 's/\./\n/g'
 
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
