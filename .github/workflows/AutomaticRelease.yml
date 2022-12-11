@@ -20,6 +20,11 @@ on:
           - alpha
           - beta
           - rc
+      make_active_file_in_modio:
+        type: boolean
+        description: Make active file in Mod.io
+        default: true
+        required: true
       update_timber_api_example:
         type: boolean
         description: Update TimberAPIExample
@@ -218,8 +223,15 @@ jobs:
       - name: Upload TimberAPI Mod.io Build Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
-          name: TimberAPI_ModioPackage
+          name: TimberAPI_${{ needs.versions.outputs.timber_api }}
           path: ${{ env.timber_api_package_folder }}
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: TimberAPI_${{ needs.versions.outputs.timber_api }}
+
+      - name: List
+        run: ls -l
 
 #      - uses: nickelc/upload-to-modio@v2.0.0
 #        with:
@@ -228,6 +240,7 @@ jobs:
 #          mod: 2463537
 #          version: ${{ needs.versions.outputs.timber_api }}
 #          path: ${{ env.timber_api_package_folder }}/*.zip
+#          active: ${{ github.event.inputs.make_active_file_in_modio }}
 
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
