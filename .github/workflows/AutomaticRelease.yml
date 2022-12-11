@@ -25,6 +25,9 @@ on:
         description: Make active file in Mod.io
         default: false
         required: true
+      release_notes:
+        type: string
+        description: Release notes. 1 line per change
       update_timber_api_example:
         type: boolean
         description: Update TimberAPIExample
