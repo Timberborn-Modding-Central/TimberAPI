@@ -231,7 +231,7 @@ jobs:
           name: TimberAPI_${{ needs.versions.outputs.timber_api }}
 
       - name: List
-        run: ls -l
+        run: ls -R
 
 #      - uses: nickelc/upload-to-modio@v2.0.0
 #        with:
