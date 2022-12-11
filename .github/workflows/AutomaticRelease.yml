@@ -227,11 +227,19 @@ jobs:
           path: ${{ env.timber_api_package_folder }}
 
       - uses: actions/download-artifact@v3
+        id: download
         with:
           name: TimberAPI_${{ needs.versions.outputs.timber_api }}
 
       - name: List
-        run: ls -R
+        run: ls -l
+
+      - name: List
+        run: echo ${{steps.download.outputs.download-path}}
+
+      - name: List
+        run: ls -l
+        working-directory: ${{steps.download.outputs.download-path}}
 
 #      - uses: nickelc/upload-to-modio@v2.0.0
 #        with:
