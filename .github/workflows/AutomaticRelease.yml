@@ -23,7 +23,7 @@ on:
       make_active_file_in_modio:
         type: boolean
         description: Make active file in Mod.io
-        default: true
+        default: false
         required: true
       update_timber_api_example:
         type: boolean
