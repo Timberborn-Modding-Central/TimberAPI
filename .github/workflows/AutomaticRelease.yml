@@ -248,7 +248,6 @@ jobs:
           path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
           active: ${{ github.event.inputs.make_active_file_in_modio }}
           changelog-path: release_notes.txt
-#          changelog: ${{ github.event.inputs.release_notes }} | sed 's/\./\n/g'
 
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
