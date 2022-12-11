@@ -233,29 +233,14 @@ jobs:
           path: ${{ env.timber_api_package_folder }}
           directory: .
 
-#      - uses: actions/download-artifact@v3
-#        id: download
-#        with:
-#          name: TimberAPI_${{ needs.versions.outputs.timber_api }}
-#
-      - name: List
-        run: ls -l
-#
-#      - name: List
-#        run: echo ${{steps.download.outputs.download-path}}
-#
-#      - name: List
-#        run: ls -l
-#        working-directory: ${{steps.download.outputs.download-path}}
-
-#      - uses: nickelc/upload-to-modio@v2.0.0
-#        with:
-#          token: ${{ secrets.MODIO_TOKEN }}
-#          game: 3659
-#          mod: 2463537
-#          version: ${{ needs.versions.outputs.timber_api }}
-#          path: ${{ env.timber_api_package_folder }}/*.zip
-#          active: ${{ github.event.inputs.make_active_file_in_modio }}
+      - uses: nickelc/upload-to-modio@v2.0.0
+        with:
+          token: ${{ secrets.MODIO_TOKEN }}
+          game: 3659
+          mod: 2463537
+          version: ${{ needs.versions.outputs.timber_api }}
+          path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
+          active: ${{ github.event.inputs.make_active_file_in_modio }}
 
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
