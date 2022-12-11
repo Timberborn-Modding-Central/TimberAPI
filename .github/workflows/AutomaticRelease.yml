@@ -237,7 +237,7 @@ jobs:
           directory: .
 
       - name: Modify Release notes string
-        run: cat <<< ${{ github.event.inputs.release_notes }} | sed 's/\./\n/g' > release_notes.txt
+        run: echo '${{ github.event.inputs.release_notes }}' | sed 's/\./\n/g' > release_notes.txt
 
       - name: Foo
         run: cat release_notes.txt
