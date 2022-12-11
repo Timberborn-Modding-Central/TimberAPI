@@ -239,9 +239,6 @@ jobs:
       - name: Modify Release notes string
         run: echo '${{ github.event.inputs.release_notes }}' | sed 's/\. */\n/g' > release_notes.txt
 
-      - name: Foo
-        run: cat release_notes.txt
-
       - uses: nickelc/upload-to-modio@v2.0.0
         with:
           token: ${{ secrets.MODIO_TOKEN }}
