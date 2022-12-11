@@ -275,24 +275,6 @@ jobs:
       - name: Copy TimberAPIExample.dll to package folder
         run: cp ${{ env.timber_api_example_output_path }}/TimberAPIExample.dll ${{ env.timber_api_example_package_dir }}/TimberAPIExample/plugins
 
-#      # Important: Change VERSION_API Before VERSION
-#      - name: Edit TimberAPI Dependency string
-#        run: sed -i 's/VERSION_API/${{ needs.versions.outputs.timber_api }}/' ${{ env.timber_api_example_package_dir }}/manifest.json
-#
-#      # Important: Change VERSION_API Before VERSION
-#      - name: Edit TimberAPI Example version number
-#        run: sed -i 's/VERSION/${{ needs.versions.outputs.timber_api_example }}/' ${{ env.timber_api_example_package_dir }}/manifest.json
-#
-#      - name: Copy README to package folder for TimberAPIExample
-#        run: cp README.md ${{ env.timber_api_example_package_dir }}
-
-#      - name: Modify README for TimberAPIExample
-#        run: sed -i 's/# TimberAPI/# TimberAPIExample/' ${{ env.timber_api_example_package_dir }}/README.md
-#      - name: Modify README for TimberAPIExample
-#        run: sed -i 's/Unofficial API to enable easier Timberborn modding/The example plugin for TimberAPI/' ${{ env.timber_api_example_package_dir }}/README.md
-#      - name: Modify README for TimberAPIExample
-#        run: sed -i 's/Currently supported features/Shows the following features/' ${{ env.timber_api_example_package_dir }}/README.md
-
       - name: Upload TimberAPIExample Mod.io Build Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
