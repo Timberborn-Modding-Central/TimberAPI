@@ -27,7 +27,7 @@ on:
         required: true
       release_notes:
         type: string
-        description: Release notes. 1 line per change
+        description: Release notes. Separate lines with a .
       update_timber_api_example:
         type: boolean
         description: Update TimberAPIExample
@@ -244,6 +244,7 @@ jobs:
           version: ${{ needs.versions.outputs.timber_api }}
           path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
           active: ${{ github.event.inputs.make_active_file_in_modio }}
+          changelog: ${{ github.event.inputs.release_notes }} | sed 's/\./\n/g'
 
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
