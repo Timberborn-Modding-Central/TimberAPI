@@ -1,7 +1,4 @@
-## Unreleased \n\n## 0.5.8
-- test line 1
-- test line 2
-- test line 3
+## Unreleased
 
 ## 0.5.0
 - NEW: Loader system
