@@ -243,7 +243,7 @@ jobs:
           path: ./changelog.txt
 
       - name: Echo package.json
-        run: echo "${{ steps.package.outputs.content }}" | grep -oP '(?<=## Unreleased\n)(\s*|\S*)*(?=##)' > temp.txt
+        run: grep -oP '(?<=## Unreleased\n)(\s*|\S*)*(?=##)' changelog.txt > temp.txt
 
       - name: FOO
         run: ls -l
