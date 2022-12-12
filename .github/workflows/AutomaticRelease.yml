@@ -244,7 +244,7 @@ jobs:
 
       - name: Grep
 #        run: grep -o '(?<=## Unreleased\n)(\s*|\S*)*(?=##)' changelog.txt > temp.txt
-        run: grep -oP 'Unreleased' changelog.txt > temp.txt
+        run: grep -oP '(?<=## Unreleased\n)(\s*|\S*)' changelog.txt > temp.txt
 
       - name: FOO
         run: ls -l
