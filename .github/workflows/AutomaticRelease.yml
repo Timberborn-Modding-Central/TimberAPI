@@ -257,7 +257,26 @@ jobs:
         run: ls -l
 
       - name: FOO2
-        run: echo ${{ steps.regex-match.outputs.group1 }}
+        run: echo "${{ steps.regex-match.outputs.group1 }}"
+
+      - name: regex match action
+        id: regex
+        # You may pin to the exact commit or the version.
+        # uses: MeilCli/regex-match@27295a1f7feb7b0b5ebcde4b2c335690a32a8ec5
+        uses: MeilCli/regex-match@v1.0.1
+        with:
+          # search regex pattern
+          regex_pattern: '(?<=## Unreleased\n).*?(?=##)'
+          # search regex option
+          regex_option: s
+          # searched string
+          search_string: "${{ steps.package.outputs.content }}"
+
+      - name: CONTENT
+        run: echo "${{ steps.package.outputs.content }}"
+
+      - name: FOO2
+        run: echo "${{ steps.regex.outputs.matched_first }}"
 
 #      - name: Modify Release notes string
 #        run: echo '${{ github.event.inputs.release_notes }}' | sed 's/\. */\n/g' > release_notes.txt
