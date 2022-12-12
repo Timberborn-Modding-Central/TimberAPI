@@ -73,8 +73,8 @@ jobs:
     name: Parse project versions
     runs-on: ubuntu-latest
     outputs:
-      timber_api: ${{ github.event.inputs.update_timber_api == 'false' && steps.timber_api.outputs.match || steps.bump_timber_api_version.outputs.next-version }}
-      timber_api_example: ${{ github.event.inputs.update_timber_api_example == 'false' && steps.timber_api_example.outputs.match || steps.bump_timber_api_example_version.outputs.next-version }}
+      timber_api: ${{ github.event.inputs.update_timber_api == 'false' && steps.timber_api.outputs.match || steps.timber_api_version_finalized.outputs.replaced }}
+      timber_api_example: ${{ github.event.inputs.update_timber_api_example == 'false' && steps.timber_api_example.outputs.match || steps.timber_api_example_version_finalized.outputs.replaced }}
     steps:
       - uses: actions/checkout@v3
 
@@ -98,6 +98,12 @@ jobs:
           current-version: ${{ steps.timber_api.outputs.match }}
           version-fragment: ${{ github.event.inputs.timber_api_update_type }}
 
+      - name: Concat string
+        id: timber_api_version_finalized
+        uses: greguintow/concat-string-action@v2
+        with:
+          string: '0.${{ steps.bump_timber_api_version.outputs.next-version }}'
+
       # TimberAPI Example versioning
       - id: timber_api_example
         uses: actions-ecosystem/action-regex-match@v2
@@ -110,6 +116,12 @@ jobs:
         with:
           current-version: ${{ steps.timber_api_example.outputs.match }}
           version-fragment: ${{ github.event.inputs.timber_api_example_update_type }}
+
+      - name: Concat string
+        id: timber_api_example_version_finalized
+        uses: greguintow/concat-string-action@v2
+        with:
+          string: '0.${{ steps.bump_timber_api_example_version.outputs.next-version }}'
 
   publish_timber_api_nuget:
     if: ${{ github.event.inputs.timber_api_update_type == 'major' || github.event.inputs.timber_api_update_type == 'feature' || github.event.inputs.timber_api_update_type == 'bug'}}
