@@ -321,7 +321,7 @@ jobs:
         with:
           regex: '## Unreleased'
           replacement: '## Unreleased \n\n## ${{ needs.versions.outputs.timber_api }}'
-          include: 'project_versions.txt'
+          include: 'changelog.txt'
 
       - name: Modify timber api example version number
         if: needs.create_timber_api_example_modio_pack.result == 'success'
