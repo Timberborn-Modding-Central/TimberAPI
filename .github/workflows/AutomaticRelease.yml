@@ -320,7 +320,10 @@ jobs:
         uses: mingjun97/file-regex-replace@v1
         with:
           regex: '## Unreleased'
-          replacement: '## Unreleased \n\n## ${{ needs.versions.outputs.timber_api }}'
+          replacement: |
+            ## Unreleased
+            
+            ## ${{ needs.versions.outputs.timber_api }}
           include: 'changelog.txt'
 
       - name: Modify timber api example version number
