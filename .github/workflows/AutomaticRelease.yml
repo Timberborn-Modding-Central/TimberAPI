@@ -250,9 +250,6 @@ jobs:
           regex_option: s
           search_string: "${{ steps.package.outputs.content }}"
 
-#      - name: FOO2
-#        run: echo "${{ steps.regex.outputs.matched_first }}"
-
       - uses: nickelc/upload-to-modio@v2.0.0
         with:
           token: ${{ secrets.MODIO_TOKEN }}
@@ -316,6 +313,14 @@ jobs:
         with:
           regex: '(?<=TIMBER_API=).*'
           replacement: '${{ needs.versions.outputs.timber_api }}'
+          include: 'project_versions.txt'
+
+      - name: Modify changelog
+        if: needs.create_timber_api_modio_pack.result == 'success'
+        uses: mingjun97/file-regex-replace@v1
+        with:
+          regex: '## Unreleased'
+          replacement: '## Unreleased \n\n## ${{ needs.versions.outputs.timber_api }}'
           include: 'project_versions.txt'
 
       - name: Modify timber api example version number
