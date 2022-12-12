@@ -242,15 +242,21 @@ jobs:
         with:
           path: ./changelog.txt
 
-      - name: Grep
+#      - name: Grep
 #        run: grep -o '(?<=## Unreleased\n)(\s*|\S*)*(?=##)' changelog.txt > temp.txt
-        run: grep -oP '(?<=## Unreleased\n)(\s*|\S*)' changelog.txt > temp.txt
+#        run: grep -oP '(?<=## Unreleased\n)(\s*|\S*)' changelog.txt > temp.txt
+
+      - uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: "${{ steps.package.outputs.content }}"
+          regex: '(?<=## Unreleased\n)(\s*|\S*)*(?=##)'
 
       - name: FOO
         run: ls -l
 
       - name: FOO2
-        run: cat temp.txt
+        run: echo ${{ steps.regex-match.outputs.group1 }}
 
 #      - name: Modify Release notes string
 #        run: echo '${{ github.event.inputs.release_notes }}' | sed 's/\. */\n/g' > release_notes.txt
