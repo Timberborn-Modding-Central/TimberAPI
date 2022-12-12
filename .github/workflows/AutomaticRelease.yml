@@ -250,7 +250,8 @@ jobs:
         id: regex-match
         with:
           text: "${{ steps.package.outputs.content }}"
-          regex: '(?<=## Unreleased\n)(\s*|\S*)*(?=##)'
+          regex: '(?<=## Unreleased\n).*?(?=##)'
+          flags: s
 
       - name: FOO
         run: ls -l
