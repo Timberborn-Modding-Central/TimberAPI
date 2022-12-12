@@ -242,12 +242,15 @@ jobs:
         with:
           path: ./changelog.txt
 
-      - name: Echo package.json
+      - name: Grep
 #        run: grep -o '(?<=## Unreleased\n)(\s*|\S*)*(?=##)' changelog.txt > temp.txt
-        run: grep -o 'Unreleased' changelog.txt > temp.txt
+        run: grep -oP 'Unreleased' changelog.txt > temp.txt
 
       - name: FOO
         run: ls -l
+
+      - name: FOO2
+        run: cat temp.txt
 
 #      - name: Modify Release notes string
 #        run: echo '${{ github.event.inputs.release_notes }}' | sed 's/\. */\n/g' > release_notes.txt
