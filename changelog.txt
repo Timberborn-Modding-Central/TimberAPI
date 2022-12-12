@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.5.9
+
 ## 0.5.0
 - NEW: Loader system
 - NEW: Bootstrap
