@@ -236,18 +236,30 @@ jobs:
           path: ${{ env.timber_api_package_folder }}
           directory: .
 
-      - name: Modify Release notes string
-        run: echo '${{ github.event.inputs.release_notes }}' | sed 's/\. */\n/g' > release_notes.txt
-
-      - uses: nickelc/upload-to-modio@v2.0.0
+      - name: Read changelof
+        id: package
+        uses: juliangruber/read-file-action@v1
         with:
-          token: ${{ secrets.MODIO_TOKEN }}
-          game: 3659
-          mod: 2463537
-          version: ${{ needs.versions.outputs.timber_api }}
-          path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
-          active: ${{ github.event.inputs.make_active_file_in_modio }}
-          changelog-path: release_notes.txt
+          path: ./changelog.txt
+
+      - name: Echo package.json
+        run: echo "${{ steps.package.outputs.content }}" | grep -oP '(?<=## Unreleased\n)(\s*|\S*)*(?=##)' > temp.txt
+
+      - name: FOO
+        run: ls -l
+
+#      - name: Modify Release notes string
+#        run: echo '${{ github.event.inputs.release_notes }}' | sed 's/\. */\n/g' > release_notes.txt
+
+#      - uses: nickelc/upload-to-modio@v2.0.0
+#        with:
+#          token: ${{ secrets.MODIO_TOKEN }}
+#          game: 3659
+#          mod: 2463537
+#          version: ${{ needs.versions.outputs.timber_api }}
+#          path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
+#          active: ${{ github.event.inputs.make_active_file_in_modio }}
+#          changelog-path: release_notes.txt
 
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
