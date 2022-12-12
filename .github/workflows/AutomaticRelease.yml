@@ -162,9 +162,9 @@ jobs:
           name: TimberAPI_NugetPackage
           path: ${{env.timber_api_nuget_path}}/*.nupkg
 
-      - name: Push NuGet Package
-        if: github.event.inputs.DoPrerelease != 'true'
-        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
+#      - name: Push NuGet Package
+#        if: github.event.inputs.DoPrerelease != 'true'
+#        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
 
   create_timber_api_modio_pack:
     if: ${{ github.event.inputs.update_timber_api == 'true' }}
@@ -236,59 +236,32 @@ jobs:
           path: ${{ env.timber_api_package_folder }}
           directory: .
 
-      - name: Read changelof
+      - name: Read changelog
         id: package
         uses: juliangruber/read-file-action@v1
         with:
           path: ./changelog.txt
 
-#      - name: Grep
-#        run: grep -o '(?<=## Unreleased\n)(\s*|\S*)*(?=##)' changelog.txt > temp.txt
-#        run: grep -oP '(?<=## Unreleased\n)(\s*|\S*)' changelog.txt > temp.txt
-
-      - uses: actions-ecosystem/action-regex-match@v2
-        id: regex-match
-        with:
-          text: "${{ steps.package.outputs.content }}"
-          regex: '(?<=## Unreleased\n).*?(?=##)'
-          flags: s
-
-      - name: FOO
-        run: ls -l
-
-      - name: FOO2
-        run: echo "${{ steps.regex-match.outputs.group1 }}"
-
       - name: regex match action
         id: regex
-        # You may pin to the exact commit or the version.
-        # uses: MeilCli/regex-match@27295a1f7feb7b0b5ebcde4b2c335690a32a8ec5
         uses: MeilCli/regex-match@v1.0.1
         with:
-          # search regex pattern
           regex_pattern: '(?<=## Unreleased\n).*?(?=##)'
-          # search regex option
           regex_option: s
-          # searched string
           search_string: "${{ steps.package.outputs.content }}"
 
-      - name: CONTENT
-        run: echo "${{ steps.package.outputs.content }}"
+#      - name: FOO2
+#        run: echo "${{ steps.regex.outputs.matched_first }}"
 
-      - name: FOO2
-        run: echo "${{ steps.regex.outputs.matched_first }}"
-
-#      - name: Modify Release notes string
-#        run: echo '${{ github.event.inputs.release_notes }}' | sed 's/\. */\n/g' > release_notes.txt
-
-#      - uses: nickelc/upload-to-modio@v2.0.0
-#        with:
-#          token: ${{ secrets.MODIO_TOKEN }}
-#          game: 3659
-#          mod: 2463537
-#          version: ${{ needs.versions.outputs.timber_api }}
-#          path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
-#          active: ${{ github.event.inputs.make_active_file_in_modio }}
+      - uses: nickelc/upload-to-modio@v2.0.0
+        with:
+          token: ${{ secrets.MODIO_TOKEN }}
+          game: 3659
+          mod: 2463537
+          version: ${{ needs.versions.outputs.timber_api }}
+          path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
+          active: ${{ github.event.inputs.make_active_file_in_modio }}
+          changelog: "${{ steps.regex.outputs.matched_first }}"
 #          changelog-path: release_notes.txt
 
   create_timber_api_example_modio_pack:
