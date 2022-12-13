@@ -259,11 +259,20 @@ jobs:
           regex_option: s
           search_string: "${{ steps.package.outputs.content }}"
 
+      - name: extract metadata
+        id: metadata
+        run: |
+          GAME_ID:$(jq '.game_id' metadata.json)
+          MOD_ID=$(jq '.timber_api_mod_id' metadata.json)
+
+          echo "GAME=$GAME_ID" >> $GITHUB_OUTPUT
+          echo "MOD=$MOD_ID" >> $GITHUB_OUTPUT
+
       - uses: nickelc/upload-to-modio@v2.0.0
         with:
           token: ${{ secrets.MODIO_TOKEN }}
-          game: 3659
-          mod: 2463537
+          game: ${{ steps.metadata.outputs.GAME_ID }}
+          mod: ${{ steps.metadata.outputs.MOD_ID }}
           version: ${{ needs.versions.outputs.timber_api }}
           path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
           active: ${{ github.event.inputs.make_active_file_in_modio }}
