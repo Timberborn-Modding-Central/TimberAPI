@@ -264,7 +264,7 @@ jobs:
       - name: extract metadata
         id: metadata
         run: |
-          GAME_ID:$(jq '.game_id' metadata.json)
+          GAME_ID=$(jq '.game_id' metadata.json)
           MOD_ID=$(jq '.timber_api_mod_id' metadata.json)
 
           echo "GAME=$GAME_ID" >> $GITHUB_OUTPUT
