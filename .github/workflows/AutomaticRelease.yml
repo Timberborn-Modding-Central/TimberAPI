@@ -73,8 +73,10 @@ jobs:
     name: Parse project versions
     runs-on: ubuntu-latest
     outputs:
-      timber_api: ${{ github.event.inputs.update_timber_api == 'false' && steps.timber_api.outputs.match || steps.timber_api_version_finalized.outputs.replaced }}
-      timber_api_example: ${{ github.event.inputs.update_timber_api_example == 'false' && steps.timber_api_example.outputs.match || steps.timber_api_example_version_finalized.outputs.replaced }}
+      timber_api: ${{ github.event.inputs.update_timber_api == 'false' && steps.timber_api.outputs.match || steps.bump_timber_api_version.outputs.next-version }}
+      timber_api_example: ${{ github.event.inputs.update_timber_api_example == 'false' && steps.timber_api_example.outputs.match || steps.bump_timber_api_example_version.outputs.next-version }}
+      timber_api_leading_zero: ${{ github.event.inputs.update_timber_api == 'false' && steps.timber_api.outputs.match || steps.timber_api_version_finalized.outputs.replaced }}
+      timber_api_example_leading_zero: ${{ github.event.inputs.update_timber_api_example == 'false' && steps.timber_api_example.outputs.match || steps.timber_api_example_version_finalized.outputs.replaced }}
     steps:
       - uses: actions/checkout@v3
 
@@ -151,7 +153,7 @@ jobs:
         run: dotnet restore
 
       - name: Build TimberAPI
-        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
+        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
 
       - name: Test
         run: dotnet test --no-build --verbosity normal
@@ -163,7 +165,7 @@ jobs:
           PROJ_FILE: ${{env.timber_api_core_project_path}}
 
       - name: Pack TimberAPI
-        run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
+        run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
 
       - name: Upload TimberAPI Build Artifact
         uses: actions/upload-artifact@v3.0.0
@@ -189,24 +191,24 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "TIMBER_API_VERSION"
-          replace: ${{ needs.versions.outputs.timber_api }}
+          replace: ${{ needs.versions.outputs.timber_api_leading_zero }}
           regex: false
 
       - name: Replace TIMBER_API_EXAMPLE_VERSION
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "TIMBER_API_EXAMPLE_VERSION"
-          replace: ${{ needs.versions.outputs.timber_api_example }}
+          replace: ${{ needs.versions.outputs.timber_api_example_leading_zero }}
           regex: false
 
       - name: Restore dependencies
         run: dotnet restore
 
       - name: Build TimberAPICore
-        run: dotnet build ${{env.timber_api_core_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
+        run: dotnet build ${{env.timber_api_core_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
 
       - name: Build Loader
-        run: dotnet build ${{env.timber_api_loaders_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api }}
+        run: dotnet build ${{env.timber_api_loaders_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
       
       - name: Create TimberAPi folder
         run: mkdir ${{ env.timber_api_package_folder }}
@@ -235,13 +237,13 @@ jobs:
       - name: Upload TimberAPI Mod.io Build Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
-          name: TimberAPI_${{ needs.versions.outputs.timber_api }}
+          name: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}
           path: ${{ env.timber_api_package_folder }}
 
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.6.2
         with:
-          filename: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
+          filename: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
           path: ${{ env.timber_api_package_folder }}
           directory: .
 
@@ -273,8 +275,8 @@ jobs:
           token: ${{ secrets.MODIO_TOKEN }}
           game: ${{ steps.metadata.outputs.GAME_ID }}
           mod: ${{ steps.metadata.outputs.MOD_ID }}
-          version: ${{ needs.versions.outputs.timber_api }}
-          path: TimberAPI_${{ needs.versions.outputs.timber_api }}.zip
+          version: ${{ needs.versions.outputs.timber_api_leading_zero }}
+          path: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
           active: ${{ github.event.inputs.make_active_file_in_modio }}
           changelog: "${{ steps.regex.outputs.matched_first }}"
 
@@ -292,21 +294,21 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "TIMBER_API_VERSION"
-          replace: ${{ needs.versions.outputs.timber_api }}
+          replace: ${{ needs.versions.outputs.timber_api_leading_zero }}
           regex: false
 
       - name: Replace TIMBER_API_EXAMPLE_VERSION
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "TIMBER_API_EXAMPLE_VERSION"
-          replace: ${{ needs.versions.outputs.timber_api_example }}
+          replace: ${{ needs.versions.outputs.timber_api_exmaple_leading_zero }}
           regex: false
 
       - name: Restore dependencies
         run: dotnet restore
 
       - name: Build TimberAPIExample
-        run: dotnet build ${{env.timber_api_example_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_example }}
+        run: dotnet build ${{env.timber_api_example_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_example_leading_zero }}
 
       - name: Copy TimberAPIExample.dll to package folder
         run: cp ${{ env.timber_api_example_output_path }}/TimberAPIExample.dll ${{ env.timber_api_example_package_dir }}/TimberAPIExample/plugins
