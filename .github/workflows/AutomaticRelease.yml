@@ -273,8 +273,8 @@ jobs:
       - uses: nickelc/upload-to-modio@v2.0.0
         with:
           token: ${{ secrets.MODIO_TOKEN }}
-          game: ${{ steps.metadata.outputs.GAME_ID }}
-          mod: ${{ steps.metadata.outputs.MOD_ID }}
+          game: ${{ steps.metadata.outputs.GAME }}
+          mod: ${{ steps.metadata.outputs.MOD }}
           version: ${{ needs.versions.outputs.timber_api_leading_zero }}
           path: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
           active: ${{ github.event.inputs.make_active_file_in_modio }}
