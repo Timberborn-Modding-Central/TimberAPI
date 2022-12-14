@@ -279,6 +279,40 @@ jobs:
           path: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
           active: ${{ github.event.inputs.make_active_file_in_modio }}
           changelog: "${{ steps.regex.outputs.matched_first }}"
+          
+
+      - name: regex match action
+        id: regex2
+        uses: MeilCli/regex-match@v1.0.1
+        with:
+          regex_pattern: '(?<=### Changes\n).*?(?=## \d)'
+          regex_option: s
+          search_string: "${{ steps.package.outputs.content }}"
+
+#      - name: Create Release
+#        id: create_release
+#        uses: actions/create-release@latest
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+#        with:
+#          tag_name: v${{ needs.versions.outputs.timber_api_leading_zero }}
+#          release_name: v${{ needs.versions.outputs.timber_api_leading_zero }}
+#          body: ${{ steps.regex2.outputs.matched_first }}
+#          draft: false
+#          prerelease: false
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          tag_name: v${{ needs.versions.outputs.timber_api_leading_zero }}
+          name: v${{ needs.versions.outputs.timber_api_leading_zero }}
+          body: ${{ steps.regex2.outputs.matched_first }}
+          draft: false
+          prerelease: false
+          files: |
+            TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
