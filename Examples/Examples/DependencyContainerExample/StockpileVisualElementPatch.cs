@@ -1,7 +1,7 @@
 using HarmonyLib;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.UiBuilderSystem;
-using Timberborn.WarehousesUI;
+using Timberborn.StockpilesUI;
 using UnityEngine.UIElements;
 
 namespace TimberAPIExample.Examples.DependencyContainerExample

@@ -7,7 +7,7 @@ using Timberborn.EntityPanelSystem;
 using Timberborn.Localization;
 using Timberborn.PrefabSystem;
 using Timberborn.SelectionSystem;
-using Timberborn.Warehouses;
+using Timberborn.Stockpiles;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;

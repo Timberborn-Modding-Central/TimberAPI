@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using TimberApi.EntityLinkerSystem;
 using Timberborn.Buildings;
+using Timberborn.Stockpiles;
 using Timberborn.TickSystem;
-using Timberborn.Warehouses;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample
 {

@@ -4,8 +4,8 @@ using TimberApi.SceneSystem;
 using TimberAPIExample.Examples.EntityLinkerExample.UI;
 using Timberborn.Buildings;
 using Timberborn.EntityPanelSystem;
+using Timberborn.Stockpiles;
 using Timberborn.TemplateSystem;
-using Timberborn.Warehouses;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample
 {
