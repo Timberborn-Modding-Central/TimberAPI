@@ -257,7 +257,7 @@ jobs:
         id: regex
         uses: MeilCli/regex-match@v1.0.1
         with:
-          regex_pattern: '(?<=## Unreleased\n).*?(?=##)'
+          regex_pattern: '(?<=### Changes\n).*?(?=## \d)'
           regex_option: s
           search_string: "${{ steps.package.outputs.content }}"
 
@@ -343,6 +343,9 @@ jobs:
             ## Unreleased
             
             ## ${{ needs.versions.outputs.timber_api }}
+
+            ### Changes
+
           include: 'changelog.txt'
 
       - name: Modify timber api example version number
