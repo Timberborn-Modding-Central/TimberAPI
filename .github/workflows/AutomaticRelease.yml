@@ -376,6 +376,7 @@ jobs:
 
   create_release:
     needs: [update_version]
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
