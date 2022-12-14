@@ -346,7 +346,7 @@ jobs:
 
             ### Changes
 
-          include: 'changelog.txt'
+          include: 'changelog.md'
 
       - name: Modify timber api example version number
         if: needs.create_timber_api_example_modio_pack.result == 'success'
