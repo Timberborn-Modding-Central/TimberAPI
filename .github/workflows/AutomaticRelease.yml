@@ -303,7 +303,6 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           tag_name: v${{ needs.versions.outputs.timber_api_leading_zero }}
           name: v${{ needs.versions.outputs.timber_api_leading_zero }}
