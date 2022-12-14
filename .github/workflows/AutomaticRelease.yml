@@ -279,15 +279,6 @@ jobs:
           path: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
           active: ${{ github.event.inputs.make_active_file_in_modio }}
           changelog: "${{ steps.regex.outputs.matched_first }}"
-          
-
-      - name: regex match action
-        id: regex2
-        uses: MeilCli/regex-match@v1.0.1
-        with:
-          regex_pattern: '## Unreleased.*?(?=## \d)'
-          regex_option: s
-          search_string: "${{ steps.package.outputs.content }}"
 
 #      - name: Create Release
 #        id: create_release
@@ -300,18 +291,6 @@ jobs:
 #          body: ${{ steps.regex2.outputs.matched_first }}
 #          draft: false
 #          prerelease: false
-
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ needs.versions.outputs.timber_api_leading_zero }}
-          name: v${{ needs.versions.outputs.timber_api_leading_zero }}
-          body: ${{ steps.regex2.outputs.matched_first }}
-          draft: false
-          prerelease: false
-          files: |
-            TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
-          token: ${{ secrets.GITHUB_TOKEN }}
 
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
@@ -394,3 +373,43 @@ jobs:
         with:
           message: "Updated versions"
           default_author: github_actions
+
+  create_release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Read changelog
+        id: package
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./changelog.md
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}
+          path: path/to/artifact
+
+      - name: Display structure of downloaded files
+        run: ls -l
+        working-directory: path/to/artifact 
+
+      - name: regex match action
+        id: regex2
+        uses: MeilCli/regex-match@v1.0.1
+        with:
+          regex_pattern: '## ${{ needs.versions.outputs.timber_api }}.*?(?=## \d)'
+          regex_option: s
+          search_string: "${{ steps.package.outputs.content }}"
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.versions.outputs.timber_api_leading_zero }}
+          name: v${{ needs.versions.outputs.timber_api_leading_zero }}
+          body: ${{ steps.regex2.outputs.matched_first }}
+          draft: false
+          prerelease: false
+          files: |
+            TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
+          token: ${{ secrets.GITHUB_TOKEN }}

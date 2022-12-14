@@ -1,8 +1,4 @@
 ## Unreleased
-
-### Changes
-
-## 5.1.4
 Some text here
 
 ### Changes
