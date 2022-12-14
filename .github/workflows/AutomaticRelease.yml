@@ -375,7 +375,7 @@ jobs:
           default_author: github_actions
 
   create_release:
-    needs: [versions, create_timber_api_modio_pack, create_timber_api_example_modio_pack, update_version]
+    needs: [update_version]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
