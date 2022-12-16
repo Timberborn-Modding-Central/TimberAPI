@@ -3,7 +3,8 @@ Unofficial API to enable easier Timberborn modding
 
 |TimberAPI Version |Game Version Compatible|
 |---|---|
-|0.5.X.X   |0.2.8.1|
+|0.5.3   |0.3.4.3|	
+|>0.5.3  |0.2.8.1|
 |0.4.X   |0.2.2.1|
 |0.3.X   |0.1.5.2|
 
