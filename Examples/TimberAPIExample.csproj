@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Timberborn.GameLibs" Version="0.2.8.1-r.0" />
+      <PackageReference Include="Timberborn.GameLibs" Version="0.3.4.3-r.0" />
     </ItemGroup>
 
     <ItemGroup>

@@ -2,9 +2,9 @@
 using HarmonyLib;
 using TimberApi.Common.SingletonSystem;
 using TimberApi.DependencyContainerSystem;
-using Timberborn.EntitySystem;
+using Timberborn.Bots;
 using Timberborn.FactionSystemGame;
-using Timberborn.Golems;
+using Timberborn.PrefabSystem;
 
 // ReSharper disable RedundantAssignment
 // ReSharper disable IdentifierTypo
@@ -16,16 +16,19 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Golems
     {
         public void Load()
         {
-            var harmony = new Harmony("TimberAPI.golem");
+            var harmony = new Harmony("TimberAPI.bot");
 
-            harmony.Patch(AccessTools.Method(typeof(GolemFactory), nameof(GolemFactory.Load)), new HarmonyMethod(AccessTools.Method(typeof(GolemFactionPatcher), nameof(PrefixGolemPrefab))));
+            harmony.Patch(AccessTools.Method(typeof(BotFactory), nameof(BotFactory.Load)),
+                new HarmonyMethod(AccessTools.Method(typeof(GolemFactionPatcher), nameof(PrefixGolemPrefab))));
         }
 
-        public static bool PrefixGolemPrefab(ref Golem ____golemPrefab, ObjectCollectionService ____objectCollectionService, FactionService ____factionService)
+        public static bool PrefixGolemPrefab(ref Bot ____botPrefab, ObjectCollectionService ____objectCollectionService,
+            FactionService ____factionService)
         {
-            var golemFactionService = DependencyContainer.GetInstance<GolemFactionService>();
-            string golemFactionId = golemFactionService.GetGolemFactionIdByFactionId(____factionService.Current.Id);
-            ____golemPrefab = ____objectCollectionService.GetAllMonoBehaviours<Golem>().Single(golem => golem.GetComponent<Prefab>().PrefabName.Contains(golemFactionId));
+            var botFactionService = DependencyContainer.GetInstance<GolemFactionService>();
+            string botFactionId = botFactionService.GetGolemFactionIdByFactionId(____factionService.Current.Id);
+            ____botPrefab = ____objectCollectionService.GetAllMonoBehaviours<Bot>()
+                .Single(bot => bot.GetComponent<Prefab>().PrefabName.Contains(botFactionId));
             return true;
         }
     }

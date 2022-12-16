@@ -6,8 +6,8 @@
         <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
         <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
         <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
-        <PackageVersion>0.5.1</PackageVersion>
-        <ReleaseVersion>0.5.1</ReleaseVersion>
+        <PackageVersion>0.5.3</PackageVersion>
+        <ReleaseVersion>0.5.3</ReleaseVersion>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -21,8 +21,8 @@
         <PackageReference Include="Unity.InputSystem" Version="1.5.0" />
         <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="Timberborn.GameLibs" Version="0.3.4.3-r.0" Condition="$(UseLocalTimberbornSource) == false" />
         <PackageReference Include="System.Collections.Immutable" Version="5.0.0"/>
-        <PackageReference Include="Timberborn.GameLibs" Version="0.2.8.1-r.0" Condition="$(UseLocalTimberbornSource) == false" />
     </ItemGroup>
 
     <!--    Import dll's from Timberborn's symlink in solution folder-->
