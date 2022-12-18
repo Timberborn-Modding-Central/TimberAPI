@@ -426,7 +426,7 @@ jobs:
           name: TimberAPI_NugetPackage
           path: .
 
-      - name: Download TimberAPI NuGet package
+      - name: Download TimberAPI.Common NuGet package
         uses: actions/download-artifact@v3
         with:
           name: TimberAPI.Common_NugetPackage
@@ -457,4 +457,5 @@ jobs:
           prerelease: false
           files: |
             **/TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}_modio.zip
+            **/*.nupkg
           token: ${{ secrets.GITHUB_TOKEN }}
