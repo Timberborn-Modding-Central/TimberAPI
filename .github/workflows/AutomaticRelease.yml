@@ -3,6 +3,10 @@ name: Automatic release
 on:
   workflow_dispatch:
     inputs:
+      min_game_version:
+        type: string
+        description: Minimum game version
+        required: true
       update_timber_api:
         type: boolean
         description: Update TimberAPI
@@ -139,10 +143,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
 
-      - name: Find and Replace
+      - name: Find and Replace TIMBER_API_VERSION_PLACEHOLDER
         uses: jacobtomlinson/gha-find-replace@v2
         with:
-          find: "TIMBER_API_VERSION"
+          find: "TIMBER_API_VERSION_PLACEHOLDER"
           replace: ${{ needs.versions.outputs.timber_api }}
           regex: false
 
@@ -207,11 +211,18 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
 
-      - name: Find and Replace TIMBER_API_VERSION
+      - name: Find and Replace TIMBER_API_VERSION_PLACEHOLDER
         uses: jacobtomlinson/gha-find-replace@v2
         with:
-          find: "TIMBER_API_VERSION"
+          find: "TIMBER_API_VERSION_PLACEHOLDER"
           replace: ${{ needs.versions.outputs.timber_api_leading_zero }}
+          regex: false
+
+      - name: Find and Replace MINIMUN_GAME_VERSION_PLACEHOLDER
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "MINIMUN_GAME_VERSION_PLACEHOLDER"
+          replace: ${{ github.event.inputs.min_game_version }}
           regex: false
 
       - name: Replace TIMBER_API_EXAMPLE_VERSION
