@@ -1,8 +1,4 @@
 ## Unreleased
-
-### Changes
-
-## 5.3.2
 Release notes go here
 
 ### Changes
