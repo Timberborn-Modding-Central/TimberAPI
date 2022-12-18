@@ -51,6 +51,10 @@ env:
   timber_api_output_path: "Core/TimberApi/bin/RELEASE/netstandard2.1"
   timber_api_nuget_path: "Core/TimberApi/bin/RELEASE"
 
+  timber_api_common_project_path: "Core/TimberApi.Common/TimberApi.Common.csproj"
+  timber_api_common_output_path: "Core/TimberApi.Common/bin/RELEASE/netstandard2.1"
+  timber_api_common_nuget_path: "Core/TimberApi.Common/bin/RELEASE"
+
   timber_api_core_project_path: "Core/TimberApi.Core/TimberApi.Core.csproj"
   timber_api_core_output_path: "Core/TimberApi.Core/bin/RELEASE/netstandard2.1"
   timber_api_loaders_project_path: "Loaders/TimberApi.BepInEx.Plugin.Loader"
@@ -154,6 +158,9 @@ jobs:
 
       - name: Build TimberAPI
         run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
+        
+      - name: Build TimberAPI.Common
+        run: dotnet build ${{env.timber_api_common_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
 
       - name: Test
         run: dotnet test --no-build --verbosity normal
@@ -167,15 +174,28 @@ jobs:
       - name: Pack TimberAPI
         run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
 
+      - name: Pack TimberAPI.Common
+        run: dotnet pack ${{env.timber_api_common_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
+
       - name: Upload TimberAPI Build Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: TimberAPI_NugetPackage
           path: ${{env.timber_api_nuget_path}}/*.nupkg
 
-#      - name: Push NuGet Package
+      - name: Upload TimberAPI.Common Build Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: TimberAPI.Common_NugetPackage
+          path: ${{env.timber_api_common_nuget_path}}/*.nupkg
+
+#      - name: Push TimberAPI NuGet Package
 #        if: github.event.inputs.DoPrerelease != 'true'
 #        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
+
+#      - name: Push TimberAPI.Common NuGet Package
+#        if: github.event.inputs.DoPrerelease != 'true'
+#        run: dotnet nuget push ${{env.timber_api_common_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
 
   create_timber_api_modio_pack:
     if: ${{ github.event.inputs.update_timber_api == 'true' }}
@@ -387,7 +407,8 @@ jobs:
         with:
           path: ./changelog.md
 
-      - uses: actions/download-artifact@v3
+      - name: Download TimberAPI mod.io artifat
+        uses: actions/download-artifact@v3
         with:
           name: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}
           path: ${{ env.timber_api_package_folder }}
@@ -398,6 +419,18 @@ jobs:
           filename: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}_modio.zip
           path: .
           directory: ${{ env.timber_api_package_folder }}
+
+      - name: Download TimberAPI NuGet package
+        uses: actions/download-artifact@v3
+        with:
+          name: TimberAPI_NugetPackage
+          path: .
+
+      - name: Download TimberAPI NuGet package
+        uses: actions/download-artifact@v3
+        with:
+          name: TimberAPI.Common_NugetPackage
+          path: .
 
       - name: Display structure of downloaded files
         run: ls -l
