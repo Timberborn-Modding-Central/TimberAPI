@@ -21,8 +21,8 @@
         <PackageReference Include="Unity.InputSystem" Version="1.5.0" />
         <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-        <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
-        <PackageReference Include="Timberborn.GameLibs" Version="0.2.8.1-r.0" Condition="$(UseLocalTimberbornSource) == false" />
+        <PackageReference Include="Timberborn.GameLibs" Version="0.3.4.3-r.0" Condition="$(UseLocalTimberbornSource) == false" />
+        <PackageReference Include="System.Collections.Immutable" Version="5.0.0"/>
     </ItemGroup>
 
     <!--    Import dll's from Timberborn's symlink in solution folder-->

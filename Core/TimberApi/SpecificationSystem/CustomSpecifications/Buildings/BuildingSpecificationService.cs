@@ -1,8 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using Timberborn.Buildings;
-using Timberborn.EntitySystem;
 using Timberborn.Persistence;
+using Timberborn.PrefabSystem;
 using Timberborn.SingletonSystem;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
