@@ -390,14 +390,14 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}
-          path: path/to/artifact
+          path: ${{ env.timber_api_package_folder }}
 
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.6.2
         with:
-          filename: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
-          path: ./path/to/artifact
-          directory: .
+          filename: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}_modio.zip
+          path: .
+          directory: ${{ env.timber_api_package_folder }}
 
       - name: Display structure of downloaded files
         run: ls -l
@@ -423,5 +423,5 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
+            TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}_modio.zip
           token: ${{ secrets.GITHUB_TOKEN }}
