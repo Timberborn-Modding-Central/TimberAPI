@@ -2,6 +2,10 @@
 
 ### Changes
 
+## 5.3.1
+
+### Changes
+
 ## 0.5.0
 
 ### TimberAPI v0.5.0.0 - The Rework
