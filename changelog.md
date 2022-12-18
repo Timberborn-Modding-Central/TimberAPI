@@ -2,19 +2,6 @@
 
 ### Changes
 
-## 5.3.4
-
-### Changes
-
-## 5.3.3
-Release notes go here
-
-### Changes
-- Line 1
-- Line 2
-
-## 0.5.0
-
 ### TimberAPI v0.5.0.0 - The Rework
 
 TimberAPI has been fully reworked to have more flexibility on new features and control to the end user. Within this release we have removed the dependency of BepInEx but we are still compatible with it.
