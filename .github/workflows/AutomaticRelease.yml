@@ -439,13 +439,6 @@ jobs:
           path: .
           directory: ${{ env.timber_api_example_package_dir }}
 
-#      - name: Display structure of downloaded files
-#        run: ls -l
-#        working-directory: .
-#      - name: Display structure of downloaded files
-#        run: ls -R
-#        working-directory: .
-
       - name: regex match action
         id: regex2
         uses: MeilCli/regex-match@v1.0.1
