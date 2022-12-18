@@ -423,5 +423,5 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            "**/TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}_modio.zip"
+            **/TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}_modio.zip
           token: ${{ secrets.GITHUB_TOKEN }}
