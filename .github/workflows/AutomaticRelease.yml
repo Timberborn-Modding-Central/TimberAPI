@@ -395,7 +395,7 @@ jobs:
           default_author: github_actions
 
   create_release:
-    needs: [versions, update_version]
+    needs: [versions, publish_timber_api_nuget, create_timber_api_modio_pack, create_timber_api_example_modio_pack, update_version]
     if: always()
     runs-on: ubuntu-latest
     steps:
