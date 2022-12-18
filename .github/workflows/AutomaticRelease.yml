@@ -392,12 +392,12 @@ jobs:
           name: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}
           path: path/to/artifact
 
-#      - name: Zip Release
-#        uses: TheDoctor0/zip-release@0.6.2
-#        with:
-#          filename: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
-#          path: ./path/to/artifact/${{ env.timber_api_package_folder }}
-#          directory: .
+      - name: Zip Release
+        uses: TheDoctor0/zip-release@0.6.2
+        with:
+          filename: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
+          path: ./path/to/artifact
+          directory: .
 
       - name: Display structure of downloaded files
         run: ls -l
