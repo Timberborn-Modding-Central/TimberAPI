@@ -2,13 +2,6 @@
 
 ### Changes
 
-## 5.1.26
-Release notes go here
-
-### Changes
-- Change 1
-- Change 2
-
 ## 0.5.0
 
 ### TimberAPI v0.5.0.0 - The Rework
