@@ -195,11 +195,11 @@ jobs:
 
       - name: Push TimberAPI NuGet Package
         if: github.event.inputs.DoPrerelease != 'true'
-        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
       - name: Push TimberAPI.Common NuGet Package
         if: github.event.inputs.DoPrerelease != 'true'
-        run: dotnet nuget push ${{env.timber_api_common_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ${{env.timber_api_common_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
   create_timber_api_modio_pack:
     if: ${{ github.event.inputs.update_timber_api == 'true' }}
