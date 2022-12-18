@@ -300,18 +300,6 @@ jobs:
           active: ${{ github.event.inputs.make_active_file_in_modio }}
           changelog: "${{ steps.regex.outputs.matched_first }}"
 
-#      - name: Create Release
-#        id: create_release
-#        uses: actions/create-release@latest
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-#        with:
-#          tag_name: v${{ needs.versions.outputs.timber_api_leading_zero }}
-#          release_name: v${{ needs.versions.outputs.timber_api_leading_zero }}
-#          body: ${{ steps.regex2.outputs.matched_first }}
-#          draft: false
-#          prerelease: false
-
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
     needs: versions
@@ -407,14 +395,16 @@ jobs:
         with:
           path: ./changelog.md
 
-      - name: Download TimberAPI mod.io artifat
+      - name: Download TimberAPI mod.io artifact
         uses: actions/download-artifact@v3
+        if: needs.create_timber_api_modio_pack.result == 'success'
         with:
           name: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}
           path: ${{ env.timber_api_package_folder }}
 
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.6.2
+        if: needs.create_timber_api_modio_pack.result == 'success'
         with:
           filename: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}_modio.zip
           path: .
@@ -422,22 +412,39 @@ jobs:
 
       - name: Download TimberAPI NuGet package
         uses: actions/download-artifact@v3
+        if: needs.publish_timber_api_nuget.result == 'success'
         with:
           name: TimberAPI_NugetPackage
           path: .
 
       - name: Download TimberAPI.Common NuGet package
         uses: actions/download-artifact@v3
+        if: needs.publish_timber_api_nuget.result == 'success'
         with:
           name: TimberAPI.Common_NugetPackage
           path: .
 
-      - name: Display structure of downloaded files
-        run: ls -l
-        working-directory: .
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: .
+      - name: Download TimberAPI Exmaple mod.io artifact
+        uses: actions/download-artifact@v3
+        if: needs.create_timber_api_example_modio_pack.result == 'success'
+        with:
+          name: TimberAPIExample_ModioPackage
+          path: ${{ env.timber_api_example_package_dir }}
+
+      - name: Zip TimberAPI Exmaple 
+        uses: TheDoctor0/zip-release@0.6.2
+        if: needs.create_timber_api_example_modio_pack.result == 'success'
+        with:
+          filename: TimberAPI_Example_${{ needs.versions.outputs.timber_api_example_leading_zero }}_modio.zip
+          path: .
+          directory: ${{ env.timber_api_example_package_dir }}
+
+#      - name: Display structure of downloaded files
+#        run: ls -l
+#        working-directory: .
+#      - name: Display structure of downloaded files
+#        run: ls -R
+#        working-directory: .
 
       - name: regex match action
         id: regex2
@@ -457,5 +464,6 @@ jobs:
           prerelease: false
           files: |
             **/TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}_modio.zip
+            **/TimberAPI_Example_${{ needs.versions.outputs.timber_api_example_leading_zero }}_modio.zip
             **/*.nupkg
           token: ${{ secrets.GITHUB_TOKEN }}
