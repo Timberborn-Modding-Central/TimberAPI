@@ -1,10 +1,9 @@
 ## Unreleased
+Release notes go here
 
 ### Changes
-
-## 5.3.1
-
-### Changes
+- Line 1
+- Line 2
 
 ## 0.5.0
 
