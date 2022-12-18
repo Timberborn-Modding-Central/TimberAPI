@@ -302,7 +302,7 @@ jobs:
 
   create_timber_api_example_modio_pack:
     if: ${{ github.event.inputs.update_timber_api_example == 'true' }}
-    needs: versions
+    needs: [versions]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -321,7 +321,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "TIMBER_API_EXAMPLE_VERSION"
-          replace: ${{ needs.versions.outputs.timber_api_exmaple_leading_zero }}
+          replace: ${{ needs.versions.outputs.timber_api_example_leading_zero }}
           regex: false
 
       - name: Restore dependencies
