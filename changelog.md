@@ -5,14 +5,7 @@
 ## 5.3.0
 
 ### Changes
-
-## 5.3.0
-
-### Changes
-
-## 5.3.0
-
-### Changes
+- Fixed to work with game version 0.3.4.3
 
 ### TimberAPI v0.5.0.0 - The Rework
 
