@@ -7,6 +7,10 @@
 ### Changes
 - Fixed to work with game version 0.3.4.3
 
+## 5.3.0
+
+### Changes
+
 ### TimberAPI v0.5.0.0 - The Rework
 
 TimberAPI has been fully reworked to have more flexibility on new features and control to the end user. Within this release we have removed the dependency of BepInEx but we are still compatible with it.
