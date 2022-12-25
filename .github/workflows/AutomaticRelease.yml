@@ -159,12 +159,12 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
-
-      - name: Build TimberAPI
-        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
         
       - name: Build TimberAPI.Common
         run: dotnet build ${{env.timber_api_common_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
+
+      - name: Build TimberAPI
+        run: dotnet build ${{env.timber_api_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
 
       - name: Test
         run: dotnet test --no-build --verbosity normal
@@ -175,17 +175,11 @@ jobs:
         with:
           PROJ_FILE: ${{env.timber_api_core_project_path}}
 
-      - name: Pack TimberAPI
-        run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
-
       - name: Pack TimberAPI.Common
         run: dotnet pack ${{env.timber_api_common_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
 
-      - name: Upload TimberAPI Build Artifact
-        uses: actions/upload-artifact@v3.0.0
-        with:
-          name: TimberAPI_NugetPackage
-          path: ${{env.timber_api_nuget_path}}/*.nupkg
+      - name: Pack TimberAPI
+        run: dotnet pack ${{env.timber_api_project_path}} --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
 
       - name: Upload TimberAPI.Common Build Artifact
         uses: actions/upload-artifact@v3.0.0
@@ -193,13 +187,19 @@ jobs:
           name: TimberAPI.Common_NugetPackage
           path: ${{env.timber_api_common_nuget_path}}/*.nupkg
 
-      - name: Push TimberAPI NuGet Package
-        if: github.event.inputs.DoPrerelease != 'true'
-        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+      - name: Upload TimberAPI Build Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: TimberAPI_NugetPackage
+          path: ${{env.timber_api_nuget_path}}/*.nupkg
 
       - name: Push TimberAPI.Common NuGet Package
         if: github.event.inputs.DoPrerelease != 'true'
         run: dotnet nuget push ${{env.timber_api_common_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Push TimberAPI NuGet Package
+        if: github.event.inputs.DoPrerelease != 'true'
+        run: dotnet nuget push ${{env.timber_api_nuget_path}}/*.nupkg -k ${{ secrets.TIMBERAPINUGETKEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
   create_timber_api_modio_pack:
     if: ${{ github.event.inputs.update_timber_api == 'true' }}
