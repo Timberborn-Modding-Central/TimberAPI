@@ -4,7 +4,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>9</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <ReleaseVersion>0.5.3</ReleaseVersion>
+        <ReleaseVersion>TIMBER_API_VERSION_PLACEHOLDER</ReleaseVersion>
     </PropertyGroup>
 
     <PropertyGroup>

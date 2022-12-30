@@ -6,8 +6,7 @@
         <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
         <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
         <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
-        <PackageVersion>0.5.3</PackageVersion>
-        <ReleaseVersion>0.5.3</ReleaseVersion>
+        <ReleaseVersion>TIMBER_API_VERSION_PLACEHOLDER</ReleaseVersion>
     </PropertyGroup>
 
     <PropertyGroup>

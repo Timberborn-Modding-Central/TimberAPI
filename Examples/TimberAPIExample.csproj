@@ -5,8 +5,7 @@
         <Description>An example plugin on how to use the TimberAPI</Description>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>9.0</LangVersion>
-        <ReleaseVersion>0.3.1</ReleaseVersion>
-        <ReleaseVersion>0.5.1</ReleaseVersion>
+        <ReleaseVersion>TIMBER_API_EXAMPLE_VERSION</ReleaseVersion>
         <PackageId>TimberAPIExample</PackageId>
         <RootNamespace>TimberAPIExample</RootNamespace>
     </PropertyGroup>
