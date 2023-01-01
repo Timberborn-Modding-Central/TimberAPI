@@ -14,7 +14,7 @@ namespace TimberApi.Core.ConsoleSystem
 {
     internal class ConsoleMonitor : MonoBehaviour, ILogListener
     {
-        private static readonly Key ConsoleKey = Key.F1;
+        private static readonly Key ConsoleKey = Key.Backslash;
         private bool _isConsoleKeyPressed;
 
         private KeyboardController _keyboardController = null!;
