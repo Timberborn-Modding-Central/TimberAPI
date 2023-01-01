@@ -2,7 +2,7 @@
 Hotfix
 
 ### Changes
-- Changed console monitor shortcut to F1
+- Changed console monitor shortcut to Backslash
 
 ## 5.3.0
 
