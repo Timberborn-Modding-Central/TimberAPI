@@ -307,7 +307,7 @@ jobs:
           game: ${{ steps.metadata.outputs.GAME }}
           mod: ${{ steps.metadata.outputs.MOD }}
           version: ${{ needs.versions.outputs.timber_api_leading_zero }}
-          path: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
+          path: ${{ env.timber_api_package_folder }}/TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
           active: ${{ github.event.inputs.make_active_file_in_modio }}
           changelog: "${{ steps.regex.outputs.matched_first }}"
 
