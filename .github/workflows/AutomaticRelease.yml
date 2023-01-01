@@ -288,7 +288,7 @@ jobs:
         id: regex
         uses: MeilCli/regex-match@v1.0.1
         with:
-          regex_pattern: '(?<=### Changes\n).*?(?=## \d)'
+          regex_pattern: '(?<=### Changes\n).*?(?=##)'
           regex_option: s
           search_string: "${{ steps.package.outputs.content }}"
 
