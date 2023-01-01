@@ -275,7 +275,7 @@ jobs:
         uses: TheDoctor0/zip-release@0.6.2
         with:
           filename: TimberAPI_${{ needs.versions.outputs.timber_api_leading_zero }}.zip
-          path: "timber_api_package_folder"
+          path: "TimberAPI"
           directory: ${{ env.timber_api_package_folder }}
 
       - name: Read changelog
