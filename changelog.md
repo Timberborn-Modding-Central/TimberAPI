@@ -1,6 +1,7 @@
 ## Unreleased
 
 ### Changes
+- Changed console monitor shortcut to F1
 
 ## 5.3.0
 
@@ -23,7 +24,7 @@ TimberAPI has been fully reworked to have more flexibility on new features and c
 - NEW: Specification generation
 - NEW: BuildingSpecification
 - REWRITTEN: AssetSystem, ConfiguratorSystem, Logging and DependencyContainer
-- MINOR CHNAGES: Specification system, UI Builder, EntityLinker and localization files
+- MINOR CHANGES: Specification system, UI Builder, EntityLinker and localization files
 - REMOVED: EventListener, Localization through code and Entity Action System
 
 ## 0.4.0
