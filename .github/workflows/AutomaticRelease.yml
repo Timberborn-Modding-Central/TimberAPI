@@ -147,14 +147,14 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "TIMBER_API_VERSION_PLACEHOLDER"
-          replace: ${{ needs.versions.outputs.timber_api }}
+          replace: ${{ needs.versions.outputs.timber_api_leading_zero }}
           regex: false
 
       - name: Replace TIMBER_API_EXAMPLE_VERSION
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "TIMBER_API_EXAMPLE_VERSION"
-          replace: ${{ needs.versions.outputs.timber_api_example }}
+          replace: ${{ needs.versions.outputs.timber_api_example_leading_zero }}
           regex: false
 
       - name: Restore dependencies
@@ -375,7 +375,7 @@ jobs:
 
             ### Changes
             
-            ## ${{ needs.versions.outputs.timber_api }}
+            ## ${{ needs.versions.outputs.timber_api_leading_zero }}
 
           include: 'changelog.md'
 
