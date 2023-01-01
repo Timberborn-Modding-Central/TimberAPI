@@ -2,13 +2,13 @@
 
 ### Changes
 
-## 5.3.1
+## TimberAPI v0.5.3.1
 Hotfix
 
 ### Changes
 - Changed console monitor shortcut to Backslash
 
-## 5.3.0
+## TimberAPI v0.5.3.0
 
 ### Changes
 - Fixed to work with game version 0.3.4.3
