@@ -375,7 +375,7 @@ jobs:
 
             ### Changes
             
-            ## ${{ needs.versions.outputs.timber_api_leading_zero }}
+            ## TimberAPI v${{ needs.versions.outputs.timber_api_leading_zero }}
 
           include: 'changelog.md'
 
