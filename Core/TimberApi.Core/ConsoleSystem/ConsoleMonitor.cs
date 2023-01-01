@@ -14,7 +14,7 @@ namespace TimberApi.Core.ConsoleSystem
 {
     internal class ConsoleMonitor : MonoBehaviour, ILogListener
     {
-        private static readonly Key ConsoleKey = Key.Tab;
+        private static readonly Key ConsoleKey = Key.F1;
         private bool _isConsoleKeyPressed;
 
         private KeyboardController _keyboardController = null!;
@@ -26,7 +26,8 @@ namespace TimberApi.Core.ConsoleSystem
             {
                 _keyboardController = GetComponent<KeyboardController>();
                 var uiDocument = GetComponent<UIDocument>();
-                uiDocument.panelSettings = Resources.FindObjectsOfTypeAll<UIDocument>().First(document => document != uiDocument).panelSettings;
+                uiDocument.panelSettings = Resources.FindObjectsOfTypeAll<UIDocument>()
+                    .First(document => document != uiDocument).panelSettings;
                 uiDocument.sortingOrder = 100000;
 
                 VisualElement consoleMonitor = ConsoleMonitorUi.Create();
