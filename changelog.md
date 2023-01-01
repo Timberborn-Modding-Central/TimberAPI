@@ -1,4 +1,5 @@
 ## Unreleased
+Hotfix
 
 ### Changes
 - Changed console monitor shortcut to F1
