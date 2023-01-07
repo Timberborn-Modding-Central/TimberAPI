@@ -8,7 +8,7 @@ namespace TimberApi.AssetShaderSystem.ShaderFix
 
         public void LoadShader()
         {
-            _pathShader = Resources.Load<GameObject>("Buildings/Paths/Path/DirtDrivewayStraightPath").GetComponent<MeshRenderer>().materials[0].shader;
+            _pathShader = Resources.Load<GameObject>("Buildings/Paths/Path/Path.Folktails").GetComponent<MeshRenderer>().materials[0].shader;
         }
 
         public bool ShouldApplyShader(Material material)
