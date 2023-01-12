@@ -13,16 +13,26 @@ namespace TimberApi.EntityLinkerSystem
 
         public virtual Obsoletable<EntityLink> Deserialize(IObjectLoader objectLoader)
         {
-            EntityLinker? linker = objectLoader.Get(LinkerKey);
-            EntityLinker? linkee = objectLoader.Get(LinkeeKey);
+            EntityLinker? linker = objectLoader.Has(LinkerKey) && objectLoader.GetObsoletable(LinkerKey, out EntityLinker value)
+                ? objectLoader.Get(LinkerKey)
+                : new EntityLinker();
+            EntityLinker? linkee = objectLoader.Has(LinkeeKey) && objectLoader.GetObsoletable(LinkeeKey, out EntityLinker value2)
+                ? objectLoader.Get(LinkeeKey)
+                : new EntityLinker();
             var link = new EntityLink(linker, linkee);
             return link;
         }
 
         public virtual void Serialize(EntityLink value, IObjectSaver objectSaver)
         {
-            objectSaver.Set(LinkerKey, value.Linker);
-            objectSaver.Set(LinkeeKey, value.Linkee);
+            if (value?.Linker != null)
+            {
+                objectSaver.Set(LinkerKey, value.Linker);
+            }
+            if (value?.Linkee != null)
+            {
+                objectSaver.Set(LinkeeKey, value.Linkee);
+            }
         }
     }
 }
