@@ -1,6 +1,7 @@
 ## Unreleased
 
 ### Changes
+- Fixed EntityLinker crashing the game ia a mod using them was disabled
 
 ## TimberAPI v0.5.3.1
 Hotfix
