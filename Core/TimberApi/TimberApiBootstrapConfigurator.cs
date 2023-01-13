@@ -12,7 +12,9 @@ namespace TimberApi
             containerDefinition.Bind<TimberApi>().AsSingleton();
             containerDefinition.Install(new AssetSystemGlobalConfigurator());
             containerDefinition.Install(new GolemFactionPatchConfigurator());
-            containerDefinition.Install(new ResourceAssetSystemConfigurator());
+            // containerDefinition.Install(new ResourceAssetSystemConfigurator());
+
+            new AssetSystemConfiguratorPatcher().Load();
         }
     }
 }
