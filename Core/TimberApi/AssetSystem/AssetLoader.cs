@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using TimberApi.AssetShaderSystem;
 using TimberApi.AssetSystem.Exceptions;
+using TimberApi.ShaderSystem;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -11,12 +11,12 @@ namespace TimberApi.AssetSystem
     {
         private readonly AssetRepository _assetRepository;
 
-        private readonly AssetShaderFixer _shaderFixer;
+        private readonly ShaderService _shaderService;
 
-        public AssetLoader(AssetRepository assetRepository, AssetShaderFixer shaderFixer)
+        public AssetLoader(AssetRepository assetRepository, ShaderService shaderService)
         {
             _assetRepository = assetRepository;
-            _shaderFixer = shaderFixer;
+            _shaderService = shaderService;
         }
 
         public T Load<T>(string path) where T : Object
@@ -42,14 +42,19 @@ namespace TimberApi.AssetSystem
             }
 
             T asset = assetFolder.GetAssetBundleAtPath(pathToFile).Load<T>(name) ??
-                      throw new InvalidOperationException($"Failed to load asset ({prefix}/{pathToFile}/{name}). Asset name does not exists inside bundle");
+                      throw new InvalidOperationException(
+                          $"Failed to load asset ({prefix}/{pathToFile}/{name}). Asset name does not exists inside bundle");
 
-            if (asset is not GameObject gameObject)
+            switch (asset)
             {
-                return asset;
+                case GameObject gameObject:
+                    _shaderService.ApplyShaders(gameObject);
+                    break;
+                case Material material:
+                    _shaderService.ApplyShaders(material);
+                    break;
             }
 
-            _shaderFixer.FixShaders(gameObject);
             return asset;
         }
 

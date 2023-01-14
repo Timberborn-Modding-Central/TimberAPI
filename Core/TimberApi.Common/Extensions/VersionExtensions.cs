@@ -5,9 +5,9 @@
     /// </summary>
     public static class VersionExtensions
     {
-        public static string ReplacePlaceholderWithFakeVersion(this string version)
+        public static string ReplacePlaceholderWithFakeVersion(this string version, string fakeVersion)
         {
-            return version.Contains("PLACEHOLDER") ? "0.0.0.0" : version;
+            return version.Contains("PLACEHOLDER") ? fakeVersion : version;
         }
     }
 }

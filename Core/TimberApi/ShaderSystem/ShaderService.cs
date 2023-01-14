@@ -4,19 +4,18 @@ using System.Linq;
 using TimberApi.Common.SingletonSystem;
 using UnityEngine;
 
-namespace TimberApi.AssetShaderSystem
+namespace TimberApi.ShaderSystem
 {
-    internal class AssetShaderFixer : ITimberApiPreLoadableSingleton
+    internal class ShaderService : ITimberApiPreLoadableSingleton
     {
-        private readonly ImmutableArray<IShaderFixApplier> _shaderFixAppliers;
+        private readonly ImmutableArray<IShaderApplier> _shaderFixAppliers;
 
         private Shader _shader = null!;
 
-        public AssetShaderFixer(IEnumerable<IShaderFixApplier> shaderFixAppliers)
+        public ShaderService(IEnumerable<IShaderApplier> shaderFixAppliers)
         {
             _shaderFixAppliers = shaderFixAppliers.ToImmutableArray();
         }
-
 
         private Shader Shader
         {
@@ -24,7 +23,8 @@ namespace TimberApi.AssetShaderSystem
             {
                 if (_shader == null)
                 {
-                    _shader = Resources.Load<GameObject>("Buildings/Paths/Platform/Platform.Full.Folktails").GetComponent<MeshRenderer>().materials[0].shader;
+                    _shader = Resources.Load<GameObject>("Buildings/Paths/Platform/Platform.Full.Folktails")
+                        .GetComponent<MeshRenderer>().materials[0].shader;
                 }
 
                 return _shader;
@@ -33,24 +33,22 @@ namespace TimberApi.AssetShaderSystem
 
         public void PreLoad()
         {
-            foreach (IShaderFixApplier shaderFixApplier in _shaderFixAppliers)
+            foreach (IShaderApplier shaderFixApplier in _shaderFixAppliers)
             {
                 shaderFixApplier.LoadShader();
             }
         }
 
-        public void FixShaders(GameObject gameObject)
+        public void ApplyShaders(GameObject gameObject)
         {
-            var meshRenderer = gameObject.GetComponent<MeshRenderer>();
-            if (meshRenderer)
+            MeshRenderer[] meshRenderers = gameObject.GetComponents<MeshRenderer>();
+            foreach (MeshRenderer meshRenderer in meshRenderers)
             {
                 foreach (Material material in meshRenderer.materials)
                 {
                     int matRenderQueue = material.renderQueue;
-                    if (!ApplyShaderFix(material))
-                    {
-                        ApplyFallbackShaderFix(material);
-                    }
+
+                    ApplyShaders(material);
 
                     material.renderQueue = matRenderQueue;
                 }
@@ -60,23 +58,24 @@ namespace TimberApi.AssetShaderSystem
             {
                 if (child.gameObject)
                 {
-                    FixShaders(child.gameObject);
+                    ApplyShaders(child.gameObject);
                 }
             }
         }
 
-        private bool ApplyShaderFix(Material material)
+        public void ApplyShaders(Material material)
         {
-            foreach (IShaderFixApplier shaderFixApplier in _shaderFixAppliers.Where(shaderFixApplier => shaderFixApplier.ShouldApplyShader(material)))
+            foreach (IShaderApplier shaderFixApplier in _shaderFixAppliers.Where(shaderFixApplier =>
+                         shaderFixApplier.ShouldApplyShader(material)))
             {
                 shaderFixApplier.Apply(material);
-                return true;
+                return;
             }
 
-            return false;
+            ApplyFallbackShaderFix(material);
         }
 
-        public void ApplyFallbackShaderFix(Material material)
+        private void ApplyFallbackShaderFix(Material material)
         {
             material.shader = Shader;
         }

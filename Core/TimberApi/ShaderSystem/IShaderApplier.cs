@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace TimberApi.AssetShaderSystem
+namespace TimberApi.ShaderSystem
 {
-    public interface IShaderFixApplier
+    public interface IShaderApplier
     {
         public void LoadShader();
 

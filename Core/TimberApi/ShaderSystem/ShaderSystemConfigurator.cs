@@ -1,17 +1,17 @@
 ﻿using Bindito.Core;
-using TimberApi.AssetShaderSystem.ShaderFix;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.SceneSystem;
+using TimberApi.ShaderSystem.ShaderAppliers;
 
-namespace TimberApi.AssetShaderSystem
+namespace TimberApi.ShaderSystem
 {
     [Configurator(SceneEntrypoint.InGame | SceneEntrypoint.MapEditor)]
-    internal class ShaderFixSystemConfigurator : IConfigurator
+    internal class ShaderApplierConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.MultiBind<IShaderFixApplier>().To<DirtShaderFixApplier>().AsSingleton();
-            containerDefinition.MultiBind<IShaderFixApplier>().To<PathShaderFixApplier>().AsSingleton();
+            containerDefinition.MultiBind<IShaderApplier>().To<DirtUrpApplier>().AsSingleton();
+            containerDefinition.MultiBind<IShaderApplier>().To<PathShaderApplier>().AsSingleton();
         }
     }
 
@@ -20,7 +20,7 @@ namespace TimberApi.AssetShaderSystem
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Bind<AssetShaderFixer>().AsSingleton();
+            containerDefinition.Bind<ShaderService>().AsSingleton();
         }
     }
 }
