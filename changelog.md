@@ -5,6 +5,7 @@
 - Fixed path shader
 - Changed placeholder versioning logic for developing
 - Fixed Timberborn ResourceLoader to work in main menu
+- Added material to shader appliers
 
 ## TimberAPI v0.5.3.1
 Hotfix
