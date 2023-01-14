@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace TimberApi.AssetShaderSystem.ShaderFix
+namespace TimberApi.ShaderSystem.ShaderAppliers
 {
-    internal class PathShaderFixApplier : IShaderFixApplier
+    internal class PathShaderApplier : IShaderApplier
     {
         private Shader _pathShader = null!;
 
