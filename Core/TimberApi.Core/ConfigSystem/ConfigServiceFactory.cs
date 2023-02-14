@@ -26,6 +26,7 @@ namespace TimberApi.Core.ConfigSystem
             _jsonSerializerSettings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
+                ObjectCreationHandling = ObjectCreationHandling.Replace,
                 ContractResolver = new ConfigContractResolver()
             };
         }
