@@ -65,7 +65,7 @@ namespace TimberApi.Core.ConfigSystem
                     Directory.CreateDirectory(Path.GetDirectoryName(configFilePath)!);
                 }
 
-                File.WriteAllText(configFilePath, JsonConvert.SerializeObject(config));
+                File.WriteAllText(configFilePath, JsonConvert.SerializeObject(config, Formatting.Indented));
             }
             catch (Exception e)
             {
