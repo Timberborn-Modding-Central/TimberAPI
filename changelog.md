@@ -1,5 +1,4 @@
 ## Unreleased
-- Added indentation to new config files
 
 ### Changes
 - Fixed EntityLinker crashing the game if a mod using them was disabled 
@@ -7,6 +6,7 @@
 - Changed placeholder versioning logic for developing
 - Fixed Timberborn ResourceLoader to work in main menu
 - Added material to shader appliers
+- Added indentation to new config files
 
 ## TimberAPI v0.5.3.1
 Hotfix
