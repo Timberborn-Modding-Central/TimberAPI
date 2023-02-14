@@ -7,6 +7,7 @@
 - Fixed Timberborn ResourceLoader to work in main menu
 - Added material to shader appliers
 - Fixed config list merging with default values
+- Added indentation to new config files
 
 ## TimberAPI v0.5.3.1
 Hotfix
