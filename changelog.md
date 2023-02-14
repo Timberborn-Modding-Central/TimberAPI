@@ -1,5 +1,4 @@
 ## Unreleased
-- Fixed config list merging with default values
 
 ### Changes
 - Fixed EntityLinker crashing the game if a mod using them was disabled 
@@ -7,6 +6,7 @@
 - Changed placeholder versioning logic for developing
 - Fixed Timberborn ResourceLoader to work in main menu
 - Added material to shader appliers
+- Fixed config list merging with default values
 
 ## TimberAPI v0.5.3.1
 Hotfix
