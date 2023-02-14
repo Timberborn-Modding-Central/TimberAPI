@@ -1,4 +1,5 @@
 ## Unreleased
+- Fixed config list merging with default values
 
 ### Changes
 - Fixed EntityLinker crashing the game if a mod using them was disabled 
