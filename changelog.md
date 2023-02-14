@@ -1,4 +1,5 @@
 ## Unreleased
+- Added indentation to new config files
 
 ### Changes
 - Fixed EntityLinker crashing the game if a mod using them was disabled 
