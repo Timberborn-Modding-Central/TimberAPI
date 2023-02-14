@@ -1,6 +1,10 @@
 ## Unreleased
 
 ### Changes
+
+## TimberAPI v0.5.3.2
+
+### Changes
 - Fixed EntityLinker crashing the game if a mod using them was disabled 
 - Fixed path shader
 - Changed placeholder versioning logic for developing
