@@ -14,7 +14,7 @@ namespace TimberApi.BottomBarSystem
 
         private readonly BottomBarToolGroupSpecificationDeserializer _bottomBarToolGroupSpecificationDeserializer;
 
-        public ImmutableDictionary<string, ToolGroupSpecification> ToolGroupSpecifications { get; private set; } = null!;
+        public ImmutableDictionary<string, BottomBarToolGroupSpecification> ToolGroupSpecifications { get; private set; } = null!;
 
         public BottomBarService(
             ToolGroupSpecificationService toolGroupSpecificationService,

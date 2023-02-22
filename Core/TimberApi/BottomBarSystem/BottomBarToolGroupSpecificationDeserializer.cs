@@ -5,7 +5,7 @@ using Timberborn.Persistence;
 
 namespace TimberApi.BottomBarSystem
 {
-    public class BottomBarToolGroupSpecificationDeserializer : ToolGroupSpecificationDeserializer<ToolGroupSpecification, BottomBarGroupInformation>
+    public class BottomBarToolGroupSpecificationDeserializer : ToolGroupSpecificationDeserializer<BottomBarToolGroupSpecification, BottomBarGroupInformation>
     {
         public BottomBarToolGroupSpecificationDeserializer(IResourceAssetLoader resourceAssetLoader) : base(resourceAssetLoader)
         {

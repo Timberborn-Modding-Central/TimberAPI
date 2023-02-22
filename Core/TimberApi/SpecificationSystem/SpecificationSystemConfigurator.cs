@@ -12,7 +12,8 @@ namespace TimberApi.SpecificationSystem
         {
             containerDefinition.Bind<SpecificationRepository>().AsSingleton();
             containerDefinition.Bind<SpecificationRepositoryPreLoadableSingleton>().AsSingleton();
-            containerDefinition.Bind<ISpecificationService>().To<TimberApiSpecificationService>().AsSingleton();
+            containerDefinition.Bind<ISpecificationService>().To<ApiSpecificationService>().AsSingleton();
+            containerDefinition.Bind<IApiSpecificationService>().To<ApiSpecificationService>().AsSingleton();
         }
     }
 }

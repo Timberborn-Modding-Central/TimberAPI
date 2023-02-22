@@ -7,7 +7,7 @@ namespace TimberApi.ToolGroupSystem
     {
         public string? GroupId { get; }
 
-        public string Layout { get; set; }
+        public string Layout { get; }
 
         public List<string> ToolIds { get; }
 

@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using UnityEngine;
 
 namespace TimberApi.ToolGroupUISystem
 {
     public class ToolGroupButtonVisualiserService
     {
+        private static readonly string DefaultVisualiser = "blue";
+
         private readonly ImmutableDictionary<string, IToolGroupButtonVisualiser> _toolGroupButtonVisualisers;
 
         public ToolGroupButtonVisualiserService(IEnumerable<IToolGroupButtonVisualiser> toolGroupButtonVisualisers)
@@ -16,7 +19,8 @@ namespace TimberApi.ToolGroupUISystem
         {
             if (! _toolGroupButtonVisualisers.ContainsKey(visualiser.ToLower()))
             {
-                throw new KeyNotFoundException($"Visualiser ({visualiser.ToLower()}) was not found.");
+                TimberApi.ConsoleWriter.Log($"Visualiser ({visualiser.ToLower()}) was not found, defaulting back to ({DefaultVisualiser}).", LogType.Error);
+                return _toolGroupButtonVisualisers[DefaultVisualiser];
             }
 
             return _toolGroupButtonVisualisers[visualiser.ToLower()];

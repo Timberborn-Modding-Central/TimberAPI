@@ -3,11 +3,10 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
-using UnityEngine;
 
 namespace TimberApi.SpecificationSystem
 {
-    internal class TimberApiSpecificationService : ISpecificationService
+    internal class ApiSpecificationService : IApiSpecificationService
     {
         private readonly JsonMergeSettings _jsonMergeSettings;
         private readonly JsonMergeSettings _jsonMergeSettingsReplace;
@@ -15,7 +14,7 @@ namespace TimberApi.SpecificationSystem
         private readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
         private readonly SpecificationRepository _specificationRepository;
 
-        public TimberApiSpecificationService(ObjectSaveReaderWriter objectSaveReaderWriter, SpecificationRepository specificationRepository)
+        public ApiSpecificationService(ObjectSaveReaderWriter objectSaveReaderWriter, SpecificationRepository specificationRepository)
         {
             _objectSaveReaderWriter = objectSaveReaderWriter;
             _specificationRepository = specificationRepository;
@@ -31,21 +30,22 @@ namespace TimberApi.SpecificationSystem
 
         public IEnumerable<T> GetSpecifications<T>(IObjectSerializer<T> serializer)
         {
-            string specificationType = typeof(T).Name;
+            return GetSpecifications<T>(typeof(T).Name, serializer);
+        }
 
-            Debug.LogError(typeof(T).Name);
-            IEnumerable<ISpecification> typeSpecification = _specificationRepository.GetBySpecification(specificationType).ToArray();
+        public IEnumerable<T> GetSpecifications<T>(string specificationName, IObjectSerializer<T> serializer)
+        {
+            IEnumerable<ISpecification> specifications = _specificationRepository.GetBySpecification(specificationName).ToArray();
 
-            foreach (ISpecification originalSpecification in typeSpecification.Where(specification => specification.IsOriginal))
+            foreach (var originalSpecification in specifications.Where(specification => specification.IsOriginal))
             {
-                IEnumerable<ISpecification> mergeSpecifications =
-                    typeSpecification.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName) && specification.IsReplace == false);
+                var mergeSpecifications =
+                    specifications.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName) && specification.IsReplace == false);
 
-                IEnumerable<ISpecification> replaceSpecifications =
-                    typeSpecification.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName) && specification.IsReplace == true);
+                var replaceSpecifications = specifications.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName) && specification.IsReplace == true);
                 var mergedJson = MergeSpecifications(originalSpecification, mergeSpecifications);
-                var replacedJson = Wrap(ReplaceSpecifications(mergedJson, replaceSpecifications).ToString(), specificationType);
-                yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJson(replacedJson)).Get(new PropertyKey<T>(specificationType), serializer);
+                var replacedJson = Wrap(ReplaceSpecifications(mergedJson, replaceSpecifications).ToString(), specificationName);
+                yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJson(replacedJson)).Get(new PropertyKey<T>(specificationName), serializer);
             }
         }
 

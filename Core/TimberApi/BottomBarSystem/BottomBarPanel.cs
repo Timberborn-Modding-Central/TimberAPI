@@ -32,7 +32,7 @@ namespace TimberApi.BottomBarSystem
 
         private readonly SortedDictionary<int, VisualElement> _bottomBarPanels = new();
 
-        private readonly List<KeyValuePair<ToolGroupSpecification, ToolGroupButton>> _sortedToolGroupButtons = new();
+        private readonly List<KeyValuePair<BottomBarToolGroupSpecification, ToolGroupButton>> _sortedToolGroupButtons = new();
 
         private readonly Dictionary<string, ToolGroupButton> _toolGroupButtons = new();
 
@@ -87,7 +87,7 @@ namespace TimberApi.BottomBarSystem
                 var button = _toolGroupButtonVisualiserService.Get(toolGroupSpecification.Layout).GetToolGroupButton(apiToolGroup, toolGroupSpecification);
 
                 _toolGroupButtons.Add(toolGroupSpecification.Id, button);
-                _sortedToolGroupButtons.Add(new KeyValuePair<ToolGroupSpecification, ToolGroupButton>(toolGroupSpecification, button));
+                _sortedToolGroupButtons.Add(new KeyValuePair<BottomBarToolGroupSpecification, ToolGroupButton>(toolGroupSpecification, button));
             }
 
             _sortedToolGroupButtons.Sort((pair, valuePair) => pair.Key.Order.CompareTo(valuePair.Key.Order));
@@ -156,14 +156,14 @@ namespace TimberApi.BottomBarSystem
 
         private void AntiCrash()
         {
-            var dictionary = _bottomBarModules.SelectMany((Func<BottomBarModule, IEnumerable<KeyValuePair<int, IBottomBarElementProvider>>>)(module => module.LeftElements))
+            var dictionary = _bottomBarModules.SelectMany((Func<BottomBarModule, IEnumerable<KeyValuePair<int, IBottomBarElementProvider>>>) (module => module.LeftElements))
                 .ToDictionary(keyValuePair => keyValuePair.Key, keyValuePair => keyValuePair.Value);
             foreach (var key in dictionary.Keys.OrderBy(key => key))
             {
                 dictionary[key].GetElement();
             }
 
-            foreach (IBottomBarElementsProvider elementsProvider in _bottomBarModules.SelectMany((Func<BottomBarModule, IEnumerable<IBottomBarElementsProvider>>)(module => module.MiddleElements)))
+            foreach (IBottomBarElementsProvider elementsProvider in _bottomBarModules.SelectMany((Func<BottomBarModule, IEnumerable<IBottomBarElementsProvider>>) (module => module.MiddleElements)))
             {
                 foreach (BottomBarElement test in elementsProvider.GetElements())
                 {

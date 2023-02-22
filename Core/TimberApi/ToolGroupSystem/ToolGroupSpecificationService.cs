@@ -1,23 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
+using TimberApi.SpecificationSystem;
 using Timberborn.Persistence;
 
 namespace TimberApi.ToolGroupSystem
 {
     public class ToolGroupSpecificationService
     {
-        private readonly ISpecificationService _specificationService;
+        private static readonly string SpecificationName = "ToolGroupSpecification";
 
-        public ToolGroupSpecificationService(ISpecificationService specificationService)
+        private readonly IApiSpecificationService _apiSpecificationService;
+
+        public ToolGroupSpecificationService(IApiSpecificationService apiAPISpecificationService)
         {
-            _specificationService = specificationService;
+            _apiSpecificationService = apiAPISpecificationService;
         }
 
         public IEnumerable<T> GetSection<T>(string section, IObjectSerializer<T> deserializer) where T : ToolGroupSpecification
         {
             var sectionLower = section.ToLower();
 
-            return _specificationService.GetSpecifications(deserializer).Where(specification => specification.Section.ToLower().Equals(sectionLower));
+            return _apiSpecificationService.GetSpecifications(SpecificationName, deserializer).Where(specification => specification.Section.ToLower().Equals(sectionLower));
         }
     }
 }
