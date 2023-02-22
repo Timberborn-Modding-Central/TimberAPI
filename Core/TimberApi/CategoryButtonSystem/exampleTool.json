@@ -1,0 +1,11 @@
+{
+    "Id": "CategoryBridges",
+    "Type": "Group(ToolGroupButton)|Tool",
+    "BuildingId": "SuspensionBridge1x1.Folktails",
+    "Layout": "blue",
+    "Order": 300,
+    "Icon": "Bridges.png",
+    "NameLocKey": "Tobbert.CategoryBridges.DisplayName",
+    "DescriptionLocKey": "Tobbert.CategoryBridges.Description",
+    "RequiresDevelopmentMode": true
+}

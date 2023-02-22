@@ -3,6 +3,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem
 {
@@ -31,6 +32,8 @@ namespace TimberApi.SpecificationSystem
         public IEnumerable<T> GetSpecifications<T>(IObjectSerializer<T> serializer)
         {
             string specificationType = typeof(T).Name;
+
+            Debug.LogError(typeof(T).Name);
             IEnumerable<ISpecification> typeSpecification = _specificationRepository.GetBySpecification(specificationType).ToArray();
 
             foreach (ISpecification originalSpecification in typeSpecification.Where(specification => specification.IsOriginal))

@@ -45,8 +45,15 @@
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
+        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\UnityEngine.UIElementsNativeModule.dll">
+            <DestinationSubDirectory>libs/</DestinationSubDirectory>
+        </Reference>
+        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\UnityEngine.UIElementsNativeModule.dll">
+            <DestinationSubDirectory>libs/</DestinationSubDirectory>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Folder Include="SpecificationSystem\CustomSpecifications\Tools"/>
       <Folder Include="ThunderstorePackage\" />
     </ItemGroup>
 
