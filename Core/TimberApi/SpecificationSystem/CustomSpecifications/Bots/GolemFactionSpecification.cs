@@ -1,4 +1,4 @@
-namespace TimberApi.SpecificationSystem.CustomSpecifications.Golems
+namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
 {
     internal class GolemFactionSpecification
     {

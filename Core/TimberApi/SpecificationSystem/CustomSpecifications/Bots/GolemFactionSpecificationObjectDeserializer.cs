@@ -1,7 +1,7 @@
 using System;
 using Timberborn.Persistence;
 
-namespace TimberApi.SpecificationSystem.CustomSpecifications.Golems
+namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
 {
     internal class GolemFactionSpecificationObjectDeserializer : IObjectSerializer<GolemFactionSpecification>
     {

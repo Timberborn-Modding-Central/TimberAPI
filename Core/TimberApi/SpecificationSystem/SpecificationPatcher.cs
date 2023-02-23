@@ -24,17 +24,6 @@ namespace TimberApi.SpecificationSystem
             );
         }
 
-        public static void Patch()
-        {
-            var harmony = new Harmony("TimberApi.specification");
-
-            harmony.Patch(AccessTools.Method(typeof(PersistenceConfigurator), nameof(PersistenceConfigurator.Configure)),
-                transpiler: new HarmonyMethod(AccessTools.Method(typeof(SpecificationPatcher), nameof(RemoveSpecificationBind))));
-
-            harmony.Patch(AccessTools.Method(typeof(MainMenuSceneConfigurator), "Configure"),
-                transpiler: new HarmonyMethod(AccessTools.Method(typeof(SpecificationPatcher), nameof(RemoveSpecificationBind))));
-        }
-
         public static IEnumerable<CodeInstruction> RemoveSpecificationBind(IEnumerable<CodeInstruction> instructions)
         {
             // IL instructions

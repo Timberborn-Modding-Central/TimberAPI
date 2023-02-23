@@ -30,18 +30,6 @@ namespace TimberApi.Core.ConfiguratorSystem
             );
         }
 
-        public static void Patch()
-        {
-            var harmony = new Harmony("TimberApi.SceneListener");
-            harmony.Patch(AccessTools.Method(typeof(MasterSceneConfigurator), "Configure"), new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMasterSceneConfigurator))));
-
-            harmony.Patch(AccessTools.Method(typeof(MainMenuSceneConfigurator), "Configure"),
-                new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMainMenuSceneConfigurator))));
-
-            harmony.Patch(AccessTools.Method(typeof(MapEditorSceneConfigurator), "Configure"),
-                new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMapEditorSceneConfigurator))));
-        }
-
         private static void PatchMasterSceneConfigurator(IContainerDefinition containerDefinition)
         {
             TimberApiSceneManager.ChangeScene(SceneEntrypoint.InGame, containerDefinition);

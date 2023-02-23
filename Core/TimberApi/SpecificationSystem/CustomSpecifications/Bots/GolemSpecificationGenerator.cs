@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 
-namespace TimberApi.SpecificationSystem.CustomSpecifications.Golems
+namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
 {
     internal class GolemSpecificationGenerator : ISpecificationGenerator
     {

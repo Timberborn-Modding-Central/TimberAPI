@@ -5,7 +5,7 @@ using TimberApi.HarmonyPatcherSystem;
 using TimberApi.ToolGroupSystem;
 using Timberborn.ToolSystem;
 
-namespace TimberApi.BottomBarSystem
+namespace TimberApi.BottomBarSystem.Patchers
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class ToolGroupManagerPatcher : BaseHarmonyPatcher

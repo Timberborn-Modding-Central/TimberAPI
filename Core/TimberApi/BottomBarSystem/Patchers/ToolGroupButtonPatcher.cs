@@ -1,23 +1,24 @@
+using System.Diagnostics.CodeAnalysis;
 using HarmonyLib;
-using TimberApi.Common.SingletonSystem;
-using TimberApi.DependencyContainerSystem;
 using TimberApi.HarmonyPatcherSystem;
 using TimberApi.ToolGroupSystem;
 using Timberborn.CoreUI;
 using Timberborn.ToolSystem;
 using UnityEngine.UIElements;
 
-namespace TimberApi.BottomBarSystem
+namespace TimberApi.BottomBarSystem.Patchers
 {
-    public class ToolGroupButtonPatcher : BaseHarmonyPatcher, ITimberApiLoadableSingleton
+    [SuppressMessage("ReSharper", "RedundantAssignment")]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public class ToolGroupButtonPatcher : BaseHarmonyPatcher
     {
         private static BottomBarService _bottomBarService = null!;
 
         private static readonly string ActiveClassName = "button--active";
 
-        public void Load()
+        public ToolGroupButtonPatcher(BottomBarService bottomBarService)
         {
-            _bottomBarService = DependencyContainer.GetInstance<BottomBarService>();
+            _bottomBarService = bottomBarService;
         }
 
         public override string UniqueId => "TimberApi.ToolGroupButton";

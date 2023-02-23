@@ -28,22 +28,6 @@ namespace TimberApi.Core.BootstrapSystem
             }
         }
 
-        public static void Patch()
-        {
-            try
-            {
-                var harmony = new Harmony("TimberApi.bootstrapper");
-
-                harmony.Patch(AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"),
-                    new HarmonyMethod(AccessTools.Method(typeof(BootstrapPatcher), nameof(BootstrapperConfiguratorPatch))));
-            }
-            catch (Exception e)
-            {
-                File.WriteAllText(Path.Combine(Paths.Logs, $"HarmonyException-{DateTime.Now:yyyy-MM-dd-HH\\hmm\\mss\\s}.log"), e.ToString());
-                throw;
-            }
-        }
-
         /// <summary>
         ///     Prefixes bootstrapper to install itself into bindito
         /// </summary>

@@ -5,7 +5,7 @@ using Timberborn.FactionSystemGame;
 using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 
-namespace TimberApi.SpecificationSystem.CustomSpecifications.Golems
+namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
 {
     internal class GolemFactionService : ILoadableSingleton
     {

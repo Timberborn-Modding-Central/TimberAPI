@@ -2,7 +2,7 @@ using Bindito.Core;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.SceneSystem;
 
-namespace TimberApi.SpecificationSystem.CustomSpecifications.Golems
+namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
 {
     [Configurator(SceneEntrypoint.InGame)]
     internal class GolemFactionConfigurator : IConfigurator
@@ -12,14 +12,6 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Golems
             containerDefinition.MultiBind<ISpecificationGenerator>().To<GolemSpecificationGenerator>().AsSingleton();
             containerDefinition.Bind<GolemFactionService>().AsSingleton();
             containerDefinition.Bind<GolemFactionSpecificationObjectDeserializer>().AsSingleton();
-        }
-    }
-
-    internal class GolemFactionPatchConfigurator : IConfigurator
-    {
-        public void Configure(IContainerDefinition containerDefinition)
-        {
-            containerDefinition.Bind<GolemFactionPatcher>().AsSingleton();
         }
     }
 }
