@@ -1,6 +1,6 @@
 {
     "Id": "CategoryBridges",
-    "Type": "Group(ToolGroupButton)|Tool",
+    "Type": "Group(ToolGroupButton)|Tool|DraggableTool",
     "BuildingId": "SuspensionBridge1x1.Folktails",
     "Layout": "blue",
     "Order": 300,

@@ -24,20 +24,20 @@ namespace TimberApi.BottomBarSystem
 
         public override void Apply(Harmony harmony)
         {
-            harmony.Patch(
-                GetMethodInfo<ToolGroupButton>("ContainsTool"),
-                GetHarmonyMethod(nameof(ContainsToolPatch))
-            );
-
-            harmony.Patch(
-                GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.OnToolGroupEntered)),
-                GetHarmonyMethod(nameof(OnToolGroupEntered))
-            );
-
-            harmony.Patch(
-                GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.OnToolGroupExited)),
-                GetHarmonyMethod(nameof(OnToolGroupExited))
-            );
+            // harmony.Patch(
+            //     GetMethodInfo<ToolGroupButton>("ContainsTool"),
+            //     GetHarmonyMethod(nameof(ContainsToolPatch))
+            // );
+            //
+            // harmony.Patch(
+            //     GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.OnToolGroupEntered)),
+            //     GetHarmonyMethod(nameof(OnToolGroupEntered))
+            // );
+            //
+            // harmony.Patch(
+            //     GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.OnToolGroupExited)),
+            //     GetHarmonyMethod(nameof(OnToolGroupExited))
+            // );
         }
 
         public static bool ContainsToolPatch(ref bool __result, ToolGroupButton __instance)

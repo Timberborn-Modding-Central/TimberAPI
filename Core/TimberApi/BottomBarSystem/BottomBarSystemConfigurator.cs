@@ -1,5 +1,4 @@
 using Bindito.Core;
-using TimberApi.BottomBarUISystem;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.SceneSystem;
 
@@ -10,11 +9,11 @@ namespace TimberApi.BottomBarSystem
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Bind<BottomBarPanel>().AsSingleton();
-            containerDefinition.Bind<BottomBarUiService>().AsSingleton();
-            containerDefinition.Bind<BottomBarService>().AsSingleton();
-            containerDefinition.Bind<ToolGroupButtonPatcher>().AsSingleton();
-            containerDefinition.Bind<BottomBarToolGroupSpecificationDeserializer>().AsSingleton();
+            // containerDefinition.Bind<BottomBarPanel>().AsSingleton();
+            // containerDefinition.Bind<BottomBarUiService>().AsSingleton();
+            // containerDefinition.Bind<BottomBarService>().AsSingleton();
+            // containerDefinition.Bind<ToolGroupButtonPatcher>().AsSingleton();
+            // containerDefinition.Bind<BottomBarToolGroupSpecificationDeserializer>().AsSingleton();
         }
     }
 }

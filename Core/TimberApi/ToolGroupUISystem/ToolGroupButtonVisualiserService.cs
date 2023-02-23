@@ -12,7 +12,7 @@ namespace TimberApi.ToolGroupUISystem
 
         public ToolGroupButtonVisualiserService(IEnumerable<IToolGroupButtonVisualiser> toolGroupButtonVisualisers)
         {
-            _toolGroupButtonVisualisers = toolGroupButtonVisualisers.ToImmutableDictionary(visualiser => visualiser.Id.ToLower(), visualiser => visualiser);
+            _toolGroupButtonVisualisers = toolGroupButtonVisualisers.ToImmutableDictionary(visualiser => visualiser.Id.ToLower());
         }
 
         public IToolGroupButtonVisualiser Get(string visualiser)

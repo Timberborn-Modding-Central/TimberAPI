@@ -9,11 +9,11 @@ namespace TimberApi.BottomBarSystem
 
         public override void Apply(Harmony harmony)
         {
-            harmony.Patch(
-                GetMethodInfo<Timberborn.BottomBarSystem.BottomBarSystemConfigurator>(
-                    nameof(Timberborn.BottomBarSystem.BottomBarSystemConfigurator.Configure)),
-                GetHarmonyMethod(nameof(ConfiguratorPatch))
-            );
+            // harmony.Patch(
+            //     GetMethodInfo<Timberborn.BottomBarSystem.BottomBarSystemConfigurator>(
+            //         nameof(Timberborn.BottomBarSystem.BottomBarSystemConfigurator.Configure)),
+            //     GetHarmonyMethod(nameof(ConfiguratorPatch))
+            // );
         }
 
         public static bool ConfiguratorPatch()

@@ -30,7 +30,7 @@ namespace TimberApi.BottomBarSystem
 
             ToolGroupSpecifications = _toolGroupSpecificationService
                 .GetSection(BottomBarSection, _bottomBarToolGroupSpecificationDeserializer)
-                .ToImmutableDictionary(specification => specification.Id, specification => specification);
+                .ToImmutableDictionary(specification => specification.Id);
 
             Debug.LogWarning($"Total count: {ToolGroupSpecifications.Count}");
 

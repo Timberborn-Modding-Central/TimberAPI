@@ -16,10 +16,10 @@ namespace TimberApi.BottomBarSystem
 
         public override void Apply(Harmony harmony)
         {
-            harmony.Patch(
-                GetMethodInfo<ToolGroupManager>(nameof(ToolGroupManager.SwitchToolGroup)),
-                GetHarmonyMethod(nameof(SwitchToolGroupPatch))
-            );
+            // harmony.Patch(
+            //     GetMethodInfo<ToolGroupManager>(nameof(ToolGroupManager.SwitchToolGroup)),
+            //     GetHarmonyMethod(nameof(SwitchToolGroupPatch))
+            // );
         }
 
         public static void SwitchToolGroupPatch(ToolGroup? toolGroup, ToolGroupManager __instance)

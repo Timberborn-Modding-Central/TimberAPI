@@ -5,10 +5,13 @@ using System.Diagnostics;
 using System.Linq;
 using TimberApi.BottomBarUISystem;
 using TimberApi.ToolGroupUISystem;
+using TimberApi.ToolSystem;
+using Timberborn.AssetSystem;
 using Timberborn.BottomBarSystem;
 using Timberborn.GameUI;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
+using UnityEngine;
 using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
 
@@ -26,6 +29,14 @@ namespace TimberApi.BottomBarSystem
 
         private readonly GameLayout _gameLayout;
 
+        private readonly ToolButtonFactory _toolButtonFactory;
+
+        private readonly ToolFactoryRepository _toolFactoryRepository;
+
+        private readonly ToolSpecificationRepository _toolSpecificationRepository;
+
+        private readonly IResourceAssetLoader _resourceAssetLoader;
+
         private VisualElement _bottomBarWrapper = null!;
 
         private readonly SortedDictionary<int, VisualElement> _mainWrapperSections = new();
@@ -41,13 +52,18 @@ namespace TimberApi.BottomBarSystem
             BottomBarUiService bottomBarUiService,
             GameLayout gameLayout,
             BottomBarService bottomBarService,
-            ToolGroupButtonVisualiserService toolGroupButtonVisualiserService)
+            ToolGroupButtonVisualiserService toolGroupButtonVisualiserService, ToolButtonFactory toolButtonFactory, ToolFactoryRepository toolFactoryRepository, ToolSpecificationRepository toolSpecificationRepository,
+            IResourceAssetLoader resourceAssetLoader)
         {
             _bottomBarModules = bottomBarModules.ToImmutableArray();
             _bottomBarUiService = bottomBarUiService;
             _gameLayout = gameLayout;
             _bottomBarService = bottomBarService;
             _toolGroupButtonVisualiserService = toolGroupButtonVisualiserService;
+            _toolButtonFactory = toolButtonFactory;
+            _toolFactoryRepository = toolFactoryRepository;
+            _toolSpecificationRepository = toolSpecificationRepository;
+            _resourceAssetLoader = resourceAssetLoader;
         }
 
         public void Load()
@@ -98,6 +114,17 @@ namespace TimberApi.BottomBarSystem
             foreach (var keyValuePair in _sortedToolGroupButtons.Where(pair => ! pair.Key.Hidden))
             {
                 var buttonRow = _bottomBarService.GetRowNumber(keyValuePair.Key.GroupId);
+
+
+                foreach (var toolId in keyValuePair.Key.ToolIds)
+                {
+                    var toolSpecification = _toolSpecificationRepository.Get(toolId);
+
+                    var tool = _toolFactoryRepository.Get(toolSpecification.Type).Create(toolSpecification);
+
+                    _toolButtonFactory.Create(tool, _resourceAssetLoader.Load<Sprite>(toolSpecification.Icon), keyValuePair.Value.ToolButtonsElement);
+                }
+
 
                 AddElementToBottomBar(keyValuePair.Value.Root, buttonRow, keyValuePair.Key.GroupInformation.Section);
                 AddElementToBottomBar(keyValuePair.Value.ToolButtonsElement, buttonRow + 1, keyValuePair.Key.GroupInformation.Section);

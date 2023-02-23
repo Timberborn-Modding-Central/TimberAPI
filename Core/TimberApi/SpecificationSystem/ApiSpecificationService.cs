@@ -9,19 +9,24 @@ namespace TimberApi.SpecificationSystem
     internal class ApiSpecificationService : IApiSpecificationService
     {
         private readonly JsonMergeSettings _jsonMergeSettings;
+
         private readonly JsonMergeSettings _jsonMergeSettingsReplace;
 
         private readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
+
         private readonly SpecificationRepository _specificationRepository;
 
         public ApiSpecificationService(ObjectSaveReaderWriter objectSaveReaderWriter, SpecificationRepository specificationRepository)
         {
             _objectSaveReaderWriter = objectSaveReaderWriter;
+
             _specificationRepository = specificationRepository;
+
             _jsonMergeSettings = new JsonMergeSettings
             {
                 MergeArrayHandling = MergeArrayHandling.Union
             };
+
             _jsonMergeSettingsReplace = new JsonMergeSettings
             {
                 MergeArrayHandling = MergeArrayHandling.Replace
@@ -30,23 +35,30 @@ namespace TimberApi.SpecificationSystem
 
         public IEnumerable<T> GetSpecifications<T>(IObjectSerializer<T> serializer)
         {
-            return GetSpecifications<T>(typeof(T).Name, serializer);
+            return GetSpecifications(typeof(T).Name, serializer);
         }
 
         public IEnumerable<T> GetSpecifications<T>(string specificationName, IObjectSerializer<T> serializer)
         {
-            IEnumerable<ISpecification> specifications = _specificationRepository.GetBySpecification(specificationName).ToArray();
+            var specifications = _specificationRepository.GetBySpecification(specificationName.ToLower()).ToArray();
 
-            foreach (var originalSpecification in specifications.Where(specification => specification.IsOriginal))
+            foreach (var specification in specifications.Where(specification => specification.IsOriginal))
             {
-                var mergeSpecifications =
-                    specifications.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName) && specification.IsReplace == false);
+                var mergedSpecification = MergeSpecification(specification, specifications);
 
-                var replaceSpecifications = specifications.Where(specification => originalSpecification != specification && specification.FullName.Equals(originalSpecification.FullName) && specification.IsReplace == true);
-                var mergedJson = MergeSpecifications(originalSpecification, mergeSpecifications);
-                var replacedJson = Wrap(ReplaceSpecifications(mergedJson, replaceSpecifications).ToString(), specificationName);
-                yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJson(replacedJson)).Get(new PropertyKey<T>(specificationName), serializer);
+                yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJson(mergedSpecification)).Get(new PropertyKey<T>(specification.SpecificationName), serializer);
             }
+        }
+
+        private string MergeSpecification(ISpecification originalSpecification, ISpecification[] specifications)
+        {
+            var mergeSpecifications = specifications.Where(s => s.FullName.Equals(originalSpecification.FullName) && ! s.IsReplace);
+            var replaceSpecifications = specifications.Where(s => s.FullName.Equals(originalSpecification.FullName) && s.IsReplace);
+
+            var specification = MergeSpecifications(originalSpecification, mergeSpecifications);
+            specification = ReplaceSpecifications(specification, replaceSpecifications);
+
+            return Wrap(specification.ToString(), originalSpecification.SpecificationName);
         }
 
         private JObject MergeSpecification(JObject originalSpecification, ISpecification mergeSpecification)
@@ -63,7 +75,7 @@ namespace TimberApi.SpecificationSystem
 
         private JObject MergeSpecifications(ISpecification originalSpecification, IEnumerable<ISpecification> mergeSpecifications)
         {
-            JObject json = JObject.Parse(originalSpecification.LoadJson());
+            var json = JObject.Parse(originalSpecification.LoadJson());
             return mergeSpecifications.Aggregate(json, MergeSpecification);
         }
 
