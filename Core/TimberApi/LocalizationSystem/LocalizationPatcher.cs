@@ -1,21 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HarmonyLib;
+using TimberApi.HarmonyPatcherSystem;
 using Timberborn.Common;
 using UnityEngine;
 
-// ReSharper disable InconsistentNaming
-
 namespace TimberApi.LocalizationSystem
 {
-    internal static class LocalizationPatcher
+    public class LocalizationPatcher : BaseHarmonyPatcher
     {
-        public static void Patch()
-        {
-            var harmony = new Harmony("TimberApi.Localization");
+        public override string UniqueId => "TimberApi.Localization";
 
-            harmony.Patch(AccessTools.TypeByName("Timberborn.Localization.LocalizationRepository").GetMethod("GetLocalization"),
-                postfix: new HarmonyMethod(AccessTools.Method(typeof(LocalizationPatcher), nameof(GetLocalizationPatch))));
+        public override void Apply(Harmony harmony)
+        {
+            // harmony.Patch(
+            //     GetMethodInfo("Timberborn.Localization.LocalizationRepository", "GetLocalization"),
+            //     postfix: GetHarmonyMethod(nameof(GetLocalizationPatch))
+            // );
         }
 
         public static void GetLocalizationPatch(string localizationKey, ref IDictionary<string, string> __result)

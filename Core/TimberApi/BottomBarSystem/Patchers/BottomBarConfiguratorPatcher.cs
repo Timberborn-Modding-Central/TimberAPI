@@ -1,7 +1,7 @@
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
 
-namespace TimberApi.BottomBarSystem
+namespace TimberApi.BottomBarSystem.Patchers
 {
     public class BottomBarConfiguratorPatcher : BaseHarmonyPatcher
     {

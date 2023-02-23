@@ -1,5 +1,6 @@
 ﻿using Bindito.Core;
 using HarmonyLib;
+using TimberApi.HarmonyPatcherSystem;
 using TimberApi.SceneSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
@@ -7,8 +8,28 @@ using Timberborn.MasterScene;
 
 namespace TimberApi.Core.ConfiguratorSystem
 {
-    public static class ConfiguratorPatcher
+    public class ConfiguratorPatcher : BaseHarmonyPatcher
     {
+        public override string UniqueId => "TimberApi.SceneListener";
+
+        public override void Apply(Harmony harmony)
+        {
+            harmony.Patch(
+                GetMethodInfo<MasterSceneConfigurator>("Configure"),
+                GetHarmonyMethod(nameof(PatchMasterSceneConfigurator))
+            );
+
+            harmony.Patch(
+                GetMethodInfo<MainMenuSceneConfigurator>("Configure"),
+                GetHarmonyMethod(nameof(PatchMainMenuSceneConfigurator))
+            );
+
+            harmony.Patch(
+                GetMethodInfo<MapEditorSceneConfigurator>("Configure"),
+                GetHarmonyMethod(nameof(PatchMapEditorSceneConfigurator))
+            );
+        }
+
         public static void Patch()
         {
             var harmony = new Harmony("TimberApi.SceneListener");

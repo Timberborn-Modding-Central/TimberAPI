@@ -20,7 +20,7 @@ namespace TimberApi.HarmonyPatcherSystem
             foreach (var harmonyPatcher in _harmonyPatchers)
             {
                 var harmony = new Harmony(harmonyPatcher.UniqueId);
-                
+
                 try
                 {
                     harmonyPatcher.Apply(harmony);
@@ -31,12 +31,12 @@ namespace TimberApi.HarmonyPatcherSystem
                 }
             }
         }
-        
+
         private static IEnumerable<IHarmonyPatcher> CreateHarmonyPatchers()
         {
             return AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
-                .Where(x => typeof(IHarmonyPatcher).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
-                .Select(x => (IHarmonyPatcher) Activator.CreateInstance(AccessTools.TypeByName(x.Name)));
+                .Where(x => typeof(IHarmonyPatcher).IsAssignableFrom(x) && ! x.IsInterface && ! x.IsAbstract)
+                .Select(x => (IHarmonyPatcher) Activator.CreateInstance(x));
         }
     }
 }
