@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TimberApi.ShaderSystem
 {
-    internal class ShaderService : ITimberApiPreLoadableSingleton
+    internal class ShaderService : ITimberApiLoadableSingleton
     {
         private readonly ImmutableArray<IShaderApplier> _shaderFixAppliers;
 
@@ -31,7 +31,7 @@ namespace TimberApi.ShaderSystem
             }
         }
 
-        public void PreLoad()
+        public void Load()
         {
             foreach (IShaderApplier shaderFixApplier in _shaderFixAppliers)
             {

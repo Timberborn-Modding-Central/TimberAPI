@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using HarmonyLib;
 using TimberApi.Common;
@@ -9,6 +10,7 @@ using Timberborn.SingletonSystem;
 
 namespace TimberApi.Core.SingletonSystem
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class SingletonSystemPatcher : BaseHarmonyPatcher
     {
         public override string UniqueId => "TimberApi.SingletonSystem";
@@ -19,7 +21,13 @@ namespace TimberApi.Core.SingletonSystem
             {
                 harmony.Patch(
                     GetMethodInfo("Timberborn.SingletonSystem.SingletonLifecycleService", "LoadAll"),
-                    GetHarmonyMethod(nameof(SingletonLifecycleServicePrefix))
+                    GetHarmonyMethod(nameof(LoadAllPrefix))
+                );
+
+                harmony.Patch(
+                    GetMethodInfo("Timberborn.SingletonSystem.SingletonLifecycleService", "LoadSingletons"),
+                    GetHarmonyMethod(nameof(LoadSingletonsPrefix)),
+                    GetHarmonyMethod(nameof(LoadSingletonsPostfix))
                 );
             }
             catch (Exception e)
@@ -29,31 +37,24 @@ namespace TimberApi.Core.SingletonSystem
             }
         }
 
-        public static void Patch()
+        public static void LoadAllPrefix(ISingletonRepository ____singletonRepository)
         {
-            try
-            {
-                var harmony = new Harmony("TimberApi.singletonSystem");
-                harmony.Patch(AccessTools.TypeByName("Timberborn.SingletonSystem.SingletonLifecycleService").GetMethod("LoadAll"),
-                    new HarmonyMethod(AccessTools.Method(typeof(SingletonSystemPatcher), nameof(SingletonLifecycleServicePrefix))));
-            }
-            catch (Exception e)
-            {
-                File.WriteAllText(Path.Combine(Paths.Logs, $"HarmonyException-{DateTime.Now:yyyy-MM-dd-HH\\hmm\\mss\\s}.log"), e.ToString());
-                throw;
-            }
+            LoadSingleton(____singletonRepository.GetSingletons<ITimberApiLoadableSingleton>(), singleton => singleton.Load());
         }
 
-        public static void SingletonLifecycleServicePrefix(ISingletonRepository ____singletonRepository)
+        public static void LoadSingletonsPrefix(ISingletonRepository ____singletonRepository)
         {
-            SingletonActivator(____singletonRepository.GetSingletons<ITimberApiPreLoadableSingleton>(), singleton => singleton.PreLoad());
-            SingletonActivator(____singletonRepository.GetSingletons<ITimberApiLoadableSingleton>(), singleton => singleton.Load());
-            SingletonActivator(____singletonRepository.GetSingletons<ITimberApiPostLoadableSingleton>(), singleton => singleton.PostLoad());
+            LoadSingleton(____singletonRepository.GetSingletons<IEarlyLoadableSingleton>(), singleton => singleton.EarlyLoad());
         }
 
-        private static void SingletonActivator<T>(IEnumerable<T> singletons, Action<T> action) where T : class
+        public static void LoadSingletonsPostfix(ISingletonRepository ____singletonRepository)
         {
-            foreach (T singleton in singletons)
+            LoadSingleton(____singletonRepository.GetSingletons<ILateLoadableSingleton>(), singleton => singleton.LateLoad());
+        }
+
+        private static void LoadSingleton<T>(IEnumerable<T> singletons, Action<T> action) where T : class
+        {
+            foreach (var singleton in singletons)
             {
                 action(singleton);
             }

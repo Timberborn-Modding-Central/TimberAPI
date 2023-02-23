@@ -6,7 +6,7 @@ using TimberApi.SceneSystem;
 
 namespace TimberApi.AssetSystem
 {
-    internal class AssetRepositoryPreLoadableSingleton : ITimberApiPreLoadableSingleton
+    internal class AssetRepositoryPreLoadableSingleton : ITimberApiLoadableSingleton
     {
         private readonly AssetRepository _assetRepository;
 
@@ -18,7 +18,7 @@ namespace TimberApi.AssetSystem
             _modRepository = modRepository;
         }
 
-        public void PreLoad()
+        public void Load()
         {
             SetTimberApiAssets();
             SetModAssets();

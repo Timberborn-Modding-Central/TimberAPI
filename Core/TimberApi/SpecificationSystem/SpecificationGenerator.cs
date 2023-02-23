@@ -6,13 +6,12 @@ using TimberApi.Common.Helpers;
 using TimberApi.Common.SingletonSystem;
 using TimberApi.ModSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
-using Timberborn.SingletonSystem;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace TimberApi.SpecificationSystem
 {
-    internal class SpecificationRepositoryPreLoadableSingleton : ITimberApiPreLoadableSingleton, ILoadableSingleton
+    internal class SpecificationGenerator : ITimberApiLoadableSingleton
     {
         private static readonly string TimberbornSpecificationPath = "Specifications";
 
@@ -22,14 +21,14 @@ namespace TimberApi.SpecificationSystem
 
         private readonly SpecificationRepository _specificationRepository;
 
-        public SpecificationRepositoryPreLoadableSingleton(IModRepository modRepository, SpecificationRepository specificationRepository, IEnumerable<ISpecificationGenerator> specificationGenerators)
+        public SpecificationGenerator(IModRepository modRepository, SpecificationRepository specificationRepository, IEnumerable<ISpecificationGenerator> specificationGenerators)
         {
             _modRepository = modRepository;
             _specificationRepository = specificationRepository;
             _specificationGenerators = specificationGenerators;
         }
 
-        public void PreLoad()
+        public void Load()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             List<ISpecification> specifications = new();
@@ -48,15 +47,6 @@ namespace TimberApi.SpecificationSystem
 
             stopwatch.Stop();
             Debug.LogWarning($"Time to execute generators: {stopwatch.ElapsedMilliseconds}");
-        }
-
-
-        public void Load()
-        {
-            List<ISpecification> specifications = new();
-
-
-            _specificationRepository.AddRange(specifications);
         }
     }
 }
