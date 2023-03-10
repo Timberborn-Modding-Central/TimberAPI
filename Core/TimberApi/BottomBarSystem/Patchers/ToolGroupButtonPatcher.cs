@@ -54,8 +54,8 @@ namespace TimberApi.BottomBarSystem.Patchers
                 return false;
             }
 
-            var row = _bottomBarService.GetRowNumber(toolGroup.Id);
-            var enteredRow = _bottomBarService.GetRowNumber(enteredToolGroup.Id);
+            var row = _bottomBarService.GetToolGroup(toolGroup.Id).Row;
+            var enteredRow = _bottomBarService.GetToolGroup(enteredToolGroup.Id).Row;
 
             if(row >= enteredRow && toolGroupEnteredEvent.ToolGroup != ____toolGroup)
             {

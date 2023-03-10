@@ -43,7 +43,9 @@ namespace TimberApi.ToolSystem
 
         public IEnumerable<ToolSpecification> GetAllFromGroup(string groupId)
         {
-            return _toolSpecifications.Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower()).Select(pair => pair.Value);
+            return _toolSpecifications.Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
+                .Select(pair => pair.Value)
+                .OrderBy(specification => specification.Order);
         }
     }
 }

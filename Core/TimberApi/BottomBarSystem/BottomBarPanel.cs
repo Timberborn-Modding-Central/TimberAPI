@@ -4,11 +4,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using TimberApi.BottomBarUISystem;
-using TimberApi.Common.Extensions;
-using TimberApi.ToolGroupUISystem;
 using TimberApi.ToolSystem;
-using Timberborn.AssetSystem;
-using Timberborn.BlockObjectTools;
 using Timberborn.BottomBarSystem;
 using Timberborn.GameUI;
 using Timberborn.SingletonSystem;
@@ -21,8 +17,6 @@ namespace TimberApi.BottomBarSystem
     public class BottomBarPanel : ILoadableSingleton
     {
         private readonly ImmutableArray<BottomBarModule> _bottomBarModules;
-
-        private readonly ToolGroupButtonVisualiserService _toolGroupButtonVisualiserService;
 
         private readonly BottomBarService _bottomBarService;
 
@@ -42,27 +36,23 @@ namespace TimberApi.BottomBarSystem
 
         private readonly SortedDictionary<int, VisualElement> _bottomBarPanels = new();
 
-        private readonly List<KeyValuePair<BottomBarToolGroupSpecification, ToolGroupButton>> _sortedToolGroupButtons = new();
-
-        private readonly Dictionary<string, ToolGroupButton> _toolGroupButtons = new();
-
-        public BottomBarPanel(
-            IEnumerable<BottomBarModule> bottomBarModules,
+        public BottomBarPanel(IEnumerable<BottomBarModule> bottomBarModules,
+            BottomBarService bottomBarService,
             BottomBarUiService bottomBarUiService,
             GameLayout gameLayout,
-            BottomBarService bottomBarService,
-            ToolGroupButtonVisualiserService toolGroupButtonVisualiserService, ToolButtonFactory toolButtonFactory, ToolFactoryRepository toolFactoryRepository, ToolSpecificationRepository toolSpecificationRepository,
-            IResourceAssetLoader resourceAssetLoader, BlockObjectToolGroupSpecificationService blockObjectToolGroupSpecificationService)
+            ToolButtonFactory toolButtonFactory,
+            ToolFactoryRepository toolFactoryRepository,
+            ToolSpecificationRepository toolSpecificationRepository)
         {
             _bottomBarModules = bottomBarModules.ToImmutableArray();
             _bottomBarUiService = bottomBarUiService;
             _gameLayout = gameLayout;
             _bottomBarService = bottomBarService;
-            _toolGroupButtonVisualiserService = toolGroupButtonVisualiserService;
             _toolButtonFactory = toolButtonFactory;
             _toolFactoryRepository = toolFactoryRepository;
             _toolSpecificationRepository = toolSpecificationRepository;
         }
+
 
         public void Load()
         {
@@ -73,7 +63,6 @@ namespace TimberApi.BottomBarSystem
             var stopwatch = Stopwatch.StartNew();
 
             SetupBottomBar();
-            CreateToolGroupButtons();
             InitializeGroupButtons();
             InitializeSections();
 
@@ -92,43 +81,25 @@ namespace TimberApi.BottomBarSystem
             _gameLayout.AddBottomBar(_bottomBarWrapper);
         }
 
-        private void CreateToolGroupButtons()
-        {
-            foreach (var toolGroupSpecification in _bottomBarService.ToolGroupSpecifications.Select(pair => pair.Value))
-            {
-                var apiToolGroup = new BottomBarToolGroup(toolGroupSpecification.Id, toolGroupSpecification.NameLocKey, toolGroupSpecification.Icon);
-
-                var button = _toolGroupButtonVisualiserService.Get(toolGroupSpecification.Layout).GetToolGroupButton(apiToolGroup, toolGroupSpecification);
-
-                _toolGroupButtons.Add(toolGroupSpecification.Id, button);
-                _sortedToolGroupButtons.Add(new KeyValuePair<BottomBarToolGroupSpecification, ToolGroupButton>(toolGroupSpecification, button));
-            }
-
-            _sortedToolGroupButtons.Sort((pair, valuePair) => pair.Key.Order.CompareTo(valuePair.Key.Order));
-        }
-
         private void InitializeGroupButtons()
         {
-            foreach (var keyValuePair in _sortedToolGroupButtons.Where(pair => ! pair.Key.Hidden))
+            foreach (var toolGroupButton in _bottomBarService.ToolGroupButtons)
             {
-                var buttonRow = _bottomBarService.GetRowNumber(keyValuePair.Key.GroupId);
-
-                foreach (var toolSpecification in _toolSpecificationRepository.GetAllFromGroup(keyValuePair.Key.Id))
+                foreach (var toolSpecification in _toolSpecificationRepository.GetAllFromGroup(toolGroupButton.Specification.Id))
                 {
-                    var tool = _toolFactoryRepository.Get(toolSpecification.Type).Create(toolSpecification, keyValuePair.Value.GetPrivateInstanceFieldValue<ToolGroup>("_toolGroup"));
+                    var tool = _toolFactoryRepository.Get(toolSpecification.Type).Create(toolSpecification, toolGroupButton.ToolGroup);
 
-                    var toolButton = _toolButtonFactory.Create(tool, toolSpecification.Icon, keyValuePair.Value.ToolButtonsElement);
+                    var toolButton = _toolButtonFactory.Create(tool, toolSpecification.Icon, toolGroupButton.ToolGroupButton.ToolButtonsElement);
 
-                    keyValuePair.Value.AddTool(toolButton);
+                    toolGroupButton.ToolGroupButton.AddTool(toolButton);
                 }
 
+                AddElementToBottomBar(toolGroupButton.ToolGroupButton.Root, toolGroupButton.Row, toolGroupButton.Specification.GroupInformation.Section);
+                AddElementToBottomBar(toolGroupButton.ToolGroupButton.ToolButtonsElement, toolGroupButton.Row + 1, toolGroupButton.Specification.GroupInformation.Section);
 
-                AddElementToBottomBar(keyValuePair.Value.Root, buttonRow, keyValuePair.Key.GroupInformation.Section);
-                AddElementToBottomBar(keyValuePair.Value.ToolButtonsElement, buttonRow + 1, keyValuePair.Key.GroupInformation.Section);
-
-                if(keyValuePair.Key.GroupId != null)
+                if(toolGroupButton.Specification.GroupId != null)
                 {
-                    _toolGroupButtons[keyValuePair.Key.GroupId].AddToolGroupButton(keyValuePair.Value);
+                    _bottomBarService.GetToolGroup(toolGroupButton.Specification.GroupId).ToolGroupButton.AddToolGroupButton(toolGroupButton.ToolGroupButton);
                 }
             }
         }

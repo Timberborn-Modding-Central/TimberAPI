@@ -1,5 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using TimberApi.Common.SingletonSystem;
+using TimberApi.SpecificationSystem.SpecificationTypes;
+using Timberborn.Buildings;
+using Timberborn.MechanicalSystem;
+using Timberborn.PrefabSystem;
+using Timberborn.Workshops;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
@@ -23,37 +32,35 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 
         private static IEnumerable<ISpecification> GenerateSpecifications()
         {
-            return new List<ISpecification>();
+            var buildingComponents = Resources.LoadAll<Building>(BuildingsPath);
 
-            // var buildingComponents = Resources.LoadAll<Building>(BuildingsPath);
-            //
-            // foreach (var component in buildingComponents)
-            // {
-            //     var buildingId = component.GetComponent<Prefab>().PrefabName;
-            //     IEnumerable<string> recipeIds = Array.Empty<string>();
-            //     var scienceCost = component.ScienceCost;
-            //     var buildingCosts = component.BuildingCost.Select(x => new BuildingCost(x.GoodId, x.Amount));
-            //     int? powerInput = null;
-            //     int? powerOutput = null;
-            //
-            //     if (component.TryGetComponent(out Manufactory manufactory))
-            //     {
-            //         recipeIds = manufactory.ProductionRecipeIds;
-            //     }
-            //
-            //     if (component.TryGetComponent(out MechanicalNodeSpecification mechanicalNodeSpecification))
-            //     {
-            //         powerInput = mechanicalNodeSpecification.PowerInput;
-            //         powerOutput = mechanicalNodeSpecification.PowerOutput;
-            //     }
-            //
-            //     var buildingSpec = new BuildingSpecification(buildingId, scienceCost, powerInput, powerOutput, recipeIds, buildingCosts);
-            //
-            //     var jsonSerializerSettings = new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore};
-            //     var buildingSpecificationJson = JsonConvert.SerializeObject(buildingSpec, Formatting.Indented, jsonSerializerSettings);
-            //
-            //     yield return new GeneratedSpecification(buildingSpecificationJson, component.name, SpecificationName);
-            // }
+            foreach (var component in buildingComponents)
+            {
+                var buildingId = component.GetComponent<Prefab>().PrefabName;
+                IEnumerable<string> recipeIds = Array.Empty<string>();
+                var scienceCost = component.ScienceCost;
+                var buildingCosts = component.BuildingCost.Select(x => new BuildingCost(x.GoodId, x.Amount));
+                int? powerInput = null;
+                int? powerOutput = null;
+
+                if(component.TryGetComponent(out Manufactory manufactory))
+                {
+                    recipeIds = manufactory.ProductionRecipeIds;
+                }
+
+                if(component.TryGetComponent(out MechanicalNodeSpecification mechanicalNodeSpecification))
+                {
+                    powerInput = mechanicalNodeSpecification.PowerInput;
+                    powerOutput = mechanicalNodeSpecification.PowerOutput;
+                }
+
+                var buildingSpec = new BuildingSpecification(buildingId, scienceCost, powerInput, powerOutput, recipeIds, buildingCosts);
+
+                var jsonSerializerSettings = new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore };
+                var buildingSpecificationJson = JsonConvert.SerializeObject(buildingSpec, Formatting.Indented, jsonSerializerSettings);
+
+                yield return new GeneratedSpecification(buildingSpecificationJson, component.name, SpecificationName);
+            }
         }
     }
 }

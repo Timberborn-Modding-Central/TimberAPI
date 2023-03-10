@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
@@ -21,7 +20,6 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
 
         public IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService)
         {
-            Debug.LogError(objectCollectionService.GetAllMonoBehaviours<PlaceableBlockObject>().Count());
             Stopwatch stopwatch = Stopwatch.StartNew();
             foreach (var placeableBlockObject in objectCollectionService.GetAllMonoBehaviours<PlaceableBlockObject>())
             {
@@ -43,9 +41,6 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
                 );
 
                 _toolIconService.AddIcon(labeledPrefab.Image);
-
-                Debug.LogWarning(JsonConvert.SerializeObject(toolSpecification));
-
 
                 yield return new GeneratedSpecification(JsonConvert.SerializeObject(toolSpecification), placeableBlockObject.name, "ToolSpecification");
             }
