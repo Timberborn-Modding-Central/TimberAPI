@@ -1,9 +1,6 @@
 {
     "Id": "Other",
     "GroupId": "Paths",
-    "ToolIds": [
-        "CategoryBridges"
-    ],
     "Section": "BottomBar:3",
     "Order": "180",
     "NameLocKey": "ToolGroups.Other",

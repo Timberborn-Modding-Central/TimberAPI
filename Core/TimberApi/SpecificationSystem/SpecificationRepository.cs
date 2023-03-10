@@ -1,32 +1,52 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
+using TimberApi.Common.Helpers;
+using TimberApi.Common.SingletonSystem;
+using TimberApi.ModSystem;
+using TimberApi.SpecificationSystem.SpecificationTypes;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem
 {
-    internal class SpecificationRepository
+    public class SpecificationRepository : ITimberApiLoadableSingleton
     {
-        private ImmutableDictionary<string, IEnumerable<ISpecification>> _specifications = null!;
+        private static readonly string TimberbornSpecificationPath = "Specifications";
 
-        public void Initialize(IEnumerable<ISpecification> specifications)
+        private readonly IModRepository _modRepository;
+
+        private Dictionary<string, List<ISpecification>> _specifications;
+
+        public SpecificationRepository(IModRepository modRepository)
         {
-            _specifications = specifications.GroupBy(specification => specification.SpecificationName).ToImmutableDictionary(
-                groupedSpecifications => groupedSpecifications.Key.ToLower(),
-                groupedSpecifications => (IEnumerable<ISpecification>) groupedSpecifications
-            );
+            _modRepository = modRepository;
+            _specifications = new Dictionary<string, List<ISpecification>>();
         }
 
         public void AddRange(IEnumerable<ISpecification> specifications)
         {
-            _specifications = _specifications.AddRange(specifications.GroupBy(specification => specification.SpecificationName).ToImmutableDictionary(
-                groupedSpecifications => groupedSpecifications.Key.ToLower(),
-                groupedSpecifications => (IEnumerable<ISpecification>) groupedSpecifications
-            ));
+            foreach (var groupedSpecification in specifications.GroupBy(specification => specification.SpecificationName))
+            {
+                if(! _specifications.ContainsKey(groupedSpecification.Key.ToLower()))
+                {
+                    _specifications.Add(groupedSpecification.Key, new List<ISpecification>());
+                }
+
+                _specifications[groupedSpecification.Key.ToLower()].AddRange(groupedSpecification);
+            }
         }
 
         public IEnumerable<ISpecification> GetBySpecification(string specificationName)
         {
             return _specifications.ContainsKey(specificationName) ? _specifications[specificationName] : Enumerable.Empty<ISpecification>();
+        }
+
+        public void Load()
+        {
+            AddRange(FileService.GetFiles(_modRepository.All().Select(mod => Path.Combine(mod.DirectoryPath, mod.SpecificationPath)), "*.json")
+                .Select(filePath => new FileSpecification(filePath)));
+
+            AddRange(Resources.LoadAll<TextAsset>(TimberbornSpecificationPath).Select(asset => new TimberbornSpecification(asset)));
         }
     }
 }

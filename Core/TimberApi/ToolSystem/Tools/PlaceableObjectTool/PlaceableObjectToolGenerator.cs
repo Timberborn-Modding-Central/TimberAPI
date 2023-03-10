@@ -1,46 +1,57 @@
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
-using TimberApi.ToolSystem.Factories.PlaceableObjectTool;
-using Timberborn.AssetSystem;
 using Timberborn.BlockSystem;
 using Timberborn.PrefabSystem;
+using Debug = UnityEngine.Debug;
 
 namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
 {
-    public class PlaceableObjectToolGenerator : ISpecificationGenerator
+    public class PlaceableObjectToolGenerator : IObjectSpecificationGenerator
     {
-        private readonly ObjectCollectionService _objectCollectionService;
+        private readonly ToolIconService _toolIconService;
 
-        private readonly IResourceAssetLoader _resourceAssetLoader;
-
-        public PlaceableObjectToolGenerator(ObjectCollectionService objectCollectionService, IResourceAssetLoader resourceAssetLoader)
+        public PlaceableObjectToolGenerator(ToolIconService toolIconService)
         {
-            _objectCollectionService = objectCollectionService;
-            _resourceAssetLoader = resourceAssetLoader;
+            _toolIconService = toolIconService;
         }
 
-        public IEnumerable<ISpecification> Generate()
+        public IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService)
         {
-            foreach (var placeableBlockObject in _resourceAssetLoader.LoadAll<PlaceableBlockObject>(""))
+            Debug.LogError(objectCollectionService.GetAllMonoBehaviours<PlaceableBlockObject>().Count());
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            foreach (var placeableBlockObject in objectCollectionService.GetAllMonoBehaviours<PlaceableBlockObject>())
             {
                 var labeledPrefab = placeableBlockObject.GetComponent<LabeledPrefab>();
+                var prefab = placeableBlockObject.GetComponent<Prefab>();
+                // Debug.LogWarning(prefab.IsNamed(prefab.PrefabName));
 
-                var test = new ToolSpecification<PlaceableObjectToolToolInformation>(
-                    placeableBlockObject.name,
+                var toolSpecification = new ToolSpecification<PlaceableObjectToolToolInformation>(
+                    prefab.PrefabName,
+                    placeableBlockObject.ToolGroupId,
                     "PlaceableObjectTool",
                     "blue",
                     placeableBlockObject.ToolOrder,
-                    $"buildings/{placeableBlockObject.ToolGroupId}/{placeableBlockObject.name}/{placeableBlockObject.name}Icon",
+                    labeledPrefab.Image.name,
                     labeledPrefab.DisplayNameLocKey,
                     labeledPrefab.DescriptionLocKey,
                     placeableBlockObject.DevModeTool,
-                    new PlaceableObjectToolToolInformation()
+                    new PlaceableObjectToolToolInformation(prefab.PrefabName)
                 );
 
-                yield return new GeneratedSpecification(JsonConvert.SerializeObject(test), placeableBlockObject.name, "ToolSpecification");
+                _toolIconService.AddIcon(labeledPrefab.Image);
+
+                Debug.LogWarning(JsonConvert.SerializeObject(toolSpecification));
+
+
+                yield return new GeneratedSpecification(JsonConvert.SerializeObject(toolSpecification), placeableBlockObject.name, "ToolSpecification");
             }
+
+            stopwatch.Stop();
+            Debug.LogWarning($"Time execution PlaceableObjectToolGenerator: {stopwatch.ElapsedMilliseconds}");
         }
     }
 }

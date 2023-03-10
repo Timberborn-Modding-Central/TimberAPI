@@ -6,6 +6,13 @@ namespace TimberApi.ToolSystem
 {
     public class ToolSpecificationDeserializer : IObjectSerializer<ToolSpecification>
     {
+        private readonly ToolIconService _toolIconService;
+
+        public ToolSpecificationDeserializer(ToolIconService toolIconService)
+        {
+            _toolIconService = toolIconService;
+        }
+
         public void Serialize(ToolSpecification value, IObjectSaver objectSaver)
         {
             throw new System.NotImplementedException();
@@ -15,20 +22,21 @@ namespace TimberApi.ToolSystem
         {
             return new ToolSpecification(
                 objectLoader.Get(new PropertyKey<string>("Id")),
+                objectLoader.GetValueOrNull(new PropertyKey<string>("GroupId")),
                 objectLoader.Get(new PropertyKey<string>("Type")),
                 objectLoader.Get(new PropertyKey<string>("Layout")),
                 objectLoader.Get(new PropertyKey<int>("Order")),
-                objectLoader.Get(new PropertyKey<string>("Icon")),
+                _toolIconService.GetIcon(objectLoader.Get(new PropertyKey<string>("Icon"))),
                 objectLoader.Get(new PropertyKey<string>("NameLocKey")),
                 objectLoader.Get(new PropertyKey<string>("DescriptionLocKey")),
-                objectLoader.Get(new PropertyKey<bool>("DevTool")),
+                objectLoader.Get(new PropertyKey<bool>("DevModeTool")),
                 GetToolInformationObjectSave(objectLoader)
             );
         }
 
         private static ObjectSave? GetToolInformationObjectSave(IObjectLoader objectLoader)
         {
-            if (! objectLoader.Has(new PropertyKey<ObjectSave>("ToolInformation")))
+            if(! objectLoader.Has(new PropertyKey<ObjectSave>("ToolInformation")))
             {
                 return null;
             }

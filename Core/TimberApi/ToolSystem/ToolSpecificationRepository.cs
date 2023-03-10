@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using TimberApi.SpecificationSystem;
 using Timberborn.SingletonSystem;
 using UnityEngine;
@@ -14,7 +15,11 @@ namespace TimberApi.ToolSystem
 
         private ImmutableDictionary<string, ToolSpecification> _toolSpecifications = null!;
 
-        public ToolSpecificationRepository(IApiSpecificationService apiAPISpecificationService, ToolSpecificationDeserializer toolSpecificationDeserializer)
+        public ToolSpecificationRepository(
+            // ReSharper disable once InconsistentNaming, Without it generators will be loaded after this class
+            ObjectSpecificationGenerator FIX_FOR_LATER_LOADING,
+            IApiSpecificationService apiAPISpecificationService,
+            ToolSpecificationDeserializer toolSpecificationDeserializer)
         {
             _apiSpecificationService = apiAPISpecificationService;
             _toolSpecificationDeserializer = toolSpecificationDeserializer;
@@ -28,12 +33,17 @@ namespace TimberApi.ToolSystem
 
         public ToolSpecification Get(string id)
         {
-            if (! _toolSpecifications.TryGetValue(id.ToLower(), out var toolSpecification))
+            if(! _toolSpecifications.TryGetValue(id.ToLower(), out var toolSpecification))
             {
                 throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
             }
 
             return toolSpecification;
+        }
+
+        public IEnumerable<ToolSpecification> GetAllFromGroup(string groupId)
+        {
+            return _toolSpecifications.Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower()).Select(pair => pair.Value);
         }
     }
 }

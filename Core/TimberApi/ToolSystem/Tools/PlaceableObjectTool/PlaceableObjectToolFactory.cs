@@ -11,7 +11,7 @@ using Timberborn.PreviewSystem;
 using Timberborn.ToolSystem;
 using Timberborn.UISound;
 
-namespace TimberApi.ToolSystem.Factories.PlaceableObjectTool
+namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
 {
     public class PlaceableObjectToolFactory : BaseToolFactory<PlaceableObjectToolToolInformation>
     {
@@ -59,14 +59,16 @@ namespace TimberApi.ToolSystem.Factories.PlaceableObjectTool
 
         private Tool CreateTool(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {
-            var placeableBlockObject = _objectCollectionService.GetAllMonoBehaviours<PlaceableBlockObject>().Single(o => o.name.ToLower().Equals(toolSpecification.Id.ToLower()));
+            var toolInformation = GetToolInformation(toolSpecification);
+            var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.BuildingPrefabName));
+            var placeableBlockObject = prefab.GetComponent<PlaceableBlockObject>();
 
-            placeableBlockObject.SetPrivateInstanceFieldValue("_devModeTool", toolSpecification.DevTool);
+            placeableBlockObject.SetPrivateInstanceFieldValue("_devModeTool", toolSpecification.DevModeTool);
             placeableBlockObject.SetPrivateInstanceFieldValue("_toolOrder", toolSpecification.Order);
 
             var blockObjectTool = new BlockObjectTool(_blockObjectToolDescriber, _inputService, _areaPickerFactory, _previewPlacerFactory, _uiSoundController, _blockObjectPlacerService, _mapEditorMode);
 
-            if (toolGroup == null)
+            if(toolGroup == null)
             {
                 blockObjectTool.Initialize(placeableBlockObject);
             }
@@ -80,7 +82,7 @@ namespace TimberApi.ToolSystem.Factories.PlaceableObjectTool
 
         protected override PlaceableObjectToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)
         {
-            return new PlaceableObjectToolToolInformation();
+            return new PlaceableObjectToolToolInformation(objectLoader.Get(new PropertyKey<string>("BuildingPrefabName")));
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem
 {
@@ -52,8 +53,8 @@ namespace TimberApi.SpecificationSystem
 
         private string MergeSpecification(ISpecification originalSpecification, ISpecification[] specifications)
         {
-            var mergeSpecifications = specifications.Where(s => s.FullName.Equals(originalSpecification.FullName) && ! s.IsReplace);
-            var replaceSpecifications = specifications.Where(s => s.FullName.Equals(originalSpecification.FullName) && s.IsReplace);
+            var mergeSpecifications = specifications.Where(s => s.FullName.Equals(originalSpecification.FullName) && s is { IsReplace: false, IsOriginal: false });
+            var replaceSpecifications = specifications.Where(s => s.FullName.Equals(originalSpecification.FullName) && s is { IsReplace: true, IsOriginal: false });
 
             var specification = MergeSpecifications(originalSpecification, mergeSpecifications);
             specification = ReplaceSpecifications(specification, replaceSpecifications);
@@ -75,6 +76,11 @@ namespace TimberApi.SpecificationSystem
 
         private JObject MergeSpecifications(ISpecification originalSpecification, IEnumerable<ISpecification> mergeSpecifications)
         {
+            foreach (var mergeSpecification in mergeSpecifications)
+            {
+                Debug.LogWarning(mergeSpecification.FullName);
+            }
+
             var json = JObject.Parse(originalSpecification.LoadJson());
             return mergeSpecifications.Aggregate(json, MergeSpecification);
         }

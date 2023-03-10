@@ -11,9 +11,18 @@ namespace TimberApi.SpecificationSystem
         public void Configure(IContainerDefinition containerDefinition)
         {
             containerDefinition.Bind<SpecificationRepository>().AsSingleton();
-            containerDefinition.Bind<SpecificationGenerator>().AsSingleton();
             containerDefinition.Bind<ISpecificationService>().To<ApiSpecificationService>().AsSingleton();
             containerDefinition.Bind<IApiSpecificationService>().To<ApiSpecificationService>().AsSingleton();
+            containerDefinition.Bind<SpecificationGenerator>().AsSingleton();
+        }
+    }
+
+    [Configurator(SceneEntrypoint.InGame)]
+    internal class SpecificationSystemInGameConfigurator : IConfigurator
+    {
+        public void Configure(IContainerDefinition containerDefinition)
+        {
+            containerDefinition.Bind<ObjectSpecificationGenerator>().AsSingleton();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace TimberApi.SpecificationSystem.SpecificationTypes
     {
         public TimberbornSpecification(TextAsset specificationAsset)
         {
-            string name = specificationAsset.name;
+            var name = specificationAsset.name;
             FullName = name.ToLower();
             Name = FullName[(FullName.IndexOf('.') + 1)..].ToLower();
             SpecificationAsset = specificationAsset;

@@ -1,11 +1,14 @@
 {
-    "Id": "CategoryBridges",
-    "Type": "Group(ToolGroupButton)|Tool|DraggableTool",
-    "BuildingId": "SuspensionBridge1x1.Folktails",
+    "Id": "RuinColumnH8",
+    "GroupId": "Ruins",
+    "Type": "PlaceableObjectTool",
     "Layout": "blue",
-    "Order": 300,
-    "Icon": "Bridges.png",
-    "NameLocKey": "Tobbert.CategoryBridges.DisplayName",
-    "DescriptionLocKey": "Tobbert.CategoryBridges.Description",
-    "RequiresDevelopmentMode": true
+    "Order": 8,
+    "Icon": "RuinColumnH8Icon",
+    "NameLocKey": "Building.Ruins.DisplayName",
+    "DescriptionLocKey": "Building.Ruins.Description",
+    "DevModeTool": true,
+    "ToolInformation": {
+        "BuildingPrefabName": "RuinColumnH8"
+    }
 }
