@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace TimberApi.ToolSystem
 {
-    public class ToolSpecificationRepository : ILoadableSingleton
+    public class ToolSpecificationService : ILoadableSingleton
     {
         private readonly IApiSpecificationService _apiSpecificationService;
 
@@ -15,7 +15,9 @@ namespace TimberApi.ToolSystem
 
         private ImmutableDictionary<string, ToolSpecification> _toolSpecifications = null!;
 
-        public ToolSpecificationRepository(
+        public ImmutableArray<ToolSpecification> ToolSpecifications => _toolSpecifications.Select(pair => pair.Value).ToImmutableArray();
+
+        public ToolSpecificationService(
             // ReSharper disable once InconsistentNaming, Without it generators will be loaded after this class
             ObjectSpecificationGenerator FIX_FOR_LATER_LOADING,
             IApiSpecificationService apiAPISpecificationService,

@@ -4,6 +4,7 @@ using TimberApi.DependencyContainerSystem;
 using TimberApi.HarmonyPatcherSystem;
 using TimberApi.ToolGroupSystem;
 using Timberborn.CoreUI;
+using Timberborn.Debugging;
 using Timberborn.ToolSystem;
 using UnityEngine.UIElements;
 
@@ -13,11 +14,14 @@ namespace TimberApi.BottomBarSystem.Patchers
     {
         private static BottomBarService _bottomBarService = null!;
 
+        private static DevModeManager _devModeManager = null!;
+
         private static readonly string ActiveClassName = "button--active";
 
         public void Load()
         {
             _bottomBarService = DependencyContainer.GetInstance<BottomBarService>();
+            _devModeManager = DependencyContainer.GetInstance<DevModeManager>();
         }
 
         public override string UniqueId => "TimberApi.ToolGroupButton";
@@ -40,9 +44,16 @@ namespace TimberApi.BottomBarSystem.Patchers
             );
         }
 
-        public static bool ContainsToolPatch(ref bool __result, ToolGroupButton __instance)
+        public static bool ContainsToolPatch(ref bool __result, ToolGroup ____toolGroup)
         {
-            __result = true;
+            if(____toolGroup is not BottomBarToolGroup bottomBarToolGroup)
+            {
+                return false;
+            }
+
+            // ContainsTool is used to toggle group on/off when tool exist in active state
+            // Will now be used to check if the group is a for devMode (Empty groups can exists)
+            __result = ! bottomBarToolGroup.DevModeToolGroup || _devModeManager.Enabled;
 
             return false;
         }

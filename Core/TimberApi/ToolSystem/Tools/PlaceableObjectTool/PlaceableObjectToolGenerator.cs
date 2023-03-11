@@ -31,11 +31,12 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
                     prefab.PrefabName,
                     placeableBlockObject.ToolGroupId,
                     "PlaceableObjectTool",
-                    "blue",
+                    "brown",
                     placeableBlockObject.ToolOrder,
                     labeledPrefab.Image.name,
                     labeledPrefab.DisplayNameLocKey,
                     labeledPrefab.DescriptionLocKey,
+                    false,
                     placeableBlockObject.DevModeTool,
                     new PlaceableObjectToolToolInformation(prefab.PrefabName)
                 );

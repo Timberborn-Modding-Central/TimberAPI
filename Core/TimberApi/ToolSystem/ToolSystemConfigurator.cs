@@ -14,7 +14,7 @@ namespace TimberApi.ToolSystem
             containerDefinition.Bind<ToolIconService>().AsSingleton();
             containerDefinition.Bind<ToolSpecificationDeserializer>().AsSingleton();
             containerDefinition.Bind<ToolFactoryRepository>().AsSingleton();
-            containerDefinition.Bind<ToolSpecificationRepository>().AsSingleton();
+            containerDefinition.Bind<ToolSpecificationService>().AsSingleton();
             containerDefinition.MultiBind<IToolFactory>().To<PlaceableObjectToolFactory>().AsSingleton();
             containerDefinition.MultiBind<IObjectSpecificationGenerator>().To<PlaceableObjectToolGenerator>().AsSingleton();
         }

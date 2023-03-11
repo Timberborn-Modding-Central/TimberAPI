@@ -24,12 +24,13 @@ namespace TimberApi.ToolSystem
                 objectLoader.Get(new PropertyKey<string>("Id")),
                 objectLoader.GetValueOrNull(new PropertyKey<string>("GroupId")),
                 objectLoader.Get(new PropertyKey<string>("Type")),
-                objectLoader.Get(new PropertyKey<string>("Layout")),
+                objectLoader.GetValueOrDefault(new PropertyKey<string>("Layout"), "brown"),
                 objectLoader.Get(new PropertyKey<int>("Order")),
                 _toolIconService.GetIcon(objectLoader.Get(new PropertyKey<string>("Icon"))),
                 objectLoader.Get(new PropertyKey<string>("NameLocKey")),
                 objectLoader.Get(new PropertyKey<string>("DescriptionLocKey")),
-                objectLoader.Get(new PropertyKey<bool>("DevModeTool")),
+                objectLoader.GetValueOrDefault(new PropertyKey<bool>("Hidden"), false),
+                objectLoader.GetValueOrDefault(new PropertyKey<bool>("DevModeTool"), false),
                 GetToolInformationObjectSave(objectLoader)
             );
         }

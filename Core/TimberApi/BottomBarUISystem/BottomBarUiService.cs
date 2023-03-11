@@ -30,7 +30,7 @@ namespace TimberApi.BottomBarUISystem
 
         public static VisualElement CreateSubSectionWrapper()
         {
-            return new VisualElement()
+            return new VisualElement
             {
                 classList = { "bottom-bar-panel__sub-section-wrapper" }
             };
@@ -38,7 +38,7 @@ namespace TimberApi.BottomBarUISystem
 
         public static VisualElement CreateMainSectionWrapper()
         {
-            return new VisualElement()
+            return new VisualElement
             {
                 classList = { "bottom-bar-panel__main-section-wrapper" }
             };
@@ -46,7 +46,7 @@ namespace TimberApi.BottomBarUISystem
 
         public static VisualElement CreateSection()
         {
-            return new VisualElement()
+            return new VisualElement
             {
                 classList = { "bottom-bar-panel__section" }
             };

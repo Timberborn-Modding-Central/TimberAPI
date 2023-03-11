@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TimberApi.ToolGroupSystem
@@ -9,22 +8,19 @@ namespace TimberApi.ToolGroupSystem
 
         public string Layout { get; }
 
-        public List<string> ToolIds { get; }
-
         public string Section { get; }
 
-        public bool RequireDevelopmentMode { get; }
+        public bool DevModeTool { get; }
 
         public bool Hidden { get; }
 
-        public ToolGroupSpecification(string id, string? groupId, string layout, int order, string nameLocKey, Sprite icon, List<string> toolIds, string section, bool requireDevelopmentMode, bool hidden, bool fallbackGroup)
+        public ToolGroupSpecification(string id, string? groupId, string layout, int order, string nameLocKey, Sprite icon, string section, bool devModeTool, bool hidden, bool fallbackGroup)
             : base(id, order, nameLocKey, icon, fallbackGroup)
         {
             GroupId = groupId;
             Layout = layout;
-            ToolIds = toolIds;
             Section = section;
-            RequireDevelopmentMode = requireDevelopmentMode;
+            DevModeTool = devModeTool;
             Hidden = hidden;
         }
 
@@ -33,9 +29,8 @@ namespace TimberApi.ToolGroupSystem
         {
             GroupId = toolGroupSpecification.GroupId;
             Layout = toolGroupSpecification.Layout;
-            ToolIds = toolGroupSpecification.ToolIds;
             Section = toolGroupSpecification.Section;
-            RequireDevelopmentMode = toolGroupSpecification.RequireDevelopmentMode;
+            DevModeTool = toolGroupSpecification.DevModeTool;
             Hidden = toolGroupSpecification.Hidden;
         }
     }
@@ -44,8 +39,8 @@ namespace TimberApi.ToolGroupSystem
     {
         public T GroupInformation { get; }
 
-        public ToolGroupSpecification(string id, string? groupId, string layout, int order, string nameLocKey, Sprite icon, List<string> toolIds, string section, bool requireDevelopmentMode, bool hidden, bool fallbackGroup, T groupInformation)
-            : base(id, groupId, layout, order, nameLocKey, icon, toolIds, section, requireDevelopmentMode, hidden, fallbackGroup)
+        public ToolGroupSpecification(string id, string? groupId, string layout, int order, string nameLocKey, Sprite icon, string section, bool devModeTool, bool hidden, bool fallbackGroup, T groupInformation)
+            : base(id, groupId, layout, order, nameLocKey, icon, section, devModeTool, hidden, fallbackGroup)
         {
             GroupInformation = groupInformation;
         }

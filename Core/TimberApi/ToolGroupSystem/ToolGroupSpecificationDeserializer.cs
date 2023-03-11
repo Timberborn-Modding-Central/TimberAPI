@@ -34,9 +34,8 @@ namespace TimberApi.ToolGroupSystem
                 objectLoader.Get(new PropertyKey<int>("Order")),
                 objectLoader.Get(new PropertyKey<string>("NameLocKey")),
                 _resourceAssetLoader.Load<Sprite>(objectLoader.Get(new PropertyKey<string>("Icon"))),
-                objectLoader.GetValueOrEmpty(new ListKey<string>("ToolIds")),
                 objectLoader.GetValueOrDefault(new PropertyKey<string>("Section"), "BottomBar"),
-                objectLoader.GetValueOrDefault(new PropertyKey<bool>("RequireDevelopmentMode"), false),
+                objectLoader.GetValueOrDefault(new PropertyKey<bool>("DevModeToolGroup"), false),
                 objectLoader.GetValueOrDefault(new PropertyKey<bool>("Hidden"), false),
                 objectLoader.GetValueOrDefault(new PropertyKey<bool>("FallbackGroup"), false),
                 GetGroupInformation(objectLoader)
@@ -45,7 +44,7 @@ namespace TimberApi.ToolGroupSystem
 
         private TGroupInformation GetGroupInformation(IObjectLoader objectLoader)
         {
-            if (! objectLoader.Has(new PropertyKey<ObjectSave>("GroupInformation")))
+            if(! objectLoader.Has(new PropertyKey<ObjectSave>("GroupInformation")))
             {
                 return DefaultGroupInformation();
             }

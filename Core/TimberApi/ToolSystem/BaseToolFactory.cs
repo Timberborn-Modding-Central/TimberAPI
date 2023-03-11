@@ -11,7 +11,6 @@ namespace TimberApi.ToolSystem
 
         public abstract Tool Create(ToolSpecification toolSpecification, ToolGroup toolGroup);
 
-
         protected T GetToolInformation(ToolSpecification toolSpecification)
         {
             var objectLoader = ObjectLoader.CreateBasicLoader(toolSpecification.ToolInformation);
