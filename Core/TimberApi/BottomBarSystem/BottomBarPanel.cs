@@ -63,8 +63,6 @@ namespace TimberApi.BottomBarSystem
         private void SetupBottomBar()
         {
             _bottomBarWrapper = _bottomBarUiService.CreateWrapper();
-            _bottomBarPanels.Add(0, BottomBarUiService.CreateMainSectionWrapper());
-
             _gameLayout.AddBottomBar(_bottomBarWrapper);
         }
 
@@ -75,7 +73,7 @@ namespace TimberApi.BottomBarSystem
                 if(bottomBarItem.IsGroup)
                 {
                     AddElementToBottomBar(bottomBarItem.ToolGroup!.ToolGroupButton.Root, bottomBarItem.ToolGroup!.Row, bottomBarItem.ToolGroup!.Specification.GroupInformation.Section);
-                    AddElementToBottomBar(bottomBarItem.ToolGroup!.ToolGroupButton.ToolButtonsElement, bottomBarItem.ToolGroup!.Row + 2, bottomBarItem.ToolGroup!.Specification.GroupInformation.Section);
+                    AddElementToBottomBar(bottomBarItem.ToolGroup!.ToolGroupButton.ToolButtonsElement, bottomBarItem.ToolGroup!.Row + 1, bottomBarItem.ToolGroup!.Specification.GroupInformation.Section);
 
                     if(bottomBarItem.ToolGroup!.Specification.GroupId != null)
                     {
@@ -98,12 +96,16 @@ namespace TimberApi.BottomBarSystem
 
         private void InitializeSections()
         {
-            var mainWrapper = GetOrInsertWrapper(0);
+            var mainPanel = GetOrInsertWrapper(0);
+
+            var mainWrapper = BottomBarUiService.CreateMainSectionWrapper();
 
             foreach (var section in _mainWrapperSections)
             {
                 mainWrapper.Add(section.Value);
             }
+
+            mainPanel.Add(mainWrapper);
         }
 
         private void AddElementToBottomBar(VisualElement visualElement, int row, int section)

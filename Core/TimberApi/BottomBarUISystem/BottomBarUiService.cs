@@ -40,7 +40,8 @@ namespace TimberApi.BottomBarUISystem
         {
             return new VisualElement
             {
-                classList = { "bottom-bar-panel__main-section-wrapper" }
+                classList = { "bottom-bar-panel__main-section-wrapper" },
+                style = { justifyContent = Justify.Center }
             };
         }
 
