@@ -16,7 +16,7 @@ namespace TimberApi.ToolUISystem.Factories
 
         public ToolButton Create(Tool tool, ToolSpecification toolGroupSpecification)
         {
-            return _toolButtonFactory.Create(tool, toolGroupSpecification.Icon, "UI/Images/BottomBar/button-bg-01");
+            return _toolButtonFactory.Create(tool, toolGroupSpecification.Icon, "UI/Images/BottomBar/button-bg-03");
         }
     }
 }

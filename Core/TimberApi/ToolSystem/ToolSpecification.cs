@@ -10,6 +10,11 @@ namespace TimberApi.ToolSystem
             : base(id, groupId, type, layout, order, icon, nameLocKey, descriptionLocKey, hidden, devModeTool, toolInformation)
         {
         }
+
+        public ToolSpecification(string id, string? groupId, string type, string layout, int order, string icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devModeTool, ObjectSave? toolInformation)
+            : base(id, groupId, type, layout, order, icon, nameLocKey, descriptionLocKey, hidden, devModeTool, toolInformation)
+        {
+        }
     }
 
     public class ToolSpecification<T>

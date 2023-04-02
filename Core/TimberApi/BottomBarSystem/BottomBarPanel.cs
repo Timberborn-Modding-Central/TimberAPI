@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -145,12 +144,12 @@ namespace TimberApi.BottomBarSystem
 
         private void AntiCrash()
         {
-            var dictionary = _bottomBarModules.SelectMany((Func<BottomBarModule, IEnumerable<KeyValuePair<int, IBottomBarElementProvider>>>) (module => module.LeftElements))
-                .ToDictionary(keyValuePair => keyValuePair.Key, keyValuePair => keyValuePair.Value);
-            foreach (var key in dictionary.Keys.OrderBy(key => key))
-            {
-                dictionary[key].GetElement();
-            }
+            // var dictionary = _bottomBarModules.SelectMany((Func<BottomBarModule, IEnumerable<KeyValuePair<int, IBottomBarElementProvider>>>) (module => module.LeftElements))
+            //     .ToDictionary(keyValuePair => keyValuePair.Key, keyValuePair => keyValuePair.Value);
+            // foreach (var key in dictionary.Keys.OrderBy(key => key))
+            // {
+            //     dictionary[key].GetElement();
+            // }
 
             // foreach (IBottomBarElementsProvider elementsProvider in _bottomBarModules.SelectMany((Func<BottomBarModule, IEnumerable<IBottomBarElementsProvider>>) (module => module.MiddleElements)))
             // {

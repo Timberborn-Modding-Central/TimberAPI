@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.BlockSystem;
 using Timberborn.PrefabSystem;
-using Debug = UnityEngine.Debug;
 
 namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
 {
@@ -20,12 +18,10 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
 
         public IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService)
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
             foreach (var placeableBlockObject in objectCollectionService.GetAllMonoBehaviours<PlaceableBlockObject>())
             {
                 var labeledPrefab = placeableBlockObject.GetComponent<LabeledPrefab>();
                 var prefab = placeableBlockObject.GetComponent<Prefab>();
-                // Debug.LogWarning(prefab.IsNamed(prefab.PrefabName));
 
                 var toolSpecification = new ToolSpecification<PlaceableObjectToolToolInformation>(
                     prefab.PrefabName,
@@ -43,11 +39,8 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
 
                 _toolIconService.AddIcon(labeledPrefab.Image);
 
-                yield return new GeneratedSpecification(JsonConvert.SerializeObject(toolSpecification), placeableBlockObject.name, "ToolSpecification");
+                yield return new GeneratedSpecification(JsonConvert.SerializeObject(toolSpecification), prefab.PrefabName, "ToolSpecification");
             }
-
-            stopwatch.Stop();
-            Debug.LogWarning($"Time execution PlaceableObjectToolGenerator: {stopwatch.ElapsedMilliseconds}");
         }
     }
 }

@@ -1,5 +1,6 @@
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
+using Timberborn.TutorialSystem;
 
 namespace TimberApi.BottomBarSystem.Patchers
 {
@@ -14,10 +15,22 @@ namespace TimberApi.BottomBarSystem.Patchers
                     nameof(Timberborn.BottomBarSystem.BottomBarSystemConfigurator.Configure)),
                 GetHarmonyMethod(nameof(ConfiguratorPatch))
             );
+
+            harmony.Patch(
+                GetMethodInfo("Timberborn.TutorialSystemInitialization.TutorialConfigurationProvider", "CreateFolktailsConfiguration"),
+                GetHarmonyMethod(nameof(Test))
+            );
         }
 
         public static bool ConfiguratorPatch()
         {
+            return false;
+        }
+
+        public static bool Test(ref TutorialConfiguration __result)
+        {
+            __result = TutorialConfiguration.CreateEmpty();
+
             return false;
         }
     }

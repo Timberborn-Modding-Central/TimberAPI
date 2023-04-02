@@ -15,9 +15,9 @@ namespace TimberApi.ToolSystem
 
         public IToolFactory Get(string factoryId)
         {
-            if (! TryGet(factoryId, out var toolFactory))
+            if(! TryGet(factoryId, out var toolFactory))
             {
-                throw new KeyNotFoundException($"Visualiser ({factoryId.ToLower()}) was not found.");
+                throw new KeyNotFoundException($"ToolFactory({factoryId.ToLower()}) was not found.");
             }
 
             return toolFactory;

@@ -2,14 +2,12 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using TimberApi.ToolGroupSystem;
 using TimberApi.ToolGroupUISystem;
 using TimberApi.ToolSystem;
 using TimberApi.ToolUISystem;
 using Timberborn.SingletonSystem;
-using Timberborn.ToolSystem;
 using Debug = UnityEngine.Debug;
-using ToolGroupSpecification = TimberApi.ToolGroupSystem.ToolGroupSpecification;
-using ToolGroupSpecificationService = TimberApi.ToolGroupSystem.ToolGroupSpecificationService;
 
 namespace TimberApi.BottomBarSystem
 {
@@ -113,16 +111,7 @@ namespace TimberApi.BottomBarSystem
             {
                 var toolFactory = _toolFactoryRepository.Get(specification.Type);
 
-                Tool tool;
-
-                if(specification.GroupId is null)
-                {
-                    tool = toolFactory.Create(specification);
-                }
-                else
-                {
-                    tool = toolFactory.Create(specification, GetToolGroup(specification.GroupId).ToolGroup);
-                }
+                var tool = specification.GroupId is null ? toolFactory.Create(specification) : toolFactory.Create(specification, GetToolGroup(specification.GroupId).ToolGroup);
 
                 var toolButton = _toolButtonFactoryService.Get(specification.Layout).Create(tool, specification);
 
