@@ -4,11 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace TimberApi.ToolSystem
 {
-    public class ToolFactoryRepository
+    public class ToolFactoryService
     {
         private readonly ImmutableDictionary<string, IToolFactory> _toolFactories;
 
-        public ToolFactoryRepository(IEnumerable<IToolFactory> toolFactories)
+        public ToolFactoryService(IEnumerable<IToolFactory> toolFactories)
         {
             _toolFactories = toolFactories.ToImmutableDictionary(factory => factory.Id.ToLower());
         }

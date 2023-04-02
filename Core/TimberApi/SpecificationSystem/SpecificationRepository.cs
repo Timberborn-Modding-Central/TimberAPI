@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TimberApi.Common;
 using TimberApi.Common.Helpers;
 using TimberApi.Common.SingletonSystem;
 using TimberApi.ModSystem;
@@ -11,7 +12,7 @@ namespace TimberApi.SpecificationSystem
 {
     public class SpecificationRepository : ITimberApiLoadableSingleton
     {
-        private static readonly string TimberbornSpecificationPath = "Specifications";
+        private static readonly string SpecificationPath = "Specifications";
 
         private readonly IModRepository _modRepository;
 
@@ -43,10 +44,17 @@ namespace TimberApi.SpecificationSystem
 
         public void Load()
         {
-            AddRange(FileService.GetFiles(_modRepository.All().Select(mod => Path.Combine(mod.DirectoryPath, mod.SpecificationPath)), "*.json")
-                .Select(filePath => new FileSpecification(filePath)));
+            AddRange(
+                FileService.GetFiles(Path.Combine(Paths.TimberApi, SpecificationPath), "*.json")
+                    .Select(filePath => new FileSpecification(filePath))
+            );
 
-            AddRange(Resources.LoadAll<TextAsset>(TimberbornSpecificationPath).Select(asset => new TimberbornSpecification(asset)));
+            AddRange(
+                FileService.GetFiles(_modRepository.All().Select(mod => Path.Combine(mod.DirectoryPath, mod.SpecificationPath)), "*.json")
+                    .Select(filePath => new FileSpecification(filePath))
+            );
+
+            AddRange(Resources.LoadAll<TextAsset>(SpecificationPath).Select(asset => new TimberbornSpecification(asset)));
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using TimberApi.SpecificationSystem;
 using Timberborn.SingletonSystem;
-using UnityEngine;
 
 namespace TimberApi.ToolSystem
 {
@@ -30,7 +29,6 @@ namespace TimberApi.ToolSystem
         public void Load()
         {
             _toolSpecifications = _apiSpecificationService.GetSpecifications(_toolSpecificationDeserializer).ToImmutableDictionary(specification => specification.Id.ToLower());
-            Debug.LogWarning(_toolSpecifications.Count);
         }
 
         public ToolSpecification Get(string id)
@@ -43,11 +41,11 @@ namespace TimberApi.ToolSystem
             return toolSpecification;
         }
 
-        public IEnumerable<ToolSpecification> GetAllFromGroup(string groupId)
+        public IEnumerable<ToolSpecification> GetByGroupId(string groupId)
         {
-            return _toolSpecifications.Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
-                .Select(pair => pair.Value)
-                .OrderBy(specification => specification.Order);
+            return _toolSpecifications
+                .Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
+                .Select(pair => pair.Value);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using Timberborn.AssetSystem;
 using Timberborn.Core;
 using Timberborn.CoreUI;
@@ -56,7 +57,16 @@ namespace TimberApi.ToolUISystem
         public ToolButton Create(Tool tool, Sprite toolImage, string backgroundImage)
         {
             var root = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolButton");
+
             root.Q<VisualElement>("Background").style.backgroundImage = new StyleBackground(_resourceAssetLoader.Load<Sprite>(backgroundImage));
+            return Create(tool, toolImage, root);
+        }
+
+        public ToolButton CreateGroupless(Tool tool, Sprite toolImage, string backgroundImage)
+        {
+            var root = _visualElementLoader.LoadVisualElement("Common/BottomBar/GrouplessToolButton");
+
+            root.Children().First().style.backgroundImage = new StyleBackground(_resourceAssetLoader.Load<Sprite>(backgroundImage));
             return Create(tool, toolImage, root);
         }
 

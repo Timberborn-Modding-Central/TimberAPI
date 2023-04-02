@@ -46,27 +46,27 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public static bool ContainsToolPatch(ref bool __result, ToolGroup ____toolGroup)
         {
-            if(____toolGroup is not BottomBarToolGroup bottomBarToolGroup)
+            if(____toolGroup is not ApiToolGroup apiToolGroup)
             {
                 return false;
             }
 
             // ContainsTool is used to toggle group on/off when tool exist in active state
             // Will now be used to check if the group is a for devMode (Empty groups can exists)
-            __result = ! bottomBarToolGroup.DevModeToolGroup || _devModeManager.Enabled;
+            __result = ! apiToolGroup.DevMode || _devModeManager.Enabled;
 
             return false;
         }
 
         public static bool OnToolGroupEntered(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroupButton __instance, ToolGroup ____toolGroup, VisualElement ____toolGroupButtonWrapper)
         {
-            if(toolGroupEnteredEvent.ToolGroup is not BottomBarToolGroup enteredToolGroup || ____toolGroup is not BottomBarToolGroup toolGroup)
+            if(toolGroupEnteredEvent.ToolGroup is not ApiToolGroup enteredToolGroup || ____toolGroup is not ApiToolGroup toolGroup)
             {
                 return false;
             }
 
-            var row = _bottomBarService.GetToolGroup(toolGroup.Id).Row;
-            var enteredRow = _bottomBarService.GetToolGroup(enteredToolGroup.Id).Row;
+            var row = _bottomBarService.GetGroupRow(toolGroup.Id);
+            var enteredRow = _bottomBarService.GetGroupRow(enteredToolGroup.Id);
 
             if(row >= enteredRow && toolGroupEnteredEvent.ToolGroup != ____toolGroup)
             {
@@ -75,7 +75,9 @@ namespace TimberApi.BottomBarSystem.Patchers
             }
 
             if(toolGroupEnteredEvent.ToolGroup != ____toolGroup)
+            {
                 return false;
+            }
 
             __instance.ToolButtonsElement.ToggleDisplayStyle(true);
             ____toolGroupButtonWrapper.AddToClassList(ActiveClassName);

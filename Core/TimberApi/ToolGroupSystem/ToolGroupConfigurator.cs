@@ -10,6 +10,8 @@ namespace TimberApi.ToolGroupSystem
         public void Configure(IContainerDefinition containerDefinition)
         {
             containerDefinition.Bind<ToolGroupSpecificationService>().AsSingleton();
+            containerDefinition.Bind<ToolGroupSpecificationDeserializer>().AsSingleton();
+            containerDefinition.Bind<ToolGroupService>().AsSingleton();
         }
     }
 }

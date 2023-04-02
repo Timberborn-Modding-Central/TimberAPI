@@ -3,7 +3,6 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
-using UnityEngine;
 
 namespace TimberApi.SpecificationSystem
 {
@@ -76,11 +75,6 @@ namespace TimberApi.SpecificationSystem
 
         private JObject MergeSpecifications(ISpecification originalSpecification, IEnumerable<ISpecification> mergeSpecifications)
         {
-            foreach (var mergeSpecification in mergeSpecifications)
-            {
-                Debug.LogWarning(mergeSpecification.FullName);
-            }
-
             var json = JObject.Parse(originalSpecification.LoadJson());
             return mergeSpecifications.Aggregate(json, MergeSpecification);
         }

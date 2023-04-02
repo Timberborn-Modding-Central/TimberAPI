@@ -1,15 +1,11 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
-using TimberApi.ToolGroupSystem;
-using Timberborn.AssetSystem;
+using Timberborn.Fields;
 using Timberborn.Planting;
 using Timberborn.PrefabSystem;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace TimberApi.ToolSystem.Tools.PlantingTool
 {
@@ -17,27 +13,25 @@ namespace TimberApi.ToolSystem.Tools.PlantingTool
     {
         private readonly ToolIconService _toolIconService;
 
-        private readonly IResourceAssetLoader _resourceAssetLoader;
-
-        public PlantingToolGenerator(ToolIconService toolIconService, IResourceAssetLoader resourceAssetLoader)
+        public PlantingToolGenerator(ToolIconService toolIconService)
         {
             _toolIconService = toolIconService;
-            _resourceAssetLoader = resourceAssetLoader;
         }
 
         public IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService)
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
             var plantables = objectCollectionService.GetAllMonoBehaviours<Plantable>().ToList();
-            for (int i = 0; i < plantables.Count; i++)
+            for (var i = 0; i < plantables.Count; i++)
             {
                 var plantable = plantables[i];
                 var labeledPrefab = plantable.GetComponent<LabeledPrefab>();
                 var prefab = plantable.GetComponent<Prefab>();
 
+                var isCrop = plantable.GetComponent<Crop>() != null;
+
                 var toolSpecification = new ToolSpecification<PlantingToolToolInformation>(
                     plantable.PrefabName,
-                    "Fields",
+                    isCrop ? "Fields" : "Forestry",
                     "PlantingTool",
                     "brown",
                     i * 10,
@@ -54,31 +48,53 @@ namespace TimberApi.ToolSystem.Tools.PlantingTool
                 yield return new GeneratedSpecification(JsonConvert.SerializeObject(toolSpecification), plantable.PrefabName, "ToolSpecification");
             }
 
-            yield return CreateToolGroupSpecification();
+            yield return CreateFieldsToolGroupSpecification();
 
-            stopwatch.Stop();
-            Debug.LogWarning($"Time execution PlantableToolGenerator: {stopwatch.ElapsedMilliseconds}");
+            yield return CreateForestryPlantingToolGroupSpecification();
         }
 
-        private GeneratedSpecification CreateToolGroupSpecification()
+        private GeneratedSpecification CreateFieldsToolGroupSpecification()
         {
-            var fieldsPlantingToolGroupIcon = _resourceAssetLoader.Load<Sprite>("Sprites/BottomBar/FieldsPlantingToolGroupIcon");
+            var json = JsonConvert.SerializeObject(new
+            {
+                Id = "Fields",
+                Layout = "Blue",
+                Order = 30,
+                NameLocKey = "ToolGroups.FieldsPlanting",
+                Icon = "Sprites/BottomBar/FieldsPlantingToolGroupIcon",
+                Section = "BottomBar",
+                DevModeTool = false,
+                Hidden = false,
+                FallbackGroup = false,
+                GroupInformation = new
+                {
+                    BottomBarSection = 0
+                }
+            });
 
-            _toolIconService.AddIcon(fieldsPlantingToolGroupIcon);
+            return new GeneratedSpecification(json, "Fields", "ToolGroupSpecification");
+        }
 
-            var toolGroupSpecification = new ToolGroupSpecification(
-                "Fields",
-                null,
-                "blue",
-                30,
-                "ToolGroups.FieldsPlanting",
-                _resourceAssetLoader.Load<Sprite>("Sprites/BottomBar/FieldsPlantingToolGroupIcon"),
-                "0",
-                false,
-                false,
-                false);
+        private GeneratedSpecification CreateForestryPlantingToolGroupSpecification()
+        {
+            var json = JsonConvert.SerializeObject(new
+            {
+                Id = "Forestry",
+                Layout = "Blue",
+                Order = 40,
+                NameLocKey = "ToolGroups.ForestryPlanting",
+                Icon = "Sprites/BottomBar/ForestryPlantingToolGroupIcon",
+                Section = "BottomBar",
+                DevModeTool = false,
+                Hidden = false,
+                FallbackGroup = false,
+                GroupInformation = new
+                {
+                    BottomBarSection = 0
+                }
+            });
 
-            return new GeneratedSpecification(JsonConvert.SerializeObject(toolGroupSpecification), "Fields", "ToolGroupSpecification");
+            return new GeneratedSpecification(json, "Fields", "ToolGroupSpecification");
         }
     }
 }

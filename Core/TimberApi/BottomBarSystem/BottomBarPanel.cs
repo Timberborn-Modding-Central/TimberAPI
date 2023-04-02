@@ -1,20 +1,23 @@
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Linq;
 using TimberApi.BottomBarUISystem;
+using TimberApi.Common.Extensions;
+using TimberApi.ToolGroupSystem;
+using TimberApi.ToolSystem;
 using Timberborn.BottomBarSystem;
 using Timberborn.GameUI;
+using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 using UnityEngine.UIElements;
-using Debug = UnityEngine.Debug;
 
 namespace TimberApi.BottomBarSystem
 {
     public class BottomBarPanel : ILoadableSingleton
     {
-        private readonly ImmutableArray<BottomBarModule> _bottomBarModules;
+        private readonly ToolService _toolService;
+
+        private readonly ToolGroupService _toolGroupService;
 
         private readonly BottomBarService _bottomBarService;
 
@@ -32,31 +35,22 @@ namespace TimberApi.BottomBarSystem
             BottomBarService bottomBarService,
             BottomBarUiService bottomBarUiService,
             GameLayout gameLayout,
-            ToolButtonFactory toolButtonFactory)
+            ToolButtonFactory toolButtonFactory, ToolService toolService, ToolGroupService toolGroupService)
         {
-            _bottomBarModules = bottomBarModules.ToImmutableArray();
             _bottomBarUiService = bottomBarUiService;
             _gameLayout = gameLayout;
+            _toolService = toolService;
+            _toolGroupService = toolGroupService;
             _bottomBarService = bottomBarService;
         }
 
         public void Load()
         {
-            var stopwatch1 = Stopwatch.StartNew();
-            AntiCrash();
-            stopwatch1.Stop();
-
-            var stopwatch = Stopwatch.StartNew();
-
             SetupBottomBar();
-            InitializeGroupButtons();
+            InitializeButtons();
             InitializeSections();
 
             AddPanelsToWrapper();
-
-            stopwatch.Stop();
-            Debug.LogWarning($"Time to execute BottomBarPanel: {stopwatch.ElapsedMilliseconds}");
-            Debug.LogWarning($"Time to execute Anti crash method: {stopwatch1.ElapsedMilliseconds}");
         }
 
         private void SetupBottomBar()
@@ -65,32 +59,62 @@ namespace TimberApi.BottomBarSystem
             _gameLayout.AddBottomBar(_bottomBarWrapper);
         }
 
-        private void InitializeGroupButtons()
+        private void InitializeButtons()
         {
-            foreach (var bottomBarItem in _bottomBarService.ToolItemButtons.Where(button => ! button.Hidden))
+            foreach (var bottomBarButton in _bottomBarService.ToolItemButtons.Where(button => ! button.Hidden).OrderBy(button => button.Order))
             {
-                if(bottomBarItem.IsGroup)
+                if(bottomBarButton.IsGroup)
                 {
-                    AddElementToBottomBar(bottomBarItem.ToolGroup!.ToolGroupButton.Root, bottomBarItem.ToolGroup!.Row, bottomBarItem.ToolGroup!.Specification.GroupInformation.Section);
-                    AddElementToBottomBar(bottomBarItem.ToolGroup!.ToolGroupButton.ToolButtonsElement, bottomBarItem.ToolGroup!.Row + 1, bottomBarItem.ToolGroup!.Specification.GroupInformation.Section);
-
-                    if(bottomBarItem.ToolGroup!.Specification.GroupId != null)
-                    {
-                        _bottomBarService.GetToolGroup(bottomBarItem.ToolGroup!.Specification.GroupId).ToolGroupButton.AddToolGroupButton(bottomBarItem.ToolGroup!.ToolGroupButton);
-                    }
+                    HandleGroupButton(bottomBarButton);
                 }
                 else
                 {
-                    if(bottomBarItem.Tool!.Specification.GroupId is null)
-                    {
-                        continue;
-                    }
-
-                    var toolGroup = _bottomBarService.GetToolGroup(bottomBarItem.Tool!.Specification.GroupId);
-                    toolGroup.ToolGroupButton.ToolButtonsElement.Add(bottomBarItem.Tool!.ToolButton.Root);
-                    toolGroup.ToolGroupButton.AddTool(bottomBarItem.Tool!.ToolButton);
+                    HandleToolButton(bottomBarButton);
                 }
             }
+        }
+
+        private void HandleGroupButton(BottomBarButton bottomBarButton)
+        {
+            var toolGroupButton = _toolGroupService.GetToolGroupButton(bottomBarButton.Id);
+
+            var section = GetBottomBarSection(bottomBarButton);
+
+            AddElementToBottomBar(toolGroupButton.Root, _bottomBarService.GetGroupRow(bottomBarButton.Id), section);
+            AddElementToBottomBar(toolGroupButton.ToolButtonsElement, _bottomBarService.GetGroupRow(bottomBarButton.Id) + 1, section);
+
+            if(bottomBarButton.GroupId != null)
+            {
+                _toolGroupService.GetToolGroupButton(bottomBarButton.GroupId).AddToolGroupButton(toolGroupButton);
+            }
+        }
+
+        private void HandleToolButton(BottomBarButton bottomBarButton)
+        {
+            var toolButton = _toolService.GetToolButton(bottomBarButton.Id);
+
+            if(bottomBarButton.GroupId is null)
+            {
+                AddElementToBottomBar(toolButton.Root, 0, GetBottomBarSection(bottomBarButton));
+                return;
+            }
+
+            var toolGroupButton = _toolGroupService.GetToolGroupButton(bottomBarButton.GroupId);
+
+            toolGroupButton.ToolButtonsElement.Add(toolButton.Root);
+            toolGroupButton.AddTool(toolButton);
+        }
+
+        private int GetBottomBarSection(BottomBarButton bottomBarButton)
+        {
+            if(bottomBarButton.ButtonInformation == null)
+            {
+                return 1;
+            }
+
+            var objectLoader = ObjectLoader.CreateBasicLoader(bottomBarButton.ButtonInformation);
+
+            return objectLoader.GetValueOrDefault(new PropertyKey<int>("BottomBarSection"), 1);
         }
 
         private void InitializeSections()
@@ -140,23 +164,6 @@ namespace TimberApi.BottomBarSystem
             {
                 _bottomBarWrapper.Add(bottomBarPanelPair.Value);
             }
-        }
-
-        private void AntiCrash()
-        {
-            // var dictionary = _bottomBarModules.SelectMany((Func<BottomBarModule, IEnumerable<KeyValuePair<int, IBottomBarElementProvider>>>) (module => module.LeftElements))
-            //     .ToDictionary(keyValuePair => keyValuePair.Key, keyValuePair => keyValuePair.Value);
-            // foreach (var key in dictionary.Keys.OrderBy(key => key))
-            // {
-            //     dictionary[key].GetElement();
-            // }
-
-            // foreach (IBottomBarElementsProvider elementsProvider in _bottomBarModules.SelectMany((Func<BottomBarModule, IEnumerable<IBottomBarElementsProvider>>) (module => module.MiddleElements)))
-            // {
-            //     foreach (BottomBarElement test in elementsProvider.GetElements())
-            //     {
-            //     }
-            // }
         }
     }
 }

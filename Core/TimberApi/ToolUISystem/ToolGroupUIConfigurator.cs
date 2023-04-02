@@ -15,6 +15,10 @@ namespace TimberApi.ToolUISystem
             containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonRedFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGreenFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonBrownFactory>().AsSingleton();
+            containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessBrownFactory>().AsSingleton();
+            containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessGreenFactory>().AsSingleton();
+            containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessRedFactory>().AsSingleton();
+            containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessBlueFactory>().AsSingleton();
         }
     }
 }

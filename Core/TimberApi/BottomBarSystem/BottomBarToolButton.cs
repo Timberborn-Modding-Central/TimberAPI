@@ -11,7 +11,7 @@ namespace TimberApi.BottomBarSystem
 
         public Tool Tool { get; }
 
-        public BottomBarToolButton(ToolSpecification specification, ToolButton toolButton, Tool tool)
+        public BottomBarToolButton(ToolSpecification specification, Tool tool, ToolButton toolButton)
         {
             Specification = specification;
             ToolButton = toolButton;

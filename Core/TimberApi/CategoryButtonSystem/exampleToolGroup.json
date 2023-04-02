@@ -1,10 +1,18 @@
 {
     "Id": "Other",
     "GroupId": "Paths",
-    "Section": "BottomBar:3",
+    "Section": "BottomBar",
+    // Optional
     "Order": "180",
     "NameLocKey": "ToolGroups.Other",
     "Icon": "Sprites/BottomBar/BuildingGroups/Other",
-    "RequiresDevelopmentMode": true,
-    "Hidden": true
+    "DevMode": true,
+    // Optional
+    "Hidden": true,
+    // Optional
+    "GroupInformation": {
+        // Optional
+        "BottomBarSection": 1
+        // Optional
+    }
 }

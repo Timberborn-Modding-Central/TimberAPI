@@ -4,13 +4,13 @@
     {
         private readonly string _json;
 
-        public GeneratedSpecification(string json, string name, string specificationName)
+        public GeneratedSpecification(string json, string name, string specificationName, bool isOriginal = true)
         {
             _json = json;
             Name = name;
             SpecificationName = specificationName.ToLower();
             FullName = $"{SpecificationName}.{name.ToLower()}";
-            IsOriginal = true;
+            IsOriginal = isOriginal;
             IsReplace = false;
         }
 
