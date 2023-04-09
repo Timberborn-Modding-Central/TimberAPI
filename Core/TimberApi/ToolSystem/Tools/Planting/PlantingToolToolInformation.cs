@@ -1,4 +1,4 @@
-namespace TimberApi.ToolSystem.Tools.PlantingTool
+namespace TimberApi.ToolSystem.Tools.Planting
 {
     public class PlantingToolToolInformation
     {

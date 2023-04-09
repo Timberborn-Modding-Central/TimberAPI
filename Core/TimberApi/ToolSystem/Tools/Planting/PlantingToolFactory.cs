@@ -8,7 +8,7 @@ using Timberborn.PrefabSystem;
 using Timberborn.SelectionToolSystem;
 using Timberborn.ToolSystem;
 
-namespace TimberApi.ToolSystem.Tools.PlantingTool
+namespace TimberApi.ToolSystem.Tools.Planting
 {
     public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
     {

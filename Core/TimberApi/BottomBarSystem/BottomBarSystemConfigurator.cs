@@ -15,6 +15,7 @@ namespace TimberApi.BottomBarSystem
             containerDefinition.Bind<BottomBarUiService>().AsSingleton();
             containerDefinition.Bind<BottomBarService>().AsSingleton();
             containerDefinition.Bind<ToolGroupButtonPatcher>().AsSingleton();
+            containerDefinition.Bind<ToolGroupManagerPatcher>().AsSingleton();
         }
     }
 }

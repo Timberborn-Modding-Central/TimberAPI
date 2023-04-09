@@ -25,6 +25,7 @@ namespace TimberApi.ToolGroupSystem
         {
             return new ToolGroupSpecification(
                 objectLoader.Get(new PropertyKey<string>("Id")),
+                objectLoader.GetValueOrDefault(new PropertyKey<string>("Type"), "ConstructionModeToolGroup"),
                 objectLoader.Get(new PropertyKey<int>("Order")),
                 objectLoader.Get(new PropertyKey<string>("NameLocKey")),
                 _resourceAssetLoader.Load<Sprite>(objectLoader.Get(new PropertyKey<string>("Icon"))),

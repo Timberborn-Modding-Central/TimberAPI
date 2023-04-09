@@ -5,7 +5,7 @@ using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.BlockSystem;
 using Timberborn.PrefabSystem;
 
-namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
+namespace TimberApi.ToolSystem.Tools.PlaceableObject
 {
     public class PlaceableObjectToolGenerator : IObjectSpecificationGenerator
     {

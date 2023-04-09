@@ -1,18 +1,14 @@
 {
     "Id": "Other",
     "GroupId": "Paths",
+    "Type": "PlaceableObjectTool",
     "Section": "BottomBar",
-    // Optional
     "Order": "180",
     "NameLocKey": "ToolGroups.Other",
     "Icon": "Sprites/BottomBar/BuildingGroups/Other",
     "DevMode": true,
-    // Optional
     "Hidden": true,
-    // Optional
     "GroupInformation": {
-        // Optional
         "BottomBarSection": 1
-        // Optional
     }
 }

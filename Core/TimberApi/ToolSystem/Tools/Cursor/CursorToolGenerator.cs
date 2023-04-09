@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.PrefabSystem;
 
-namespace TimberApi.ToolSystem.Tools.CursorTool
+namespace TimberApi.ToolSystem.Tools.Cursor
 {
     public class CursorToolGenerator : IObjectSpecificationGenerator
     {

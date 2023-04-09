@@ -13,6 +13,8 @@ namespace TimberApi.ToolGroupSystem
 
         private readonly ToolGroupButtonFactoryService _toolGroupButtonFactoryService;
 
+        private readonly ToolGroupFactoryService _toolGroupFactoryService;
+
         private ImmutableDictionary<string, ApiToolGroup> _toolGroups = null!;
 
         private ImmutableDictionary<string, ToolGroupButton> _toolGroupButtons = null!;
@@ -21,10 +23,14 @@ namespace TimberApi.ToolGroupSystem
 
         public IEnumerable<ToolGroupButton> ToolGroupButtons => _toolGroupButtons.Select(pair => pair.Value).ToImmutableArray();
 
-        public ToolGroupService(ToolGroupSpecificationService toolGroupSpecificationService, ToolGroupButtonFactoryService toolGroupButtonFactoryService)
+        public ToolGroupService(
+            ToolGroupSpecificationService toolGroupSpecificationService,
+            ToolGroupButtonFactoryService toolGroupButtonFactoryService,
+            ToolGroupFactoryService toolGroupFactoryService)
         {
             _toolGroupSpecificationService = toolGroupSpecificationService;
             _toolGroupButtonFactoryService = toolGroupButtonFactoryService;
+            _toolGroupFactoryService = toolGroupFactoryService;
         }
 
         public void Load()
@@ -35,14 +41,8 @@ namespace TimberApi.ToolGroupSystem
 
             foreach (var toolGroupSpecification in _toolGroupSpecificationService.ToolGroupSpecifications)
             {
-                var toolGroup = new ApiToolGroup(
-                    toolGroupSpecification.Id,
-                    toolGroupSpecification.GroupId,
-                    toolGroupSpecification.Section,
-                    toolGroupSpecification.NameLocKey,
-                    toolGroupSpecification.DevMode,
-                    toolGroupSpecification.Icon
-                );
+                var toolGroup = _toolGroupFactoryService.Get(toolGroupSpecification.Type).Create(toolGroupSpecification);
+
                 toolGroups.Add(toolGroupSpecification.Id.ToLower(), toolGroup);
 
                 var button = _toolGroupButtonFactoryService.Get(toolGroupSpecification.Layout).Create(toolGroup, toolGroupSpecification);

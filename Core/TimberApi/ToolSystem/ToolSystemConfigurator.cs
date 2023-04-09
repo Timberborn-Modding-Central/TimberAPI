@@ -2,9 +2,9 @@ using Bindito.Core;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.SceneSystem;
 using TimberApi.SpecificationSystem;
-using TimberApi.ToolSystem.Tools.CursorTool;
-using TimberApi.ToolSystem.Tools.PlaceableObjectTool;
-using TimberApi.ToolSystem.Tools.PlantingTool;
+using TimberApi.ToolSystem.Tools.Cursor;
+using TimberApi.ToolSystem.Tools.PlaceableObject;
+using TimberApi.ToolSystem.Tools.Planting;
 
 namespace TimberApi.ToolSystem
 {

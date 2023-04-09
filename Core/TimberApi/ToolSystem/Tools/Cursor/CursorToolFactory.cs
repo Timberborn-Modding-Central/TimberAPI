@@ -1,9 +1,9 @@
 using System;
-using TimberApi.ToolSystem.Tools.PlantingTool;
+using TimberApi.ToolSystem.Tools.Planting;
 using Timberborn.Persistence;
 using Timberborn.ToolSystem;
 
-namespace TimberApi.ToolSystem.Tools.CursorTool
+namespace TimberApi.ToolSystem.Tools.Cursor
 {
     public class CursorToolFactory : BaseToolFactory<PlantingToolToolInformation>
     {

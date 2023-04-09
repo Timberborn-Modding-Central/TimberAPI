@@ -11,7 +11,7 @@ using Timberborn.PreviewSystem;
 using Timberborn.ToolSystem;
 using Timberborn.UISound;
 
-namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
+namespace TimberApi.ToolSystem.Tools.PlaceableObject
 {
     public class PlaceableObjectToolFactory : BaseToolFactory<PlaceableObjectToolToolInformation>
     {

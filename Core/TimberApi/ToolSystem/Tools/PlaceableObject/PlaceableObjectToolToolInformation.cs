@@ -1,4 +1,4 @@
-namespace TimberApi.ToolSystem.Tools.PlaceableObjectTool
+namespace TimberApi.ToolSystem.Tools.PlaceableObject
 {
     public class PlaceableObjectToolToolInformation
     {

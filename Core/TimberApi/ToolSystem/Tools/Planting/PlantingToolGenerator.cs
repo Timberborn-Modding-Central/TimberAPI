@@ -7,7 +7,7 @@ using Timberborn.Fields;
 using Timberborn.Planting;
 using Timberborn.PrefabSystem;
 
-namespace TimberApi.ToolSystem.Tools.PlantingTool
+namespace TimberApi.ToolSystem.Tools.Planting
 {
     public class PlantingToolGenerator : IObjectSpecificationGenerator
     {
@@ -60,6 +60,7 @@ namespace TimberApi.ToolSystem.Tools.PlantingTool
                 Id = "Fields",
                 Layout = "Blue",
                 Order = 30,
+                Type = "PlantingModeToolGroup",
                 NameLocKey = "ToolGroups.FieldsPlanting",
                 Icon = "Sprites/BottomBar/FieldsPlantingToolGroupIcon",
                 Section = "BottomBar",
@@ -72,6 +73,7 @@ namespace TimberApi.ToolSystem.Tools.PlantingTool
                 }
             });
 
+
             return new GeneratedSpecification(json, "Fields", "ToolGroupSpecification");
         }
 
@@ -82,6 +84,7 @@ namespace TimberApi.ToolSystem.Tools.PlantingTool
                 Id = "Forestry",
                 Layout = "Blue",
                 Order = 40,
+                Type = "PlantingModeToolGroup",
                 NameLocKey = "ToolGroups.ForestryPlanting",
                 Icon = "Sprites/BottomBar/ForestryPlantingToolGroupIcon",
                 Section = "BottomBar",

@@ -1,10 +1,9 @@
-using Timberborn.ConstructionMode;
 using Timberborn.ToolSystem;
 using UnityEngine;
 
 namespace TimberApi.ToolGroupSystem
 {
-    public sealed class ApiToolGroup : ToolGroup, IConstructionModeEnabler
+    public class ApiToolGroup : ToolGroup
     {
         public string Id { get; }
 
@@ -17,7 +16,7 @@ namespace TimberApi.ToolGroupSystem
         public ApiToolGroup(string id, string? groupId, string section, string displayNameLocKey, bool devMode, Sprite icon)
         {
             Id = id;
-            DisplayNameLocKey = displayNameLocKey;
+            base.DisplayNameLocKey = displayNameLocKey;
             Icon = icon;
             DevMode = devMode;
             Section = section;
