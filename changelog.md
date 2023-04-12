@@ -2,6 +2,10 @@
 
 ### Changes
 
+## TimberAPI v0.5.4.0
+
+### Changes
+
 ## TimberAPI v0.5.3.2
 
 ### Changes
