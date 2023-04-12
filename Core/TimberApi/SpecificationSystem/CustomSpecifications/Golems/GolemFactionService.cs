@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Timberborn.FactionSystem;
-using Timberborn.FactionSystemGame;
+using Timberborn.GameFactionSystem;
 using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 

@@ -34,7 +34,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 
         public BuildingSpecification? GetBuildingSpecificationByBuilding(Building building)
         {
-            var prefab = building.GetComponent<Prefab>();
+            var prefab = building.GetComponentFast<Prefab>();
             string prefabName = prefab.PrefabName.ToLower();
             return _buildingSpecifications.FirstOrDefault(x => x?.BuildingId.ToLower() == prefabName);
         }

@@ -8,7 +8,7 @@ namespace TimberApi.ShaderSystem.ShaderAppliers
 
         public void LoadShader()
         {
-            _dirtUrpShader = Resources.Load<GameObject>("Buildings/Wellbeing/Carousel/CarouselConstructionSite5x5+3x1Dirt").GetComponentsInChildren<MeshRenderer>()[1].materials[0].shader;
+            //_dirtUrpShader = Resources.Load<GameObject>("Buildings/Wellbeing/Carousel/CarouselConstructionSite5x5+3x1Dirt").GetComponentsInChildren<MeshRenderer>()[1].materials[0].shader;
         }
 
         public bool ShouldApplyShader(Material material)
