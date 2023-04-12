@@ -1,33 +1,24 @@
 ﻿using Bindito.Core;
 using HarmonyLib;
-using TimberApi.HarmonyPatcherSystem;
 using TimberApi.SceneSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
-using Timberborn.MasterScene;
+using Timberborn.GameScene;
 
 namespace TimberApi.Core.ConfiguratorSystem
 {
-    public class ConfiguratorPatcher : BaseHarmonyPatcher
+    public static class ConfiguratorPatcher
     {
-        public override string UniqueId => "TimberApi.SceneListener";
-
-        public override void Apply(Harmony harmony)
+        public static void Patch()
         {
-            harmony.Patch(
-                GetMethodInfo<MasterSceneConfigurator>("Configure"),
-                GetHarmonyMethod(nameof(PatchMasterSceneConfigurator))
-            );
+            var harmony = new Harmony("TimberApi.SceneListener");
+            harmony.Patch(AccessTools.Method(typeof(GameSceneConfigurator), "Configure"), new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMasterSceneConfigurator))));
 
-            harmony.Patch(
-                GetMethodInfo<MainMenuSceneConfigurator>("Configure"),
-                GetHarmonyMethod(nameof(PatchMainMenuSceneConfigurator))
-            );
+            harmony.Patch(AccessTools.Method(typeof(MainMenuSceneConfigurator), "Configure"),
+                new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMainMenuSceneConfigurator))));
 
-            harmony.Patch(
-                GetMethodInfo<MapEditorSceneConfigurator>("Configure"),
-                GetHarmonyMethod(nameof(PatchMapEditorSceneConfigurator))
-            );
+            harmony.Patch(AccessTools.Method(typeof(MapEditorSceneConfigurator), "Configure"),
+                new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMapEditorSceneConfigurator))));
         }
 
         private static void PatchMasterSceneConfigurator(IContainerDefinition containerDefinition)

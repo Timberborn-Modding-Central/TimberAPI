@@ -28,7 +28,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.UI
         protected StartLinkingButton _startLinkButton;
 
         protected EntityLinkViewFactory _entityLinkViewFactory;
-        protected readonly SelectionManager _selectionManager;
+        protected readonly EntitySelectionService _entitySelectionService;
         protected readonly ILoc _loc;
 
         private int _maxLinks = 5;
@@ -39,13 +39,13 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.UI
             UIBuilder builder,
             EntityLinkViewFactory entityLinkViewFactory,
             StartLinkingButton startLinkButton,
-            SelectionManager selectionManager,
+            EntitySelectionService entitySelectionService,
             ILoc loc)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _entityLinkViewFactory = entityLinkViewFactory;
             _startLinkButton = startLinkButton;
-            _selectionManager = selectionManager;
+            _entitySelectionService = entitySelectionService;
             _loc = loc;
         }
 
@@ -145,7 +145,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.UI
                 var targetButton = view.Q<Button>("Target");
                 targetButton.clicked += delegate
                 {
-                    _selectionManager.FocusOn(linkeeGameObject);
+                    _entitySelectionService.SelectAndFocusOn(linkeeGameObject);
                 };
                 view.Q<Button>("RemoveLinkButton").clicked += delegate
                 {
