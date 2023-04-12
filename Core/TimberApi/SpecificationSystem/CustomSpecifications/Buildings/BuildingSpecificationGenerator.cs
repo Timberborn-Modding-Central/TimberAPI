@@ -23,19 +23,19 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 
             foreach (Building component in buildingComponents)
             {
-                string buildingId = component.GetComponent<Prefab>().PrefabName;
+                string buildingId = component.GetComponentFast<Prefab>().PrefabName;
                 IEnumerable<string> recipeIds = Array.Empty<string>();
                 int scienceCost = component.ScienceCost;
                 IEnumerable<BuildingCost> buildingCosts = component.BuildingCost.Select(x => new BuildingCost(x.GoodId, x.Amount));
                 int? powerInput = null;
                 int? powerOutput = null;
 
-                if (component.TryGetComponent(out Manufactory manufactory))
+                if (component.TryGetComponentFast(out Manufactory manufactory))
                 {
                     recipeIds = manufactory.ProductionRecipeIds;
                 }
 
-                if (component.TryGetComponent(out MechanicalNodeSpecification mechanicalNodeSpecification))
+                if (component.TryGetComponentFast(out MechanicalNodeSpecification mechanicalNodeSpecification))
                 {
                     powerInput = mechanicalNodeSpecification.PowerInput;
                     powerOutput = mechanicalNodeSpecification.PowerOutput;

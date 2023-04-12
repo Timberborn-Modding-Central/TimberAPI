@@ -3,7 +3,7 @@ using HarmonyLib;
 using TimberApi.Common.SingletonSystem;
 using TimberApi.DependencyContainerSystem;
 using Timberborn.Bots;
-using Timberborn.FactionSystemGame;
+using Timberborn.GameFactionSystem;
 using Timberborn.PrefabSystem;
 
 // ReSharper disable RedundantAssignment
@@ -28,7 +28,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Golems
             var botFactionService = DependencyContainer.GetInstance<GolemFactionService>();
             string botFactionId = botFactionService.GetGolemFactionIdByFactionId(____factionService.Current.Id);
             ____botPrefab = ____objectCollectionService.GetAllMonoBehaviours<Bot>()
-                .Single(bot => bot.GetComponent<Prefab>().PrefabName.Contains(botFactionId));
+                .Single(bot => bot.GetComponentFast<Prefab>().PrefabName.Contains(botFactionId));
             return true;
         }
     }

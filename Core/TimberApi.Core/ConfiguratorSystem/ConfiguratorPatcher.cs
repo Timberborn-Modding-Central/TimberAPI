@@ -3,7 +3,7 @@ using HarmonyLib;
 using TimberApi.SceneSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
-using Timberborn.MasterScene;
+using Timberborn.GameScene;
 
 namespace TimberApi.Core.ConfiguratorSystem
 {
@@ -12,7 +12,7 @@ namespace TimberApi.Core.ConfiguratorSystem
         public static void Patch()
         {
             var harmony = new Harmony("TimberApi.SceneListener");
-            harmony.Patch(AccessTools.Method(typeof(MasterSceneConfigurator), "Configure"), new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMasterSceneConfigurator))));
+            harmony.Patch(AccessTools.Method(typeof(GameSceneConfigurator), "Configure"), new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMasterSceneConfigurator))));
 
             harmony.Patch(AccessTools.Method(typeof(MainMenuSceneConfigurator), "Configure"),
                 new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMainMenuSceneConfigurator))));

@@ -34,12 +34,12 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 
                 ChangeBuildingProperties(building, buildingSpecification);
 
-                if (building.TryGetComponent(out Manufactory manufactory))
+                if (building.TryGetComponentFast(out Manufactory manufactory))
                 {
                     ChangeManufactoryRecipes(manufactory, buildingSpecification);
                 }
 
-                if (building.TryGetComponent(out MechanicalNodeSpecification mechanicalNodeSpecification))
+                if (building.TryGetComponentFast(out MechanicalNodeSpecification mechanicalNodeSpecification))
                 {
                     ChangeMechanicalNodeSpecification(mechanicalNodeSpecification, buildingSpecification);
                 }

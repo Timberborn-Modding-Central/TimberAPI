@@ -2,11 +2,11 @@
 using TimberApi.EntityLinkerSystem;
 using Timberborn.EntitySystem;
 using Timberborn.Localization;
-using Timberborn.PickObjectToolSystem;
 using Timberborn.SelectionSystem;
 using Timberborn.ToolSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TimberApi.ToolSystem;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample.UI
 {
@@ -21,19 +21,19 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.UI
 
         protected readonly ILoc _loc;
         protected readonly PickObjectTool _pickObjectTool;
-        protected readonly SelectionManager _selectionManager;
+        protected readonly EntitySelectionService _entitySelectionService;
         protected readonly ToolManager _toolManager;
         protected Button _button;
 
         public StartLinkingButton(
             ILoc loc,
             PickObjectTool pickObjectTool,
-            SelectionManager selectionManager,
+            EntitySelectionService entitySelectionService,
             ToolManager toolManager)
         {
             _loc = loc;
             _pickObjectTool = pickObjectTool;
-            _selectionManager = selectionManager;
+            _entitySelectionService = entitySelectionService;
             _toolManager = toolManager;
         }
 
@@ -50,7 +50,7 @@ namespace TimberAPIExample.Examples.EntityLinkerExample.UI
         }
 
         /// <summary>
-        /// Fires up the object picker tool to select the linkee.
+        /// Fires up the object picker tool to select the linkee.-ö..
         /// Called when the button is pressed
         /// </summary>
         /// <typeparam name="T"></typeparam>

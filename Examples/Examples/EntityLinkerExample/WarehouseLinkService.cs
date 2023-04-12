@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using TimberApi.EntityLinkerSystem;
-using Timberborn.Buildings;
+using Timberborn.BuildingsBlocking;
 using Timberborn.Stockpiles;
 using Timberborn.TickSystem;
 
@@ -22,8 +22,8 @@ namespace TimberAPIExample.Examples.EntityLinkerExample
         /// </summary>
         public void Awake()
         {
-            _stockpile = GetComponent<Stockpile>();
-            _linker = GetComponent<EntityLinker>();
+            _stockpile = GetComponentFast<Stockpile>();
+            _linker = GetComponentFast<EntityLinker>();
         }
 
         /// <summary>
