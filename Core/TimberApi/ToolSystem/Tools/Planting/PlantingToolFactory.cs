@@ -48,7 +48,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
             var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
             var plantable = prefab.GetComponent<Plantable>();
 
-            return new Timberborn.PlantingUI.PlantingTool(_plantableDescriber, _plantingSelectionService, _devModePlantableSpawner, _selectionToolProcessorFactory, plantable, GetPlanterBuildingName(plantable), toolGroup);
+            return new PlantingTool(_plantableDescriber, _plantingSelectionService, _devModePlantableSpawner, _selectionToolProcessorFactory, plantable, GetPlanterBuildingName(plantable), toolGroup);
         }
 
         protected override PlantingToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)

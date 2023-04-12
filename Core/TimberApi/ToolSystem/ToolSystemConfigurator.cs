@@ -2,6 +2,7 @@ using Bindito.Core;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.SceneSystem;
 using TimberApi.SpecificationSystem;
+using TimberApi.ToolSystem.Tools.BuilderPriority;
 using TimberApi.ToolSystem.Tools.Cursor;
 using TimberApi.ToolSystem.Tools.PlaceableObject;
 using TimberApi.ToolSystem.Tools.Planting;
@@ -18,12 +19,16 @@ namespace TimberApi.ToolSystem
             containerDefinition.Bind<ToolSpecificationDeserializer>().AsSingleton();
             containerDefinition.Bind<ToolFactoryService>().AsSingleton();
             containerDefinition.Bind<ToolSpecificationService>().AsSingleton();
+            
             containerDefinition.MultiBind<IToolFactory>().To<PlaceableObjectToolFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolFactory>().To<PlantingToolFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolFactory>().To<CursorToolFactory>().AsSingleton();
+            containerDefinition.MultiBind<IToolFactory>().To<BuilderPriorityToolFactory>().AsSingleton();
+            
             containerDefinition.MultiBind<IObjectSpecificationGenerator>().To<PlaceableObjectToolGenerator>().AsSingleton();
             containerDefinition.MultiBind<IObjectSpecificationGenerator>().To<PlantingToolGenerator>().AsSingleton();
             containerDefinition.MultiBind<IObjectSpecificationGenerator>().To<CursorToolGenerator>().AsSingleton();
+            containerDefinition.MultiBind<ISpecificationGenerator>().To<BuilderPriorityToolGenerator>().AsSingleton();
         }
     }
 }

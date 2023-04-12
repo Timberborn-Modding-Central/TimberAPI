@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -45,6 +46,13 @@ namespace TimberApi.ToolSystem
         {
             return _toolSpecifications
                 .Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
+                .Select(pair => pair.Value);
+        }
+        
+        public IEnumerable<ToolSpecification> GetBySection(string section)
+        {
+            return _toolSpecifications
+                .Where(pair => string.Equals(pair.Value.Section, section, StringComparison.CurrentCultureIgnoreCase))
                 .Select(pair => pair.Value);
         }
     }

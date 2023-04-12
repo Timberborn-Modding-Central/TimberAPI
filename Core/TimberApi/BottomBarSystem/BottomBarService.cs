@@ -57,7 +57,7 @@ namespace TimberApi.BottomBarSystem
                 );
             }
 
-            foreach (var specification in _toolSpecificationService.ToolSpecifications)
+            foreach (var specification in _toolSpecificationService.GetBySection("BottomBar"))
             {
                 yield return new BottomBarButton(
                     specification.Id,

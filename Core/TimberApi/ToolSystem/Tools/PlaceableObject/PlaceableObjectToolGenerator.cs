@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using TimberApi.DependencyContainerSystem;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.BlockSystem;
@@ -22,24 +23,29 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
             {
                 var labeledPrefab = placeableBlockObject.GetComponent<LabeledPrefab>();
                 var prefab = placeableBlockObject.GetComponent<Prefab>();
-
-                var toolSpecification = new ToolSpecification<PlaceableObjectToolToolInformation>(
-                    prefab.PrefabName,
-                    placeableBlockObject.ToolGroupId,
-                    "PlaceableObjectTool",
-                    "brown",
-                    placeableBlockObject.ToolOrder,
-                    labeledPrefab.Image.name,
-                    labeledPrefab.DisplayNameLocKey,
-                    labeledPrefab.DescriptionLocKey,
-                    false,
-                    placeableBlockObject.DevModeTool,
-                    new PlaceableObjectToolToolInformation(prefab.PrefabName)
-                );
+                
+                var json = JsonConvert.SerializeObject(new
+                {
+                    Id = prefab.PrefabName,
+                    GroupId = placeableBlockObject.ToolGroupId,
+                    Type = "PlaceableObjectTool",
+                    Layout = "Brown",
+                    Order = placeableBlockObject.ToolOrder * 100,
+                    Icon = labeledPrefab.Image.name,
+                    NameLocKey = labeledPrefab.DisplayNameLocKey,
+                    DescriptionLocKey = labeledPrefab.DescriptionLocKey,
+                    Hidden = false,
+                    DevModeTool = placeableBlockObject.DevModeTool,
+                    FallbackGroup = false,
+                    ToolInformation = new
+                    {
+                        PrefabName = prefab.PrefabName
+                    }
+                });
 
                 _toolIconService.AddIcon(labeledPrefab.Image);
 
-                yield return new GeneratedSpecification(JsonConvert.SerializeObject(toolSpecification), prefab.PrefabName, "ToolSpecification");
+                yield return new GeneratedSpecification(json, prefab.PrefabName, "ToolSpecification");
             }
         }
     }

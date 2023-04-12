@@ -2,11 +2,11 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
 {
     public class PlaceableObjectToolToolInformation
     {
-        public PlaceableObjectToolToolInformation(string buildingPrefabName)
+        public PlaceableObjectToolToolInformation(string prefabName)
         {
-            BuildingPrefabName = buildingPrefabName;
+            PrefabName = prefabName;
         }
 
-        public string BuildingPrefabName { get; }
+        public string PrefabName { get; }
     }
 }

@@ -28,24 +28,29 @@ namespace TimberApi.ToolSystem.Tools.Planting
                 var prefab = plantable.GetComponent<Prefab>();
 
                 var isCrop = plantable.GetComponent<Crop>() != null;
-
-                var toolSpecification = new ToolSpecification<PlantingToolToolInformation>(
-                    plantable.PrefabName,
-                    isCrop ? "Fields" : "Forestry",
-                    "PlantingTool",
-                    "brown",
-                    i * 10,
-                    labeledPrefab.Image.name,
-                    labeledPrefab.DisplayNameLocKey,
-                    labeledPrefab.DescriptionLocKey,
-                    false,
-                    false,
-                    new PlantingToolToolInformation(prefab.PrefabName)
-                );
+                
+                var json = JsonConvert.SerializeObject(new
+                {
+                    Id = plantable.PrefabName,
+                    GroupId = isCrop ? "Fields" : "Forestry",
+                    Type = "PlantingTool",
+                    Layout = "Brown",
+                    Order = i * 10,
+                    Icon = labeledPrefab.Image.name,
+                    NameLocKey = labeledPrefab.DisplayNameLocKey,
+                    DescriptionLocKey = labeledPrefab.DescriptionLocKey,
+                    Hidden = false,
+                    DevModeTool = false,
+                    FallbackGroup = false,
+                    ToolInformation = new
+                    {
+                        PrefabName = prefab.PrefabName
+                    }
+                });
 
                 _toolIconService.AddIcon(labeledPrefab.Image);
 
-                yield return new GeneratedSpecification(JsonConvert.SerializeObject(toolSpecification), plantable.PrefabName, "ToolSpecification");
+                yield return new GeneratedSpecification(json, plantable.PrefabName, "ToolSpecification");
             }
 
             yield return CreateFieldsToolGroupSpecification();
@@ -64,7 +69,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
                 NameLocKey = "ToolGroups.FieldsPlanting",
                 Icon = "Sprites/BottomBar/FieldsPlantingToolGroupIcon",
                 Section = "BottomBar",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
                 FallbackGroup = false,
                 GroupInformation = new
@@ -88,7 +93,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
                 NameLocKey = "ToolGroups.ForestryPlanting",
                 Icon = "Sprites/BottomBar/ForestryPlantingToolGroupIcon",
                 Section = "BottomBar",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
                 FallbackGroup = false,
                 GroupInformation = new

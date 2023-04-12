@@ -23,6 +23,7 @@ namespace TimberApi.ToolSystem
             return new ToolSpecification(
                 objectLoader.Get(new PropertyKey<string>("Id")),
                 objectLoader.GetValueOrNull(new PropertyKey<string>("GroupId")),
+                objectLoader.GetValueOrDefault(new PropertyKey<string>("Section"), "BottomBar"),
                 objectLoader.Get(new PropertyKey<string>("Type")),
                 objectLoader.GetValueOrDefault(new PropertyKey<string>("Layout"), "brown"),
                 objectLoader.Get(new PropertyKey<int>("Order")),

@@ -52,8 +52,9 @@
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
     </ItemGroup>
+    
     <ItemGroup>
-        <Folder Include="SpecificationSystem\CustomSpecifications\Tools"/>
+        <Folder Include="SpecificationSystem\CustomSpecifications\Tools" />
       <Folder Include="ThunderstorePackage\" />
     </ItemGroup>
 

@@ -5,11 +5,13 @@ using Timberborn.BlockObjectTools;
 using Timberborn.BlockSystem;
 using Timberborn.Core;
 using Timberborn.InputSystem;
+using Timberborn.InventorySystem;
 using Timberborn.Persistence;
 using Timberborn.PrefabSystem;
 using Timberborn.PreviewSystem;
 using Timberborn.ToolSystem;
 using Timberborn.UISound;
+using UnityEngine;
 
 namespace TimberApi.ToolSystem.Tools.PlaceableObject
 {
@@ -60,7 +62,7 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
         private Tool CreateTool(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {
             var toolInformation = GetToolInformation(toolSpecification);
-            var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.BuildingPrefabName));
+            var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
             var placeableBlockObject = prefab.GetComponent<PlaceableBlockObject>();
 
             placeableBlockObject.SetPrivateInstanceFieldValue("_devModeTool", toolSpecification.DevModeTool);
@@ -82,7 +84,7 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
 
         protected override PlaceableObjectToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)
         {
-            return new PlaceableObjectToolToolInformation(objectLoader.Get(new PropertyKey<string>("BuildingPrefabName")));
+            return new PlaceableObjectToolToolInformation(objectLoader.Get(new PropertyKey<string>("PrefabName")));
         }
     }
 }

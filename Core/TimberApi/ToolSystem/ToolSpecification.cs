@@ -6,13 +6,13 @@ namespace TimberApi.ToolSystem
 {
     public class ToolSpecification : ToolSpecification<ObjectSave>
     {
-        public ToolSpecification(string id, string? groupId, string type, string layout, int order, Sprite icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devModeTool, ObjectSave? toolInformation)
-            : base(id, groupId, type, layout, order, icon, nameLocKey, descriptionLocKey, hidden, devModeTool, toolInformation)
+        public ToolSpecification(string id, string? groupId, string section, string type, string layout, int order, Sprite icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devModeTool, ObjectSave? toolInformation)
+            : base(id, groupId, section, type, layout, order, icon, nameLocKey, descriptionLocKey, hidden, devModeTool, toolInformation)
         {
         }
 
-        public ToolSpecification(string id, string? groupId, string type, string layout, int order, string icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devModeTool, ObjectSave? toolInformation)
-            : base(id, groupId, type, layout, order, icon, nameLocKey, descriptionLocKey, hidden, devModeTool, toolInformation)
+        public ToolSpecification(string id, string? groupId, string section, string type, string layout, int order, string icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devModeTool, ObjectSave? toolInformation)
+            : base(id, groupId, section, type, layout, order, icon, nameLocKey, descriptionLocKey, hidden, devModeTool, toolInformation)
         {
         }
     }
@@ -22,6 +22,8 @@ namespace TimberApi.ToolSystem
         public string Id { get; }
 
         public string? GroupId { get; }
+
+        public string Section { get; }
 
         public string Type { get; }
 
@@ -43,10 +45,11 @@ namespace TimberApi.ToolSystem
 
         public T? ToolInformation { get; }
 
-        public ToolSpecification(string id, string? groupId, string type, string layout, int order, Sprite icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devModeTool, T? toolInformation)
+        public ToolSpecification(string id, string? groupId, string section, string type, string layout, int order, Sprite icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devModeTool, T? toolInformation)
         {
             Id = id;
             GroupId = groupId;
+            Section = section;
             Type = type;
             Layout = layout;
             Order = order;
@@ -58,10 +61,11 @@ namespace TimberApi.ToolSystem
             ToolInformation = toolInformation;
         }
 
-        public ToolSpecification(string id, string? groupId, string type, string layout, int order, string icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devModeTool, T? toolInformation)
+        public ToolSpecification(string id, string? groupId, string section, string type, string layout, int order, string icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devModeTool, T? toolInformation)
         {
             Id = id;
             GroupId = groupId;
+            Section = section;
             Type = type;
             Layout = layout;
             Order = order;
