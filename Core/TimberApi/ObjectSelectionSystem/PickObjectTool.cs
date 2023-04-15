@@ -10,7 +10,7 @@ using Timberborn.SelectionSystem;
 using Timberborn.ToolSystem;
 using UnityEngine;
 
-namespace TimberApi.ToolSystem
+namespace TimberApi.ObjectSelectionSystem
 {
     public class PickObjectTool : Tool, IInputProcessor
     {
