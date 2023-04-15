@@ -6,7 +6,7 @@ using Timberborn.SelectionSystem;
 using Timberborn.ToolSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
-using TimberApi.ToolSystem;
+using TimberApi.ObjectSelectionSystem;
 
 namespace TimberAPIExample.Examples.EntityLinkerExample.UI
 {
