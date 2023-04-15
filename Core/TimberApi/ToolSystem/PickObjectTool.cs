@@ -14,13 +14,13 @@ namespace TimberApi.ToolSystem
 {
     public class PickObjectTool : Tool, IInputProcessor
     {
-        private static readonly string CursorKey = "PickObjectCursor";
+        //private static readonly string CursorKey = "PickObjectCursor";
         private readonly InputService _inputService;
         private readonly ToolManager _toolManager;
         private readonly Highlighter _highlighter;
         private readonly Colors _colors;
         private readonly EntityComponentRegistry _entityComponentRegistry;
-        private readonly CursorService _cursorService;
+        //private readonly CursorService _cursorService;
         private readonly SelectableObjectRaycaster _selectableObjectRaycaster;
         private ToolDescription _toolDescription;
         private string _warning;
@@ -35,21 +35,21 @@ namespace TimberApi.ToolSystem
             _highlighter = highlighter;
             _colors = colors;
             _entityComponentRegistry = entityComponentRegistry;
-            _cursorService = cursorService;
+            //_cursorService = cursorService;
             _selectableObjectRaycaster = selectableObjectRaycaster;
         }
 
         public override void Enter()
         {
             _inputService.AddInputProcessor(this);
-            _cursorService.SetCursor(CursorKey);
+            //_cursorService.SetCursor(CursorKey);
         }
 
         public override void Exit()
         {
             _inputService.RemoveInputProcessor(this);
             _highlighter.UnhighlightAllSecondary();
-            _cursorService.ResetCursor();
+            //_cursorService.ResetCursor();
         }
 
         public override ToolDescription Description()
