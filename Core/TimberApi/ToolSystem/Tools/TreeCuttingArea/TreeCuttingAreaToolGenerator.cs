@@ -22,7 +22,7 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
                 GroupId = "TreeCutting",
                 Type = "TreeCuttingAreaUnselectionTool",
                 Layout = "Brown",
-                Order = 0,
+                Order = 100,
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/CancelToolIcon",
@@ -68,7 +68,7 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
             {
                 Id = "TreeCutting",
                 Layout = "Blue",
-                Order = 30,
+                Order = 0,
                 Type = "TreeCuttingAreaToolGroup",
                 NameLocKey = "ToolGroups.TreeCutting",
                 Icon = "Sprites/BottomBar/TreeToolGroupIcon",

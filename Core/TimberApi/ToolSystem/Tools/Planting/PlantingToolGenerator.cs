@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.Fields;
+using Timberborn.NaturalResources;
 using Timberborn.Planting;
 using Timberborn.PrefabSystem;
 
@@ -21,13 +22,13 @@ namespace TimberApi.ToolSystem.Tools.Planting
         public IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService)
         {
             var plantables = objectCollectionService.GetAllMonoBehaviours<Plantable>().ToList();
-            for (var i = 0; i < plantables.Count; i++)
+            foreach (var plantable in plantables)
             {
-                var plantable = plantables[i];
                 var labeledPrefab = plantable.GetComponentFast<LabeledPrefab>();
                 var prefab = plantable.GetComponentFast<Prefab>();
 
                 var isCrop = plantable.GetComponentFast<Crop>() != null;
+                var naturalResource = plantable.GetComponentFast<NaturalResource>();
                 
                 var json = JsonConvert.SerializeObject(new
                 {
@@ -35,7 +36,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
                     GroupId = isCrop ? "Fields" : "Forestry",
                     Type = "PlantingTool",
                     Layout = "Brown",
-                    Order = i * 10,
+                    Order = naturalResource.OrderId,
                     Icon = labeledPrefab.Image.name,
                     NameLocKey = labeledPrefab.DisplayNameLocKey,
                     DescriptionLocKey = labeledPrefab.DescriptionLocKey,
@@ -58,13 +59,13 @@ namespace TimberApi.ToolSystem.Tools.Planting
             yield return CreateForestryPlantingToolGroupSpecification();
         }
 
-        private GeneratedSpecification CreateFieldsToolGroupSpecification()
+        private static GeneratedSpecification CreateFieldsToolGroupSpecification()
         {
             var json = JsonConvert.SerializeObject(new
             {
                 Id = "Fields",
                 Layout = "Blue",
-                Order = 30,
+                Order = 10,
                 Type = "PlantingModeToolGroup",
                 NameLocKey = "ToolGroups.FieldsPlanting",
                 Icon = "Sprites/BottomBar/FieldsPlantingToolGroupIcon",
@@ -82,13 +83,13 @@ namespace TimberApi.ToolSystem.Tools.Planting
             return new GeneratedSpecification(json, "Fields", "ToolGroupSpecification");
         }
 
-        private GeneratedSpecification CreateForestryPlantingToolGroupSpecification()
+        private static GeneratedSpecification CreateForestryPlantingToolGroupSpecification()
         {
             var json = JsonConvert.SerializeObject(new
             {
                 Id = "Forestry",
                 Layout = "Blue",
-                Order = 40,
+                Order = 20,
                 Type = "PlantingModeToolGroup",
                 NameLocKey = "ToolGroups.ForestryPlanting",
                 Icon = "Sprites/BottomBar/ForestryPlantingToolGroupIcon",
@@ -102,7 +103,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
                 }
             });
 
-            return new GeneratedSpecification(json, "Fields", "ToolGroupSpecification");
+            return new GeneratedSpecification(json, "Forestry", "ToolGroupSpecification");
         }
     }
 }

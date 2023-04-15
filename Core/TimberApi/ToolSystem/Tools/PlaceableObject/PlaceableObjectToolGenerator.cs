@@ -1,13 +1,9 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using Newtonsoft.Json;
-using TimberApi.DependencyContainerSystem;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.BlockSystem;
 using Timberborn.PrefabSystem;
-using Timberborn.ToolSystem;
-using Debug = UnityEngine.Debug;
 
 namespace TimberApi.ToolSystem.Tools.PlaceableObject
 {
@@ -32,7 +28,7 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
                     GroupId = placeableBlockObject.ToolGroupId,
                     Type = "PlaceableObjectTool",
                     Layout = "Brown",
-                    Order = placeableBlockObject.ToolOrder * 100,
+                    Order = placeableBlockObject.ToolOrder * 10,
                     Icon = labeledPrefab.Image.name,
                     NameLocKey = labeledPrefab.DisplayNameLocKey,
                     DescriptionLocKey = labeledPrefab.DescriptionLocKey,
