@@ -2,6 +2,12 @@
 
 ### Changes
 
+## TimberAPI v0.5.4.0
+Updated
+
+### Changes
+- Updated for Timberborn 0.4.0.0
+
 ## TimberAPI v0.5.3.2
 
 ### Changes
