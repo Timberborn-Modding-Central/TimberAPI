@@ -12,11 +12,18 @@ namespace TimberApi.ToolSystem.Tools.Planting
 {
     public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
     {
+        public override string Id => "PlantingTool";
+
         private readonly PlantableDescriber _plantableDescriber;
+        
         private readonly PlantingSelectionService _plantingSelectionService;
+        
         private readonly DevModePlantableSpawner _devModePlantableSpawner;
+        
         private readonly SelectionToolProcessorFactory _selectionToolProcessorFactory;
+        
         private readonly ILoc _loc;
+        
         private readonly ObjectCollectionService _objectCollectionService;
 
         public PlantingToolFactory(
@@ -34,19 +41,13 @@ namespace TimberApi.ToolSystem.Tools.Planting
             _loc = loc;
             _objectCollectionService = objectCollectionService;
         }
-
-        public override string Id => "PlantingTool";
-
-        public override Tool Create(ToolSpecification toolSpecification)
-        {
-            throw new NotSupportedException("PlantingTool requires a ToolGroup");
-        }
-
-        public override Tool Create(ToolSpecification toolSpecification, ToolGroup toolGroup)
+        
+        public override Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {
             var toolInformation = GetToolInformation(toolSpecification);
-            var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
-            var plantable = prefab.GetComponent<Plantable>();
+            
+            var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().First(o => o.IsNamedExactly(toolInformation.PrefabName));
+            var plantable = prefab.GetComponentFast<Plantable>();
 
             return new PlantingTool(_plantableDescriber, _plantingSelectionService, _devModePlantableSpawner, _selectionToolProcessorFactory, plantable, GetPlanterBuildingName(plantable), toolGroup);
         }
@@ -57,6 +58,6 @@ namespace TimberApi.ToolSystem.Tools.Planting
         }
 
         private string GetPlanterBuildingName(Plantable plantable) => _loc.T(_objectCollectionService.GetAllMonoBehaviours<PlanterBuilding>()
-            .Single((Func<PlanterBuilding, bool>) (building => building.PlantableResourceGroup == plantable.ResourceGroup)).GetComponent<LabeledPrefab>().DisplayNameLocKey);
+            .Single((Func<PlanterBuilding, bool>) (building => building.PlantableResourceGroup == plantable.ResourceGroup)).GetComponentFast<LabeledPrefab>().DisplayNameLocKey);
     }
 }

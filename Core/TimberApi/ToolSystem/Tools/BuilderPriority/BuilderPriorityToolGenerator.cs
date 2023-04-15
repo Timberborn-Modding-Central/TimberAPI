@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.PrioritySystem;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace TimberApi.ToolSystem.Tools.BuilderPriority
 {
@@ -21,7 +23,7 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
                     Layout = "Brown",
                     Order = (int)priority,
                     Icon = $"Sprites/Priority/Buttons/{priority}",
-                    NameLocKey = $"CAN NOT BE MODIFIED",
+                    NameLocKey = "CAN NOT BE MODIFIED",
                     DescriptionLocKey = "CAN NOT BE MODIFIED",
                     Hidden = false,
                     DevModeTool = false,
@@ -34,7 +36,7 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
                 
                 yield return new GeneratedSpecification(json, priority.ToString(), "ToolSpecification");
             }
-
+            
             yield return CreatePriorityToolGroup();
         }
 

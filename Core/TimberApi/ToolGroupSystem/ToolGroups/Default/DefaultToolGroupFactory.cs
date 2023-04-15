@@ -4,11 +4,12 @@ namespace TimberApi.ToolGroupSystem.ToolGroups.Default
     {
         public string Id => "DefaultToolGroup";
 
-        public ApiToolGroup Create(ToolGroupSpecification toolGroupSpecification)
+        public IToolGroup Create(ToolGroupSpecification toolGroupSpecification)
         {
             return new ApiToolGroup(
                 toolGroupSpecification.Id,
                 toolGroupSpecification.GroupId,
+                toolGroupSpecification.Order,
                 toolGroupSpecification.Section,
                 toolGroupSpecification.NameLocKey,
                 toolGroupSpecification.DevMode,

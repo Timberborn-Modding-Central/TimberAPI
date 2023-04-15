@@ -55,5 +55,12 @@ namespace TimberApi.ToolSystem
                 .Where(pair => string.Equals(pair.Value.Section, section, StringComparison.CurrentCultureIgnoreCase))
                 .Select(pair => pair.Value);
         }
+        
+        public IEnumerable<ToolSpecification> GetByType(string type)
+        {
+            return _toolSpecifications
+                .Where(pair => string.Equals(pair.Value.Type, type, StringComparison.CurrentCultureIgnoreCase))
+                .Select(pair => pair.Value);
+        }
     }
 }

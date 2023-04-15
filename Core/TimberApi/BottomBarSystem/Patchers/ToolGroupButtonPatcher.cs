@@ -50,7 +50,7 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public static bool ContainsToolPatch(ref bool __result, ToolGroup ____toolGroup)
         {
-            if(____toolGroup is not ApiToolGroup apiToolGroup)
+            if(____toolGroup is not IToolGroup apiToolGroup)
             {
                 return false;
             }
@@ -64,7 +64,7 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public static bool OnToolGroupEntered(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroupButton __instance, ToolGroup ____toolGroup, VisualElement ____toolGroupButtonWrapper)
         {
-            if(toolGroupEnteredEvent.ToolGroup is not ApiToolGroup enteredToolGroup || ____toolGroup is not ApiToolGroup toolGroup)
+            if(toolGroupEnteredEvent.ToolGroup is not IToolGroup enteredToolGroup || ____toolGroup is not IToolGroup toolGroup)
             {
                 return false;
             }

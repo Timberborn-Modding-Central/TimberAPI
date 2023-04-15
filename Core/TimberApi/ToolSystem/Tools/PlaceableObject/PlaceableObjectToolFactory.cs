@@ -17,16 +17,24 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
 {
     public class PlaceableObjectToolFactory : BaseToolFactory<PlaceableObjectToolToolInformation>
     {
+        public override string Id => "PlaceableObjectTool";
+
         private readonly ObjectCollectionService _objectCollectionService;
 
         private readonly BlockObjectToolDescriber _blockObjectToolDescriber;
+        
         private readonly InputService _inputService;
+        
         private readonly AreaPickerFactory _areaPickerFactory;
+        
         private readonly PreviewPlacerFactory _previewPlacerFactory;
+        
         private readonly UISoundController _uiSoundController;
+        
         private readonly BlockObjectPlacerService _blockObjectPlacerService;
+        
         private readonly MapEditorMode _mapEditorMode;
-
+        
         public PlaceableObjectToolFactory(
             ObjectCollectionService objectCollectionService,
             BlockObjectToolDescriber blockObjectToolDescriber,
@@ -46,24 +54,12 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
             _blockObjectPlacerService = blockObjectPlacerService;
             _mapEditorMode = mapEditorMode;
         }
-
-        public override string Id => "PlaceableObjectTool";
-
-        public override Tool Create(ToolSpecification toolSpecification)
-        {
-            return CreateTool(toolSpecification);
-        }
-
-        public override Tool Create(ToolSpecification toolSpecification, ToolGroup toolGroup)
-        {
-            return CreateTool(toolSpecification, toolGroup);
-        }
-
-        private Tool CreateTool(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
+        
+        public override Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {
             var toolInformation = GetToolInformation(toolSpecification);
             var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
-            var placeableBlockObject = prefab.GetComponent<PlaceableBlockObject>();
+            var placeableBlockObject = prefab.GetComponentFast<PlaceableBlockObject>();
 
             placeableBlockObject.SetPrivateInstanceFieldValue("_devModeTool", toolSpecification.DevModeTool);
             placeableBlockObject.SetPrivateInstanceFieldValue("_toolOrder", toolSpecification.Order);

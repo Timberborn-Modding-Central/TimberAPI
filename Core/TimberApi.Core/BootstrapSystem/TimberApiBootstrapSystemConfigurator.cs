@@ -53,4 +53,4 @@ namespace TimberApi.Core.BootstrapSystem
             ModLoaderSystemConfigurator.Prefab(gameObject);
         }
     }
-}
+} 

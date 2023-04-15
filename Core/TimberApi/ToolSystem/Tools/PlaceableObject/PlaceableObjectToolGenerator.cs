@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.BlockSystem;
 using Timberborn.PrefabSystem;
+using Timberborn.ToolSystem;
+using Debug = UnityEngine.Debug;
 
 namespace TimberApi.ToolSystem.Tools.PlaceableObject
 {
@@ -21,9 +24,8 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
         {
             foreach (var placeableBlockObject in objectCollectionService.GetAllMonoBehaviours<PlaceableBlockObject>())
             {
-                var labeledPrefab = placeableBlockObject.GetComponent<LabeledPrefab>();
-                var prefab = placeableBlockObject.GetComponent<Prefab>();
-                
+                var labeledPrefab = placeableBlockObject.GetComponentFast<LabeledPrefab>();
+                var prefab = placeableBlockObject.GetComponentFast<Prefab>();
                 var json = JsonConvert.SerializeObject(new
                 {
                     Id = prefab.PrefabName,

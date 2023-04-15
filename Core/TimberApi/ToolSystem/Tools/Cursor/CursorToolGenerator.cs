@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
-using Timberborn.PrefabSystem;
 
 namespace TimberApi.ToolSystem.Tools.Cursor
 {
-    public class CursorToolGenerator : IObjectSpecificationGenerator
+    public class CursorToolGenerator : ISpecificationGenerator
     {
-        public IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService)
+        public IEnumerable<ISpecification> Generate()
         {
             var json = JsonConvert.SerializeObject(new
             {

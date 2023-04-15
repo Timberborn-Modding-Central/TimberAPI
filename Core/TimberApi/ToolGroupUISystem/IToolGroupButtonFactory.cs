@@ -1,4 +1,6 @@
+using TimberApi.ToolGroupSystem;
 using Timberborn.ToolSystem;
+using ToolGroupSpecification = Timberborn.ToolSystem.ToolGroupSpecification;
 
 namespace TimberApi.ToolGroupUISystem
 {
@@ -6,6 +8,6 @@ namespace TimberApi.ToolGroupUISystem
     {
         public string Id { get; }
 
-        public ToolGroupButton Create(ToolGroup toolGroup, ToolGroupSpecification toolGroupSpecification);
+        public ToolGroupButton Create(IToolGroup toolGroup, ToolGroupSpecification toolGroupSpecification);
     }
 }

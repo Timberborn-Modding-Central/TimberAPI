@@ -4,6 +4,7 @@ using TimberApi.SceneSystem;
 using TimberApi.ToolGroupSystem.ToolGroups.ConstructionMode;
 using TimberApi.ToolGroupSystem.ToolGroups.Default;
 using TimberApi.ToolGroupSystem.ToolGroups.PlantingMode;
+using TimberApi.ToolGroupSystem.ToolGroups.TreeCuttingArea;
 
 namespace TimberApi.ToolGroupSystem
 {
@@ -19,6 +20,7 @@ namespace TimberApi.ToolGroupSystem
             containerDefinition.MultiBind<IToolGroupFactory>().To<ConstructionModeToolGroupFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolGroupFactory>().To<DefaultToolGroupFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolGroupFactory>().To<PlantingModeToolGroupFactory>().AsSingleton();
+            containerDefinition.MultiBind<IToolGroupFactory>().To<TreeCuttingAreaToolGroupFactory>().AsSingleton();
         }
     }
 }

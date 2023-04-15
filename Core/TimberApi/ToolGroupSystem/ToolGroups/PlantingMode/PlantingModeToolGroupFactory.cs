@@ -4,11 +4,12 @@ namespace TimberApi.ToolGroupSystem.ToolGroups.PlantingMode
     {
         public string Id => "PlantingModeToolGroup";
 
-        public ApiToolGroup Create(ToolGroupSpecification toolGroupSpecification)
+        public IToolGroup Create(ToolGroupSpecification toolGroupSpecification)
         {
             return new PlantingModeToolGroup(
                 toolGroupSpecification.Id,
                 toolGroupSpecification.GroupId,
+                toolGroupSpecification.Order,
                 toolGroupSpecification.Section,
                 toolGroupSpecification.NameLocKey,
                 toolGroupSpecification.DevMode,

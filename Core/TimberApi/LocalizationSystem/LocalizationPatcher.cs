@@ -13,10 +13,10 @@ namespace TimberApi.LocalizationSystem
 
         public override void Apply(Harmony harmony)
         {
-            harmony.Patch(
-                GetMethodInfo("Timberborn.Localization.LocalizationRepository", "GetLocalization"),
-                postfix: GetHarmonyMethod(nameof(GetLocalizationPatch))
-            );
+            // harmony.Patch(
+            //     GetMethodInfo("Timberborn.Localization.LocalizationRepository", "GetLocalization"),
+            //     postfix: GetHarmonyMethod(nameof(GetLocalizationPatch))
+            // );
         }
 
         public static void GetLocalizationPatch(string localizationKey, ref IDictionary<string, string> __result)

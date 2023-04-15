@@ -5,10 +5,10 @@ using TimberApi.Common.Extensions;
 using TimberApi.ToolGroupSystem;
 using TimberApi.ToolSystem;
 using Timberborn.BottomBarSystem;
-using Timberborn.GameUI;
 using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
+using Timberborn.UILayoutSystem;
 using UnityEngine.UIElements;
 
 namespace TimberApi.BottomBarSystem
@@ -23,7 +23,7 @@ namespace TimberApi.BottomBarSystem
 
         private readonly BottomBarUiService _bottomBarUiService;
 
-        private readonly GameLayout _gameLayout;
+        private readonly UILayout _uiLayout;
 
         private VisualElement _bottomBarWrapper = null!;
 
@@ -34,11 +34,11 @@ namespace TimberApi.BottomBarSystem
         public BottomBarPanel(IEnumerable<BottomBarModule> bottomBarModules,
             BottomBarService bottomBarService,
             BottomBarUiService bottomBarUiService,
-            GameLayout gameLayout,
+            UILayout uiLayout,
             ToolButtonFactory toolButtonFactory, ToolService toolService, ToolGroupService toolGroupService)
         {
             _bottomBarUiService = bottomBarUiService;
-            _gameLayout = gameLayout;
+            _uiLayout = uiLayout;
             _toolService = toolService;
             _toolGroupService = toolGroupService;
             _bottomBarService = bottomBarService;
@@ -56,7 +56,7 @@ namespace TimberApi.BottomBarSystem
         private void SetupBottomBar()
         {
             _bottomBarWrapper = _bottomBarUiService.CreateWrapper();
-            _gameLayout.AddBottomBar(_bottomBarWrapper);
+            _uiLayout.AddBottomBar(_bottomBarWrapper);
         }
 
         private void InitializeButtons()

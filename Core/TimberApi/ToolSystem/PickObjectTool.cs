@@ -15,7 +15,6 @@ namespace TimberApi.ToolSystem
     public class PickObjectTool : Tool, IInputProcessor
     {
         private static readonly string CursorKey = "PickObjectCursor";
-
         private readonly InputService _inputService;
 
         private readonly ToolManager _toolManager;

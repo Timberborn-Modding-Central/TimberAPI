@@ -4,6 +4,6 @@ namespace TimberApi.ToolGroupSystem
     {
         public string Id { get; }
 
-        public ApiToolGroup Create(ToolGroupSpecification toolGroupSpecification);
+        public IToolGroup Create(ToolGroupSpecification toolGroupSpecification);
     }
 }

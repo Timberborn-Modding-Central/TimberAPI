@@ -15,11 +15,11 @@ namespace TimberApi.ToolGroupSystem
 
         private readonly ToolGroupFactoryService _toolGroupFactoryService;
 
-        private ImmutableDictionary<string, ApiToolGroup> _toolGroups = null!;
+        private ImmutableDictionary<string, IToolGroup> _toolGroups = null!;
 
         private ImmutableDictionary<string, ToolGroupButton> _toolGroupButtons = null!;
 
-        public IEnumerable<ApiToolGroup> ToolGroups => _toolGroups.Select(pair => pair.Value).ToImmutableArray();
+        public IEnumerable<IToolGroup> ToolGroups => _toolGroups.Select(pair => pair.Value).ToImmutableArray();
 
         public IEnumerable<ToolGroupButton> ToolGroupButtons => _toolGroupButtons.Select(pair => pair.Value).ToImmutableArray();
 
@@ -35,7 +35,7 @@ namespace TimberApi.ToolGroupSystem
 
         public void Load()
         {
-            var toolGroups = new Dictionary<string, ApiToolGroup>();
+            var toolGroups = new Dictionary<string, IToolGroup>();
 
             var toolGroupButtons = new Dictionary<string, ToolGroupButton>();
 
@@ -53,7 +53,7 @@ namespace TimberApi.ToolGroupSystem
             _toolGroupButtons = toolGroupButtons.ToImmutableDictionary();
         }
 
-        public ApiToolGroup GetToolGroup(string id)
+        public IToolGroup GetToolGroup(string id)
         {
             if(! _toolGroups.TryGetValue(id.ToLower(), out var toolGroup))
             {
@@ -63,14 +63,14 @@ namespace TimberApi.ToolGroupSystem
             return toolGroup;
         }
 
-        public IEnumerable<ApiToolGroup> GetToolGroupByGroupId(string groupId)
+        public IEnumerable<IToolGroup> GetToolGroupByGroupId(string groupId)
         {
             return _toolGroups
                 .Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
                 .Select(pair => pair.Value);
         }
 
-        public IEnumerable<ApiToolGroup> GetToolGroupBySection(string section)
+        public IEnumerable<IToolGroup> GetToolGroupBySection(string section)
         {
             return _toolGroups
                 .Where(pair => pair.Value.Section.ToLower().Equals(section.ToLower()))

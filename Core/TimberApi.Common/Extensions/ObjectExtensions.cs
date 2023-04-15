@@ -34,5 +34,10 @@ namespace TimberApi.Common.Extensions
         {
             return (T)obj.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(obj, args);
         }
+        
+        public static object InvokeInternalInstanceMember(this object obj, string name, object[] args)
+        {
+            return obj.GetType().GetMethod(name)!.Invoke(obj, args);
+        }
     }
 }

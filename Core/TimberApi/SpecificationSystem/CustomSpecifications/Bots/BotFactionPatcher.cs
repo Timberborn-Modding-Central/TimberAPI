@@ -4,7 +4,7 @@ using HarmonyLib;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.HarmonyPatcherSystem;
 using Timberborn.Bots;
-using Timberborn.FactionSystemGame;
+using Timberborn.GameFactionSystem;
 using Timberborn.PrefabSystem;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
@@ -23,12 +23,11 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
             );
         }
 
-        public static bool LoadPrefix(ref Bot ____botPrefab, ObjectCollectionService ____objectCollectionService,
-            FactionService ____factionService)
+        public static bool LoadPrefix(ref Bot ____botPrefab, ObjectCollectionService ____objectCollectionService, FactionService ____factionService)
         {
             var botFactionService = DependencyContainer.GetInstance<BotFactionService>();
             var botFactionId = botFactionService.GetGolemFactionIdByFactionId(____factionService.Current.Id);
-            ____botPrefab = ____objectCollectionService.GetAllMonoBehaviours<Bot>().Single(bot => bot.GetComponent<Prefab>().PrefabName.Contains(botFactionId));
+            ____botPrefab = ____objectCollectionService.GetAllMonoBehaviours<Bot>().Single(bot => bot.GetComponentFast<Prefab>().PrefabName.Contains(botFactionId));
             return true;
         }
     }

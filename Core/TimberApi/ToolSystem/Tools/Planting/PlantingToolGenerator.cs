@@ -24,10 +24,10 @@ namespace TimberApi.ToolSystem.Tools.Planting
             for (var i = 0; i < plantables.Count; i++)
             {
                 var plantable = plantables[i];
-                var labeledPrefab = plantable.GetComponent<LabeledPrefab>();
-                var prefab = plantable.GetComponent<Prefab>();
+                var labeledPrefab = plantable.GetComponentFast<LabeledPrefab>();
+                var prefab = plantable.GetComponentFast<Prefab>();
 
-                var isCrop = plantable.GetComponent<Crop>() != null;
+                var isCrop = plantable.GetComponentFast<Crop>() != null;
                 
                 var json = JsonConvert.SerializeObject(new
                 {

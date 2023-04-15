@@ -44,7 +44,7 @@ namespace TimberApi.ToolSystem
             {
                 var toolFactory = _toolFactoryService.Get(specification.Type);
 
-                var tool = specification.GroupId is null ? toolFactory.Create(specification) : toolFactory.Create(specification, _toolGroupService.GetToolGroup(specification.GroupId));
+                var tool = specification.GroupId is null ? toolFactory.Create(specification) : toolFactory.Create(specification, (ToolGroup) _toolGroupService.GetToolGroup(specification.GroupId));
                 tools.Add(specification.Id.ToLower(), tool);
 
                 var toolButton = _toolButtonFactoryService.Get(specification.Layout).Create(tool, specification);

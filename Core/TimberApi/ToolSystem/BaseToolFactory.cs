@@ -7,9 +7,7 @@ namespace TimberApi.ToolSystem
     {
         public abstract string Id { get; }
 
-        public abstract Tool Create(ToolSpecification toolSpecification);
-
-        public abstract Tool Create(ToolSpecification toolSpecification, ToolGroup toolGroup);
+        public abstract Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null);
 
         protected T GetToolInformation(ToolSpecification toolSpecification)
         {
