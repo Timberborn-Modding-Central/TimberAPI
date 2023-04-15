@@ -12,6 +12,9 @@ using UnityEngine;
 
 namespace TimberApi.ObjectSelectionSystem
 {
+
+    // TODO: This class has commented code regarding custom cursor from PickObjectTool
+    //       In the future the code can be uncommented, when the old cursor for the tool is recovered.
     public class PickObjectTool : Tool, IInputProcessor
     {
         //private static readonly string CursorKey = "PickObjectCursor";
