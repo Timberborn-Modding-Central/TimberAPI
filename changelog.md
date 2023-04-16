@@ -1,6 +1,19 @@
 ## Unreleased
 
 ### Changes
+- Added ToolSystem
+- Added ToolUiSystem
+- Added ToolGroupSystem
+- Added ToolGroupUiSystem
+- Added BottomBarSystem
+- Added BottomBarUiSystem
+- Added `GetSpecifications` overload with manual specification name
+- Added `IObjectSpecificationGenerator` for object specifications
+- Added HarmonyPatcherSystem
+- Added `IEarlyLoadableSingleton`, `ILatePostLoadableSingleton`, `ILateLoadableSingleton`
+- Added Property `Name` to `FileSpecification`
+- Added `isOriginal` parameter to `GeneratedSpecification` constructor
+- Renamed Golems to Bots
 
 ## TimberAPI v0.5.4.0
 Updated

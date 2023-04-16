@@ -7,9 +7,4 @@ namespace TimberApi.SpecificationSystem
     {
         IEnumerable<ISpecification> Generate();
     }
-
-    public interface IObjectSpecificationGenerator
-    {
-        IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService);
-    }
 }

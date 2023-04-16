@@ -15,8 +15,9 @@ namespace TimberApi.ToolGroupSystem
         private ImmutableDictionary<string, ToolGroupSpecification> _toolGroupSpecifications = null!;
 
         public ToolGroupSpecificationService(
-            // ReSharper disable once InconsistentNaming, Without it generators will be loaded after this class
-            ObjectSpecificationGenerator FIX_FOR_LATER_LOADING,
+            // ReSharper disable once InconsistentNaming
+            // Required to prevent dependency loop or accessing before specifications are generated
+            ObjectSpecificationGenerator DEPENDENCY_ORDER_FIX,
             IApiSpecificationService apiAPISpecificationService,
             ToolGroupSpecificationDeserializer toolGroupSpecificationDeserializer)
         {
