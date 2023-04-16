@@ -15,6 +15,12 @@
 - Added `isOriginal` parameter to `GeneratedSpecification` constructor
 - Renamed Golems to Bots
 
+## TimberAPI v0.5.4.1
+Bug fixes.
+
+### Changes
+- Fixed PickObjectTool crashing the game
+
 ## TimberAPI v0.5.4.0
 Updated
 
