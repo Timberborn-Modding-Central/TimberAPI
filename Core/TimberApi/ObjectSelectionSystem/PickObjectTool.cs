@@ -12,24 +12,35 @@ using UnityEngine;
 
 namespace TimberApi.ObjectSelectionSystem
 {
-
     // TODO: This class has commented code regarding custom cursor from PickObjectTool
     //       In the future the code can be uncommented, when the old cursor for the tool is recovered.
     public class PickObjectTool : Tool, IInputProcessor
     {
         //private static readonly string CursorKey = "PickObjectCursor";
+        
         private readonly InputService _inputService;
+        
         private readonly ToolManager _toolManager;
+        
         private readonly Highlighter _highlighter;
+        
         private readonly Colors _colors;
+        
         private readonly EntityComponentRegistry _entityComponentRegistry;
+        
         //private readonly CursorService _cursorService;
+        
         private readonly SelectableObjectRaycaster _selectableObjectRaycaster;
-        private ToolDescription _toolDescription;
-        private string _warning;
-        private readonly HashSet<GameObject> _allCandidates = new HashSet<GameObject>();
-        private Func<GameObject, string> _validateCandidate;
-        private Action<GameObject> _callback;
+        
+        private ToolDescription _toolDescription = null!;
+        
+        private string _warning = "";
+        
+        private readonly HashSet<GameObject> _allCandidates = new();
+        
+        private Func<GameObject, string> _validateCandidate = null!;
+        
+        private Action<GameObject> _callback = null!;
 
         public PickObjectTool(InputService inputService, ToolManager toolManager, Highlighter highlighter, Colors colors, EntityComponentRegistry entityComponentRegistry, CursorService cursorService, SelectableObjectRaycaster selectableObjectRaycaster)
         {
@@ -84,7 +95,7 @@ namespace TimberApi.ObjectSelectionSystem
             {
                 _highlighter.HighlightSecondary(hitObject, _colors.EntitySelection);
                 _warning = _validateCandidate(hitObject);
-                if (_inputService.SelectionStart && !_inputService.MouseOverUI)
+                if (_inputService is { SelectionStart: true, MouseOverUI: false })
                 {
                     _toolManager.SwitchToDefaultTool();
                     _callback(hitObject);
@@ -98,16 +109,16 @@ namespace TimberApi.ObjectSelectionSystem
         private void HighlightCandidates()
         {
             _highlighter.UnhighlightAllSecondary();
-            foreach (GameObject allCandidate in _allCandidates)
+            foreach (var allCandidate in _allCandidates)
             {
-                Color color = ((_validateCandidate(allCandidate) == "") ? _colors.BuildablePreview : _colors.UnbuildablePreview);
+                var color = _validateCandidate(allCandidate) == "" ? _colors.BuildablePreview : _colors.UnbuildablePreview;
                 _highlighter.HighlightSecondary(allCandidate, color);
             }
         }
 
         private static ToolDescription CreateDescription(string title, string description)
         {
-            ToolDescription.Builder builder = new ToolDescription.Builder(title);
+            var builder = new ToolDescription.Builder(title);
             builder.AddSection(description);
             return builder.Build();
         }
