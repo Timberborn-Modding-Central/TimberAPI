@@ -1,6 +1,7 @@
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
 using Timberborn.ToolSystem;
+using UnityEngine.UIElements;
 
 namespace TimberApi.BottomBarSystem.Patchers
 {

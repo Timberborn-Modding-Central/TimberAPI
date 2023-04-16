@@ -27,7 +27,7 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
                     Id = prefab.PrefabName,
                     GroupId = placeableBlockObject.ToolGroupId,
                     Type = "PlaceableObjectTool",
-                    Layout = "Brown",
+                    Layout = "Default",
                     Order = placeableBlockObject.ToolOrder * 10,
                     Icon = labeledPrefab.Image.name,
                     NameLocKey = labeledPrefab.DisplayNameLocKey,

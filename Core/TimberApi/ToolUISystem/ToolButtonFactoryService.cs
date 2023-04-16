@@ -6,7 +6,7 @@ namespace TimberApi.ToolUISystem
 {
     public class ToolButtonFactoryService
     {
-        private static readonly string DefaultFactory = "brown";
+        private static readonly string DefaultFactory = "Default";
 
         private readonly ImmutableDictionary<string, IToolButtonFactory> _toolButtonFactories;
 

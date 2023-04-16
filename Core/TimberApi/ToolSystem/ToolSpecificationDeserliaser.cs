@@ -26,7 +26,7 @@ namespace TimberApi.ToolSystem
                 objectLoader.GetValueOrNull(new PropertyKey<string>("GroupId")),
                 objectLoader.GetValueOrDefault(new PropertyKey<string>("Section"), "BottomBar"),
                 objectLoader.Get(new PropertyKey<string>("Type")),
-                objectLoader.GetValueOrDefault(new PropertyKey<string>("Layout"), "brown"),
+                objectLoader.GetValueOrDefault(new PropertyKey<string>("Layout"), "Default"),
                 objectLoader.Get(new PropertyKey<int>("Order")),
                 _toolIconService.GetIcon(objectLoader.Get(new PropertyKey<string>("Icon"))),
                 objectLoader.Get(new PropertyKey<string>("NameLocKey")),

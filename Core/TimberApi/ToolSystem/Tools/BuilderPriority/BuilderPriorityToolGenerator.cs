@@ -17,7 +17,7 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
                     Id = priority,
                     GroupId = "Priority",
                     Type = "PriorityTool",
-                    Layout = "Brown",
+                    Layout = "Default",
                     Order = (int) priority,
                     Icon = $"Sprites/Priority/Buttons/{priority}",
                     NameLocKey = "CAN NOT BE MODIFIED",
@@ -43,7 +43,7 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
             {
                 Id = "Priority",
                 Layout = "Blue",
-                Order = 40,
+                Order = 50,
                 Type = "DefaultToolGroup",
                 NameLocKey = "ToolGroups.Priority",
                 Icon = "Sprites/BottomBar/PriorityToolGroupIcon",

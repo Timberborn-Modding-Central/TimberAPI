@@ -35,7 +35,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
                     Id = plantable.PrefabName,
                     GroupId = isCrop ? "Fields" : "Forestry",
                     Type = "PlantingTool",
-                    Layout = "Brown",
+                    Layout = "Default",
                     Order = naturalResource.OrderId,
                     Icon = labeledPrefab.Image.name,
                     NameLocKey = labeledPrefab.DisplayNameLocKey,
@@ -65,7 +65,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
             {
                 Id = "Fields",
                 Layout = "Blue",
-                Order = 10,
+                Order = 20,
                 Type = "PlantingModeToolGroup",
                 NameLocKey = "ToolGroups.FieldsPlanting",
                 Icon = "Sprites/BottomBar/FieldsPlantingToolGroupIcon",
@@ -89,7 +89,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
             {
                 Id = "Forestry",
                 Layout = "Blue",
-                Order = 20,
+                Order = 30,
                 Type = "PlantingModeToolGroup",
                 NameLocKey = "ToolGroups.ForestryPlanting",
                 Icon = "Sprites/BottomBar/ForestryPlantingToolGroupIcon",
