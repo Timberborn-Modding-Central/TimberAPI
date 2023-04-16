@@ -8,7 +8,7 @@
 
     <PropertyGroup>
         <!--   Set to true if you want to use the live timberborn assemblies of the game, requires symlink     -->
-        <UseLocalTimberbornSource>true</UseLocalTimberbornSource>
+        <UseLocalTimberbornSource>false</UseLocalTimberbornSource>
         <!--   none: don't copy, bepinex: path to game > bepinex > plugins, timberapi: path to game > timberapi     -->
         <CopyDllToPath>none</CopyDllToPath>
     </PropertyGroup>
