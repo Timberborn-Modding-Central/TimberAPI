@@ -12,7 +12,7 @@ namespace TimberApi.ToolSystem.Tools.CancelPlanting
             yield return FieldsCancelPlantingTool();
             yield return ForestryCancelPlantingTool();
         }
-        
+
         private static GeneratedSpecification ForestryCancelPlantingTool()
         {
             var json = JsonConvert.SerializeObject(new
@@ -27,12 +27,12 @@ namespace TimberApi.ToolSystem.Tools.CancelPlanting
                 Icon = "Sprites/BottomBar/CancelToolIcon",
                 DevModeTool = false,
                 Hidden = false,
-                FallbackGroup = false,
+                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "TreeCuttingAreaUnselection", "ToolSpecification");
         }
-        
+
         private static GeneratedSpecification FieldsCancelPlantingTool()
         {
             var json = JsonConvert.SerializeObject(new
@@ -47,7 +47,7 @@ namespace TimberApi.ToolSystem.Tools.CancelPlanting
                 Icon = "Sprites/BottomBar/CancelToolIcon",
                 DevModeTool = false,
                 Hidden = false,
-                FallbackGroup = false,
+                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "TreeCuttingAreaSelection", "ToolSpecification");

@@ -1,11 +1,8 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using TimberApi.SpecificationSystem.SpecificationTypes;
 using Timberborn.PrioritySystem;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace TimberApi.ToolSystem.Tools.BuilderPriority
 {
@@ -33,10 +30,10 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
                         Priority = priority
                     }
                 });
-                
+
                 yield return new GeneratedSpecification(json, priority.ToString(), "ToolSpecification");
             }
-            
+
             yield return CreatePriorityToolGroup();
         }
 
@@ -59,7 +56,7 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
                     BottomBarSection = 0
                 }
             });
-            
+
             return new GeneratedSpecification(json, "Priority", "ToolGroupSpecification");
         }
     }

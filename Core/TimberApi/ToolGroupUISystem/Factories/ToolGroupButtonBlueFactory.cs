@@ -1,20 +1,19 @@
 using TimberApi.ToolGroupSystem;
 using Timberborn.ToolSystem;
-using UnityEngine;
 using ToolGroupSpecification = Timberborn.ToolSystem.ToolGroupSpecification;
 
 namespace TimberApi.ToolGroupUISystem.Factories
 {
     public class ToolGroupButtonBlueFactory : IToolGroupButtonFactory
     {
-        public string Id => "Blue";
-
         private readonly ToolGroupButtonFactory _toolGroupButtonFactory;
 
         public ToolGroupButtonBlueFactory(ToolGroupButtonFactory toolGroupButtonFactory)
         {
             _toolGroupButtonFactory = toolGroupButtonFactory;
         }
+
+        public string Id => "Blue";
 
         public ToolGroupButton Create(IToolGroup toolGroup, ToolGroupSpecification toolGroupSpecification)
         {

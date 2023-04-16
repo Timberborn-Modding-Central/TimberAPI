@@ -7,7 +7,7 @@ namespace TimberApi.ToolGroupSystem
         string DisplayNameLocKey { get; }
 
         Sprite Icon { get; }
-        
+
         int Order { get; }
 
         string Id { get; }

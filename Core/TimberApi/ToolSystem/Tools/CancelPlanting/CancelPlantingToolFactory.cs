@@ -1,18 +1,15 @@
 using Timberborn.Localization;
 using Timberborn.PlantingUI;
 using Timberborn.SelectionToolSystem;
-using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.ToolSystem.Tools.CancelPlanting
 {
     public class CancelPlantingToolFactory : IToolFactory
     {
-        public string Id => "CancelPlantingTool";
-        
-        private readonly PlantingSelectionService _plantingSelectionService;
-        
         private readonly ILoc _loc;
+
+        private readonly PlantingSelectionService _plantingSelectionService;
 
         private readonly SelectionToolProcessorFactory _selectionToolProcessorFactory;
 
@@ -22,6 +19,8 @@ namespace TimberApi.ToolSystem.Tools.CancelPlanting
             _loc = loc;
             _selectionToolProcessorFactory = selectionToolProcessorFactory;
         }
+
+        public string Id => "CancelPlantingTool";
 
         public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {

@@ -1,3 +1,4 @@
+using System;
 using TimberApi.Common.Extensions;
 using Timberborn.AssetSystem;
 using Timberborn.Persistence;
@@ -18,7 +19,7 @@ namespace TimberApi.ToolGroupSystem
 
         public void Serialize(ToolGroupSpecification value, IObjectSaver objectSaver)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Obsoletable<ToolGroupSpecification> Deserialize(IObjectLoader objectLoader)

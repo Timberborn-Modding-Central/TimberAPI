@@ -11,7 +11,7 @@ namespace TimberApi.ToolSystem.Tools.SettingBox
         {
             yield return SettingBoxTool();
         }
-        
+
         private static GeneratedSpecification SettingBoxTool()
         {
             var json = JsonConvert.SerializeObject(new

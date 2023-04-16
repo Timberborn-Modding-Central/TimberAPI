@@ -14,8 +14,6 @@ namespace TimberApi.ToolGroupSystem
 
         private ImmutableDictionary<string, ToolGroupSpecification> _toolGroupSpecifications = null!;
 
-        public ImmutableArray<ToolGroupSpecification> ToolGroupSpecifications => _toolGroupSpecifications.Select(pair => pair.Value).ToImmutableArray();
-
         public ToolGroupSpecificationService(
             // ReSharper disable once InconsistentNaming, Without it generators will be loaded after this class
             ObjectSpecificationGenerator FIX_FOR_LATER_LOADING,
@@ -25,6 +23,8 @@ namespace TimberApi.ToolGroupSystem
             _apiSpecificationService = apiAPISpecificationService;
             _toolGroupSpecificationDeserializer = toolGroupSpecificationDeserializer;
         }
+
+        public ImmutableArray<ToolGroupSpecification> ToolGroupSpecifications => _toolGroupSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
         public void Load()
         {

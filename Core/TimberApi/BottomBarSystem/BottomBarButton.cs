@@ -5,6 +5,16 @@ namespace TimberApi.BottomBarSystem
 {
     public class BottomBarButton : IComparable<BottomBarButton>
     {
+        public BottomBarButton(string id, bool isGroup, string? groupId, bool hidden, int order, ObjectSave? buttonInformation)
+        {
+            Id = id;
+            IsGroup = isGroup;
+            GroupId = groupId;
+            Hidden = hidden;
+            Order = order;
+            ButtonInformation = buttonInformation;
+        }
+
         public string Id { get; }
 
         public bool IsGroup { get; }
@@ -16,16 +26,6 @@ namespace TimberApi.BottomBarSystem
         public int Order { get; }
 
         public ObjectSave? ButtonInformation { get; }
-
-        public BottomBarButton(string id, bool isGroup, string? groupId, bool hidden, int order, ObjectSave? buttonInformation)
-        {
-            Id = id;
-            IsGroup = isGroup;
-            GroupId = groupId;
-            Hidden = hidden;
-            Order = order;
-            ButtonInformation = buttonInformation;
-        }
 
         public int CompareTo(BottomBarButton other)
         {

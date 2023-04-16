@@ -29,7 +29,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
 
                 var isCrop = plantable.GetComponentFast<Crop>() != null;
                 var naturalResource = plantable.GetComponentFast<NaturalResource>();
-                
+
                 var json = JsonConvert.SerializeObject(new
                 {
                     Id = plantable.PrefabName,
@@ -39,13 +39,13 @@ namespace TimberApi.ToolSystem.Tools.Planting
                     Order = naturalResource.OrderId,
                     Icon = labeledPrefab.Image.name,
                     NameLocKey = labeledPrefab.DisplayNameLocKey,
-                    DescriptionLocKey = labeledPrefab.DescriptionLocKey,
+                    labeledPrefab.DescriptionLocKey,
                     Hidden = false,
                     DevModeTool = false,
                     FallbackGroup = false,
                     ToolInformation = new
                     {
-                        PrefabName = prefab.PrefabName
+                        prefab.PrefabName
                     }
                 });
 

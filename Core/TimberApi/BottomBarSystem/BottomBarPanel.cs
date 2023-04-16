@@ -15,21 +15,21 @@ namespace TimberApi.BottomBarSystem
 {
     public class BottomBarPanel : ILoadableSingleton
     {
-        private readonly ToolService _toolService;
-
-        private readonly ToolGroupService _toolGroupService;
+        private readonly SortedDictionary<int, VisualElement> _bottomBarPanels = new();
 
         private readonly BottomBarService _bottomBarService;
 
         private readonly BottomBarUiService _bottomBarUiService;
 
+        private readonly SortedDictionary<int, VisualElement> _mainWrapperSections = new();
+
+        private readonly ToolGroupService _toolGroupService;
+        
+        private readonly ToolService _toolService;
+
         private readonly UILayout _uiLayout;
 
         private VisualElement _bottomBarWrapper = null!;
-
-        private readonly SortedDictionary<int, VisualElement> _mainWrapperSections = new();
-
-        private readonly SortedDictionary<int, VisualElement> _bottomBarPanels = new();
 
         public BottomBarPanel(IEnumerable<BottomBarModule> bottomBarModules,
             BottomBarService bottomBarService,
@@ -62,16 +62,10 @@ namespace TimberApi.BottomBarSystem
         private void InitializeButtons()
         {
             foreach (var bottomBarButton in _bottomBarService.ToolItemButtons.Where(button => ! button.Hidden).OrderBy(button => button.Order))
-            {
                 if(bottomBarButton.IsGroup)
-                {
                     HandleGroupButton(bottomBarButton);
-                }
                 else
-                {
                     HandleToolButton(bottomBarButton);
-                }
-            }
         }
 
         private void HandleGroupButton(BottomBarButton bottomBarButton)
@@ -83,10 +77,7 @@ namespace TimberApi.BottomBarSystem
             AddElementToBottomBar(toolGroupButton.Root, _bottomBarService.GetGroupRow(bottomBarButton.Id), section);
             AddElementToBottomBar(toolGroupButton.ToolButtonsElement, _bottomBarService.GetGroupRow(bottomBarButton.Id) + 1, section);
 
-            if(bottomBarButton.GroupId != null)
-            {
-                _toolGroupService.GetToolGroupButton(bottomBarButton.GroupId).AddToolGroupButton(toolGroupButton);
-            }
+            if(bottomBarButton.GroupId != null) _toolGroupService.GetToolGroupButton(bottomBarButton.GroupId).AddToolGroupButton(toolGroupButton);
         }
 
         private void HandleToolButton(BottomBarButton bottomBarButton)
@@ -107,10 +98,7 @@ namespace TimberApi.BottomBarSystem
 
         private int GetBottomBarSection(BottomBarButton bottomBarButton)
         {
-            if(bottomBarButton.ButtonInformation == null)
-            {
-                return 1;
-            }
+            if(bottomBarButton.ButtonInformation == null) return 1;
 
             var objectLoader = ObjectLoader.CreateBasicLoader(bottomBarButton.ButtonInformation);
 
@@ -123,10 +111,7 @@ namespace TimberApi.BottomBarSystem
 
             var mainWrapper = BottomBarUiService.CreateMainSectionWrapper();
 
-            foreach (var section in _mainWrapperSections)
-            {
-                mainWrapper.Add(section.Value);
-            }
+            foreach (var section in _mainWrapperSections) mainWrapper.Add(section.Value);
 
             mainPanel.Add(mainWrapper);
         }
@@ -140,30 +125,21 @@ namespace TimberApi.BottomBarSystem
 
         private VisualElement GetOrInsertWrapper(int row)
         {
-            if(! _bottomBarPanels.ContainsKey(row))
-            {
-                _bottomBarPanels.Add(row, BottomBarUiService.CreateSubSectionWrapper());
-            }
+            if(! _bottomBarPanels.ContainsKey(row)) _bottomBarPanels.Add(row, BottomBarUiService.CreateSubSectionWrapper());
 
             return _bottomBarPanels[row];
         }
 
         private VisualElement GetOrInsertSection(int section)
         {
-            if(! _mainWrapperSections.ContainsKey(section))
-            {
-                _mainWrapperSections.Add(section, BottomBarUiService.CreateSection());
-            }
+            if(! _mainWrapperSections.ContainsKey(section)) _mainWrapperSections.Add(section, BottomBarUiService.CreateSection());
 
             return _mainWrapperSections[section];
         }
 
         private void AddPanelsToWrapper()
         {
-            foreach (var bottomBarPanelPair in _bottomBarPanels.Reverse())
-            {
-                _bottomBarWrapper.Add(bottomBarPanelPair.Value);
-            }
+            foreach (var bottomBarPanelPair in _bottomBarPanels.Reverse()) _bottomBarWrapper.Add(bottomBarPanelPair.Value);
         }
     }
 }

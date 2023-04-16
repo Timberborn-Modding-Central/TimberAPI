@@ -13,15 +13,15 @@ namespace TimberApi.ToolGroupUISystem
     {
         private readonly EventBus _eventBus;
 
-        private readonly ToolGroupManager _toolGroupManager;
-
-        private readonly VisualElementLoader _visualElementLoader;
-
-        private readonly ToolButtonService _toolButtonService;
-
         private readonly ILoc _loc;
 
         private readonly IResourceAssetLoader _resourceAssetLoader;
+
+        private readonly ToolButtonService _toolButtonService;
+
+        private readonly ToolGroupManager _toolGroupManager;
+
+        private readonly VisualElementLoader _visualElementLoader;
 
         public ToolGroupButtonFactory(
             EventBus eventBus,

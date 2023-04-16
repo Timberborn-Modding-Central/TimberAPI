@@ -6,14 +6,14 @@ namespace TimberApi.ToolGroupUISystem.Factories
 {
     public class ToolGroupButtonBrownFactory : IToolGroupButtonFactory
     {
-        public string Id => "Brown";
-
         private readonly ToolGroupButtonFactory _toolGroupButtonFactory;
 
         public ToolGroupButtonBrownFactory(ToolGroupButtonFactory toolGroupButtonFactory)
         {
             _toolGroupButtonFactory = toolGroupButtonFactory;
         }
+
+        public string Id => "Brown";
 
         public ToolGroupButton Create(IToolGroup toolGroup, ToolGroupSpecification toolGroupSpecification)
         {

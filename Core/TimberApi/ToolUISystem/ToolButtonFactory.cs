@@ -74,7 +74,7 @@ namespace TimberApi.ToolUISystem
         public ToolButton Create(Tool tool, Sprite toolImage, VisualElement root)
         {
             root.Q<VisualElement>("ToolImage").style.backgroundImage = new StyleBackground(toolImage);
-            var button = new TestButton(_toolManager, _devModeManager, _toolGroupManager, _mapEditorMode, tool, root, root.Q<Button>("ToolButton"));
+            var button = new ToolButton(_toolManager, _devModeManager, _toolGroupManager, _mapEditorMode, tool, root, root.Q<Button>("ToolButton"));
             _eventBus.Register(button);
             _toolButtonService.Add(button);
             return button;

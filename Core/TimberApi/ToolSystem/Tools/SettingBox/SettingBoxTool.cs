@@ -24,6 +24,8 @@ namespace TimberApi.ToolSystem.Tools.SettingBox
             _eventBus.Post(new ShowOptionsEvent());
         }
 
-        public override void Exit() { }
+        public override void Exit()
+        {
+        }
     }
 }

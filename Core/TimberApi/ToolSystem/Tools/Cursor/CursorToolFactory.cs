@@ -1,17 +1,18 @@
+using Timberborn.CursorToolSystem;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.ToolSystem.Tools.Cursor
 {
     public class CursorToolFactory : IToolFactory
     {
-        public string Id => "CursorTool";
-        
-        private readonly Timberborn.CursorToolSystem.CursorTool _cursorTool;
+        private readonly CursorTool _cursorTool;
 
-        public CursorToolFactory(Timberborn.CursorToolSystem.CursorTool cursorTool)
+        public CursorToolFactory(CursorTool cursorTool)
         {
             _cursorTool = cursorTool;
         }
+
+        public string Id => "CursorTool";
 
         public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {

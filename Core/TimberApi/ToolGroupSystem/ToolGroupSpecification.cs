@@ -13,6 +13,18 @@ namespace TimberApi.ToolGroupSystem
 
     public class ToolGroupSpecification<T> : Timberborn.ToolSystem.ToolGroupSpecification
     {
+        public ToolGroupSpecification(string id, string type, int order, string nameLocKey, Sprite icon, bool fallbackGroup, string? groupId, string layout, string section, bool devMode, bool hidden, T? groupInformation)
+            : base(id, order, nameLocKey, icon, fallbackGroup)
+        {
+            Type = type;
+            GroupId = groupId;
+            Layout = layout;
+            Section = section;
+            DevMode = devMode;
+            Hidden = hidden;
+            GroupInformation = groupInformation;
+        }
+
         public string Type { get; set; }
 
         public string? GroupId { get; }
@@ -26,17 +38,5 @@ namespace TimberApi.ToolGroupSystem
         public bool Hidden { get; }
 
         public T? GroupInformation { get; }
-
-        public ToolGroupSpecification(string id, string type, int order, string nameLocKey, Sprite icon, bool fallbackGroup, string? groupId, string layout, string section, bool devMode, bool hidden, T? groupInformation)
-            : base(id, order, nameLocKey, icon, fallbackGroup)
-        {
-            Type = type;
-            GroupId = groupId;
-            Layout = layout;
-            Section = section;
-            DevMode = devMode;
-            Hidden = hidden;
-            GroupInformation = groupInformation;
-        }
     }
 }

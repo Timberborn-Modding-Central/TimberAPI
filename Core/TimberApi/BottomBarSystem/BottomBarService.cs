@@ -11,17 +11,15 @@ namespace TimberApi.BottomBarSystem
     {
         private static readonly string BottomBarSection = "BottomBar";
 
+        private readonly Dictionary<string, int> _toolGroupRows = new();
+
         private readonly ToolGroupSpecificationService _toolGroupSpecificationService;
 
         private readonly ToolSpecificationService _toolSpecificationService;
 
         private ImmutableDictionary<string, ToolGroupSpecification> _toolGroupSpecifications = null!;
 
-        private readonly Dictionary<string, int> _toolGroupRows = new();
-
         private ImmutableArray<BottomBarButton> _toolItemButtons;
-
-        public IEnumerable<BottomBarButton> ToolItemButtons => _toolItemButtons;
 
         public BottomBarService(
             ToolGroupSpecificationService toolGroupSpecificationService,
@@ -30,6 +28,8 @@ namespace TimberApi.BottomBarSystem
             _toolGroupSpecificationService = toolGroupSpecificationService;
             _toolSpecificationService = toolSpecificationService;
         }
+
+        public IEnumerable<BottomBarButton> ToolItemButtons => _toolItemButtons;
 
         public void Load()
         {
@@ -58,7 +58,6 @@ namespace TimberApi.BottomBarSystem
             }
 
             foreach (var specification in _toolSpecificationService.GetBySection("BottomBar"))
-            {
                 yield return new BottomBarButton(
                     specification.Id,
                     false,
@@ -67,15 +66,11 @@ namespace TimberApi.BottomBarSystem
                     specification.Order,
                     specification.ToolInformation
                 );
-            }
         }
 
         public int GetGroupRow(string groupId)
         {
-            if(! _toolGroupRows.TryGetValue(groupId.ToLower(), out var row))
-            {
-                throw new KeyNotFoundException($"The given GroupId ({groupId.ToLower()}) cannot be found.");
-            }
+            if(! _toolGroupRows.TryGetValue(groupId.ToLower(), out var row)) throw new KeyNotFoundException($"The given GroupId ({groupId.ToLower()}) cannot be found.");
 
             return row;
         }
@@ -86,10 +81,7 @@ namespace TimberApi.BottomBarSystem
 
             while (true)
             {
-                if(toolGroupSpecification.GroupId == null)
-                {
-                    return row;
-                }
+                if(toolGroupSpecification.GroupId == null) return row;
 
                 toolGroupSpecification = _toolGroupSpecifications[toolGroupSpecification.GroupId];
                 row += 1;

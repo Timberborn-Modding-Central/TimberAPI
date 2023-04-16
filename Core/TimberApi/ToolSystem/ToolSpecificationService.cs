@@ -15,8 +15,6 @@ namespace TimberApi.ToolSystem
 
         private ImmutableDictionary<string, ToolSpecification> _toolSpecifications = null!;
 
-        public ImmutableArray<ToolSpecification> ToolSpecifications => _toolSpecifications.Select(pair => pair.Value).ToImmutableArray();
-
         public ToolSpecificationService(
             // ReSharper disable once InconsistentNaming, Without it generators will be loaded after this class
             ObjectSpecificationGenerator FIX_FOR_LATER_LOADING,
@@ -26,6 +24,8 @@ namespace TimberApi.ToolSystem
             _apiSpecificationService = apiAPISpecificationService;
             _toolSpecificationDeserializer = toolSpecificationDeserializer;
         }
+
+        public ImmutableArray<ToolSpecification> ToolSpecifications => _toolSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
         public void Load()
         {
@@ -48,14 +48,14 @@ namespace TimberApi.ToolSystem
                 .Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
                 .Select(pair => pair.Value);
         }
-        
+
         public IEnumerable<ToolSpecification> GetBySection(string section)
         {
             return _toolSpecifications
                 .Where(pair => string.Equals(pair.Value.Section, section, StringComparison.CurrentCultureIgnoreCase))
                 .Select(pair => pair.Value);
         }
-        
+
         public IEnumerable<ToolSpecification> GetByType(string type)
         {
             return _toolSpecifications

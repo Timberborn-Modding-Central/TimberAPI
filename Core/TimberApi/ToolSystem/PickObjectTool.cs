@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Timberborn.Common;
 using Timberborn.CoreUI;
 using Timberborn.EntitySystem;
@@ -15,29 +14,30 @@ namespace TimberApi.ToolSystem
     public class PickObjectTool : Tool, IInputProcessor
     {
         private static readonly string CursorKey = "PickObjectCursor";
-        private readonly InputService _inputService;
-
-        private readonly ToolManager _toolManager;
-
-        private readonly Highlighter _highlighter;
-
-        private readonly Colors _colors;
-
-        private readonly EntityComponentRegistry _entityComponentRegistry;
-
-        private readonly CursorService _cursorService;
-
-        private readonly SelectableObjectRaycaster _selectableObjectRaycaster;
-
-        private ToolDescription _toolDescription = null!;
-
-        private string _warning = "";
 
         private readonly HashSet<GameObject> _allCandidates = new();
 
-        private Func<GameObject, string> _validateCandidate = null!;
+        private readonly Colors _colors;
+
+        private readonly CursorService _cursorService;
+
+        private readonly EntityComponentRegistry _entityComponentRegistry;
+
+        private readonly Highlighter _highlighter;
         
+        private readonly InputService _inputService;
+
+        private readonly SelectableObjectRaycaster _selectableObjectRaycaster;
+
+        private readonly ToolManager _toolManager;
+
         private Action<GameObject> _callback = null!;
+
+        private ToolDescription _toolDescription = null!;
+
+        private Func<GameObject, string> _validateCandidate = null!;
+
+        private string _warning = "";
 
         public PickObjectTool(InputService inputService, ToolManager toolManager, Highlighter highlighter, Colors colors, EntityComponentRegistry entityComponentRegistry, CursorService cursorService,
             SelectableObjectRaycaster selectableObjectRaycaster)
@@ -49,6 +49,25 @@ namespace TimberApi.ToolSystem
             _entityComponentRegistry = entityComponentRegistry;
             _cursorService = cursorService;
             _selectableObjectRaycaster = selectableObjectRaycaster;
+        }
+
+        public bool ProcessInput()
+        {
+            HighlightCandidates();
+            if(_selectableObjectRaycaster.TryHitSelectableObject(out var hitObject) && _allCandidates.Contains(hitObject))
+            {
+                _highlighter.HighlightSecondary(hitObject, _colors.EntitySelection);
+                _warning = _validateCandidate(hitObject);
+                if(_inputService is { SelectionStart: true, MouseOverUI: false })
+                {
+                    _toolManager.SwitchToDefaultTool();
+                    _callback(hitObject);
+                    return true;
+                }
+            }
+
+            _warning = "";
+            return false;
         }
 
         public override void Enter()
@@ -83,25 +102,6 @@ namespace TimberApi.ToolSystem
             IEnumerable<GameObject> values = from component in _entityComponentRegistry.GetEnabled<T>() select component.gameObject;
             _allCandidates.AddRange(values);
             _toolManager.SwitchTool(this);
-        }
-
-        public bool ProcessInput()
-        {
-            HighlightCandidates();
-            if(_selectableObjectRaycaster.TryHitSelectableObject(out var hitObject) && _allCandidates.Contains(hitObject))
-            {
-                _highlighter.HighlightSecondary(hitObject, _colors.EntitySelection);
-                _warning = _validateCandidate(hitObject);
-                if(_inputService is { SelectionStart: true, MouseOverUI: false })
-                {
-                    _toolManager.SwitchToDefaultTool();
-                    _callback(hitObject);
-                    return true;
-                }
-            }
-
-            _warning = "";
-            return false;
         }
 
         private void HighlightCandidates()

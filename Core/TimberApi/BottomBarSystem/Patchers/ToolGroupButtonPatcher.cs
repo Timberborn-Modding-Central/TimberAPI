@@ -17,18 +17,15 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         private static DevModeManager _devModeManager = null!;
 
-        private static ConstructionModeService _constructionModeService = null!;
-
         private static readonly string ActiveClassName = "button--active";
+
+        public override string UniqueId => "TimberApi.ToolGroupButton";
 
         public void Load()
         {
             _bottomBarService = DependencyContainer.GetInstance<BottomBarService>();
             _devModeManager = DependencyContainer.GetInstance<DevModeManager>();
-            _constructionModeService = DependencyContainer.GetInstance<ConstructionModeService>();
         }
-
-        public override string UniqueId => "TimberApi.ToolGroupButton";
 
         public override void Apply(Harmony harmony)
         {
@@ -50,10 +47,7 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public static bool ContainsToolPatch(ref bool __result, ToolGroup ____toolGroup)
         {
-            if(____toolGroup is not IToolGroup apiToolGroup)
-            {
-                return false;
-            }
+            if(____toolGroup is not IToolGroup apiToolGroup) return false;
 
             // ContainsTool is used to toggle group on/off when tool exist in active state
             // Will now be used to check if the group is a for devMode (Empty groups can exists)
@@ -64,10 +58,7 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public static bool OnToolGroupEntered(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroupButton __instance, ToolGroup ____toolGroup, VisualElement ____toolGroupButtonWrapper)
         {
-            if(toolGroupEnteredEvent.ToolGroup is not IToolGroup enteredToolGroup || ____toolGroup is not IToolGroup toolGroup)
-            {
-                return false;
-            }
+            if(toolGroupEnteredEvent.ToolGroup is not IToolGroup enteredToolGroup || ____toolGroup is not IToolGroup toolGroup) return false;
 
             var row = _bottomBarService.GetGroupRow(toolGroup.Id);
             var enteredRow = _bottomBarService.GetGroupRow(enteredToolGroup.Id);
@@ -78,10 +69,7 @@ namespace TimberApi.BottomBarSystem.Patchers
                 ____toolGroupButtonWrapper.RemoveFromClassList(ActiveClassName);
             }
 
-            if(toolGroupEnteredEvent.ToolGroup != ____toolGroup)
-            {
-                return false;
-            }
+            if(toolGroupEnteredEvent.ToolGroup != ____toolGroup) return false;
 
             __instance.ToolButtonsElement.ToggleDisplayStyle(true);
             ____toolGroupButtonWrapper.AddToClassList(ActiveClassName);
@@ -91,10 +79,7 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public static bool OnToolGroupExited(ToolGroupExitedEvent toolGroupExitedEvent, ToolGroupButton __instance, VisualElement ____toolGroupButtonWrapper)
         {
-            if(toolGroupExitedEvent.ToolGroup is not ExitingTool)
-            {
-                return false;
-            }
+            if(toolGroupExitedEvent.ToolGroup is not ExitingTool) return false;
 
             __instance.ToolButtonsElement.ToggleDisplayStyle(false);
             ____toolGroupButtonWrapper.RemoveFromClassList(ActiveClassName);

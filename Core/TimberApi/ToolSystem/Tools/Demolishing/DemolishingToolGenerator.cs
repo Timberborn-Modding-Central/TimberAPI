@@ -15,7 +15,7 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
             yield return BuildingDeconstructionTool();
             yield return EntityBlockObjectDeletionTool();
         }
-        
+
         private static GeneratedSpecification EntityBlockObjectDeletionTool()
         {
             var json = JsonConvert.SerializeObject(new
@@ -30,12 +30,12 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 Icon = "Sprites/BottomBar/DeleteObjectIcon",
                 DevModeTool = false,
                 Hidden = false,
-                FallbackGroup = false,
+                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "EntityBlockObjectDeletion", "ToolSpecification");
         }
-        
+
         private static GeneratedSpecification BuildingDeconstructionTool()
         {
             var json = JsonConvert.SerializeObject(new
@@ -50,12 +50,12 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 Icon = "Sprites/BottomBar/DeleteObjectIcon",
                 DevModeTool = false,
                 Hidden = false,
-                FallbackGroup = false,
+                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "BuildingDeconstruction", "ToolSpecification");
         }
-        
+
         private static GeneratedSpecification DemolishableSelectionTool()
         {
             var json = JsonConvert.SerializeObject(new
@@ -70,12 +70,12 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 Icon = "Sprites/BottomBar/DemolishResourcesTool",
                 DevModeTool = false,
                 Hidden = false,
-                FallbackGroup = false,
+                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "DemolishableSelection", "ToolSpecification");
         }
-        
+
         private static GeneratedSpecification DemolishableUnselectionTool()
         {
             var json = JsonConvert.SerializeObject(new
@@ -90,12 +90,12 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 Icon = "Sprites/BottomBar/CancelToolIcon",
                 DevModeTool = false,
                 Hidden = false,
-                FallbackGroup = false,
+                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "DemolishableUnselection", "ToolSpecification");
         }
-        
+
         private static GeneratedSpecification CreateDemolishingToolGroup()
         {
             var json = JsonConvert.SerializeObject(new

@@ -10,8 +10,6 @@ using TimberApi.ToolSystem.Tools.PlaceableObject;
 using TimberApi.ToolSystem.Tools.Planting;
 using TimberApi.ToolSystem.Tools.SettingBox;
 using TimberApi.ToolSystem.Tools.TreeCuttingArea;
-using CancelPlantingToolFactory = TimberApi.ToolSystem.Tools.CancelPlanting.CancelPlantingToolFactory;
-using TreeCuttingAreaSelectionToolFactory = TimberApi.ToolSystem.Tools.TreeCuttingArea.TreeCuttingAreaSelectionToolFactory;
 
 namespace TimberApi.ToolSystem
 {
@@ -25,7 +23,7 @@ namespace TimberApi.ToolSystem
             containerDefinition.Bind<ToolSpecificationDeserializer>().AsSingleton();
             containerDefinition.Bind<ToolFactoryService>().AsSingleton();
             containerDefinition.Bind<ToolSpecificationService>().AsSingleton();
-            
+
             containerDefinition.MultiBind<IToolFactory>().To<EntityBlockObjectDeletionToolFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolFactory>().To<BuildingDeconstructionToolFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolFactory>().To<DemolishableUnselectionToolFactory>().AsSingleton();
@@ -38,7 +36,7 @@ namespace TimberApi.ToolSystem
             containerDefinition.MultiBind<IToolFactory>().To<TreeCuttingAreaUnselectionToolFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolFactory>().To<CancelPlantingToolFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolFactory>().To<SettingBoxToolFactory>().AsSingleton();
-            
+
             containerDefinition.MultiBind<IObjectSpecificationGenerator>().To<PlaceableObjectToolGenerator>().AsSingleton();
             containerDefinition.MultiBind<IObjectSpecificationGenerator>().To<PlantingToolGenerator>().AsSingleton();
             containerDefinition.MultiBind<ISpecificationGenerator>().To<CursorToolGenerator>().AsSingleton();

@@ -31,13 +31,13 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
                     Order = placeableBlockObject.ToolOrder * 10,
                     Icon = labeledPrefab.Image.name,
                     NameLocKey = labeledPrefab.DisplayNameLocKey,
-                    DescriptionLocKey = labeledPrefab.DescriptionLocKey,
+                    labeledPrefab.DescriptionLocKey,
                     Hidden = false,
-                    DevModeTool = placeableBlockObject.DevModeTool,
+                    placeableBlockObject.DevModeTool,
                     FallbackGroup = false,
                     ToolInformation = new
                     {
-                        PrefabName = prefab.PrefabName
+                        prefab.PrefabName
                     }
                 });
 

@@ -9,19 +9,15 @@ namespace TimberApi.ToolGroupSystem
 {
     public class ToolGroupService : ILoadableSingleton
     {
-        private readonly ToolGroupSpecificationService _toolGroupSpecificationService;
-
         private readonly ToolGroupButtonFactoryService _toolGroupButtonFactoryService;
 
         private readonly ToolGroupFactoryService _toolGroupFactoryService;
-
-        private ImmutableDictionary<string, IToolGroup> _toolGroups = null!;
+        
+        private readonly ToolGroupSpecificationService _toolGroupSpecificationService;
 
         private ImmutableDictionary<string, ToolGroupButton> _toolGroupButtons = null!;
 
-        public IEnumerable<IToolGroup> ToolGroups => _toolGroups.Select(pair => pair.Value).ToImmutableArray();
-
-        public IEnumerable<ToolGroupButton> ToolGroupButtons => _toolGroupButtons.Select(pair => pair.Value).ToImmutableArray();
+        private ImmutableDictionary<string, IToolGroup> _toolGroups = null!;
 
         public ToolGroupService(
             ToolGroupSpecificationService toolGroupSpecificationService,
@@ -32,6 +28,10 @@ namespace TimberApi.ToolGroupSystem
             _toolGroupButtonFactoryService = toolGroupButtonFactoryService;
             _toolGroupFactoryService = toolGroupFactoryService;
         }
+
+        public IEnumerable<IToolGroup> ToolGroups => _toolGroups.Select(pair => pair.Value).ToImmutableArray();
+
+        public IEnumerable<ToolGroupButton> ToolGroupButtons => _toolGroupButtons.Select(pair => pair.Value).ToImmutableArray();
 
         public void Load()
         {

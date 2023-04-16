@@ -13,7 +13,7 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
             yield return TreeCuttingAreaSelectionTool();
             yield return TreeCuttingAreaUnselectionTool();
         }
-        
+
         private static GeneratedSpecification TreeCuttingAreaUnselectionTool()
         {
             var json = JsonConvert.SerializeObject(new
@@ -37,7 +37,7 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
 
             return new GeneratedSpecification(json, "TreeCuttingAreaUnselection", "ToolSpecification");
         }
-        
+
         private static GeneratedSpecification TreeCuttingAreaSelectionTool()
         {
             var json = JsonConvert.SerializeObject(new
@@ -61,7 +61,7 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
 
             return new GeneratedSpecification(json, "TreeCuttingAreaSelection", "ToolSpecification");
         }
-        
+
         private static GeneratedSpecification CreateCuttingTreeGroup()
         {
             var json = JsonConvert.SerializeObject(new
@@ -81,7 +81,7 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
                     BottomBarSection = 0
                 }
             });
-            
+
             return new GeneratedSpecification(json, "TreeCutting", "ToolGroupSpecification");
         }
     }

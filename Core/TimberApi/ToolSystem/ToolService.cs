@@ -10,21 +10,17 @@ namespace TimberApi.ToolSystem
 {
     public class ToolService : ILoadableSingleton
     {
-        private readonly ToolSpecificationService _toolSpecificationService;
+        private readonly ToolButtonFactoryService _toolButtonFactoryService;
 
         private readonly ToolFactoryService _toolFactoryService;
 
-        private readonly ToolButtonFactoryService _toolButtonFactoryService;
-
         private readonly ToolGroupService _toolGroupService;
 
-        private ImmutableDictionary<string, Tool> _tools = null!;
+        private readonly ToolSpecificationService _toolSpecificationService;
 
         private ImmutableDictionary<string, ToolButton> _toolButtons = null!;
 
-        public IEnumerable<Tool> Tools => _tools.Select(pair => pair.Value).ToImmutableArray();
-
-        public IEnumerable<ToolButton> ToolButtons => _toolButtons.Select(pair => pair.Value).ToImmutableArray();
+        private ImmutableDictionary<string, Tool> _tools = null!;
 
         public ToolService(ToolSpecificationService toolSpecificationService, ToolFactoryService toolFactoryService, ToolButtonFactoryService toolButtonFactoryService, ToolGroupService toolGroupService)
         {
@@ -33,6 +29,10 @@ namespace TimberApi.ToolSystem
             _toolButtonFactoryService = toolButtonFactoryService;
             _toolGroupService = toolGroupService;
         }
+
+        public IEnumerable<Tool> Tools => _tools.Select(pair => pair.Value).ToImmutableArray();
+
+        public IEnumerable<ToolButton> ToolButtons => _toolButtons.Select(pair => pair.Value).ToImmutableArray();
 
         public void Load()
         {
@@ -57,22 +57,22 @@ namespace TimberApi.ToolSystem
 
         public Tool GetTool(string id)
         {
-            if(! _tools.TryGetValue(id.ToLower(), out var toolGroup))
+            if(! _tools.TryGetValue(id.ToLower(), out var tool))
             {
-                throw new KeyNotFoundException($"The given ToolGroupId ({id.ToLower()}) cannot be found.");
+                throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
             }
 
-            return toolGroup;
+            return tool;
         }
 
         public ToolButton GetToolButton(string id)
         {
-            if(! _toolButtons.TryGetValue(id.ToLower(), out var toolGroupButton))
+            if(! _toolButtons.TryGetValue(id.ToLower(), out var toolButton))
             {
-                throw new KeyNotFoundException($"The given ToolGroupId ({id.ToLower()}) cannot be found.");
+                throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
             }
 
-            return toolGroupButton;
+            return toolButton;
         }
     }
 }
