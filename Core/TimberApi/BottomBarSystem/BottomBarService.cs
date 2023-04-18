@@ -79,13 +79,13 @@ namespace TimberApi.BottomBarSystem
         {
             var row = 0;
 
-            while (true)
+            while (toolGroupSpecification.GroupId != null)
             {
-                if(toolGroupSpecification.GroupId == null) return row;
-
                 toolGroupSpecification = _toolGroupSpecifications[toolGroupSpecification.GroupId];
                 row += 1;
             }
+
+            return row;
         }
     }
 }
