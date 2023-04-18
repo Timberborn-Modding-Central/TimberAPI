@@ -26,7 +26,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
         public static bool LoadPrefix(ref Bot ____botPrefab, ObjectCollectionService ____objectCollectionService, FactionService ____factionService)
         {
             var botFactionService = DependencyContainer.GetInstance<BotFactionService>();
-            var botFactionId = botFactionService.GetGolemFactionIdByFactionId(____factionService.Current.Id);
+            var botFactionId = botFactionService.GetBotFactionIdByFactionId(____factionService.Current.Id);
             ____botPrefab = ____objectCollectionService.GetAllMonoBehaviours<Bot>().Single(bot => bot.GetComponentFast<Prefab>().PrefabName.Contains(botFactionId));
             return true;
         }

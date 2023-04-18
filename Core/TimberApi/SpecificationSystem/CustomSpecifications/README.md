@@ -2,11 +2,11 @@
 
 These specifications provide a workaround to certain features to improve the modding experience or fix bugs.
 
-## Faction golem
+## Faction bot
 
-**What:** Reusing golem models in other factions or creating custom golem models  
+**What:** Reusing bot models in other factions or creating custom bots models  
 **When:** Creating new faction specifications  
-**Why:** GolemId is hardcode to the factionId
+**Why:** BotId is hardcode to the factionId
 
 ## Building Specifications
 

@@ -29,15 +29,15 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
             _botFactions = _specificationService.GetSpecifications(_botFactionSpecificationObjectDeserializer).ToImmutableArray();
         }
 
-        public string GetGolemFactionIdByFactionId(string factionId)
+        public string GetBotFactionIdByFactionId(string factionId)
         {
-            BotFactionSpecification? golemFactionSpecification = _botFactions.FirstOrDefault(specification => specification.FactionId.Equals(factionId));
-            if(golemFactionSpecification != null)
+            var botFactionSpecification = _botFactions.FirstOrDefault(specification => specification.FactionId.Equals(factionId));
+            if(botFactionSpecification != null)
             {
-                return golemFactionSpecification.BotId;
+                return botFactionSpecification.BotId;
             }
 
-            TimberApi.ConsoleWriter.Log("Golems for faction " + factionId + " doesn't exists, falling back to " + _factionSpecificationService.StartingFaction.Id);
+            TimberApi.ConsoleWriter.Log("Bots for faction " + factionId + " doesn't exists, falling back to " + _factionSpecificationService.StartingFaction.Id);
             return _factionSpecificationService.StartingFaction.Id;
         }
     }
