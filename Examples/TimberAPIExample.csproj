@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Description>An example plugin on how to use the TimberAPI</Description>
@@ -10,17 +9,15 @@
         <RootNamespace>TimberAPIExample</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
-    </ItemGroup>
-
+    <Import Project="$(SolutionDir)GameImports.targets" />
+    
     <ItemGroup>
-      <PackageReference Include="Timberborn.GameLibs" Version="0.4.0-r.0" />
+        <ProjectReference Include="..\Core\TimberApi.Common\TimberApi.Common.csproj" />
+        <ProjectReference Include="..\Core\TimberApi.Core\TimberApi.Core.csproj" />
+        <ProjectReference Include="..\Core\TimberApi\TimberApi.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Core\TimberApi.Common\TimberApi.Common.csproj" />
-      <ProjectReference Include="..\Core\TimberApi.Core\TimberApi.Core.csproj" />
-      <ProjectReference Include="..\Core\TimberApi\TimberApi.csproj" />
-    </ItemGroup>
+    
+    <PropertyGroup>
+        <TransferDllPath>$(SolutionDir)Timberborn\BepInEx\plugins\TimberAPIExample</TransferDllPath>
+    </PropertyGroup>
 </Project>

@@ -10,7 +10,8 @@ namespace TimberApi.ShaderSystem
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.MultiBind<IShaderApplier>().To<DirtUrpApplier>().AsSingleton();
+            // TODO: Not yet found
+            // containerDefinition.MultiBind<IShaderApplier>().To<DirtUrpApplier>().AsSingleton();
             containerDefinition.MultiBind<IShaderApplier>().To<PathShaderApplier>().AsSingleton();
         }
     }

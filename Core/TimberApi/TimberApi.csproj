@@ -4,19 +4,14 @@
         <Nullable>enable</Nullable>
         <LangVersion>9</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Authors>hawkfalcon, TheBloodEyes, thundersen</Authors>
+        <Authors>Hawkfalcon, TheBloodEyes, Thundersen, Hythonhan</Authors>
         <PackageProjectUrl>https://timberapi.com</PackageProjectUrl>
         <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
         <ReleaseVersion>TIMBER_API_VERSION_PLACEHOLDER</ReleaseVersion>
     </PropertyGroup>
 
-    <PropertyGroup>
-        <!--   Set to true if you want to use the live timberborn assemblies of the game, requires symlink     -->
-        <UseLocalTimberbornSource>false</UseLocalTimberbornSource>
-        <!--   none: don't copy, bepinex: path to game > bepinex > plugins, timberapi: path to game > timberapi     -->
-        <CopyDllToPath>none</CopyDllToPath>
-    </PropertyGroup>
-
+    <Import Project="$(SolutionDir)GameImports.targets" />
+    
     <ItemGroup>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
             <_Parameter1>TimberApi.Core</_Parameter1>
@@ -26,41 +21,4 @@
     <ItemGroup>
         <ProjectReference Include="..\TimberApi.Common\TimberApi.Common.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701" />
-        <PackageReference Include="Threenine.LinqToCsv" Version="1.6.0" />
-        <PackageReference Include="MonoMod.Utils" Version="22.5.1.1" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-        <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
-        <PackageReference Include="UnityEngine.Modules" Version="2022.1.6" IncludeAssets="compile" />
-        <PackageReference Include="Timberborn.GameLibs" Version="0.4.0-r.0" Condition="$(UseLocalTimberbornSource) == false" />
-    </ItemGroup>
-
-    <!--    Import dll's from Timberborn's symlink in solution folder-->
-    <ItemGroup Condition="$(UseLocalTimberbornSource)">
-        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Timberborn.*.dll">
-            <DestinationSubDirectory>libs/</DestinationSubDirectory>
-        </Reference>
-        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
-            <DestinationSubDirectory>libs/</DestinationSubDirectory>
-        </Reference>
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="ThunderstorePackage\" />
-    </ItemGroup>
-
-    <!--    Used for automaticly transfer dll to Timberborn location, make a symlink `Timberborn` in the solution folder -->
-    <PropertyGroup Condition="$(CopyDllToPath) == 'timberapi'">
-        <TimberApiPath>$(SolutionDir)Timberborn\TimberAPI</TimberApiPath>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="$(CopyDllToPath) == 'bepinex'">
-        <TimberApiPath>$(SolutionDir)Timberborn\BepInEx\plugins\$(SolutionName)</TimberApiPath>
-    </PropertyGroup>
-
-    <Target Name="AutomaticCopyToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath) != 'none'">
-        <Message Text="### Copy TimberApi common ###" Importance="high" />
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TimberApiPath)\core" />
-    </Target>
 </Project>

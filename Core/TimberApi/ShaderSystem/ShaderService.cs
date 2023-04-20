@@ -23,8 +23,7 @@ namespace TimberApi.ShaderSystem
             {
                 if (_shader == null)
                 {
-                    _shader = Resources.Load<GameObject>("Buildings/Paths/Platform/Platform.Full.Folktails")
-                        .GetComponent<MeshRenderer>().materials[0].shader;
+                    _shader = Resources.Load<Material>("materials/goods/Box").shader;
                 }
 
                 return _shader;
