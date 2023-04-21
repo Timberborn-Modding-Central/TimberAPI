@@ -8,8 +8,7 @@ namespace TimberApi.ShaderSystem.ShaderAppliers
 
         public void LoadShader()
         {
-            _pathShader = Resources.Load<GameObject>("Buildings/Paths/Path/Path.Folktails")
-                .GetComponentInChildren<MeshRenderer>().materials[0].shader;
+            _pathShader = Resources.Load<Material>("buildings/paths/path/Path.Folktails").shader;
         }
 
         public bool ShouldApplyShader(Material material)

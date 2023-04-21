@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Timberborn.Common;
+using Timberborn.BaseComponentSystem;
 using Timberborn.CoreUI;
 using Timberborn.EntitySystem;
 using Timberborn.InputSystem;
@@ -36,7 +34,7 @@ namespace TimberApi.ObjectSelectionSystem
         
         private string _warning = "";
         
-        private readonly HashSet<GameObject> _allCandidates = new();
+        private readonly Dictionary<GameObject, BaseComponent> _allCandidates = new();
         
         private Func<GameObject, string> _validateCandidate = null!;
         
@@ -76,29 +74,31 @@ namespace TimberApi.ObjectSelectionSystem
             return _warning;
         }
 
-        public void StartPicking<T>(string title, string description, Func<GameObject, string> validateCandidate, Action<GameObject> callback) where T : MonoBehaviour, IRegisteredComponent
+        public void StartPicking<T>(string title, string description, Func<GameObject, string> validateCandidate, Action<GameObject> callback) where T : BaseComponent, IRegisteredComponent
         {
             _toolDescription = CreateDescription(title, description);
             _validateCandidate = validateCandidate;
             _callback = callback;
             _allCandidates.Clear();
-            IEnumerable<GameObject> values = from component in _entityComponentRegistry.GetEnabled<T>()
-                                             select component.gameObject;
-            _allCandidates.AddRange(values);
+            
+            foreach (var component in _entityComponentRegistry.GetEnabled<T>())
+            {
+                _allCandidates.Add(component.GameObjectFast, component);
+            }
             _toolManager.SwitchTool(this);
-        }
-
+        } 
+        
         public bool ProcessInput()
         {
             HighlightCandidates();
-            if (_selectableObjectRaycaster.TryHitSelectableObject(out var hitObject) && _allCandidates.Contains(hitObject))
+            if (_selectableObjectRaycaster.TryHitSelectableObject(out var hitObject) && _allCandidates.ContainsKey(hitObject.GameObjectFast))
             {
                 _highlighter.HighlightSecondary(hitObject, _colors.EntitySelection);
-                _warning = _validateCandidate(hitObject);
+                _warning = _validateCandidate(hitObject.GameObjectFast);
                 if (_inputService is { SelectionStart: true, MouseOverUI: false })
                 {
                     _toolManager.SwitchToDefaultTool();
-                    _callback(hitObject);
+                    _callback(hitObject.GameObjectFast);
                     return true;
                 }
             }
@@ -111,8 +111,7 @@ namespace TimberApi.ObjectSelectionSystem
             _highlighter.UnhighlightAllSecondary();
             foreach (var allCandidate in _allCandidates)
             {
-                var color = _validateCandidate(allCandidate) == "" ? _colors.BuildablePreview : _colors.UnbuildablePreview;
-                _highlighter.HighlightSecondary(allCandidate, color);
+                var color = _validateCandidate(allCandidate.Key) == "" ? _colors.BuildablePreview : _colors.UnbuildablePreview; _highlighter.HighlightSecondary(allCandidate.Value, color);
             }
         }
 

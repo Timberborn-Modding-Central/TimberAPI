@@ -236,7 +236,7 @@ jobs:
         run: dotnet restore
 
       - name: Build TimberAPICore
-        run: dotnet build ${{env.timber_api_core_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
+        run: dotnet build ${{env.timber_api_core_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }};SolutionDir=${{ github.workspace }}
 
       - name: Build Loader
         run: dotnet build ${{env.timber_api_loaders_project_path}} --no-restore --configuration RELEASE -p:Version=${{ needs.versions.outputs.timber_api_leading_zero }}
