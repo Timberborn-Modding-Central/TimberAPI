@@ -8,7 +8,7 @@
         <ReleaseVersion>TIMBER_API_VERSION_PLACEHOLDER</ReleaseVersion>
     </PropertyGroup>
 
-    <Import Project="$(SolutionDir)GameImports.targets" />
+    <Import Project="..\..\GameImports.targets" />
     
     <ItemGroup>
         <ProjectReference Include="..\TimberApi.Common\TimberApi.Common.csproj" />
