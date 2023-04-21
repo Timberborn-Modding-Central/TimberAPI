@@ -7,7 +7,7 @@
         <ReleaseVersion>0.5.1</ReleaseVersion>
     </PropertyGroup>
 
-    <Import Project="$(SolutionDir)GameImports.targets" />
+    <Import Project="..\..\GameImports.targets" />
     
     <Import Project="..\TimberApi.SharedLoader\TimberApi.SharedLoader.projitems" Label="Shared" />
 
