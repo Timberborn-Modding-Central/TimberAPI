@@ -1,6 +1,8 @@
 ## Unreleased
+Automation fix
 
 ### Changes
+- Changed GameImports import to use relative paths
 
 ## TimberAPI v0.5.4.1
 Bug fixes.
