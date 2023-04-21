@@ -9,7 +9,7 @@
         <ReleaseVersion>TIMBER_API_VERSION_PLACEHOLDER</ReleaseVersion>
     </PropertyGroup>
 
-    <Import Project="$(SolutionDir)GameImports.targets" />
+    <Import Project="..\..\GameImports.targets" />
     
     <ItemGroup>
         <PackageReference Include="Unity.InputSystem" Version="1.5.0" />

@@ -10,7 +10,7 @@
         <ReleaseVersion>TIMBER_API_VERSION_PLACEHOLDER</ReleaseVersion>
     </PropertyGroup>
 
-    <Import Project="$(SolutionDir)GameImports.targets" />
+    <Import Project="..\..\GameImports.targets" />
     
     <ItemGroup>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
