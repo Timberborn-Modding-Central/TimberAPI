@@ -1,13 +1,13 @@
 using System.Collections.Immutable;
 using System.Linq;
+using TimberApi.Common.SingletonSystem;
 using Timberborn.FactionSystem;
 using Timberborn.GameFactionSystem;
 using Timberborn.Persistence;
-using Timberborn.SingletonSystem;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
 {
-    internal class BotFactionService : ILoadableSingleton
+    internal class BotFactionService : ITimberApiLoadableSingleton
     {
         private readonly FactionSpecificationService _factionSpecificationService;
         private readonly BotFactionSpecificationObjectDeserializer _botFactionSpecificationObjectDeserializer;
@@ -32,6 +32,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Bots
         public string GetBotFactionIdByFactionId(string factionId)
         {
             var botFactionSpecification = _botFactions.FirstOrDefault(specification => specification.FactionId.Equals(factionId));
+            
             if(botFactionSpecification != null)
             {
                 return botFactionSpecification.BotId;
