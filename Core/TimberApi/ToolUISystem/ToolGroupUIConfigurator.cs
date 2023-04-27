@@ -1,7 +1,6 @@
 using Bindito.Core;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.SceneSystem;
-using TimberApi.ToolGroupSystem.ToolGroups.Default;
 using TimberApi.ToolUISystem.Factories;
 
 namespace TimberApi.ToolUISystem
