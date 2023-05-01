@@ -7,9 +7,14 @@ namespace TimberApi.ToolSystem
     {
         public abstract string Id { get; }
 
-        public abstract Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null);
+        public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup)
+        {
+            return CreateTool(toolSpecification, GetToolInformation(toolSpecification), toolGroup);
+        }
 
-        protected T GetToolInformation(ToolSpecification toolSpecification)
+        protected abstract Tool CreateTool(ToolSpecification toolSpecification, T toolInformation, ToolGroup? toolGroup);
+
+        private T GetToolInformation(ToolSpecification toolSpecification)
         {
             var objectLoader = ObjectLoader.CreateBasicLoader(toolSpecification.ToolInformation);
 

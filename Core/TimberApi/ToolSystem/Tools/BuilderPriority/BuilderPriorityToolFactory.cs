@@ -18,10 +18,8 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
             _builderPriorityToolFactory = DependencyContainer.GetInstance(AccessTools.TypeByName("Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolFactory"));
         }
 
-        public override Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
+        protected override Tool CreateTool(ToolSpecification toolSpecification, BuilderPriorityToolToolInformation toolInformation, ToolGroup? toolGroup)
         {
-            var toolInformation = GetToolInformation(toolSpecification);
-
             return (Tool) _builderPriorityToolFactory.InvokeInternalInstanceMember("Create", new object[]
             {
                 toolInformation.Priority

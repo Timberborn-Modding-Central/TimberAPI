@@ -52,10 +52,9 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
         }
 
         public override string Id => "PlaceableObjectTool";
-
-        public override Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
+        
+        protected override Tool CreateTool(ToolSpecification toolSpecification, PlaceableObjectToolToolInformation toolInformation, ToolGroup? toolGroup)
         {
-            var toolInformation = GetToolInformation(toolSpecification);
             var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
             var placeableBlockObject = prefab.GetComponentFast<PlaceableBlockObject>();
 

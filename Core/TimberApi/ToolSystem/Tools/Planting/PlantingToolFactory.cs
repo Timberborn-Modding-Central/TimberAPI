@@ -42,10 +42,8 @@ namespace TimberApi.ToolSystem.Tools.Planting
 
         public override string Id => "PlantingTool";
 
-        public override Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
+        protected override Tool CreateTool(ToolSpecification toolSpecification, PlantingToolToolInformation toolInformation, ToolGroup? toolGroup)
         {
-            var toolInformation = GetToolInformation(toolSpecification);
-
             var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().First(o => o.IsNamedExactly(toolInformation.PrefabName));
             var plantable = prefab.GetComponentFast<Plantable>();
 
