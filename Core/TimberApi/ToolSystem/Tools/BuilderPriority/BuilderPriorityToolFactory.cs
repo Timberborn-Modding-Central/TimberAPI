@@ -1,29 +1,23 @@
-using HarmonyLib;
-using TimberApi.Common.Extensions;
-using TimberApi.DependencyContainerSystem;
 using Timberborn.Persistence;
-using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
+using TimberbornBuilderPriorityToolFactory = Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolFactory;
 
 namespace TimberApi.ToolSystem.Tools.BuilderPriority
 {
-    public class BuilderPriorityToolFactory : BaseToolFactory<BuilderPriorityToolToolInformation>, ILoadableSingleton
+    public class BuilderPriorityToolFactory : BaseToolFactory<BuilderPriorityToolToolInformation>
     {
-        private object _builderPriorityToolFactory = null!;
-        
         public override string Id => "PriorityTool";
 
-        public void Load()
+        private readonly Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolFactory _builderPriorityToolFactory;
+
+        public BuilderPriorityToolFactory(Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolFactory builderPriorityToolFactory)
         {
-            _builderPriorityToolFactory = DependencyContainer.GetInstance(AccessTools.TypeByName("Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolFactory"));
+            _builderPriorityToolFactory = builderPriorityToolFactory;
         }
 
         protected override Tool CreateTool(ToolSpecification toolSpecification, BuilderPriorityToolToolInformation toolInformation, ToolGroup? toolGroup)
         {
-            return (Tool) _builderPriorityToolFactory.InvokeInternalInstanceMember("Create", new object[]
-            {
-                toolInformation.Priority
-            });
+            return _builderPriorityToolFactory.Create(toolInformation.Priority);
         }
 
         protected override BuilderPriorityToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)

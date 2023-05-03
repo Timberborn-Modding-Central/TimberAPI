@@ -5,15 +5,15 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
 {
     public class EntityBlockObjectDeletionToolFactory : IToolFactory
     {
+        public string Id => "EntityBlockObjectDeletionTool";
+
         private readonly EntityBlockObjectDeletionTool _entityBlockObjectDeletionTool;
 
         public EntityBlockObjectDeletionToolFactory(EntityBlockObjectDeletionTool entityBlockObjectDeletionTool)
         {
             _entityBlockObjectDeletionTool = entityBlockObjectDeletionTool;
         }
-
-        public string Id => "EntityBlockObjectDeletionTool";
-
+        
         public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {
             _entityBlockObjectDeletionTool.Initialize(toolGroup);

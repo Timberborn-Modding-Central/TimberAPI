@@ -16,6 +16,8 @@ namespace TimberApi.ToolSystem.Tools.Cursor
 
         public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {
+            _cursorTool.ToolGroup = toolGroup;
+            
             return _cursorTool;
         }
     }

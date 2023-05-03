@@ -57,16 +57,20 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
         {
             var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
             var placeableBlockObject = prefab.GetComponentFast<PlaceableBlockObject>();
-
-            placeableBlockObject.SetPrivateInstanceFieldValue("_devModeTool", toolSpecification.DevMode);
-            placeableBlockObject.SetPrivateInstanceFieldValue("_toolOrder", toolSpecification.Order);
+            
+            placeableBlockObject._devModeTool = toolSpecification.DevMode;
+            placeableBlockObject._toolOrder = toolSpecification.Order;
 
             var blockObjectTool = new BlockObjectTool(_blockObjectToolDescriber, _inputService, _areaPickerFactory, _previewPlacerFactory, _uiSoundController, _blockObjectPlacerService, _mapEditorMode);
 
             if(toolGroup == null)
+            {
                 blockObjectTool.Initialize(placeableBlockObject);
+            }
             else
+            {
                 blockObjectTool.Initialize(placeableBlockObject, toolGroup);
+            }
 
             return blockObjectTool;
         }

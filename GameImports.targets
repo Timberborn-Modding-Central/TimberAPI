@@ -9,6 +9,8 @@
     </PropertyGroup>
     
     <ItemGroup>
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" />        
+        
         <PackageReference Include="Lib.Harmony" Version="2.2.2" NoWarn="NU1701" />
         <PackageReference Include="Threenine.LinqToCsv" Version="1.6.0" />
         <PackageReference Include="MonoMod.Utils" Version="22.5.1.1" />
@@ -20,16 +22,16 @@
 
     <!--    Import dll's from Timberborn's symlink in solution folder-->
     <ItemGroup Condition="$(UseLocalTimberbornSource)">
-        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Timberborn.*.dll">
+        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Timberborn.*.dll" Publicize="true">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
-        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\UnityEngine.UIElementsNativeModule.dll">
+        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\UnityEngine.UIElementsNativeModule.dll" Publicize="true">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
-        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\UnityEngine.UIElementsNativeModule.dll">
+        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\UnityEngine.UIElementsNativeModule.dll" Publicize="true">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
     </ItemGroup>
