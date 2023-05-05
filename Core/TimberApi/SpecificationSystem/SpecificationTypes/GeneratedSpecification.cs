@@ -1,6 +1,6 @@
 ﻿namespace TimberApi.SpecificationSystem.SpecificationTypes
 {
-    internal class GeneratedSpecification : ISpecification
+    public class GeneratedSpecification : ISpecification
     {
         private readonly string _json;
 
