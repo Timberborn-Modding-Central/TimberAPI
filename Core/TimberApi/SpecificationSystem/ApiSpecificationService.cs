@@ -3,10 +3,11 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Timberborn.Persistence;
 using Timberborn.WorldSerialization;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem
 {
-    internal class ApiSpecificationService : IApiSpecificationService
+    internal class ApiSpecificationService : ISpecificationService
     {
         private readonly JsonMergeSettings _jsonMergeSettings;
 

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using TimberApi.SpecificationSystem;
+using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 
 namespace TimberApi.ToolSystem
 {
     public class ToolSpecificationService : ILoadableSingleton
     {
-        private readonly IApiSpecificationService _apiSpecificationService;
+        private readonly ISpecificationService _specificationService;
 
         private readonly ToolSpecificationDeserializer _toolSpecificationDeserializer;
 
@@ -19,10 +20,10 @@ namespace TimberApi.ToolSystem
             // ReSharper disable once InconsistentNaming
             // Required to prevent dependency loop or accessing before specifications are generated
             ObjectSpecificationGenerator DEPENDENCY_ORDER_FIX,
-            IApiSpecificationService apiAPISpecificationService,
+            ISpecificationService specificationService,
             ToolSpecificationDeserializer toolSpecificationDeserializer)
         {
-            _apiSpecificationService = apiAPISpecificationService;
+            _specificationService = specificationService;
             _toolSpecificationDeserializer = toolSpecificationDeserializer;
         }
 
@@ -30,7 +31,7 @@ namespace TimberApi.ToolSystem
 
         public void Load()
         {
-            _toolSpecifications = _apiSpecificationService.GetSpecifications(_toolSpecificationDeserializer).ToImmutableDictionary(specification => specification.Id.ToLower());
+            _toolSpecifications = _specificationService.GetSpecifications(_toolSpecificationDeserializer).ToImmutableDictionary(specification => specification.Id.ToLower());
         }
 
         public ToolSpecification Get(string id)
