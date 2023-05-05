@@ -31,7 +31,8 @@ namespace TimberApi.BottomBarSystem.Patchers
                 return;
             }
 
-            __instance.SetPrivateInstancePropertyValue("ActiveToolGroup", ExitingToolGroup);
+
+            __instance.ActiveToolGroup = ExitingToolGroup;
         }
     }
 }

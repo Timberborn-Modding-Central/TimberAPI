@@ -43,8 +43,8 @@ namespace TimberApi.ToolSystem
             {
                 return null;
             }
-
-            return objectLoader.GetPrivateInstanceFieldValue<ObjectSave>("_objectSave").Get<ObjectSave>("ToolInformation");
+            
+            return ((ObjectLoader)objectLoader)._objectSave.Get<ObjectSave>("ToolInformation");
         }
     }
 }

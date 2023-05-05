@@ -42,12 +42,12 @@ namespace TimberApi.ToolGroupSystem
 
         private static ObjectSave? GetGroupInformationObjectSave(IObjectLoader objectLoader)
         {
-            if(! objectLoader.Has(new PropertyKey<ObjectSave>("GroupInformation")))
+            if(! objectLoader.Has(new PropertyKey<ObjectSave>("ToolInformation")))
             {
                 return null;
             }
-
-            return objectLoader.GetPrivateInstanceFieldValue<ObjectSave>("_objectSave").Get<ObjectSave>("GroupInformation");
+            
+            return ((ObjectLoader)objectLoader)._objectSave.Get<ObjectSave>("ToolInformation");
         }
     }
 }
