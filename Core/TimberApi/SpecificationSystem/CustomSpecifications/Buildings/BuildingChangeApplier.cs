@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TimberApi.Common.Extensions;
 using Timberborn.Buildings;
 using Timberborn.Goods;
 using Timberborn.MechanicalSystem;
@@ -23,9 +22,9 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 
         public void Load()
         {
-            foreach (Building building in _objectCollectionService.GetAllMonoBehaviours<Building>())
+            foreach (var building in _objectCollectionService.GetAllMonoBehaviours<Building>())
             {
-                BuildingSpecification? buildingSpecification = _buildingSpecificationService.GetBuildingSpecificationByBuilding(building);
+                var buildingSpecification = _buildingSpecificationService.GetBuildingSpecificationByBuilding(building);
 
                 if (buildingSpecification == null)
                 {
@@ -50,30 +49,31 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
         {
             if (buildingSpecification.PowerOutput != null)
             {
-                mechanicalNodeSpecification.SetPrivateInstanceFieldValue("_powerOutput", buildingSpecification.PowerOutput);
+                mechanicalNodeSpecification._powerOutput = (int) buildingSpecification.PowerOutput;
             }
 
             if (buildingSpecification.PowerInput != null)
             {
-                mechanicalNodeSpecification.SetPrivateInstanceFieldValue("_powerInput", buildingSpecification.PowerInput);
+                mechanicalNodeSpecification._powerInput = (int) buildingSpecification.PowerInput;
             }
         }
 
         private static void ChangeManufactoryRecipes(Manufactory manufactory, BuildingSpecification buildingSpecification)
         {
-            manufactory.SetPrivateInstanceFieldValue("_productionRecipeIds", buildingSpecification.RecipeIds.Distinct().ToArray());
+            manufactory._productionRecipeIds = buildingSpecification.RecipeIds.Distinct().ToArray();
         }
 
         private static void ChangeBuildingProperties(Building building, BuildingSpecification buildingSpecification)
         {
             if (buildingSpecification.ScienceCost != null)
             {
-                building.SetPrivateInstanceFieldValue("_scienceCost", buildingSpecification.ScienceCost);
+                building._scienceCost = (int) buildingSpecification.ScienceCost;
             }
 
             List<BuildingCost> reverseList = new(buildingSpecification.BuildingCosts);
             reverseList.Reverse();
-            building.SetPrivateInstanceFieldValue("_buildingCost", reverseList.Select(x => new GoodAmountSpecification(x.GoodId, x.Amount)).Distinct(new GoodAmountSpecificationComparer()).ToArray());
+
+            building._buildingCost = reverseList.Select(x => new GoodAmountSpecification(x.GoodId, x.Amount)).Distinct(new GoodAmountSpecificationComparer()) as GoodAmountSpecification[];
         }
     }
 }
