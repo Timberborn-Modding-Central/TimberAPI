@@ -30,8 +30,7 @@ namespace TimberApi.BottomBarSystem.Patchers
             {
                 return;
             }
-
-
+            
             __instance.ActiveToolGroup = ExitingToolGroup;
         }
     }

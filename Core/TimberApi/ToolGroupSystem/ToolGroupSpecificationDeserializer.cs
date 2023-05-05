@@ -16,7 +16,6 @@ namespace TimberApi.ToolGroupSystem
             _resourceAssetLoader = resourceAssetLoader;
         }
 
-
         public void Serialize(ToolGroupSpecification value, IObjectSaver objectSaver)
         {
             throw new NotImplementedException();
@@ -42,12 +41,12 @@ namespace TimberApi.ToolGroupSystem
 
         private static ObjectSave? GetGroupInformationObjectSave(IObjectLoader objectLoader)
         {
-            if(! objectLoader.Has(new PropertyKey<ObjectSave>("ToolInformation")))
+            if(! objectLoader.Has(new PropertyKey<ObjectSave>("GroupInformation")))
             {
                 return null;
             }
             
-            return ((ObjectLoader)objectLoader)._objectSave.Get<ObjectSave>("ToolInformation");
+            return ((ObjectLoader)objectLoader)._objectSave.Get<ObjectSave>("GroupInformation");
         }
     }
 }
