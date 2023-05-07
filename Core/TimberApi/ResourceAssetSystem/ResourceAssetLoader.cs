@@ -21,7 +21,6 @@ namespace TimberApi.ResourceAssetSystem
         public T[] LoadAll<T>(string path) where T : Object
         {
             return Resources.LoadAll<T>(path) ?? _assetLoader.LoadAll<T>(path);
-            ;
         }
     }
 }

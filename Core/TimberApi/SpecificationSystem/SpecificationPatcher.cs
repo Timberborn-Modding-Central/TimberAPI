@@ -1,22 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
+using TimberApi.HarmonyPatcherSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.Persistence;
 
 namespace TimberApi.SpecificationSystem
 {
-    internal static class SpecificationPatcher
+    internal class SpecificationPatcher : BaseHarmonyPatcher
     {
-        public static void Patch()
+        public override string UniqueId => "TimberApi.Specification";
+
+        public override void Apply(Harmony harmony)
         {
-            var harmony = new Harmony("TimberApi.specification");
+            harmony.Patch(
+                GetMethodInfo<PersistenceConfigurator>(nameof(PersistenceConfigurator.Configure)),
+                transpiler: GetHarmonyMethod(nameof(RemoveSpecificationBind))
+            );
 
-            harmony.Patch(AccessTools.Method(typeof(PersistenceConfigurator), nameof(PersistenceConfigurator.Configure)),
-                transpiler: new HarmonyMethod(AccessTools.Method(typeof(SpecificationPatcher), nameof(RemoveSpecificationBind))));
-
-            harmony.Patch(AccessTools.Method(typeof(MainMenuSceneConfigurator), "Configure"),
-                transpiler: new HarmonyMethod(AccessTools.Method(typeof(SpecificationPatcher), nameof(RemoveSpecificationBind))));
+            harmony.Patch(
+                GetMethodInfo<MainMenuSceneConfigurator>("Configure"),
+                transpiler: GetHarmonyMethod(nameof(RemoveSpecificationBind))
+            );
         }
 
         public static IEnumerable<CodeInstruction> RemoveSpecificationBind(IEnumerable<CodeInstruction> instructions)

@@ -4,7 +4,7 @@ using TimberApi.SceneSystem;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    [Configurator(SceneEntrypoint.InGame | SceneEntrypoint.MapEditor)]
+    [Configurator(SceneEntrypoint.InGame)]
     internal class BuildingSpecificationConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
@@ -12,7 +12,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
             containerDefinition.Bind<BuildingSpecificationService>().AsSingleton();
             containerDefinition.Bind<BuildingSpecificationObjectDeserializer>().AsSingleton();
             containerDefinition.Bind<BuildingCostObjectDeserializer>().AsSingleton();
-            containerDefinition.MultiBind<ISpecificationGenerator>().To<BuildingSpecificationGenerator>().AsSingleton();
+            containerDefinition.MultiBind<IObjectSpecificationGenerator>().To<BuildingSpecificationGenerator>().AsSingleton();
             containerDefinition.Bind<BuildingChanger>().AsSingleton();
         }
     }

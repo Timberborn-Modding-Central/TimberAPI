@@ -1,17 +1,21 @@
 ﻿using Bindito.Core;
 using HarmonyLib;
-using TimberApi.Common.SingletonSystem;
+using TimberApi.HarmonyPatcherSystem;
 using Timberborn.AssetSystem;
+using UnityEngine;
 
 namespace TimberApi.ResourceAssetSystem
 {
-    internal class AssetSystemConfiguratorPatcher : ITimberApiLoadableSingleton
+    internal class AssetSystemConfiguratorPatcher : BaseHarmonyPatcher
     {
-        public void Load()
+        public override string UniqueId => "TimberApi.AssetLoaderPatcher";
+
+        public override void Apply(Harmony harmony)
         {
-            var harmony = new Harmony("TimberApi.AssetLoaderPatcher");
-            harmony.Patch(AccessTools.Method(typeof(AssetSystemConfigurator), nameof(AssetSystemConfigurator.Configure)),
-                new HarmonyMethod(AccessTools.Method(typeof(AssetSystemConfiguratorPatcher), nameof(AssetSystemConfiguratorPatch))));
+            harmony.Patch(
+                GetMethodInfo<AssetSystemConfigurator>(nameof(AssetSystemConfigurator.Configure)),
+                GetHarmonyMethod(nameof(AssetSystemConfiguratorPatch))
+            );
         }
 
         private static bool AssetSystemConfiguratorPatch(IContainerDefinition containerDefinition)

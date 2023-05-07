@@ -1,6 +1,7 @@
 ﻿using Bindito.Core;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.SceneSystem;
+using UnityEngine;
 
 namespace TimberApi.AssetSystem
 {

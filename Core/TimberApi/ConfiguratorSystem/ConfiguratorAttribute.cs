@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using TimberApi.SceneSystem;
 
 namespace TimberApi.ConfiguratorSystem
@@ -7,7 +8,7 @@ namespace TimberApi.ConfiguratorSystem
     ///     Attribute to register configurators
     ///     Attribute should be placed on a `IConfigurator` class, exception will be thrown if not
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class), MeansImplicitUse]
     public class ConfiguratorAttribute : Attribute
     {
         /// <summary>

@@ -1,18 +1,22 @@
 ﻿using Bindito.Core;
 using HarmonyLib;
+using TimberApi.HarmonyPatcherSystem;
 using TimberApi.SceneSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
 using Timberborn.GameScene;
+using UnityEngine;
 
 namespace TimberApi.Core.ConfiguratorSystem
 {
-    public static class ConfiguratorPatcher
+    public class ConfiguratorPatcher : BaseHarmonyPatcher
     {
-        public static void Patch()
+        public override string UniqueId => "TimberApi.Core.Configurator";
+        
+        public override void Apply(Harmony harmony)
         {
-            var harmony = new Harmony("TimberApi.SceneListener");
-            harmony.Patch(AccessTools.Method(typeof(GameSceneConfigurator), "Configure"), new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMasterSceneConfigurator))));
+            harmony.Patch(AccessTools.Method(typeof(GameSceneConfigurator), "Configure"), 
+                new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMasterSceneConfigurator))));
 
             harmony.Patch(AccessTools.Method(typeof(MainMenuSceneConfigurator), "Configure"),
                 new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMainMenuSceneConfigurator))));

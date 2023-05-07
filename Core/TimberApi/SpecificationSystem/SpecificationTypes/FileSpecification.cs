@@ -10,16 +10,20 @@ namespace TimberApi.SpecificationSystem.SpecificationTypes
 
             FilePath = filePath;
             FullName = fileName.Replace(".original", "").Replace(".replace", "").ToLower();
+            Name = FullName[(FullName.IndexOf('.') + 1)..].ToLower();
             SpecificationName = fileName[..fileName.IndexOf('.')].ToLower();
             IsOriginal = fileName.ToLower().EndsWith("original");
             IsReplace = fileName.ToLower().EndsWith("replace");
         }
 
+        public string Name { get; }
+
+        public string SpecificationName { get; }
+
+
         private string FilePath { get; }
 
         public string FullName { get; }
-
-        public string SpecificationName { get; }
 
         public bool IsOriginal { get; }
 

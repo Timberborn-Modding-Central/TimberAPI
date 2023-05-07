@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bindito.Core;
+using Timberborn.BaseComponentSystem;
 using Timberborn.ConstructibleSystem;
 using Timberborn.Persistence;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace TimberApi.EntityLinkerSystem
     ///     If can be called in code or you could for example create an in game button
     ///     which can make the call.
     /// </summary>
-    public class EntityLinker : MonoBehaviour, IFinishedStateListener, IPersistentEntity
+    public class EntityLinker : BaseComponent, IFinishedStateListener, IPersistentEntity
     {
         //Keys for saving/loading
         protected static readonly ComponentKey EntityLinkerKey = new("EntityLinker");
@@ -162,7 +163,7 @@ namespace TimberApi.EntityLinkerSystem
         }
 
         /// <summary>
-        ///     Remvoes all existing Links
+        ///     Removes all existing Links
         /// </summary>
         public virtual void RemoveAllLinks()
         {

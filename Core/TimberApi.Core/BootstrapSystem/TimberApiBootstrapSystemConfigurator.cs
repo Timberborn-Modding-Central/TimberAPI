@@ -8,9 +8,7 @@ using TimberApi.Core.ConfiguratorSystem;
 using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem;
-using TimberApi.Core.SingletonSystem;
-using TimberApi.LocalizationSystem;
-using TimberApi.SpecificationSystem;
+using TimberApi.HarmonyPatcherSystem;
 
 namespace TimberApi.Core.BootstrapSystem
 {
@@ -24,11 +22,7 @@ namespace TimberApi.Core.BootstrapSystem
             {
                 Instance = this;
                 AddPrefabConfigurators();
-                BootstrapPatcher.Patch();
-                ConfiguratorPatcher.Patch();
-                LocalizationPatcher.Patch();
-                SpecificationPatcher.Patch();
-                SingletonSystemPatcher.Patch();
+                new HarmonyPatcherActivator().PatchAll();
             }
             catch (Exception e)
             {
@@ -59,4 +53,4 @@ namespace TimberApi.Core.BootstrapSystem
             ModLoaderSystemConfigurator.Prefab(gameObject);
         }
     }
-}
+} 

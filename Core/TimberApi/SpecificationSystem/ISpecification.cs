@@ -2,9 +2,11 @@ namespace TimberApi.SpecificationSystem
 {
     public interface ISpecification
     {
-        string FullName { get; }
+        string Name { get; }
 
         string SpecificationName { get; }
+
+        string FullName { get; }
 
         bool IsOriginal { get; }
 

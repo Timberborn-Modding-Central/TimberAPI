@@ -3,20 +3,23 @@ using System.IO;
 using Bindito.Core;
 using HarmonyLib;
 using TimberApi.Common;
+using TimberApi.HarmonyPatcherSystem;
 using Timberborn.Bootstrapper;
 
 namespace TimberApi.Core.BootstrapSystem
 {
-    internal static class BootstrapPatcher
+    internal class BootstrapPatcher : BaseHarmonyPatcher
     {
-        public static void Patch()
+        public override string UniqueId => "TimberApi.Bootstrapper";
+
+        public override void Apply(Harmony harmony)
         {
             try
             {
-                var harmony = new Harmony("TimberApi.bootstrapper");
-
-                harmony.Patch(AccessTools.Method(typeof(BootstrapperConfigurator), "Configure"),
-                    new HarmonyMethod(AccessTools.Method(typeof(BootstrapPatcher), nameof(BootstrapperConfiguratorPatch))));
+                harmony.Patch(
+                    GetMethodInfo<BootstrapperConfigurator>("Configure"),
+                    GetHarmonyMethod(nameof(BootstrapperConfiguratorPatch))
+                );
             }
             catch (Exception e)
             {

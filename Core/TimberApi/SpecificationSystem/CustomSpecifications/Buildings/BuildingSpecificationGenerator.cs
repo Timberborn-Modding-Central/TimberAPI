@@ -7,35 +7,35 @@ using Timberborn.Buildings;
 using Timberborn.MechanicalSystem;
 using Timberborn.PrefabSystem;
 using Timberborn.Workshops;
-using UnityEngine;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    internal class BuildingSpecificationGenerator : ISpecificationGenerator
+    internal class BuildingSpecificationGenerator : IObjectSpecificationGenerator
     {
-        private static readonly string BuildingsPath = "Buildings";
-
         private static readonly string SpecificationName = "BuildingSpecification";
-
-        public IEnumerable<ISpecification> Generate()
+        
+        public IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService)
         {
-            Building[] buildingComponents = Resources.LoadAll<Building>(BuildingsPath);
+            var buildings = objectCollectionService.GetAllMonoBehaviours<Building>();
 
-            foreach (Building component in buildingComponents)
+            foreach (var building in buildings)
             {
-                string buildingId = component.GetComponentFast<Prefab>().PrefabName;
+                var buildingId = building.GetComponentFast<Prefab>().PrefabName;
+                
                 IEnumerable<string> recipeIds = Array.Empty<string>();
-                int scienceCost = component.ScienceCost;
-                IEnumerable<BuildingCost> buildingCosts = component.BuildingCost.Select(x => new BuildingCost(x.GoodId, x.Amount));
+                
+                var scienceCost = building.ScienceCost;
+                
+                var buildingCosts = building.BuildingCost.Select(x => new BuildingCost(x.GoodId, x.Amount));
                 int? powerInput = null;
                 int? powerOutput = null;
 
-                if (component.TryGetComponentFast(out Manufactory manufactory))
+                if (building.TryGetComponentFast(out Manufactory manufactory))
                 {
                     recipeIds = manufactory.ProductionRecipeIds;
                 }
 
-                if (component.TryGetComponentFast(out MechanicalNodeSpecification mechanicalNodeSpecification))
+                if (building.TryGetComponentFast(out MechanicalNodeSpecification mechanicalNodeSpecification))
                 {
                     powerInput = mechanicalNodeSpecification.PowerInput;
                     powerOutput = mechanicalNodeSpecification.PowerOutput;
@@ -44,9 +44,9 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
                 var buildingSpec = new BuildingSpecification(buildingId, scienceCost, powerInput, powerOutput, recipeIds, buildingCosts);
 
                 var jsonSerializerSettings = new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore};
-                string buildingSpecificationJson = JsonConvert.SerializeObject(buildingSpec, Formatting.Indented, jsonSerializerSettings);
+                var buildingSpecificationJson = JsonConvert.SerializeObject(buildingSpec, Formatting.Indented, jsonSerializerSettings);
 
-                yield return new GeneratedSpecification(buildingSpecificationJson, component.name, SpecificationName);
+                yield return new GeneratedSpecification(buildingSpecificationJson, building.name, SpecificationName);
             }
         }
     }

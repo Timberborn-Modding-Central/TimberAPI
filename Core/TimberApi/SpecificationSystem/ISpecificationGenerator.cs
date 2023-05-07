@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Timberborn.PrefabSystem;
 
 namespace TimberApi.SpecificationSystem
 {
