@@ -13,7 +13,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
     internal class BuildingSpecificationGenerator : IObjectSpecificationGenerator
     {
         private static readonly string SpecificationName = "BuildingSpecification";
-        
+
         public IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService)
         {
             var buildings = objectCollectionService.GetAllMonoBehaviours<Building>();
@@ -25,7 +25,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
                 IEnumerable<string> recipeIds = Array.Empty<string>();
                 
                 var scienceCost = building.ScienceCost;
-                
+
                 var buildingCosts = building.BuildingCost.Select(x => new BuildingCost(x.GoodId, x.Amount));
                 int? powerInput = null;
                 int? powerOutput = null;
@@ -42,6 +42,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
                 }
 
                 var buildingSpec = new BuildingSpecification(buildingId, scienceCost, powerInput, powerOutput, recipeIds, buildingCosts);
+                
 
                 var jsonSerializerSettings = new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore};
                 var buildingSpecificationJson = JsonConvert.SerializeObject(buildingSpec, Formatting.Indented, jsonSerializerSettings);

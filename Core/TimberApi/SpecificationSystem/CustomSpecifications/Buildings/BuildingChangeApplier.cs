@@ -73,7 +73,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
             List<BuildingCost> reverseList = new(buildingSpecification.BuildingCosts);
             reverseList.Reverse();
 
-            building._buildingCost = reverseList.Select(x => new GoodAmountSpecification(x.GoodId, x.Amount)).Distinct(new GoodAmountSpecificationComparer()) as GoodAmountSpecification[];
+            building._buildingCost = reverseList.Select(x => new GoodAmountSpecification(x.GoodId, x.Amount)).Distinct(new GoodAmountSpecificationComparer()).ToArray();
         }
     }
 }

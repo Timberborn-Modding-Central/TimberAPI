@@ -1,5 +1,6 @@
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
+using TimberApi.SceneSystem;
 using Timberborn.TutorialSystem;
 using Timberborn.TutorialSystemInitialization;
 
@@ -25,7 +26,7 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public static bool ConfiguratorPatch()
         {
-            return false;
+            return TimberApiSceneManager.CurrentScene != SceneEntrypoint.InGame;
         }
 
         public static bool Test(ref TutorialConfiguration __result)
