@@ -16,7 +16,7 @@ namespace TimberApi.LocalizationSystem
         {
             harmony.Patch(
                 GetMethodInfo<LocalizationRepository>(nameof(LocalizationRepository.GetLocalization)),
-                GetHarmonyMethod(nameof(GetLocalizationPatch))
+                postfix: GetHarmonyMethod(nameof(GetLocalizationPatch))
             );
         }
 

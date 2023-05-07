@@ -27,7 +27,7 @@ namespace TimberApi.HarmonyPatcherSystem
                 }
                 catch (Exception)
                 {
-                    Debug.LogError($"Patcher {harmonyPatcher.UniqueId} failed.");
+                    TimberApi.ConsoleWriter.Log($"Patcher {harmonyPatcher.UniqueId} failed.", LogType.Error);
                 }
             }
         }

@@ -14,7 +14,7 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
             }
             else
             {
-                Debug.LogWarning($"Priority {priority} is not not a valid priority. Defaulting back to Normal");
+                TimberApi.ConsoleWriter.Log($"Priority {priority} is not not a valid priority. Defaulting back to Normal", LogType.Warning);
                 Priority = Priority.Normal;
             }
         }

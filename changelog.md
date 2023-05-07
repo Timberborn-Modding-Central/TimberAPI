@@ -1,6 +1,8 @@
 ## Unreleased
 
 ### Changes
+- Converted Debug.Logs into TimberApi logs
+- Fixed localization patch crash
 
 ## TimberAPI v0.5.5.0
 The BottomBar rework. TimberApi will now provide a custom written bottom bar to make it more customizable with simple specifications.
