@@ -1,6 +1,10 @@
 ## Unreleased
 
 ### Changes
+
+## TimberAPI v0.5.5.1
+
+### Changes
 - Converted Debug.Logs into TimberApi logs
 - Fixed localization patch crash
 
