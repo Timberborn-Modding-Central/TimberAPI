@@ -20,12 +20,12 @@ namespace TimberApi.Core.SingletonSystem
             try
             {
                 harmony.Patch(
-                    GetMethodInfo("Timberborn.SingletonSystem.SingletonLifecycleService", "LoadAll"),
+                    GetMethodInfo<SingletonLifecycleService>(nameof(SingletonLifecycleService.LoadAll)),
                     GetHarmonyMethod(nameof(LoadAllPrefix))
                 );
 
                 harmony.Patch(
-                    GetMethodInfo("Timberborn.SingletonSystem.SingletonLifecycleService", "LoadSingletons"),
+                    GetMethodInfo<SingletonLifecycleService>(nameof(SingletonLifecycleService.LoadSingletons)),
                     GetHarmonyMethod(nameof(LoadSingletonsPrefix)),
                     GetHarmonyMethod(nameof(LoadSingletonsPostfix))
                 );

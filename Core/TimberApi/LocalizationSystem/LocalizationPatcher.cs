@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
 using Timberborn.Common;
+using Timberborn.Localization;
+using Timberborn.TutorialSystemInitialization;
 using UnityEngine;
 
 namespace TimberApi.LocalizationSystem
@@ -14,8 +16,8 @@ namespace TimberApi.LocalizationSystem
         public override void Apply(Harmony harmony)
         {
             harmony.Patch(
-                GetMethodInfo("Timberborn.Localization.LocalizationRepository", "GetLocalization"),
-                postfix: GetHarmonyMethod(nameof(GetLocalizationPatch))
+                GetMethodInfo<LocalizationRepository>(nameof(LocalizationRepository.GetLocalization)),
+                GetHarmonyMethod(nameof(GetLocalizationPatch))
             );
         }
 

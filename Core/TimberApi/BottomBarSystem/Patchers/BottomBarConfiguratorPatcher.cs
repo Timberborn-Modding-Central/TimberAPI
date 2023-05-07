@@ -1,6 +1,7 @@
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
 using Timberborn.TutorialSystem;
+using Timberborn.TutorialSystemInitialization;
 
 namespace TimberApi.BottomBarSystem.Patchers
 {
@@ -17,7 +18,7 @@ namespace TimberApi.BottomBarSystem.Patchers
             );
 
             harmony.Patch(
-                GetMethodInfo("Timberborn.TutorialSystemInitialization.TutorialConfigurationProvider", "CreateFolktailsConfiguration"),
+                GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider.CreateFolktailsConfiguration)),
                 GetHarmonyMethod(nameof(Test))
             );
         }
