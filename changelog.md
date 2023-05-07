@@ -1,4 +1,5 @@
 ## Unreleased
+The BottomBar rework. TimberApi will now provide a custom written bottom bar to make it more customizable with simple specifications.
 
 ### Changes
 - Added ToolSystem
@@ -7,13 +8,13 @@
 - Added ToolGroupUiSystem
 - Added BottomBarSystem
 - Added BottomBarUiSystem
-- Added `GetSpecifications` overload with manual specification name
 - Added `IObjectSpecificationGenerator` for object specifications
 - Added HarmonyPatcherSystem
 - Added `IEarlyLoadableSingleton`, `ILatePostLoadableSingleton`, `ILateLoadableSingleton`
 - Added Property `Name` to `FileSpecification`
 - Added `isOriginal` parameter to `GeneratedSpecification` constructor
 - Renamed Golems to Bots
+- Added `BepInEx.AssemblyPublicizer` to remove reflections
 
 ## TimberAPI v0.5.4.2
 Automation fix
