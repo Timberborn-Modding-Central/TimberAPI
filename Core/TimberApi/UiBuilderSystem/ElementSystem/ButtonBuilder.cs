@@ -7,7 +7,7 @@ using LocalizableButton = TimberApi.UiBuilderSystem.CustomElements.LocalizableBu
 
 namespace TimberApi.UiBuilderSystem.ElementSystem
 {
-    public class ButtonBuilder : BaseElementBuilder<CustomElements.LocalizableButton, ButtonBuilder>, ITextElementBuilder<ButtonBuilder>
+    public class ButtonBuilder : BaseElementBuilder<LocalizableButton, ButtonBuilder>, ITextElementBuilder<ButtonBuilder>
     {
         public ButtonBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) : base(new LocalizableButton(), visualElementInitializer,
             assetLoader, uiPresetFactory)

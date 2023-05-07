@@ -3,7 +3,6 @@ using TimberApi.Common.SingletonSystem;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.HarmonyPatcherSystem;
 using TimberApi.ToolGroupSystem;
-using Timberborn.ConstructionMode;
 using Timberborn.CoreUI;
 using Timberborn.Debugging;
 using Timberborn.ToolSystem;

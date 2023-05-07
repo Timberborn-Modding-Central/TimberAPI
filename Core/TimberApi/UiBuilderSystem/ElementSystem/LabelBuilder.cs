@@ -7,7 +7,7 @@ using LocalizableLabel = TimberApi.UiBuilderSystem.CustomElements.LocalizableLab
 
 namespace TimberApi.UiBuilderSystem.ElementSystem
 {
-    public class LabelBuilder : BaseElementBuilder<CustomElements.LocalizableLabel, LabelBuilder>, ITextElementBuilder<LabelBuilder>
+    public class LabelBuilder : BaseElementBuilder<LocalizableLabel, LabelBuilder>, ITextElementBuilder<LabelBuilder>
     {
         public LabelBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) : base(new LocalizableLabel(), visualElementInitializer,
             assetLoader, uiPresetFactory)

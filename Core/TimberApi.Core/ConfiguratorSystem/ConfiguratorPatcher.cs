@@ -2,10 +2,9 @@
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
 using TimberApi.SceneSystem;
+using Timberborn.GameScene;
 using Timberborn.MainMenuScene;
 using Timberborn.MapEditorScene;
-using Timberborn.GameScene;
-using UnityEngine;
 
 namespace TimberApi.Core.ConfiguratorSystem
 {

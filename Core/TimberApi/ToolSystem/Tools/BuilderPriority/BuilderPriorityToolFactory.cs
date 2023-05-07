@@ -8,9 +8,9 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
     {
         public override string Id => "PriorityTool";
 
-        private readonly Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolFactory _builderPriorityToolFactory;
+        private readonly TimberbornBuilderPriorityToolFactory _builderPriorityToolFactory;
 
-        public BuilderPriorityToolFactory(Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolFactory builderPriorityToolFactory)
+        public BuilderPriorityToolFactory(TimberbornBuilderPriorityToolFactory builderPriorityToolFactory)
         {
             _builderPriorityToolFactory = builderPriorityToolFactory;
         }

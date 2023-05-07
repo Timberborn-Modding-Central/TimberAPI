@@ -2,7 +2,6 @@
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
 using Timberborn.AssetSystem;
-using UnityEngine;
 
 namespace TimberApi.ResourceAssetSystem
 {

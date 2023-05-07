@@ -4,7 +4,6 @@ using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
 using Timberborn.Common;
 using Timberborn.Localization;
-using Timberborn.TutorialSystemInitialization;
 using UnityEngine;
 
 namespace TimberApi.LocalizationSystem

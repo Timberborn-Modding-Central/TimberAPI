@@ -8,7 +8,7 @@ using LocalizableToggle = TimberApi.UiBuilderSystem.CustomElements.LocalizableTo
 
 namespace TimberApi.UiBuilderSystem.ElementSystem
 {
-    public class ToggleBuilder : BaseElementBuilder<CustomElements.LocalizableToggle, ToggleBuilder>, ITextElementBuilder<ToggleBuilder>
+    public class ToggleBuilder : BaseElementBuilder<LocalizableToggle, ToggleBuilder>, ITextElementBuilder<ToggleBuilder>
     {
         private readonly VisualElementBuilder _toggleElementBuilder;
 

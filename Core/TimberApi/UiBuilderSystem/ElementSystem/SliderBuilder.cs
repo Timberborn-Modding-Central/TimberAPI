@@ -8,7 +8,7 @@ using LocalizableSlider = TimberApi.UiBuilderSystem.CustomElements.LocalizableSl
 
 namespace TimberApi.UiBuilderSystem.ElementSystem
 {
-    public class SliderBuilder : BaseElementBuilder<CustomElements.LocalizableSlider, SliderBuilder>
+    public class SliderBuilder : BaseElementBuilder<LocalizableSlider, SliderBuilder>
     {
         public SliderBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) : base(new LocalizableSlider(), visualElementInitializer,
             assetLoader, uiPresetFactory)

@@ -1,6 +1,4 @@
 using System.Linq;
-using HarmonyLib;
-using TimberApi.ToolSystem;
 using Timberborn.AssetSystem;
 using Timberborn.Core;
 using Timberborn.CoreUI;

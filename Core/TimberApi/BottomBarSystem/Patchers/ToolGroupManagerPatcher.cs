@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using HarmonyLib;
-using TimberApi.Common.Extensions;
 using TimberApi.HarmonyPatcherSystem;
 using TimberApi.ToolGroupSystem;
 using Timberborn.ToolSystem;
