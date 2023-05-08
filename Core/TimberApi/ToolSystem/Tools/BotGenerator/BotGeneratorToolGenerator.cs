@@ -18,9 +18,8 @@ namespace TimberApi.ToolSystem.Tools.BotGenerator
                 NameLocKey = "Cursor",
                 DescriptionLocKey = "Cursor",
                 Icon = "Sprites/BottomBar/BotGeneratorTool",
-                DevModeTool = true,
+                DevMode = true,
                 Hidden = false,
-                FallbackGroup = false,
                 ToolInformation = new
                 {
                     BottomBarSection = 0

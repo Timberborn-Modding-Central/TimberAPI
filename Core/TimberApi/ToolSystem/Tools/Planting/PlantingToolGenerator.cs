@@ -37,19 +37,18 @@ namespace TimberApi.ToolSystem.Tools.Planting
                     Type = "PlantingTool",
                     Layout = "Default",
                     Order = naturalResource.OrderId,
-                    Icon = labeledPrefab.Image.name,
+                    Icon = $"{prefab.PrefabName}:{labeledPrefab.Image.name}",
                     NameLocKey = labeledPrefab.DisplayNameLocKey,
                     labeledPrefab.DescriptionLocKey,
                     Hidden = false,
-                    DevModeTool = false,
-                    FallbackGroup = false,
+                    DevMode = false,
                     ToolInformation = new
                     {
                         prefab.PrefabName
                     }
                 });
 
-                _toolIconService.AddIcon(labeledPrefab.Image);
+                _toolIconService.AddIcon($"{prefab.PrefabName}:{labeledPrefab.Image.name}", labeledPrefab.Image);
 
                 yield return new GeneratedSpecification(json, plantable.PrefabName, "ToolSpecification");
             }

@@ -18,9 +18,8 @@ namespace TimberApi.ToolSystem.Tools.Cursor
                 NameLocKey = "Cursor",
                 DescriptionLocKey = "Cursor",
                 Icon = "Sprites/BottomBar/Cursor",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
-                FallbackGroup = false,
                 ToolInformation = new
                 {
                     BottomBarSection = 0

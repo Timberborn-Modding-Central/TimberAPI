@@ -25,9 +25,8 @@ namespace TimberApi.ToolSystem.Tools.CancelPlanting
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/CancelToolIcon",
-                DevModeTool = false,
-                Hidden = false,
-                FallbackGroup = false
+                DevMode = false,
+                Hidden = false
             });
 
             return new GeneratedSpecification(json, "TreeCuttingAreaUnselection", "ToolSpecification");
@@ -45,9 +44,8 @@ namespace TimberApi.ToolSystem.Tools.CancelPlanting
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/CancelToolIcon",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
-                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "TreeCuttingAreaSelection", "ToolSpecification");

@@ -23,8 +23,7 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
                     NameLocKey = "CAN NOT BE MODIFIED",
                     DescriptionLocKey = "CAN NOT BE MODIFIED",
                     Hidden = false,
-                    DevModeTool = false,
-                    FallbackGroup = false,
+                    DevMode = false,
                     ToolInformation = new
                     {
                         Priority = priority

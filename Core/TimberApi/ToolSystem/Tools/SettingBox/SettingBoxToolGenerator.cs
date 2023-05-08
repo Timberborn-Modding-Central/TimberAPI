@@ -23,9 +23,8 @@ namespace TimberApi.ToolSystem.Tools.SettingBox
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/Options",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
-                FallbackGroup = false,
                 ToolInformation = new
                 {
                     BottomBarSection = 2

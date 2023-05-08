@@ -1,6 +1,9 @@
 ## Unreleased
 
 ### Changes
+- Updated generated bottom bar specifications
+- Changed property `DevModeTool` to `DevMode`
+- Made Icon property unique with cached icons
 
 ## TimberAPI v0.5.5.1
 

@@ -18,9 +18,8 @@ namespace TimberApi.ToolSystem.Tools.BeaverGenerator
                 NameLocKey = "Cursor",
                 DescriptionLocKey = "Cursor",
                 Icon = "Sprites/BottomBar/BeaverGeneratorTool",
-                DevModeTool = true,
+                DevMode = true,
                 Hidden = false,
-                FallbackGroup = false,
                 ToolInformation = new
                 {
                     BottomBarSection = 0

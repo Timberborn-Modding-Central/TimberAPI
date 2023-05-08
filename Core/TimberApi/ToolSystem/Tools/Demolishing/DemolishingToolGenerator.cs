@@ -28,9 +28,8 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/DeleteObjectIcon",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
-                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "EntityBlockObjectDeletion", "ToolSpecification");
@@ -48,9 +47,8 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/DeleteObjectIcon",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
-                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "BuildingDeconstruction", "ToolSpecification");
@@ -68,9 +66,8 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/DemolishResourcesTool",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
-                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "DemolishableSelection", "ToolSpecification");
@@ -88,9 +85,8 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/CancelToolIcon",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
-                FallbackGroup = false
             });
 
             return new GeneratedSpecification(json, "DemolishableUnselection", "ToolSpecification");
@@ -104,7 +100,7 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 Layout = "Blue",
                 Order = 40,
                 Type = "ConstructionModeToolGroup",
-                NameLocKey = "ToolGroups.FieldsPlanting",
+                NameLocKey = "ToolGroups.Demolishing",
                 Icon = "Sprites/BottomBar/DeleteGroupIcon",
                 Section = "BottomBar",
                 DevMode = false,

@@ -32,7 +32,7 @@ namespace TimberApi.ToolSystem
                 objectLoader.Get(new PropertyKey<string>("NameLocKey")),
                 objectLoader.Get(new PropertyKey<string>("DescriptionLocKey")),
                 objectLoader.GetValueOrDefault(new PropertyKey<bool>("Hidden"), false),
-                objectLoader.GetValueOrDefault(new PropertyKey<bool>("DevModeTool"), false),
+                objectLoader.GetValueOrDefault(new PropertyKey<bool>("DevMode"), false),
                 GetToolInformationObjectSave(objectLoader)
             );
         }

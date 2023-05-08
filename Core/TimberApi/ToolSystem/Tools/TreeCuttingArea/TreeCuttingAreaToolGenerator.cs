@@ -26,9 +26,8 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/CancelToolIcon",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
-                FallbackGroup = false,
                 ToolInformation = new
                 {
                     BottomBarSection = 0
@@ -50,9 +49,8 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/TreeCuttingAreaSelectionTool",
-                DevModeTool = false,
+                DevMode = false,
                 Hidden = false,
-                FallbackGroup = false,
                 ToolInformation = new
                 {
                     BottomBarSection = 0
@@ -75,7 +73,6 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
                 Section = "BottomBar",
                 DevMode = false,
                 Hidden = false,
-                FallbackGroup = false,
                 GroupInformation = new
                 {
                     BottomBarSection = 0

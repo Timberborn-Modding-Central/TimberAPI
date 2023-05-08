@@ -15,9 +15,9 @@ namespace TimberApi.ToolSystem
             _resourceAssetLoader = resourceAssetLoader;
         }
 
-        public void AddIcon(Sprite sprite)
+        public void AddIcon(string key, Sprite sprite)
         {
-            _icons.Add(sprite.name, sprite);
+            _icons.Add(key, sprite);
         }
 
         public Sprite GetIcon(string path)
