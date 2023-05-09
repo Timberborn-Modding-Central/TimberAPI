@@ -1,6 +1,7 @@
 ## Unreleased
 
 ### Changes
+- Fixed crash due ToolGroup missing FallbackGroup property
 
 ## TimberAPI v0.5.5.2
 
