@@ -73,6 +73,7 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
                 Section = "BottomBar",
                 DevMode = false,
                 Hidden = false,
+                FallbackGroup = false,
                 GroupInformation = new
                 {
                     BottomBarSection = 0
