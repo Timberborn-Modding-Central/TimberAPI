@@ -1,5 +1,6 @@
 ﻿using Bindito.Core;
 using TimberApi.AssetSystem;
+using TimberApi.SpecificationSystem;
 
 namespace TimberApi
 {
@@ -9,6 +10,7 @@ namespace TimberApi
         {
             containerDefinition.Bind<TimberApi>().AsSingleton();
             containerDefinition.Install(new AssetSystemGlobalConfigurator());
+            containerDefinition.Install(new SpecificationSystemGlobalConfigurator());
         }
     }
 }
