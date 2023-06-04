@@ -27,7 +27,7 @@ namespace TimberApi.LocalizationSystem
                 string id = defaultRecord.Id;
                 if (!localizedRecords.TryGetValue(id, out string text) || string.IsNullOrEmpty(text))
                 {
-                    localizedRecords[id] = defaultRecord.Text;
+                    localizedRecords[id] = TextColors.ColorizeText(defaultRecord.Text);
                 }
             }
 
