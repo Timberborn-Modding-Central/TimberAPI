@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bindito.Core;
 using HarmonyLib;
+using TimberApi.SceneSystem;
 using UnityEngine;
 
 namespace TimberApi.HarmonyPatcherSystem
@@ -10,24 +12,51 @@ namespace TimberApi.HarmonyPatcherSystem
     {
         private readonly IEnumerable<IHarmonyPatcher> _harmonyPatchers;
 
+        private readonly Dictionary<string, Harmony> _activatePatchers;
+
         public HarmonyPatcherActivator()
         {
             _harmonyPatchers = CreateHarmonyPatchers();
+            _activatePatchers = new Dictionary<string, Harmony>();
+            TimberApiSceneManager.SceneChanged += ApiSceneManagerOnSceneChanged;
         }
 
-        public void PatchAll()
+        private void ApiSceneManagerOnSceneChanged(SceneEntrypoint previousscene, SceneEntrypoint currentscene, IContainerDefinition currentcontainerdefinition)
+        {
+            PatchAll(currentscene);
+        }
+
+        public void PatchAll(SceneEntrypoint? scene)
         {
             foreach (var harmonyPatcher in _harmonyPatchers)
             {
-                var harmony = new Harmony(harmonyPatcher.UniqueId);
-
                 try
                 {
-                    harmonyPatcher.Apply(harmony);
+                    var shouldApply = harmonyPatcher.ShouldApply(scene);
+
+                    if(shouldApply && _activatePatchers.ContainsKey(harmonyPatcher.UniqueId))
+                    {
+                        continue;
+                    }
+                    
+                    if(shouldApply)
+                    {
+                        var harmony = new Harmony(harmonyPatcher.UniqueId);
+                        
+                        harmonyPatcher.Apply(harmony);
+                        _activatePatchers.Add(harmonyPatcher.UniqueId, harmony);
+                        continue;
+                    }
+
+                    if(_activatePatchers.TryGetValue(harmonyPatcher.UniqueId, out var activeHarmony))
+                    {
+                        activeHarmony.UnpatchAll(harmonyPatcher.UniqueId);
+                        _activatePatchers.Remove(harmonyPatcher.UniqueId);
+                    }
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
-                    TimberApi.ConsoleWriter.Log($"Patcher {harmonyPatcher.UniqueId} failed.", LogType.Error);
+                    TimberApi.ConsoleWriter.Log($"Patcher {harmonyPatcher.UniqueId} failed.\r\n" + exception, LogType.Error);
                 }
             }
         }

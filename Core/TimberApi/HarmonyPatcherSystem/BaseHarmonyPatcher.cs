@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using HarmonyLib;
+using TimberApi.SceneSystem;
 
 namespace TimberApi.HarmonyPatcherSystem
 {
@@ -10,6 +11,11 @@ namespace TimberApi.HarmonyPatcherSystem
 
         public abstract void Apply(Harmony harmony);
         
+        public virtual bool ShouldApply(SceneEntrypoint? sceneEntrypoint)
+        {
+            return true;
+        }
+
         protected static MethodInfo GetMethodInfo(string type, string method, Type[]? parameters = null)
         {
             return AccessTools.Method(AccessTools.TypeByName(type), method, parameters);

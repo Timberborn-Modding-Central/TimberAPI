@@ -1,4 +1,5 @@
 using HarmonyLib;
+using TimberApi.SceneSystem;
 
 namespace TimberApi.HarmonyPatcherSystem
 {
@@ -7,5 +8,7 @@ namespace TimberApi.HarmonyPatcherSystem
         public string UniqueId { get; }
 
         public void Apply(Harmony harmony);
+
+        public bool ShouldApply(SceneEntrypoint? sceneEntrypoint);
     }
 }

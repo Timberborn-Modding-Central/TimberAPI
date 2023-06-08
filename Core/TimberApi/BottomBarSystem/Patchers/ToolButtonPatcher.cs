@@ -1,5 +1,6 @@
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
+using TimberApi.SceneSystem;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.BottomBarSystem.Patchers
@@ -16,6 +17,11 @@ namespace TimberApi.BottomBarSystem.Patchers
                 GetMethodInfo<ToolButton>("OnButtonClicked"),
                 prefix: GetHarmonyMethod(nameof(OnButtonClickedPatch))
             );
+        }
+        
+        public override bool ShouldApply(SceneEntrypoint? sceneEntrypoint)
+        {
+            return sceneEntrypoint == SceneEntrypoint.InGame;
         }
 
         public static void OnButtonClickedPatch(ToolButton __instance, ToolGroupManager ____toolGroupManager)

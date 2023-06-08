@@ -24,6 +24,11 @@ namespace TimberApi.BottomBarSystem.Patchers
             );
         }
 
+        public override bool ShouldApply(SceneEntrypoint? sceneEntrypoint)
+        {
+            return sceneEntrypoint == SceneEntrypoint.InGame;
+        }
+
         public static bool ConfiguratorPatch()
         {
             return TimberApiSceneManager.CurrentScene != SceneEntrypoint.InGame;

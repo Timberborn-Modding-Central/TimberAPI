@@ -9,6 +9,7 @@ using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem;
 using TimberApi.HarmonyPatcherSystem;
+using TimberApi.SceneSystem;
 
 namespace TimberApi.Core.BootstrapSystem
 {
@@ -22,7 +23,7 @@ namespace TimberApi.Core.BootstrapSystem
             {
                 Instance = this;
                 AddPrefabConfigurators();
-                new HarmonyPatcherActivator().PatchAll();
+                new HarmonyPatcherActivator().PatchAll(null);
             }
             catch (Exception e)
             {
