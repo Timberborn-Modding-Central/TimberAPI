@@ -20,14 +20,14 @@ namespace TimberApi.LocalizationSystem
         public static Dictionary<string, string> GetLocalization(string localizationKey)
         {
             Dictionary<string, string> localizedRecords = GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey))
-                .ToDictionary(record => record.Id, record => record.Text);
+                .ToDictionary(record => record.Id, record => TextColors.ColorizeText(record.Text));
 
             foreach (LocalizationRecord defaultRecord in GetDefaultLocalization())
             {
                 string id = defaultRecord.Id;
                 if (!localizedRecords.TryGetValue(id, out string text) || string.IsNullOrEmpty(text))
                 {
-                    localizedRecords[id] = defaultRecord.Text;
+                    localizedRecords[id] = TextColors.ColorizeText(defaultRecord.Text);
                 }
             }
 
