@@ -24,9 +24,10 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
                 {
                     continue;
                 }
-                
+
                 var labeledPrefab = placeableBlockObject.GetComponentFast<LabeledPrefab>();
                 var prefab = placeableBlockObject.GetComponentFast<Prefab>();
+
                 var json = JsonConvert.SerializeObject(new
                 {
                     Id = prefab.PrefabName,

@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
+using TimberApi.SceneSystem;
 using TimberApi.ToolGroupSystem;
 using Timberborn.ToolSystem;
 
@@ -19,6 +20,11 @@ namespace TimberApi.BottomBarSystem.Patchers
                 GetMethodInfo<ToolGroupManager>(nameof(ToolGroupManager.SwitchToolGroup)),
                 GetHarmonyMethod(nameof(SwitchToolGroupPatch))
             );
+        }
+        
+        public override bool ShouldApply(SceneEntrypoint? sceneEntrypoint)
+        {
+            return sceneEntrypoint == SceneEntrypoint.InGame;
         }
 
         public static void SwitchToolGroupPatch(ToolGroup? toolGroup, ToolGroupManager __instance)

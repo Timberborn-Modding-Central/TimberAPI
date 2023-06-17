@@ -2,6 +2,7 @@ using HarmonyLib;
 using TimberApi.Common.SingletonSystem;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.HarmonyPatcherSystem;
+using TimberApi.SceneSystem;
 using TimberApi.ToolGroupSystem;
 using Timberborn.CoreUI;
 using Timberborn.Debugging;
@@ -42,6 +43,11 @@ namespace TimberApi.BottomBarSystem.Patchers
                 GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.OnToolGroupExited)),
                 GetHarmonyMethod(nameof(OnToolGroupExited))
             );
+        }
+        
+        public override bool ShouldApply(SceneEntrypoint? sceneEntrypoint)
+        {
+            return sceneEntrypoint == SceneEntrypoint.InGame;
         }
 
         public static bool ContainsToolPatch(ref bool __result, ToolGroup ____toolGroup)

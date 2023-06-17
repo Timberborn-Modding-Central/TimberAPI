@@ -36,6 +36,16 @@ namespace TimberApi.SpecificationSystem
                 _specifications[groupedSpecification.Key.ToLower()].AddRange(groupedSpecification);
             }
         }
+        
+        public void Add(ISpecification specification)
+        {
+            if(! _specifications.ContainsKey(specification.SpecificationName.ToLower()))
+            {
+                _specifications.Add(specification.SpecificationName.ToLower(), new List<ISpecification>());
+            }
+
+            _specifications[specification.SpecificationName.ToLower()].Add(specification);
+        }
 
         public IEnumerable<ISpecification> GetBySpecification(string specificationName)
         {
