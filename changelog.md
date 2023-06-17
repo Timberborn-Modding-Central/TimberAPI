@@ -1,6 +1,12 @@
 ## Unreleased
+Big fixes for various problems.
 
 ### Changes
+- Fixed missing ruins in MapEditor
+- Fixed order changing on reload
+- Added object specification generator cache
+- Fixed colorized text @ihsoft
+- Added conditional harmony patching
 
 ## TimberAPI v0.5.5.3
 
