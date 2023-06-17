@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,12 +20,12 @@ namespace TimberApi.LocalizationSystem
         /// <returns></returns>
         public static Dictionary<string, string> GetLocalization(string localizationKey)
         {
-            Dictionary<string, string> localizedRecords = GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey))
+            var localizedRecords = GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey))
                 .ToDictionary(record => record.Id, record => TextColors.ColorizeText(record.Text));
 
             foreach (LocalizationRecord defaultRecord in GetDefaultLocalization())
             {
-                string id = defaultRecord.Id;
+                var id = defaultRecord.Id;
                 if (!localizedRecords.TryGetValue(id, out string text) || string.IsNullOrEmpty(text))
                 {
                     localizedRecords[id] = TextColors.ColorizeText(defaultRecord.Text);
@@ -40,12 +41,12 @@ namespace TimberApi.LocalizationSystem
         /// <param name="localization"></param>
         /// <param name="filePaths"></param>
         /// <returns></returns>
-        private static IEnumerable<LocalizationRecord> GetLocalizationRecordsFromFiles(string localization, IEnumerable<string> filePaths)
+        private static IEnumerable<LocalizationRecord> GetLocalizationRecordsFromFiles(string localization, IEnumerable<LocalizationFile> filePaths)
         {
             List<LocalizationRecord> records = new();
-            foreach (string path in filePaths)
+            foreach (LocalizationFile localizationFile in filePaths)
             {
-                records.AddRange(TryToReadRecords(localization, path));
+                records.AddRange(TryToReadRecords(localization, localizationFile));
             }
 
             return records;
@@ -55,18 +56,22 @@ namespace TimberApi.LocalizationSystem
         ///     Timberborn method Timberborn.Localization.LocalizationRepository.TryToReadRecords
         /// </summary>
         /// <param name="localization"></param>
-        /// <param name="filePath"></param>
+        /// <param name="localizationFile"></param>
         /// <returns></returns>
         /// <exception cref="InvalidDataException"></exception>
-        private static IEnumerable<LocalizationRecord> TryToReadRecords(string localization, string filePath)
+        private static IEnumerable<LocalizationRecord> TryToReadRecords(string localization, LocalizationFile localizationFile)
         {
             try
             {
-                return new CsvContext().Read<LocalizationRecord>(filePath);
+                var localizationRecords =  new CsvContext().Read<LocalizationRecord>(localizationFile.FilePath);
+                
+                ValidateLocalizationRecords(localizationRecords, localizationFile.Mod);
+                
+                return new CsvContext().Read<LocalizationRecord>(localizationFile.FilePath);
             }
             catch (Exception ex)
             {
-                string message = "Unable to parse file for " + localization + ".";
+                var message = "Unable to parse file for " + localization + ".";
                 if (ex is AggregatedException aggregatedException)
                 {
                     message = message + " First error: " + aggregatedException.m_InnerExceptionsList[0].Message;
@@ -79,6 +84,25 @@ namespace TimberApi.LocalizationSystem
 
                 TimberApi.ConsoleWriter.Log(message, LogType.Error);
                 return new List<LocalizationRecord>();
+            }
+        }
+
+        private static void ValidateLocalizationRecords(IEnumerable<LocalizationRecord> localizationRecords, IMod mod)
+        {
+            var hasValidationErrors = false;
+
+            foreach (var record in localizationRecords)
+            {
+                if(record.Text is null)
+                {
+                    hasValidationErrors = true;
+                    TimberApi.ConsoleWriter.LogAs(mod.Name, $"Localization Id does not have any text: {record.Id}", LogType.Error);
+                }
+            }
+
+            if(hasValidationErrors)
+            {
+                throw new Exception($"Validating localization files for {mod.Name} failed.");
             }
         }
 
@@ -95,21 +119,21 @@ namespace TimberApi.LocalizationSystem
         /// </summary>
         /// <param name="localizationKey"></param>
         /// <returns></returns>
-        private static List<string> GetLocalizationFilePathsFromDependencies(string localizationKey)
+        private static IEnumerable<LocalizationFile> GetLocalizationFilePathsFromDependencies(string localizationKey)
         {
-            List<string> localizationFilePaths = new();
+            List<LocalizationFile> localizationFilePaths = new();
             foreach (IMod mod in DependencyContainer.GetInstance<IModRepository>().All())
             {
-                string pluginLocalizationPath = Path.Combine(mod.DirectoryPath, mod.LanguagePath);
+                var pluginLocalizationPath = Path.Combine(mod.DirectoryPath, mod.LanguagePath);
 
-                (bool hasLocalization, string localizationName) = LocalizationNameOrDefault(pluginLocalizationPath, localizationKey);
+                (var hasLocalization, var localizationName) = LocalizationNameOrDefault(pluginLocalizationPath, localizationKey);
 
                 if (!hasLocalization)
                 {
                     continue;
                 }
 
-                localizationFilePaths.Add(Path.Combine(pluginLocalizationPath, localizationName));
+                localizationFilePaths.Add(new LocalizationFile(mod, Path.Combine(pluginLocalizationPath, localizationName)));
             }
 
             return localizationFilePaths;
