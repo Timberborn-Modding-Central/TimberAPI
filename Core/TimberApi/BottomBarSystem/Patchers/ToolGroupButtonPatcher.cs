@@ -1,3 +1,4 @@
+using System.Linq;
 using HarmonyLib;
 using TimberApi.Common.SingletonSystem;
 using TimberApi.DependencyContainerSystem;
@@ -13,6 +14,8 @@ namespace TimberApi.BottomBarSystem.Patchers
 {
     public class ToolGroupButtonPatcher : BaseHarmonyPatcher, ITimberApiLoadableSingleton
     {
+        private static ToolGroupService _toolGroupService = null!;
+        
         private static BottomBarService _bottomBarService = null!;
 
         private static DevModeManager _devModeManager = null!;
@@ -25,12 +28,13 @@ namespace TimberApi.BottomBarSystem.Patchers
         {
             _bottomBarService = DependencyContainer.GetInstance<BottomBarService>();
             _devModeManager = DependencyContainer.GetInstance<DevModeManager>();
+            _toolGroupService = DependencyContainer.GetInstance<ToolGroupService>();
         }
 
         public override void Apply(Harmony harmony)
         {
             harmony.Patch(
-                GetMethodInfo<ToolGroupButton>("ContainsTool"),
+                GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.ContainsTool)),
                 GetHarmonyMethod(nameof(ContainsToolPatch))
             );
 
@@ -50,13 +54,24 @@ namespace TimberApi.BottomBarSystem.Patchers
             return sceneEntrypoint == SceneEntrypoint.InGame;
         }
 
-        public static bool ContainsToolPatch(ref bool __result, ToolGroup ____toolGroup)
+        public static bool ContainsToolPatch(ref bool __result, ToolGroup ____toolGroup, ToolGroupButton __instance)
         {
-            if(____toolGroup is not IToolGroup apiToolGroup) return false;
+            if (____toolGroup is not IToolGroup apiToolGroup)
+            {
+                return false;
+            }
 
-            // ContainsTool is used to toggle group on/off when tool exist in active state
-            // Will now be used to check if the group is a for devMode (Empty groups can exists)
-            __result = ! apiToolGroup.DevMode || _devModeManager.Enabled;
+            var hasActiveTool = __instance._toolButtons.Any<ToolButton>(button => button.ToolEnabled);
+
+            if (hasActiveTool)
+            {
+                __result = true;
+                return false;
+            }
+
+            __result = _toolGroupService
+                .GetToolGroupButtonByGroupId(apiToolGroup.Id)
+                .Any(button => button.ContainsTool());
 
             return false;
         }

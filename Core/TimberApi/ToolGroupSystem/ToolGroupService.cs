@@ -86,5 +86,12 @@ namespace TimberApi.ToolGroupSystem
 
             return toolGroupButton;
         }
+        
+        public IEnumerable<ToolGroupButton> GetToolGroupButtonByGroupId(string groupId)
+        {
+            return _toolGroupButtons
+                .Where(pair => ((IToolGroup)pair.Value._toolGroup).GroupId?.ToLower() == groupId.ToLower())
+                .Select(pair => pair.Value);
+        }
     }
 }
