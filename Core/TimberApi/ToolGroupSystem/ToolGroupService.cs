@@ -7,7 +7,7 @@ using Timberborn.ToolSystem;
 
 namespace TimberApi.ToolGroupSystem
 {
-    public class ToolGroupService : IObjectSpecificationLoadableSingleton
+    public class ToolGroupService : ILateLoadableSingleton
     {
         private readonly ToolGroupButtonFactoryService _toolGroupButtonFactoryService;
 
@@ -33,7 +33,7 @@ namespace TimberApi.ToolGroupSystem
 
         public IEnumerable<ToolGroupButton> ToolGroupButtons => _toolGroupButtons.Select(pair => pair.Value).ToImmutableArray();
 
-        public void SpecificationLoad()
+        public void LateLoad()
         {
             var toolGroups = new Dictionary<string, IToolGroup>();
 

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace TimberApi.ToolGroupSystem
 {
-    public class ToolGroupSpecificationService : IObjectSpecificationLoadableSingleton
+    public class ToolGroupSpecificationService : ILateLoadableSingleton
     {
         private readonly ISpecificationService _specificationService;
 
@@ -23,23 +23,19 @@ namespace TimberApi.ToolGroupSystem
             ISpecificationService specificationService,
             ToolGroupSpecificationDeserializer toolGroupSpecificationDeserializer)
         {
-            Debug.LogWarning("CCCCCCCCCCCC");
-
             _specificationService = specificationService;
             _toolGroupSpecificationDeserializer = toolGroupSpecificationDeserializer;
         }
 
         public ImmutableArray<ToolGroupSpecification> ToolGroupSpecifications => _toolGroupSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
-        public void SpecificationLoad()
+        public void LateLoad()
         {
-            Debug.LogWarning("AAAAAAA");
             _toolGroupSpecifications = _specificationService.GetSpecifications(_toolGroupSpecificationDeserializer).ToImmutableDictionary(specification => specification.Id.ToLower());
         }
         
         public ToolGroupSpecification Get(string id)
         {
-            Debug.LogWarning("VVVVVVVVVV");
             if(! _toolGroupSpecifications.TryGetValue(id.ToLower(), out var toolGroupSpecification))
             {
                 throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
@@ -50,8 +46,6 @@ namespace TimberApi.ToolGroupSystem
 
         public IEnumerable<ToolGroupSpecification> GetByGroupId(string groupId)
         {
-            Debug.LogWarning("ZZZZZZZZZZZZZ");
-
             return _toolGroupSpecifications
                 .Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
                 .Select(pair => pair.Value);
@@ -59,8 +53,6 @@ namespace TimberApi.ToolGroupSystem
 
         public IEnumerable<ToolGroupSpecification> GetBySection(string section)
         {
-            Debug.LogWarning("XXXXXXXXXXXX");
-
             return _toolGroupSpecifications
                 .Where(pair => pair.Value.Section.ToLower().Equals(section.ToLower()))
                 .Select(pair => pair.Value);

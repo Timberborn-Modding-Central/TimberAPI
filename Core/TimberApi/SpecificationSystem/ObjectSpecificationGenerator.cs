@@ -50,8 +50,6 @@ namespace TimberApi.SpecificationSystem
                 }
             }
             
-            Debug.LogWarning("LOLOLOLOLOLOL");
-
             RunSpecificationLoadableSingletons(_singletonRepository.GetSingletons<IObjectSpecificationLoadableSingleton>());
         }
         
@@ -59,9 +57,7 @@ namespace TimberApi.SpecificationSystem
         {
             foreach (var singleton in singletons)
             {
-                Debug.LogWarning("NNNNNNNNNNNNNNN");
                 singleton.SpecificationLoad();
-                Debug.LogWarning("MMMMMMMMMMMMMM");
             }
         }
     }

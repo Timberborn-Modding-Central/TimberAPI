@@ -19,7 +19,7 @@ namespace TimberApi.SpecificationSystem
         
         public static void Test()
         {
-            Debug.LogWarning("HELP ME!!!!!!");
+            Debug.LogError("ManufactoryInventoryInitializer.Initialize");
         }
     }
 }

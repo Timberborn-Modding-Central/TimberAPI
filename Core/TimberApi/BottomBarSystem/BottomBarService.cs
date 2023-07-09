@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using TimberApi.Common.SingletonSystem;
 using TimberApi.ToolGroupSystem;
 using TimberApi.ToolSystem;
 using Timberborn.SingletonSystem;
 
 namespace TimberApi.BottomBarSystem
 {
-    public class BottomBarService : ILoadableSingleton
+    public class BottomBarService : ILateLoadableSingleton
     {
         private static readonly string BottomBarSection = "BottomBar";
 
@@ -31,7 +32,7 @@ namespace TimberApi.BottomBarSystem
 
         public IEnumerable<BottomBarButton> ToolItemButtons => _toolItemButtons;
 
-        public void Load()
+        public void LateLoad()
         {
             _toolGroupSpecifications = _toolGroupSpecificationService
                 .GetBySection(BottomBarSection)

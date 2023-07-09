@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace TimberApi.ToolSystem
 {
-    public class ToolSpecificationService : IObjectSpecificationLoadableSingleton
+    public class ToolSpecificationService : ILateLoadableSingleton
     {
         private readonly ISpecificationService _specificationService;
 
@@ -26,7 +26,7 @@ namespace TimberApi.ToolSystem
 
         public ImmutableArray<ToolSpecification> ToolSpecifications => _toolSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
-        public void SpecificationLoad()
+        public void LateLoad()
         {
             _toolSpecifications = _specificationService.GetSpecifications(_toolSpecificationDeserializer).ToImmutableDictionary(specification => specification.Id.ToLower());
         }

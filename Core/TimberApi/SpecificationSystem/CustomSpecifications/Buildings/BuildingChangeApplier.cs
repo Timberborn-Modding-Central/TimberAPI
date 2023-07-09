@@ -6,7 +6,6 @@ using Timberborn.Goods;
 using Timberborn.MechanicalSystem;
 using Timberborn.PrefabSystem;
 using Timberborn.Workshops;
-using UnityEngine;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
@@ -23,7 +22,6 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
         
         public void SpecificationLoad()
         {
-            Debug.LogWarning("KAKAKAKAK");
             foreach (var building in _objectCollectionService.GetAllMonoBehaviours<Building>())
             {
                 var buildingSpecification = _buildingSpecificationService.GetBuildingSpecificationByBuilding(building);
