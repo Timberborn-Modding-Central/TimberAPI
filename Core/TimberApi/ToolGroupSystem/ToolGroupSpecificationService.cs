@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using TimberApi.SpecificationSystem;
-using TimberApi.SpecificationSystem.CustomSpecifications.Buildings;
+using TimberApi.Common.SingletonSystem;
 using Timberborn.Persistence;
-using Timberborn.SingletonSystem;
+using UnityEngine;
 
 namespace TimberApi.ToolGroupSystem
 {
-    public class ToolGroupSpecificationService : ILoadableSingleton
+    public class ToolGroupSpecificationService : IObjectSpecificationLoadableSingleton
     {
         private readonly ISpecificationService _specificationService;
 
@@ -21,26 +20,26 @@ namespace TimberApi.ToolGroupSystem
         /// This will resolve the solution for now, if somehow there isn't a need to this would be very good!!
         /// </summary>
         public ToolGroupSpecificationService(
-            // ReSharper disable once InconsistentNaming
-            // Required to prevent dependency loop or accessing before specifications are generated
-            ObjectSpecificationGenerator DEPENDENCY_ORDER_FIX,
-            BuildingChangeApplier DEPENDENCY_ORDER_FIX2,
             ISpecificationService specificationService,
             ToolGroupSpecificationDeserializer toolGroupSpecificationDeserializer)
         {
+            Debug.LogWarning("CCCCCCCCCCCC");
+
             _specificationService = specificationService;
             _toolGroupSpecificationDeserializer = toolGroupSpecificationDeserializer;
         }
 
         public ImmutableArray<ToolGroupSpecification> ToolGroupSpecifications => _toolGroupSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
-        public void Load()
+        public void SpecificationLoad()
         {
+            Debug.LogWarning("AAAAAAA");
             _toolGroupSpecifications = _specificationService.GetSpecifications(_toolGroupSpecificationDeserializer).ToImmutableDictionary(specification => specification.Id.ToLower());
         }
-
+        
         public ToolGroupSpecification Get(string id)
         {
+            Debug.LogWarning("VVVVVVVVVV");
             if(! _toolGroupSpecifications.TryGetValue(id.ToLower(), out var toolGroupSpecification))
             {
                 throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
@@ -51,6 +50,8 @@ namespace TimberApi.ToolGroupSystem
 
         public IEnumerable<ToolGroupSpecification> GetByGroupId(string groupId)
         {
+            Debug.LogWarning("ZZZZZZZZZZZZZ");
+
             return _toolGroupSpecifications
                 .Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
                 .Select(pair => pair.Value);
@@ -58,6 +59,8 @@ namespace TimberApi.ToolGroupSystem
 
         public IEnumerable<ToolGroupSpecification> GetBySection(string section)
         {
+            Debug.LogWarning("XXXXXXXXXXXX");
+
             return _toolGroupSpecifications
                 .Where(pair => pair.Value.Section.ToLower().Equals(section.ToLower()))
                 .Select(pair => pair.Value);

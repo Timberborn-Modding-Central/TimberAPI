@@ -1,16 +1,16 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
+using TimberApi.Common.SingletonSystem;
 using Timberborn.Buildings;
 using Timberborn.Persistence;
 using Timberborn.PrefabSystem;
-using Timberborn.SingletonSystem;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
     /// <summary>
     ///     This service fetches BuildingSpecifications
     /// </summary>
-    public class BuildingSpecificationService : ILoadableSingleton
+    public class BuildingSpecificationService : IObjectSpecificationLoadableSingleton
     {
         private readonly BuildingSpecificationObjectDeserializer _buildingRecipeSpecificationObjectObjectDeserializer;
         private readonly ISpecificationService _specificationService;
@@ -27,7 +27,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
         /// <summary>
         ///     Fetches all BuildingSpecifications on load and stores them
         /// </summary>
-        public void Load()
+        public void SpecificationLoad()
         {
             _buildingSpecifications = _specificationService.GetSpecifications(_buildingRecipeSpecificationObjectObjectDeserializer).ToImmutableArray();
         }

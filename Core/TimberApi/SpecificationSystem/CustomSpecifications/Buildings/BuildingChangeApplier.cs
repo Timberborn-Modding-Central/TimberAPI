@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TimberApi.Common.SingletonSystem;
 using Timberborn.Buildings;
 using Timberborn.Goods;
 using Timberborn.MechanicalSystem;
 using Timberborn.PrefabSystem;
-using Timberborn.SingletonSystem;
 using Timberborn.Workshops;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    public class BuildingChangeApplier : ILoadableSingleton
+    public class BuildingChangeApplier : IObjectSpecificationLoadableSingleton
     {
         private readonly BuildingSpecificationService _buildingSpecificationService;
         private readonly ObjectCollectionService _objectCollectionService;
@@ -19,9 +20,10 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
             _objectCollectionService = objectCollectionService;
             _buildingSpecificationService = buildingSpecificationService;
         }
-
-        public void Load()
+        
+        public void SpecificationLoad()
         {
+            Debug.LogWarning("KAKAKAKAK");
             foreach (var building in _objectCollectionService.GetAllMonoBehaviours<Building>())
             {
                 var buildingSpecification = _buildingSpecificationService.GetBuildingSpecificationByBuilding(building);
