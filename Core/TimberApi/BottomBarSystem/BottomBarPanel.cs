@@ -56,7 +56,7 @@ namespace TimberApi.BottomBarSystem
         private void SetupBottomBar()
         {
             _bottomBarWrapper = _bottomBarUiService.CreateWrapper();
-            _uiLayout.AddBottomBar(_bottomBarWrapper);
+            _uiLayout._bottomBar.Insert(0, _bottomBarWrapper);
         }
 
         private void InitializeButtons()
