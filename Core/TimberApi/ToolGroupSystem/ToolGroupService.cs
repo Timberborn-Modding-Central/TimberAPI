@@ -52,11 +52,6 @@ namespace TimberApi.ToolGroupSystem
             _toolGroups = toolGroups.ToImmutableDictionary();
             _toolGroupButtons = toolGroupButtons.ToImmutableDictionary();
         }
-        
-        public void Load()
-        {
-
-        }
 
         public IToolGroup GetToolGroup(string id)
         {

@@ -10,7 +10,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
     /// <summary>
     ///     This service fetches BuildingSpecifications
     /// </summary>
-    public class BuildingSpecificationService : ILoadableSingleton
+    internal class BuildingSpecificationService : ILoadableSingleton
     {
         private readonly BuildingSpecificationObjectDeserializer _buildingRecipeSpecificationObjectObjectDeserializer;
         private readonly ISpecificationService _specificationService;

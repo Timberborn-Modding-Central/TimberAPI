@@ -14,11 +14,7 @@ namespace TimberApi.ToolGroupSystem
         private readonly ToolGroupSpecificationDeserializer _toolGroupSpecificationDeserializer;
 
         private ImmutableDictionary<string, ToolGroupSpecification> _toolGroupSpecifications = null!;
-
-        /// <summary>
-        /// When this feature has been introduced the loading order has been compromised for BuildingChangeApplier, activating it too late
-        /// This will resolve the solution for now, if somehow there isn't a need to this would be very good!!
-        /// </summary>
+        
         public ToolGroupSpecificationService(
             ISpecificationService specificationService,
             ToolGroupSpecificationDeserializer toolGroupSpecificationDeserializer)
@@ -33,7 +29,7 @@ namespace TimberApi.ToolGroupSystem
         {
             _toolGroupSpecifications = _specificationService.GetSpecifications(_toolGroupSpecificationDeserializer).ToImmutableDictionary(specification => specification.Id.ToLower());
         }
-        
+
         public ToolGroupSpecification Get(string id)
         {
             if(! _toolGroupSpecifications.TryGetValue(id.ToLower(), out var toolGroupSpecification))

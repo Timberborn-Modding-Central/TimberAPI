@@ -9,7 +9,7 @@ using Timberborn.Workshops;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    public class BuildingChangeApplier : ILoadableSingleton
+    internal class BuildingChangeApplier : ILoadableSingleton
     {
         private readonly BuildingSpecificationService _buildingSpecificationService;
         private readonly ObjectCollectionService _objectCollectionService;

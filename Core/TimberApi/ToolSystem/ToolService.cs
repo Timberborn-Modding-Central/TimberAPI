@@ -39,8 +39,7 @@ namespace TimberApi.ToolSystem
             var tools = new Dictionary<string, Tool>();
 
             var toolButtons = new Dictionary<string, ToolButton>();
-
-
+            
             foreach (var specification in _toolSpecificationService.ToolSpecifications)
             {
                 var toolFactory = _toolFactoryService.Get(specification.Type);

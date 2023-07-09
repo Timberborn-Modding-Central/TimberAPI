@@ -3,7 +3,7 @@ using Timberborn.Persistence;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    public class BuildingCostObjectDeserializer : IObjectSerializer<BuildingCost>
+    internal class BuildingCostObjectDeserializer : IObjectSerializer<BuildingCost>
     {
         private readonly PropertyKey<int> _amountKey = new("Amount");
         private readonly PropertyKey<string> _goodIdKey = new("GoodId");
