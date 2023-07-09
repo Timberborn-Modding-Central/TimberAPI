@@ -1,15 +1,11 @@
 using System.Collections.Generic;
-using TimberApi.Common.SingletonSystem;
 using Timberborn.PrefabSystem;
 using Timberborn.SingletonSystem;
-using UnityEngine;
 
 namespace TimberApi.SpecificationSystem
 {
     public class ObjectSpecificationGenerator : ILoadableSingleton
     {
-        private readonly ISingletonRepository _singletonRepository;
-
         private readonly SpecificationRepository _specificationRepository;
 
         private readonly ObjectCollectionService _objectCollectionService;
@@ -19,7 +15,6 @@ namespace TimberApi.SpecificationSystem
         private readonly ObjectSpecificationCacheService _objectSpecificationCacheService;
 
         public ObjectSpecificationGenerator(
-            ISingletonRepository singletonRepository,
             ObjectCollectionService objectCollectionService,
             IEnumerable<IObjectSpecificationGenerator> objectSpecificationGenerators,
             SpecificationRepository specificationRepository,
@@ -29,7 +24,6 @@ namespace TimberApi.SpecificationSystem
             _specificationGenerators = objectSpecificationGenerators;
             _specificationRepository = specificationRepository;
             _objectSpecificationCacheService = objectSpecificationCacheService;
-            _singletonRepository = singletonRepository;
         }
 
         public void Load()
@@ -48,20 +42,6 @@ namespace TimberApi.SpecificationSystem
                         _specificationRepository.Add(specification);
                     }
                 }
-            }
-            
-            Debug.LogWarning("LOLOLOLOLOLOL");
-
-            RunSpecificationLoadableSingletons(_singletonRepository.GetSingletons<IObjectSpecificationLoadableSingleton>());
-        }
-        
-        private static void RunSpecificationLoadableSingletons(IEnumerable<IObjectSpecificationLoadableSingleton> singletons)
-        {
-            foreach (var singleton in singletons)
-            {
-                Debug.LogWarning("NNNNNNNNNNNNNNN");
-                singleton.SpecificationLoad();
-                Debug.LogWarning("MMMMMMMMMMMMMM");
             }
         }
     }

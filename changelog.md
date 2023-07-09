@@ -1,6 +1,8 @@
 ## Unreleased
 
 ### Changes
+- Fixed BuildingSpecifications
+- Fixed dependency order in a correct way
 
 ## TimberAPI v0.5.5.5
 
