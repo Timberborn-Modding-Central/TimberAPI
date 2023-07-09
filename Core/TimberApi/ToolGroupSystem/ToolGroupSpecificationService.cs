@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using TimberApi.SpecificationSystem;
+using TimberApi.SpecificationSystem.CustomSpecifications.Buildings;
 using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 
@@ -15,10 +16,15 @@ namespace TimberApi.ToolGroupSystem
 
         private ImmutableDictionary<string, ToolGroupSpecification> _toolGroupSpecifications = null!;
 
+        /// <summary>
+        /// When this feature has been introduced the loading order has been compromised for BuildingChangeApplier, activating it too late
+        /// This will resolve the solution for now, if somehow there isn't a need to this would be very good!!
+        /// </summary>
         public ToolGroupSpecificationService(
             // ReSharper disable once InconsistentNaming
             // Required to prevent dependency loop or accessing before specifications are generated
             ObjectSpecificationGenerator DEPENDENCY_ORDER_FIX,
+            BuildingChangeApplier DEPENDENCY_ORDER_FIX2,
             ISpecificationService specificationService,
             ToolGroupSpecificationDeserializer toolGroupSpecificationDeserializer)
         {

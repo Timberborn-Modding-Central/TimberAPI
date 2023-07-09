@@ -5,7 +5,7 @@ using Timberborn.Persistence;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    internal class BuildingSpecificationObjectDeserializer : IObjectSerializer<BuildingSpecification>
+    public class BuildingSpecificationObjectDeserializer : IObjectSerializer<BuildingSpecification>
     {
         private readonly BuildingCostObjectDeserializer _buildingCostObjectDeserializer;
 
