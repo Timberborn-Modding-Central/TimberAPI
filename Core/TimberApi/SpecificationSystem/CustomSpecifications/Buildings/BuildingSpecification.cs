@@ -7,7 +7,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
     ///     Represents the various settings that can be changed
     ///     on Buildings using TimberAPI
     /// </summary>
-    public class BuildingSpecification
+    internal class BuildingSpecification
     {
         public string BuildingId;
 
