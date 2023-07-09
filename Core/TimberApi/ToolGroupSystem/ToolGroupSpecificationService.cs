@@ -1,24 +1,21 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using TimberApi.SpecificationSystem;
+using TimberApi.Common.SingletonSystem;
 using Timberborn.Persistence;
-using Timberborn.SingletonSystem;
+using UnityEngine;
 
 namespace TimberApi.ToolGroupSystem
 {
-    public class ToolGroupSpecificationService : ILoadableSingleton
+    public class ToolGroupSpecificationService : ILateLoadableSingleton
     {
         private readonly ISpecificationService _specificationService;
 
         private readonly ToolGroupSpecificationDeserializer _toolGroupSpecificationDeserializer;
 
         private ImmutableDictionary<string, ToolGroupSpecification> _toolGroupSpecifications = null!;
-
+        
         public ToolGroupSpecificationService(
-            // ReSharper disable once InconsistentNaming
-            // Required to prevent dependency loop or accessing before specifications are generated
-            ObjectSpecificationGenerator DEPENDENCY_ORDER_FIX,
             ISpecificationService specificationService,
             ToolGroupSpecificationDeserializer toolGroupSpecificationDeserializer)
         {
@@ -28,7 +25,7 @@ namespace TimberApi.ToolGroupSystem
 
         public ImmutableArray<ToolGroupSpecification> ToolGroupSpecifications => _toolGroupSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
-        public void Load()
+        public void LateLoad()
         {
             _toolGroupSpecifications = _specificationService.GetSpecifications(_toolGroupSpecificationDeserializer).ToImmutableDictionary(specification => specification.Id.ToLower());
         }

@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using TimberApi.Common.SingletonSystem;
 using TimberApi.ToolGroupUISystem;
-using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.ToolGroupSystem
 {
-    public class ToolGroupService : ILoadableSingleton
+    public class ToolGroupService : ILateLoadableSingleton
     {
         private readonly ToolGroupButtonFactoryService _toolGroupButtonFactoryService;
 
@@ -33,7 +33,7 @@ namespace TimberApi.ToolGroupSystem
 
         public IEnumerable<ToolGroupButton> ToolGroupButtons => _toolGroupButtons.Select(pair => pair.Value).ToImmutableArray();
 
-        public void Load()
+        public void LateLoad()
         {
             var toolGroups = new Dictionary<string, IToolGroup>();
 

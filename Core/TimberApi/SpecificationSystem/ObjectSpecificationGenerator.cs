@@ -14,9 +14,10 @@ namespace TimberApi.SpecificationSystem
 
         private readonly ObjectSpecificationCacheService _objectSpecificationCacheService;
 
-        public ObjectSpecificationGenerator(ObjectCollectionService objectCollectionService,
+        public ObjectSpecificationGenerator(
+            ObjectCollectionService objectCollectionService,
             IEnumerable<IObjectSpecificationGenerator> objectSpecificationGenerators,
-            SpecificationRepository specificationRepository, 
+            SpecificationRepository specificationRepository,
             ObjectSpecificationCacheService objectSpecificationCacheService)
         {
             _objectCollectionService = objectCollectionService;

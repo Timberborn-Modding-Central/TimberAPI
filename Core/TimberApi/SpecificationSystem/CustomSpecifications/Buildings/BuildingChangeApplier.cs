@@ -9,17 +9,17 @@ using Timberborn.Workshops;
 
 namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
 {
-    internal class BuildingChanger : ILoadableSingleton
+    internal class BuildingChangeApplier : ILoadableSingleton
     {
         private readonly BuildingSpecificationService _buildingSpecificationService;
         private readonly ObjectCollectionService _objectCollectionService;
 
-        public BuildingChanger(ObjectCollectionService objectCollectionService, BuildingSpecificationService buildingSpecificationService)
+        public BuildingChangeApplier(ObjectCollectionService objectCollectionService, BuildingSpecificationService buildingSpecificationService)
         {
             _objectCollectionService = objectCollectionService;
             _buildingSpecificationService = buildingSpecificationService;
         }
-
+        
         public void Load()
         {
             foreach (var building in _objectCollectionService.GetAllMonoBehaviours<Building>())
