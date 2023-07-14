@@ -1,6 +1,8 @@
 ## Unreleased
 
 ### Changes
+- Added IApiSpecificationService
+- Fixed Demolish tool order
 
 ## TimberAPI v0.5.5.6
 
