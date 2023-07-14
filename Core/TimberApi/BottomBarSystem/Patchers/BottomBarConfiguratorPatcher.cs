@@ -17,11 +17,6 @@ namespace TimberApi.BottomBarSystem.Patchers
                     nameof(Timberborn.BottomBarSystem.BottomBarSystemConfigurator.Configure)),
                 GetHarmonyMethod(nameof(ConfiguratorPatch))
             );
-
-            harmony.Patch(
-                GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider.CreateFolktailsConfiguration)),
-                GetHarmonyMethod(nameof(Test))
-            );
         }
 
         public override bool ShouldApply(SceneEntrypoint? sceneEntrypoint)
@@ -32,13 +27,6 @@ namespace TimberApi.BottomBarSystem.Patchers
         public static bool ConfiguratorPatch()
         {
             return TimberApiSceneManager.CurrentScene != SceneEntrypoint.InGame;
-        }
-
-        public static bool Test(ref TutorialConfiguration __result)
-        {
-            __result = TutorialConfiguration.CreateEmpty();
-
-            return false;
         }
     }
 }
