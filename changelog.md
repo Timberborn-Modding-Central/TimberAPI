@@ -1,6 +1,10 @@
 ## Unreleased
 
 ### Changes
+
+## TimberAPI v0.5.5.8
+
+### Changes
 - Removed folktail tutorial, due to crash
 
 ## TimberAPI v0.5.5.7
