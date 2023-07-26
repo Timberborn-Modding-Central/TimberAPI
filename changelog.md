@@ -2,6 +2,23 @@
 
 ### Changes
 
+## TimberAPI v0.5.5.8
+
+### Changes
+- Removed folktail tutorial, due to crash
+
+## TimberAPI v0.5.5.7
+
+### Changes
+- Added IApiSpecificationService
+- Fixed Demolish tool order
+
+## TimberAPI v0.5.5.6
+
+### Changes
+- Fixed BuildingSpecifications
+- Fixed dependency order in a correct way
+
 ## TimberAPI v0.5.5.5
 
 ### Changes

@@ -17,10 +17,10 @@ namespace TimberApi.BottomBarSystem.Patchers
                     nameof(Timberborn.BottomBarSystem.BottomBarSystemConfigurator.Configure)),
                 GetHarmonyMethod(nameof(ConfiguratorPatch))
             );
-
+            
             harmony.Patch(
                 GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider.CreateFolktailsConfiguration)),
-                GetHarmonyMethod(nameof(Test))
+                GetHarmonyMethod(nameof(CreateFolktailsConfigurationPatch))
             );
         }
 
@@ -33,8 +33,8 @@ namespace TimberApi.BottomBarSystem.Patchers
         {
             return TimberApiSceneManager.CurrentScene != SceneEntrypoint.InGame;
         }
-
-        public static bool Test(ref TutorialConfiguration __result)
+        
+        public static bool CreateFolktailsConfigurationPatch(ref TutorialConfiguration __result)
         {
             __result = TutorialConfiguration.CreateEmpty();
 

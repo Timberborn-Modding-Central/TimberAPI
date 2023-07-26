@@ -6,7 +6,7 @@ using Timberborn.WorldSerialization;
 
 namespace TimberApi.SpecificationSystem
 {
-    internal class ApiSpecificationService : ISpecificationService
+    internal class ApiSpecificationService : IApiSpecificationService
     {
         private readonly JsonMergeSettings _jsonMergeSettings;
 
@@ -40,13 +40,19 @@ namespace TimberApi.SpecificationSystem
 
         public IEnumerable<T> GetSpecifications<T>(string specificationName, IObjectSerializer<T> serializer)
         {
+            foreach (var specification in GetSpecificationJsons(specificationName))
+            {
+                yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJson(specification.Item2)).Get(new PropertyKey<T>(specification.Item1.SpecificationName), serializer);
+            }
+        }
+        
+        public IEnumerable<(ISpecification, string)> GetSpecificationJsons(string specificationName)
+        {
             var specifications = _specificationRepository.GetBySpecification(specificationName.ToLower()).ToArray();
 
             foreach (var specification in specifications.Where(specification => specification.IsOriginal))
             {
-                var mergedSpecification = MergeSpecification(specification, specifications);
-
-                yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJson(mergedSpecification)).Get(new PropertyKey<T>(specification.SpecificationName), serializer);
+                yield return (specification, MergeSpecification(specification, specifications));
             }
         }
 

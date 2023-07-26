@@ -13,7 +13,7 @@ namespace TimberApi.SpecificationSystem.CustomSpecifications.Buildings
             containerDefinition.Bind<BuildingSpecificationObjectDeserializer>().AsSingleton();
             containerDefinition.Bind<BuildingCostObjectDeserializer>().AsSingleton();
             containerDefinition.MultiBind<IObjectSpecificationGenerator>().To<BuildingSpecificationGenerator>().AsSingleton();
-            containerDefinition.Bind<BuildingChanger>().AsSingleton();
+            containerDefinition.Bind<BuildingChangeApplier>().AsSingleton();
         }
     }
 }

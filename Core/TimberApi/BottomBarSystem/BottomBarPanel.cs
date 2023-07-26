@@ -2,18 +2,18 @@ using System.Collections.Generic;
 using System.Linq;
 using TimberApi.BottomBarUISystem;
 using TimberApi.Common.Extensions;
+using TimberApi.Common.SingletonSystem;
 using TimberApi.ToolGroupSystem;
 using TimberApi.ToolSystem;
 using Timberborn.BottomBarSystem;
 using Timberborn.Persistence;
-using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 using Timberborn.UILayoutSystem;
 using UnityEngine.UIElements;
 
 namespace TimberApi.BottomBarSystem
 {
-    public class BottomBarPanel : ILoadableSingleton
+    public class BottomBarPanel : ILateLoadableSingleton
     {
         private readonly SortedDictionary<int, VisualElement> _bottomBarPanels = new();
 
@@ -44,7 +44,7 @@ namespace TimberApi.BottomBarSystem
             _bottomBarService = bottomBarService;
         }
 
-        public void Load()
+        public void LateLoad()
         {
             SetupBottomBar();
             InitializeButtons();
@@ -56,7 +56,7 @@ namespace TimberApi.BottomBarSystem
         private void SetupBottomBar()
         {
             _bottomBarWrapper = _bottomBarUiService.CreateWrapper();
-            _uiLayout.AddBottomBar(_bottomBarWrapper);
+            _uiLayout._bottomBar.Insert(0, _bottomBarWrapper);
         }
 
         private void InitializeButtons()
