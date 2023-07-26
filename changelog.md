@@ -1,6 +1,10 @@
 ## Unreleased
 
 ### Changes
+
+## TimberAPI v0.6.0.0
+
+### Changes
 - Added sinle type specificaiton eg. `AssetSpecification.original.json`
 - Added `AssetSpecification` with `IgnoreDirectoryPrefixes` to remove directory prefixes from the game
 - Changed `ContainTools` prefix so that groups will be hidden when empty in/out devmode
