@@ -1,4 +1,5 @@
 using System.IO;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem.SpecificationTypes
 {
@@ -6,12 +7,22 @@ namespace TimberApi.SpecificationSystem.SpecificationTypes
     {
         public FileSpecification(string filePath)
         {
-            string fileName = Path.GetFileNameWithoutExtension(filePath);
+            var fileName = Path.GetFileNameWithoutExtension(filePath);
 
             FilePath = filePath;
             FullName = fileName.Replace(".original", "").Replace(".replace", "").ToLower();
-            Name = FullName[(FullName.IndexOf('.') + 1)..].ToLower();
-            SpecificationName = fileName[..fileName.IndexOf('.')].ToLower();
+            
+            if(FullName.Contains('.'))
+            {
+                Name = FullName[(FullName.IndexOf('.') + 1)..].ToLower();
+                SpecificationName = fileName[..fileName.IndexOf('.')].ToLower();
+            }
+            else
+            {
+                Name = "";
+                SpecificationName = FullName[(FullName.IndexOf('.') + 1)..].ToLower();
+            }
+            
             IsOriginal = fileName.ToLower().EndsWith("original");
             IsReplace = fileName.ToLower().EndsWith("replace");
         }

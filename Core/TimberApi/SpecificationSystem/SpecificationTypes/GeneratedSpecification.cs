@@ -9,7 +9,7 @@
             _json = json;
             Name = name;
             SpecificationName = specificationName.ToLower();
-            FullName = $"{SpecificationName}.{name.ToLower()}";
+            FullName = string.IsNullOrWhiteSpace(name) ? SpecificationName : $"{SpecificationName}.{name.ToLower()}";
             IsOriginal = isOriginal;
             IsReplace = false;
         }

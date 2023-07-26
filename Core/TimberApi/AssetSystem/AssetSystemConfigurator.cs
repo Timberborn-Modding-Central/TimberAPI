@@ -1,6 +1,7 @@
 ﻿using Bindito.Core;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.SceneSystem;
+using TimberApi.SpecificationSystem;
 
 namespace TimberApi.AssetSystem
 {
@@ -11,6 +12,8 @@ namespace TimberApi.AssetSystem
         {
             containerDefinition.Bind<IAssetLoader>().To<AssetLoader>().AsSingleton();
             containerDefinition.Bind<AssetSceneLoader>().AsSingleton();
+            containerDefinition.Bind<AssetSpecificationDeserializer>().AsSingleton();
+            containerDefinition.MultiBind<ISpecificationGenerator>().To<AssetSpecificationGenerator>().AsSingleton();
         }
     }
 }
