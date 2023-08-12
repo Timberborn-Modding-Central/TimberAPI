@@ -3,6 +3,7 @@ using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
 using TimberApi.SceneSystem;
 using TimberApi.ToolGroupSystem;
+using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.BottomBarSystem.Patchers
@@ -10,7 +11,7 @@ namespace TimberApi.BottomBarSystem.Patchers
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class ToolGroupManagerPatcher : BaseHarmonyPatcher
     {
-        private static readonly ToolGroup ExitingToolGroup = new ExitingTool();
+        private static readonly ToolGroup ExitingToolGroup = new ExitingToolGroup();
 
         public override string UniqueId => "TimberApi.ToolGroupManager";
 
@@ -27,7 +28,7 @@ namespace TimberApi.BottomBarSystem.Patchers
             return sceneEntrypoint == SceneEntrypoint.InGame;
         }
 
-        public static void SwitchToolGroupPatch(ToolGroup? toolGroup, ToolGroupManager __instance)
+        public static void SwitchToolGroupPatch(ToolGroup? toolGroup, ToolGroupManager __instance, EventBus ____eventBus)
         {
             ToolButtonPatcher.ActiveToolButton?.Root.EnableInClassList("button--active", false);
 
@@ -35,6 +36,8 @@ namespace TimberApi.BottomBarSystem.Patchers
             {
                 return;
             }
+            
+            ____eventBus.Post(new ToolGroupExitedEvent(__instance.ActiveToolGroup));
             
             __instance.ActiveToolGroup = ExitingToolGroup;
         }

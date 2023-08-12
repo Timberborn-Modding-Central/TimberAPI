@@ -1,6 +1,9 @@
 ## Unreleased
 
 ### Changes
+- Updated `ExitToolGroup`, does not require most group types to disable them after closing
+- Changed `SwitchToolGroupPatch` so it will trigger the `ExitToolGroup` and the original group
+- Added `BuilderPriorityToolGroup`
 
 ## TimberAPI v0.6.0.0
 

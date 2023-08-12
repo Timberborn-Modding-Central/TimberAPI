@@ -1,13 +1,12 @@
 using Timberborn.ConstructionMode;
-using Timberborn.ForestryUI;
-using Timberborn.PlantingUI;
+using Timberborn.ToolSystem;
 
 namespace TimberApi.ToolGroupSystem
 {
     /// <summary>
-    ///     Add all mode enablers in this class to deactivate them on exiting a group
+    ///     Requires IConstructionModeEnabler to disable construction mode even when it's in the other ToolGroups, reason is unknown.
     /// </summary>
-    public class ExitingTool : TreeCuttingAreaToolGroup, IConstructionModeEnabler, IPlantingToolGroup
+    public class ExitingToolGroup : ToolGroup, IConstructionModeEnabler
     {
     }
 }

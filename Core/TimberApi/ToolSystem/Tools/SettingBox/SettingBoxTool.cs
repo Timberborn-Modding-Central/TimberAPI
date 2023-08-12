@@ -20,7 +20,7 @@ namespace TimberApi.ToolSystem.Tools.SettingBox
 
         public override void Enter()
         {
-            _toolGroupManager.SwitchToolGroup(new ExitingTool());
+            _toolGroupManager.SwitchToolGroup(new ExitingToolGroup());
             _eventBus.Post(new ShowOptionsEvent());
         }
 

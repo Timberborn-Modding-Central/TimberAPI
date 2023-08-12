@@ -99,7 +99,7 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public static bool OnToolGroupExited(ToolGroupExitedEvent toolGroupExitedEvent, ToolGroupButton __instance, VisualElement ____toolGroupButtonWrapper)
         {
-            if(toolGroupExitedEvent.ToolGroup is not ExitingTool) return false;
+            if(toolGroupExitedEvent.ToolGroup is not ExitingToolGroup) return false;
 
             __instance.ToolButtonsElement.ToggleDisplayStyle(false);
             ____toolGroupButtonWrapper.RemoveFromClassList(ActiveClassName);
