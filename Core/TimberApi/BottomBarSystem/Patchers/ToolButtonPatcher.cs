@@ -1,7 +1,9 @@
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
 using TimberApi.SceneSystem;
+using Timberborn.BuilderPrioritySystemUI;
 using Timberborn.ToolSystem;
+using UnityEngine;
 
 namespace TimberApi.BottomBarSystem.Patchers
 {
@@ -14,7 +16,7 @@ namespace TimberApi.BottomBarSystem.Patchers
         public override void Apply(Harmony harmony)
         {
             harmony.Patch(
-                GetMethodInfo<ToolButton>("OnButtonClicked"),
+                GetMethodInfo<ToolButton>(nameof(ToolButton.OnButtonClicked)),
                 prefix: GetHarmonyMethod(nameof(OnButtonClickedPatch))
             );
         }

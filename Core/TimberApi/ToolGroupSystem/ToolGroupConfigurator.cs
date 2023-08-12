@@ -2,6 +2,7 @@ using Bindito.Core;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.SceneSystem;
 using TimberApi.SpecificationSystem;
+using TimberApi.ToolGroupSystem.ToolGroups.BuilderPriority;
 using TimberApi.ToolGroupSystem.ToolGroups.ConstructionMode;
 using TimberApi.ToolGroupSystem.ToolGroups.Default;
 using TimberApi.ToolGroupSystem.ToolGroups.PlantingMode;
@@ -22,6 +23,7 @@ namespace TimberApi.ToolGroupSystem
             containerDefinition.MultiBind<IToolGroupFactory>().To<DefaultToolGroupFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolGroupFactory>().To<PlantingModeToolGroupFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolGroupFactory>().To<TreeCuttingAreaToolGroupFactory>().AsSingleton();
+            containerDefinition.MultiBind<IToolGroupFactory>().To<BuilderPriorityToolGroupFactory>().AsSingleton();
             containerDefinition.MultiBind<ISpecificationGenerator>().To<TimberbornGroupGenerator>().AsSingleton();
         }
     }

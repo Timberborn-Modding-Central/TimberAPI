@@ -43,7 +43,7 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
                 Id = "Priority",
                 Layout = "Blue",
                 Order = 50,
-                Type = "DefaultToolGroup",
+                Type = "BuilderPriorityToolGroup",
                 NameLocKey = "ToolGroups.Priority",
                 Icon = "Sprites/BottomBar/PriorityToolGroupIcon",
                 Section = "BottomBar",
