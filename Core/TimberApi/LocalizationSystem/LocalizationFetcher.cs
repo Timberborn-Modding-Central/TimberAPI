@@ -6,6 +6,7 @@ using System.Linq;
 using LINQtoCSV;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.ModSystem;
+using Timberborn.Common;
 using Timberborn.Localization;
 using UnityEngine;
 
@@ -20,66 +21,61 @@ namespace TimberApi.LocalizationSystem
         /// <returns></returns>
         public static Dictionary<string, string> GetLocalization(string localizationKey)
         {
-            var localizedRecords = GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey))
-                .ToDictionary(record => record.Id, record => TextColors.ColorizeText(record.Text));
-
-            foreach (LocalizationRecord defaultRecord in GetDefaultLocalization())
+            if (localizationKey == LocalizationCodes.Default)
             {
-                var id = defaultRecord.Id;
-                if (!localizedRecords.TryGetValue(id, out string text) || string.IsNullOrEmpty(text))
-                {
-                    localizedRecords[id] = TextColors.ColorizeText(defaultRecord.Text);
-                }
+                return GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey))
+                    .ToDictionary(record => record.Id, record => TextColors.ColorizeText(record.Text))!;
             }
 
-            return localizedRecords;
+            var userLocalizationRecords = GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey));
+            var defaultLocalizationRecords = GetLocalizationRecordsFromFiles(LocalizationCodes.Default, GetLocalizationFilePathsFromDependencies(LocalizationCodes.Default));
+
+            return defaultLocalizationRecords
+                .ToDictionary(
+                    defaultLocalizationRecord => defaultLocalizationRecord.Id,
+                    defaultLocalizationRecord => TextColors.ColorizeText(userLocalizationRecords.FirstOrDefault(userLocalizationRecord => userLocalizationRecord.Id == defaultLocalizationRecord.Id)?.Text ?? defaultLocalizationRecord.Text)
+                )!;
         }
 
         /// <summary>
         ///     Parses text files into LocalizationRecords
         /// </summary>
-        /// <param name="localization"></param>
+        /// <param name="localizationKey"></param>
         /// <param name="filePaths"></param>
         /// <returns></returns>
-        private static IEnumerable<LocalizationRecord> GetLocalizationRecordsFromFiles(string localization, IEnumerable<LocalizationFile> filePaths)
+        private static IEnumerable<LocalizationRecord> GetLocalizationRecordsFromFiles(string localizationKey, IEnumerable<LocalizationFile> filePaths)
         {
-            List<LocalizationRecord> records = new();
-            foreach (LocalizationFile localizationFile in filePaths)
-            {
-                records.AddRange(TryToReadRecords(localization, localizationFile));
-            }
-
-            return records;
+            return filePaths
+                .SelectMany(localizationFile => TryToReadRecords(localizationKey, localizationFile))
+                .GroupBy(record => record.Id)
+                .Select(recordsGroupedById => recordsGroupedById.Last())
+                .ToList();
         }
 
         /// <summary>
         ///     Timberborn method Timberborn.Localization.LocalizationRepository.TryToReadRecords
         /// </summary>
-        /// <param name="localization"></param>
+        /// <param name="localizationKey"></param>
         /// <param name="localizationFile"></param>
         /// <returns></returns>
         /// <exception cref="InvalidDataException"></exception>
-        private static IEnumerable<LocalizationRecord> TryToReadRecords(string localization, LocalizationFile localizationFile)
+        private static IEnumerable<LocalizationRecord> TryToReadRecords(string localizationKey, LocalizationFile localizationFile)
         {
             try
             {
-                var localizationRecords =  new CsvContext().Read<LocalizationRecord>(localizationFile.FilePath);
-                
-                ValidateLocalizationRecords(localizationRecords, localizationFile.Mod);
-                
-                return new CsvContext().Read<LocalizationRecord>(localizationFile.FilePath);
+                return CleanLocalizationRecords(new CsvContext().Read<LocalizationRecord>(localizationFile.FilePath), localizationFile.Mod);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                var message = "Unable to parse file for " + localization + ".";
-                if (ex is AggregatedException aggregatedException)
+                var message = "Unable to parse file for " + localizationKey + ".";
+                if (exception is AggregatedException aggregatedException)
                 {
                     message = message + " First error: " + aggregatedException.m_InnerExceptionsList[0].Message;
                 }
 
-                if (localization == LocalizationCodes.Default)
+                if (localizationKey == LocalizationCodes.Default)
                 {
-                    throw new InvalidDataException(message, ex);
+                    throw new InvalidDataException(message, exception);
                 }
 
                 TimberApi.ConsoleWriter.Log(message, LogType.Error);
@@ -87,31 +83,25 @@ namespace TimberApi.LocalizationSystem
             }
         }
 
-        private static void ValidateLocalizationRecords(IEnumerable<LocalizationRecord> localizationRecords, IMod mod)
+        private static IEnumerable<LocalizationRecord> CleanLocalizationRecords(IEnumerable<LocalizationRecord> localizationRecords, IMod mod)
         {
-            var hasValidationErrors = false;
+            var records = localizationRecords.ToList();
+            
+            var errors = records
+                .Where(record => record.Text is null)
+                .ToList();
 
-            foreach (var record in localizationRecords)
+            if (errors.IsEmpty())
             {
-                if(record.Text is null)
-                {
-                    hasValidationErrors = true;
-                    TimberApi.ConsoleWriter.LogAs(mod.Name, $"Localization Id does not have any text: {record.Id}", LogType.Error);
-                }
+                return records.Where(record => record.Id is not null); // TODO: Maybe we should log this?
             }
 
-            if(hasValidationErrors)
+            foreach (var error in errors)
             {
-                throw new Exception($"Validating localization files for {mod.Name} failed.");
+                TimberApi.ConsoleWriter.LogAs(mod.Name, $"Localization Id does not have any text: {error.Id}", LogType.Error);
             }
-        }
 
-        /// <summary>
-        ///     Returns the default localization
-        /// </summary>
-        private static IEnumerable<LocalizationRecord> GetDefaultLocalization()
-        {
-            return GetLocalizationRecordsFromFiles(LocalizationCodes.Default, GetLocalizationFilePathsFromDependencies(LocalizationCodes.Default));
+            throw new Exception($"Validating localization files for {mod.Name} failed.");
         }
 
         /// <summary>
@@ -121,53 +111,31 @@ namespace TimberApi.LocalizationSystem
         /// <returns></returns>
         private static IEnumerable<LocalizationFile> GetLocalizationFilePathsFromDependencies(string localizationKey)
         {
-            List<LocalizationFile> localizationFilePaths = new();
-            foreach (IMod mod in DependencyContainer.GetInstance<IModRepository>().All())
-            {
-                var pluginLocalizationPath = Path.Combine(mod.DirectoryPath, mod.LanguagePath);
-
-                (var hasLocalization, var localizationName) = LocalizationNameOrDefault(pluginLocalizationPath, localizationKey);
-
-                if (!hasLocalization)
-                {
-                    continue;
-                }
-
-                localizationFilePaths.Add(new LocalizationFile(mod, Path.Combine(pluginLocalizationPath, localizationName)));
-            }
-
-            return localizationFilePaths;
+            return (
+                from mod in DependencyContainer.GetInstance<IModRepository>().All()
+                let pluginLocalizationPath = Path.Combine(mod.DirectoryPath, mod.LanguagePath)
+                let localizationFile = GetLocalizationFile(pluginLocalizationPath, localizationKey) ?? GetLocalizationFile(pluginLocalizationPath, LocalizationCodes.Default)
+                where localizationFile is not null
+                select new LocalizationFile(mod, Path.Combine(pluginLocalizationPath, localizationFile))
+            ).ToList();
         }
 
         /// <summary>
-        ///     Check if localization file exists, return default if not
-        ///     Returns false if default and localization file doesn't exists
+        ///     Get the localization file from the plugin localization path or return null
         /// </summary>
         /// <param name="pluginLocalizationPath"></param>
-        /// <param name="localizationName"></param>
-        private static (bool, string) LocalizationNameOrDefault(string pluginLocalizationPath, string localizationName)
+        /// <param name="localizationKey"></param>
+        private static string? GetLocalizationFile(string pluginLocalizationPath, string localizationKey)
         {
-            if (string.IsNullOrEmpty(localizationName))
+            if (string.IsNullOrEmpty(localizationKey)
+                || !Directory.Exists(pluginLocalizationPath))
             {
-                return (false, "");
+                return null;
             }
 
-            if (!Directory.Exists(pluginLocalizationPath))
-            {
-                return (false, "");
-            }
-
-            if (File.Exists(Path.Combine(pluginLocalizationPath, localizationName + ".txt")))
-            {
-                return (true, localizationName + ".txt");
-            }
-
-            if (File.Exists(Path.Combine(pluginLocalizationPath, LocalizationCodes.Default + ".txt")))
-            {
-                return (true, LocalizationCodes.Default + ".txt");
-            }
-
-            return (false, "");
+            return File.Exists(Path.Combine(pluginLocalizationPath, localizationKey + ".txt"))
+                ? localizationKey + ".txt"
+                : null;
         }
     }
 }
