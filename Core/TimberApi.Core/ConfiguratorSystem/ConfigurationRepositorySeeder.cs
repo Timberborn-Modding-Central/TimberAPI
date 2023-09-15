@@ -41,9 +41,26 @@ namespace TimberApi.Core.ConfiguratorSystem
             IEnumerable<Type> configuratorTypes = assembly.GetTypesByAttribute<ConfiguratorAttribute>();
             ImmutableArray<IConfigurator> configurators = ValidateAndCreateConfigurators(configuratorTypes).ToImmutableArray();
 
-            _configuratorRepository.AddRange(SceneEntrypoint.MainMenu, GetConfiguratorWithSceneFlag(configurators, SceneEntrypoint.MainMenu));
-            _configuratorRepository.AddRange(SceneEntrypoint.InGame, GetConfiguratorWithSceneFlag(configurators, SceneEntrypoint.InGame));
-            _configuratorRepository.AddRange(SceneEntrypoint.MapEditor, GetConfiguratorWithSceneFlag(configurators, SceneEntrypoint.MapEditor));
+            var filteredConfigurators = FilterConfiguratorsWithMissingRequiredModDependencies(configurators).ToImmutableArray();
+
+            _configuratorRepository.AddRange(SceneEntrypoint.MainMenu, GetConfiguratorWithSceneFlag(filteredConfigurators, SceneEntrypoint.MainMenu));
+            _configuratorRepository.AddRange(SceneEntrypoint.InGame, GetConfiguratorWithSceneFlag(filteredConfigurators, SceneEntrypoint.InGame));
+            _configuratorRepository.AddRange(SceneEntrypoint.MapEditor, GetConfiguratorWithSceneFlag(filteredConfigurators, SceneEntrypoint.MapEditor));
+        }
+        
+        /// <summary>
+        ///     Configurator filter based on defined mod dependencies
+        /// </summary>
+        /// <param name="configurators">validated configurators</param>
+        /// <returns>Filtered configurators that have all their dependencies active</returns>
+        private IEnumerable<IConfigurator> FilterConfiguratorsWithMissingRequiredModDependencies(IEnumerable<IConfigurator> configurators)
+        {
+            return configurators.Where(configurator =>
+            {
+                var attribute = configurator.GetType().GetCustomAttribute<RequiredModDependencies>();
+
+                return attribute == null || attribute.ModDependencies.All(modDependency => _modRepository.Has(modDependency));
+            });
         }
 
         /// <summary>
