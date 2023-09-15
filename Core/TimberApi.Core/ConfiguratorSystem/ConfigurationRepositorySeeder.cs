@@ -41,7 +41,7 @@ namespace TimberApi.Core.ConfiguratorSystem
             IEnumerable<Type> configuratorTypes = assembly.GetTypesByAttribute<ConfiguratorAttribute>();
             ImmutableArray<IConfigurator> configurators = ValidateAndCreateConfigurators(configuratorTypes).ToImmutableArray();
 
-            var filteredConfigurators = FilterConfiguratorsWithoutMissingModDependencies(configurators).ToImmutableArray();
+            var filteredConfigurators = FilterConfiguratorsWithMissingRequiredModDependencies(configurators).ToImmutableArray();
 
             _configuratorRepository.AddRange(SceneEntrypoint.MainMenu, GetConfiguratorWithSceneFlag(filteredConfigurators, SceneEntrypoint.MainMenu));
             _configuratorRepository.AddRange(SceneEntrypoint.InGame, GetConfiguratorWithSceneFlag(filteredConfigurators, SceneEntrypoint.InGame));
@@ -52,15 +52,15 @@ namespace TimberApi.Core.ConfiguratorSystem
         ///     Configurator filter based on defined mod dependencies
         /// </summary>
         /// <param name="configurators">validated configurators</param>
-        /// <returns>Filtered configurators without missing mod dependencies</returns>
-        private IEnumerable<IConfigurator> FilterConfiguratorsWithoutMissingModDependencies(IEnumerable<IConfigurator> configurators)
+        /// <returns>Filtered configurators that have all their dependencies active</returns>
+        private IEnumerable<IConfigurator> FilterConfiguratorsWithMissingRequiredModDependencies(IEnumerable<IConfigurator> configurators)
         {
-            foreach (var configurator in configurators)
+            return configurators.Where(configurator =>
             {
                 var attribute = configurator.GetType().GetCustomAttribute<RequiredModDependencies>();
-                if(attribute == null || attribute.ModDependencies.All(modDependency => _modRepository.TryGetByUniqueId(modDependency, out _))) 
-                    yield return configurator;
-            }
+
+                return attribute == null || attribute.ModDependencies.All(modDependency => _modRepository.Has(modDependency));
+            });
         }
 
         /// <summary>

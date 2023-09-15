@@ -39,6 +39,11 @@ namespace TimberApi.Core.ModLoaderSystem
             return _assemblyModDirectory.TryGetValue(assembly, out mod!);
         }
 
+        public bool Has(string uniqueId)
+        {
+            return _uniqueIdModDirectory.TryGetKey(uniqueId, out _);
+        }
+
         [Inject]
         public void InjectDependencies(ModLoader modLoader)
         {

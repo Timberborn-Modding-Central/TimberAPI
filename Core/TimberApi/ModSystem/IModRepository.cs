@@ -12,5 +12,7 @@ namespace TimberApi.ModSystem
         bool TryGetByUniqueId(string uniqueId, out IMod mod);
 
         bool TryGetByAssembly(Assembly assembly, out IMod mod);
+
+        bool Has(string uniqueId);
     }
 }
