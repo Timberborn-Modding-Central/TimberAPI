@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using TimberApi.HarmonyPatcherSystem;
-using Timberborn.Common;
 using Timberborn.Localization;
-using UnityEngine;
 
 namespace TimberApi.LocalizationSystem
 {
@@ -23,15 +20,12 @@ namespace TimberApi.LocalizationSystem
         public static void GetLocalizationPatch(string localizationKey, ref IDictionary<string, string> __result)
         {
             IDictionary<string, string> localization = LocalizationFetcher.GetLocalization(localizationKey);
-            try
+
+            TimberApi.ConsoleWriter.Log($"Loaded {localization.Count} custom labels");
+
+            foreach (var (key, value) in localization)
             {
-                __result.AddRange(localization);
-                TimberApi.ConsoleWriter.Log($"Loaded {localization.Count} custom labels");
-            }
-            catch (Exception e)
-            {
-                TimberApi.ConsoleWriter.Log(e.ToString(), LogType.Error);
-                throw;
+                __result[key] = value;
             }
         }
     }
