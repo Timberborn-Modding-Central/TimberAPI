@@ -79,6 +79,7 @@ namespace TimberApi.LocalizationSystem
                 }
 
                 TimberApi.ConsoleWriter.Log(message, LogType.Error);
+                
                 return new List<LocalizationRecord>();
             }
         }
@@ -93,7 +94,7 @@ namespace TimberApi.LocalizationSystem
 
             if (errors.IsEmpty())
             {
-                return records.Where(record => record.Id is not null); // TODO: Maybe we should log this?
+                return records.Where(record => record.Id is not null);
             }
 
             foreach (var error in errors)
@@ -127,15 +128,12 @@ namespace TimberApi.LocalizationSystem
         /// <param name="localizationKey"></param>
         private static string? GetLocalizationFile(string pluginLocalizationPath, string localizationKey)
         {
-            if (string.IsNullOrEmpty(localizationKey)
-                || !Directory.Exists(pluginLocalizationPath))
+            if (string.IsNullOrEmpty(localizationKey) || !Directory.Exists(pluginLocalizationPath))
             {
                 return null;
             }
 
-            return File.Exists(Path.Combine(pluginLocalizationPath, localizationKey + ".txt"))
-                ? localizationKey + ".txt"
-                : null;
+            return File.Exists(Path.Combine(pluginLocalizationPath, localizationKey + ".txt")) ? localizationKey + ".txt" : null;
         }
     }
 }
