@@ -24,7 +24,7 @@ namespace TimberApi.LocalizationSystem
             if (localizationKey == LocalizationCodes.Default)
             {
                 return GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey))
-                    .ToDictionary(r => r.Id, r => TextColors.ColorizeText(r.Text))!;
+                    .ToDictionary(record => record.Id, record => TextColors.ColorizeText(record.Text))!;
             }
 
             var userLocalizationRecords = GetLocalizationRecordsFromFiles(localizationKey, GetLocalizationFilePathsFromDependencies(localizationKey));
@@ -32,8 +32,8 @@ namespace TimberApi.LocalizationSystem
 
             return defaultLocalizationRecords
                 .ToDictionary(
-                    r => r.Id,
-                    r => TextColors.ColorizeText(userLocalizationRecords.FirstOrDefault(ur => ur.Id == r.Id)?.Text ?? r.Text)
+                    defaultLocalizationRecord => defaultLocalizationRecord.Id,
+                    defaultLocalizationRecord => TextColors.ColorizeText(userLocalizationRecords.FirstOrDefault(userLocalizationRecord => userLocalizationRecord.Id == defaultLocalizationRecord.Id)?.Text ?? defaultLocalizationRecord.Text)
                 )!;
         }
 
@@ -47,8 +47,8 @@ namespace TimberApi.LocalizationSystem
         {
             return filePaths
                 .SelectMany(localizationFile => TryToReadRecords(localizationKey, localizationFile))
-                .GroupBy(r => r.Id)
-                .Select(g => g.Last())
+                .GroupBy(record => record.Id)
+                .Select(recordsGroupedById => recordsGroupedById.Last())
                 .ToList();
         }
 
@@ -65,17 +65,17 @@ namespace TimberApi.LocalizationSystem
             {
                 return CleanLocalizationRecords(new CsvContext().Read<LocalizationRecord>(localizationFile.FilePath), localizationFile.Mod);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
                 var message = "Unable to parse file for " + localizationKey + ".";
-                if (ex is AggregatedException aggregatedException)
+                if (exception is AggregatedException aggregatedException)
                 {
                     message = message + " First error: " + aggregatedException.m_InnerExceptionsList[0].Message;
                 }
 
                 if (localizationKey == LocalizationCodes.Default)
                 {
-                    throw new InvalidDataException(message, ex);
+                    throw new InvalidDataException(message, exception);
                 }
 
                 TimberApi.ConsoleWriter.Log(message, LogType.Error);
@@ -85,15 +85,15 @@ namespace TimberApi.LocalizationSystem
 
         private static IEnumerable<LocalizationRecord> CleanLocalizationRecords(IEnumerable<LocalizationRecord> localizationRecords, IMod mod)
         {
-            var enumerable = localizationRecords.ToList();
+            var records = localizationRecords.ToList();
             
-            var errors = enumerable
+            var errors = records
                 .Where(record => record.Text is null)
                 .ToList();
 
             if (errors.IsEmpty())
             {
-                return enumerable.Where(r => r.Id is not null); // TODO: Maybe we should log this?
+                return records.Where(record => record.Id is not null); // TODO: Maybe we should log this?
             }
 
             foreach (var error in errors)
