@@ -1,6 +1,10 @@
 ## Unreleased
 
 ### Changes
+
+## TimberAPI v0.6.1.0
+
+### Changes
 - Updated `LocalizationPatch` to allow overwriting localization keys from mods/base game
 - Added `RequiredModDependencies` attribute to only use the configurator when specific mod keys are loaded
 
