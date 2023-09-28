@@ -1,6 +1,9 @@
 ## Unreleased
+Fixed Timber API to work with gameversion 0.5.0.0
 
 ### Changes
+- Updated gamelibs to 0.5.0.0
+- Fixed PickObjectTool
 
 ## TimberAPI v0.6.1.0
 
