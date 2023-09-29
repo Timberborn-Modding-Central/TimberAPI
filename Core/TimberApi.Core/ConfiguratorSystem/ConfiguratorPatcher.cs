@@ -14,13 +14,13 @@ namespace TimberApi.Core.ConfiguratorSystem
         
         public override void Apply(Harmony harmony)
         {
-            harmony.Patch(AccessTools.Method(typeof(GameSceneConfigurator), "Configure"), 
+            harmony.Patch(AccessTools.Method(typeof(GameSceneInstaller), nameof(GameSceneInstaller.Configure)), 
                 new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMasterSceneConfigurator))));
 
-            harmony.Patch(AccessTools.Method(typeof(MainMenuSceneConfigurator), "Configure"),
+            harmony.Patch(AccessTools.Method(typeof(MainMenuSceneConfigurator), nameof(MainMenuSceneConfigurator.Configure)),
                 new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMainMenuSceneConfigurator))));
 
-            harmony.Patch(AccessTools.Method(typeof(MapEditorSceneConfigurator), "Configure"),
+            harmony.Patch(AccessTools.Method(typeof(MapEditorSceneConfigurator), nameof(MainMenuSceneConfigurator.Configure)),
                 new HarmonyMethod(AccessTools.Method(typeof(ConfiguratorPatcher), nameof(PatchMapEditorSceneConfigurator))));
         }
 

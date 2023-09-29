@@ -14,16 +14,13 @@ namespace TimberApi.Core.ConsoleSystem
     {
         public override void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.MultiBind<ILogListener>().ToInstance(GetInstanceFromPrefab<ConsoleMonitor>());
             containerDefinition.Bind<IInternalConsoleWriter>().To<InternalConsoleWriter>().AsSingleton();
             containerDefinition.Bind<IConsoleWriter>().To<ConsoleWriter>().AsSingleton();
         }
 
         public static void Prefab(GameObject parent)
         {
-            PrefabBuilder.Create<ConsoleSystemConfigurator>("ConsoleSystemConfigurator")
-                .AddGameObject("ConsoleMonitor", consoleMonitor => consoleMonitor.AddComponent<UIDocument>().AddComponent<KeyboardController>().AddComponent<ConsoleMonitor>())
-                .FinishAndSetParent(parent);
+            PrefabBuilder.Create<ConsoleSystemConfigurator>("ConsoleSystemConfigurator").FinishAndSetParent(parent);
         }
     }
 }

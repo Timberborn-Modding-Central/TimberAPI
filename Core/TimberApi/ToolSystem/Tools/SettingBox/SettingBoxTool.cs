@@ -1,27 +1,26 @@
 using TimberApi.ToolGroupSystem;
 using Timberborn.Options;
-using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.ToolSystem.Tools.SettingBox
 {
     public class SettingBoxTool : Tool
     {
-        private readonly EventBus _eventBus;
-
         private readonly ToolGroupManager _toolGroupManager;
 
-        public SettingBoxTool(ToolGroup? toolGroup, EventBus eventBus, ToolGroupManager toolGroupManager)
+        private readonly IOptionsBox _optionsBox;
+
+        public SettingBoxTool(ToolGroup? toolGroup, ToolGroupManager toolGroupManager, IOptionsBox optionsBox)
         {
             ToolGroup = toolGroup;
-            _eventBus = eventBus;
             _toolGroupManager = toolGroupManager;
+            _optionsBox = optionsBox;
         }
 
         public override void Enter()
         {
             _toolGroupManager.SwitchToolGroup(new ExitingToolGroup());
-            _eventBus.Post(new ShowOptionsEvent());
+            _optionsBox.Show();
         }
 
         public override void Exit()
