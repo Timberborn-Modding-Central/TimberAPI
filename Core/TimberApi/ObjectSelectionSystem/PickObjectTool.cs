@@ -95,7 +95,7 @@ namespace TimberApi.ObjectSelectionSystem
             {
                 _highlighter.HighlightSecondary(hitObject, _colors.EntitySelection);
                 _warning = _validateCandidate(hitObject.GameObjectFast);
-                if (_inputService is { SelectionStart: true, MouseOverUI: false })
+                if (_inputService is { MainMouseButtonDown: true, MouseOverUI: false })
                 {
                     _toolManager.SwitchToDefaultTool();
                     _callback(hitObject.GameObjectFast);

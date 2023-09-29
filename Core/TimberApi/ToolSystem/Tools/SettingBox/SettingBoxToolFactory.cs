@@ -1,25 +1,25 @@
-using Timberborn.SingletonSystem;
+using Timberborn.Options;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.ToolSystem.Tools.SettingBox
 {
     public class SettingBoxToolFactory : IToolFactory
     {
-        private readonly EventBus _eventBus;
+        private readonly IOptionsBox _optionsBox;
 
         private readonly ToolGroupManager _toolGroupManager;
 
-        public SettingBoxToolFactory(EventBus eventBus, ToolGroupManager toolGroupManager)
+        public SettingBoxToolFactory(ToolGroupManager toolGroupManager, IOptionsBox optionsBox)
         {
-            _eventBus = eventBus;
             _toolGroupManager = toolGroupManager;
+            _optionsBox = optionsBox;
         }
 
         public string Id => "SettingBoxTool";
 
         public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {
-            return new SettingBoxTool(toolGroup, _eventBus, _toolGroupManager);
+            return new SettingBoxTool(toolGroup, _toolGroupManager, _optionsBox);
         }
     }
 }

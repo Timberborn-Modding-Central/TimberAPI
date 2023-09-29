@@ -13,7 +13,7 @@ using TimberApi.Core.ModLoaderSystem.Exceptions;
 using TimberApi.Core.ModLoaderSystem.ObjectDeserializers;
 using TimberApi.ModSystem;
 using Timberborn.Persistence;
-using Timberborn.WorldSerialization;
+using Timberborn.SerializationSystem;
 using UnityEngine;
 using Logger = TimberApi.Core.LoggingSystem.Logger;
 
