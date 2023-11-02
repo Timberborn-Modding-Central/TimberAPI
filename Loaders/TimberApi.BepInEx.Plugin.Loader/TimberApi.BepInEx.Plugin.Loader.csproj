@@ -22,5 +22,9 @@
         <PackageReference Include="BepInEx.Core" Version="5.4.17" />
         <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
         <PackageReference Include="BepInEx.BaseLib" Version="5.4.19" />
+    </ItemGroup>    
+    
+    <ItemGroup>
+      <PackageReference Update="Timberborn.GameLibs" Version="0.5.2-r.0" />
     </ItemGroup>
 </Project>

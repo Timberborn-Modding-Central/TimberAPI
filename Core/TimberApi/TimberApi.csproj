@@ -21,4 +21,8 @@
     <ItemGroup>
         <ProjectReference Include="..\TimberApi.Common\TimberApi.Common.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="Timberborn.GameLibs" Version="0.5.2-r.0" />
+    </ItemGroup>
 </Project>
