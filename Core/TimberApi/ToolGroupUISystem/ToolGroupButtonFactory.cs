@@ -23,7 +23,6 @@ namespace TimberApi.ToolGroupUISystem
 
         private readonly VisualElementLoader _visualElementLoader;
 
-
         public ToolGroupButtonFactory(
             EventBus eventBus,
             ToolGroupManager toolGroupManager,
