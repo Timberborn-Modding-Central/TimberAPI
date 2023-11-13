@@ -20,9 +20,9 @@ namespace TimberApi.ModSystem
 
         string EntryDll { get; }
 
-        string SpecificationPath { get; }
-
         string LanguagePath { get; set; }
+        
+        ISpecificationSettings SpecificationSettings { get; }
 
         ImmutableArray<IModAssetInfo> Assets { get; }
 

@@ -3,9 +3,9 @@
         <!--    Used for automaticly transfer dll to Timberborn location, make a symlink `Timberborn` in the solution folder -->
         <TransferDllPath>$(SolutionDir)Timberborn\BepInEx\plugins\$(SolutionName)\core</TransferDllPath>
         <!--    Set to true if you want to use the live timberborn assemblies of the game, requires symlink -->
-        <UseLocalTimberbornSource>false</UseLocalTimberbornSource>
+        <UseLocalTimberbornSource>true</UseLocalTimberbornSource>
         <!--    Set to true if you want to copy the dll's to game > bepinex > plugins   -->
-        <CopyDllToPath>false</CopyDllToPath>
+        <CopyDllToPath>true</CopyDllToPath>
     </PropertyGroup>
     
     <ItemGroup>

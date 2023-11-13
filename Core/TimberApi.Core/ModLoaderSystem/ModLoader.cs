@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -12,6 +13,7 @@ using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem.Exceptions;
 using TimberApi.Core.ModLoaderSystem.ObjectDeserializers;
 using TimberApi.ModSystem;
+using Timberborn.ConstructionSites;
 using Timberborn.Persistence;
 using Timberborn.SerializationSystem;
 using UnityEngine;
@@ -97,6 +99,9 @@ namespace TimberApi.Core.ModLoaderSystem
 
                     loadableMod.IsLoaded = true;
                     loadedMods.Add(loadableMod);
+                    
+                    EnableSpecificationDirectories(loadableMod, loadedMods);
+                    
                     _consoleWriter.LogAs(loadableMod.Name, $"Loaded version {loadableMod.Version}", LogType.Log);
                 }
                 catch (Exception e)
@@ -106,6 +111,18 @@ namespace TimberApi.Core.ModLoaderSystem
             }
 
             return loadedMods;
+        }
+        
+        /// <summary>
+        /// Will check if specification directory can be loaded based on the given required dependencies.
+        /// When a specification directory cannot be loaded, it will not be included in the SpecificationRepository.
+        /// </summary>
+        private static void EnableSpecificationDirectories(IMod mod, IEnumerable<IMod> loadedMods)
+        {
+            foreach (var specificationDirectory in mod.SpecificationSettings.Directories)
+            {
+                specificationDirectory.Enabled = specificationDirectory.RequiredDependencies.All(dependencyId => loadedMods.Select(loadedMod => loadedMod.UniqueId).Contains(dependencyId));
+            }
         }
 
         /// <summary>

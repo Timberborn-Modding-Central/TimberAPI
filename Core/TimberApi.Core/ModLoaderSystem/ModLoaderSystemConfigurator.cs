@@ -16,6 +16,8 @@ namespace TimberApi.Core.ModLoaderSystem
             containerDefinition.Bind<ModObjectDeserializer>().AsSingleton();
             containerDefinition.Bind<ModDependencyObjectDeserializer>().AsSingleton();
             containerDefinition.Bind<ModAssetInfoObjectDeserializer>().AsSingleton();
+            containerDefinition.Bind<SpecificationSettingsDeserializer>().AsSingleton();
+            containerDefinition.Bind<SpecificationDirectoryDeserializer>().AsSingleton();
 
             containerDefinition.Bind<IModDependencySorter>().To<TopologicalSorter>().AsSingleton();
             containerDefinition.Bind<ModLoader>().AsSingleton();

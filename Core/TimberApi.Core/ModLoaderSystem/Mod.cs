@@ -11,7 +11,7 @@ namespace TimberApi.Core.ModLoaderSystem
     internal class Mod : IMod
     {
         public Mod(string name, Version version, string uniqueId, Version minimumApiVersion, Version minimumGameVersion, string entryDll, string specificationPath, string languagePath,
-            IEnumerable<IModAssetInfo> assets, IEnumerable<IModDependency> dependencies)
+            SpecificationSettings specificationSettings, IEnumerable<IModAssetInfo> assets, IEnumerable<IModDependency> dependencies)
         {
             Name = name;
             Version = version;
@@ -21,6 +21,7 @@ namespace TimberApi.Core.ModLoaderSystem
             EntryDll = entryDll;
             SpecificationPath = specificationPath;
             LanguagePath = languagePath;
+            SpecificationSettings = specificationSettings;
             Assets = assets.ToImmutableArray();
             Dependencies = dependencies.ToImmutableArray();
         }
@@ -40,6 +41,8 @@ namespace TimberApi.Core.ModLoaderSystem
         public string SpecificationPath { get; set; }
 
         public string LanguagePath { get; set; }
+
+        public ISpecificationSettings SpecificationSettings { get; }
 
         public ImmutableArray<IModAssetInfo> Assets { get; set; }
 

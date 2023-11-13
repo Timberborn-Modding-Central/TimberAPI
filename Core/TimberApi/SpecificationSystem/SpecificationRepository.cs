@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TimberApi.Common;
@@ -60,8 +61,11 @@ namespace TimberApi.SpecificationSystem
             );
 
             AddRange(
-                FileService.GetFiles(_modRepository.All().Select(mod => Path.Combine(mod.DirectoryPath, mod.SpecificationPath)), "*.json")
-                    .Select(filePath => new FileSpecification(filePath))
+                FileService.GetFiles(
+                    from mod in _modRepository.All()
+                    let modDirectoryPath = mod.DirectoryPath
+                    from loadedSpecificationPath in mod.SpecificationSettings.LoadableDirectories
+                    select Path.Combine(modDirectoryPath, loadedSpecificationPath).ToLower(), "*.json").Select(filePath => new FileSpecification(filePath))
             );
 
             AddRange(Resources.LoadAll<TextAsset>(SpecificationPath).Select(asset => new TimberbornSpecification(asset)));

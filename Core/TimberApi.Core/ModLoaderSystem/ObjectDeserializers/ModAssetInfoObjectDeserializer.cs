@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TimberApi.Common.ConsoleSystem;
 using TimberApi.Common.Extensions;
 using TimberApi.SceneSystem;
 using Timberborn.Persistence;
@@ -11,13 +10,6 @@ namespace TimberApi.Core.ModLoaderSystem.ObjectDeserializers
 {
     internal class ModAssetInfoObjectDeserializer : IObjectSerializer<ModAssetInfo>
     {
-        private readonly IInternalConsoleWriter _consoleWriter;
-
-        public ModAssetInfoObjectDeserializer(IInternalConsoleWriter consoleWriter)
-        {
-            _consoleWriter = consoleWriter;
-        }
-
         public void Serialize(ModAssetInfo value, IObjectSaver objectSaver)
         {
         }
