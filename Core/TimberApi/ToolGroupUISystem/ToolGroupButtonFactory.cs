@@ -23,6 +23,7 @@ namespace TimberApi.ToolGroupUISystem
 
         private readonly VisualElementLoader _visualElementLoader;
 
+
         public ToolGroupButtonFactory(
             EventBus eventBus,
             ToolGroupManager toolGroupManager,
@@ -49,7 +50,12 @@ namespace TimberApi.ToolGroupUISystem
             var visualElement = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolGroupButton");
             visualElement.Q<VisualElement>("ToolGroupButtonWrapper").Q<VisualElement>("").style.backgroundImage = new StyleBackground(backgroundImage);
             InitializeElement(visualElement, toolGroup, toolGroupImage);
-            var toolGroupButton = new ToolGroupButton(_loc, toolGroup, visualElement, visualElement.Q<VisualElement>("ToolButtons"), visualElement.Q<VisualElement>("ToolGroupButtonWrapper"));
+            var toolGroupButton = new ToolGroupButton(_loc,
+                                                      _toolGroupManager,
+                                                      toolGroup, 
+                                                      visualElement, 
+                                                      visualElement.Q<VisualElement>("ToolButtons"), 
+                                                      visualElement.Q<VisualElement>("ToolGroupButtonWrapper"));
             _eventBus.Register(toolGroupButton);
             _toolButtonService.Add(toolGroupButton);
             return toolGroupButton;

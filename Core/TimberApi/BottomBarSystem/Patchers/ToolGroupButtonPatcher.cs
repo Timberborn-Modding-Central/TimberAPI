@@ -33,8 +33,9 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public override void Apply(Harmony harmony)
         {
+            
             harmony.Patch(
-                GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.ContainsTool)),
+                AccessTools.PropertyGetter(typeof(ToolGroupButton), nameof(ToolGroupButton.IsVisible)),
                 GetHarmonyMethod(nameof(ContainsToolPatch))
             );
 
@@ -71,7 +72,7 @@ namespace TimberApi.BottomBarSystem.Patchers
 
             __result = _toolGroupService
                 .GetToolGroupButtonByGroupId(apiToolGroup.Id)
-                .Any(button => button.ContainsTool());
+                .Any(button => button.IsVisible);
 
             return false;
         }

@@ -30,6 +30,8 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
 
         private readonly UISoundController _uiSoundController;
 
+        private readonly BlockObjectUnlockerService _blockObjectUnlockerService;
+
         public PlaceableObjectToolFactory(
             ObjectCollectionService objectCollectionService,
             BlockObjectToolDescriber blockObjectToolDescriber,
@@ -38,7 +40,8 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
             PreviewPlacerFactory previewPlacerFactory,
             UISoundController uiSoundController,
             BlockObjectPlacerService blockObjectPlacerService,
-            MapEditorMode mapEditorMode)
+            MapEditorMode mapEditorMode,
+            BlockObjectUnlockerService blockObjectUnlockerService)
         {
             _objectCollectionService = objectCollectionService;
             _blockObjectToolDescriber = blockObjectToolDescriber;
@@ -48,6 +51,7 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
             _uiSoundController = uiSoundController;
             _blockObjectPlacerService = blockObjectPlacerService;
             _mapEditorMode = mapEditorMode;
+            _blockObjectUnlockerService = blockObjectUnlockerService;
         }
 
         public override string Id => "PlaceableObjectTool";
@@ -60,7 +64,15 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
             placeableBlockObject._devModeTool = toolSpecification.DevMode;
             placeableBlockObject._toolOrder = toolSpecification.Order;
 
-            var blockObjectTool = new BlockObjectTool(_blockObjectToolDescriber, _inputService, _areaPickerFactory, _previewPlacerFactory, _uiSoundController, _blockObjectPlacerService, _mapEditorMode);
+            var blockObjectTool = new BlockObjectTool(
+                _blockObjectToolDescriber, 
+                _inputService, 
+                _areaPickerFactory, 
+                _previewPlacerFactory, 
+                _uiSoundController, 
+                _blockObjectPlacerService,
+                _blockObjectUnlockerService,
+                _mapEditorMode);
 
             if(toolGroup == null)
             {

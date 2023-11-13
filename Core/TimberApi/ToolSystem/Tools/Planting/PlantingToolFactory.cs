@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Timberborn.CoreUI;
 using Timberborn.Localization;
 using Timberborn.Persistence;
 using Timberborn.Planting;
@@ -24,13 +25,16 @@ namespace TimberApi.ToolSystem.Tools.Planting
 
         private readonly SelectionToolProcessorFactory _selectionToolProcessorFactory;
 
+        private readonly DialogBoxShower _dialogBoxShower;
+
         public PlantingToolFactory(
             PlantableDescriber plantableDescriber,
             PlantingSelectionService plantingSelectionService,
             DevModePlantableSpawner devModePlantableSpawner,
             SelectionToolProcessorFactory selectionToolProcessorFactory,
             ILoc loc,
-            ObjectCollectionService objectCollectionService)
+            ObjectCollectionService objectCollectionService,
+            DialogBoxShower dialogBoxShower)
         {
             _plantableDescriber = plantableDescriber;
             _plantingSelectionService = plantingSelectionService;
@@ -38,6 +42,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
             _selectionToolProcessorFactory = selectionToolProcessorFactory;
             _loc = loc;
             _objectCollectionService = objectCollectionService;
+            _dialogBoxShower = dialogBoxShower;
         }
 
         public override string Id => "PlantingTool";
@@ -47,7 +52,15 @@ namespace TimberApi.ToolSystem.Tools.Planting
             var prefab = _objectCollectionService.GetAllMonoBehaviours<Prefab>().First(o => o.IsNamedExactly(toolInformation.PrefabName));
             var plantable = prefab.GetComponentFast<Plantable>();
 
-            return new PlantingTool(_plantableDescriber, _plantingSelectionService, _devModePlantableSpawner, _selectionToolProcessorFactory, plantable, GetPlanterBuildingName(plantable), toolGroup);
+            return new PlantingTool(
+                _plantableDescriber, 
+                _plantingSelectionService, 
+                _devModePlantableSpawner,
+                _loc,
+                _dialogBoxShower,
+                _selectionToolProcessorFactory, 
+                plantable, 
+                GetPlanterBuildingName(plantable), toolGroup);
         }
 
         protected override PlantingToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)
