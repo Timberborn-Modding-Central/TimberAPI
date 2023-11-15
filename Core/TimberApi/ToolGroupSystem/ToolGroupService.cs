@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace TimberApi.ToolGroupSystem
 
             var toolGroupButtons = new Dictionary<string, ToolGroupButton>();
 
-            foreach (var toolGroupSpecification in _toolGroupSpecificationService.ToolGroupSpecifications)
+            foreach (var toolGroupSpecification in _toolGroupSpecificationService.ToolGroupSpecifications.OrderBy(x => x.Layout).ThenBy(x => x.Order))
             {
                 var toolGroup = _toolGroupFactoryService.Get(toolGroupSpecification.Type).Create(toolGroupSpecification);
 

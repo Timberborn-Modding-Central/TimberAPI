@@ -16,7 +16,7 @@ namespace TimberApi.BottomBarSystem.Patchers
         public override void Apply(Harmony harmony)
         {
             harmony.Patch(
-                GetMethodInfo<ToolButton>(nameof(ToolButton.OnButtonClicked)),
+                GetMethodInfo<ToolButton>(nameof(ToolButton.Select)),
                 prefix: GetHarmonyMethod(nameof(OnButtonClickedPatch))
             );
         }

@@ -36,9 +36,9 @@ namespace TimberApi.BottomBarSystem.Patchers
             {
                 return;
             }
-            
+
             ____eventBus.Post(new ToolGroupExitedEvent(__instance.ActiveToolGroup));
-            
+
             __instance.ActiveToolGroup = ExitingToolGroup;
         }
     }

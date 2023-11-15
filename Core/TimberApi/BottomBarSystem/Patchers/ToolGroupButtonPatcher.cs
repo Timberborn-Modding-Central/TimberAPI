@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using TimberApi.Common.SingletonSystem;
@@ -33,8 +35,13 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public override void Apply(Harmony harmony)
         {
+
             harmony.Patch(
-                GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.ContainsTool)),
+                GetMethodInfo<ToolButtonService>(nameof(ToolButtonService.Add), new Type[] { typeof(ToolButton) }),
+                GetHarmonyMethod(nameof(AddPatch)));
+
+            harmony.Patch(
+                AccessTools.PropertyGetter(typeof(ToolGroupButton), nameof(ToolGroupButton.IsVisible)),
                 GetHarmonyMethod(nameof(ContainsToolPatch))
             );
 
@@ -49,6 +56,33 @@ namespace TimberApi.BottomBarSystem.Patchers
             );
         }
         
+        public static bool AddPatch(ToolButton toolButton, ToolButtonService __instance)
+        {
+            if(toolButton.Tool?.Default == true)
+            {
+                __instance._toolButtons.Insert(0, toolButton);
+            }
+            else
+            {
+                __instance._toolButtons.Insert(__instance._toolButtons.Count > 0 ? 1 : 0, toolButton);
+            }
+            if (toolButton.Tool?.ToolGroup == null)
+            {
+                if (toolButton.Root.Q<VisualElement>("ToolImage")?.style.backgroundImage.ToString() != "Options (UnityEngine.Sprite)")
+                {
+                    if (toolButton.Tool?.Default == true)
+                    {
+                        __instance._rootButtons.Insert(0, toolButton);
+                    }
+                    else
+                    {
+                        __instance._rootButtons.Insert(1, toolButton);
+                    }
+                }
+            }
+            return false;
+        }
+
         public override bool ShouldApply(SceneEntrypoint? sceneEntrypoint)
         {
             return sceneEntrypoint == SceneEntrypoint.InGame;
@@ -71,7 +105,7 @@ namespace TimberApi.BottomBarSystem.Patchers
 
             __result = _toolGroupService
                 .GetToolGroupButtonByGroupId(apiToolGroup.Id)
-                .Any(button => button.ContainsTool());
+                .Any(button => button.IsVisible);
 
             return false;
         }

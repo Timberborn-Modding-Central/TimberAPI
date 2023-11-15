@@ -23,6 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Update="Timberborn.GameLibs" Version="0.5.2-r.0" />
+      <PackageReference Update="Timberborn.GameLibs" Version="0.5.3-r.1" />
     </ItemGroup>
 </Project>
