@@ -27,6 +27,8 @@ namespace TimberApi.ToolSystem.Tools.Planting
 
         private readonly DialogBoxShower _dialogBoxShower;
 
+        private readonly ToolUnlockingService _toolUnlockingService;
+
         public PlantingToolFactory(
             PlantableDescriber plantableDescriber,
             PlantingSelectionService plantingSelectionService,
@@ -34,7 +36,8 @@ namespace TimberApi.ToolSystem.Tools.Planting
             SelectionToolProcessorFactory selectionToolProcessorFactory,
             ILoc loc,
             ObjectCollectionService objectCollectionService,
-            DialogBoxShower dialogBoxShower)
+            DialogBoxShower dialogBoxShower,
+            ToolUnlockingService toolUnlockingService)
         {
             _plantableDescriber = plantableDescriber;
             _plantingSelectionService = plantingSelectionService;
@@ -43,6 +46,7 @@ namespace TimberApi.ToolSystem.Tools.Planting
             _loc = loc;
             _objectCollectionService = objectCollectionService;
             _dialogBoxShower = dialogBoxShower;
+            _toolUnlockingService = toolUnlockingService;
         }
 
         public override string Id => "PlantingTool";
@@ -56,11 +60,11 @@ namespace TimberApi.ToolSystem.Tools.Planting
                 _plantableDescriber, 
                 _plantingSelectionService, 
                 _devModePlantableSpawner,
-                _loc,
-                _dialogBoxShower,
+                _toolUnlockingService,
                 _selectionToolProcessorFactory, 
                 plantable, 
-                GetPlanterBuildingName(plantable), toolGroup);
+                GetPlanterBuildingName(plantable), 
+                toolGroup);
         }
 
         protected override PlantingToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)
