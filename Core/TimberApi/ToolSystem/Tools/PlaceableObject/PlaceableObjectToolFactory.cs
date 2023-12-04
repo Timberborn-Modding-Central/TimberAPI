@@ -30,7 +30,7 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
 
         private readonly UISoundController _uiSoundController;
 
-        private readonly BlockObjectUnlockerService _blockObjectUnlockerService;
+        private readonly ToolUnlockingService _toolUnlockingService;
 
         public PlaceableObjectToolFactory(
             ObjectCollectionService objectCollectionService,
@@ -41,7 +41,7 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
             UISoundController uiSoundController,
             BlockObjectPlacerService blockObjectPlacerService,
             MapEditorMode mapEditorMode,
-            BlockObjectUnlockerService blockObjectUnlockerService)
+            ToolUnlockingService toolUnlockingService)
         {
             _objectCollectionService = objectCollectionService;
             _blockObjectToolDescriber = blockObjectToolDescriber;
@@ -51,7 +51,7 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
             _uiSoundController = uiSoundController;
             _blockObjectPlacerService = blockObjectPlacerService;
             _mapEditorMode = mapEditorMode;
-            _blockObjectUnlockerService = blockObjectUnlockerService;
+            _toolUnlockingService = toolUnlockingService;
         }
 
         public override string Id => "PlaceableObjectTool";
@@ -71,8 +71,8 @@ namespace TimberApi.ToolSystem.Tools.PlaceableObject
                 _previewPlacerFactory, 
                 _uiSoundController, 
                 _blockObjectPlacerService,
-                _blockObjectUnlockerService,
-                _mapEditorMode);
+                _mapEditorMode,
+                _toolUnlockingService);
 
             if(toolGroup == null)
             {

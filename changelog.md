@@ -1,6 +1,8 @@
 ## Unreleased
+Necessary changes to make TimberAPI work with game v0.5.4.0
 
 ### Changes
+- Necessary changes to make TimberAPI work with game v0.5.4.0
 
 ## TimberAPI v0.6.3.0
 Updated gamelibs to v0.5.3.0 and fixes to make TimberAPI work with game version 0.5.3.0
