@@ -25,4 +25,4 @@ Unofficial API to enable easier Timberborn modding
 **[Documentation for TimberAPI](https://github.com/Timberborn-Modding-Central/TimberAPI/wiki/TimberAPI-Feature-Guide)**
 
 ## Provided Sample Plugin with API examples
-**[Example Plugin](https://github.com/Timberborn-Modding-Central/TimberAPI/blob/main/TimberAPIExample/TimberApiExamplePlugin.cs)**
+**[Example Plugin](https://github.com/Timberborn-Modding-Central/TimberAPI/blob/main/Examples/TimberApiExamplePlugin.cs)**
