@@ -68,6 +68,24 @@ namespace TimberApi.UiBuilderSystem
 
         public UIBoxBuilder AddCloseButton(string name = null)
         {
+// // Old, lacks ability to be extended easily, specially with complex components
+// _box.AddPreset(test => test.Sliders().SliderDiamond(10, 100, builder: builder => builder.SetLowValue(10).SetHighValue(100)));
+//
+// // New option 1, There is no way to make the options discoverable by which preset type they belong (slider, buttons, etc)
+// // Builder Func would still be available here, eg. builder => builder.SetLowValue(10)
+// _box.AddPreset("SliderDiamond", new SliderOptions(10, 100)); // Diamond slider with a value of min: 10, max: 100
+// _box.AddPreset("Button", new ButtonOptions("text.locKey", 10, 10)); // locKey, height, width
+//
+// // New option 2, other option
+// _box.AddPreset("SliderDiamond", builder => builder.SetLowValue(10).SetHighValue(100));
+// _box.AddPreset("SliderDiamond", builder => builder.SetLocKey(10).SetHeight(10).SetWidth(10));
+//
+// // Wish I was possible. or something similar
+// _box.AddPreset("SliderDiamond", 10, 100); // Diamond slider with a value of min: 10, max: 100
+// _box.AddPreset("Button", "text.locKey", 10, 10); // locKey, height, width
+
+  
+            
             _box.AddPreset(factory => factory.Buttons().Close(name, builder: builder => builder.SetStyle(style =>
             {
                 style.position = Position.Absolute;

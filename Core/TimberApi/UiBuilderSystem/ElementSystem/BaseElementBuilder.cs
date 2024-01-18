@@ -6,7 +6,12 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.UiBuilderSystem.ElementSystem
 {
-    public abstract class BaseElementBuilder<TElement, TBuilder> where TElement : VisualElement where TBuilder : BaseElementBuilder<TElement, TBuilder>
+    public interface TestKok
+    {
+        
+    }
+    
+    public abstract class BaseElementBuilder<TElement, TBuilder> : TestKok where TElement : VisualElement where TBuilder : BaseElementBuilder<TElement, TBuilder>
     {
         private readonly IAssetLoader _assetLoader;
 
@@ -67,6 +72,11 @@ namespace TimberApi.UiBuilderSystem.ElementSystem
         public TBuilder AddPreset(Func<UiPresetFactory, VisualElement> presetFactory)
         {
             Root.Add(presetFactory.Invoke(_uiPresetFactory));
+            return BuilderInstance;
+        }
+        
+        public TBuilder AddPreset<TABuilder>(string preset, Func<TABuilder, TABuilder> presetFactory) where TABuilder : TestKok
+        {
             return BuilderInstance;
         }
 

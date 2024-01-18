@@ -1,4 +1,6 @@
 using TimberApi.AssetSystem;
+using TimberApi.PresetSystem;
+using TimberApi.PresetSystem.PresetOptions;
 using TimberApi.UiBuilderSystem.PresetSystem;
 using Timberborn.CoreUI;
 using UnityEngine;
@@ -7,6 +9,22 @@ using LocalizableButton = TimberApi.UiBuilderSystem.CustomElements.LocalizableBu
 
 namespace TimberApi.UiBuilderSystem.ElementSystem
 {
+    public class ButtonBuilderOptions : PresetOption, ISizePreset, ILocalizationPreset
+    {
+        public ButtonBuilderOptions(string locKey, Length? width, Length? height)
+        {
+            LocKey = locKey;
+            Width = width;
+            Height = height;
+        }
+
+        public string LocKey { get; set; }
+        
+        public Length? Width { get; set; }
+
+        public Length? Height { get; set; }
+    }
+    
     public class ButtonBuilder : BaseElementBuilder<LocalizableButton, ButtonBuilder>, ITextElementBuilder<ButtonBuilder>
     {
         public ButtonBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader, UiPresetFactory uiPresetFactory) : base(new LocalizableButton(), visualElementInitializer,
