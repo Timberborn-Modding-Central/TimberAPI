@@ -7,9 +7,13 @@ using TimberApi.DependencyContainerSystem;
 using TimberApi.HarmonyPatcherSystem;
 using TimberApi.SceneSystem;
 using TimberApi.ToolGroupSystem;
+using TimberApi.ToolSystem;
+using Timberborn.Common;
 using Timberborn.CoreUI;
+using Timberborn.CursorToolSystem;
 using Timberborn.Debugging;
 using Timberborn.ToolSystem;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace TimberApi.BottomBarSystem.Patchers
@@ -35,11 +39,15 @@ namespace TimberApi.BottomBarSystem.Patchers
 
         public override void Apply(Harmony harmony)
         {
-
             harmony.Patch(
                 GetMethodInfo<ToolButtonService>(nameof(ToolButtonService.Add), new Type[] { typeof(ToolButton) }),
                 GetHarmonyMethod(nameof(AddPatch)));
 
+            harmony.Patch(
+                AccessTools.PropertyGetter(typeof(ToolButton), nameof(ToolButton.IsVisible)),
+                postfix: GetHarmonyMethod(nameof(TestButtonPatch))
+            );
+            
             harmony.Patch(
                 AccessTools.PropertyGetter(typeof(ToolGroupButton), nameof(ToolGroupButton.IsVisible)),
                 GetHarmonyMethod(nameof(ContainsToolPatch))
@@ -54,10 +62,60 @@ namespace TimberApi.BottomBarSystem.Patchers
                 GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.OnToolGroupExited)),
                 GetHarmonyMethod(nameof(OnToolGroupExited))
             );
+            
+            harmony.Patch(
+                GetMethodInfo<ToolbarButtonRetriever>(nameof(ToolbarButtonRetriever.GetActiveButtonIndex)),
+                GetHarmonyMethod(nameof(TestPatch))
+            );
+        }
+        
+        public static void TestButtonPatch(ref bool __result, ToolButton __instance)
+        {
+            Debug.LogWarning(__result);
+            
+            Debug.LogWarning("ToolGroup: " + __instance.Tool.ToolGroup);
+            Debug.LogWarning("Active toolgroup: " + __instance._toolGroupManager.ActiveToolGroup);
+        }
+        
+        public static void TestPatch(IReadOnlyList<IToolbarButton> buttons, int __result)
+        {
+
+            
+            var toolbarButton = buttons.LastOrDefault((Func<IToolbarButton, bool>) (button => button.IsActive));
+            var index = buttons.IndexOf(toolbarButton);
+
+            
+            
+            Debug.LogWarning(index);
+            foreach (var button in buttons)
+            {
+                Debug.Log(button.IsVisible);
+            }
+            Debug.LogError(buttons.Count);
+
+
+
+
+                
         }
         
         public static bool AddPatch(ToolButton toolButton, ToolButtonService __instance)
         {
+            __instance._toolButtons.Add(toolButton);
+            
+            if (toolButton.Tool.ToolGroup != null)
+            {
+                return false;
+            }
+
+            if (toolButton.Tool is not IUnselectableTool && toolButton.Tool is not CursorTool)
+            {
+                __instance._rootButtons.Add(toolButton);
+            }
+
+            return false;
+            
+            
             if(toolButton.Tool?.Default == true)
             {
                 __instance._toolButtons.Insert(0, toolButton);
