@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using TimberApi.AssetSystem.Exceptions;
 using TimberApi.ShaderSystem;
 using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
 namespace TimberApi.AssetSystem

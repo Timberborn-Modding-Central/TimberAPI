@@ -14,6 +14,7 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
             containerDefinition.MultiBind<IToolFactory>().To<DemolishableSelectionToolFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolFactory>().To<EntityBlockObjectDeletionToolFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolFactory>().To<BuildingDeconstructionToolFactory>().AsSingleton();
+            containerDefinition.MultiBind<IToolFactory>().To<DeleteRubbleToolFactory>().AsSingleton();
             containerDefinition.MultiBind<ISpecificationGenerator>().To<DemolishingToolGenerator>().AsSingleton();
         }
     }

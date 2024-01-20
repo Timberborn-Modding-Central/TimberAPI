@@ -17,7 +17,10 @@ namespace TimberApi.ToolSystem.Tools.BuilderPriority
 
         protected override Tool CreateTool(ToolSpecification toolSpecification, BuilderPriorityToolToolInformation toolInformation, ToolGroup? toolGroup)
         {
-            return _builderPriorityToolFactory.Create(toolInformation.Priority);
+            var priorityTool = _builderPriorityToolFactory.Create(toolInformation.Priority);
+            priorityTool.ToolGroup = toolGroup;
+            
+            return priorityTool;
         }
 
         protected override BuilderPriorityToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)

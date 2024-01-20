@@ -1,4 +1,5 @@
 using System;
+using TimberApi.ToolGroupSystem;
 using Timberborn.AssetSystem;
 using Timberborn.CoreUI;
 using Timberborn.Localization;
@@ -56,7 +57,7 @@ namespace TimberApi.ToolGroupUISystem
                                                       visualElement.Q<VisualElement>("ToolButtons"), 
                                                       visualElement.Q<VisualElement>("ToolGroupButtonWrapper"));
             _eventBus.Register(toolGroupButton);
-            _toolButtonService.Add(toolGroupButton);
+            Add((IToolGroup)toolGroup, toolGroupButton);
             return toolGroupButton;
         }
 
@@ -82,6 +83,16 @@ namespace TimberApi.ToolGroupUISystem
             {
                 _toolGroupManager.SwitchToolGroup(toolGroup);
                 tooltip.parent.ToggleDisplayStyle(false);
+            }
+        }
+        
+        private void Add(IToolGroup toolGroup, ToolGroupButton toolButton)
+        {
+            _toolButtonService._toolGroupButtons.Add(toolButton);
+
+            if (toolGroup.GroupId == null)
+            {
+                _toolButtonService._rootButtons.Add(toolButton);
             }
         }
     }
