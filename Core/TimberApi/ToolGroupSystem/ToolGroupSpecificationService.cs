@@ -3,7 +3,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using TimberApi.Common.SingletonSystem;
 using Timberborn.Persistence;
-using UnityEngine;
 
 namespace TimberApi.ToolGroupSystem
 {
