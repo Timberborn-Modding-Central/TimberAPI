@@ -24,8 +24,6 @@ namespace TimberApi.BottomBarSystem.Patchers
         
         private static BottomBarService _bottomBarService = null!;
 
-        private static DevModeManager _devModeManager = null!;
-
         private static readonly string ActiveClassName = "button--active";
 
         public override string UniqueId => "TimberApi.ToolGroupButton";
@@ -33,7 +31,6 @@ namespace TimberApi.BottomBarSystem.Patchers
         public void Load()
         {
             _bottomBarService = DependencyContainer.GetInstance<BottomBarService>();
-            _devModeManager = DependencyContainer.GetInstance<DevModeManager>();
             _toolGroupService = DependencyContainer.GetInstance<ToolGroupService>();
         }
 
@@ -42,11 +39,6 @@ namespace TimberApi.BottomBarSystem.Patchers
             harmony.Patch(
                 GetMethodInfo<ToolButtonService>(nameof(ToolButtonService.Add), new Type[] { typeof(ToolButton) }),
                 GetHarmonyMethod(nameof(AddPatch)));
-
-            harmony.Patch(
-                AccessTools.PropertyGetter(typeof(ToolButton), nameof(ToolButton.IsVisible)),
-                postfix: GetHarmonyMethod(nameof(TestButtonPatch))
-            );
             
             harmony.Patch(
                 AccessTools.PropertyGetter(typeof(ToolGroupButton), nameof(ToolGroupButton.IsVisible)),
@@ -62,43 +54,8 @@ namespace TimberApi.BottomBarSystem.Patchers
                 GetMethodInfo<ToolGroupButton>(nameof(ToolGroupButton.OnToolGroupExited)),
                 GetHarmonyMethod(nameof(OnToolGroupExited))
             );
-            
-            harmony.Patch(
-                GetMethodInfo<ToolbarButtonRetriever>(nameof(ToolbarButtonRetriever.GetActiveButtonIndex)),
-                GetHarmonyMethod(nameof(TestPatch))
-            );
         }
-        
-        public static void TestButtonPatch(ref bool __result, ToolButton __instance)
-        {
-            Debug.LogWarning(__result);
-            
-            Debug.LogWarning("ToolGroup: " + __instance.Tool.ToolGroup);
-            Debug.LogWarning("Active toolgroup: " + __instance._toolGroupManager.ActiveToolGroup);
-        }
-        
-        public static void TestPatch(IReadOnlyList<IToolbarButton> buttons, int __result)
-        {
 
-            
-            var toolbarButton = buttons.LastOrDefault((Func<IToolbarButton, bool>) (button => button.IsActive));
-            var index = buttons.IndexOf(toolbarButton);
-
-            
-            
-            Debug.LogWarning(index);
-            foreach (var button in buttons)
-            {
-                Debug.Log(button.IsVisible);
-            }
-            Debug.LogError(buttons.Count);
-
-
-
-
-                
-        }
-        
         public static bool AddPatch(ToolButton toolButton, ToolButtonService __instance)
         {
             __instance._toolButtons.Add(toolButton);
@@ -113,31 +70,6 @@ namespace TimberApi.BottomBarSystem.Patchers
                 __instance._rootButtons.Add(toolButton);
             }
 
-            return false;
-            
-            
-            if(toolButton.Tool?.Default == true)
-            {
-                __instance._toolButtons.Insert(0, toolButton);
-            }
-            else
-            {
-                __instance._toolButtons.Insert(__instance._toolButtons.Count > 0 ? 1 : 0, toolButton);
-            }
-            if (toolButton.Tool?.ToolGroup == null)
-            {
-                if (toolButton.Root.Q<VisualElement>("ToolImage")?.style.backgroundImage.ToString() != "Options (UnityEngine.Sprite)")
-                {
-                    if (toolButton.Tool?.Default == true)
-                    {
-                        __instance._rootButtons.Insert(0, toolButton);
-                    }
-                    else
-                    {
-                        __instance._rootButtons.Insert(1, toolButton);
-                    }
-                }
-            }
             return false;
         }
 
