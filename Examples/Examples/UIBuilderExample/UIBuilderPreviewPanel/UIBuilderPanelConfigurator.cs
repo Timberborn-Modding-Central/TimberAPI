@@ -7,7 +7,6 @@ using TimberApi.UiBuilderSystem;
 using TimberApi.UiBuilderSystem.CustomElements;
 using TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel.Previews;
 using Timberborn.MainMenuScene;
-using Timberborn.Options;
 using UnityEngine.UIElements;
 
 namespace TimberAPIExample.Examples.UIBuilderExample.UIBuilderPreviewPanel

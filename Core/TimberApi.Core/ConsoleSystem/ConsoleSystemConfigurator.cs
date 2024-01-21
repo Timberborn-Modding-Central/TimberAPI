@@ -2,11 +2,8 @@
 using Bindito.Unity;
 using TimberApi.Common.ConsoleSystem;
 using TimberApi.Common.Helpers;
-using TimberApi.Common.LoggingSystem;
 using TimberApi.ConsoleSystem;
-using Timberborn.InputSystem;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace TimberApi.Core.ConsoleSystem
 {

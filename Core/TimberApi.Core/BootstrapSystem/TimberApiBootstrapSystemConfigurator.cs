@@ -9,7 +9,6 @@ using TimberApi.Core.ConsoleSystem;
 using TimberApi.Core.LoggingSystem;
 using TimberApi.Core.ModLoaderSystem;
 using TimberApi.HarmonyPatcherSystem;
-using TimberApi.SceneSystem;
 
 namespace TimberApi.Core.BootstrapSystem
 {
