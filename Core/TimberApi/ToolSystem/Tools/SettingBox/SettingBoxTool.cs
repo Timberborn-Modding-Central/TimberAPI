@@ -4,7 +4,7 @@ using Timberborn.ToolSystem;
 
 namespace TimberApi.ToolSystem.Tools.SettingBox
 {
-    public class SettingBoxTool : Tool
+    public class SettingBoxTool : Tool, IUnselectableTool
     {
         private readonly ToolGroupManager _toolGroupManager;
 

@@ -1,9 +1,6 @@
 ﻿using HarmonyLib;
 using TimberApi.ModSystem;
 using TimberApi.ConsoleSystem;
-using Bindito.Core;
-using TimberApi.ConfiguratorSystem;
-using TimberApi.SceneSystem;
 using TimberAPIExample.Examples.ConfigExample;
 
 namespace TimberAPIExample

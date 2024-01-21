@@ -7,9 +7,13 @@ using TimberApi.DependencyContainerSystem;
 using TimberApi.HarmonyPatcherSystem;
 using TimberApi.SceneSystem;
 using TimberApi.ToolGroupSystem;
+using TimberApi.ToolSystem;
+using Timberborn.Common;
 using Timberborn.CoreUI;
+using Timberborn.CursorToolSystem;
 using Timberborn.Debugging;
 using Timberborn.ToolSystem;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace TimberApi.BottomBarSystem.Patchers
@@ -20,8 +24,6 @@ namespace TimberApi.BottomBarSystem.Patchers
         
         private static BottomBarService _bottomBarService = null!;
 
-        private static DevModeManager _devModeManager = null!;
-
         private static readonly string ActiveClassName = "button--active";
 
         public override string UniqueId => "TimberApi.ToolGroupButton";
@@ -29,17 +31,15 @@ namespace TimberApi.BottomBarSystem.Patchers
         public void Load()
         {
             _bottomBarService = DependencyContainer.GetInstance<BottomBarService>();
-            _devModeManager = DependencyContainer.GetInstance<DevModeManager>();
             _toolGroupService = DependencyContainer.GetInstance<ToolGroupService>();
         }
 
         public override void Apply(Harmony harmony)
         {
-
             harmony.Patch(
                 GetMethodInfo<ToolButtonService>(nameof(ToolButtonService.Add), new Type[] { typeof(ToolButton) }),
                 GetHarmonyMethod(nameof(AddPatch)));
-
+            
             harmony.Patch(
                 AccessTools.PropertyGetter(typeof(ToolGroupButton), nameof(ToolGroupButton.IsVisible)),
                 GetHarmonyMethod(nameof(ContainsToolPatch))
@@ -55,31 +55,21 @@ namespace TimberApi.BottomBarSystem.Patchers
                 GetHarmonyMethod(nameof(OnToolGroupExited))
             );
         }
-        
+
         public static bool AddPatch(ToolButton toolButton, ToolButtonService __instance)
         {
-            if(toolButton.Tool?.Default == true)
+            __instance._toolButtons.Add(toolButton);
+            
+            if (toolButton.Tool.ToolGroup != null)
             {
-                __instance._toolButtons.Insert(0, toolButton);
+                return false;
             }
-            else
+
+            if (toolButton.Tool is not IUnselectableTool && toolButton.Tool is not CursorTool)
             {
-                __instance._toolButtons.Insert(__instance._toolButtons.Count > 0 ? 1 : 0, toolButton);
+                __instance._rootButtons.Add(toolButton);
             }
-            if (toolButton.Tool?.ToolGroup == null)
-            {
-                if (toolButton.Root.Q<VisualElement>("ToolImage")?.style.backgroundImage.ToString() != "Options (UnityEngine.Sprite)")
-                {
-                    if (toolButton.Tool?.Default == true)
-                    {
-                        __instance._rootButtons.Insert(0, toolButton);
-                    }
-                    else
-                    {
-                        __instance._rootButtons.Insert(1, toolButton);
-                    }
-                }
-            }
+
             return false;
         }
 

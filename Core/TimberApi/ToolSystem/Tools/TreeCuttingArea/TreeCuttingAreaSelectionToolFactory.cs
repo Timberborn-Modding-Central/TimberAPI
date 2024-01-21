@@ -16,6 +16,8 @@ namespace TimberApi.ToolSystem.Tools.TreeCuttingArea
 
         public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
         {
+            _treeCuttingAreaSelectionTool.ToolGroup = toolGroup;
+            
             return _treeCuttingAreaSelectionTool;
         }
     }

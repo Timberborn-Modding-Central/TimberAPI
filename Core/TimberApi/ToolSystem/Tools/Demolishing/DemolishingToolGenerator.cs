@@ -11,6 +11,7 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
         {
             yield return CreateDemolishingToolGroup();
             yield return DemolishableSelectionTool();
+            yield return DeleteRecoveredGoodStackTool();
             yield return DemolishableUnselectionTool();
             yield return BuildingDeconstructionTool();
             yield return EntityBlockObjectDeletionTool();
@@ -24,10 +25,29 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 GroupId = "Demolishing",
                 Type = "EntityBlockObjectDeletionTool",
                 Layout = "Default",
-                Order = 20,
+                Order = 30,
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/DeleteObjectIcon",
+                DevMode = false,
+                Hidden = false,
+            });
+
+            return new GeneratedSpecification(json, "EntityBlockObjectDeletion", "ToolSpecification");
+        }
+        
+        private static GeneratedSpecification DeleteRecoveredGoodStackTool()
+        {
+            var json = JsonConvert.SerializeObject(new
+            {
+                Id = "DeleteRecoveredGoodStack",
+                GroupId = "Demolishing",
+                Type = "DeleteRecoveredGoodStackTool",
+                Layout = "Default",
+                Order = 10,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/DeleteRecoveredGoodStackToolIcon",
                 DevMode = false,
                 Hidden = false,
             });
@@ -62,7 +82,7 @@ namespace TimberApi.ToolSystem.Tools.Demolishing
                 GroupId = "Demolishing",
                 Type = "DemolishableSelectionTool",
                 Layout = "Default",
-                Order = 10,
+                Order = 20,
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",
                 Icon = "Sprites/BottomBar/DemolishResourcesTool",
