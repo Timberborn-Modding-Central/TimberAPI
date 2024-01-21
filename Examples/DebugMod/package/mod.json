@@ -1,0 +1,8 @@
+{
+  "Name": "DebugMod",
+  "Version": "1.0.0",
+  "UniqueId": "debug_mod",
+  "MinimumApiVersion": "1.0.0",
+  "MinimumGameVersion": "0.0.0.0",
+  "EntryDll": "DebugMod.dll"
+}

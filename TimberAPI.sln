@@ -23,6 +23,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TimberApi.SharedLoader", "L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimberAPIExample", "Examples\TimberAPIExample.csproj", "{342850DB-A32D-4E1D-B4E5-0E5E811C1E1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugMod", "Examples\DebugMod\DebugMod.csproj", "{442F26D7-B238-4ECA-88BE-AF0152CF217A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,12 @@ Global
 		{342850DB-A32D-4E1D-B4E5-0E5E811C1E1E}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{342850DB-A32D-4E1D-B4E5-0E5E811C1E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{342850DB-A32D-4E1D-B4E5-0E5E811C1E1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{442F26D7-B238-4ECA-88BE-AF0152CF217A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{442F26D7-B238-4ECA-88BE-AF0152CF217A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{442F26D7-B238-4ECA-88BE-AF0152CF217A}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{442F26D7-B238-4ECA-88BE-AF0152CF217A}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{442F26D7-B238-4ECA-88BE-AF0152CF217A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{442F26D7-B238-4ECA-88BE-AF0152CF217A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +85,7 @@ Global
 		{7F9DEDAE-5D31-4CC5-8397-ACE084EF6938} = {E3D7F842-4203-4D91-891A-E99B662DF831}
 		{09CC98DD-7A9D-4E56-9CBA-4B3CE3D2B6BF} = {D914C445-F4DC-415F-94F1-C0B4E89D8157}
 		{342850DB-A32D-4E1D-B4E5-0E5E811C1E1E} = {A37E4A86-5068-4E66-A660-10C34660E66E}
+		{442F26D7-B238-4ECA-88BE-AF0152CF217A} = {A37E4A86-5068-4E66-A660-10C34660E66E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63F8DD95-B36E-453C-B23B-D898ED1A3E27}
