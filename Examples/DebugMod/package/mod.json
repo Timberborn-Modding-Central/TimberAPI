@@ -4,5 +4,13 @@
   "UniqueId": "debug_mod",
   "MinimumApiVersion": "1.0.0",
   "MinimumGameVersion": "0.0.0.0",
-  "EntryDll": "DebugMod.dll"
+  "EntryDll": "DebugMod.dll",
+  "Assets": [
+    {
+      "Prefix": "DebugMod",
+      "Scenes": [
+        "All"
+      ]
+    }
+  ]
 }

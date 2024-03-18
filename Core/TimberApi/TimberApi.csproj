@@ -25,4 +25,8 @@
     <ItemGroup>
       <PackageReference Update="Timberborn.GameLibs" Version="0.5.4-r.0" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="PresetSystem\Presets\Buttons\" />
+    </ItemGroup>
 </Project>
