@@ -4,42 +4,53 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.UiBuilderSystem.ElementBuilders
 {
-    public class ButtonBuilder : ButtonBuilder<ButtonBuilder>
+    public class LocalizableButtonBuilder : ButtonBuilder<LocalizableButtonBuilder, LocalizableButton>
     {
-        protected override ButtonBuilder BuilderInstance => this;
-    }
-    
-    public abstract class ButtonBuilder<TBuilder> : BaseElementBuilder<LocalizableButton, TBuilder> 
-        where TBuilder : BaseElementBuilder<LocalizableButton, TBuilder>
-    {
-        public ButtonBuilder<TBuilder> SetText(string text)
-        {
-            Root.text = text;
-            return this;
-        }
+        protected override LocalizableButtonBuilder BuilderInstance => this;
 
-        public ButtonBuilder<TBuilder> SetLocKey(string key)
+        public LocalizableButtonBuilder SetLocKey(string key)
         {
             Root._textLocKey = key;
-            return this;
+            return BuilderInstance;
         }
+    }
 
-        public ButtonBuilder<TBuilder> SetColor(StyleColor color)
+    public class ButtonBuilder : ButtonBuilder<ButtonBuilder, Button>
+    {
+        protected override ButtonBuilder BuilderInstance => this;
+
+        public ButtonBuilder SetText(string text)
+        {
+            Root.text = text;
+            return BuilderInstance;
+        }
+    }
+
+    public abstract class ButtonBuilder<TBuilder, TElement> : BaseElementBuilder<TBuilder, TElement>
+        where TBuilder : BaseElementBuilder<TBuilder, TElement>
+        where TElement : Button, new()
+    {
+        public TBuilder SetColor(StyleColor color)
         {
             Root.style.color = color;
-            return this;
+            return BuilderInstance;
         }
 
-        public ButtonBuilder<TBuilder> SetFontSize(Length size)
+        public TBuilder SetFontSize(Length size)
         {
             Root.style.fontSize = size;
-            return this;
+            return BuilderInstance;
         }
 
-        public ButtonBuilder<TBuilder> SetFontStyle(FontStyle style)
+        public TBuilder SetFontStyle(FontStyle style)
         {
             Root.style.unityFontStyleAndWeight = style;
-            return this;
-        } 
+            return BuilderInstance;
+        }
+        
+        protected override TElement InitializeRoot()
+        {
+            return new TElement();
+        }
     }
 }

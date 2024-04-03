@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.UiBuilderSystem.ElementBuilders
 {
-    public class ListViewBuilder : BaseElementBuilder<ListView, ListViewBuilder>, IScrollableBuilder<ListViewBuilder>
+    public class ListViewBuilder : BaseElementBuilder<ListViewBuilder, ListView>
     {
         protected override ListViewBuilder BuilderInstance => this;
 
@@ -52,6 +52,11 @@ namespace TimberApi.UiBuilderSystem.ElementBuilders
         {
             Root.selectionType = selectionType;
             return this;
+        }
+
+        protected override ListView InitializeRoot()
+        {
+            return new ListView();
         }
     }
 }

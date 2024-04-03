@@ -4,10 +4,6 @@ using TimberApi.SceneSystem;
 using TimberApi.StyleSheetSystem;
 using TimberApi.UiBuilderSystem.ElementBuilders;
 using TimberApi.UiBuilderSystem.Presets.Buttons;
-using TimberApi.UiBuilderSystem.PresetSystem;
-using Timberborn.GameDistrictsMigration;
-using Timberborn.TemplateSystem;
-using UnityEngine;
 
 namespace TimberApi.UiBuilderSystem
 {
@@ -18,10 +14,6 @@ namespace TimberApi.UiBuilderSystem
         {
             containerDefinition.Bind<UIBoxBuilder>().AsTransient();
             containerDefinition.Bind<UIBuilderOld>().AsSingleton();
-            containerDefinition.Bind<ComponentBuilder>().AsSingleton();
-            containerDefinition.Bind<UiPresetFactory>().AsSingleton();
-            
-            // New
             
             containerDefinition.Bind<LabelBuilder>().AsTransient();
             containerDefinition.Bind<SliderBuilder>().AsTransient();
@@ -30,6 +22,7 @@ namespace TimberApi.UiBuilderSystem
             containerDefinition.Bind<ButtonBuilder>().AsTransient();
             containerDefinition.Bind<VisualElementBuilder>().AsTransient();
             
+            containerDefinition.Bind<ScrollViewBuilder>().AsTransient();
             containerDefinition.Bind<StyleSheetBuilder>().AsTransient();
             containerDefinition.Bind<UIBuilder>().AsSingleton();
             containerDefinition.Bind<BuilderStyleSheetCache>().AsSingleton();

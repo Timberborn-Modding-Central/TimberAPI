@@ -1,22 +1,16 @@
+using Timberborn.CoreUI;
 using UnityEngine;
 using UnityEngine.UIElements;
-using LocalizableLabel = TimberApi.UiBuilderSystem.CustomElements.LocalizableLabel;
 
 namespace TimberApi.UiBuilderSystem.ElementBuilders
 {
-    public class LabelBuilder : BaseElementBuilder<LocalizableLabel, LabelBuilder>, ITextElementBuilder<LabelBuilder>
+    public class LabelBuilder : BaseElementBuilder<LabelBuilder, LocalizableLabel>
     {
         protected override LabelBuilder BuilderInstance => this;
 
-        public LabelBuilder SetText(string text)
-        {
-            Root.text = text;
-            return this;
-        }
-
         public LabelBuilder SetLocKey(string key)
         {
-            Root.TextLocKey = key;
+            Root._textLocKey = key;
             return this;
         }
 
@@ -42,6 +36,11 @@ namespace TimberApi.UiBuilderSystem.ElementBuilders
         {
             Root.style.whiteSpace = whiteSpace;
             return this;
+        }
+
+        protected override LocalizableLabel InitializeRoot()
+        {
+            return new LocalizableLabel();
         }
     }
 }

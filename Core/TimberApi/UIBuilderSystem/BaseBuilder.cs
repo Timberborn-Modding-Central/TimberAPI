@@ -50,11 +50,8 @@ namespace TimberApi.UiBuilderSystem
         {
             Root.name = name;
         }
-        
-        protected virtual TElement InitializeRoot()
-        {
-            return new TElement();
-        }
+
+        protected abstract TElement InitializeRoot();
         
         protected virtual void InitializeStyleSheet(StyleSheetBuilder styleSheetBuilder)
         {
@@ -85,9 +82,9 @@ namespace TimberApi.UiBuilderSystem
     {
         protected internal VisualElementInitializer VisualElementInitializer = null!;
 
-        internal BuilderStyleSheetCache BuilderStyleSheetCache = null!;
+        protected internal BuilderStyleSheetCache BuilderStyleSheetCache = null!;
         
-        internal UIBuilder _uiBuilder = null!;
+        protected UIBuilder UIBuilder = null!;
         
         internal abstract void SetName(string name);
         
@@ -98,7 +95,7 @@ namespace TimberApi.UiBuilderSystem
         {
             VisualElementInitializer = visualElementInitializer;
             BuilderStyleSheetCache = builderStyleSheetCache;
-            _uiBuilder = uiBuilder;
+            UIBuilder = uiBuilder;
         }
 
         internal abstract VisualElement BuildElement();

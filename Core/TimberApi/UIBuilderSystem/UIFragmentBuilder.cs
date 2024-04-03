@@ -15,9 +15,8 @@ namespace TimberApi.UiBuilderSystem
 
         private string _scale;
 
-        public UIFragmentBuilder(ComponentBuilder componentBuilder)
+        public UIFragmentBuilder()
         {
-            _wrapper = componentBuilder.CreateVisualElement();
             _backgroundClass = TimberApiStyle.Backgrounds.Bg3;
             _scale = TimberApiStyle.Scales.Scale5;
             _wrapper.SetPadding(new Padding(new Length(12, Pixel), new Length(8, Pixel)));

@@ -1,11 +1,11 @@
 using System;
+using Timberborn.CoreUI;
 using UnityEngine;
 using UnityEngine.UIElements;
-using LocalizableToggle = TimberApi.UiBuilderSystem.CustomElements.LocalizableToggle;
 
 namespace TimberApi.UiBuilderSystem.ElementBuilders
 {
-    public class ToggleBuilder : BaseElementBuilder<LocalizableToggle, ToggleBuilder>, ITextElementBuilder<ToggleBuilder>
+    public class ToggleBuilder : BaseElementBuilder<ToggleBuilder, LocalizableToggle>
     {
         private readonly VisualElementBuilder _toggleElementBuilder;
         
@@ -20,15 +20,9 @@ namespace TimberApi.UiBuilderSystem.ElementBuilders
 
         protected override ToggleBuilder BuilderInstance => this;
 
-        public ToggleBuilder SetText(string text)
-        {
-            Root.text = text;
-            return this;
-        }
-
         public ToggleBuilder SetLocKey(string key)
         {
-            Root.TextLocKey = key;
+            Root._textLocKey = key;
             return this;
         }
 
@@ -54,6 +48,11 @@ namespace TimberApi.UiBuilderSystem.ElementBuilders
         {
             builder.Invoke(_toggleElementBuilder);
             return this;
+        }
+
+        protected override LocalizableToggle InitializeRoot()
+        {
+            return new LocalizableToggle();
         }
     }
 }

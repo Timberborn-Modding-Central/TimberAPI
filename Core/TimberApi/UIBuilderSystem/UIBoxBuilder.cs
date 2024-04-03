@@ -22,13 +22,13 @@ namespace TimberApi.UiBuilderSystem
         
         private readonly VisualElementBuilder _wrapper;
         
-        public UIBoxBuilder(ComponentBuilder componentBuilder, IResourceAssetLoader resourceAssetLoader)
+        public UIBoxBuilder(IResourceAssetLoader resourceAssetLoader)
         {
             _resourceAssetLoader = resourceAssetLoader;
-            _wrapper = componentBuilder.CreateVisualElement();
-            _centerWrapper = componentBuilder.CreateVisualElement();
-            _box = componentBuilder.CreateVisualElement().AddClass(TimberApiStyle.Backgrounds.BorderTransparent).AddClass(TimberApiStyle.Scales.Scale5).SetPadding(new Length(45, Pixel));
-            _scrollView = componentBuilder.CreateVisualElement();
+            // _wrapper = componentBuilder.CreateVisualElement();
+            // _centerWrapper = componentBuilder.CreateVisualElement();
+            // _box = componentBuilder.CreateVisualElement().AddClass(TimberApiStyle.Backgrounds.BorderTransparent).AddClass(TimberApiStyle.Scales.Scale5).SetPadding(new Length(45, Pixel));
+            // _scrollView = componentBuilder.CreateVisualElement();
         }
         //
         // public UIBoxBuilder SetBoxInCenter()

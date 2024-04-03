@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.UiBuilderSystem.ElementBuilders
 {
-    public class ScrollViewBuilder : BaseElementBuilder<ScrollView, ScrollViewBuilder>, IScrollableBuilder<ScrollViewBuilder>
+    public class ScrollViewBuilder : BaseElementBuilder<ScrollViewBuilder, ScrollView>
     {
         protected override ScrollViewBuilder BuilderInstance => this;
 
@@ -34,6 +34,11 @@ namespace TimberApi.UiBuilderSystem.ElementBuilders
         {
             Root.Add(element);
             return this;
+        }
+
+        protected override ScrollView InitializeRoot()
+        {
+            return new ScrollView();
         }
     }
 }

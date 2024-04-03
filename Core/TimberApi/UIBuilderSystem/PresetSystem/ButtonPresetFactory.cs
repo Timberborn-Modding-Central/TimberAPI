@@ -1,5 +1,4 @@
 using System;
-using TimberApi.UiBuilderSystem.CustomElements;
 using TimberApi.UiBuilderSystem.ElementBuilders;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,69 +10,6 @@ namespace TimberApi.UiBuilderSystem.PresetSystem
 {
     public class ButtonPresetFactory
     {
-        private readonly ComponentBuilder _componentBuilder;
-
-        public ButtonPresetFactory(ComponentBuilder componentBuilder)
-        {
-            _componentBuilder = componentBuilder;
-        }
-
-        // /// <summary>
-        // ///     Normal: width 20px, height 20px
-        // ///     Small: width 18px, height 18px
-        // ///     Large: width 24px, height 24px
-        // /// </summary>
-        // public LocalizableButton ArrowDown(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.ArrowDown).AddClass(TimberApiStyle.Buttons.Hover.ArrowDownHover)
-        //         .AddClass(TimberApiStyle.Buttons.Active.ArrowDownActive).AddClass(TimberApiStyle.Sounds.Click).SetStyle(style => style.unityBackgroundScaleMode = ScaleMode.StretchToFill).SetName(name)
-        //         .SetHeight(size == default ? new Length(24, Pixel) : size).SetWidth(size == default ? new Length(24, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // /// <summary>
-        // ///     Normal: width 20px, height 20px
-        // ///     Small: width 18px, height 18px
-        // ///     Large: width 24px, height 24px
-        // /// </summary>
-        // public LocalizableButton ArrowDownInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.ArrowDownInverted).AddClass(TimberApiStyle.Buttons.Hover.ArrowDownHover)
-        //         .AddClass(TimberApiStyle.Buttons.Active.ArrowDownActive).AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(24, Pixel) : size)
-        //         .SetWidth(size == default ? new Length(24, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // /// <summary>
-        // ///     Normal: width 20px, height 20px
-        // ///     Small: width 18px, height 18px
-        // ///     Large: width 24px, height 24px
-        // /// </summary>
-        // public LocalizableButton ArrowLeft(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.ArrowLeft).AddClass(TimberApiStyle.Buttons.Hover.ArrowLeftHover)
-        //         .AddClass(TimberApiStyle.Buttons.Active.ArrowLeftActive).AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(24, Pixel) : size)
-        //         .SetWidth(size == default ? new Length(24, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // /// <summary>
-        // ///     Normal: width 20px, height 20px
-        // ///     Small: width 18px, height 18px
-        // ///     Large: width 24px, height 24px
-        // /// </summary>
-        // public LocalizableButton ArrowLeftInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.ArrowLeftInverted).AddClass(TimberApiStyle.Buttons.Hover.ArrowLeftHover)
-        //         .AddClass(TimberApiStyle.Buttons.Active.ArrowLeftActive).AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(24, Pixel) : size)
-        //         .SetWidth(size == default ? new Length(24, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
         // /// <summary>
         // ///     Normal: width 20px, height 20px
         // ///     Small: width 18px, height 18px

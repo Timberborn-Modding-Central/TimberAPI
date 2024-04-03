@@ -1,23 +1,17 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Timberborn.CoreUI;
 using UnityEngine.UIElements;
-using LocalizableSlider = TimberApi.UiBuilderSystem.CustomElements.LocalizableSlider;
 
 namespace TimberApi.UiBuilderSystem.ElementBuilders
 {
-    public class SliderBuilder : BaseElementBuilder<LocalizableSlider, SliderBuilder>
+    public class SliderBuilder : BaseElementBuilder<SliderBuilder, LocalizableSlider>
     {
         protected override SliderBuilder BuilderInstance => this;
 
         public SliderBuilder SetLabelLocKey(string locKey)
         {
-            Root.TextLocKey = locKey;
-            return this;
-        }
-
-        public SliderBuilder SetLabel(string text)
-        {
-            Root.label = text;
+            Root._textLocKey = locKey;
             return this;
         }
 
@@ -63,6 +57,11 @@ namespace TimberApi.UiBuilderSystem.ElementBuilders
         {
             modifyScroller.Invoke(Root.Q<VisualElement>("unity-tracker"));
             return this;
+        }
+
+        protected override LocalizableSlider InitializeRoot()
+        {
+            return new LocalizableSlider();
         }
     }
 }

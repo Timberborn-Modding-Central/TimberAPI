@@ -2,7 +2,7 @@ using Timberborn.CoreUI;
 
 namespace TimberApi.UiBuilderSystem.ElementBuilders
 {
-    public class TextFieldBuilder : BaseElementBuilder<NineSliceTextField, TextFieldBuilder>
+    public class TextFieldBuilder : BaseElementBuilder<TextFieldBuilder, NineSliceTextField>
     {
         protected override TextFieldBuilder BuilderInstance => this;
 
@@ -10,6 +10,11 @@ namespace TimberApi.UiBuilderSystem.ElementBuilders
         {
             Root.multiline = isMultiLine;
             return this;
+        }
+
+        protected override NineSliceTextField InitializeRoot()
+        {
+            return new NineSliceTextField();
         }
     }
 }

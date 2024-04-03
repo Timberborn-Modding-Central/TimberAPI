@@ -18,7 +18,7 @@ namespace TimberApi.UiBuilderSystem
         }
         
         private BaseBuilder Create(Type builderType)
-        {
+        { 
             var builder = (BaseBuilder) _container.GetInstance(builderType);
             builder.Initialize();
 

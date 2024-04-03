@@ -4,9 +4,9 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.UiBuilderSystem.ElementBuilders
 {
-    public abstract class BaseElementBuilder<TElement, TBuilder> : BaseBuilder<TBuilder, TElement>
+    public abstract class BaseElementBuilder<TBuilder, TElement> : BaseBuilder<TBuilder, TElement>
+        where TBuilder : BaseElementBuilder<TBuilder, TElement>
         where TElement : VisualElement, new()
-        where TBuilder : BaseElementBuilder<TElement, TBuilder>
     {
         public TBuilder AddStyleSheet(StyleSheet styleSheet)
         {
@@ -25,24 +25,44 @@ namespace TimberApi.UiBuilderSystem.ElementBuilders
             Root.RemoveFromClassList(className);
             return BuilderInstance;
         }
-
-        public TBuilder AddComponent<TComponentBuilder>(Func<TComponentBuilder, TComponentBuilder> builder) where TComponentBuilder : BaseBuilder
+        
+        public TBuilder AddComponent<TComponentBuilder>(string name, Func<TComponentBuilder, TComponentBuilder> builder) where TComponentBuilder : BaseBuilder
         {
-            var component = builder.Invoke(_uiBuilder.Create<TComponentBuilder>());
+            var component = builder.Invoke(UIBuilder.Create<TComponentBuilder>(name));
             
             Root.Add(component.BuildElement());
             return BuilderInstance;
         }
         
+        public TBuilder AddComponent<TComponentBuilder>(Func<TComponentBuilder, TComponentBuilder> builder) where TComponentBuilder : BaseBuilder
+        {
+            var component = builder.Invoke(UIBuilder.Create<TComponentBuilder>());
+            
+            Root.Add(component.BuildElement());
+            return BuilderInstance;
+        }
+        
+        public TBuilder AddComponent<TComponentBuilder>(string name) where TComponentBuilder : BaseBuilder
+        {
+            Root.Add(UIBuilder.Build<TComponentBuilder>(name));
+            return BuilderInstance;
+        }
+        
         public TBuilder AddComponent<TComponentBuilder>() where TComponentBuilder : BaseBuilder
         {
-            Root.Add(_uiBuilder.Build<TComponentBuilder>());
+            Root.Add(UIBuilder.Build<TComponentBuilder>());
+            return BuilderInstance;
+        }
+        
+        public TBuilder AddComponent(string name, Type builderType)
+        {
+            Root.Add(UIBuilder.Build(name, builderType));
             return BuilderInstance;
         }
         
         public TBuilder AddComponent(Type builderType)
         {
-            Root.Add(_uiBuilder.Build(builderType));
+            Root.Add(UIBuilder.Build(builderType));
             return BuilderInstance;
         }
 
