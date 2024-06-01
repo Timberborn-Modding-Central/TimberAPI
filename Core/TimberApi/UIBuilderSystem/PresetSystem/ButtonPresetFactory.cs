@@ -10,63 +10,6 @@ namespace TimberApi.UiBuilderSystem.PresetSystem
 {
     public class ButtonPresetFactory
     {
-        // /// <summary>
-        // ///     Normal: width 20px, height 20px
-        // ///     Small: width 18px, height 18px
-        // ///     Large: width 24px, height 24px
-        // /// </summary>
-        // public LocalizableButton ArrowRight(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.ArrowRight).AddClass(TimberApiStyle.Buttons.Hover.ArrowRightHover)
-        //         .AddClass(TimberApiStyle.Buttons.Active.ArrowRightActive).AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(24, Pixel) : size)
-        //         .SetWidth(size == default ? new Length(24, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // /// <summary>
-        // ///     Normal: width 20px, height 20px
-        // ///     Small: width 18px, height 18px
-        // ///     Large: width 24px, height 24px
-        // /// </summary>
-        // public LocalizableButton ArrowRightInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.ArrowRightInverted).AddClass(TimberApiStyle.Buttons.Hover.ArrowRightHover)
-        //         .AddClass(TimberApiStyle.Buttons.Active.ArrowRightActive).AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(24, Pixel) : size)
-        //         .SetWidth(size == default ? new Length(24, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // /// <summary>
-        // ///     Normal: width 20px, height 20px
-        // ///     Small: width 18px, height 18px
-        // ///     Large: width 24px, height 24px
-        // /// </summary>
-        // public LocalizableButton ArrowUp(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.ArrowUp).AddClass(TimberApiStyle.Buttons.Hover.ArrowUpHover)
-        //         .AddClass(TimberApiStyle.Buttons.Active.ArrowUpActive).AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(24, Pixel) : size)
-        //         .SetWidth(size == default ? new Length(24, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // /// <summary>
-        // ///     Normal: width 20px, height 20px
-        // ///     Small: width 18px, height 18px
-        // ///     Large: width 24px, height 24px
-        // /// </summary>
-        // public LocalizableButton ArrowUpInverted(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.ArrowUpInverted).AddClass(TimberApiStyle.Buttons.Hover.ArrowUpHover)
-        //         .AddClass(TimberApiStyle.Buttons.Active.ArrowUpActive).AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(24, Pixel) : size)
-        //         .SetWidth(size == default ? new Length(24, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        //
         // public LocalizableButton Close(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
         // {
         //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.Close).AddClass(TimberApiStyle.Buttons.Hover.CloseHover)
@@ -74,40 +17,7 @@ namespace TimberApi.UiBuilderSystem.PresetSystem
         //     builder?.Invoke(button);
         //     return button.Build();
         // }
-        //
-        //
-        // public LocalizableButton DownArrow(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.DownArrow).AddClass(TimberApiStyle.Buttons.Hover.DownArrowHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(34, Pixel) : size).SetWidth(size == default ? new Length(57, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // public LocalizableButton LeftArrow(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.LeftArrow).AddClass(TimberApiStyle.Buttons.Hover.LeftArrowHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(57, Pixel) : size).SetWidth(size == default ? new Length(34, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // public LocalizableButton RightArrow(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.RightArrow).AddClass(TimberApiStyle.Buttons.Hover.RightArrowHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(57, Pixel) : size).SetWidth(size == default ? new Length(34, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // public LocalizableButton UpArrow(string name = null, Length size = default, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.UpArrow).AddClass(TimberApiStyle.Buttons.Hover.UpArrowHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(34, Pixel) : size).SetWidth(size == default ? new Length(57, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
+    
         // /// <summary>
         // ///     Normal: width 20px, height 20px
         // ///     Small: width 18px, height 18px
@@ -290,81 +200,6 @@ namespace TimberApi.UiBuilderSystem.PresetSystem
         // {
         //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.LevelVisibilityReset).AddClass(TimberApiStyle.Buttons.Hover.LevelVisibilityResetHover)
         //         .AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetHeight(size == default ? new Length(35, Pixel) : size).SetWidth(size == default ? new Length(35, Pixel) : size);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // /// <summary>
-        // ///     Medium: height 33px, width 184px, font-size 13px
-        // ///     Large text: font-size 17px
-        // /// </summary>
-        // public LocalizableButton Button(string locKey = null, Length width = default, Length height = default, Length fontSize = default, FontStyle fontStyle = default, StyleColor color = default,
-        //     string name = null, string text = null, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.Button).AddClass(TimberApiStyle.Buttons.Hover.ButtonHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).SetName(name).SetLocKey(locKey).SetText(text).SetColor(color == default ? new StyleColor(new Color(1, 1, 1, 1)) : color)
-        //         .SetFontSize(fontSize == default ? new Length(14, Pixel) : fontSize).SetFontStyle(fontStyle == default ? FontStyle.Bold : fontStyle)
-        //         .SetHeight(height == default ? new Length(44, Pixel) : height).SetWidth(width == default ? new Length(254, Pixel) : width);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // public LocalizableButton ButtonGame(string locKey = null, Length width = default, Length height = default, Length fontSize = default, FontStyle fontStyle = default, StyleColor color = default,
-        //     string scale = default, string name = null, string text = null, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.ButtonGame).AddClass(TimberApiStyle.Buttons.Hover.ButtonGameHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).AddClass(scale ?? TimberApiStyle.Scales.Scale5).SetName(name).SetLocKey(locKey).SetText(text)
-        //         .SetColor(color == default ? new StyleColor(new Color(1, 1, 1, 1)) : color).SetFontSize(fontSize == default ? new Length(13, Pixel) : fontSize)
-        //         .SetFontStyle(fontStyle == default ? FontStyle.Bold : fontStyle).SetHeight(height == default ? new Length(33, Pixel) : height)
-        //         .SetWidth(width == default ? new Length(184, Pixel) : width);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // public LocalizableButton NewGameCustom(string locKey = null, Length width = default, Length height = default, Length fontSize = default, FontStyle fontStyle = default,
-        //     StyleColor color = default, string scale = default, string name = null, string text = null, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.NewGameCustom).AddClass(TimberApiStyle.Buttons.Hover.NewGameCustomHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).AddClass(scale ?? TimberApiStyle.Scales.Scale5).SetName(name).SetLocKey(locKey).SetText(text)
-        //         .SetColor(color == default ? new StyleColor(new Color(1, 1, 1, 1)) : color).SetFontSize(fontSize == default ? new Length(13, Pixel) : fontSize)
-        //         .SetFontStyle(fontStyle == default ? FontStyle.Bold : fontStyle).SetHeight(height == default ? new Length(80, Pixel) : height)
-        //         .SetWidth(width == default ? new Length(184, Pixel) : width);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // public LocalizableButton NewGameEasy(string locKey = null, Length width = default, Length height = default, Length fontSize = default, FontStyle fontStyle = default,
-        //     StyleColor color = default, string scale = default, string name = null, string text = null, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.NewGameEasy).AddClass(TimberApiStyle.Buttons.Hover.NewGameEasyHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).AddClass(scale ?? TimberApiStyle.Scales.Scale5).SetName(name).SetLocKey(locKey).SetText(text)
-        //         .SetColor(color == default ? new StyleColor(new Color(1, 1, 1, 1)) : color).SetFontSize(fontSize == default ? new Length(13, Pixel) : fontSize)
-        //         .SetFontStyle(fontStyle == default ? FontStyle.Bold : fontStyle).SetHeight(height == default ? new Length(80, Pixel) : height)
-        //         .SetWidth(width == default ? new Length(184, Pixel) : width);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // public LocalizableButton NewGameNormal(string locKey = null, Length width = default, Length height = default, Length fontSize = default, FontStyle fontStyle = default,
-        //     StyleColor color = default, string scale = default, string name = null, string text = null, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.NewGameNormal).AddClass(TimberApiStyle.Buttons.Hover.NewGameNormalHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).AddClass(scale ?? TimberApiStyle.Scales.Scale5).SetName(name).SetLocKey(locKey).SetText(text)
-        //         .SetColor(color == default ? new StyleColor(new Color(1, 1, 1, 1)) : color).SetFontSize(fontSize == default ? new Length(13, Pixel) : fontSize)
-        //         .SetFontStyle(fontStyle == default ? FontStyle.Bold : fontStyle).SetHeight(height == default ? new Length(80, Pixel) : height)
-        //         .SetWidth(width == default ? new Length(184, Pixel) : width);
-        //     builder?.Invoke(button);
-        //     return button.Build();
-        // }
-        //
-        // public LocalizableButton NewGameHard(string locKey = null, Length width = default, Length height = default, Length fontSize = default, FontStyle fontStyle = default,
-        //     StyleColor color = default, string scale = default, string name = null, string text = null, Action<ButtonBuilder> builder = default)
-        // {
-        //     ButtonBuilder button = _componentBuilder.CreateButton().AddClass(TimberApiStyle.Buttons.Normal.NewGameHard).AddClass(TimberApiStyle.Buttons.Hover.NewGameHardHover)
-        //         .AddClass(TimberApiStyle.Sounds.Click).AddClass(scale ?? TimberApiStyle.Scales.Scale5).SetName(name).SetLocKey(locKey).SetText(text)
-        //         .SetColor(color == default ? new StyleColor(new Color(1, 1, 1, 1)) : color).SetFontSize(fontSize == default ? new Length(13, Pixel) : fontSize)
-        //         .SetFontStyle(fontStyle == default ? FontStyle.Bold : fontStyle).SetHeight(height == default ? new Length(80, Pixel) : height)
-        //         .SetWidth(width == default ? new Length(184, Pixel) : width);
         //     builder?.Invoke(button);
         //     return button.Build();
         // }

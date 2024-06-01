@@ -15,7 +15,7 @@ namespace TimberApi.UiBuilderSystem.ElementBuilders
         }
     }
 
-    public class ButtonBuilder : ButtonBuilder<ButtonBuilder, Button>
+    public class ButtonBuilder : ButtonBuilder<ButtonBuilder, NineSliceButton>
     {
         protected override ButtonBuilder BuilderInstance => this;
 

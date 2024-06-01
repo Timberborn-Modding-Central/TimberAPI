@@ -6,6 +6,7 @@ namespace TimberApi.StyleSheetSystem.Extensions
     {
         private static readonly Dictionary<Property, string> Properties = new()
         {
+            // Default Unity properties
             { Property.AlignContent, "align-content" },
             { Property.AlignItems, "align-items" },
             { Property.AlignSelf, "align-self" },
@@ -98,6 +99,16 @@ namespace TimberApi.StyleSheetSystem.Extensions
             { Property.WhiteSpace, "white-space" },
             { Property.Width, "width" },
             { Property.WordSpacing, "word-spacing" },
+            
+            // Timberborn properties
+            { Property.ClickSound, "--click-sound" },
+            { Property.NineSlicedBackgroundImage, "--background-image" },
+            { Property.BackgroundSliceScale, "--background-slice-scale" },
+            { Property.BackgroundSlice, "--background-slice" },
+            { Property.BackgroundSliceTop, "--background-slice-top" },
+            { Property.BackgroundSliceRight, "--background-slice-right" },
+            { Property.BackgroundSliceBottom, "--background-slice-bottom" },
+            { Property.BackgroundSliceLeft, "--background-slice-left" },
         };
 
         public static string ToUnityString(this Property property)

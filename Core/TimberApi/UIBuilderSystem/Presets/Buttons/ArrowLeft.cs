@@ -6,82 +6,87 @@ using StyleSheetBuilder = TimberApi.StyleSheetSystem.StyleSheetBuilder;
 
 namespace TimberApi.UiBuilderSystem.Presets.Buttons
 {
-    public class ArrowLeft : BaseBuilder<Button>
+    public class ArrowLeft : ArrowLeft<ArrowLeft>
     {
-        private readonly ButtonBuilder _buttonBuilder;
+        protected override ArrowLeft BuilderInstance => this;
+    }
+    
+    public abstract class ArrowLeft<TBuilder> : BaseBuilder<TBuilder, Button>
+        where TBuilder : BaseBuilder<TBuilder, Button>
+    {
+        protected ButtonBuilder ButtonBuilder = null!;
 
-        private string _imageClass = "api__button__arrow_down--normal";
+        protected string ImageClass = "api__button__arrow_left--normal";
 
-        private string _sizeClass = "api__button__arrow_down--size-normal";
-
-        public ArrowLeft(UIBuilder uiBuilder)
-        {
-            _buttonBuilder = uiBuilder.Create<ButtonBuilder>();
-        }
-
+        protected string SizeClass = "api__button__arrow_left--size-normal";
+        
         protected override void InitializeStyleSheet(StyleSheetBuilder styleSheetBuilder)
         {
             styleSheetBuilder
-                .AddBackgroundClass("api__button__arrow_down", "ui/images/buttons/arrow-left-hover", PseudoClass.Hover)
-                .AddBackgroundClass("api__button__arrow_down--normal", "ui/images/buttons/arrow-left")
-                .AddBackgroundClass("api__button__arrow_down--inverted", "ui/images/buttons/arrow-left-inverted")
-                .AddBackgroundClass("api__button__arrow_down--active", "ui/images/buttons/arrow-left-active", PseudoClass.Active, PseudoClass.Hover)
+                .AddClickSoundClass("api__button__arrow_left", "UI.Click")
+                .AddBackgroundClass("api__button__arrow_left", "ui/images/buttons/arrow-left-hover", PseudoClass.Hover)
+                .AddBackgroundClass("api__button__arrow_left--normal", "ui/images/buttons/arrow-left")
+                .AddBackgroundClass("api__button__arrow_left--inverted", "ui/images/buttons/arrow-left-inverted")
+                .AddBackgroundClass("api__button__arrow_left--active", "ui/images/buttons/arrow-left-active", PseudoClass.Active, PseudoClass.Hover)
 
-                .AddClass("api__button__arrow_down--size-normal", builder => builder
+                .AddClass("api__button__arrow_left--size-normal", builder => builder
                     .Add(Property.Height, new Dimension(20, Dimension.Unit.Pixel))
                     .Add(Property.Width, new Dimension(20, Dimension.Unit.Pixel))
                 )
-                .AddClass("api__button__arrow_down--size-small", builder => builder
+                .AddClass("api__button__arrow_left--size-small", builder => builder
                     .Add(Property.Height, new Dimension(18, Dimension.Unit.Pixel))
                     .Add(Property.Width, new Dimension(18, Dimension.Unit.Pixel))
                 )
-                .AddClass("api__button__arrow_down--size-large", builder => builder
+                .AddClass("api__button__arrow_left--size-large", builder => builder
                     .Add(Property.Height, new Dimension(24, Dimension.Unit.Pixel))
                     .Add(Property.Width, new Dimension(24, Dimension.Unit.Pixel))
                 );
         }
         
-        public ArrowLeft Small()
+        public TBuilder Small()
         {
-            _sizeClass = "api__button__arrow_down--size-small";
-            return this;
+            SizeClass = "api__button__arrow_left--size-small";
+            return BuilderInstance;
         }
         
-        public ArrowLeft Large()
+        public TBuilder Large()
         {
-            _sizeClass = "api__button__arrow_down--size-large";
-            return this;
+            SizeClass = "api__button__arrow_left--size-large";
+            return BuilderInstance;
         }
         
-        public ArrowLeft SetSize(Length size)
+        public TBuilder SetSize(Length size)
         {
-            _buttonBuilder.SetHeight(size);
-            _buttonBuilder.SetWidth(size);
-            return this;
+            ButtonBuilder.SetHeight(size);
+            ButtonBuilder.SetWidth(size);
+            return BuilderInstance;
         }
 
-        public ArrowLeft Active()
+        public TBuilder Active()
         {
-            _buttonBuilder.AddClass("api__button__arrow_down--active");
-            return this;
+            ButtonBuilder.AddClass("api__button__arrow_left--active");
+            return BuilderInstance;
         }
 
-        public ArrowLeft Inverted()
+        public TBuilder Inverted()
         {
-            _imageClass = "api__button__arrow_down--inverted";
-            return this;
+            ImageClass = "api__button__arrow_left--inverted";
+            return BuilderInstance;
         }
 
         protected override Button InitializeRoot()
         {
-            return _buttonBuilder.AddClass("api__button__arrow_down").Build();
+            ButtonBuilder = UIBuilder.Create<ButtonBuilder>();
+            
+            return ButtonBuilder.AddClass("api__button__arrow_left").Build();
         }
+        
 
         public override Button Build()
         {
-            return _buttonBuilder
-                .AddClass(_imageClass)
-                .AddClass(_sizeClass)
+            return ButtonBuilder
+                .AddClass(ImageClass)
+                .AddClass(SizeClass)
                 .Build();
         }
     }

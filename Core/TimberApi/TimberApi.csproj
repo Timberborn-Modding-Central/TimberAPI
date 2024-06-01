@@ -28,5 +28,6 @@
 
     <ItemGroup>
       <Folder Include="PresetSystem\Presets\Buttons\" />
+      <Folder Include="StyleSheetSystem\Helpers\" />
     </ItemGroup>
 </Project>

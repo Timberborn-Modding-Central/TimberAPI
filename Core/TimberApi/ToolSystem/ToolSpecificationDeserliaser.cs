@@ -2,6 +2,7 @@ using System;
 using TimberApi.Common.Extensions;
 using Timberborn.Persistence;
 using Timberborn.SerializationSystem;
+using Timberborn.StockpileVisualization;
 
 namespace TimberApi.ToolSystem
 {

@@ -18,6 +18,27 @@ namespace TimberApi.StyleSheetSystem
             _resourceAssetLoader = resourceAssetLoader;
         }
         
+        public PropertyBuilder AddNineSlicedBackgroundImage(string path, float slice, float sliceScale)
+        {
+            Add(Property.NineSlicedBackgroundImage, _resourceAssetLoader.Load<Sprite>(path));
+            Add(Property.BackgroundSlice, slice);
+            Add(Property.BackgroundSliceScale, sliceScale);
+
+            return this;
+        }
+        
+        public PropertyBuilder AddNineSlicedBackgroundImage(string path, float sliceTop, float sliceRight, float sliceBottom, float sliceLeft, float sliceScale)
+        {
+            Add(Property.NineSlicedBackgroundImage, _resourceAssetLoader.Load<Sprite>(path));
+            Add(Property.BackgroundSliceTop, sliceTop);
+            Add(Property.BackgroundSliceRight, sliceRight);
+            Add(Property.BackgroundSliceBottom, sliceBottom);
+            Add(Property.BackgroundSliceLeft, sliceLeft);
+            Add(Property.BackgroundSliceScale, sliceScale);
+
+            return this;
+        }
+        
         public PropertyBuilder AddBackgroundImage(string path)
         {
             Add(Property.BackgroundImage, _resourceAssetLoader.Load<Sprite>(path));

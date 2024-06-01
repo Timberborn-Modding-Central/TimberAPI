@@ -17,9 +17,9 @@ namespace TimberApi.UiBuilderSystem
             
             containerDefinition.Bind<LabelBuilder>().AsTransient();
             containerDefinition.Bind<SliderBuilder>().AsTransient();
-            containerDefinition.Bind<ArrowDown>().AsTransient();
-            containerDefinition.Bind<ArrowLeft>().AsTransient();
+
             containerDefinition.Bind<ButtonBuilder>().AsTransient();
+            containerDefinition.Bind<LocalizableButtonBuilder>().AsTransient();
             containerDefinition.Bind<VisualElementBuilder>().AsTransient();
             
             containerDefinition.Bind<ScrollViewBuilder>().AsTransient();

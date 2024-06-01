@@ -2,6 +2,7 @@ namespace TimberApi.StyleSheetSystem
 {
     public enum Property
     {
+        // Default Unity properties
         AlignContent,
         AlignItems,
         AlignSelf,
@@ -94,5 +95,15 @@ namespace TimberApi.StyleSheetSystem
         WhiteSpace,
         Width,
         WordSpacing,
+        
+        // Timberborn properties
+        ClickSound,
+        NineSlicedBackgroundImage,
+        BackgroundSliceScale,
+        BackgroundSlice,
+        BackgroundSliceTop,
+        BackgroundSliceRight,
+        BackgroundSliceBottom,
+        BackgroundSliceLeft,
     }
 }

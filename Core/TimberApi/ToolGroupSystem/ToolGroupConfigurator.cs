@@ -19,6 +19,7 @@ namespace TimberApi.ToolGroupSystem
             containerDefinition.Bind<ToolGroupSpecificationDeserializer>().AsSingleton();
             containerDefinition.Bind<ToolGroupService>().AsSingleton();
             containerDefinition.Bind<ToolGroupFactoryService>().AsSingleton();
+            
             containerDefinition.MultiBind<IToolGroupFactory>().To<ConstructionModeToolGroupFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolGroupFactory>().To<DefaultToolGroupFactory>().AsSingleton();
             containerDefinition.MultiBind<IToolGroupFactory>().To<PlantingModeToolGroupFactory>().AsSingleton();
