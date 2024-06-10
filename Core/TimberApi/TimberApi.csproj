@@ -29,5 +29,6 @@
     <ItemGroup>
       <Folder Include="PresetSystem\Presets\Buttons\" />
       <Folder Include="StyleSheetSystem\Helpers\" />
+      <Folder Include="UIBuilderSystem\Presets\CheckBoxes\" />
     </ItemGroup>
 </Project>

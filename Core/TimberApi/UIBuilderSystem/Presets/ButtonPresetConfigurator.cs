@@ -10,10 +10,10 @@ namespace TimberApi.UIBuilderSystem.Presets
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Bind<ArrowDown>().AsTransient();
-            containerDefinition.Bind<ArrowLeft>().AsTransient();
-            containerDefinition.Bind<ArrowUp>().AsTransient();
-            containerDefinition.Bind<ArrowRight>().AsTransient();
+            containerDefinition.Bind<ArrowDownButton>().AsTransient();
+            containerDefinition.Bind<ArrowLeftButton>().AsTransient();
+            containerDefinition.Bind<ArrowUpButton>().AsTransient();
+            containerDefinition.Bind<ArrowRightButton>().AsTransient();
             containerDefinition.Bind<ButtonMenu>().AsTransient();
             containerDefinition.Bind<ButtonGame>().AsTransient();
             containerDefinition.Bind<ButtonEmpty>().AsTransient();
