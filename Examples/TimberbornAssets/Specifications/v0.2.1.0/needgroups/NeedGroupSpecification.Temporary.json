@@ -1,6 +1,0 @@
-{
-  "Id": "Temporary",
-  "Order": 10,
-  "DisplayNameLocKey": "NeedGroup.Temporary.DisplayName",
-  "HideWhenNoActiveNeed": true
-}

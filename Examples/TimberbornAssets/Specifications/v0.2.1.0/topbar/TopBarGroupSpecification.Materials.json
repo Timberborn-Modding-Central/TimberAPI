@@ -1,7 +1,0 @@
-{
-  "Id": "Materials",
-  "Order": 1,
-  "DisplayNameLocKey": "TopBar.Materials",
-  "Icon": "Sprites/TopBar/Materials",
-  "SingleResourceGroup": false
-}

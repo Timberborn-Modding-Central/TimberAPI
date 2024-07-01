@@ -1,6 +1,0 @@
-{
-  "Id": "Beaver",
-  "DisplayNameLocKey": "Beaver.PluralDisplayName",
-  "WorkerOnlyTextLocKey": "Work.BeaverOnly",
-  "IgnoresWorkingHours": false
-}
