@@ -1,6 +1,0 @@
-{
-  "Id": "CuttingSuccessChance",
-  "LocKey": "Bonus.CuttingSuccessChance",
-  "MinimumValue": 0.01,
-  "MaximumValue": 1
-}

@@ -1,6 +1,0 @@
-{
-  "Id": "Passive",
-  "Order": 30,
-  "DisplayNameLocKey": "NeedGroup.Passive.DisplayName",
-  "HideNeedProgressBar": true
-}

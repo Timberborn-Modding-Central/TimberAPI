@@ -1,7 +1,0 @@
-{
-  "Id": "Water",
-  "Order": 4,
-  "DisplayNameLocKey": "TopBar.Water",
-  "Icon": "Sprites/TopBar/Water",
-  "SingleResourceGroup": true
-}
