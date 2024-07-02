@@ -17,6 +17,7 @@
         <PackageReference Include="Lib.Harmony" Version="2.3.3" NoWarn="NU1701" />
         <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
         <PackageReference Include="UnityEngine.Modules" Version="6000.0.4" IncludeAssets="compile" />
+        <PackageReference Include="Castle.Core" Version="5.1.1" />
 <!--        Needs to be updated-->
         <PackageReference Include="Timberborn.GameLibs" Version="0.3.4.3-r.0" ExcludeAssets="All" Condition="$(UseLocalTimberbornSource)" />
     </ItemGroup>
