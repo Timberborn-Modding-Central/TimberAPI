@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Timberborn.AssetSystem;
 using Timberborn.Common;
-using Timberborn.PrefabGroupSystem;
-using Timberborn.PrefabSystem;
 using UnityEngine;
 
 namespace TimberApi.SpecificationSystem;
 
 internal class GeneratedSpecificationAssetRepository
 {
-    private readonly List<IGeneratedSpecification> _cachedObjectSpecifications = new ();
+    private readonly List<GeneratedSpecification> _cachedObjectSpecifications = new ();
     
     public readonly Dictionary<string, OrderedAsset<TextAsset>> GeneratedSpecificationAssets = new();
     
-    public void AddSpecificationRange(IEnumerable<IGeneratedSpecification> generatedSpecifications)
+    public void AddSpecificationRange(IEnumerable<GeneratedSpecification> generatedSpecifications)
     {
         try
         {
@@ -27,11 +25,9 @@ internal class GeneratedSpecificationAssetRepository
             );
             
             GeneratedSpecificationAssets.AddRange(generatedSpecificationAssets);
-
-            if (specifications.Any(generatedSpecification => generatedSpecification.ObjectSpecification))
-            {
-                _cachedObjectSpecifications.AddRange(specifications);
-            }
+            
+            // Prefab generated specifications should only be done once, since prefabs will keep their changed values.
+            _cachedObjectSpecifications.AddRange(specifications.Where(generatedSpecification => generatedSpecification.ObjectSpecification));
         }
         catch (Exception exception)
         {
@@ -47,7 +43,7 @@ internal class GeneratedSpecificationAssetRepository
         AddSpecificationRange(_cachedObjectSpecifications);
     }
 
-    private static OrderedAsset<TextAsset> CreateOrderedSpecificationAsset(IGeneratedSpecification specification)
+    private static OrderedAsset<TextAsset> CreateOrderedSpecificationAsset(GeneratedSpecification specification)
     {
         var asset = new TextAsset(specification.Json)
         {
