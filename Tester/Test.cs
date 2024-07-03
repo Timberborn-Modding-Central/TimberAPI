@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Linq;
 using Timberborn.AssetSystem;
+using Timberborn.Bootstrapper;
 using Timberborn.Persistence;
 using Timberborn.PrefabGroupSystem;
 using Timberborn.SingletonSystem;
@@ -35,7 +39,7 @@ public class Test : ILoadableSingleton
     {
         ((AssetLoader)_assetLoader)._assetProviders = _assetProviders.ToImmutableArray();
         
-        var specifications = _assetLoader.LoadAll<TextAsset>("specifications/needsaffectedbysoakedness");
+        var specifications = _assetLoader.LoadAll<TextAsset>("specifications/tools");
 
         foreach (var specification in specifications)
         {

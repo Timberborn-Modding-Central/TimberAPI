@@ -4,6 +4,8 @@ namespace TimberApi.SpecificationSystem;
 
 public class GeneratedSpecification
 {
+    private static string _specificationPath = "specifications";
+    
     public virtual bool ObjectSpecification { get; }
 
     public string FullPath { get; }
@@ -14,7 +16,7 @@ public class GeneratedSpecification
 
     public GeneratedSpecification(string path, string specificationName, string json, bool objectSpecification = false)
     {
-        FullPath = path + "/" + specificationName;
+        FullPath = $"{_specificationPath}/{path}/{specificationName}".ToLower();
         SpecificationName = specificationName;
         Json = json;
         ObjectSpecification = objectSpecification;
@@ -22,7 +24,7 @@ public class GeneratedSpecification
 
     public GeneratedSpecification(string path, string specificationName, object json, bool objectSpecification = false)
     {
-        FullPath = path + "/" + specificationName;
+        FullPath = $"{_specificationPath}/{path}/{specificationName}".ToLower();
         SpecificationName = specificationName;
         ObjectSpecification = objectSpecification;
         Json = JsonConvert.SerializeObject(json);

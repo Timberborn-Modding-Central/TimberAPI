@@ -42,7 +42,6 @@ internal class GeneratedSpecificationAssetProvider : IAssetProvider
 
     public void Reset()
     {
-        Debug.LogWarning("Clearing generated cache");
         _generatedSpecificationAssetRepository.Reset();
     }
 }

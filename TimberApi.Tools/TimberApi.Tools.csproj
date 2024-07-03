@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\TimberApi.SpecificationSystem\TimberApi.SpecificationSystem.csproj" />
         <ProjectReference Include="..\TimberApi\TimberApi.csproj" />
     </ItemGroup>
 

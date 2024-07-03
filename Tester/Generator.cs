@@ -20,7 +20,7 @@ public class Generator : ISpecificationGenerator
         Debug.LogError(_prefabGroupService.AllPrefabs.Length);
         return new List<GeneratedSpecification>
         {
-            new("specifications/needsaffectedbysoakedness", "NeedAffectedBySoakednessSpecification.WetFur", new
+            new("needsaffectedbysoakedness", "NeedAffectedBySoakednessSpecification.WetFur", new
                 {
                     NeedId = "WetFur",
                     PointsPerHour = 500,
