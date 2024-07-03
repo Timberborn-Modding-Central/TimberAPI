@@ -18,7 +18,6 @@ internal class GeneratedSpecificationLoader : ITimberApiPostLoadableSingleton
 
     public void PostLoad()
     {
-        Debug.LogWarning("Starting generators");
         foreach (var specificationGenerator in _specificationGenerators)
         {
             _generatedSpecificationAssetRepository.AddSpecificationRange(specificationGenerator.Generate());

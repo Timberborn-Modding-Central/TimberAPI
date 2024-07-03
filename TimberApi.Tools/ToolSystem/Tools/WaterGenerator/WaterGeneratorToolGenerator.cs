@@ -25,6 +25,6 @@ public class WaterGeneratorToolGenerator : ISpecificationGenerator
             }
         });
 
-        yield return new GeneratedSpecification(json, "WaterGenerator", "ToolSpecification");
+        yield return new GeneratedSpecification("Root", "ToolSpecification.WaterGenerator", json);
     }
 }

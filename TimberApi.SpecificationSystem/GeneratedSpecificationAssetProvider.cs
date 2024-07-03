@@ -19,9 +19,11 @@ internal class GeneratedSpecificationAssetProvider : IAssetProvider
 
     public bool TryLoad<T>(string path, out OrderedAsset<T> orderedAsset) where T : Object
     {
-        if (typeof(T) == typeof(TextAsset))
+        if (typeof(T) == typeof(TextAsset) && _generatedSpecificationAssetRepository.GeneratedSpecificationAssets.ContainsKey(path))
         {
-            Debug.LogWarning("WOOO");
+            orderedAsset = _generatedSpecificationAssetRepository.GeneratedSpecificationAssets[path].As<T>();
+            
+            return true;
         }
 
         orderedAsset = new OrderedAsset<T>();

@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using Timberborn.BlockSystem;
 using Timberborn.PrefabSystem;
+using Timberborn.Wonders;
+using UnityEngine;
 
 namespace TimberApi.Tools.ToolSystem.Tools.PlaceableObject;
 

@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\TimberApi.SpecificationSystem\TimberApi.SpecificationSystem.csproj" />
+        <ProjectReference Include="..\TimberApi.Tools\TimberApi.Tools.csproj" />
         <ProjectReference Include="..\TimberApi\TimberApi.csproj" />
     </ItemGroup>
 

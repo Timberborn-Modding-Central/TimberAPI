@@ -23,12 +23,6 @@
         </Reference>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="ToolGroupSystem\" />
-      <Folder Include="ToolGroupUI\" />
-      <Folder Include="ToolUI\" />
-    </ItemGroup>
-
     <PropertyGroup>
         <CopyDllToPath>false</CopyDllToPath>
         <ModPath>Documents/Mods</ModPath>

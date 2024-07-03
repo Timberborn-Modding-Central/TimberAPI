@@ -16,8 +16,6 @@ public class Generator : ISpecificationGenerator
 
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        Debug.LogError("This is my generator");
-        Debug.LogError(_prefabGroupService.AllPrefabs.Length);
         return new List<GeneratedSpecification>
         {
             new("needsaffectedbysoakedness", "NeedAffectedBySoakednessSpecification.WetFur", new
