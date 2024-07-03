@@ -2,7 +2,7 @@
   "Name": "TimberApi",
   "Version": "MOD_VERSION_PLACEHOLDER",
   "Id": "TimberApi",
-  "MinimumGameVersion": "0.0.0.0",
+  "MinimumGameVersion": "TIMBERBORN_GAME_VERSION_PLACEHOLDER",
   "Description": "Poggers",
   "RequiredMods": []
 }

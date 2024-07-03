@@ -15,6 +15,7 @@
 
     <ItemGroup>
         <PackageReference Include="Lib.Harmony" Version="2.3.3" NoWarn="NU1701" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
         <PackageReference Include="UnityEngine.Modules" Version="6000.0.4" IncludeAssets="compile" />
         <PackageReference Include="Castle.Core" Version="5.1.1" />
@@ -23,7 +24,9 @@
     </ItemGroup>
 
     <ItemGroup Condition="$(UseLocalTimberbornSource)">
-        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Timberborn.*.dll">
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" />
+
+        <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Timberborn.*.dll" Publicize="true">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
@@ -33,10 +36,8 @@
     
     <ItemGroup>
       <Folder Include="ConfigSystem\" />
-      <Folder Include="DependencyContainer\" />
-      <Folder Include="HarmonySystem\" />
+      <Folder Include="DependencyContainerSystem\" />
       <Folder Include="ModSystem\" />
-      <Folder Include="SingletonSystem\" />
     </ItemGroup>
     
     <Target Name="CopyingFilesToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath)">
