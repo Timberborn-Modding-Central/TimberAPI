@@ -12,6 +12,7 @@ internal class SingletonLifecycleServicePatcher
     public static void LoadAllPrefix(ISingletonRepository ____singletonRepository)
     {
         LoadSingleton(____singletonRepository.GetSingletons<ITimberApiLoadableSingleton>(), singleton => singleton.Load());
+        LoadSingleton(____singletonRepository.GetSingletons<ITimberApiPostLoadableSingleton>(), singleton => singleton.PostLoad());
     }
     
     public static void LoadSingletonsPrefix(ISingletonRepository ____singletonRepository)

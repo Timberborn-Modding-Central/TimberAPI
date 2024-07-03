@@ -2,7 +2,7 @@ using Bindito.Core;
 
 namespace TimberApi.Tools.ToolSystem;
 
-[Context("InGame")]
+[Context("Game")]
 [Context("MapEditor")]
 public class ToolSystemConfigurator : IConfigurator
 {

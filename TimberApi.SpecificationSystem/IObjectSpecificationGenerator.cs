@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using Timberborn.PrefabGroupSystem;
 using Timberborn.PrefabSystem;
 
-namespace TimberApi.SpecificationSystem
+namespace TimberApi.SpecificationSystem;
+
+public interface IObjectSpecificationGenerator
 {
-    public interface IObjectSpecificationGenerator
-    {
-        // IEnumerable<ISpecification> Generate(ObjectCollectionService objectCollectionService);
-    }
+    IEnumerable<GeneratedObjectSpecification> Generate(PrefabGroupService prefabGroupService);
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Timberborn.AssetSystem;
 using Timberborn.Common;
+using Timberborn.PrefabGroupSystem;
+using Timberborn.PrefabSystem;
 using UnityEngine;
 
 namespace TimberApi.SpecificationSystem;
@@ -21,7 +23,7 @@ internal class GeneratedSpecificationAssetRepository
             
             var generatedSpecificationAssets = specifications.ToDictionary(
                 specification => specification.FullPath,
-                specification => new OrderedAsset<TextAsset>(-1, new TextAsset(specification.Json))
+                CreateOrderedSpecificationAsset
             );
             
             GeneratedSpecificationAssets.AddRange(generatedSpecificationAssets);
@@ -43,5 +45,15 @@ internal class GeneratedSpecificationAssetRepository
         GeneratedSpecificationAssets.Clear();
         
         AddSpecificationRange(_cachedObjectSpecifications);
+    }
+
+    private static OrderedAsset<TextAsset> CreateOrderedSpecificationAsset(IGeneratedSpecification specification)
+    {
+        var asset = new TextAsset(specification.Json)
+        {
+            name = specification.SpecificationName
+        };
+
+        return new OrderedAsset<TextAsset>(-1, asset);
     }
 }

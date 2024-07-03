@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using TimberApi.SingletonSystem;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem;
 
-internal class GeneratedSpecificationLoader : ITimberApiLoadableSingleton
+internal class GeneratedSpecificationLoader : ITimberApiPostLoadableSingleton
 {
     private readonly GeneratedSpecificationAssetRepository _generatedSpecificationAssetRepository;
     
@@ -15,8 +16,9 @@ internal class GeneratedSpecificationLoader : ITimberApiLoadableSingleton
         _generatedSpecificationAssetRepository = generatedSpecificationAssetRepository;
     }
 
-    public void Load()
+    public void PostLoad()
     {
+        Debug.LogWarning("Starting generators");
         foreach (var specificationGenerator in _specificationGenerators)
         {
             _generatedSpecificationAssetRepository.AddSpecificationRange(specificationGenerator.Generate());

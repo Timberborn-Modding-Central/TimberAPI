@@ -1,15 +1,14 @@
 using Bindito.Core;
-using Timberborn.AssetSystem;
-using UnityEngine;
+using TimberApi.SpecificationSystem;
 
 namespace Tester;
 
-[Context("MainMenu")]
+[Context("Game")]
 public class Configurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
-        Debug.LogError("SSWWAAA");
         containerDefinition.Bind<Test>().AsSingleton();
+        containerDefinition.MultiBind<ISpecificationGenerator>().To<Generator>().AsSingleton();
     }
 }

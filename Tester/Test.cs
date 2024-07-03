@@ -1,10 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Linq;
 using Timberborn.AssetSystem;
+using Timberborn.Bootstrapper;
 using Timberborn.Persistence;
+using Timberborn.PrefabGroupSystem;
 using Timberborn.SingletonSystem;
 using Timberborn.SoakedEffects;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Tester;
 
@@ -18,11 +24,14 @@ public class Test : ILoadableSingleton
 
     private readonly NeedAffectedBySoakednessSpecificationDeserializer _deserializer;
 
-    public Test(IAssetLoader assetLoader, ISpecificationService specificationService, IEnumerable<IAssetProvider> assetProviders)
+    private readonly PrefabGroupSpecificationDeserializer _prefabGroupSpecificationDeserializer;
+
+    public Test(IAssetLoader assetLoader, ISpecificationService specificationService, IEnumerable<IAssetProvider> assetProviders, PrefabGroupSpecificationDeserializer prefabGroupSpecificationDeserializer)
     {
         _assetLoader = assetLoader;
         _specificationService = specificationService;
         _assetProviders = assetProviders;
+        _prefabGroupSpecificationDeserializer = prefabGroupSpecificationDeserializer;
         _deserializer = new NeedAffectedBySoakednessSpecificationDeserializer();
     }
     

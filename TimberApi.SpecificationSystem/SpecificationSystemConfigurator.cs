@@ -2,7 +2,7 @@ using Bindito.Core;
 
 namespace TimberApi.SpecificationSystem;
 
-[Context("InGame")]
+[Context("Game")]
 [Context("MainMenu")]
 [Context("MapEditor")]
 internal class SpecificationSystemConfigurator : IConfigurator

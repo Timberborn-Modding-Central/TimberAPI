@@ -1,8 +1,8 @@
 using System;
 using HarmonyLib;
 using TimberApi.HarmonySystem;
+using TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
 using Timberborn.ModManagerScene;
-using Timberborn.SingletonSystem;
 using UnityEngine;
 
 namespace TimberApi.SpecificationSystem;
@@ -19,6 +19,8 @@ internal class ModStarter : IModStarter
                 harmony.GetMethodInfo("Timberborn.Bootstrapper.BootstrapperConfigurator", "Configure"),
                 harmony.GetHarmonyMethod<BootstrapperConfigurator>(nameof(BootstrapperConfigurator.Patch))
             );
+            
+            EarlyLoadPatcher.Patch(harmony);
         }
         catch (Exception e)
         {
