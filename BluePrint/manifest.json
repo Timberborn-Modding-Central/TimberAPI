@@ -1,0 +1,13 @@
+{
+  "Name": "BluePrint",
+  "Version": "1.0",
+  "Id": "TimberApi",
+  "MinimumGameVersion": "0.0.0.0",
+  "Description": "Poggers",
+  "RequiredMods": [
+    {
+      "Id": "TimberApi",
+      "MinimumVersion": "0.7"
+    }
+  ]
+}
