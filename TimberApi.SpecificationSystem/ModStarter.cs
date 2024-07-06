@@ -16,7 +16,7 @@ internal class ModStarter : IModStarter
             var harmony = new Harmony("TimberApi.SpecificationSystem");
 
             harmony.Patch(
-                harmony.GetMethodInfo("Timberborn.Bootstrapper.BootstrapperConfigurator", "Configure"),
+                harmony.GetMethodInfo<Timberborn.Bootstrapper.BootstrapperConfigurator>(nameof(Timberborn.Bootstrapper.BootstrapperConfigurator.Configure)),
                 harmony.GetHarmonyMethod<BootstrapperConfigurator>(nameof(BootstrapperConfigurator.Patch))
             );
             
