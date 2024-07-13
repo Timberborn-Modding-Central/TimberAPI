@@ -4,6 +4,7 @@ using TimberApi.HarmonySystem;
 using TimberApi.Tools.ToolGroupSystem;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
+using UnityEngine;
 
 namespace TimberApi.BottomBarSystem.Patches;
 

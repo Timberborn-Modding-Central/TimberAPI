@@ -31,14 +31,14 @@ public class PlaceableObjectToolGenerator : ISpecificationGenerator
 
             var labeledPrefab = placeableBlockObject.GetComponentFast<LabeledPrefab>();
             var prefab = placeableBlockObject.GetComponentFast<Prefab>();
-
+            
             var json = JsonConvert.SerializeObject(new
             {
                 Id = prefab.PrefabName,
                 GroupId = placeableBlockObject.ToolGroupId,
                 Type = "PlaceableObjectTool",
                 Layout = "Default",
-                Order = placeableBlockObject.ToolOrder * 10,
+                Order = placeableBlockObject.ToolOrder,
                 Icon = $"{prefab.PrefabName}:{labeledPrefab.Image.name}",
                 NameLocKey = labeledPrefab.DisplayNameLocKey,
                 labeledPrefab.DescriptionLocKey,

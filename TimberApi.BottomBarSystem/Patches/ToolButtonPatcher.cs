@@ -1,6 +1,8 @@
 using HarmonyLib;
 using TimberApi.HarmonySystem;
+using TimberApi.Tools.ToolSystem;
 using Timberborn.ToolSystem;
+using UnityEngine;
 
 namespace TimberApi.BottomBarSystem.Patches;
 
@@ -14,6 +16,11 @@ public class ToolButtonPatcher
             harmony.GetMethodInfo<ToolButton>(nameof(ToolButton.Select)),
             prefix: harmony.GetHarmonyMethod<ToolButtonPatcher>(nameof(OnButtonClickedPatch))
         );
+        
+        harmony.Patch(
+            harmony.GetMethodInfo<ToolButton>(nameof(ToolButton.OnToolEntered), new []{ typeof(ToolEnteredEvent)}),
+            prefix: harmony.GetHarmonyMethod<ToolButtonPatcher>(nameof(OnToolEnteredPatch))
+        );
     }
 
     public static void OnButtonClickedPatch(ToolButton __instance, ToolGroupManager ____toolGroupManager)
@@ -26,5 +33,10 @@ public class ToolButtonPatcher
         }
 
         ____toolGroupManager.SwitchToolGroup(__instance.Tool.ToolGroup);
+    }
+    
+    public static bool OnToolEnteredPatch(ToolEnteredEvent toolEnteredEvent)
+    {
+        return toolEnteredEvent.Tool is not IUnselectableTool;
     }
 }

@@ -7,11 +7,8 @@ public class SettingBoxToolFactory : IToolFactory
 {
     private readonly IOptionsBox _optionsBox;
 
-    private readonly ToolGroupManager _toolGroupManager;
-
-    public SettingBoxToolFactory(ToolGroupManager toolGroupManager, IOptionsBox optionsBox)
+    public SettingBoxToolFactory(IOptionsBox optionsBox)
     {
-        _toolGroupManager = toolGroupManager;
         _optionsBox = optionsBox;
     }
 
@@ -19,6 +16,6 @@ public class SettingBoxToolFactory : IToolFactory
 
     public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
     {
-        return new SettingBoxTool(toolGroup, _toolGroupManager, _optionsBox);
+        return new SettingBoxTool(toolGroup, _optionsBox);
     }
 }
