@@ -24,12 +24,7 @@ class ModManagerScenePanelPatch
     [HarmonyPrefix]
     static bool Prefix()
     {
-        ModRepository modRepository = ModManagerScenePanel.CreateModRepository();
-        ModdedState.AddMods(modRepository.EnabledMods.Select<Mod, string>((Func<Mod, string>) (mod => mod.Manifest.Name)));
-        new ModCodeStarter(modRepository).Start();
-        new ModAssetBundleLoader(modRepository).Load();
-        ModManagerScenePanel.StartGame();
-
+        ModManagerScenePanel.LoadModsAndStartGame();
         return false;
     }
 }
