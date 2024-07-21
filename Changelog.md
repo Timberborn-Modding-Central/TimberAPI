@@ -1,4 +1,8 @@
 ## 0.7.0.1
+- Fixed loading 2 saves in 1 session crash.
+- Fixed MapEditor crash.
+
+## 0.7.0.0
 - Removed order multiplier.
 - Fixed IUnselectable ToolButtons to keep selected.
 
