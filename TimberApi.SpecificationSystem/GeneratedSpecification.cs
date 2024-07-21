@@ -26,7 +26,7 @@ public class GeneratedSpecification
     {
         FullPath = $"{_specificationPath}/{path}/{specificationName}".ToLower();
         SpecificationName = specificationName;
-        ObjectSpecification = objectSpecification;
         Json = JsonConvert.SerializeObject(json);
+        ObjectSpecification = objectSpecification;
     }
 }

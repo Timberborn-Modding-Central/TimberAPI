@@ -4,8 +4,6 @@ using TimberApi.SpecificationSystem;
 using Timberborn.BlockSystem;
 using Timberborn.PrefabSystem;
 using Timberborn.Wonders;
-using UnityEngine;
-using Logger = HarmonyLib.Tools.Logger;
 
 namespace TimberApi.Tools.ToolSystem.Tools.PlaceableObject;
 

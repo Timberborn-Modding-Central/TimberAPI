@@ -9,25 +9,36 @@ namespace TimberApi.SpecificationSystem;
 
 internal class GeneratedSpecificationAssetRepository
 {
-    private readonly List<GeneratedSpecification> _cachedObjectSpecifications = new ();
-    
+    private readonly Dictionary<string, GeneratedSpecification> _cachedObjectSpecifications = new();
+
     public readonly Dictionary<string, OrderedAsset<TextAsset>> GeneratedSpecificationAssets = new();
-    
+
+    private readonly HashSet<string> _newCachedObjectSpecificationPaths = new();
+
     public void AddSpecificationRange(IEnumerable<GeneratedSpecification> generatedSpecifications)
     {
         try
         {
-            var specifications = generatedSpecifications.ToList();
-            
-            var generatedSpecificationAssets = specifications.ToDictionary(
-                specification => specification.FullPath,
-                CreateOrderedSpecificationAsset
-            );
-            
-            GeneratedSpecificationAssets.AddRange(generatedSpecificationAssets);
-            
-            // Prefab generated specifications should only be done once, since prefabs will keep their changed values.
-            _cachedObjectSpecifications.AddRange(specifications.Where(generatedSpecification => generatedSpecification.ObjectSpecification));
+            foreach (var generatedSpecification in generatedSpecifications)
+            {
+                var specification = generatedSpecification;
+
+                if (generatedSpecification.ObjectSpecification)
+                {
+                    if (!_cachedObjectSpecifications.TryGetValue(generatedSpecification.FullPath, out specification))
+                    {
+                        specification = generatedSpecification;
+                        _cachedObjectSpecifications.Add(generatedSpecification.FullPath, generatedSpecification);
+                        _newCachedObjectSpecificationPaths.Add(generatedSpecification.FullPath);
+                    }
+                    else if (_newCachedObjectSpecificationPaths.Contains(specification.FullPath))
+                    {
+                        throw new GeneratedObjectSpecificationAlreadyExistsException(specification.FullPath);
+                    }
+                }
+
+                GeneratedSpecificationAssets[specification.FullPath] = CreateOrderedSpecificationAsset(specification);
+            }
         }
         catch (Exception exception)
         {
@@ -35,12 +46,11 @@ internal class GeneratedSpecificationAssetRepository
             throw exception;
         }
     }
-    
+
     public void Reset()
     {
         GeneratedSpecificationAssets.Clear();
-        
-        AddSpecificationRange(_cachedObjectSpecifications);
+        _newCachedObjectSpecificationPaths.Clear();
     }
 
     private static OrderedAsset<TextAsset> CreateOrderedSpecificationAsset(GeneratedSpecification specification)
