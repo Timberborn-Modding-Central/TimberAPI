@@ -22,9 +22,9 @@ class ModManagerScenePanelPatch
 {
     [HarmonyPatch(typeof(ModManagerScenePanel), "Awake")]
     [HarmonyPrefix]
-    static bool Prefix()
+    static bool Prefix(ModManagerScenePanel __instance)
     {
-        ModManagerScenePanel.LoadModsAndStartGame();
+        __instance.LoadModsAndStartGame();
         return false;
     }
 }
