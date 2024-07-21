@@ -1,6 +1,6 @@
 ## 0.7.0.1
 - Removed order multiplier.
-- Fixed IUnselectable toolbuttons to keep selected.
+- Fixed IUnselectable ToolButtons to keep selected.
 
 ## 0.7.0.0
 - Added BottomBarRework.

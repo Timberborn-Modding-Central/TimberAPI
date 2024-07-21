@@ -37,9 +37,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{785A7148-1F49-41D2-9C70-335D744A2AB4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specifications", "specifications", "{BCD7F0BE-DD6E-4C57-936A-4F25E8898C96}"
-	ProjectSection(SolutionItems) = preProject
-		package\specifications\NeedAffectedBySoakednessSpecification.WetFur.json = package\specifications\NeedAffectedBySoakednessSpecification.WetFur.json
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.SpecificationSystem", "TimberApi.SpecificationSystem\TimberApi.SpecificationSystem.csproj", "{B22111AD-AB44-43BA-8BB0-95B0D82BA82D}"
 EndProject

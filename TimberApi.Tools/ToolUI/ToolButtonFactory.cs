@@ -70,10 +70,25 @@ public class ToolButtonFactory
         return Create(tool, toolImage, root);
     }
 
+    public ToolButton CreateHex(Tool tool, Sprite toolImage)
+    {
+        var content = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolButtonHex");
+        return Create(tool, toolImage, content);
+    }
+    
+    public ToolButton CreateHex(Tool tool, Sprite toolImage, string backgroundImage)
+    {
+        var root = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolButtonHex");
+        root.Children().First().style.backgroundImage = new StyleBackground(_assetLoader.Load<Sprite>(backgroundImage));
+        
+        return Create(tool, toolImage, root);
+    }
+
+
     public ToolButton Create(Tool tool, Sprite toolImage, VisualElement root)
     {
         root.Q<VisualElement>("ToolImage").style.backgroundImage = new StyleBackground(toolImage);
-        var button = new ToolButton(_toolManager, _devModeManager, _toolGroupManager, _mapEditorMode, tool, root, root.Q<Button>("ToolButton"));
+        var button = new ToolButton(_toolManager, _devModeManager, _toolGroupManager, _mapEditorMode, tool, root, root.Q<Button>());
         _eventBus.Register(button);
         _toolButtonService.Add(button);
         return button;

@@ -14,7 +14,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Lib.Harmony" Version="2.3.3" NoWarn="NU1701" />
+        <PackageReference Include="HarmonyX" Version="2.13.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
         <PackageReference Include="UnityEngine.Modules" Version="6000.0.4" IncludeAssets="compile" />
