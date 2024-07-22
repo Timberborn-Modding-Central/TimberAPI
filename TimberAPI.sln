@@ -13,7 +13,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Package", "Package", "{5B81753F-6FBA-4061-BDF6-F3709FDB4FBA}"
 	ProjectSection(SolutionItems) = preProject
 		package\manifest.json = package\manifest.json
-		package\manifest.ci.json = package\manifest.ci.json
+		package\workshop_data.json = package\workshop_data.json
+		package\thumbnail.png = package\thumbnail.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{41EF4C9F-9EAA-487A-B8D2-248225CC70E4}"
