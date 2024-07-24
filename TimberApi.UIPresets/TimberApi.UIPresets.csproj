@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\TimberApi.UIBuilderSystem\TimberApi.UIBuilderSystem.csproj" />
         <ProjectReference Include="..\TimberApi\TimberApi.csproj" />
     </ItemGroup>
 
@@ -20,10 +21,6 @@
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="UIBuilderSystem\" />
     </ItemGroup>
 
     <PropertyGroup>

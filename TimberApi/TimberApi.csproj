@@ -36,7 +36,6 @@
     
     <ItemGroup>
       <Folder Include="ConfigSystem\" />
-      <Folder Include="DependencyContainerSystem\" />
       <Folder Include="ModSystem\" />
     </ItemGroup>
     
