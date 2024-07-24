@@ -12,21 +12,20 @@ namespace TimberApi.Tools.ToolUI;
 
 public class ToolButtonFactory
 {
-    private readonly EventBus _eventBus;
-
-    private readonly ToolManager _toolManager;
+    private readonly IAssetLoader _assetLoader;
 
     private readonly DevModeManager _devModeManager;
+    private readonly EventBus _eventBus;
 
-    private readonly VisualElementLoader _visualElementLoader;
+    private readonly MapEditorMode _mapEditorMode;
 
     private readonly ToolButtonService _toolButtonService;
 
     private readonly ToolGroupManager _toolGroupManager;
 
-    private readonly MapEditorMode _mapEditorMode;
+    private readonly ToolManager _toolManager;
 
-    private readonly IAssetLoader _assetLoader;
+    private readonly VisualElementLoader _visualElementLoader;
 
     public ToolButtonFactory(
         EventBus eventBus,
@@ -57,8 +56,9 @@ public class ToolButtonFactory
     public ToolButton Create(Tool tool, Sprite toolImage, string backgroundImage)
     {
         var root = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolButton");
-            
-        root.Q<VisualElement>("Background").style.backgroundImage = new StyleBackground(_assetLoader.Load<Sprite>(backgroundImage));
+
+        root.Q<VisualElement>("Background").style.backgroundImage =
+            new StyleBackground(_assetLoader.Load<Sprite>(backgroundImage));
         return Create(tool, toolImage, root);
     }
 
@@ -70,10 +70,26 @@ public class ToolButtonFactory
         return Create(tool, toolImage, root);
     }
 
+    public ToolButton CreateHex(Tool tool, Sprite toolImage)
+    {
+        var content = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolButtonHex");
+        return Create(tool, toolImage, content);
+    }
+
+    public ToolButton CreateHex(Tool tool, Sprite toolImage, string backgroundImage)
+    {
+        var root = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolButtonHex");
+        root.Children().First().style.backgroundImage = new StyleBackground(_assetLoader.Load<Sprite>(backgroundImage));
+
+        return Create(tool, toolImage, root);
+    }
+
+
     public ToolButton Create(Tool tool, Sprite toolImage, VisualElement root)
     {
         root.Q<VisualElement>("ToolImage").style.backgroundImage = new StyleBackground(toolImage);
-        var button = new ToolButton(_toolManager, _devModeManager, _toolGroupManager, _mapEditorMode, tool, root, root.Q<Button>("ToolButton"));
+        var button = new ToolButton(_toolManager, _devModeManager, _toolGroupManager, _mapEditorMode, tool, root,
+            root.Q<Button>());
         _eventBus.Register(button);
         _toolButtonService.Add(button);
         return button;

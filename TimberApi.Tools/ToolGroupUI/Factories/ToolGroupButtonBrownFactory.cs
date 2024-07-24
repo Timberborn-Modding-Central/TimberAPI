@@ -17,6 +17,7 @@ public class ToolGroupButtonBrownFactory : IToolGroupButtonFactory
 
     public ToolGroupButton Create(IToolGroup toolGroup, ToolGroupSpecification toolGroupSpecification)
     {
-        return _toolGroupButtonFactory.Create((ToolGroup) toolGroup, toolGroup.Icon, "UI/Images/BottomBar/subbutton-bg-01");
+        return _toolGroupButtonFactory.Create((ToolGroup)toolGroup, toolGroup.Icon,
+            "UI/Images/BottomBar/subbutton-bg-01");
     }
 }

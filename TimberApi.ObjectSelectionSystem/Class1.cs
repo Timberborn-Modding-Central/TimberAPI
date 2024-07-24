@@ -1,8 +1,5 @@
-﻿using System;
+﻿namespace TimberApi.ObjectSelectionSystem;
 
-namespace TimberApi.ObjectSelectionSystem
+public class Class1
 {
-    public class Class1
-    {
-    }
 }

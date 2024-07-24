@@ -5,5 +5,5 @@ public enum Scene
     MainMenu,
     Game,
     MapEditor,
-    Unknown,
+    Unknown
 }

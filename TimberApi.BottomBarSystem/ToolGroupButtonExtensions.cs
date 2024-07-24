@@ -1,12 +1,11 @@
 using Timberborn.ToolSystem;
 
-namespace TimberApi.BottomBarSystem
+namespace TimberApi.BottomBarSystem;
+
+internal static class ToolGroupButtonExtensions
 {
-    internal static class ToolGroupButtonExtensions
+    public static void AddToolGroupButton(this ToolGroupButton toolGroupButton, ToolGroupButton childButton)
     {
-        public static void AddToolGroupButton(this ToolGroupButton toolGroupButton, ToolGroupButton childButton)
-        {
-            toolGroupButton.ToolButtonsElement.Add(childButton.Root);
-        }
+        toolGroupButton.ToolButtonsElement.Add(childButton.Root);
     }
 }

@@ -6,9 +6,8 @@ namespace TimberApi.Tools.ToolSystem;
 
 public class ToolIconService
 {
-    private readonly Dictionary<string, Sprite> _icons = new();
-
     private readonly IAssetLoader _assetLoader;
+    private readonly Dictionary<string, Sprite> _icons = new();
 
     public ToolIconService(IAssetLoader assetLoader)
     {

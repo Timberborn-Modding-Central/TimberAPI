@@ -15,8 +15,9 @@ public class ToolbarButtonRetrieverPatcher
             harmony.GetHarmonyMethod<ToolbarButtonRetrieverPatcher>(nameof(TryGetPreviousVisibleButtonPatch))
         );
     }
-        
-    public static bool TryGetPreviousVisibleButtonPatch(IEnumerable<IToolbarButton> buttons, out IToolbarButton? previousButton)
+
+    public static bool TryGetPreviousVisibleButtonPatch(IEnumerable<IToolbarButton> buttons,
+        out IToolbarButton? previousButton)
     {
         previousButton = null;
         return buttons.Any(button => button.IsVisible);

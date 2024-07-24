@@ -12,11 +12,10 @@ namespace TimberApi.Tools.ToolGroupUI;
 
 public class ToolGroupButtonFactory
 {
+    private readonly IAssetLoader _assetLoader;
     private readonly EventBus _eventBus;
 
     private readonly ILoc _loc;
-
-    private readonly IAssetLoader _assetLoader;
 
     private readonly ToolButtonService _toolButtonService;
 
@@ -48,13 +47,14 @@ public class ToolGroupButtonFactory
     public ToolGroupButton Create(ToolGroup toolGroup, Sprite toolGroupImage, Sprite backgroundImage)
     {
         var visualElement = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolGroupButton");
-        visualElement.Q<VisualElement>("ToolGroupButtonWrapper").Q<VisualElement>("").style.backgroundImage = new StyleBackground(backgroundImage);
+        visualElement.Q<VisualElement>("ToolGroupButtonWrapper").Q<VisualElement>("").style.backgroundImage =
+            new StyleBackground(backgroundImage);
         InitializeElement(visualElement, toolGroup, toolGroupImage);
         var toolGroupButton = new ToolGroupButton(_loc,
             _toolGroupManager,
-            toolGroup, 
-            visualElement, 
-            visualElement.Q<VisualElement>("ToolButtons"), 
+            toolGroup,
+            visualElement,
+            visualElement.Q<VisualElement>("ToolButtons"),
             visualElement.Q<VisualElement>("ToolGroupButtonWrapper"));
         _eventBus.Register(toolGroupButton);
         Add((IToolGroup)toolGroup, toolGroupButton);
@@ -65,9 +65,9 @@ public class ToolGroupButtonFactory
     {
         var button = root.Q<Button>("ToolGroupButton");
         var tooltip = root.Q<Label>("Tooltip");
-        button.RegisterCallback((EventCallback<MouseEnterEvent>) (_ => tooltip.parent.ToggleDisplayStyle(true)));
-        button.RegisterCallback((EventCallback<MouseLeaveEvent>) (_ => tooltip.parent.ToggleDisplayStyle(false)));
-        button.clicked += (Action) (() => OnButtonClick(tooltip, toolGroup));
+        button.RegisterCallback((EventCallback<MouseEnterEvent>)(_ => tooltip.parent.ToggleDisplayStyle(true)));
+        button.RegisterCallback((EventCallback<MouseLeaveEvent>)(_ => tooltip.parent.ToggleDisplayStyle(false)));
+        button.clicked += (Action)(() => OnButtonClick(tooltip, toolGroup));
         button.style.backgroundImage = new StyleBackground(toolGroupImage);
         tooltip.parent.ToggleDisplayStyle(false);
         root.Q<VisualElement>("ToolButtons").ToggleDisplayStyle(false);
@@ -75,7 +75,7 @@ public class ToolGroupButtonFactory
 
     private void OnButtonClick(VisualElement tooltip, ToolGroup toolGroup)
     {
-        if(_toolGroupManager.ActiveToolGroup == toolGroup)
+        if (_toolGroupManager.ActiveToolGroup == toolGroup)
         {
             _toolGroupManager.CloseToolGroup();
         }
@@ -85,14 +85,11 @@ public class ToolGroupButtonFactory
             tooltip.parent.ToggleDisplayStyle(false);
         }
     }
-        
+
     private void Add(IToolGroup toolGroup, ToolGroupButton toolButton)
     {
         _toolButtonService._toolGroupButtons.Add(toolButton);
 
-        if (toolGroup.GroupId == null)
-        {
-            _toolButtonService._rootButtons.Add(toolButton);
-        }
+        if (toolGroup.GroupId == null) _toolButtonService._rootButtons.Add(toolButton);
     }
 }

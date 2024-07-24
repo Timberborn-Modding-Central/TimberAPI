@@ -1,35 +1,35 @@
 using System;
 using Timberborn.SerializationSystem;
 
-namespace TimberApi.BottomBarSystem
+namespace TimberApi.BottomBarSystem;
+
+public class BottomBarButton : IComparable<BottomBarButton>
 {
-    public class BottomBarButton : IComparable<BottomBarButton>
+    public BottomBarButton(string id, bool isGroup, string? groupId, bool hidden, int order,
+        ObjectSave? buttonInformation)
     {
-        public BottomBarButton(string id, bool isGroup, string? groupId, bool hidden, int order, ObjectSave? buttonInformation)
-        {
-            Id = id;
-            IsGroup = isGroup;
-            GroupId = groupId;
-            Hidden = hidden;
-            Order = order;
-            ButtonInformation = buttonInformation;
-        }
+        Id = id;
+        IsGroup = isGroup;
+        GroupId = groupId;
+        Hidden = hidden;
+        Order = order;
+        ButtonInformation = buttonInformation;
+    }
 
-        public string Id { get; }
+    public string Id { get; }
 
-        public bool IsGroup { get; }
+    public bool IsGroup { get; }
 
-        public string? GroupId { get; }
+    public string? GroupId { get; }
 
-        public bool Hidden { get; }
+    public bool Hidden { get; }
 
-        public int Order { get; }
+    public int Order { get; }
 
-        public ObjectSave? ButtonInformation { get; }
+    public ObjectSave? ButtonInformation { get; }
 
-        public int CompareTo(BottomBarButton other)
-        {
-            return Order.CompareTo(other.Order);
-        }
+    public int CompareTo(BottomBarButton other)
+    {
+        return Order.CompareTo(other.Order);
     }
 }

@@ -6,14 +6,14 @@ public class TreeCuttingAreaToolGroupFactory : IToolGroupFactory
 
     public IToolGroup Create(ToolGroupSpecification toolGroupSpecification)
     {
-            return new TreeCuttingAreaToolGroup(
-                toolGroupSpecification.Id,
-                toolGroupSpecification.GroupId,
-                toolGroupSpecification.Order,
-                toolGroupSpecification.Section,
-                toolGroupSpecification.NameLocKey,
-                toolGroupSpecification.DevMode,
-                toolGroupSpecification.Icon
-            );
-        }
+        return new TreeCuttingAreaToolGroup(
+            toolGroupSpecification.Id,
+            toolGroupSpecification.GroupId,
+            toolGroupSpecification.Order,
+            toolGroupSpecification.Section,
+            toolGroupSpecification.NameLocKey,
+            toolGroupSpecification.DevMode,
+            toolGroupSpecification.Icon
+        );
+    }
 }

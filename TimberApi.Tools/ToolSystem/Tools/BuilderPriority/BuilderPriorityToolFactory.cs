@@ -6,8 +6,6 @@ namespace TimberApi.Tools.ToolSystem.Tools.BuilderPriority;
 
 public class BuilderPriorityToolFactory : BaseToolFactory<BuilderPriorityToolToolInformation>
 {
-    public override string Id => "PriorityTool";
-
     private readonly TimberbornBuilderPriorityToolFactory _builderPriorityToolFactory;
 
     public BuilderPriorityToolFactory(TimberbornBuilderPriorityToolFactory builderPriorityToolFactory)
@@ -15,11 +13,14 @@ public class BuilderPriorityToolFactory : BaseToolFactory<BuilderPriorityToolToo
         _builderPriorityToolFactory = builderPriorityToolFactory;
     }
 
-    protected override Tool CreateTool(ToolSpecification toolSpecification, BuilderPriorityToolToolInformation toolInformation, ToolGroup? toolGroup)
+    public override string Id => "PriorityTool";
+
+    protected override Tool CreateTool(ToolSpecification toolSpecification,
+        BuilderPriorityToolToolInformation toolInformation, ToolGroup? toolGroup)
     {
         var priorityTool = _builderPriorityToolFactory.Create(toolInformation.Priority);
         priorityTool.ToolGroup = toolGroup;
-            
+
         return priorityTool;
     }
 

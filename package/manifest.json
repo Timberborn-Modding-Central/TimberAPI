@@ -2,8 +2,8 @@
   "Name": "TimberApi",
   "Version": "0.7.1.0",
   "Id": "TimberApi",
-  "MinimumGameVersion": "0.0.0.0",
-  "Description": "Poggers",
+  "MinimumGameVersion": "0.6.2.0",
+  "Description": "TimberAPI supports modders to create new content in Timberborn.",
   "RequiredMods": [
     {
       "Id": "Harmony",

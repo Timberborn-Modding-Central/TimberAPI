@@ -15,18 +15,21 @@ public class ModStarter : IModStarter
         try
         {
             var harmony = new Harmony("TimberApi");
-            
+
             SceneManager.Patch(harmony);
 
             harmony.Patch(
                 harmony.GetMethodInfo<SingletonLifecycleService>(nameof(SingletonLifecycleService.LoadAll)),
-                harmony.GetHarmonyMethod<SingletonLifecycleServicePatcher>(nameof(SingletonLifecycleServicePatcher.LoadAllPrefix))
+                harmony.GetHarmonyMethod<SingletonLifecycleServicePatcher>(nameof(SingletonLifecycleServicePatcher
+                    .LoadAllPrefix))
             );
-            
+
             harmony.Patch(
                 harmony.GetMethodInfo<SingletonLifecycleService>(nameof(SingletonLifecycleService.LoadSingletons)),
-                harmony.GetHarmonyMethod<SingletonLifecycleServicePatcher>(nameof(SingletonLifecycleServicePatcher.LoadSingletonsPrefix)),
-                harmony.GetHarmonyMethod<SingletonLifecycleServicePatcher>(nameof(SingletonLifecycleServicePatcher.LoadSingletonsPostfix))
+                harmony.GetHarmonyMethod<SingletonLifecycleServicePatcher>(nameof(SingletonLifecycleServicePatcher
+                    .LoadSingletonsPrefix)),
+                harmony.GetHarmonyMethod<SingletonLifecycleServicePatcher>(nameof(SingletonLifecycleServicePatcher
+                    .LoadSingletonsPostfix))
             );
         }
         catch (Exception e)

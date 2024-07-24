@@ -17,7 +17,7 @@ public class CursorToolFactory : IToolFactory
     public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
     {
         _cursorTool.ToolGroup = toolGroup;
-            
+
         return _cursorTool;
     }
 }

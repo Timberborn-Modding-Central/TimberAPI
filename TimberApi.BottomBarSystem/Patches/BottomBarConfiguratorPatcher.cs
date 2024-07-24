@@ -14,12 +14,14 @@ public class BottomBarConfiguratorPatcher
         try
         {
             harmony.Patch(
-                harmony.GetMethodInfo<Timberborn.BottomBarSystem.BottomBarSystemConfigurator>(nameof(Timberborn.BottomBarSystem.BottomBarSystemConfigurator.Configure)),
+                harmony.GetMethodInfo<Timberborn.BottomBarSystem.BottomBarSystemConfigurator>(
+                    nameof(Timberborn.BottomBarSystem.BottomBarSystemConfigurator.Configure)),
                 harmony.GetHarmonyMethod<BottomBarConfiguratorPatcher>(nameof(DisableBottomBarSystemConfigurator))
             );
-            
+
             harmony.Patch(
-                harmony.GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider.CreateFolktailsConfiguration)),
+                harmony.GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider
+                    .CreateFolktailsConfiguration)),
                 harmony.GetHarmonyMethod<BottomBarConfiguratorPatcher>(nameof(CreateFolktailsConfigurationPatch))
             );
         }
@@ -34,7 +36,7 @@ public class BottomBarConfiguratorPatcher
     {
         return false;
     }
-    
+
     public static bool CreateFolktailsConfigurationPatch(ref TutorialConfiguration __result)
     {
         __result = TutorialConfiguration.CreateEmpty();

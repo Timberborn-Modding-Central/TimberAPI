@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\TimberApi\TimberApi.csproj" />
+        <ProjectReference Include="..\TimberApi\TimberApi.csproj"/>
     </ItemGroup>
 
     <ItemGroup Condition="$(UseLocalTimberbornSource)">
-        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" />
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2"/>
 
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Timberborn.*.dll" Publicize="true">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
@@ -22,13 +22,17 @@
         </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="UIBuilderSystem\"/>
+    </ItemGroup>
+
     <PropertyGroup>
         <CopyDllToPath>false</CopyDllToPath>
         <ModPath>Documents/Mods</ModPath>
     </PropertyGroup>
 
     <Target Name="CopyingFilesToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath)">
-        <Message Text="### Copying files to plugins ###" Importance="high" />
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\$(SolutionName)\core" />
+        <Message Text="### Copying files to plugins ###" Importance="high"/>
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\$(SolutionName)\core"/>
     </Target>
 </Project>

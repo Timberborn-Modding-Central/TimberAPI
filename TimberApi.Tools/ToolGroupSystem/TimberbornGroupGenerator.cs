@@ -20,7 +20,7 @@ public class TimberbornGroupGenerator : ISpecificationGenerator
             DevMode = true
         });
 
-        return new GeneratedSpecification(json, "MapEditor", "ToolGroupSpecification", false);
+        return new GeneratedSpecification(json, "MapEditor", "ToolGroupSpecification");
     }
 
     private static GeneratedSpecification RuinsGroupDevelopment()
@@ -30,7 +30,7 @@ public class TimberbornGroupGenerator : ISpecificationGenerator
             DevMode = true
         });
 
-        return new GeneratedSpecification(json, "Ruins", "ToolGroupSpecification", false);
+        return new GeneratedSpecification(json, "Ruins", "ToolGroupSpecification");
     }
 
     private static GeneratedSpecification OtherGroupHidden()
@@ -40,6 +40,6 @@ public class TimberbornGroupGenerator : ISpecificationGenerator
             Hidden = true
         });
 
-        return new GeneratedSpecification(json, "Other", "ToolGroupSpecification", false);
+        return new GeneratedSpecification(json, "Other", "ToolGroupSpecification");
     }
 }

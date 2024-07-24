@@ -11,9 +11,8 @@ namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 
 public class PlantingToolGenerator : ISpecificationGenerator
 {
-    private readonly ToolIconService _toolIconService;
-
     private readonly PrefabService _prefabService;
+    private readonly ToolIconService _toolIconService;
 
     public PlantingToolGenerator(ToolIconService toolIconService, PrefabService prefabService)
     {

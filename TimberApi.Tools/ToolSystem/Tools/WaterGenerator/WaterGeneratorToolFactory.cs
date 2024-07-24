@@ -5,14 +5,14 @@ namespace TimberApi.Tools.ToolSystem.Tools.WaterGenerator;
 
 public class WaterGeneratorToolFactory : IToolFactory
 {
-    public string Id => "WaterGeneratorTool";
-
     private readonly WaterHeightBrushTool _waterHeightBrushTool;
 
     public WaterGeneratorToolFactory(WaterHeightBrushTool waterHeightBrushTool)
     {
         _waterHeightBrushTool = waterHeightBrushTool;
     }
+
+    public string Id => "WaterGeneratorTool";
 
     public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
     {

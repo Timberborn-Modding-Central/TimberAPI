@@ -12,7 +12,7 @@ public class ToolGroupService : ILoadableSingleton
     private readonly ToolGroupButtonFactoryService _toolGroupButtonFactoryService;
 
     private readonly ToolGroupFactoryService _toolGroupFactoryService;
-        
+
     private readonly ToolGroupSpecificationService _toolGroupSpecificationService;
 
     private ImmutableDictionary<string, ToolGroupButton> _toolGroupButtons = null!;
@@ -31,7 +31,8 @@ public class ToolGroupService : ILoadableSingleton
 
     public IEnumerable<IToolGroup> ToolGroups => _toolGroups.Select(pair => pair.Value).ToImmutableArray();
 
-    public IEnumerable<ToolGroupButton> ToolGroupButtons => _toolGroupButtons.Select(pair => pair.Value).ToImmutableArray();
+    public IEnumerable<ToolGroupButton> ToolGroupButtons =>
+        _toolGroupButtons.Select(pair => pair.Value).ToImmutableArray();
 
     public void Load()
     {
@@ -39,13 +40,15 @@ public class ToolGroupService : ILoadableSingleton
 
         var toolGroupButtons = new Dictionary<string, ToolGroupButton>();
 
-        foreach (var toolGroupSpecification in _toolGroupSpecificationService.ToolGroupSpecifications.OrderBy(x => x.Layout).ThenBy(x => x.Order))
+        foreach (var toolGroupSpecification in _toolGroupSpecificationService.ToolGroupSpecifications
+                     .OrderBy(x => x.Layout).ThenBy(x => x.Order))
         {
             var toolGroup = _toolGroupFactoryService.Get(toolGroupSpecification.Type).Create(toolGroupSpecification);
 
             toolGroups.Add(toolGroupSpecification.Id.ToLower(), toolGroup);
 
-            var button = _toolGroupButtonFactoryService.Get(toolGroupSpecification.Layout).Create(toolGroup, toolGroupSpecification);
+            var button = _toolGroupButtonFactoryService.Get(toolGroupSpecification.Layout)
+                .Create(toolGroup, toolGroupSpecification);
             toolGroupButtons.Add(toolGroupSpecification.Id.ToLower(), button);
         }
 
@@ -55,10 +58,8 @@ public class ToolGroupService : ILoadableSingleton
 
     public IToolGroup GetToolGroup(string id)
     {
-        if(! _toolGroups.TryGetValue(id.ToLower(), out var toolGroup))
-        {
+        if (!_toolGroups.TryGetValue(id.ToLower(), out var toolGroup))
             throw new KeyNotFoundException($"The given ToolGroupId ({id.ToLower()}) cannot be found.");
-        }
 
         return toolGroup;
     }
@@ -79,14 +80,12 @@ public class ToolGroupService : ILoadableSingleton
 
     public ToolGroupButton GetToolGroupButton(string id)
     {
-        if(! _toolGroupButtons.TryGetValue(id.ToLower(), out var toolGroupButton))
-        {
+        if (!_toolGroupButtons.TryGetValue(id.ToLower(), out var toolGroupButton))
             throw new KeyNotFoundException($"The given ToolGroupId ({id.ToLower()}) cannot be found.");
-        }
 
         return toolGroupButton;
     }
-        
+
     public IEnumerable<ToolGroupButton> GetToolGroupButtonByGroupId(string groupId)
     {
         return _toolGroupButtons

@@ -6,6 +6,5 @@ public class ModStarter : IModStarter
 {
     public void StartMod()
     {
-        
     }
 }

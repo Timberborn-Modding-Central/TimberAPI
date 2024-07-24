@@ -8,7 +8,7 @@ public class BuilderPriorityToolToolInformation
 {
     public BuilderPriorityToolToolInformation(string priority)
     {
-        if(Enum.TryParse(priority, out Priority result))
+        if (Enum.TryParse(priority, out Priority result))
         {
             Priority = result;
         }

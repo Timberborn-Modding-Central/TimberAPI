@@ -6,74 +6,72 @@ using TimberApi.Tools.ToolUI;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 
-namespace TimberApi.Tools.ToolSystem
+namespace TimberApi.Tools.ToolSystem;
+
+public class ToolService : ILoadableSingleton
 {
-    public class ToolService : ILoadableSingleton
+    private readonly ToolButtonFactoryService _toolButtonFactoryService;
+
+    private readonly ToolFactoryService _toolFactoryService;
+
+    private readonly ToolGroupService _toolGroupService;
+
+    private readonly ToolSpecificationService _toolSpecificationService;
+
+    private ImmutableDictionary<string, ToolButton> _toolButtons = null!;
+
+    private ImmutableDictionary<string, Tool> _tools = null!;
+
+    public ToolService(ToolSpecificationService toolSpecificationService, ToolFactoryService toolFactoryService,
+        ToolButtonFactoryService toolButtonFactoryService, ToolGroupService toolGroupService)
     {
-        private readonly ToolButtonFactoryService _toolButtonFactoryService;
+        _toolSpecificationService = toolSpecificationService;
+        _toolFactoryService = toolFactoryService;
+        _toolButtonFactoryService = toolButtonFactoryService;
+        _toolGroupService = toolGroupService;
+    }
 
-        private readonly ToolFactoryService _toolFactoryService;
+    public IEnumerable<Tool> Tools => _tools.Select(pair => pair.Value).ToImmutableArray();
 
-        private readonly ToolGroupService _toolGroupService;
+    public IEnumerable<ToolButton> ToolButtons => _toolButtons.Select(pair => pair.Value).ToImmutableArray();
 
-        private readonly ToolSpecificationService _toolSpecificationService;
+    public void Load()
+    {
+        var tools = new Dictionary<string, Tool>();
 
-        private ImmutableDictionary<string, ToolButton> _toolButtons = null!;
+        var toolButtons = new Dictionary<string, ToolButton>();
 
-        private ImmutableDictionary<string, Tool> _tools = null!;
-
-        public ToolService(ToolSpecificationService toolSpecificationService, ToolFactoryService toolFactoryService, ToolButtonFactoryService toolButtonFactoryService, ToolGroupService toolGroupService)
+        foreach (var specification in _toolSpecificationService.ToolSpecifications)
         {
-            _toolSpecificationService = toolSpecificationService;
-            _toolFactoryService = toolFactoryService;
-            _toolButtonFactoryService = toolButtonFactoryService;
-            _toolGroupService = toolGroupService;
+            var toolFactory = _toolFactoryService.Get(specification.Type);
+
+            var tool = specification.GroupId is null
+                ? toolFactory.Create(specification)
+                : toolFactory.Create(specification, (ToolGroup)_toolGroupService.GetToolGroup(specification.GroupId));
+
+            tools.Add(specification.Id.ToLower(), tool);
+
+            var toolButton = _toolButtonFactoryService.Get(specification.Layout).Create(tool, specification);
+            toolButtons.Add(specification.Id.ToLower(), toolButton);
         }
 
-        public IEnumerable<Tool> Tools => _tools.Select(pair => pair.Value).ToImmutableArray();
+        _tools = tools.ToImmutableDictionary();
+        _toolButtons = toolButtons.ToImmutableDictionary();
+    }
 
-        public IEnumerable<ToolButton> ToolButtons => _toolButtons.Select(pair => pair.Value).ToImmutableArray();
+    public Tool GetTool(string id)
+    {
+        if (!_tools.TryGetValue(id.ToLower(), out var tool))
+            throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
 
-        public void Load()
-        {
-            var tools = new Dictionary<string, Tool>();
+        return tool;
+    }
 
-            var toolButtons = new Dictionary<string, ToolButton>();
-            
-            foreach (var specification in _toolSpecificationService.ToolSpecifications)
-            {
-                var toolFactory = _toolFactoryService.Get(specification.Type);
+    public ToolButton GetToolButton(string id)
+    {
+        if (!_toolButtons.TryGetValue(id.ToLower(), out var toolButton))
+            throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
 
-                var tool = specification.GroupId is null ? toolFactory.Create(specification) : toolFactory.Create(specification, (ToolGroup) _toolGroupService.GetToolGroup(specification.GroupId));
-
-                tools.Add(specification.Id.ToLower(), tool);
-
-                var toolButton = _toolButtonFactoryService.Get(specification.Layout).Create(tool, specification);
-                toolButtons.Add(specification.Id.ToLower(), toolButton);
-            }
-
-            _tools = tools.ToImmutableDictionary();
-            _toolButtons = toolButtons.ToImmutableDictionary();
-        }
-
-        public Tool GetTool(string id)
-        {
-            if(! _tools.TryGetValue(id.ToLower(), out var tool))
-            {
-                throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
-            }
-
-            return tool;
-        }
-
-        public ToolButton GetToolButton(string id)
-        {
-            if(! _toolButtons.TryGetValue(id.ToLower(), out var toolButton))
-            {
-                throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
-            }
-
-            return toolButton;
-        }
+        return toolButton;
     }
 }

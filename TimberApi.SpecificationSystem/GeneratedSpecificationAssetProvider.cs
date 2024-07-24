@@ -10,7 +10,8 @@ internal class GeneratedSpecificationAssetProvider : IAssetProvider
 {
     private readonly GeneratedSpecificationAssetRepository _generatedSpecificationAssetRepository;
 
-    public GeneratedSpecificationAssetProvider(GeneratedSpecificationAssetRepository generatedSpecificationAssetRepository)
+    public GeneratedSpecificationAssetProvider(
+        GeneratedSpecificationAssetRepository generatedSpecificationAssetRepository)
     {
         _generatedSpecificationAssetRepository = generatedSpecificationAssetRepository;
     }
@@ -19,10 +20,11 @@ internal class GeneratedSpecificationAssetProvider : IAssetProvider
 
     public bool TryLoad<T>(string path, out OrderedAsset<T> orderedAsset) where T : Object
     {
-        if (typeof(T) == typeof(TextAsset) && _generatedSpecificationAssetRepository.GeneratedSpecificationAssets.ContainsKey(path))
+        if (typeof(T) == typeof(TextAsset) &&
+            _generatedSpecificationAssetRepository.GeneratedSpecificationAssets.ContainsKey(path))
         {
             orderedAsset = _generatedSpecificationAssetRepository.GeneratedSpecificationAssets[path].As<T>();
-            
+
             return true;
         }
 
@@ -32,10 +34,7 @@ internal class GeneratedSpecificationAssetProvider : IAssetProvider
 
     public IEnumerable<OrderedAsset<T>> LoadAll<T>(string path) where T : Object
     {
-        if (typeof(T) != typeof(TextAsset))
-        {
-            return new List<OrderedAsset<T>>();
-        }
+        if (typeof(T) != typeof(TextAsset)) return new List<OrderedAsset<T>>();
 
         return (IEnumerable<OrderedAsset<T>>)_generatedSpecificationAssetRepository.GeneratedSpecificationAssets
             .Where(registeredSpecification => registeredSpecification.Key.StartsWith(path))

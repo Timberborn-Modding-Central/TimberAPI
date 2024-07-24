@@ -9,32 +9,33 @@ namespace TimberApi;
 
 public class SceneManager
 {
-    public delegate void SceneChangedCallback(Scene previousScene, Scene currentScene, IContainerDefinition currentContainerDefinition);
+    public delegate void SceneChangedCallback(Scene previousScene, Scene currentScene,
+        IContainerDefinition currentContainerDefinition);
 
     public static Scene PreviousScene { get; private set; }
 
     public static Scene CurrentScene { get; private set; } = Scene.Unknown;
 
     public static event SceneChangedCallback SceneChanged = delegate { };
-    
+
     internal static void Patch(Harmony harmony)
     {
         harmony.Patch(
             harmony.GetMethodInfo<GameSceneInstaller>(nameof(GameSceneInstaller.Configure)),
-            postfix: harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMasterSceneConfigurator))
+            harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMasterSceneConfigurator))
         );
-        
+
         harmony.Patch(
             harmony.GetMethodInfo<MainMenuSceneConfigurator>(nameof(GameSceneInstaller.Configure)),
-            postfix: harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMainMenuSceneConfigurator))
+            harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMainMenuSceneConfigurator))
         );
-        
+
         harmony.Patch(
             harmony.GetMethodInfo<MapEditorSceneConfigurator>(nameof(GameSceneInstaller.Configure)),
-            postfix: harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMapEditorSceneConfigurator))
+            harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMapEditorSceneConfigurator))
         );
     }
-    
+
     private static void PatchMasterSceneConfigurator(IContainerDefinition containerDefinition)
     {
         ChangeScene(Scene.Game, containerDefinition);
