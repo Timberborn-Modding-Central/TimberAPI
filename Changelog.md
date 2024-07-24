@@ -1,3 +1,7 @@
+## 0.7.1.0
+- Added UIBuilder V2.
+- Added DependencyContainer.
+
 ## 0.7.0.1
 
 - Fixed loading 2 saves in 1 session crash.
