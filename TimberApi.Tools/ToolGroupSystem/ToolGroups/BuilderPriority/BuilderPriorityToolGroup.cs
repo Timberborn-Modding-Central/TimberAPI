@@ -4,7 +4,8 @@ namespace TimberApi.Tools.ToolGroupSystem.ToolGroups.BuilderPriority;
 
 public sealed class BuilderPriorityToolGroup : Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolGroup, IToolGroup
 {
-    public BuilderPriorityToolGroup(string id, string? groupId, int order, string section, string displayNameLocKey, bool devMode, Sprite icon)
+    public BuilderPriorityToolGroup(string id, string? groupId, int order, string section, string displayNameLocKey,
+        bool devMode, Sprite icon)
     {
         Id = id;
         DisplayNameLocKey = displayNameLocKey;

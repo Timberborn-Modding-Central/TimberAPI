@@ -1,10 +1,5 @@
-﻿using System;
-using System.Linq;
-using BepInEx;
+﻿using BepInEx;
 using HarmonyLib;
-using Timberborn.Modding;
-using Timberborn.ModdingAssets;
-using Timberborn.ModManagerScene;
 using Timberborn.ModManagerSceneUI;
 
 namespace AutoModStarter;
@@ -18,14 +13,13 @@ public class AutoStarterPlugin : BaseUnityPlugin
     }
 }
 
-class ModManagerScenePanelPatch
+internal class ModManagerScenePanelPatch
 {
     [HarmonyPatch(typeof(ModManagerScenePanel), "Awake")]
     [HarmonyPrefix]
-    static bool Prefix(ModManagerScenePanel __instance)
+    private static bool Prefix(ModManagerScenePanel __instance)
     {
         __instance.LoadModsAndStartGame();
         return false;
     }
 }
-

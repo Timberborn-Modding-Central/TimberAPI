@@ -4,7 +4,6 @@ using TimberApi.HarmonySystem;
 using TimberApi.Tools.ToolGroupSystem;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
-using UnityEngine;
 
 namespace TimberApi.BottomBarSystem.Patches;
 
@@ -25,10 +24,7 @@ public class ToolGroupManagerPatcher
     {
         ToolButtonPatcher.ActiveToolButton?.Root.EnableInClassList("button--active", false);
 
-        if(toolGroup != null)
-        {
-            return;
-        }
+        if (toolGroup != null) return;
 
         ____eventBus.Post(new ToolGroupExitedEvent(__instance.ActiveToolGroup));
 

@@ -9,9 +9,8 @@ namespace TimberApi.Tools.ToolSystem.Tools.PlaceableObject;
 
 public class PlaceableObjectToolGenerator : ISpecificationGenerator
 {
-    private readonly ToolIconService _toolIconService;
-
     private readonly PrefabService _prefabService;
+    private readonly ToolIconService _toolIconService;
 
     public PlaceableObjectToolGenerator(ToolIconService toolIconService, PrefabService prefabService)
     {
@@ -23,17 +22,14 @@ public class PlaceableObjectToolGenerator : ISpecificationGenerator
     {
         foreach (var placeableBlockObject in _prefabService.GetAllMonoBehaviours<PlaceableBlockObject>())
         {
-            if(! placeableBlockObject.UsableWithCurrentFeatureToggles)
-            {
-                continue;
-            }
+            if (!placeableBlockObject.UsableWithCurrentFeatureToggles) continue;
 
             var labeledPrefab = placeableBlockObject.GetComponentFast<LabeledPrefab>();
             var prefab = placeableBlockObject.GetComponentFast<Prefab>();
             var wonder = placeableBlockObject.GetComponentFast<Wonder>();
 
             _toolIconService.AddIcon($"{prefab.PrefabName}:{labeledPrefab.Image.name}", labeledPrefab.Image);
-            
+
             var json = JsonConvert.SerializeObject(new
             {
                 Id = prefab.PrefabName,

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
-using UnityEngine;
 
 namespace TimberApi.Tools.ToolSystem.Tools.CancelPlanting;
 
@@ -45,7 +44,7 @@ public class CancelPlantingToolGenerator : ISpecificationGenerator
             DescriptionLocKey = "CAN NOT BE MODIFIED",
             Icon = "Sprites/BottomBar/CancelToolIcon",
             DevMode = false,
-            Hidden = false,
+            Hidden = false
         });
 
         return new GeneratedSpecification("Tools", "ToolSpecification.FieldsCancelPlanting", json);

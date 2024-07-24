@@ -17,9 +17,10 @@ public class ToolButtonFactoryService
 
     public IToolButtonFactory Get(string factoryId)
     {
-        if(! _toolButtonFactories.ContainsKey(factoryId.ToLower()))
+        if (!_toolButtonFactories.ContainsKey(factoryId.ToLower()))
         {
-            Debug.LogError($"ToolButtonFactory({factoryId.ToLower()}) was not found, defaulting back to ({DefaultFactory}).");
+            Debug.LogError(
+                $"ToolButtonFactory({factoryId.ToLower()}) was not found, defaulting back to ({DefaultFactory}).");
             return _toolButtonFactories[DefaultFactory];
         }
 

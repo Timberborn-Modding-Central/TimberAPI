@@ -6,14 +6,14 @@ public class ConstructionModeToolGroupFactory : IToolGroupFactory
 
     public IToolGroup Create(ToolGroupSpecification toolGroupSpecification)
     {
-            return new ConstructionModeToolGroup(
-                toolGroupSpecification.Id,
-                toolGroupSpecification.GroupId,
-                toolGroupSpecification.Order,
-                toolGroupSpecification.Section,
-                toolGroupSpecification.NameLocKey,
-                toolGroupSpecification.DevMode,
-                toolGroupSpecification.Icon
-            );
-        }
+        return new ConstructionModeToolGroup(
+            toolGroupSpecification.Id,
+            toolGroupSpecification.GroupId,
+            toolGroupSpecification.Order,
+            toolGroupSpecification.Section,
+            toolGroupSpecification.NameLocKey,
+            toolGroupSpecification.DevMode,
+            toolGroupSpecification.Icon
+        );
+    }
 }

@@ -5,7 +5,8 @@ namespace TimberApi.Tools.ToolGroupSystem;
 
 public class ApiToolGroup : ToolGroup, IToolGroup
 {
-    public ApiToolGroup(string id, string? groupId, int order, string section, string displayNameLocKey, bool devMode, Sprite icon)
+    public ApiToolGroup(string id, string? groupId, int order, string section, string displayNameLocKey, bool devMode,
+        Sprite icon)
     {
         Id = id;
         base.DisplayNameLocKey = displayNameLocKey;

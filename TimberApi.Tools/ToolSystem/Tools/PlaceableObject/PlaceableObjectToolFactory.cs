@@ -8,32 +8,31 @@ using Timberborn.PrefabSystem;
 using Timberborn.PreviewSystem;
 using Timberborn.ToolSystem;
 using Timberborn.UISound;
-using UnityEngine;
 
 namespace TimberApi.Tools.ToolSystem.Tools.PlaceableObject;
 
 public class PlaceableObjectToolFactory : BaseToolFactory<PlaceableObjectToolToolInformation>
 {
-    private readonly PrefabService _prefabService;
+    private readonly AreaPickerFactory _areaPickerFactory;
 
     private readonly BlockObjectPlacerService _blockObjectPlacerService;
 
-    private readonly InputService _inputService;
+    private readonly BlockObjectToolDescriber _blockObjectToolDescriber;
 
-    private readonly AreaPickerFactory _areaPickerFactory;
+    private readonly InputService _inputService;
+    private readonly PrefabService _prefabService;
 
     private readonly PreviewPlacerFactory _previewPlacerFactory;
 
-    private readonly UISoundController _uiSoundController;
-
     private readonly ToolUnlockingService _toolUnlockingService;
 
-    private readonly BlockObjectToolDescriber _blockObjectToolDescriber;
+    private readonly UISoundController _uiSoundController;
 
     public PlaceableObjectToolFactory(
         PrefabService prefabService, InputService inputService, PreviewPlacerFactory previewPlacerFactory,
         UISoundController uiSoundController, ToolUnlockingService toolUnlockingService,
-        BlockObjectToolDescriber blockObjectToolDescriber, AreaPickerFactory areaPickerFactory, BlockObjectPlacerService blockObjectPlacerService)
+        BlockObjectToolDescriber blockObjectToolDescriber, AreaPickerFactory areaPickerFactory,
+        BlockObjectPlacerService blockObjectPlacerService)
     {
         _prefabService = prefabService;
         _inputService = inputService;
@@ -65,11 +64,11 @@ public class PlaceableObjectToolFactory : BaseToolFactory<PlaceableObjectToolToo
             _toolUnlockingService,
             _blockObjectToolDescriber
         );
-            
+
         var matchingPlacer = _blockObjectPlacerService.GetMatchingPlacer(prefab.GetComponentFast<BlockObject>());
 
         blockObjectTool.Initialize(placeableBlockObject, matchingPlacer, toolGroup);
-        
+
         return blockObjectTool;
     }
 

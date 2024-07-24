@@ -9,9 +9,9 @@ internal class GeneratedSpecificationAssetRepository
 {
     private readonly Dictionary<string, GeneratedSpecification> _cachedObjectSpecifications = new();
 
-    public readonly Dictionary<string, OrderedAsset<TextAsset>> GeneratedSpecificationAssets = new();
-
     private readonly HashSet<string> _newCachedObjectSpecificationPaths = new();
+
+    public readonly Dictionary<string, OrderedAsset<TextAsset>> GeneratedSpecificationAssets = new();
 
     public void AddSpecificationRange(IEnumerable<GeneratedSpecification> generatedSpecifications)
     {

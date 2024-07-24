@@ -15,17 +15,17 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
 {
     private readonly DevModePlantableSpawner _devModePlantableSpawner;
 
-    private readonly ILoc _loc;
+    private readonly DialogBoxShower _dialogBoxShower;
 
-    private readonly PrefabService _prefabService;
+    private readonly ILoc _loc;
 
     private readonly PlantableDescriber _plantableDescriber;
 
     private readonly PlantingSelectionService _plantingSelectionService;
 
-    private readonly SelectionToolProcessorFactory _selectionToolProcessorFactory;
+    private readonly PrefabService _prefabService;
 
-    private readonly DialogBoxShower _dialogBoxShower;
+    private readonly SelectionToolProcessorFactory _selectionToolProcessorFactory;
 
     private readonly ToolUnlockingService _toolUnlockingService;
 
@@ -51,19 +51,21 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
 
     public override string Id => "PlantingTool";
 
-    protected override Tool CreateTool(ToolSpecification toolSpecification, PlantingToolToolInformation toolInformation, ToolGroup? toolGroup)
+    protected override Tool CreateTool(ToolSpecification toolSpecification, PlantingToolToolInformation toolInformation,
+        ToolGroup? toolGroup)
     {
-        var prefab = _prefabService.GetAllMonoBehaviours<Prefab>().First(o => o.IsNamedExactly(toolInformation.PrefabName));
+        var prefab = _prefabService.GetAllMonoBehaviours<Prefab>()
+            .First(o => o.IsNamedExactly(toolInformation.PrefabName));
         var plantable = prefab.GetComponentFast<Plantable>();
 
         return new PlantingTool(
-            _plantableDescriber, 
-            _plantingSelectionService, 
+            _plantableDescriber,
+            _plantingSelectionService,
             _devModePlantableSpawner,
             _toolUnlockingService,
-            _selectionToolProcessorFactory, 
-            plantable, 
-            GetPlanterBuildingName(plantable), 
+            _selectionToolProcessorFactory,
+            plantable,
+            GetPlanterBuildingName(plantable),
             toolGroup);
     }
 
@@ -75,6 +77,8 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
     private string GetPlanterBuildingName(Plantable plantable)
     {
         return _loc.T(_prefabService.GetAllMonoBehaviours<PlanterBuilding>()
-            .Single((Func<PlanterBuilding, bool>) (building => building.PlantableResourceGroup == plantable.ResourceGroup)).GetComponentFast<LabeledPrefab>().DisplayNameLocKey);
+            .Single(
+                (Func<PlanterBuilding, bool>)(building => building.PlantableResourceGroup == plantable.ResourceGroup))
+            .GetComponentFast<LabeledPrefab>().DisplayNameLocKey);
     }
 }

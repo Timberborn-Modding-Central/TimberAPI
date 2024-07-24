@@ -1,8 +1,7 @@
-namespace TimberApi.UIBuilderSystem.StyleSheetSystem
+namespace TimberApi.UIBuilderSystem.StyleSheetSystem;
+
+public enum SelectorType
 {
-    public enum SelectorType
-    {
-        Button,
-        VisualElement,
-    }
+    Button,
+    VisualElement
 }

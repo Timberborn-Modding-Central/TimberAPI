@@ -35,9 +35,7 @@ public class ToolSpecificationService : ILoadableSingleton
     public ToolSpecification Get(string id)
     {
         if (!_toolSpecifications.TryGetValue(id.ToLower(), out var toolSpecification))
-        {
             throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
-        }
 
         return toolSpecification;
     }

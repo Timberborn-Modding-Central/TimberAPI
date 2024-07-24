@@ -10,14 +10,15 @@ namespace TimberApi.BottomBarSystem;
 public class ModStarter : IModStarter
 {
     private static Harmony _harmony = null!;
-    
+
     public void StartMod()
     {
         _harmony = new Harmony("TimberApi.BottomBar");
         SceneManager.SceneChanged += SceneManagerOnSceneChanged;
     }
 
-    private void SceneManagerOnSceneChanged(Scene previousscene, Scene currentscene, IContainerDefinition currentcontainerdefinition)
+    private void SceneManagerOnSceneChanged(Scene previousscene, Scene currentscene,
+        IContainerDefinition currentcontainerdefinition)
     {
         if (currentscene != Scene.Game)
         {
@@ -25,11 +26,8 @@ public class ModStarter : IModStarter
             return;
         }
 
-        if (previousscene == Scene.Game)
-        {
-            return;
-        }
-        
+        if (previousscene == Scene.Game) return;
+
         try
         {
             BottomBarConfiguratorPatcher.Patch(_harmony);

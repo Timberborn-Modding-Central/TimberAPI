@@ -1,8 +1,5 @@
-﻿using System;
+﻿namespace TimberApi.EntityLinkerSystem;
 
-namespace TimberApi.EntityLinkerSystem
+public class Class1
 {
-    public class Class1
-    {
-    }
 }

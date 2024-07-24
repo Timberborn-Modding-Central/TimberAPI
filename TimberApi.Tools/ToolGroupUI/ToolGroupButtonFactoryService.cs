@@ -12,14 +12,16 @@ public class ToolGroupButtonFactoryService
 
     public ToolGroupButtonFactoryService(IEnumerable<IToolGroupButtonFactory> toolGroupButtonVisualisers)
     {
-        _toolGroupButtonFactories = toolGroupButtonVisualisers.ToImmutableDictionary(visualiser => visualiser.Id.ToLower());
+        _toolGroupButtonFactories =
+            toolGroupButtonVisualisers.ToImmutableDictionary(visualiser => visualiser.Id.ToLower());
     }
 
     public IToolGroupButtonFactory Get(string factoryId)
     {
-        if(! _toolGroupButtonFactories.ContainsKey(factoryId.ToLower()))
+        if (!_toolGroupButtonFactories.ContainsKey(factoryId.ToLower()))
         {
-            Debug.LogError($"ToolGroupButtonFactory({factoryId.ToLower()}) was not found, defaulting back to ({DefaultFactory}).");
+            Debug.LogError(
+                $"ToolGroupButtonFactory({factoryId.ToLower()}) was not found, defaulting back to ({DefaultFactory}).");
             return _toolGroupButtonFactories[DefaultFactory];
         }
 

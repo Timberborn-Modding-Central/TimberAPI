@@ -17,7 +17,7 @@ public class BuilderPriorityToolGenerator : ISpecificationGenerator
                 GroupId = "Priority",
                 Type = "PriorityTool",
                 Layout = "Default",
-                Order = (int) priority,
+                Order = (int)priority,
                 Icon = $"Sprites/Priority/Buttons/{priority}",
                 NameLocKey = "CAN NOT BE MODIFIED",
                 DescriptionLocKey = "CAN NOT BE MODIFIED",

@@ -41,11 +41,8 @@ public class ToolGroupSpecificationDeserializer : IObjectSerializer<ToolGroupSpe
 
     private static ObjectSave? GetGroupInformationObjectSave(IObjectLoader objectLoader)
     {
-        if(! objectLoader.Has(new PropertyKey<ObjectSave>("GroupInformation")))
-        {
-            return null;
-        }
-            
+        if (!objectLoader.Has(new PropertyKey<ObjectSave>("GroupInformation"))) return null;
+
         return ((ObjectLoader)objectLoader)._objectSave.Get<ObjectSave>("GroupInformation");
     }
 }

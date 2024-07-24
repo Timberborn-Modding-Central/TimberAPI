@@ -15,10 +15,8 @@ public class ToolGroupFactoryService
 
     public IToolGroupFactory Get(string factoryId)
     {
-        if(! TryGet(factoryId, out var toolFactory))
-        {
+        if (!TryGet(factoryId, out var toolFactory))
             throw new KeyNotFoundException($"ToolGroupFactory({factoryId.ToLower()}) was not found.");
-        }
 
         return toolFactory;
     }

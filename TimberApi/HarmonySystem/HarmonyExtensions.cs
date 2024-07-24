@@ -15,8 +15,9 @@ public static class HarmonyExtensions
     {
         return AccessTools.Method(typeof(T), methodName, parameters);
     }
-        
-    public static HarmonyMethod GetHarmonyMethod<T>(this Harmony harmony, string methodName, Type[]? parameters = null, int priority = -1)
+
+    public static HarmonyMethod GetHarmonyMethod<T>(this Harmony harmony, string methodName, Type[]? parameters = null,
+        int priority = -1)
     {
         return new HarmonyMethod(GetMethodInfo<T>(harmony, methodName, parameters), priority);
     }

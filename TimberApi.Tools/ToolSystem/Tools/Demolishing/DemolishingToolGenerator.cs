@@ -29,12 +29,12 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             DescriptionLocKey = "CAN NOT BE MODIFIED",
             Icon = "Sprites/BottomBar/DeleteObjectIcon",
             DevMode = false,
-            Hidden = false,
+            Hidden = false
         });
 
         return new GeneratedSpecification("Tools", "ToolSpecification.EntityBlockObjectDeletion", json);
     }
-        
+
     private static GeneratedSpecification DeleteRecoveredGoodStackTool()
     {
         var json = JsonConvert.SerializeObject(new
@@ -48,7 +48,7 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             DescriptionLocKey = "CAN NOT BE MODIFIED",
             Icon = "Sprites/BottomBar/DeleteRecoveredGoodStackToolIcon",
             DevMode = false,
-            Hidden = false,
+            Hidden = false
         });
 
         return new GeneratedSpecification("Tools", "ToolSpecification.DeleteRecoveredGoodStack", json);
@@ -67,7 +67,7 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             DescriptionLocKey = "CAN NOT BE MODIFIED",
             Icon = "Sprites/BottomBar/DeleteObjectIcon",
             DevMode = false,
-            Hidden = false,
+            Hidden = false
         });
 
         return new GeneratedSpecification("Tools", "ToolSpecification.BuildingDeconstruction", json);
@@ -86,7 +86,7 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             DescriptionLocKey = "CAN NOT BE MODIFIED",
             Icon = "Sprites/BottomBar/DemolishResourcesTool",
             DevMode = false,
-            Hidden = false,
+            Hidden = false
         });
 
         return new GeneratedSpecification("Tools", "ToolSpecification.DemolishableSelection", json);
@@ -105,7 +105,7 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             DescriptionLocKey = "CAN NOT BE MODIFIED",
             Icon = "Sprites/BottomBar/CancelToolIcon",
             DevMode = false,
-            Hidden = false,
+            Hidden = false
         });
 
         return new GeneratedSpecification("Tools", "ToolSpecification.DemolishableUnselection", json);

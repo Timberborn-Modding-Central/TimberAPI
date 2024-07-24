@@ -1,14 +1,13 @@
-namespace TimberApi.UIBuilderSystem.StyleSheetSystem
+namespace TimberApi.UIBuilderSystem.StyleSheetSystem;
+
+public enum PseudoClass
 {
-    public enum PseudoClass
-    {
-        Hover,
-        Active,
-        Inactive,
-        Focus,
-        Selected,
-        Disabled,
-        Enabled,
-        Checked
-    }
+    Hover,
+    Active,
+    Inactive,
+    Focus,
+    Selected,
+    Disabled,
+    Enabled,
+    Checked
 }

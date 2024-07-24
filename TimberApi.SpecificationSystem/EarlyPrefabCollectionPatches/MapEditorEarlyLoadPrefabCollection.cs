@@ -20,7 +20,7 @@ public class MapEditorEarlyLoadPrefabCollection : ITimberApiLoadableSingleton
     public void Load()
     {
         EarlyLoadPatcher.BlockLoading = false;
-        
+
         _prefabGroupService.Load();
 
         EarlyLoadPatcher.BlockLoading = true;

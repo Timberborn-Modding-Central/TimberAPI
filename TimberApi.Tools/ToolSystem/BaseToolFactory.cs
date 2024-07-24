@@ -34,8 +34,12 @@ public class SpecificationService : ISpecificationService
 {
     public static readonly string SpecificationPath = "Specifications";
     public static readonly string OptionalSpecificationSuffix = ".optional";
-    public readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
     public readonly IAssetLoader _assetLoader;
+    public readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
+
+    static SpecificationService()
+    {
+    }
 
     public SpecificationService(
         ObjectSaveReaderWriter objectSaveReaderWriter,
@@ -47,12 +51,18 @@ public class SpecificationService : ISpecificationService
 
     public IEnumerable<T> GetSpecifications<T>(IObjectSerializer<T> serializer)
     {
-        string type = typeof (T).Name;
-        foreach (var source in _assetLoader.LoadAll<TextAsset>(SpecificationPath).Select((Func<LoadedAsset<TextAsset>, TextAsset>) (loadedAsset => loadedAsset.Asset)).Where((Func<TextAsset, bool>) (asset => asset.name.StartsWith(type + "."))).GroupBy((Func<TextAsset, string>) (asset => asset.name.Replace(OptionalSpecificationSuffix, string.Empty))).Where<IGrouping<string, TextAsset>>((Func<IGrouping<string, TextAsset>, bool>) (assetGroup => assetGroup.Any((Func<TextAsset, bool>) (asset => !asset.name.EndsWith(OptionalSpecificationSuffix))))))
-            yield return ObjectLoader.CreateBasicLoader(_objectSaveReaderWriter.ReadJsons(source.Select((Func<TextAsset, string>) (asset => asset.text))).Wrap(type)).Get<T>(new PropertyKey<T>(type), serializer);
-    }
-
-    static SpecificationService()
-    {
+        var type = typeof(T).Name;
+        foreach (var source in _assetLoader.LoadAll<TextAsset>(SpecificationPath)
+                     .Select((Func<LoadedAsset<TextAsset>, TextAsset>)(loadedAsset => loadedAsset.Asset))
+                     .Where((Func<TextAsset, bool>)(asset => asset.name.StartsWith(type + ".")))
+                     .GroupBy((Func<TextAsset, string>)(asset =>
+                         asset.name.Replace(OptionalSpecificationSuffix, string.Empty)))
+                     .Where<IGrouping<string, TextAsset>>((Func<IGrouping<string, TextAsset>, bool>)(assetGroup =>
+                         assetGroup.Any((Func<TextAsset, bool>)(asset =>
+                             !asset.name.EndsWith(OptionalSpecificationSuffix))))))
+            yield return ObjectLoader
+                .CreateBasicLoader(_objectSaveReaderWriter
+                    .ReadJsons(source.Select((Func<TextAsset, string>)(asset => asset.text))).Wrap(type))
+                .Get(new PropertyKey<T>(type), serializer);
     }
 }

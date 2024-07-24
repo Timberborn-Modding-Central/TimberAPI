@@ -13,7 +13,7 @@ public class ToolGroupSpecificationService : ILoadableSingleton
     private readonly ToolGroupSpecificationDeserializer _toolGroupSpecificationDeserializer;
 
     private ImmutableDictionary<string, ToolGroupSpecification> _toolGroupSpecifications = null!;
-        
+
     public ToolGroupSpecificationService(
         ISpecificationService specificationService,
         ToolGroupSpecificationDeserializer toolGroupSpecificationDeserializer)
@@ -22,19 +22,19 @@ public class ToolGroupSpecificationService : ILoadableSingleton
         _toolGroupSpecificationDeserializer = toolGroupSpecificationDeserializer;
     }
 
-    public ImmutableArray<ToolGroupSpecification> ToolGroupSpecifications => _toolGroupSpecifications.Select(pair => pair.Value).ToImmutableArray();
+    public ImmutableArray<ToolGroupSpecification> ToolGroupSpecifications =>
+        _toolGroupSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
     public void Load()
     {
-        _toolGroupSpecifications = _specificationService.GetSpecifications(_toolGroupSpecificationDeserializer).ToImmutableDictionary(specification => specification.Id.ToLower());
+        _toolGroupSpecifications = _specificationService.GetSpecifications(_toolGroupSpecificationDeserializer)
+            .ToImmutableDictionary(specification => specification.Id.ToLower());
     }
 
     public ToolGroupSpecification Get(string id)
     {
-        if(! _toolGroupSpecifications.TryGetValue(id.ToLower(), out var toolGroupSpecification))
-        {
+        if (!_toolGroupSpecifications.TryGetValue(id.ToLower(), out var toolGroupSpecification))
             throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
-        }
 
         return toolGroupSpecification;
     }

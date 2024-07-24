@@ -1,20 +1,19 @@
 using Timberborn.CoreUI;
 
-namespace TimberApi.UIBuilderSystem.ElementBuilders
+namespace TimberApi.UIBuilderSystem.ElementBuilders;
+
+public class TextFieldBuilder : BaseElementBuilder<TextFieldBuilder, NineSliceTextField>
 {
-    public class TextFieldBuilder : BaseElementBuilder<TextFieldBuilder, NineSliceTextField>
+    protected override TextFieldBuilder BuilderInstance => this;
+
+    public TextFieldBuilder SetMultiLine(bool isMultiLine)
     {
-        protected override TextFieldBuilder BuilderInstance => this;
+        Root.multiline = isMultiLine;
+        return this;
+    }
 
-        public TextFieldBuilder SetMultiLine(bool isMultiLine)
-        {
-            Root.multiline = isMultiLine;
-            return this;
-        }
-
-        protected override NineSliceTextField InitializeRoot()
-        {
-            return new NineSliceTextField();
-        }
+    protected override NineSliceTextField InitializeRoot()
+    {
+        return new NineSliceTextField();
     }
 }

@@ -2,61 +2,60 @@ using Timberborn.CoreUI;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace TimberApi.UIBuilderSystem.ElementBuilders
+namespace TimberApi.UIBuilderSystem.ElementBuilders;
+
+public class LocalizableLabelBuilder : LabelBuilder<LocalizableLabelBuilder, LocalizableLabel>
 {
-    public class LocalizableLabelBuilder : LabelBuilder<LocalizableLabelBuilder, LocalizableLabel>
-    {
-        protected override LocalizableLabelBuilder BuilderInstance => this;
+    protected override LocalizableLabelBuilder BuilderInstance => this;
 
-        public LocalizableLabelBuilder SetLocKey(string key)
-        {
-            Root._textLocKey = key;
-            return BuilderInstance;
-        }
+    public LocalizableLabelBuilder SetLocKey(string key)
+    {
+        Root._textLocKey = key;
+        return BuilderInstance;
+    }
+}
+
+public class LabelBuilder : LabelBuilder<LabelBuilder, Label>
+{
+    protected override LabelBuilder BuilderInstance => this;
+
+    public LabelBuilder SetText(string text)
+    {
+        Root.text = text;
+        return BuilderInstance;
+    }
+}
+
+public abstract class LabelBuilder<TBuilder, TElement> : BaseElementBuilder<TBuilder, TElement>
+    where TBuilder : BaseElementBuilder<TBuilder, TElement>
+    where TElement : Label, new()
+{
+    public TBuilder SetColor(StyleColor color)
+    {
+        Root.style.color = color;
+        return BuilderInstance;
     }
 
-    public class LabelBuilder : LabelBuilder<LabelBuilder, Label>
+    public TBuilder SetFontSize(Length size)
     {
-        protected override LabelBuilder BuilderInstance => this;
-
-        public LabelBuilder SetText(string text)
-        {
-            Root.text = text;
-            return BuilderInstance;
-        }
+        Root.style.fontSize = size;
+        return BuilderInstance;
     }
-    
-    public abstract class LabelBuilder<TBuilder, TElement> : BaseElementBuilder<TBuilder, TElement>
-        where TBuilder : BaseElementBuilder<TBuilder, TElement>
-        where TElement : Label, new()
+
+    public TBuilder SetFontStyle(FontStyle style)
     {
-        public TBuilder SetColor(StyleColor color)
-        {
-            Root.style.color = color;
-            return BuilderInstance;
-        }
+        Root.style.unityFontStyleAndWeight = style;
+        return BuilderInstance;
+    }
 
-        public TBuilder SetFontSize(Length size)
-        {
-            Root.style.fontSize = size;
-            return BuilderInstance;
-        }
+    public TBuilder SetWhiteSpace(WhiteSpace whiteSpace)
+    {
+        Root.style.whiteSpace = whiteSpace;
+        return BuilderInstance;
+    }
 
-        public TBuilder SetFontStyle(FontStyle style)
-        {
-            Root.style.unityFontStyleAndWeight = style;
-            return BuilderInstance;
-        }
-
-        public TBuilder SetWhiteSpace(WhiteSpace whiteSpace)
-        {
-            Root.style.whiteSpace = whiteSpace;
-            return BuilderInstance;
-        }
-
-        protected override TElement InitializeRoot()
-        {
-            return new TElement();
-        }
+    protected override TElement InitializeRoot()
+    {
+        return new TElement();
     }
 }

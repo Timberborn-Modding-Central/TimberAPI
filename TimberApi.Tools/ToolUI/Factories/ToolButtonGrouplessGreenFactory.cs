@@ -16,6 +16,7 @@ public class ToolButtonGrouplessGreenFactory : IToolButtonFactory
 
     public ToolButton Create(Tool tool, ToolSpecification toolGroupSpecification)
     {
-        return _toolButtonFactory.CreateGroupless(tool, toolGroupSpecification.Icon, "UI/Images/BottomBar/button-bg-03");
+        return _toolButtonFactory.CreateGroupless(tool, toolGroupSpecification.Icon,
+            "UI/Images/BottomBar/button-bg-03");
     }
 }
