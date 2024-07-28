@@ -1,3 +1,8 @@
+## 0.7.1.1
+- Added missing builders in dependency injection.
+- Created own StyleValue classes, so people don't require to publicize unity dll's.
+- Added BuildAndInitialize to UIBuilder.
+
 ## 0.7.1.0
 - Added UIBuilder V2.
 - Added DependencyContainer.

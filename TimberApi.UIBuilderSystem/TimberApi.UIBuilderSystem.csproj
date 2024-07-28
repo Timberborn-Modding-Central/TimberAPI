@@ -22,10 +22,6 @@
         </Reference>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="UIBuilderSystem\"/>
-    </ItemGroup>
-
     <PropertyGroup>
         <CopyDllToPath>false</CopyDllToPath>
         <ModPath>Documents/Mods</ModPath>

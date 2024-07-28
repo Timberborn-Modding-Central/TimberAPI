@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using Timberborn.AssetSystem;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace TimberApi.UIBuilderSystem.StyleSheetSystem;
 public class PropertyBuilder
 {
     private readonly IAssetLoader _assetLoader;
+
     private readonly UnityEngine.UIElements.StyleSheets.StyleSheetBuilder _builder;
 
     public PropertyBuilder(UnityEngine.UIElements.StyleSheets.StyleSheetBuilder builder, IAssetLoader assetLoader)
@@ -77,7 +79,7 @@ public class PropertyBuilder
     {
         _builder.BeginProperty(property.ToUnityString(), 0);
 
-        _builder.AddValue(value);
+        _builder.AddValue(UnityElementMapper.UnityStyleValueKeyword[value]);
 
         _builder.EndProperty();
 
@@ -88,7 +90,7 @@ public class PropertyBuilder
     {
         _builder.BeginProperty(property.ToUnityString(), 0);
 
-        _builder.AddValue(value);
+        _builder.AddValue(UnityElementMapper.UnityStyleValueFunction[value]);
 
         _builder.EndProperty();
 
@@ -110,7 +112,7 @@ public class PropertyBuilder
     {
         _builder.BeginProperty(property.ToUnityString(), 0);
 
-        _builder.AddValue(value, type);
+        _builder.AddValue(value, UnityElementMapper.UnityStyleValueType[type]);
 
         _builder.EndProperty();
 

@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using LocalizableButtonBuilder = TimberApi.UIBuilderSystem.ElementBuilders.LocalizableButtonBuilder;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
+using StyleValueType = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleValueType;
 
 namespace TimberApi.UIPresets.Buttons;
 

@@ -8,6 +8,15 @@ using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetB
 
 namespace TimberApi.UIPresets.Buttons;
 
+public class TestButton : BaseBuilder<Button>
+{
+    protected override Button InitializeRoot()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+
 public class ArrowRightButton : ArrowRightButton<ArrowRightButton>
 {
     protected override ArrowRightButton BuilderInstance => this;

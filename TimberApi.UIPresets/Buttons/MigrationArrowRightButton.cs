@@ -5,6 +5,7 @@ using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
+using StyleValueType = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleValueType;
 
 namespace TimberApi.UIPresets.Buttons;
 

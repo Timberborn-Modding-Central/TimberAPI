@@ -6,6 +6,7 @@ using Timberborn.CoreUI;
 using UnityEngine;
 using UnityEngine.UIElements;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
+using StyleValueType = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleValueType;
 
 namespace TimberApi.UIPresets.Buttons;
 

@@ -8,16 +8,7 @@ namespace TimberApi.UIBuilderSystem.ElementBuilders;
 public class ToggleBuilder : BaseElementBuilder<ToggleBuilder, LocalizableToggle>
 {
     private readonly VisualElementBuilder _toggleElementBuilder;
-
-    // public ToggleBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader) 
-    //     : base(new LocalizableToggle(), visualElementInitializer, assetLoader)
-    // {
-    //     Root.style.color = Color.white;
-    //     
-    //     //TODO: Fix this?
-    //     // _toggleElementBuilder = new VisualElementBuilder(visualElementInitializer, assetLoader, Root.Q<VisualElement>("unity-checkmark"));
-    // }
-
+    
     protected override ToggleBuilder BuilderInstance => this;
 
     public ToggleBuilder SetLocKey(string key)
