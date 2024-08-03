@@ -2,6 +2,7 @@ using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
@@ -61,16 +62,16 @@ public abstract class CircleButton<TBuilder> : BaseBuilder<TBuilder, Button>
             .AddBackgroundClass("api__button__circle-button--active", "ui/images/buttons/circle-empty-active",
                 PseudoClass.Active, PseudoClass.Hover)
             .AddClass("api__button__circle-button--size-normal", builder => builder
-                .Add(Property.Height, new Dimension(22, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(22, Dimension.Unit.Pixel))
+                .Height(22)
+                .Width(22)
             )
             .AddClass("api__button__circle-button--size-small", builder => builder
-                .Add(Property.Height, new Dimension(20, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(20, Dimension.Unit.Pixel))
+                .Height(20)
+                .Width(20)
             )
             .AddClass("api__button__circle-button--size-large", builder => builder
-                .Add(Property.Height, new Dimension(24, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(24, Dimension.Unit.Pixel))
+                .Height(24)
+                .Width(24)
             );
     }
 

@@ -2,6 +2,7 @@ using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
@@ -53,16 +54,16 @@ public abstract class CyclerMainLeft<TBuilder> : BaseBuilder<TBuilder, Button>
             .AddBackgroundHoverClass("api__button__cycler-main-left", "ui/images/buttons/cycler_left",
                 "ui/images/buttons/cycler_left_hover")
             .AddClass("api__button__cycler-main-left--size-normal", builder => builder
-                .Add(Property.Height, new Dimension(24, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(24, Dimension.Unit.Pixel))
+                .Height(24)
+                .Width(24)
             )
             .AddClass("api__button__cycler-main-left--size-small", builder => builder
-                .Add(Property.Height, new Dimension(20, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(20, Dimension.Unit.Pixel))
+                .Height(20)
+                .Width(20)
             )
             .AddClass("api__button__cycler-main-left--size-large", builder => builder
-                .Add(Property.Height, new Dimension(26, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(26, Dimension.Unit.Pixel))
+                .Height(26)
+                .Width(26)
             );
     }
 

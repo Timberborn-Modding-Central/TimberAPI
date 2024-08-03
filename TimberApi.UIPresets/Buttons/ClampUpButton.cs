@@ -2,6 +2,7 @@ using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
@@ -54,8 +55,8 @@ public abstract class ClampUp<TBuilder> : BaseBuilder<TBuilder, Button>
             .AddBackgroundClass("api__button__clamp-up--active", "ui/images/game/clamp-up-active", PseudoClass.Hover,
                 PseudoClass.Active)
             .AddClass("api__button__clamp-up", builder => builder
-                .Add(Property.Width, new Dimension(94, Dimension.Unit.Pixel))
-                .Add(Property.Height, new Dimension(16, Dimension.Unit.Pixel))
+                .Height(94)
+                .Width(16)
             );
     }
 }

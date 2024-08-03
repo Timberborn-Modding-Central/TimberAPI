@@ -1,9 +1,13 @@
+using System.Diagnostics;
 using TimberApi.UIBuilderSystem;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums;
 using TimberApi.UIPresets.Buttons;
+using TimberApi.UIPresets.Sliders;
 using Timberborn.BaseComponentSystem;
 using Timberborn.CoreUI;
 using Timberborn.EntityPanelSystem;
 using UnityEngine.UIElements;
+using Debug = UnityEngine.Debug;
 
 namespace Tester;
 
@@ -20,7 +24,7 @@ public class TestFragment : IEntityPanelFragment
 
     public VisualElement InitializeFragment()
     {
-        return _root = _builder.Create<GameButton>().SetLocKey("AAAAAAAAAAAA").BuildAndInitialize();
+        return _root = _builder.Create<SliderTest>().BuildAndInitialize();
     }
 
     public void ShowFragment(BaseComponent entity)

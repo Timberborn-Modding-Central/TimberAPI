@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using UnityEngine.UIElements;
 
@@ -33,26 +32,28 @@ public class SliderIntBuilder : BaseElementBuilder<SliderIntBuilder, Localizable
         return this;
     }
 
-    [SuppressMessage("", "Publicizer001")]
+    [Obsolete("This should be converted to a StyleSheetBuilder, will be removed in update 7.")]
     public SliderIntBuilder ModifyDragContainer(Action<VisualElement> modifyScroller)
     {
         modifyScroller.Invoke(Root.dragContainer);
         return this;
     }
 
-    [SuppressMessage("", "Publicizer001")]
+    [Obsolete("This should be converted to a StyleSheetBuilder, will be removed in update 7.")]
     public SliderIntBuilder ModifyDragElement(Action<VisualElement> modifyScroller)
     {
         modifyScroller.Invoke(Root.dragElement);
         return this;
     }
 
+    [Obsolete("This should be converted to a StyleSheetBuilder, will be removed in update 7.")]
     public SliderIntBuilder ModifyLabelElement(Action<VisualElement> modifyScroller)
     {
         modifyScroller.Invoke(Root.labelElement);
         return this;
     }
 
+    [Obsolete("This should be converted to a StyleSheetBuilder, will be removed in update 7.")]
     public SliderIntBuilder ModifyTracker(Action<VisualElement> modifyScroller)
     {
         modifyScroller.Invoke(Root.Q<VisualElement>("unity-tracker"));

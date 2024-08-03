@@ -1,7 +1,9 @@
 using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using Timberborn.CoreUI;
+using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using LocalizableButtonBuilder = TimberApi.UIBuilderSystem.ElementBuilders.LocalizableButtonBuilder;
@@ -55,15 +57,15 @@ public abstract class WideButton<TBuilder> : BaseBuilder<TBuilder, LocalizableBu
     {
         styleSheetBuilder
             .AddClass("api__button__wide-button", builder => builder
-                .AddNineSlicedBackgroundImage("ui/images/buttons/wide", 20, 0.5f)
-                .Add(Property.Color, "white", StyleValueType.Enum)
-                .Add(Property.ClickSound, "UI.Click", StyleValueType.String)
-                .Add(Property.Height, new Dimension(32, Dimension.Unit.Pixel))
-                .Add(Property.MinWidth, new Dimension(130, Dimension.Unit.Pixel))
+                .NineSlicedBackgroundImage("ui/images/buttons/wide", 20, 0.5f)
+                .Color(Color.white)
+                .ClickSound("UI.Click")
+                .Height(32)
+                .MinWidth(130)
             )
             .AddClass("api__button__wide-button", new[] { PseudoClass.Hover }, builder => builder
-                .AddNineSlicedBackgroundImage("ui/images/buttons/wide-hover", 20, 0.5f)
-                .Add(Property.Color, "black", StyleValueType.Enum)
+                .NineSlicedBackgroundImage("ui/images/buttons/wide-hover", 20, 0.5f)
+                .Color(Color.black)
             )
             .AddNineSlicedBackgroundClass("api__button__wide-button--active", "ui/images/buttons/wide-active", 20, 0.5f,
                 PseudoClass.Hover, PseudoClass.Active);

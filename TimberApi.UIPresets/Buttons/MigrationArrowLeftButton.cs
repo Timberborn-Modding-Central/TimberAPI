@@ -2,6 +2,7 @@ using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
@@ -44,9 +45,9 @@ public abstract class MigrationArrowLeftButton<TBuilder> : BaseBuilder<TBuilder,
             .AddBackgroundHoverClass("api__button__migration-arrow-left-button",
                 "ui/images/buttons/migration/left-arrow", "ui/images/buttons/migration/left-arrow-hover")
             .AddClass("api__button__migration-arrow-left-button", builder => builder
-                .Add(Property.ClickSound, "UI.Click", StyleValueType.String)
-                .Add(Property.Height, new Dimension(24, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(32, Dimension.Unit.Pixel))
+                .ClickSound("UI.Click")
+                .Height(24)
+                .Width(32)
             );
     }
 

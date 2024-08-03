@@ -2,6 +2,7 @@ using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
@@ -51,8 +52,8 @@ public abstract class CyclerRight<TBuilder> : BaseBuilder<TBuilder, Button>
             .AddBackgroundHoverClass("api__button__cycler-right", "ui/images/game/cycler-right",
                 "ui/images/game/cycler-right-hover")
             .AddClass("api__button__cycler-right", builder => builder
-                .Add(Property.Width, new Dimension(11, Dimension.Unit.Pixel))
-                .Add(Property.Height, new Dimension(20, Dimension.Unit.Pixel))
+                .Height(20)
+                .Width(11)
             );
     }
 }

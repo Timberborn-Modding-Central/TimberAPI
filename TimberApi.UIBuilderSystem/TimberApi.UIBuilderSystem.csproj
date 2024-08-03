@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
-        <LangVersion>10</LangVersion>
+        <LangVersion>latest</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Authors>TheBloodEyes</Authors>
     </PropertyGroup>
@@ -20,6 +20,10 @@
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="StyleSheetSystem\PropertyBuilderExtensions\" />
     </ItemGroup>
 
     <PropertyGroup>
