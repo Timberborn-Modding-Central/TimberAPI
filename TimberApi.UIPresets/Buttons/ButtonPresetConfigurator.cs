@@ -3,6 +3,8 @@ using Bindito.Core;
 namespace TimberApi.UIPresets.Buttons;
 
 [Context("Game")]
+[Context("MainMenu")]
+[Context("MapEditor")]
 public class ButtonPresetConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)

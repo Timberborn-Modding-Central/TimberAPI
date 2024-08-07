@@ -24,7 +24,7 @@ public class TestFragment : IEntityPanelFragment
 
     public VisualElement InitializeFragment()
     {
-        return _root = _builder.Create<SliderTest>().BuildAndInitialize();
+        return _root = _builder.Create<MainMenuTextSliderInt>().BuildAndInitialize();
     }
 
     public void ShowFragment(BaseComponent entity)

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 00ccc0a20a28b5445a0140fd067935f4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142753
+  packageName: Roslyn C# - Runtime Compiler
+  packageVersion: 1.9.0
+  assetPath: Assets/RoslynCSharp/Scripts/RoslynCSharp/Runtime/Modding/ModScriptReplacer.cs
+  uploadId: 680456

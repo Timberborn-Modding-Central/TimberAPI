@@ -13,13 +13,18 @@ public class UIBuilderSystemConfigurator : IConfigurator
     {
         containerDefinition.Bind<LabelBuilder>().AsTransient();
         containerDefinition.Bind<LocalizableLabelBuilder>().AsTransient();
+        
+        containerDefinition.Bind<SliderIntBuilder>().AsTransient();
+        containerDefinition.Bind<LocalizableSliderIntBuilder>().AsTransient();
+
         containerDefinition.Bind<SliderBuilder>().AsTransient();
+        containerDefinition.Bind<LocalizableSliderBuilder>().AsTransient();
+        
         containerDefinition.Bind<ButtonBuilder>().AsTransient();
         containerDefinition.Bind<LocalizableButtonBuilder>().AsTransient();
         containerDefinition.Bind<VisualElementBuilder>().AsTransient();
         containerDefinition.Bind<ScrollViewBuilder>().AsTransient();
         containerDefinition.Bind<ListViewBuilder>().AsTransient();
-        containerDefinition.Bind<SliderIntBuilder>().AsTransient();
         containerDefinition.Bind<TextFieldBuilder>().AsTransient();
         containerDefinition.Bind<ToggleBuilder>().AsTransient();
 

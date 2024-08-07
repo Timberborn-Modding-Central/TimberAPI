@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="HarmonyX" Version="2.7.0"/>
+        <PackageReference Include="Lib.Harmony" Version="2.3.3"/>
         <PackageReference Include="MonoMod.RuntimeDetour" Version="21.12.13.1"/>
         <PackageReference Include="BepInEx.Analyzers" Version="1.0.7" PrivateAssets="all"/>
         <PackageReference Include="BepInEx.Core" Version="5.4.17"/>

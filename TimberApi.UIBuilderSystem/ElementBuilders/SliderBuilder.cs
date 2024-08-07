@@ -1,66 +1,54 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
 using Timberborn.CoreUI;
 using UnityEngine.UIElements;
 
 namespace TimberApi.UIBuilderSystem.ElementBuilders;
 
-public class SliderBuilder : BaseElementBuilder<SliderBuilder, LocalizableSlider>
+public class LocalizableSliderBuilder : SliderBuilder<LocalizableSliderBuilder, LocalizableSlider>
+{
+    protected override LocalizableSliderBuilder BuilderInstance => this;
+
+    public LocalizableSliderBuilder SetLocKey(string key)
+    {
+        Root._textLocKey = key;
+        return BuilderInstance;
+    }
+}
+
+public class SliderBuilder : SliderBuilder<SliderBuilder, Slider>
 {
     protected override SliderBuilder BuilderInstance => this;
 
-    public SliderBuilder SetLabelLocKey(string locKey)
+    public SliderBuilder SetLabel(string text)
     {
-        Root._textLocKey = locKey;
-        return this;
+        Root.label = text;
+        return BuilderInstance;
     }
+}
 
-    public SliderBuilder SetLowValue(float value)
+public abstract class SliderBuilder<TBuilder, TElement> : BaseElementBuilder<TBuilder, TElement>
+    where TBuilder : BaseElementBuilder<TBuilder, TElement>
+    where TElement : Slider, new()
+{
+    public TBuilder SetLowValue(float value)
     {
         Root.lowValue = value;
-        return this;
+        return BuilderInstance;
     }
 
-    public SliderBuilder SetHighValue(float value)
+    public TBuilder SetHighValue(float value)
     {
         Root.highValue = value;
-        return this;
+        return BuilderInstance;
     }
 
-    public SliderBuilder SetValue(float value)
+    public TBuilder SetValue(float value)
     {
         Root.value = value;
-        return this;
+        return BuilderInstance;
     }
 
-    [SuppressMessage("", "Publicizer001")]
-    public SliderBuilder ModifyDragContainer(Action<VisualElement> modifyScroller)
+    protected override TElement InitializeRoot()
     {
-        modifyScroller.Invoke(Root.dragContainer);
-        return this;
-    }
-
-    [SuppressMessage("", "Publicizer001")]
-    public SliderBuilder ModifyDragElement(Action<VisualElement> modifyScroller)
-    {
-        modifyScroller.Invoke(Root.dragElement);
-        return this;
-    }
-
-    public SliderBuilder ModifyLabelElement(Action<VisualElement> modifyScroller)
-    {
-        modifyScroller.Invoke(Root.labelElement);
-        return this;
-    }
-
-    public SliderBuilder ModifyTracker(Action<VisualElement> modifyScroller)
-    {
-        modifyScroller.Invoke(Root.Q<VisualElement>("unity-tracker"));
-        return this;
-    }
-
-    protected override LocalizableSlider InitializeRoot()
-    {
-        return new LocalizableSlider();
+        return new TElement();
     }
 }
