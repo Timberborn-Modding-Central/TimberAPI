@@ -1,17 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Timberborn.Common;
+using UnityEngine;
 
 namespace TimberApi.UIBuilderSystem.StyleSheetSystem;
 
 public partial class StyleSheetBuilder
 {
-    private static readonly Regex DescendentRegex = new(@"\s+");
-
-    private static readonly Regex SelectorRegex = new(@"(\b#\w+\b|\.\w+)");
-
-    private static readonly char[] Delimiters = { '#', '.', ':' };
+    private static readonly char[] Delimiters = ['#', '.', ':'];
 
     public StyleSheetBuilder AddSelector(string complexSelector, Action<PropertyBuilder> propertyBuilder)
     {
@@ -86,7 +84,7 @@ public partial class StyleSheetBuilder
                 complexSelectorBuilder.AddId(selector[1..]);
                 break;
             case ':':
-                complexSelectorBuilder.AddPseudoClass(PseudoClass.Hover);
+                complexSelectorBuilder.AddPseudoClass(Enum.Parse<PseudoClass>(selector[1..], ignoreCase: true));
                 break;
             case '*':
                 complexSelectorBuilder.AddWildcard();
@@ -98,70 +96,8 @@ public partial class StyleSheetBuilder
                 complexSelectorBuilder.AddChild();
                 break;
             default:
-                complexSelectorBuilder.AddType(SelectorType.VisualElement);
+                complexSelectorBuilder.AddType(Enum.Parse<SelectorType>(selector[1..], ignoreCase: true));
                 break;
         }
     }
-
-    // public StyleSheetBuilder AddSelector(string complexSelector, Action<PropertyBuilder> propertyBuilder)
-    // {
-    //     _builder.BeginRule(0);
-    //     
-    //     var complexBuilder = new ComplexSelectorBuilder(_builder);
-    //     
-    //     var childRelations = complexSelector.Trim().Split(">");
-    //
-    //     for (var i = 0; i < childRelations.Length; i++)
-    //     {
-    //         var childRelation = childRelations[i];
-    //
-    //         var descendents = DescendentRegex.Split(childRelation.Trim());
-    //
-    //         for (var j = 0; j < descendents.Length; j++)
-    //         {
-    //             var descendent = descendents[j];
-    //             
-    //             string[] selectors = SelectorRegex.Split(descendent.Trim()).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
-    //
-    //             foreach (var selector in selectors)
-    //             {
-    //                 switch (selector[0])
-    //                 {
-    //                     case '.':
-    //                         complexBuilder.AddClass(selector[1..]);
-    //                         break;
-    //                     case '#':
-    //                         complexBuilder.AddId(selector[1..]);
-    //                         break;
-    //                     case ':':
-    //                         complexBuilder.AddPseudoClass(PseudoClass.Hover);
-    //                         break;
-    //                     default:
-    //                         complexBuilder.AddType(SelectorType.VisualElement);
-    //                         break;
-    //                 }
-    //             }
-    //
-    //             if (descendents.Length <= 1 || descendents.Length - 1 == j)
-    //             {
-    //                 continue;
-    //             }
-    //             
-    //             complexBuilder.AddDescendant();
-    //         }
-    //         
-    //         if (childRelations.Length > 1 && childRelations.Length - 1 != i)
-    //         {
-    //             complexBuilder.AddChild();
-    //         }
-    //     }
-    //
-    //     complexBuilder.Build();
-    //     
-    //     propertyBuilder.Invoke(_propertyBuilder);
-    //     
-    //     _builder.EndRule();
-    //
-    //     return this;
-    // }
 }

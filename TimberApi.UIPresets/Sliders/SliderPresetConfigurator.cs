@@ -5,7 +5,7 @@ namespace TimberApi.UIPresets.Sliders;
 [Context("MainMenu")]
 [Context("MapEditor")]
 [Context("Game")]
-public class SliderConfigurator : IConfigurator
+public class SliderPresetConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
