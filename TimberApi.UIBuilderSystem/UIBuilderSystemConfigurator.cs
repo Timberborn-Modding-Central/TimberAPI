@@ -20,9 +20,14 @@ public class UIBuilderSystemConfigurator : IConfigurator
         containerDefinition.Bind<SliderBuilder>().AsTransient();
         containerDefinition.Bind<LocalizableSliderBuilder>().AsTransient();
         
+        containerDefinition.Bind<MinMaxSliderBuilder>().AsTransient();
+        containerDefinition.Bind<LocalizableMinMaxSliderBuilder>().AsTransient();
+        
         containerDefinition.Bind<ToggleBuilder>().AsTransient();
         containerDefinition.Bind<LocalizableToggleBuilder>().AsTransient();
 
+        
+        
         
         containerDefinition.Bind<ButtonBuilder>().AsTransient();
         containerDefinition.Bind<LocalizableButtonBuilder>().AsTransient();

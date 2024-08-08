@@ -77,6 +77,13 @@ public class ComplexSelectorBuilder
 
         return this;
     }
+    
+    public ComplexSelectorBuilder AddCommaSeparator()
+    {
+        throw new NotImplementedException("Comma separator has not been implemented, use multiple selectors.");
+
+        return this;
+    }
 
     public void Build()
     {

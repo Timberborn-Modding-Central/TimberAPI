@@ -54,8 +54,17 @@ public static class ModPatcher
             }
         };
         
-        test.Add(uiBuilder.Create<GameToggle>().SetLocKey("Swa").Build());
-        test.Add(uiBuilder.Create<GameTextToggle>().SetLabel("Swa").Small().Build());
+        test.Add(uiBuilder.Create<GameMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLocKey("Swa").Build());
+        test.Add(uiBuilder.Create<GameMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLocKey("Swa").Small().Build());
+
+        test.Add(uiBuilder.Create<GameMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLocKey("Swa").Diamond().Build());
+        test.Add(uiBuilder.Create<GameMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLocKey("Swa").Diamond().Small().Build());
+        
+        test.Add(uiBuilder.Create<GameTextMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLabel("Swa").Build());
+        test.Add(uiBuilder.Create<GameTextMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLabel("Swa").Small().Build());
+
+        test.Add(uiBuilder.Create<GameTextMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLabel("Swa").Diamond().Build());
+        test.Add(uiBuilder.Create<GameTextMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLabel("Swa").Diamond().Small().Build());
 
         uiBuilder.Initialize(test);
         __instance._root.Add(test);

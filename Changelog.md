@@ -1,3 +1,13 @@
+## 0.7.2.0
+- Added `MinMaxSliderBuilder`.
+- Added `MinMaxSlider` game preset.
+
+## 0.7.1.2
+- Added Game,MainMenu Slider/SliderInt presets.
+- Added GameToggle preset.
+- Fixed Type selector.
+- Fixed pseudo class selectors.
+
 ## 0.7.1.1
 - Added missing builders in dependency injection.
 - Created own StyleValue classes, so people don't require to publicize unity dll's.

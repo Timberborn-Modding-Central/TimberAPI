@@ -22,9 +22,9 @@ public abstract class GameTextToggle<TBuilder> : BaseBuilder<TBuilder, Toggle>
 
     protected string SizeClass = "api__toggle--normal";
 
-    public TBuilder SetLabel(string text)
+    public TBuilder SetText(string text)
     {
-        ToggleBuilder.SetLabel(text);
+        ToggleBuilder.SetText(text);
         return BuilderInstance;
     }
     
@@ -47,14 +47,15 @@ public abstract class GameTextToggle<TBuilder> : BaseBuilder<TBuilder, Toggle>
         styleSheetBuilder
             .AddClass("api__toggle", builder => builder
                 .ClickSound("UI.Click")
-                .FlexGrow(0)
-                .AlignSelf(AlignSelf.Center)
                 .Overflow(Overflow.Visible)
             )
             .AddSelector(".api__toggle > .unity-toggle__input > .unity-toggle__text", builder => builder
-                    .Color(new Color(0.8f, 0.8f, 0.8f))
-                    .WhiteSpace(WhiteSpace.Normal)
-                // .FontSize(13)
+                .Color(new Color(0.8f, 0.8f, 0.8f))
+                .WhiteSpace(WhiteSpace.Normal)
+                .FontSize(13)
+            )
+            .AddSelector(".api__toggle--small > .unity-toggle__input > .unity-toggle__text", builder => builder
+                .FontSize(12)
             )
             .AddSelector(".api__toggle > .unity-toggle__input > .unity-toggle__checkmark", builder => builder
                 .BackgroundImage("UI/Images/Buttons/empty-inverted")

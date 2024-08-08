@@ -19,9 +19,9 @@ public class ToggleBuilder : ToggleBuilder<ToggleBuilder, Toggle>
 {
     protected override ToggleBuilder BuilderInstance => this;
 
-    public ToggleBuilder SetLabel(string text)
+    public ToggleBuilder SetText(string text)
     {
-        Root.label = text;
+        Root.text = text;
         return BuilderInstance;
     }
 }

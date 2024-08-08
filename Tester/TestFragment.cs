@@ -3,9 +3,11 @@ using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums;
 using TimberApi.UIPresets.Buttons;
 using TimberApi.UIPresets.Sliders;
+using TimberApi.UIPresets.Toggles;
 using Timberborn.BaseComponentSystem;
 using Timberborn.CoreUI;
 using Timberborn.EntityPanelSystem;
+using UnityEngine;
 using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
 
@@ -24,7 +26,13 @@ public class TestFragment : IEntityPanelFragment
 
     public VisualElement InitializeFragment()
     {
-        return _root = _builder.Create<MainMenuTextSliderInt>().BuildAndInitialize();
+        _root = new VisualElement();
+        
+        _root.Add(_builder.Create<GameToggle>().SetLocKey("SWAG").Build());
+        _root.Add(_builder.Create<GameToggle>().Small().SetLocKey("SWAG").Build());
+
+        _builder.Initialize(_root);
+        return _root;
     }
 
     public void ShowFragment(BaseComponent entity)

@@ -20,5 +20,8 @@ public class SliderPresetConfigurator : IConfigurator
         
         containerDefinition.Bind<GameSlider>().AsTransient();
         containerDefinition.Bind<GameTextSlider>().AsTransient();
+        
+        containerDefinition.Bind<GameMinMaxSlider>().AsTransient();
+        containerDefinition.Bind<GameTextMinMaxSlider>().AsTransient();
     }
 }

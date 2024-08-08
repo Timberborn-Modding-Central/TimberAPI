@@ -47,14 +47,15 @@ public abstract class GameToggle<TBuilder> : BaseBuilder<TBuilder, LocalizableTo
         styleSheetBuilder
             .AddClass("api__toggle", builder => builder
                 .ClickSound("UI.Click")
-                .FlexGrow(0)
-                .AlignSelf(AlignSelf.Center)
                 .Overflow(Overflow.Visible)
             )
             .AddSelector(".api__toggle > .unity-toggle__input > .unity-toggle__text", builder => builder
-                    .Color(new Color(0.8f, 0.8f, 0.8f))
-                    .WhiteSpace(WhiteSpace.Normal)
-                // .FontSize(13)
+                .Color(new Color(0.8f, 0.8f, 0.8f))
+                .WhiteSpace(WhiteSpace.Normal)
+                .FontSize(13)
+            )
+            .AddSelector(".api__toggle--small > .unity-toggle__input > .unity-toggle__text", builder => builder
+                .FontSize(12)
             )
             .AddSelector(".api__toggle > .unity-toggle__input > .unity-toggle__checkmark", builder => builder
                 .BackgroundImage("UI/Images/Buttons/empty-inverted")
