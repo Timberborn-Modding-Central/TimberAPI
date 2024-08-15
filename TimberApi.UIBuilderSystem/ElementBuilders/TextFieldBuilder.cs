@@ -1,4 +1,4 @@
-using Timberborn.CoreUI;
+using TimberApi.UIBuilderSystem.CustomElements;
 
 namespace TimberApi.UIBuilderSystem.ElementBuilders;
 

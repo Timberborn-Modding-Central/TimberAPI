@@ -1,10 +1,12 @@
+using System;
+using System.Collections.Generic;
 using HarmonyLib;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIPresets.Buttons;
-using TimberApi.UIPresets.Sliders;
+using TimberApi.UIPresets.Labels;
+using TimberApi.UIPresets.ListViews;
 using TimberApi.UIPresets.Toggles;
-using Timberborn.CoreUI;
 using Timberborn.MainMenuScene;
 using Timberborn.ModManagerScene;
 using UnityEngine;
@@ -25,9 +27,13 @@ public class ModStarter : IModStarter
 [HarmonyPatch(typeof(WelcomeScreenBox), nameof(WelcomeScreenBox.Load))]
 public static class ModPatcher
 {
+    private static UIBuilder _uiBuilder = null!;
+
+    public static List<string> Test = new List<string>() { "item1", "item2" };
+    
     public static bool Prefix(WelcomeScreenBox __instance)
     {
-        var uiBuilder = DependencyContainer.GetInstance<UIBuilder>();
+        _uiBuilder = DependencyContainer.GetInstance<UIBuilder>();
         
         
         __instance._root = new VisualElement
@@ -54,22 +60,19 @@ public static class ModPatcher
             }
         };
         
-        test.Add(uiBuilder.Create<GameMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLocKey("Swa").Build());
-        test.Add(uiBuilder.Create<GameMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLocKey("Swa").Small().Build());
-
-        test.Add(uiBuilder.Create<GameMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLocKey("Swa").Diamond().Build());
-        test.Add(uiBuilder.Create<GameMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLocKey("Swa").Diamond().Small().Build());
+        Console.WriteLine("Hell my console writeline");
         
-        test.Add(uiBuilder.Create<GameTextMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLabel("Swa").Build());
-        test.Add(uiBuilder.Create<GameTextMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLabel("Swa").Small().Build());
+        test.Add(_uiBuilder.Create<DefaultListView>().SetMakeItem(VisualElement).SetItemSource(Test).SetSelectionType(SelectionType.Single).Build());
 
-        test.Add(uiBuilder.Create<GameTextMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLabel("Swa").Diamond().Build());
-        test.Add(uiBuilder.Create<GameTextMinMaxSlider>().SetLowLimit(1).SetHighLimit(20).SetValue(new Vector2(5, 10)).SetLabel("Swa").Diamond().Small().Build());
-
-        uiBuilder.Initialize(test);
+        _uiBuilder.Initialize(test);
         __instance._root.Add(test);
 
         return false;
     }
 
+    private static VisualElement VisualElement()
+    {
+        Debug.LogError("AAAAAAA");
+        return _uiBuilder.Build<ArrowUpButton>();
+    }
 }

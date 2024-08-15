@@ -11,5 +11,8 @@ public class TogglePresetConfigurator : IConfigurator
     {
         containerDefinition.Bind<GameToggle>().AsTransient();
         containerDefinition.Bind<GameTextToggle>().AsTransient();
+        
+        containerDefinition.Bind<SettingToggle>().AsTransient();
+        containerDefinition.Bind<SettingTextToggle>().AsTransient();
     }
 }

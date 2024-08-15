@@ -1,3 +1,6 @@
+## 0.7.3.0
+- Removed usage of internal Timberborn elements.
+
 ## 0.7.2.0
 - Added `MinMaxSliderBuilder`.
 - Added `MinMaxSlider` game preset.

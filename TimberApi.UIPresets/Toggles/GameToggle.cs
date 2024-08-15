@@ -1,9 +1,9 @@
 using TimberApi.UIBuilderSystem;
+using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
-using TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums;
-using Timberborn.CoreUI;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Overflow = TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums.Overflow;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
 using WhiteSpace = TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums.WhiteSpace;
@@ -20,8 +20,10 @@ public abstract class GameToggle<TBuilder> : BaseBuilder<TBuilder, LocalizableTo
 {
     protected LocalizableToggleBuilder ToggleBuilder = null!;
 
-    protected string SizeClass = "api__toggle--normal";
-
+    protected string SizeClass = "api__toggle--size-normal";
+        
+    protected string ImageClass = "api__toggle--normal";
+    
     public TBuilder SetLocKey(string locKey)
     {
         ToggleBuilder.SetLocKey(locKey);
@@ -30,7 +32,21 @@ public abstract class GameToggle<TBuilder> : BaseBuilder<TBuilder, LocalizableTo
     
     public TBuilder Small()
     {
-        SizeClass = "api__toggle--small";
+        SizeClass = "api__toggle--size-small";
+        return BuilderInstance;
+    }
+    
+    public TBuilder Size(Length size)
+    {
+        var checkmark = Root.Q<VisualElement>("unity-checkmark");
+        checkmark.style.width = size;
+        checkmark.style.height = size;
+        return BuilderInstance;
+    }
+    
+    public TBuilder Inverted()
+    {
+        ImageClass = "api__toggle--inverted";
         return BuilderInstance;
     }
 
@@ -54,15 +70,22 @@ public abstract class GameToggle<TBuilder> : BaseBuilder<TBuilder, LocalizableTo
                 .WhiteSpace(WhiteSpace.Normal)
                 .FontSize(13)
             )
-            .AddSelector(".api__toggle--small > .unity-toggle__input > .unity-toggle__text", builder => builder
+            .AddSelector(".api__toggle--size-small > .unity-toggle__input > .unity-toggle__text", builder => builder
                 .FontSize(12)
             )
-            .AddSelector(".api__toggle > .unity-toggle__input > .unity-toggle__checkmark", builder => builder
+            .AddSelector(".api__toggle--normal > .unity-toggle__input > .unity-toggle__checkmark", builder => builder
                 .BackgroundImage("UI/Images/Buttons/empty-inverted")
                 .MarginRight(4)
             )
-            .AddSelector(".api__toggle > .unity-toggle__input:checked > .unity-toggle__checkmark", builder => builder
+            .AddSelector(".api__toggle--inverted > .unity-toggle__input > .unity-toggle__checkmark", builder => builder
+                .BackgroundImage("UI/Images/Buttons/empty")
+                .MarginRight(4)
+            )
+            .AddSelector(".api__toggle--normal > .unity-toggle__input:checked > .unity-toggle__checkmark", builder => builder
                 .BackgroundImage("UI/Images/Buttons/checkmark-inverted")
+            )
+            .AddSelector(".api__toggle--inverted > .unity-toggle__input:checked > .unity-toggle__checkmark", builder => builder
+                .BackgroundImage("UI/Images/Buttons/checkmark")
             )
             .AddSelector(".api__toggle > .unity-toggle__input:hover:enabled > .unity-toggle__checkmark", builder =>
                 builder
@@ -72,12 +95,12 @@ public abstract class GameToggle<TBuilder> : BaseBuilder<TBuilder, LocalizableTo
                 builder => builder
                     .BackgroundImage("UI/Images/Buttons/checkmark-hover")
             )
-            .AddSelector(".api__toggle--normal > .unity-toggle__input > .unity-toggle__checkmark",
+            .AddSelector(".api__toggle--size-normal > .unity-toggle__input > .unity-toggle__checkmark",
                 builder => builder
                     .Width(20)
                     .Height(20)
             )
-            .AddSelector(".api__toggle--small > .unity-toggle__input > .unity-toggle__checkmark",
+            .AddSelector(".api__toggle--size-small > .unity-toggle__input > .unity-toggle__checkmark",
                 builder => builder
                     .Width(15)
                     .Height(15)
@@ -88,6 +111,7 @@ public abstract class GameToggle<TBuilder> : BaseBuilder<TBuilder, LocalizableTo
     {
         return ToggleBuilder
             .AddClass(SizeClass)
+            .AddClass(ImageClass)
             .Build();
     }
 }

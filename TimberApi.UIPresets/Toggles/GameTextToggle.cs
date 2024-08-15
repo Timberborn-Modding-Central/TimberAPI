@@ -33,6 +33,14 @@ public abstract class GameTextToggle<TBuilder> : BaseBuilder<TBuilder, Toggle>
         SizeClass = "api__toggle--small";
         return BuilderInstance;
     }
+    
+    public TBuilder Size(Length size)
+    {
+        var checkmark = Root.Q<VisualElement>("unity-checkmark");
+        checkmark.style.width = size;
+        checkmark.style.height = size;
+        return BuilderInstance;
+    }
 
     protected override Toggle InitializeRoot()
     {
