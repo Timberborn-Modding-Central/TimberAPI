@@ -1,4 +1,4 @@
-## New
+## 0.7.4.0
 - Added `BuildingSpecification`.
 - Added `EntityLinkerSystem`.
 - Added `PickObjectTool`.

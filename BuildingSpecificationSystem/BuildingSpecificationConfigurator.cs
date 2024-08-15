@@ -9,7 +9,6 @@ internal class BuildingSpecificationConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
-        Debug.LogError("AAA");
         containerDefinition.Bind<BuildingSpecificationService>().AsSingleton();
         containerDefinition.Bind<BuildingSpecificationObjectDeserializer>().AsSingleton();
         containerDefinition.Bind<BuildingCostObjectDeserializer>().AsSingleton();

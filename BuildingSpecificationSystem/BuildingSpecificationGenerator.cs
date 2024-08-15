@@ -20,7 +20,6 @@ internal class BuildingSpecificationGenerator(
     public IEnumerable<GeneratedSpecification> Generate()
     {
         var buildings = prefabService.GetAllMonoBehaviours<Building>();
-        Debug.LogError("BBB");
 
         foreach (var building in buildings)
         {
