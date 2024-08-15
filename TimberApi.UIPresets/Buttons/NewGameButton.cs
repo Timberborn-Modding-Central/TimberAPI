@@ -1,11 +1,11 @@
 using System;
 using TimberApi.UIBuilderSystem;
+using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
-using Timberborn.CoreUI;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
 
 namespace TimberApi.UIPresets.Buttons;
@@ -95,14 +95,14 @@ public abstract class ButtonNewGame<TBuilder> : BaseBuilder<TBuilder, Localizabl
     {
         styleSheetBuilder
             .AddClass("api__button__button-new-game", builder => builder
-                .Add(Property.ClickSound, "UI.Click", StyleValueType.String)
-                .Add(Property.Width, new Dimension(209, Dimension.Unit.Pixel))
-                .Add(Property.Height, new Dimension(92, Dimension.Unit.Pixel))
-                .Add(Property.FontSize, new Dimension(18, Dimension.Unit.Pixel))
-                .Add(Property.Color, "white", StyleValueType.Enum)
+                .ClickSound("UI.Click")
+                .Width(209)
+                .Height(92)
+                .FontSize(18)
+                .Color(Color.white)
             )
             .AddClass("api__button__button-new-game", new[] { PseudoClass.Hover }, builder => builder
-                .Add(Property.Color, "black", StyleValueType.Enum)
+                .Color(Color.black)
             )
             .AddNineSlicedBackgroundHoverClass("api__button__button-new-game--easy",
                 "ui/images/buttons/difficulty/easy", "ui/images/buttons/difficulty/easy-hover", 64, 0.6f)

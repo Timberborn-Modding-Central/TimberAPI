@@ -2,6 +2,7 @@ using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
@@ -53,16 +54,16 @@ public abstract class MinusBatchMultiButton<TBuilder> : BaseBuilder<TBuilder, Bu
             .AddBackgroundHoverClass("api__button__minus-batch-button", "ui/images/buttons/minus-batch-multi",
                 "ui/images/buttons/minus-batch-multi-hover")
             .AddClass("api__button__minus-batch-button--size-normal", builder => builder
-                .Add(Property.Height, new Dimension(20, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(20, Dimension.Unit.Pixel))
+                .Height(20)
+                .Width(20)
             )
             .AddClass("api__button__minus-batch-button--size-small", builder => builder
-                .Add(Property.Height, new Dimension(18, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(18, Dimension.Unit.Pixel))
+                .Height(18)
+                .Width(18)
             )
             .AddClass("api__button__minus-batch-button--size-large", builder => builder
-                .Add(Property.Height, new Dimension(24, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(24, Dimension.Unit.Pixel))
+                .Height(24)
+                .Width(24)
             );
     }
 

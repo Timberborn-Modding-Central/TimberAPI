@@ -1,11 +1,12 @@
 using System;
 using TimberApi.UIBuilderSystem;
+using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
-using Timberborn.CoreUI;
 using UnityEngine;
 using UnityEngine.UIElements;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
+using StyleValueType = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleValueType;
 
 namespace TimberApi.UIPresets.Buttons;
 

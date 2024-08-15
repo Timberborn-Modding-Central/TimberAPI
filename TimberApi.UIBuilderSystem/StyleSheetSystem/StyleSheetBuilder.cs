@@ -1,5 +1,4 @@
 using System;
-using Timberborn.AssetSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityStyleSheetBuilder = UnityEngine.UIElements.StyleSheets.StyleSheetBuilder;
@@ -15,10 +14,10 @@ public partial class StyleSheetBuilder
 
     private bool _built;
 
-    public StyleSheetBuilder(IAssetLoader assetLoader)
+    public StyleSheetBuilder()
     {
         _builder = new UnityStyleSheetBuilder();
-        _propertyBuilder = new PropertyBuilder(_builder, assetLoader);
+        _propertyBuilder = new PropertyBuilder(_builder);
     }
 
     public StyleSheetBuilder AddComplexSelector(Func<ComplexSelectorBuilder, ComplexSelectorBuilder> complexSelector,

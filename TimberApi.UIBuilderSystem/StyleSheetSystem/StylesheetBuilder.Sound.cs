@@ -1,5 +1,3 @@
-using UnityEngine.UIElements;
-
 namespace TimberApi.UIBuilderSystem.StyleSheetSystem;
 
 public partial class StyleSheetBuilder

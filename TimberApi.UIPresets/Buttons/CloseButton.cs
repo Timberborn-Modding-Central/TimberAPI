@@ -2,6 +2,7 @@ using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
+using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
@@ -39,8 +40,8 @@ public abstract class CloseButton<TBuilder> : BaseBuilder<TBuilder, Button>
             .AddBackgroundHoverClass("api__button__close-button", "ui/images/buttons/close",
                 "ui/images/buttons/close_hover")
             .AddClass("api__button__close-button", builder => builder
-                .Add(Property.Height, new Dimension(40, Dimension.Unit.Pixel))
-                .Add(Property.Width, new Dimension(40, Dimension.Unit.Pixel))
+                .Height(40)
+                .Width(40)
             );
     }
 

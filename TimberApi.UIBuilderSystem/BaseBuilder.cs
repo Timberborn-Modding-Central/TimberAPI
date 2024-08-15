@@ -83,6 +83,7 @@ public abstract class BaseBuilder
     protected internal BuilderStyleSheetCache BuilderStyleSheetCache = null!;
 
     protected UIBuilder UIBuilder = null!;
+    
     protected internal VisualElementInitializer VisualElementInitializer = null!;
 
     internal abstract void SetName(string name);
@@ -99,4 +100,12 @@ public abstract class BaseBuilder
     }
 
     internal abstract VisualElement BuildElement();
+
+    internal VisualElement BuildAndInitializeElement()
+    {
+        var element = BuildElement();
+        VisualElementInitializer.InitializeVisualElement(element);
+
+        return element;
+    }
 }

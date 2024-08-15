@@ -1,57 +1,55 @@
-using System;
-using Timberborn.CoreUI;
+using TimberApi.UIBuilderSystem.CustomElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace TimberApi.UIBuilderSystem.ElementBuilders;
 
-public class ToggleBuilder : BaseElementBuilder<ToggleBuilder, LocalizableToggle>
+public class LocalizableToggleBuilder : ToggleBuilder<LocalizableToggleBuilder, LocalizableToggle>
 {
-    private readonly VisualElementBuilder _toggleElementBuilder;
+    protected override LocalizableToggleBuilder BuilderInstance => this;
 
-    // public ToggleBuilder(VisualElementInitializer visualElementInitializer, IAssetLoader assetLoader) 
-    //     : base(new LocalizableToggle(), visualElementInitializer, assetLoader)
-    // {
-    //     Root.style.color = Color.white;
-    //     
-    //     //TODO: Fix this?
-    //     // _toggleElementBuilder = new VisualElementBuilder(visualElementInitializer, assetLoader, Root.Q<VisualElement>("unity-checkmark"));
-    // }
-
-    protected override ToggleBuilder BuilderInstance => this;
-
-    public ToggleBuilder SetLocKey(string key)
+    public LocalizableToggleBuilder SetLocKey(string key)
     {
         Root._textLocKey = key;
-        return this;
+        return BuilderInstance;
     }
+}
 
-    public ToggleBuilder SetColor(StyleColor color)
+public class ToggleBuilder : ToggleBuilder<ToggleBuilder, Toggle>
+{
+    protected override ToggleBuilder BuilderInstance => this;
+
+    public ToggleBuilder SetText(string text)
+    {
+        Root.text = text;
+        return BuilderInstance;
+    }
+}
+
+public abstract class ToggleBuilder<TBuilder, TElement> : BaseElementBuilder<TBuilder, TElement>
+    where TBuilder : BaseElementBuilder<TBuilder, TElement>
+    where TElement : Toggle, new()
+{
+    public TBuilder SetColor(StyleColor color)
     {
         Root.style.color = color;
-        return this;
+        return BuilderInstance;
     }
 
-    public ToggleBuilder SetFontSize(Length size)
+    public TBuilder SetFontSize(Length size)
     {
         Root.style.fontSize = size;
-        return this;
+        return BuilderInstance;
     }
 
-    public ToggleBuilder SetFontStyle(FontStyle style)
+    public TBuilder SetFontStyle(FontStyle style)
     {
         Root.style.unityFontStyleAndWeight = style;
-        return this;
+        return BuilderInstance;
     }
 
-    public ToggleBuilder ModifyCheckMarkElement(Action<VisualElementBuilder> builder)
+    protected override TElement InitializeRoot()
     {
-        builder.Invoke(_toggleElementBuilder);
-        return this;
-    }
-
-    protected override LocalizableToggle InitializeRoot()
-    {
-        return new LocalizableToggle();
+        return new TElement();
     }
 }

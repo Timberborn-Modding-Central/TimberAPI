@@ -17,17 +17,17 @@ public static class PseudoClassSelectorExtensions
         { PseudoClass.Checked, "checked" }
     };
 
-    public static string ToUnityString(this PseudoClass pseudoClass)
+    private static string ToUnityString(this PseudoClass pseudoClass)
     {
         return PseudoClasses[pseudoClass];
     }
 
-    public static StyleSelectorPart ToStyleSelectorPart(this PseudoClass pseudoClass)
+    private static StyleSelectorPart ToStyleSelectorPart(this PseudoClass pseudoClass)
     {
         return new StyleSelectorPart { value = pseudoClass.ToUnityString(), type = StyleSelectorType.PseudoClass };
     }
 
-    public static StyleSelectorPart[] ToStyleSelectorParts(this PseudoClass[] pseudoClasses)
+    public static IEnumerable<StyleSelectorPart> ToStyleSelectorParts(this PseudoClass[] pseudoClasses)
     {
         var parts = new StyleSelectorPart[pseudoClasses.Length];
 

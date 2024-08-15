@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 83fa33e170cf5264b845d7d4f0627585
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142753
+  packageName: Roslyn C# - Runtime Compiler
+  packageVersion: 1.9.0
+  assetPath: Assets/RoslynCSharp/Scripts/RoslynCSharp/Runtime/Interface/ScriptEventHandlerProxy.cs
+  uploadId: 680456

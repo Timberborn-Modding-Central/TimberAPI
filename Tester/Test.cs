@@ -16,6 +16,7 @@ public class Test : ILoadableSingleton
 
     public void Load()
     {
+        
         Debug.LogWarning($"Tool size is: {_toolService.Tools.Count()}");
     }
 }

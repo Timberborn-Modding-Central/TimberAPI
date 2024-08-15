@@ -1,3 +1,21 @@
+## 0.7.3.0
+- Removed usage of internal Timberborn elements.
+
+## 0.7.2.0
+- Added `MinMaxSliderBuilder`.
+- Added `MinMaxSlider` game preset.
+
+## 0.7.1.2
+- Added Game,MainMenu Slider/SliderInt presets.
+- Added GameToggle preset.
+- Fixed Type selector.
+- Fixed pseudo class selectors.
+
+## 0.7.1.1
+- Added missing builders in dependency injection.
+- Created own StyleValue classes, so people don't require to publicize unity dll's.
+- Added BuildAndInitialize to UIBuilder.
+
 ## 0.7.1.0
 - Added UIBuilder V2.
 - Added DependencyContainer.
