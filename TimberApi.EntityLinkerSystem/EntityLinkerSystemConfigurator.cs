@@ -10,6 +10,7 @@ namespace TimberApi.EntityLinkerSystem
         public void Configure(IContainerDefinition containerDefinition)
         {
             containerDefinition.Bind<EntityLinkObjectSerializer>().AsSingleton();
+            containerDefinition.Bind<PickObjectTool>().AsSingleton();
             containerDefinition.MultiBind<TemplateModule>().ToProvider(ProvideTemplateModule).AsSingleton();
         }
 
