@@ -2,12 +2,13 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
-        <LangVersion>10</LangVersion>
+        <LangVersion>latest</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Authors>TheBloodEyes</Authors>
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\TimberApi.SpecificationSystem\TimberApi.SpecificationSystem.csproj" />
         <ProjectReference Include="..\TimberApi\TimberApi.csproj"/>
     </ItemGroup>
 
