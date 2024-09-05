@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using Timberborn.BlockSystem;
+using Timberborn.EntitySystem;
 using Timberborn.PrefabSystem;
 using Timberborn.Wonders;
 
@@ -10,11 +11,9 @@ namespace TimberApi.Tools.ToolSystem.Tools.PlaceableObject;
 public class PlaceableObjectToolGenerator : ISpecificationGenerator
 {
     private readonly PrefabService _prefabService;
-    private readonly ToolIconService _toolIconService;
 
-    public PlaceableObjectToolGenerator(ToolIconService toolIconService, PrefabService prefabService)
+    public PlaceableObjectToolGenerator(PrefabService prefabService)
     {
-        _toolIconService = toolIconService;
         _prefabService = prefabService;
     }
 
@@ -24,12 +23,10 @@ public class PlaceableObjectToolGenerator : ISpecificationGenerator
         {
             if (!placeableBlockObject.UsableWithCurrentFeatureToggles) continue;
 
-            var labeledPrefab = placeableBlockObject.GetComponentFast<LabeledPrefab>();
+            var labeledEntitySpec = placeableBlockObject.GetComponentFast<LabeledEntitySpec>();
             var prefab = placeableBlockObject.GetComponentFast<Prefab>();
             var wonder = placeableBlockObject.GetComponentFast<Wonder>();
-
-            _toolIconService.AddIcon($"{prefab.PrefabName}:{labeledPrefab.Image.name}", labeledPrefab.Image);
-
+            
             var json = JsonConvert.SerializeObject(new
             {
                 Id = prefab.PrefabName,
@@ -37,9 +34,9 @@ public class PlaceableObjectToolGenerator : ISpecificationGenerator
                 Type = "PlaceableObjectTool",
                 Layout = !wonder ? "Default" : "WonderDefault",
                 Order = placeableBlockObject.ToolOrder,
-                Icon = $"{prefab.PrefabName}:{labeledPrefab.Image.name}",
-                NameLocKey = labeledPrefab.DisplayNameLocKey,
-                labeledPrefab.DescriptionLocKey,
+                Icon = labeledEntitySpec.ImagePath,
+                NameLocKey = labeledEntitySpec.DisplayNameLocKey,
+                labeledEntitySpec.DescriptionLocKey,
                 Hidden = false,
                 DevMode = placeableBlockObject.DevModeTool,
                 ToolInformation = new

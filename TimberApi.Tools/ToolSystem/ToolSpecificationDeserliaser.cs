@@ -7,13 +7,6 @@ namespace TimberApi.Tools.ToolSystem;
 
 public class ToolSpecificationDeserializer : IObjectSerializer<ToolSpecification>
 {
-    private readonly ToolIconService _toolIconService;
-
-    public ToolSpecificationDeserializer(ToolIconService toolIconService)
-    {
-        _toolIconService = toolIconService;
-    }
-
     public void Serialize(ToolSpecification value, IObjectSaver objectSaver)
     {
         throw new NotImplementedException();
@@ -28,7 +21,7 @@ public class ToolSpecificationDeserializer : IObjectSerializer<ToolSpecification
             objectLoader.Get(new PropertyKey<string>("Type")),
             objectLoader.GetValueOrDefault(new PropertyKey<string>("Layout"), "Default"),
             objectLoader.Get(new PropertyKey<int>("Order")),
-            _toolIconService.GetIcon(objectLoader.Get(new PropertyKey<string>("Icon"))),
+            objectLoader.Get(new PropertyKey<string>("Icon")),
             objectLoader.Get(new PropertyKey<string>("NameLocKey")),
             objectLoader.Get(new PropertyKey<string>("DescriptionLocKey")),
             objectLoader.GetValueOrDefault(new PropertyKey<bool>("Hidden"), false),

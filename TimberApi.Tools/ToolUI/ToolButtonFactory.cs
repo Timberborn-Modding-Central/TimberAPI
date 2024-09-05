@@ -46,6 +46,18 @@ public class ToolButtonFactory
         _mapEditorMode = mapEditorMode;
         _assetLoader = assetLoader;
     }
+    
+    public ToolButton Create(Tool tool, string toolImagePath)
+    {
+        var toolImage = _assetLoader.Load<Sprite>(toolImagePath);
+        return Create(tool, toolImage);
+    }
+    
+    public ToolButton Create(Tool tool, string toolImagePath, string backgroundImage)
+    {
+        var toolImage = _assetLoader.Load<Sprite>(toolImagePath);
+        return Create(tool, toolImage, backgroundImage);
+    }
 
     public ToolButton Create(Tool tool, Sprite toolImage)
     {
@@ -61,6 +73,13 @@ public class ToolButtonFactory
             new StyleBackground(_assetLoader.Load<Sprite>(backgroundImage));
         return Create(tool, toolImage, root);
     }
+    
+    public ToolButton CreateGroupless(Tool tool, string toolImagePath, string backgroundImage)
+    {
+        var toolImage = _assetLoader.Load<Sprite>(toolImagePath);
+
+        return CreateGroupless(tool, toolImage, backgroundImage);
+    }
 
     public ToolButton CreateGroupless(Tool tool, Sprite toolImage, string backgroundImage)
     {
@@ -70,6 +89,18 @@ public class ToolButtonFactory
         return Create(tool, toolImage, root);
     }
 
+    public ToolButton CreateHex(Tool tool, string toolImagePath)
+    {
+        var toolImage = _assetLoader.Load<Sprite>(toolImagePath);
+        return CreateHex(tool, toolImage);
+    }    
+    
+    public ToolButton CreateHex(Tool tool, string toolImagePath, string backgroundImage)
+    {
+        var toolImage = _assetLoader.Load<Sprite>(toolImagePath);
+        return CreateHex(tool, toolImage, backgroundImage);
+    }    
+    
     public ToolButton CreateHex(Tool tool, Sprite toolImage)
     {
         var content = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolButtonHex");

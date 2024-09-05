@@ -5,7 +5,6 @@ using Timberborn.BlockSystem;
 using Timberborn.InputSystem;
 using Timberborn.Persistence;
 using Timberborn.PrefabSystem;
-using Timberborn.PreviewSystem;
 using Timberborn.ToolSystem;
 using Timberborn.UISound;
 
@@ -20,6 +19,7 @@ public class PlaceableObjectToolFactory : BaseToolFactory<PlaceableObjectToolToo
     private readonly BlockObjectToolDescriber _blockObjectToolDescriber;
 
     private readonly InputService _inputService;
+    
     private readonly PrefabService _prefabService;
 
     private readonly PreviewPlacerFactory _previewPlacerFactory;
@@ -49,27 +49,26 @@ public class PlaceableObjectToolFactory : BaseToolFactory<PlaceableObjectToolToo
     protected override Tool CreateTool(ToolSpecification toolSpecification,
         PlaceableObjectToolToolInformation toolInformation, ToolGroup? toolGroup)
     {
-        var prefab = _prefabService.GetAllMonoBehaviours<Prefab>()
-            .Single(o => o.IsNamed(toolInformation.PrefabName));
+        var prefab = _prefabService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
         var placeableBlockObject = prefab.GetComponentFast<PlaceableBlockObject>();
 
         placeableBlockObject._devModeTool = toolSpecification.DevMode;
         placeableBlockObject._toolOrder = toolSpecification.Order;
-
-        var blockObjectTool = new BlockObjectTool(
+        
+        var matchingPlacer = _blockObjectPlacerService.GetMatchingPlacer(prefab.GetComponentFast<BlockObject>());
+        var previewPlacer = _previewPlacerFactory.Create(placeableBlockObject);
+        
+        return new BlockObjectTool(
+            placeableBlockObject,
+            toolGroup,
             _inputService,
             _areaPickerFactory,
-            _previewPlacerFactory,
             _uiSoundController,
             _toolUnlockingService,
-            _blockObjectToolDescriber
+            matchingPlacer,
+            _blockObjectToolDescriber,
+            previewPlacer
         );
-
-        var matchingPlacer = _blockObjectPlacerService.GetMatchingPlacer(prefab.GetComponentFast<BlockObject>());
-
-        blockObjectTool.Initialize(placeableBlockObject, matchingPlacer, toolGroup);
-
-        return blockObjectTool;
     }
 
     protected override PlaceableObjectToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)

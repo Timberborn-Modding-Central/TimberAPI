@@ -1,12 +1,11 @@
 using Timberborn.SerializationSystem;
-using UnityEngine;
 
 namespace TimberApi.Tools.ToolSystem;
 
 public class ToolSpecification : ToolSpecification<ObjectSave>
 {
     public ToolSpecification(string id, string? groupId, string section, string type, string layout, int order,
-        Sprite icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devMode,
+        string icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devMode,
         ObjectSave? toolInformation)
         : base(id, groupId, section, type, layout, order, icon, nameLocKey, descriptionLocKey, hidden, devMode,
             toolInformation)
@@ -17,7 +16,7 @@ public class ToolSpecification : ToolSpecification<ObjectSave>
 public class ToolSpecification<T>
 {
     public ToolSpecification(string id, string? groupId, string section, string type, string layout, int order,
-        Sprite icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devMode, T? toolInformation)
+        string icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devMode, T? toolInformation)
     {
         Id = id;
         GroupId = groupId;
@@ -45,7 +44,7 @@ public class ToolSpecification<T>
 
     public int Order { get; }
 
-    public Sprite Icon { get; }
+    public string Icon { get; }
 
     public string NameLocKey { get; }
 

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
+using Timberborn.EntitySystem;
 using Timberborn.Fields;
 using Timberborn.NaturalResources;
 using Timberborn.Planting;
@@ -12,20 +13,20 @@ namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 public class PlantingToolGenerator : ISpecificationGenerator
 {
     private readonly PrefabService _prefabService;
-    private readonly ToolIconService _toolIconService;
 
-    public PlantingToolGenerator(ToolIconService toolIconService, PrefabService prefabService)
+    public PlantingToolGenerator(PrefabService prefabService)
     {
-        _toolIconService = toolIconService;
         _prefabService = prefabService;
     }
 
     public IEnumerable<GeneratedSpecification> Generate()
     {
         var plantables = _prefabService.GetAllMonoBehaviours<Plantable>().ToList();
+        
         foreach (var plantable in plantables)
         {
-            var labeledPrefab = plantable.GetComponentFast<LabeledPrefab>();
+            var labeledEntitySpec = plantable.GetComponentFast<LabeledEntitySpec>();
+            
             var prefab = plantable.GetComponentFast<Prefab>();
 
             var isCrop = plantable.GetComponentFast<Crop>() != null;
@@ -38,9 +39,9 @@ public class PlantingToolGenerator : ISpecificationGenerator
                 Type = "PlantingTool",
                 Layout = "Default",
                 Order = naturalResource.OrderId,
-                Icon = $"{prefab.PrefabName}:{labeledPrefab.Image.name}",
-                NameLocKey = labeledPrefab.DisplayNameLocKey,
-                labeledPrefab.DescriptionLocKey,
+                Icon = labeledEntitySpec.ImagePath,
+                NameLocKey = labeledEntitySpec.DisplayNameLocKey,
+                labeledEntitySpec.DescriptionLocKey,
                 Hidden = false,
                 DevMode = false,
                 ToolInformation = new
@@ -48,8 +49,6 @@ public class PlantingToolGenerator : ISpecificationGenerator
                     prefab.PrefabName
                 }
             });
-
-            _toolIconService.AddIcon($"{prefab.PrefabName}:{labeledPrefab.Image.name}", labeledPrefab.Image);
 
             yield return new GeneratedSpecification("Tools", $"ToolSpecification.{plantable.PrefabName}", json, true);
         }

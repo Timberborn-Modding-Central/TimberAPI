@@ -54,7 +54,7 @@ internal class BuildingChangeApplier(
 
     private static void ChangeManufactoryRecipes(Manufactory manufactory, BuildingSpecification buildingSpecification)
     {
-        manufactory._productionRecipeIds = buildingSpecification.RecipeIds.Distinct().ToArray();
+        manufactory._manufactorySpec._productionRecipeIds = buildingSpecification.RecipeIds.Distinct().ToList();
     }
 
     private static void ChangeBuildingProperties(Building building, BuildingSpecification buildingSpecification)
