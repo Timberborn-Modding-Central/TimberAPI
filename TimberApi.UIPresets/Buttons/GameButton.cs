@@ -10,12 +10,12 @@ using StyleValueType = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleValueType
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class GameButton : ButtonGame<GameButton>
+public class GameButton : GameButton<GameButton>
 {
     protected override GameButton BuilderInstance => this;
 }
 
-public abstract class ButtonGame<TBuilder> : BaseBuilder<TBuilder, LocalizableButton>
+public abstract class GameButton<TBuilder> : BaseBuilder<TBuilder, LocalizableButton>
     where TBuilder : BaseBuilder<TBuilder, LocalizableButton>
 {
     protected LocalizableButtonBuilder ButtonBuilder = null!;

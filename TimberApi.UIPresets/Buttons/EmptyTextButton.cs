@@ -10,12 +10,12 @@ using StyleValueType = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleValueType
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class EmptyTextButton : ButtonEmptyText<EmptyTextButton>
+public class EmptyTextButton : EmptyTextButton<EmptyTextButton>
 {
     protected override EmptyTextButton BuilderInstance => this;
 }
 
-public abstract class ButtonEmptyText<TBuilder> : BaseBuilder<TBuilder, LocalizableButton>
+public abstract class EmptyTextButton<TBuilder> : BaseBuilder<TBuilder, LocalizableButton>
     where TBuilder : BaseBuilder<TBuilder, LocalizableButton>
 {
     protected LocalizableButtonBuilder ButtonBuilder = null!;

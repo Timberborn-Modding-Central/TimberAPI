@@ -9,12 +9,12 @@ using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetB
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class CyclerMainRightButton : CyclerMainRight<CyclerMainRightButton>
+public class CyclerMainRightButton : CyclerMainRightButton<CyclerMainRightButton>
 {
     protected override CyclerMainRightButton BuilderInstance => this;
 }
 
-public abstract class CyclerMainRight<TBuilder> : BaseBuilder<TBuilder, Button>
+public abstract class CyclerMainRightButton<TBuilder> : BaseBuilder<TBuilder, Button>
     where TBuilder : BaseBuilder<TBuilder, Button>
 {
     protected ButtonBuilder ButtonBuilder = null!;

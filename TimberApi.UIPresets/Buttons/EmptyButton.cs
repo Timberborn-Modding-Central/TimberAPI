@@ -8,12 +8,12 @@ using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetB
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class EmptyButton : ButtonEmpty<EmptyButton>
+public class EmptyButton : EmptyButton<EmptyButton>
 {
     protected override EmptyButton BuilderInstance => this;
 }
 
-public abstract class ButtonEmpty<TBuilder> : BaseBuilder<TBuilder, NineSliceButton>
+public abstract class EmptyButton<TBuilder> : BaseBuilder<TBuilder, NineSliceButton>
     where TBuilder : BaseBuilder<TBuilder, NineSliceButton>
 {
     protected ButtonBuilder ButtonBuilder = null!;

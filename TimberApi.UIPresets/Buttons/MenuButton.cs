@@ -11,12 +11,12 @@ using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetB
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class MenuButton : ButtonMenu<MenuButton>
+public class MenuButton : MenuButton<MenuButton>
 {
     protected override MenuButton BuilderInstance => this;
 }
 
-public abstract class ButtonMenu<TBuilder> : BaseBuilder<TBuilder, LocalizableButton>
+public abstract class MenuButton<TBuilder> : BaseBuilder<TBuilder, LocalizableButton>
     where TBuilder : BaseBuilder<TBuilder, LocalizableButton>
 {
     protected LocalizableButtonBuilder ButtonBuilder = null!;

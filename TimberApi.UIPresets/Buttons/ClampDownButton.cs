@@ -9,12 +9,12 @@ using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetB
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class ClampDownButton : ClampDown<ClampDownButton>
+public class ClampDownButton : ClampDownButton<ClampDownButton>
 {
     protected override ClampDownButton BuilderInstance => this;
 }
 
-public abstract class ClampDown<TBuilder> : BaseBuilder<TBuilder, Button>
+public abstract class ClampDownButton<TBuilder> : BaseBuilder<TBuilder, Button>
     where TBuilder : BaseBuilder<TBuilder, Button>
 {
     protected ButtonBuilder ButtonBuilder = null!;

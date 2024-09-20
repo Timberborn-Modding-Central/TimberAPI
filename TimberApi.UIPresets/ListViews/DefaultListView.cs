@@ -4,13 +4,15 @@ using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
-using TimberApi.UIPresets.ListViews.Exceptions;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
 
 namespace TimberApi.UIPresets.ListViews;
 
+/// <summary>
+/// The `ListView` requires the methods `SetItemSource`, `SetBindItem` & `SetMakeItem` to be set.
+/// </summary>
 public class DefaultListView : DefaultListView<DefaultListView>
 {
     protected override DefaultListView BuilderInstance => this;
@@ -94,10 +96,5 @@ public abstract class DefaultListView<TBuilder> : BaseBuilder<TBuilder, ListView
                     .Add(Property.NineSlicedBackgroundImage, "UI/Images/Core/scroll-button-nine-slice-highlight",
                         UIBuilderSystem.StyleSheetSystem.StyleValueType.ResourcePath)
             );
-    }
-
-    public override ListView Build()
-    {
-        return base.Build();
     }
 }
