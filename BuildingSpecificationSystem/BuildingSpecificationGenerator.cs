@@ -19,7 +19,7 @@ internal class BuildingSpecificationGenerator(
 
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        var buildings = prefabService.GetAllMonoBehaviours<Building>();
+        var buildings = prefabService.GetAll<Building>();
 
         foreach (var building in buildings)
         {

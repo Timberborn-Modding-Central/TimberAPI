@@ -50,7 +50,7 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
     protected override Tool CreateTool(ToolSpecification toolSpecification, PlantingToolToolInformation toolInformation,
         ToolGroup? toolGroup)
     {
-        var prefab = _prefabService.GetAllMonoBehaviours<Prefab>()
+        var prefab = _prefabService.GetAll<Prefab>()
             .First(o => o.IsNamedExactly(toolInformation.PrefabName));
         var plantable = prefab.GetComponentFast<Plantable>();
 
@@ -72,6 +72,6 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
     
     private string GetPlanterBuildingName(Plantable plantable)
     {
-        return _loc.T(_prefabService.GetAllMonoBehaviours<PlanterBuildingSpec>().Single((Func<PlanterBuildingSpec, bool>) (building => building.PlantableResourceGroup == plantable.ResourceGroup)).GetComponentFast<LabeledEntitySpec>().DisplayNameLocKey);
+        return _loc.T(_prefabService.GetAll<PlanterBuildingSpec>().Single((Func<PlanterBuildingSpec, bool>) (building => building.PlantableResourceGroup == plantable.ResourceGroup)).GetComponentFast<LabeledEntitySpec>().DisplayNameLocKey);
     }
 }

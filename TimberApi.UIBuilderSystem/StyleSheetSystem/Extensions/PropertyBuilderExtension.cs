@@ -258,6 +258,18 @@ public static class PropertyBuilderExtension
         return propertyBuilder.Add(Property.Padding, new Dimension(value, unit));
     }
     
+    public static PropertyBuilder PaddingX(this PropertyBuilder propertyBuilder, float value, Dimension.Unit unit = Pixel)
+    {
+        propertyBuilder.Add(Property.PaddingLeft, new Dimension(value, unit));
+        return propertyBuilder.Add(Property.PaddingRight, new Dimension(value, unit));
+    }
+    
+    public static PropertyBuilder PaddingY(this PropertyBuilder propertyBuilder, float value, Dimension.Unit unit = Pixel)
+    {
+        propertyBuilder.Add(Property.PaddingTop, new Dimension(value, unit));
+        return propertyBuilder.Add(Property.PaddingBottom, new Dimension(value, unit));
+    }
+    
     public static PropertyBuilder PaddingLeft(this PropertyBuilder propertyBuilder, float value, Dimension.Unit unit = Pixel)
     {
         return propertyBuilder.Add(Property.PaddingLeft, new Dimension(value, unit));

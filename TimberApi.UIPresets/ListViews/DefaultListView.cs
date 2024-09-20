@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
+using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
-using TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums;
-using UnityEngine;
+using TimberApi.UIPresets.ListViews.Exceptions;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
@@ -23,14 +23,15 @@ public abstract class DefaultListView<TBuilder> : BaseBuilder<TBuilder, ListView
 
     protected override ListView InitializeRoot()
     {
-        ListViewBuilder = UIBuilder.Create<ListViewBuilder>();
-
-        return ListViewBuilder.AddClass("api__default-list-view").Build();
+        ListViewBuilder = UIBuilder.Create<ListViewBuilder>()
+            .AddClass("api__default-list-view");
+        
+        return ListViewBuilder.Build();
     }
     
-    public TBuilder SetMakeItem(Func<VisualElement> visualElement)
+    public TBuilder SetMakeItem(Func<VisualElement> makeItemFunc)
     {
-        ListViewBuilder.SetMakeItem(visualElement);
+        ListViewBuilder.SetMakeItem(makeItemFunc);
         return BuilderInstance;
     }
 
@@ -45,6 +46,12 @@ public abstract class DefaultListView<TBuilder> : BaseBuilder<TBuilder, ListView
         ListViewBuilder.SetBindItem(bindItem);
         return BuilderInstance;
     }
+    
+    public TBuilder SetItemHeight(float height)
+    {
+        ListViewBuilder.SetItemHeight(height);
+        return BuilderInstance;
+    }
 
     public TBuilder SetSelectionType(SelectionType selectionType)
     {
@@ -55,23 +62,42 @@ public abstract class DefaultListView<TBuilder> : BaseBuilder<TBuilder, ListView
     protected override void InitializeStyleSheet(StyleSheetBuilder styleSheetBuilder)
     {
         styleSheetBuilder
-            .AddClass("api__default-list-view", builder => builder
-                .FlexGrow(1)
-                .AlignItems(AlignItems.Center)
-                .JustifyContent(JustifyContent.Center)
-                .MarginLeft(15)
-                .MarginRight(15)
+            .AddSelector(
+                ".api__default-list-view .unity-scroll-view__content-and-vertical-scroll-container > .unity-scroller > .unity-slider",
+                builder => builder
+                    .Width(20)
+                    .MinWidth(20)
             )
-            .AddSelector("*", builder => builder
-                .BackgroundColor(Color.black)
+            .AddSelector(
+                ".api__default-list-view .unity-scroll-view__content-and-vertical-scroll-container > .unity-scroller > .unity-slider .unity-base-slider__dragger",
+                builder => builder
+                    .MinHeight(58)
+                    .Left(2)
             )
-            .AddSelector(".api__default-list-view > .unity-scroll-view > .unity-scroll-view__content-viewport", builder => builder
-                .AlignItems(AlignItems.Center)
-                .JustifyContent(JustifyContent.Center)
-                .FlexGrow(0)
-            )
-            .AddSelector(".api__default-list-view > .unity-scroll-view > .unity-scroll-view__content-viewport > .unity-scroll-view__content-container", builder => builder
+            .AddSelector(".api__default-list-view .scroll-view__nine-slice-dragger", builder => builder
+                .NineSlicedBackgroundImage("UI/Images/Core/scroll-button-nine-slice", 14, 0.5f)
                 .Width(100, Dimension.Unit.Percent)
+                .Height(100, Dimension.Unit.Percent)
+            )
+            .AddSelector(".api__default-list-view .scroll-view__nine-slice-tracker", builder => builder
+                .NineSlicedBackgroundImage("UI/Images/Core/scroll-bar-nine-slice", 16, 0, 16, 0, 0.5f)
+                .Width(100, Dimension.Unit.Percent)
+                .Height(100, Dimension.Unit.Percent)
+            )
+            .AddSelector(".api__default-list-view .scroll-view__nine-slice-dragger:hover", builder => builder
+                .Add(Property.NineSlicedBackgroundImage, "UI/Images/Core/scroll-button-nine-slice-highlight",
+                    UIBuilderSystem.StyleSheetSystem.StyleValueType.ResourcePath)
+            )
+            .AddSelector(
+                ".api__default-list-view .unity-base-slider__drag-container:active .scroll-view__nine-slice-dragger",
+                builder => builder
+                    .Add(Property.NineSlicedBackgroundImage, "UI/Images/Core/scroll-button-nine-slice-highlight",
+                        UIBuilderSystem.StyleSheetSystem.StyleValueType.ResourcePath)
             );
+    }
+
+    public override ListView Build()
+    {
+        return base.Build();
     }
 }

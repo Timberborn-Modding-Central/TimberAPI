@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HarmonyLib;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.UIBuilderSystem;
+using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIPresets.Buttons;
 using TimberApi.UIPresets.Labels;
 using TimberApi.UIPresets.ListViews;
@@ -29,7 +30,18 @@ public static class ModPatcher
 {
     private static UIBuilder _uiBuilder = null!;
 
-    public static List<string> Test = new List<string>() { "item1", "item2" };
+    public static List<string> Test = new List<string>()
+    {
+        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
+        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
+        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
+        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
+        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
+        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
+        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
+        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
+        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
+    };
     
     public static bool Prefix(WelcomeScreenBox __instance)
     {
@@ -56,13 +68,20 @@ public static class ModPatcher
                 paddingRight = 20,
                 paddingLeft = 20,
                 paddingTop = 20,
-                backgroundColor = Color.gray
+                backgroundColor = Color.gray,
+                flexDirection = FlexDirection.Row,
             }
         };
         
         Console.WriteLine("Hell my console writeline");
         
-        test.Add(_uiBuilder.Create<DefaultListView>().SetMakeItem(VisualElement).SetItemSource(Test).SetSelectionType(SelectionType.Single).Build());
+        test.Add(_uiBuilder.Create<GameButton>().ModifyRoot(builder => builder.SetPadding(10)).SetLocKey("Hello world").Build());
+        test.Add(_uiBuilder.Create<GameButton>().SetLocKey("hello.world.key").Build());
+        test.Add(_uiBuilder.Create<GameButton>().Destructive().SetLocKey("hello.world.key").Build());
+        test.Add(_uiBuilder.Create<DefaultListView>()
+            .SetItemSource(Test)
+            .SetBindItem(BindItem)
+            .SetMakeItem(VisualElement).Build());
 
         _uiBuilder.Initialize(test);
         __instance._root.Add(test);
@@ -70,9 +89,12 @@ public static class ModPatcher
         return false;
     }
 
+    private static void BindItem(VisualElement arg1, int arg2)
+    {
+    }
+
     private static VisualElement VisualElement()
     {
-        Debug.LogError("AAAAAAA");
-        return _uiBuilder.Build<ArrowUpButton>();
+        return _uiBuilder.Build<MyListItem>();
     }
 }

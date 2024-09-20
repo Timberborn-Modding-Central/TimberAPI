@@ -120,7 +120,6 @@ public partial class StyleSheetBuilder
                 complexSelectorBuilder.AddWildcard();
                 break;
             case ' ':
-                Debug.LogWarning(selector);
                 complexSelectorBuilder.AddDescendant();
                 break;
             case '>':
@@ -130,7 +129,7 @@ public partial class StyleSheetBuilder
                 complexSelectorBuilder.AddCommaSeparator();
                 break;
             default:
-                complexSelectorBuilder.AddType(Enum.Parse<SelectorType>(selector[1..], ignoreCase: true));
+                complexSelectorBuilder.AddType(Enum.Parse<SelectorType>(selector, ignoreCase: true));
                 break;
         }
     }

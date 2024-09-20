@@ -1,3 +1,9 @@
+## 0.7.6.0
+- Fixed for update 0.6.6.1
+
+## 0.7.5.0
+- Fixed for update 0.6.5.1
+
 ## 0.7.4.0
 - Added `BuildingSpecification`.
 - Added `EntityLinkerSystem`.

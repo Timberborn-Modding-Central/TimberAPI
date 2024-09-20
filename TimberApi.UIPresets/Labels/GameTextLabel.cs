@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
@@ -69,6 +70,13 @@ public abstract class GameTextLabel<TBuilder> : BaseBuilder<TBuilder, Label>
             .AddClass("api__game-text-label--big", builder => builder.FontSize(14))
             .AddClass("api__game-text-label--heading", builder => builder.FontSize(15))
             .AddClass("api__game-text-label--title", builder => builder.FontSize(18));
+    }
+    
+    public TBuilder ModifyRoot(Action<LabelBuilder> buttonBuilder)
+    {
+        buttonBuilder.Invoke(LabelBuilder);
+
+        return BuilderInstance;
     }
     
     public override Label Build()

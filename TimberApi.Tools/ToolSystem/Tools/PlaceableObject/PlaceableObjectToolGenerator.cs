@@ -19,7 +19,7 @@ public class PlaceableObjectToolGenerator : ISpecificationGenerator
 
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        foreach (var placeableBlockObject in _prefabService.GetAllMonoBehaviours<PlaceableBlockObject>())
+        foreach (var placeableBlockObject in _prefabService.GetAll<PlaceableBlockObject>())
         {
             if (!placeableBlockObject.UsableWithCurrentFeatureToggles) continue;
 

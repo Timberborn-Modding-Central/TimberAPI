@@ -21,7 +21,7 @@ public class PlantingToolGenerator : ISpecificationGenerator
 
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        var plantables = _prefabService.GetAllMonoBehaviours<Plantable>().ToList();
+        var plantables = _prefabService.GetAll<Plantable>().ToList();
         
         foreach (var plantable in plantables)
         {

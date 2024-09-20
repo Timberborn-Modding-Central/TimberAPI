@@ -49,7 +49,7 @@ public class PlaceableObjectToolFactory : BaseToolFactory<PlaceableObjectToolToo
     protected override Tool CreateTool(ToolSpecification toolSpecification,
         PlaceableObjectToolToolInformation toolInformation, ToolGroup? toolGroup)
     {
-        var prefab = _prefabService.GetAllMonoBehaviours<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
+        var prefab = _prefabService.GetAll<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
         var placeableBlockObject = prefab.GetComponentFast<PlaceableBlockObject>();
 
         placeableBlockObject._devModeTool = toolSpecification.DevMode;

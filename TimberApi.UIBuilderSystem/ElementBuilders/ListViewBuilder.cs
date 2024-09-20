@@ -31,6 +31,12 @@ public class ListViewBuilder : BaseElementBuilder<ListViewBuilder, ListView>
         Root.selectionType = selectionType;
         return this;
     }
+    
+    public ListViewBuilder SetItemHeight(float height)
+    {
+        Root.fixedItemHeight = height;
+        return this;
+    }
 
     protected override ListView InitializeRoot()
     {

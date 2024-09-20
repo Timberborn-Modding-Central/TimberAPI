@@ -28,8 +28,7 @@ public class TestFragment : IEntityPanelFragment
     {
         _root = new VisualElement();
         
-        _root.Add(_builder.Create<GameToggle>().SetLocKey("SWAG").Build());
-        _root.Add(_builder.Create<GameToggle>().Small().SetLocKey("SWAG").Build());
+        _root.Add(_builder.Create<GameButton>().SetLocKey("SWAG").Build());
 
         _builder.Initialize(_root);
         return _root;

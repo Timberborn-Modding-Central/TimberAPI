@@ -16,7 +16,7 @@ internal class BuildingChangeApplier(
 {
     public void Load()
     {
-        foreach (var building in prefabService.GetAllMonoBehaviours<Building>())
+        foreach (var building in prefabService.GetAll<Building>())
         {
             var buildingSpecification = buildingSpecificationService.GetBuildingSpecificationByBuilding(building);
 

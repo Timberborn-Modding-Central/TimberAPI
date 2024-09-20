@@ -34,11 +34,6 @@
         </Reference>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="ConfigSystem\"/>
-        <Folder Include="ModSystem\"/>
-    </ItemGroup>
-
     <Target Name="CopyingFilesToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath)">
         <ItemGroup>
             <ModPackagePath Include="$(SolutionDir)\package\**\*.*"/>
