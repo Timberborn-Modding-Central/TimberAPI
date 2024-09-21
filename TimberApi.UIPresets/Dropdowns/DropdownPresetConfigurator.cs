@@ -1,5 +1,4 @@
 using Bindito.Core;
-using TimberApi.UIPresets.ListViews;
 
 namespace TimberApi.UIPresets.Dropdowns;
 
@@ -10,6 +9,7 @@ public class DropdownPresetConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
-        containerDefinition.Bind<DefaultDropdown>().AsTransient();
+        containerDefinition.Bind<OptionDropdown>().AsTransient();
+        containerDefinition.Bind<GameDropdown>().AsTransient();
     }
 }

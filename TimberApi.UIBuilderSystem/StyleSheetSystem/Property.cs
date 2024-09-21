@@ -87,17 +87,19 @@ public enum Property
     UnitySliceScale,
     UnitySliceTop,
     UnityTextAlign,
-    UnityTextOutline,//
-    UnityTextOutlineColor,// NOG TE DOEN
-    UnityTextOutlineWidth,//
-    UnityTextOverflowPosition,//
-    Visibility,//
+    UnityTextOutline,
+    UnityTextOutlineColor,
+    UnityTextOutlineWidth,
+    UnityTextOverflowPosition,
+    UnityCursorColor,
+    UnitySelectionColor,
+    Visibility,
     WhiteSpace,
     Width,
     WordSpacing, 
 
     // Timberborn properties
-    ClickSound, 
+    ClickSound = 500, 
     NineSlicedBackgroundImage, 
     BackgroundSliceScale,
     BackgroundSlice,

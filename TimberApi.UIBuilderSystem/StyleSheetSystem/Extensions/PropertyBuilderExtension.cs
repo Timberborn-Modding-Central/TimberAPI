@@ -365,6 +365,16 @@ public static class PropertyBuilderExtension
         return propertyBuilder.Add(Property.UnityTextOverflowPosition, unityTextOverflowPosition.ToUnityString(), StyleValueType.Enum);
     }
     
+    public static PropertyBuilder UnityCursorColor(this PropertyBuilder propertyBuilder, Color color)
+    {
+        return propertyBuilder.Add(Property.UnityCursorColor, color);
+    }
+    
+    public static PropertyBuilder UnitySelectionColor(this PropertyBuilder propertyBuilder, Color color)
+    {
+        return propertyBuilder.Add(Property.UnitySelectionColor, color);
+    }
+    
     public static PropertyBuilder Visibility(this PropertyBuilder propertyBuilder, Visibility visibility)
     {
         return propertyBuilder.Add(Property.Visibility, visibility.ToUnityString(), StyleValueType.Enum);

@@ -8,7 +8,11 @@ using TimberApi.UIPresets.Buttons;
 using TimberApi.UIPresets.Dropdowns;
 using TimberApi.UIPresets.Labels;
 using TimberApi.UIPresets.ListViews;
+using TimberApi.UIPresets.ScrollViews;
+using TimberApi.UIPresets.TextFields;
 using TimberApi.UIPresets.Toggles;
+using Timberborn.BatchControl;
+using Timberborn.DropdownSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.ModManagerScene;
 using UnityEngine;
@@ -31,19 +35,6 @@ public static class ModPatcher
 {
     private static UIBuilder _uiBuilder = null!;
 
-    public static List<string> Test = new List<string>()
-    {
-        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
-        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
-        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
-        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
-        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
-        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
-        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
-        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
-        "item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2","item1", "item2",
-    };
-    
     public static bool Prefix(WelcomeScreenBox __instance)
     {
         _uiBuilder = DependencyContainer.GetInstance<UIBuilder>();
@@ -75,24 +66,27 @@ public static class ModPatcher
         };
         
         Console.WriteLine("Hell my console writeline");
-        
-        test.Add(_uiBuilder.Create<GameButton>().ModifyRoot(builder => builder.SetPadding(10)).SetLocKey("Hello world").Build());
-        test.Add(_uiBuilder.Create<GameButton>().SetLocKey("hello.world.key").Build());
-        test.Add(_uiBuilder.Create<GameButton>().Destructive().SetLocKey("hello.world.key").Build());
-        // test.Add(_uiBuilder.Create<DefaultDropdown>().SetItems().Build());
 
+
+        test.Add(_uiBuilder.Create<DefaultScrollView>()
+            .SetMaxHeight(150)
+            .SetMaxWidth(150)
+            .AddComponent<DefaultTextField>()
+            .AddComponent<DefaultTextField>(field => field.SetTextAlign(TextAnchor.MiddleLeft))
+            .AddComponent<DefaultTextField>(field => field.SetTextAlign(TextAnchor.MiddleRight))
+            .AddComponent<DefaultTextField>()
+            .AddComponent<DefaultTextField>(field => field.Large())
+            .Build());
+        
+        test.Add(_uiBuilder.Create<VisualElementBuilder>()
+            .AddComponent<DefaultTextField>(field => field.MultiLine().SetHeight(100).SetWidth(100))
+            .AddComponent<DefaultTextField>(field => field.MultiLine().SetHeight(100).SetWidth(100).Large())
+            .Build()
+        );
         _uiBuilder.Initialize(test);
         __instance._root.Add(test);
 
+
         return false;
-    }
-
-    private static void BindItem(VisualElement arg1, int arg2)
-    {
-    }
-
-    private static VisualElement VisualElement()
-    {
-        return _uiBuilder.Build<MyListItem>();
     }
 }

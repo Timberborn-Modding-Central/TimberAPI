@@ -79,10 +79,34 @@ public abstract class BaseElementBuilder<TBuilder, TElement> : BaseBuilder<TBuil
         Root.style.width = width;
         return BuilderInstance;
     }
+    
+    public TBuilder SetMaxWidth(Length width)
+    {
+        Root.style.maxWidth = width;
+        return BuilderInstance;
+    }
+    
+    public TBuilder SetMinWidth(Length width)
+    {
+        Root.style.minWidth = width;
+        return BuilderInstance;
+    }
 
     public TBuilder SetHeight(Length height)
     {
         Root.style.height = height;
+        return BuilderInstance;
+    }
+    
+    public TBuilder SetMaxHeight(Length height)
+    {
+        Root.style.maxHeight = height;
+        return BuilderInstance;
+    }
+    
+    public TBuilder SetMinHeight(Length height)
+    {
+        Root.style.minHeight = height;
         return BuilderInstance;
     }
 
