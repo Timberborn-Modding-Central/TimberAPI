@@ -4,6 +4,7 @@ using HarmonyLib;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
+using TimberApi.UIPresets.Builders;
 using TimberApi.UIPresets.Buttons;
 using TimberApi.UIPresets.Dropdowns;
 using TimberApi.UIPresets.Labels;
@@ -68,21 +69,14 @@ public static class ModPatcher
         Console.WriteLine("Hell my console writeline");
 
 
-        test.Add(_uiBuilder.Create<DefaultScrollView>()
-            .SetMaxHeight(150)
-            .SetMaxWidth(150)
+        test.Add(_uiBuilder.Create<FragmentBuilder>()
             .AddComponent<DefaultTextField>()
             .AddComponent<DefaultTextField>(field => field.SetTextAlign(TextAnchor.MiddleLeft))
             .AddComponent<DefaultTextField>(field => field.SetTextAlign(TextAnchor.MiddleRight))
             .AddComponent<DefaultTextField>()
             .AddComponent<DefaultTextField>(field => field.Large())
             .Build());
-        
-        test.Add(_uiBuilder.Create<VisualElementBuilder>()
-            .AddComponent<DefaultTextField>(field => field.MultiLine().SetHeight(100).SetWidth(100))
-            .AddComponent<DefaultTextField>(field => field.MultiLine().SetHeight(100).SetWidth(100).Large())
-            .Build()
-        );
+
         _uiBuilder.Initialize(test);
         __instance._root.Add(test);
 

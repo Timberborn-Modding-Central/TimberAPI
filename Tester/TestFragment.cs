@@ -1,7 +1,10 @@
 using System.Diagnostics;
 using TimberApi.UIBuilderSystem;
+using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums;
+using TimberApi.UIPresets.Builders;
 using TimberApi.UIPresets.Buttons;
+using TimberApi.UIPresets.Labels;
 using TimberApi.UIPresets.Sliders;
 using TimberApi.UIPresets.Toggles;
 using Timberborn.BaseComponentSystem;
@@ -26,12 +29,16 @@ public class TestFragment : IEntityPanelFragment
 
     public VisualElement InitializeFragment()
     {
-        _root = new VisualElement();
-        
-        _root.Add(_builder.Create<GameButton>().SetLocKey("SWAG").Build());
-
-        _builder.Initialize(_root);
-        return _root;
+        return _builder.Create<VisualElementBuilder>()
+            .AddComponent<FragmentBuilder>(builder => builder.AddComponent<GameTextLabel>(button => button.SetText("Workplace").Big()))
+            .AddComponent<FragmentBuilder>(builder => builder.PalePurple().AddComponent<GameTextLabel>(button => button.SetText("Workplace").Big()))
+            .AddComponent<FragmentBuilder>(builder => builder.Purple().AddComponent<GameTextLabel>(button => button.SetText("Workplace").Big()))
+            .AddComponent<FragmentBuilder>(builder => builder.PurpleStriped().AddComponent<GameTextLabel>(button => button.SetText("Workplace").Big()))
+            .AddComponent<FragmentBuilder>(builder => builder.Red().AddComponent<GameTextLabel>(button => button.SetText("Workplace").Big()))
+            .AddComponent<FragmentBuilder>(builder => builder.RedStriped().AddComponent<GameTextLabel>(button => button.SetText("Workplace").Big()))
+            .AddComponent<FragmentBuilder>(builder => builder.Blue().AddComponent<GameTextLabel>(button => button.SetText("Workplace").Big()))
+            .AddComponent<FragmentBuilder>(builder => builder.Gray().AddComponent<GameTextLabel>(button => button.SetText("Workplace").Big()))
+            .BuildAndInitialize();
     }
 
     public void ShowFragment(BaseComponent entity)
