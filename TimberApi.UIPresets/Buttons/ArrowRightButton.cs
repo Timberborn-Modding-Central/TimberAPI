@@ -4,19 +4,9 @@ using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
 
 namespace TimberApi.UIPresets.Buttons;
-
-public class TestButton : BaseBuilder<Button>
-{
-    protected override Button InitializeRoot()
-    {
-        throw new NotImplementedException();
-    }
-}
-
 
 public class ArrowRightButton : ArrowRightButton<ArrowRightButton>
 {
