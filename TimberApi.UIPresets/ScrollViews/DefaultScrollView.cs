@@ -119,4 +119,16 @@ public abstract class DefaultScrollView<TBuilder> : BaseBuilder<TBuilder, Scroll
                         UIBuilderSystem.StyleSheetSystem.StyleValueType.ResourcePath)
             );
     }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ScrollViewBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<ScrollViewBuilder> scrollViewBuilder)
+    {
+        scrollViewBuilder.Invoke(ScrollViewBuilder);
+        return BuilderInstance;
+    }
 }

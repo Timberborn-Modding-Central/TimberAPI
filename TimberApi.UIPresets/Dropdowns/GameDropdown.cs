@@ -1,14 +1,7 @@
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
-using TimberApi.UIBuilderSystem.StyleSheetSystem;
-using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using Timberborn.DropdownSystem;
-using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.StyleSheets;
-using Display = TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums.Display;
-using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
-using StyleValueType = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleValueType;
 
 namespace TimberApi.UIPresets.Dropdowns;
 

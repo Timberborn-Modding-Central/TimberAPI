@@ -97,4 +97,16 @@ public abstract class DefaultListView<TBuilder> : BaseBuilder<TBuilder, ListView
                         UIBuilderSystem.StyleSheetSystem.StyleValueType.ResourcePath)
             );
     }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ListViewBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<ListViewBuilder> listViewBuilder)
+    {
+        listViewBuilder.Invoke(ListViewBuilder);
+        return BuilderInstance;
+    }
 }

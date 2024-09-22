@@ -79,17 +79,22 @@ public abstract class MenuButton<TBuilder> : BaseBuilder<TBuilder, LocalizableBu
             );
     }
 
-    public TBuilder ModifyRoot(Action<LocalizableButtonBuilder> buttonBuilder)
-    {
-        buttonBuilder.Invoke(ButtonBuilder);
-
-        return BuilderInstance;
-    }
-
     public override LocalizableButton Build()
     {
         return ButtonBuilder
             .AddClass(SizeClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LocalizableButtonBuilder> buttonBuilder)
+    {
+        buttonBuilder.Invoke(ButtonBuilder);
+        return BuilderInstance;
     }
 }

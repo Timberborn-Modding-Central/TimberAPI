@@ -79,17 +79,22 @@ public abstract class EmptyButton<TBuilder> : BaseBuilder<TBuilder, NineSliceBut
                 0.5f, PseudoClass.Hover, PseudoClass.Active);
     }
 
-    public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
-    {
-        buttonBuilder.Invoke(ButtonBuilder);
-
-        return BuilderInstance;
-    }
-
     public override NineSliceButton Build()
     {
         return ButtonBuilder
             .AddClass(ImageClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
+    {
+        buttonBuilder.Invoke(ButtonBuilder);
+        return BuilderInstance;
     }
 }

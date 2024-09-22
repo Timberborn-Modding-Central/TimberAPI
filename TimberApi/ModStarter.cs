@@ -2,7 +2,6 @@ using System;
 using HarmonyLib;
 using TimberApi.HarmonySystem;
 using TimberApi.SingletonSystem;
-using Timberborn.CommandLine;
 using Timberborn.ModManagerScene;
 using Timberborn.SingletonSystem;
 using UnityEngine;

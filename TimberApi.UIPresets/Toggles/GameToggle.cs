@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
@@ -113,5 +114,17 @@ public abstract class GameToggle<TBuilder> : BaseBuilder<TBuilder, LocalizableTo
             .AddClass(SizeClass)
             .AddClass(ImageClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ToggleBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LocalizableToggleBuilder> toggleBuilder)
+    {
+        toggleBuilder.Invoke(ToggleBuilder);
+        return BuilderInstance;
     }
 }

@@ -106,17 +106,22 @@ public abstract class EmptyTextButton<TBuilder> : BaseBuilder<TBuilder, Localiza
                 0.5f, PseudoClass.Hover, PseudoClass.Active);
     }
 
-    public TBuilder ModifyRoot(Action<LocalizableButtonBuilder> buttonBuilder)
-    {
-        buttonBuilder.Invoke(ButtonBuilder);
-
-        return BuilderInstance;
-    }
-
     public override LocalizableButton Build()
     {
         return ButtonBuilder
             .AddClass(ImageClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LocalizableButtonBuilder> buttonBuilder)
+    {
+        buttonBuilder.Invoke(ButtonBuilder);
+        return BuilderInstance;
     }
 }

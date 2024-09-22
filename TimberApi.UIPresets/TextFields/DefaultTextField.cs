@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
@@ -110,5 +111,17 @@ public abstract class DefaultTextField<TBuilder> : BaseBuilder<TBuilder, TextFie
         
         return TextFieldBuilder
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        TextFieldBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<TextFieldBuilder> textFieldBuilder)
+    {
+        textFieldBuilder.Invoke(TextFieldBuilder);
+        return BuilderInstance;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
@@ -38,5 +39,17 @@ public abstract class DefaultListViewItemWrapper<TBuilder> : BaseBuilder<TBuilde
                 "UI/Images/Core/scroll_tab", 15, 142, 15, 142, 0.5f)
             .AddNineSlicedBackground(".api__default-list-view__item-background:checked", "UI/Images/Core/scroll_tab",
                 15, 142, 15, 142, 0.5f);
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        VisualElementBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<VisualElementBuilder> visualElementBuilder)
+    {
+        visualElementBuilder.Invoke(VisualElementBuilder);
+        return BuilderInstance;
     }
 }

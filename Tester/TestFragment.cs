@@ -1,18 +1,11 @@
-using System.Diagnostics;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
-using TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums;
 using TimberApi.UIPresets.Builders;
-using TimberApi.UIPresets.Buttons;
 using TimberApi.UIPresets.Labels;
-using TimberApi.UIPresets.Sliders;
-using TimberApi.UIPresets.Toggles;
 using Timberborn.BaseComponentSystem;
 using Timberborn.CoreUI;
 using Timberborn.EntityPanelSystem;
-using UnityEngine;
 using UnityEngine.UIElements;
-using Debug = UnityEngine.Debug;
 
 namespace Tester;
 
