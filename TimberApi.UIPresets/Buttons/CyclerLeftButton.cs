@@ -1,20 +1,18 @@
 using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
-using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class CyclerLeftButton : CyclerLeft<CyclerLeftButton>
+public class CyclerLeftButton : CyclerLeftButton<CyclerLeftButton>
 {
     protected override CyclerLeftButton BuilderInstance => this;
 }
 
-public abstract class CyclerLeft<TBuilder> : BaseBuilder<TBuilder, Button>
+public abstract class CyclerLeftButton<TBuilder> : BaseBuilder<TBuilder, Button>
     where TBuilder : BaseBuilder<TBuilder, Button>
 {
     protected ButtonBuilder ButtonBuilder = null!;
@@ -45,10 +43,15 @@ public abstract class CyclerLeft<TBuilder> : BaseBuilder<TBuilder, Button>
             );
     }
 
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
     public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
     {
         buttonBuilder.Invoke(ButtonBuilder);
-
         return BuilderInstance;
     }
 }

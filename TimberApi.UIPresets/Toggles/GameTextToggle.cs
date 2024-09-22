@@ -1,7 +1,7 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
-using TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Overflow = TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums.Overflow;
@@ -97,5 +97,17 @@ public abstract class GameTextToggle<TBuilder> : BaseBuilder<TBuilder, Toggle>
         return ToggleBuilder
             .AddClass(SizeClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ToggleBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<ToggleBuilder> toggleBuilder)
+    {
+        toggleBuilder.Invoke(ToggleBuilder);
+        return BuilderInstance;
     }
 }

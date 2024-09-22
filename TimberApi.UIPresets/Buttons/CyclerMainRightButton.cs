@@ -1,20 +1,18 @@
 using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
-using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class CyclerMainRightButton : CyclerMainRight<CyclerMainRightButton>
+public class CyclerMainRightButton : CyclerMainRightButton<CyclerMainRightButton>
 {
     protected override CyclerMainRightButton BuilderInstance => this;
 }
 
-public abstract class CyclerMainRight<TBuilder> : BaseBuilder<TBuilder, Button>
+public abstract class CyclerMainRightButton<TBuilder> : BaseBuilder<TBuilder, Button>
     where TBuilder : BaseBuilder<TBuilder, Button>
 {
     protected ButtonBuilder ButtonBuilder = null!;
@@ -67,17 +65,22 @@ public abstract class CyclerMainRight<TBuilder> : BaseBuilder<TBuilder, Button>
             );
     }
 
-    public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
-    {
-        buttonBuilder.Invoke(ButtonBuilder);
-
-        return BuilderInstance;
-    }
-
     public override Button Build()
     {
         return ButtonBuilder
             .AddClass(SizeClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
+    {
+        buttonBuilder.Invoke(ButtonBuilder);
+        return BuilderInstance;
     }
 }

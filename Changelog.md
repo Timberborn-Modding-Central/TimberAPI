@@ -1,3 +1,21 @@
+## 0.7.7.0
+- Added `AddClass` to all presets, for adjusting presets with stylesheets.
+- Fixed missing `ModifyRoot` to all presets.
+- Renamed `ButtonGame` preset to `GameButton`.
+- Renamed many abstract presets to `...Buton`
+- Added `ListView` presets.
+- Added `TextField` presets.
+- Added `ScrollView` presets.
+- Added `Dropdown` presets.
+- Added `FragmentBuilder`.
+- Added `BoxBuilder`.
+
+## 0.7.6.0
+- Fixed for update 0.6.6.1.
+
+## 0.7.5.0
+- Fixed for update 0.6.5.1.
+
 ## 0.7.4.0
 - Added `BuildingSpecification`.
 - Added `EntityLinkerSystem`.

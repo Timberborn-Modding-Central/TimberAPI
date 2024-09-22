@@ -26,7 +26,7 @@ public class UIBuilderSystemConfigurator : IConfigurator
         containerDefinition.Bind<ToggleBuilder>().AsTransient();
         containerDefinition.Bind<LocalizableToggleBuilder>().AsTransient();
 
-        
+        containerDefinition.Bind<DropDownBuilder>().AsTransient();
         
         
         containerDefinition.Bind<ButtonBuilder>().AsTransient();

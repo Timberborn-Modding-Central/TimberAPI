@@ -118,13 +118,6 @@ public abstract class ButtonNewGame<TBuilder> : BaseBuilder<TBuilder, Localizabl
                 "ui/images/buttons/difficulty/hard-active", 64, 0.6f, PseudoClass.Hover, PseudoClass.Active);
     }
 
-    public TBuilder ModifyRoot(Action<LocalizableButtonBuilder> buttonBuilder)
-    {
-        buttonBuilder.Invoke(ButtonBuilder);
-
-        return BuilderInstance;
-    }
-
     public override LocalizableButton Build()
     {
         if (IsActive) ButtonBuilder.AddClass(ImageClass + "--active");
@@ -132,5 +125,17 @@ public abstract class ButtonNewGame<TBuilder> : BaseBuilder<TBuilder, Localizabl
         return ButtonBuilder
             .AddClass(ImageClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LocalizableButtonBuilder> buttonBuilder)
+    {
+        buttonBuilder.Invoke(ButtonBuilder);
+        return BuilderInstance;
     }
 }

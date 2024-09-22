@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
@@ -77,5 +78,17 @@ public abstract class SettingToggle<TBuilder> : BaseBuilder<TBuilder, Localizabl
                 builder => builder
                     .BackgroundImage("UI/Images/Buttons/checkbox_on_hover")
             );
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ToggleBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LocalizableToggleBuilder> toggleBuilder)
+    {
+        toggleBuilder.Invoke(ToggleBuilder);
+        return BuilderInstance;
     }
 }

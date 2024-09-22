@@ -1,8 +1,17 @@
 using Bindito.Core;
-using Timberborn.BeaversUI;
 using Timberborn.EntityPanelSystem;
 
 namespace Tester;
+
+[Context("MainMenu")]
+public class MainMenuConfigurator : IConfigurator
+{
+    public void Configure(IContainerDefinition containerDefinition)
+    {
+        containerDefinition.Bind<MyListItem>().AsTransient();
+
+    }
+}
 
 [Context("Game")]
 public class Configurator : IConfigurator
@@ -12,7 +21,6 @@ public class Configurator : IConfigurator
         containerDefinition.Bind<Test>().AsSingleton();
         containerDefinition.Bind<TestFragment>().AsSingleton();
         containerDefinition.MultiBind<EntityPanelModule>().ToProvider<EntityPanelModuleProvider>().AsSingleton();
-
     }
     
     public class EntityPanelModuleProvider : IProvider<EntityPanelModule>

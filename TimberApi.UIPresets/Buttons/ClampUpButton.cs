@@ -4,17 +4,16 @@ using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class ClampUpButton : ClampUp<ClampUpButton>
+public class ClampUpButton : ClampUpButton<ClampUpButton>
 {
     protected override ClampUpButton BuilderInstance => this;
 }
 
-public abstract class ClampUp<TBuilder> : BaseBuilder<TBuilder, Button>
+public abstract class ClampUpButton<TBuilder> : BaseBuilder<TBuilder, Button>
     where TBuilder : BaseBuilder<TBuilder, Button>
 {
     protected ButtonBuilder ButtonBuilder = null!;
@@ -39,13 +38,6 @@ public abstract class ClampUp<TBuilder> : BaseBuilder<TBuilder, Button>
         return ButtonBuilder.AddClass("api__button__clamp-up").Build();
     }
 
-    public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
-    {
-        buttonBuilder.Invoke(ButtonBuilder);
-
-        return BuilderInstance;
-    }
-
     protected override void InitializeStyleSheet(StyleSheetBuilder styleSheetBuilder)
     {
         styleSheetBuilder
@@ -58,5 +50,17 @@ public abstract class ClampUp<TBuilder> : BaseBuilder<TBuilder, Button>
                 .Height(94)
                 .Width(16)
             );
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
+    {
+        buttonBuilder.Invoke(ButtonBuilder);
+        return BuilderInstance;
     }
 }

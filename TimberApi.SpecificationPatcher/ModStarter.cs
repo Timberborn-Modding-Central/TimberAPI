@@ -1,11 +1,3 @@
-using System.Collections.Generic;
-using HarmonyLib;
-using Newtonsoft.Json.Linq;
-using TimberApi.HarmonySystem;
-using Timberborn.ModManagerScene;
-using Timberborn.SerializationSystem;
-using UnityEngine;
-
 namespace TimberApi.SpecificationPatcher;
 
 // public class ModStarter : IModStarter

@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
@@ -76,5 +77,17 @@ public abstract class GameTextLabel<TBuilder> : BaseBuilder<TBuilder, Label>
         return LabelBuilder
             .AddClass(SizeClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        LabelBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LabelBuilder> labelBuilder)
+    {
+        labelBuilder.Invoke(LabelBuilder);
+        return BuilderInstance;
     }
 }

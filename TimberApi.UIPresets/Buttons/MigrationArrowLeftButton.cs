@@ -1,12 +1,9 @@
 using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
-using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.StyleSheets;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
-using StyleValueType = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleValueType;
 
 namespace TimberApi.UIPresets.Buttons;
 
@@ -51,10 +48,15 @@ public abstract class MigrationArrowLeftButton<TBuilder> : BaseBuilder<TBuilder,
             );
     }
 
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
     public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
     {
         buttonBuilder.Invoke(ButtonBuilder);
-
         return BuilderInstance;
     }
 }

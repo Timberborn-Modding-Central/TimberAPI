@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
@@ -148,5 +149,17 @@ public abstract class GameSliderInt<TBuilder> : BaseBuilder<TBuilder, Localizabl
             .AddClass(SizeClass)
             .AddClass(DraggerClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        SliderIntBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LocalizableSliderIntBuilder> sliderIntBuilder)
+    {
+        sliderIntBuilder.Invoke(SliderIntBuilder);
+        return BuilderInstance;
     }
 }

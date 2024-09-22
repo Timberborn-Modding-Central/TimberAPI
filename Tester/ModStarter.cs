@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
 using HarmonyLib;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.UIBuilderSystem;
-using TimberApi.UIPresets.Buttons;
-using TimberApi.UIPresets.Labels;
-using TimberApi.UIPresets.ListViews;
-using TimberApi.UIPresets.Toggles;
+using TimberApi.UIPresets.Builders;
+using TimberApi.UIPresets.TextFields;
 using Timberborn.MainMenuScene;
 using Timberborn.ModManagerScene;
 using UnityEngine;
@@ -29,8 +26,6 @@ public static class ModPatcher
 {
     private static UIBuilder _uiBuilder = null!;
 
-    public static List<string> Test = new List<string>() { "item1", "item2" };
-    
     public static bool Prefix(WelcomeScreenBox __instance)
     {
         _uiBuilder = DependencyContainer.GetInstance<UIBuilder>();
@@ -56,23 +51,28 @@ public static class ModPatcher
                 paddingRight = 20,
                 paddingLeft = 20,
                 paddingTop = 20,
-                backgroundColor = Color.gray
+                backgroundColor = Color.gray,
+                flexDirection = FlexDirection.Row,
             }
         };
         
         Console.WriteLine("Hell my console writeline");
-        
-        test.Add(_uiBuilder.Create<DefaultListView>().SetMakeItem(VisualElement).SetItemSource(Test).SetSelectionType(SelectionType.Single).Build());
+
+
+test.Add(_uiBuilder.Create<BoxBuilder>()
+    .AddCloseButton("ButtonName")
+    .AddHeader("Settings")
+    .SetWidth(500)
+    .SetHeight(500)
+    .AddComponent<DefaultTextField>()
+    .AddComponent<DefaultTextField>()
+    .AddComponent<DefaultTextField>()
+    .Build());
 
         _uiBuilder.Initialize(test);
         __instance._root.Add(test);
 
-        return false;
-    }
 
-    private static VisualElement VisualElement()
-    {
-        Debug.LogError("AAAAAAA");
-        return _uiBuilder.Build<ArrowUpButton>();
+        return false;
     }
 }

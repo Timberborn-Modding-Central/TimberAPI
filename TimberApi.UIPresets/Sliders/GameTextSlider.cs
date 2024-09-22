@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
@@ -147,5 +148,17 @@ public abstract class GameTextSlider<TBuilder> : BaseBuilder<TBuilder, Slider>
             .AddClass(SizeClass)
             .AddClass(DraggerClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        SliderBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<SliderBuilder> sliderBuilder)
+    {
+        sliderBuilder.Invoke(SliderBuilder);
+        return BuilderInstance;
     }
 }

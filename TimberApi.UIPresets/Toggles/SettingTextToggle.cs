@@ -1,5 +1,5 @@
+using System;
 using TimberApi.UIBuilderSystem;
-using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using UnityEngine;
@@ -77,5 +77,17 @@ public abstract class SettingTextToggle<TBuilder> : BaseBuilder<TBuilder, Toggle
                 builder => builder
                     .BackgroundImage("UI/Images/Buttons/checkbox_on_hover")
             );
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ToggleBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<ToggleBuilder> toggleBuilder)
+    {
+        toggleBuilder.Invoke(ToggleBuilder);
+        return BuilderInstance;
     }
 }

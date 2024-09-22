@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
@@ -173,5 +174,17 @@ public abstract class GameMinMaxSlider<TBuilder> : BaseBuilder<TBuilder, Localiz
             .AddClass(SizeClass)
             .AddClass(DraggerClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        MinMaxSliderBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LocalizableMinMaxSliderBuilder> minMaxSliderBuilder)
+    {
+        minMaxSliderBuilder.Invoke(MinMaxSliderBuilder);
+        return BuilderInstance;
     }
 }

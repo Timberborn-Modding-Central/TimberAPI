@@ -1,5 +1,5 @@
+using System;
 using TimberApi.UIBuilderSystem;
-using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
@@ -174,5 +174,17 @@ public abstract class GameTextMinMaxSlider<TBuilder> : BaseBuilder<TBuilder, Min
             .AddClass(SizeClass)
             .AddClass(DraggerClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        MinMaxSliderBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<MinMaxSliderBuilder> minMaxSliderBuilder)
+    {
+        minMaxSliderBuilder.Invoke(MinMaxSliderBuilder);
+        return BuilderInstance;
     }
 }

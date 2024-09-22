@@ -8,12 +8,12 @@ using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetB
 
 namespace TimberApi.UIPresets.Buttons;
 
-public class EmptyButton : ButtonEmpty<EmptyButton>
+public class EmptyButton : EmptyButton<EmptyButton>
 {
     protected override EmptyButton BuilderInstance => this;
 }
 
-public abstract class ButtonEmpty<TBuilder> : BaseBuilder<TBuilder, NineSliceButton>
+public abstract class EmptyButton<TBuilder> : BaseBuilder<TBuilder, NineSliceButton>
     where TBuilder : BaseBuilder<TBuilder, NineSliceButton>
 {
     protected ButtonBuilder ButtonBuilder = null!;
@@ -79,17 +79,22 @@ public abstract class ButtonEmpty<TBuilder> : BaseBuilder<TBuilder, NineSliceBut
                 0.5f, PseudoClass.Hover, PseudoClass.Active);
     }
 
-    public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
-    {
-        buttonBuilder.Invoke(ButtonBuilder);
-
-        return BuilderInstance;
-    }
-
     public override NineSliceButton Build()
     {
         return ButtonBuilder
             .AddClass(ImageClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
+    {
+        buttonBuilder.Invoke(ButtonBuilder);
+        return BuilderInstance;
     }
 }

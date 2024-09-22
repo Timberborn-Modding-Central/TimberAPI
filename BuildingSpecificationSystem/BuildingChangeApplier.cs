@@ -16,7 +16,7 @@ internal class BuildingChangeApplier(
 {
     public void Load()
     {
-        foreach (var building in prefabService.GetAllMonoBehaviours<Building>())
+        foreach (var building in prefabService.GetAll<Building>())
         {
             var buildingSpecification = buildingSpecificationService.GetBuildingSpecificationByBuilding(building);
 
@@ -54,7 +54,7 @@ internal class BuildingChangeApplier(
 
     private static void ChangeManufactoryRecipes(Manufactory manufactory, BuildingSpecification buildingSpecification)
     {
-        manufactory._productionRecipeIds = buildingSpecification.RecipeIds.Distinct().ToArray();
+        manufactory._manufactorySpec._productionRecipeIds = buildingSpecification.RecipeIds.Distinct().ToList();
     }
 
     private static void ChangeBuildingProperties(Building building, BuildingSpecification buildingSpecification)

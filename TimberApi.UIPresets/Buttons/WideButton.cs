@@ -69,10 +69,15 @@ public abstract class WideButton<TBuilder> : BaseBuilder<TBuilder, LocalizableBu
                 PseudoClass.Hover, PseudoClass.Active);
     }
 
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
     public TBuilder ModifyRoot(Action<LocalizableButtonBuilder> buttonBuilder)
     {
         buttonBuilder.Invoke(ButtonBuilder);
-
         return BuilderInstance;
     }
 }

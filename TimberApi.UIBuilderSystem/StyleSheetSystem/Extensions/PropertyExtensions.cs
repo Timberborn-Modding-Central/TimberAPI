@@ -95,6 +95,8 @@ public static class PropertyExtensions
         { Property.UnityTextOutlineColor, "-unity-text-outline-color" },
         { Property.UnityTextOutlineWidth, "-unity-text-outline-width" },
         { Property.UnityTextOverflowPosition, "-unity-text-overflow-position" },
+        { Property.UnityCursorColor, "--unity-cursor-color" },
+        { Property.UnitySelectionColor, "--unity-selection-color" },
         { Property.Visibility, "visibility" },
         { Property.WhiteSpace, "white-space" },
         { Property.Width, "width" },

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Timberborn.CoreUI;
+using Timberborn.EntitySystem;
 using Timberborn.Localization;
 using Timberborn.Persistence;
 using Timberborn.Planting;
@@ -14,8 +14,6 @@ namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
 {
     private readonly DevModePlantableSpawner _devModePlantableSpawner;
-
-    private readonly DialogBoxShower _dialogBoxShower;
 
     private readonly ILoc _loc;
 
@@ -36,7 +34,6 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
         SelectionToolProcessorFactory selectionToolProcessorFactory,
         ILoc loc,
         PrefabService prefabService,
-        DialogBoxShower dialogBoxShower,
         ToolUnlockingService toolUnlockingService)
     {
         _plantableDescriber = plantableDescriber;
@@ -45,7 +42,6 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
         _selectionToolProcessorFactory = selectionToolProcessorFactory;
         _loc = loc;
         _prefabService = prefabService;
-        _dialogBoxShower = dialogBoxShower;
         _toolUnlockingService = toolUnlockingService;
     }
 
@@ -54,7 +50,7 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
     protected override Tool CreateTool(ToolSpecification toolSpecification, PlantingToolToolInformation toolInformation,
         ToolGroup? toolGroup)
     {
-        var prefab = _prefabService.GetAllMonoBehaviours<Prefab>()
+        var prefab = _prefabService.GetAll<Prefab>()
             .First(o => o.IsNamedExactly(toolInformation.PrefabName));
         var plantable = prefab.GetComponentFast<Plantable>();
 
@@ -73,12 +69,9 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
     {
         return new PlantingToolToolInformation(objectLoader.Get(new PropertyKey<string>("PrefabName")));
     }
-
+    
     private string GetPlanterBuildingName(Plantable plantable)
     {
-        return _loc.T(_prefabService.GetAllMonoBehaviours<PlanterBuilding>()
-            .Single(
-                (Func<PlanterBuilding, bool>)(building => building.PlantableResourceGroup == plantable.ResourceGroup))
-            .GetComponentFast<LabeledPrefab>().DisplayNameLocKey);
+        return _loc.T(_prefabService.GetAll<PlanterBuildingSpec>().Single((Func<PlanterBuildingSpec, bool>) (building => building.PlantableResourceGroup == plantable.ResourceGroup)).GetComponentFast<LabeledEntitySpec>().DisplayNameLocKey);
     }
 }

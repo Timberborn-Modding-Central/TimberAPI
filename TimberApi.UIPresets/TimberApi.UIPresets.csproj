@@ -23,10 +23,6 @@
         </Reference>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Scrollers\" />
-    </ItemGroup>
-
     <PropertyGroup>
         <CopyDllToPath>false</CopyDllToPath>
         <ModPath>Documents/Mods</ModPath>
