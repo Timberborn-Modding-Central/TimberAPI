@@ -44,11 +44,16 @@ public abstract class CloseButton<TBuilder> : BaseBuilder<TBuilder, Button>
                 .Width(40)
             );
     }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        ButtonBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
 
     public TBuilder ModifyRoot(Action<ButtonBuilder> buttonBuilder)
     {
         buttonBuilder.Invoke(ButtonBuilder);
-
         return BuilderInstance;
     }
 }

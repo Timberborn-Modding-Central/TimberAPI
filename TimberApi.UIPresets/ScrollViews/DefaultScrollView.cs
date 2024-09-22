@@ -83,6 +83,9 @@ public abstract class DefaultScrollView<TBuilder> : BaseBuilder<TBuilder, Scroll
             .AddClass("api__default-scroll-view", builder => builder
                 .FlexGrow(1)
             )
+            .AddSelector(".api__default-scroll-view .unity-scroll-view__content-and-vertical-scroll-container > .unity-scroll-view__content-viewport", builder => builder
+                .PaddingX(3)
+            )
             .AddSelector(
                 ".api__default-scroll-view .unity-scroll-view__content-and-vertical-scroll-container > .unity-scroller > .unity-slider",
                 builder => builder

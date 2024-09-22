@@ -1,3 +1,4 @@
+using System;
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.CustomElements;
 using TimberApi.UIBuilderSystem.ElementBuilders;
@@ -49,6 +50,12 @@ public abstract class GameLabel<TBuilder> : BaseBuilder<TBuilder, LocalizableLab
         SizeClass = "api__game-text-label--title";
         return BuilderInstance;
     }
+    
+    public TBuilder SetFontStyle(FontStyle style)
+    {
+        LabelBuilder.SetFontStyle(style);
+        return BuilderInstance;
+    }
 
     protected override LocalizableLabel InitializeRoot()
     {
@@ -68,7 +75,8 @@ public abstract class GameLabel<TBuilder> : BaseBuilder<TBuilder, LocalizableLab
             .AddClass("api__game-text-label--normal", builder => builder.FontSize(13))
             .AddClass("api__game-text-label--big", builder => builder.FontSize(14))
             .AddClass("api__game-text-label--heading", builder => builder.FontSize(15))
-            .AddClass("api__game-text-label--title", builder => builder.FontSize(18));
+            .AddClass("api__game-text-label--title", builder => builder.FontSize(18))
+            .AddClass("api__game_text-label--bold", builder => builder.UnityFontStyle(UnityFontStyle.Bold));
     }
 
     public override LocalizableLabel Build()
@@ -76,5 +84,17 @@ public abstract class GameLabel<TBuilder> : BaseBuilder<TBuilder, LocalizableLab
         return LabelBuilder
             .AddClass(SizeClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        LabelBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LocalizableLabelBuilder> labelBuilder)
+    {
+        labelBuilder.Invoke(LabelBuilder);
+        return BuilderInstance;
     }
 }

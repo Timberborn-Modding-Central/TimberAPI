@@ -1,19 +1,9 @@
 using System;
-using System.Collections.Generic;
 using HarmonyLib;
 using TimberApi.DependencyContainerSystem;
 using TimberApi.UIBuilderSystem;
-using TimberApi.UIBuilderSystem.ElementBuilders;
 using TimberApi.UIPresets.Builders;
-using TimberApi.UIPresets.Buttons;
-using TimberApi.UIPresets.Dropdowns;
-using TimberApi.UIPresets.Labels;
-using TimberApi.UIPresets.ListViews;
-using TimberApi.UIPresets.ScrollViews;
 using TimberApi.UIPresets.TextFields;
-using TimberApi.UIPresets.Toggles;
-using Timberborn.BatchControl;
-using Timberborn.DropdownSystem;
 using Timberborn.MainMenuScene;
 using Timberborn.ModManagerScene;
 using UnityEngine;
@@ -69,13 +59,15 @@ public static class ModPatcher
         Console.WriteLine("Hell my console writeline");
 
 
-        test.Add(_uiBuilder.Create<FragmentBuilder>()
-            .AddComponent<DefaultTextField>()
-            .AddComponent<DefaultTextField>(field => field.SetTextAlign(TextAnchor.MiddleLeft))
-            .AddComponent<DefaultTextField>(field => field.SetTextAlign(TextAnchor.MiddleRight))
-            .AddComponent<DefaultTextField>()
-            .AddComponent<DefaultTextField>(field => field.Large())
-            .Build());
+test.Add(_uiBuilder.Create<BoxBuilder>()
+    .AddCloseButton("ButtonName")
+    .AddHeader("Settings")
+    .SetWidth(500)
+    .SetHeight(500)
+    .AddComponent<DefaultTextField>()
+    .AddComponent<DefaultTextField>()
+    .AddComponent<DefaultTextField>()
+    .Build());
 
         _uiBuilder.Initialize(test);
         __instance._root.Add(test);

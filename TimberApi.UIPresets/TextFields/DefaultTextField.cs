@@ -33,13 +33,13 @@ public abstract class DefaultTextField<TBuilder> : BaseBuilder<TBuilder, TextFie
         return BuilderInstance;
     }
     
-    public TBuilder SetHeight(float height)
+    public TBuilder SetHeight(Length height)
     {
         TextFieldBuilder.SetHeight(height);
         return BuilderInstance;
     }
     
-    public TBuilder SetWidth(float width)
+    public TBuilder SetWidth(Length width)
     {
         TextFieldBuilder.SetWidth(width);
         return BuilderInstance;

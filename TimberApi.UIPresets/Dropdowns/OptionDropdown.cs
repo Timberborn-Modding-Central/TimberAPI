@@ -4,6 +4,7 @@ using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem.Extensions;
 using Timberborn.DropdownSystem;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Display = TimberApi.UIBuilderSystem.StyleSheetSystem.PropertyEnums.Display;
 using StyleSheetBuilder = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleSheetBuilder;
 using StyleValueType = TimberApi.UIBuilderSystem.StyleSheetSystem.StyleValueType;
@@ -32,7 +33,7 @@ public abstract class OptionDropdown<TBuilder> : BaseBuilder<TBuilder, Dropdown>
         return DropDownBuilder.Build();
     }
     
-    public TBuilder SetWidth(float width)
+    public TBuilder SetWidth(Length width)
     {
         DropDownBuilder.SetWidth(width);
         return BuilderInstance;

@@ -10,5 +10,6 @@ public class UIBuilderConfigurator : IConfigurator
     public void Configure(IContainerDefinition containerDefinition)
     {
         containerDefinition.Bind<FragmentBuilder>().AsTransient();
+        containerDefinition.Bind<BoxBuilder>().AsTransient();
     }
 }

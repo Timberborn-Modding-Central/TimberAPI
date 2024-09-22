@@ -28,7 +28,7 @@ public abstract class GameDropdown<TBuilder> : BaseBuilder<TBuilder, Dropdown>
         return DropDownBuilder.Build();
     }
     
-    public TBuilder SetWidth(float width)
+    public TBuilder SetWidth(Length width)
     {
         DropDownBuilder.SetWidth(width);
         return BuilderInstance;

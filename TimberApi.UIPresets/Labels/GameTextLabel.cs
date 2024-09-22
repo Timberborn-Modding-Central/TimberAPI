@@ -72,17 +72,22 @@ public abstract class GameTextLabel<TBuilder> : BaseBuilder<TBuilder, Label>
             .AddClass("api__game-text-label--title", builder => builder.FontSize(18));
     }
     
-    public TBuilder ModifyRoot(Action<LabelBuilder> buttonBuilder)
-    {
-        buttonBuilder.Invoke(LabelBuilder);
-
-        return BuilderInstance;
-    }
-    
     public override Label Build()
     {
         return LabelBuilder
             .AddClass(SizeClass)
             .Build();
+    }
+    
+    public TBuilder AddClass(string styleClass)
+    {
+        LabelBuilder.AddClass(styleClass);
+        return BuilderInstance;
+    }
+
+    public TBuilder ModifyRoot(Action<LabelBuilder> labelBuilder)
+    {
+        labelBuilder.Invoke(LabelBuilder);
+        return BuilderInstance;
     }
 }
