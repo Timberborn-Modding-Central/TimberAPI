@@ -1,0 +1,13 @@
+{
+  "Name": "TimberApi Debug Tool",
+  "Version": "1.0.0",
+  "Id": "TimberApi.Debug",
+  "MinimumGameVersion": "0.6.2.0",
+  "Description": "TimberApi Debug Tool is used to improve development with TimberApi",
+  "RequiredMods": [
+    {
+      "Id": "Harmony",
+      "MinimumVersion": "2.3.3"
+    }
+  ]
+}
