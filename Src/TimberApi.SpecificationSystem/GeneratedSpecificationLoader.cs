@@ -3,22 +3,14 @@ using TimberApi.SingletonSystem;
 
 namespace TimberApi.SpecificationSystem;
 
-internal class GeneratedSpecificationLoader : ITimberApiPostLoadableSingleton
+internal class GeneratedSpecificationLoader(
+    GeneratedSpecificationAssetRepository generatedSpecificationAssetRepository,
+    IEnumerable<ISpecificationGenerator> specificationGenerators)
+    : ITimberApiPostLoadableSingleton
 {
-    private readonly GeneratedSpecificationAssetRepository _generatedSpecificationAssetRepository;
-
-    private readonly IEnumerable<ISpecificationGenerator> _specificationGenerators;
-
-    public GeneratedSpecificationLoader(GeneratedSpecificationAssetRepository generatedSpecificationAssetRepository,
-        IEnumerable<ISpecificationGenerator> specificationGenerators)
-    {
-        _specificationGenerators = specificationGenerators;
-        _generatedSpecificationAssetRepository = generatedSpecificationAssetRepository;
-    }
-
     public void PostLoad()
     {
-        foreach (var specificationGenerator in _specificationGenerators)
-            _generatedSpecificationAssetRepository.AddSpecificationRange(specificationGenerator.Generate());
+        foreach (var specificationGenerator in specificationGenerators)
+            generatedSpecificationAssetRepository.AddSpecificationRange(specificationGenerator.Generate());
     }
 }

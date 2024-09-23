@@ -5,20 +5,11 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.UIBuilderSystem;
 
-public class UIBuilder
+public class UIBuilder(IContainer container, VisualElementInitializer visualElementInitializer)
 {
-    private readonly IContainer _container;
-    private readonly VisualElementInitializer _visualElementInitializer;
-
-    public UIBuilder(IContainer container, VisualElementInitializer visualElementInitializer)
-    {
-        _container = container;
-        _visualElementInitializer = visualElementInitializer;
-    }
-
     private BaseBuilder Create(Type builderType)
     {
-        var builder = (BaseBuilder)_container.GetInstance(builderType);
+        var builder = (BaseBuilder)container.GetInstance(builderType);
         builder.Initialize();
 
         return builder;
@@ -140,6 +131,6 @@ public class UIBuilder
 
     public void Initialize(VisualElement element)
     {
-        _visualElementInitializer.InitializeVisualElement(element);
+        visualElementInitializer.InitializeVisualElement(element);
     }
 }

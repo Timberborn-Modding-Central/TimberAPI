@@ -30,23 +30,18 @@ public abstract class BaseToolFactory<T> : IToolFactory
     protected abstract T DeserializeToolInformation(IObjectLoader objectLoader);
 }
 
-public class SpecificationService : ISpecificationService
+public class SpecificationService(
+    ObjectSaveReaderWriter objectSaveReaderWriter,
+    IAssetLoader assetLoader)
+    : ISpecificationService
 {
     public static readonly string SpecificationPath = "Specifications";
     public static readonly string OptionalSpecificationSuffix = ".optional";
-    public readonly IAssetLoader _assetLoader;
-    public readonly ObjectSaveReaderWriter _objectSaveReaderWriter;
+    public readonly IAssetLoader _assetLoader = assetLoader;
+    public readonly ObjectSaveReaderWriter _objectSaveReaderWriter = objectSaveReaderWriter;
 
     static SpecificationService()
     {
-    }
-
-    public SpecificationService(
-        ObjectSaveReaderWriter objectSaveReaderWriter,
-        IAssetLoader assetLoader)
-    {
-        _objectSaveReaderWriter = objectSaveReaderWriter;
-        _assetLoader = assetLoader;
     }
 
     public IEnumerable<T> GetSpecifications<T>(IObjectSerializer<T> serializer)

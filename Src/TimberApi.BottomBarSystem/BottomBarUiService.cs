@@ -4,20 +4,13 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.BottomBarSystem;
 
-public class BottomBarUiService : ILoadableSingleton
+public class BottomBarUiService(IAssetLoader assetLoader) : ILoadableSingleton
 {
-    private readonly IAssetLoader _assetLoader;
-
     private StyleSheet _bottomBarStyleSheet = null!;
-
-    public BottomBarUiService(IAssetLoader assetLoader)
-    {
-        _assetLoader = assetLoader;
-    }
 
     public void Load()
     {
-        _bottomBarStyleSheet = _assetLoader.Load<StyleSheet>("UI/Views/Common/BottomBar/BottomBarStyle");
+        _bottomBarStyleSheet = assetLoader.Load<StyleSheet>("UI/Views/Common/BottomBar/BottomBarStyle");
     }
 
     public VisualElement CreateWrapper()

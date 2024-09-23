@@ -10,53 +10,32 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.Tools.ToolGroupUI;
 
-public class ToolGroupButtonFactory
+public class ToolGroupButtonFactory(
+    EventBus eventBus,
+    ToolGroupManager toolGroupManager,
+    VisualElementLoader visualElementLoader,
+    ToolButtonService toolButtonService,
+    ILoc loc,
+    IAssetLoader assetLoader)
 {
-    private readonly IAssetLoader _assetLoader;
-    private readonly EventBus _eventBus;
-
-    private readonly ILoc _loc;
-
-    private readonly ToolButtonService _toolButtonService;
-
-    private readonly ToolGroupManager _toolGroupManager;
-
-    private readonly VisualElementLoader _visualElementLoader;
-
-    public ToolGroupButtonFactory(
-        EventBus eventBus,
-        ToolGroupManager toolGroupManager,
-        VisualElementLoader visualElementLoader,
-        ToolButtonService toolButtonService,
-        ILoc loc,
-        IAssetLoader assetLoader)
-    {
-        _eventBus = eventBus;
-        _toolGroupManager = toolGroupManager;
-        _visualElementLoader = visualElementLoader;
-        _toolButtonService = toolButtonService;
-        _loc = loc;
-        _assetLoader = assetLoader;
-    }
-
     public ToolGroupButton Create(ToolGroup toolGroup, Sprite toolGroupImage, string backgroundImage)
     {
-        return Create(toolGroup, toolGroupImage, _assetLoader.Load<Sprite>(backgroundImage));
+        return Create(toolGroup, toolGroupImage, assetLoader.Load<Sprite>(backgroundImage));
     }
 
     public ToolGroupButton Create(ToolGroup toolGroup, Sprite toolGroupImage, Sprite backgroundImage)
     {
-        var visualElement = _visualElementLoader.LoadVisualElement("Common/BottomBar/ToolGroupButton");
+        var visualElement = visualElementLoader.LoadVisualElement("Common/BottomBar/ToolGroupButton");
         visualElement.Q<VisualElement>("ToolGroupButtonWrapper").Q<VisualElement>("").style.backgroundImage =
             new StyleBackground(backgroundImage);
         InitializeElement(visualElement, toolGroup, toolGroupImage);
-        var toolGroupButton = new ToolGroupButton(_loc,
-            _toolGroupManager,
+        var toolGroupButton = new ToolGroupButton(loc,
+            toolGroupManager,
             toolGroup,
             visualElement,
             visualElement.Q<VisualElement>("ToolButtons"),
             visualElement.Q<VisualElement>("ToolGroupButtonWrapper"));
-        _eventBus.Register(toolGroupButton);
+        eventBus.Register(toolGroupButton);
         Add((IToolGroup)toolGroup, toolGroupButton);
         return toolGroupButton;
     }
@@ -75,21 +54,21 @@ public class ToolGroupButtonFactory
 
     private void OnButtonClick(VisualElement tooltip, ToolGroup toolGroup)
     {
-        if (_toolGroupManager.ActiveToolGroup == toolGroup)
+        if (toolGroupManager.ActiveToolGroup == toolGroup)
         {
-            _toolGroupManager.CloseToolGroup();
+            toolGroupManager.CloseToolGroup();
         }
         else
         {
-            _toolGroupManager.SwitchToolGroup(toolGroup);
+            toolGroupManager.SwitchToolGroup(toolGroup);
             tooltip.parent.ToggleDisplayStyle(false);
         }
     }
 
     private void Add(IToolGroup toolGroup, ToolGroupButton toolButton)
     {
-        _toolButtonService._toolGroupButtons.Add(toolButton);
+        toolButtonService._toolGroupButtons.Add(toolButton);
 
-        if (toolGroup.GroupId == null) _toolButtonService._rootButtons.Add(toolButton);
+        if (toolGroup.GroupId == null) toolButtonService._rootButtons.Add(toolButton);
     }
 }

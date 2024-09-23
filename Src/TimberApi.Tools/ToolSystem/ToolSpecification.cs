@@ -2,57 +2,58 @@ using Timberborn.SerializationSystem;
 
 namespace TimberApi.Tools.ToolSystem;
 
-public class ToolSpecification : ToolSpecification<ObjectSave>
+public class ToolSpecification(
+    string id,
+    string? groupId,
+    string section,
+    string type,
+    string layout,
+    int order,
+    string icon,
+    string nameLocKey,
+    string descriptionLocKey,
+    bool hidden,
+    bool devMode,
+    ObjectSave? toolInformation)
+    : ToolSpecification<ObjectSave>(id, groupId, section, type, layout, order, icon, nameLocKey, descriptionLocKey,
+        hidden, devMode,
+        toolInformation);
+
+public class ToolSpecification<T>(
+    string id,
+    string? groupId,
+    string section,
+    string type,
+    string layout,
+    int order,
+    string icon,
+    string nameLocKey,
+    string descriptionLocKey,
+    bool hidden,
+    bool devMode,
+    T? toolInformation)
 {
-    public ToolSpecification(string id, string? groupId, string section, string type, string layout, int order,
-        string icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devMode,
-        ObjectSave? toolInformation)
-        : base(id, groupId, section, type, layout, order, icon, nameLocKey, descriptionLocKey, hidden, devMode,
-            toolInformation)
-    {
-    }
-}
+    public string Id { get; } = id;
 
-public class ToolSpecification<T>
-{
-    public ToolSpecification(string id, string? groupId, string section, string type, string layout, int order,
-        string icon, string nameLocKey, string descriptionLocKey, bool hidden, bool devMode, T? toolInformation)
-    {
-        Id = id;
-        GroupId = groupId;
-        Section = section;
-        Type = type;
-        Layout = layout;
-        Order = order;
-        Icon = icon;
-        NameLocKey = nameLocKey;
-        DescriptionLocKey = descriptionLocKey;
-        DevMode = devMode;
-        Hidden = hidden;
-        ToolInformation = toolInformation;
-    }
+    public string? GroupId { get; } = groupId;
 
-    public string Id { get; }
+    public string Section { get; } = section;
 
-    public string? GroupId { get; }
+    public string Type { get; } = type;
 
-    public string Section { get; }
+    public string Layout { get; } = layout;
 
-    public string Type { get; }
+    public int Order { get; } = order;
 
-    public string Layout { get; }
+    public string Icon { get; } = icon;
 
-    public int Order { get; }
+    public string NameLocKey { get; } = nameLocKey;
 
-    public string Icon { get; }
+    public string DescriptionLocKey { get; } = descriptionLocKey;
 
-    public string NameLocKey { get; }
+    public bool Hidden { get; } = hidden;
 
-    public string DescriptionLocKey { get; }
+    public bool DevMode { get; } = devMode;
 
-    public bool Hidden { get; }
-
-    public bool DevMode { get; }
-
-    public T? ToolInformation { get; }
+    public T? ToolInformation { get; } = toolInformation;
 }

@@ -12,32 +12,21 @@ namespace TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
  * This requires the faction, so we need to load it as early as possible.
  * By doing this code that requires generated specification based on models don't need to do magic and can keep in their normal lifecycle. eg. BottomBarRework
  */
-public class GameEarlyLoadPrefabCollection : ITimberApiLoadableSingleton
+public class GameEarlyLoadPrefabCollection(
+    FactionService factionService,
+    IWorldSaveSupplier worldSaveSupplier,
+    PrefabGroupService prefabGroupService,
+    FactionSpecificationService factionSpecificationService)
+    : ITimberApiLoadableSingleton
 {
-    private readonly FactionService _factionService;
-    private readonly FactionSpecificationService _factionSpecificationService;
-
-    private readonly PrefabGroupService _prefabGroupService;
-
-    private readonly IWorldSaveSupplier _worldSaveSupplier;
-
-    public GameEarlyLoadPrefabCollection(FactionService factionService, IWorldSaveSupplier worldSaveSupplier,
-        PrefabGroupService prefabGroupService, FactionSpecificationService factionSpecificationService)
-    {
-        _factionService = factionService;
-        _worldSaveSupplier = worldSaveSupplier;
-        _prefabGroupService = prefabGroupService;
-        _factionSpecificationService = factionSpecificationService;
-    }
-
     public void Load()
     {
         EarlyLoadPatcher.BlockLoading = false;
 
-        ((GameSceneWorldSaveSupplier)_worldSaveSupplier).Load();
-        _factionSpecificationService.Load();
-        _factionService.Load();
-        _prefabGroupService.Load();
+        ((GameSceneWorldSaveSupplier)worldSaveSupplier).Load();
+        factionSpecificationService.Load();
+        factionService.Load();
+        prefabGroupService.Load();
 
         EarlyLoadPatcher.BlockLoading = true;
     }

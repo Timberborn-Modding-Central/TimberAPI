@@ -8,20 +8,13 @@ namespace TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
  * This requires the faction, so we need to load it as early as possible.
  * By doing this code that requires generated specification based on models don't need to do magic and can keep in their normal lifecycle. eg. BottomBarRework
  */
-public class MapEditorEarlyLoadPrefabCollection : ITimberApiLoadableSingleton
+public class MapEditorEarlyLoadPrefabCollection(PrefabGroupService prefabGroupService) : ITimberApiLoadableSingleton
 {
-    private readonly PrefabGroupService _prefabGroupService;
-
-    public MapEditorEarlyLoadPrefabCollection(PrefabGroupService prefabGroupService)
-    {
-        _prefabGroupService = prefabGroupService;
-    }
-
     public void Load()
     {
         EarlyLoadPatcher.BlockLoading = false;
 
-        _prefabGroupService.Load();
+        prefabGroupService.Load();
 
         EarlyLoadPatcher.BlockLoading = true;
     }

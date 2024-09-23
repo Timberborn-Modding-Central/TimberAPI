@@ -3,19 +3,12 @@ using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolUI.Factories;
 
-public class ToolButtonDefaultFactory : IToolButtonFactory
+public class ToolButtonDefaultFactory(ToolButtonFactory toolButtonFactory) : IToolButtonFactory
 {
-    private readonly ToolButtonFactory _toolButtonFactory;
-
-    public ToolButtonDefaultFactory(ToolButtonFactory toolButtonFactory)
-    {
-        _toolButtonFactory = toolButtonFactory;
-    }
-
     public string Id => "Default";
 
     public ToolButton Create(Tool tool, ToolSpecification toolGroupSpecification)
     {
-        return _toolButtonFactory.Create(tool, toolGroupSpecification.Icon);
+        return toolButtonFactory.Create(tool, toolGroupSpecification.Icon);
     }
 }

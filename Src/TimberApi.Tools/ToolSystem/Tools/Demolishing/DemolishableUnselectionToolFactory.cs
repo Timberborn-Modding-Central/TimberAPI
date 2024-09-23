@@ -3,20 +3,13 @@ using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.Demolishing;
 
-public class DemolishableUnselectionToolFactory : IToolFactory
+public class DemolishableUnselectionToolFactory(DemolishableUnselectionTool demolishableUnselectionTool) : IToolFactory
 {
-    private readonly DemolishableUnselectionTool _demolishableUnselectionTool;
-
-    public DemolishableUnselectionToolFactory(DemolishableUnselectionTool demolishableUnselectionTool)
-    {
-        _demolishableUnselectionTool = demolishableUnselectionTool;
-    }
-
     public string Id => "DemolishableUnselectionTool";
 
     public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
     {
-        _demolishableUnselectionTool.Initialize(toolGroup);
-        return _demolishableUnselectionTool;
+        demolishableUnselectionTool.Initialize(toolGroup);
+        return demolishableUnselectionTool;
     }
 }

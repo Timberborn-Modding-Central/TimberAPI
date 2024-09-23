@@ -2,35 +2,19 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.UIBuilderSystem.StylingElements;
 
-public struct Padding
+public struct Padding(Length top, Length right, Length bottom, Length left)
 {
-    public Length Top;
-    public Length Right;
-    public Length Bottom;
-    public Length Left;
+    public Length Top = top;
+    public Length Right = right;
+    public Length Bottom = bottom;
+    public Length Left = left;
 
-    public Padding(Length padding)
+    public Padding(Length padding) : this(padding, padding, padding, padding)
     {
-        Top = padding;
-        Right = padding;
-        Bottom = padding;
-        Left = padding;
     }
 
-    public Padding(Length paddingX, Length paddingY)
+    public Padding(Length paddingX, Length paddingY) : this(paddingY, paddingX, paddingY, paddingX)
     {
-        Top = paddingY;
-        Bottom = paddingY;
-        Left = paddingX;
-        Right = paddingX;
-    }
-
-    public Padding(Length top, Length right, Length bottom, Length left)
-    {
-        Top = top;
-        Right = right;
-        Bottom = bottom;
-        Left = left;
     }
 
     public static implicit operator Padding(int value)

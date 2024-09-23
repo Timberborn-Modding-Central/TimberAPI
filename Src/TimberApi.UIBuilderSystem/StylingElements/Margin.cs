@@ -2,35 +2,19 @@ using UnityEngine.UIElements;
 
 namespace TimberApi.UIBuilderSystem.StylingElements;
 
-public struct Margin
+public struct Margin(Length top, Length right, Length bottom, Length left)
 {
-    public Length Top;
-    public Length Right;
-    public Length Bottom;
-    public Length Left;
+    public Length Top = top;
+    public Length Right = right;
+    public Length Bottom = bottom;
+    public Length Left = left;
 
-    public Margin(Length margin)
+    public Margin(Length margin) : this(margin, margin, margin, margin)
     {
-        Top = margin;
-        Right = margin;
-        Bottom = margin;
-        Left = margin;
     }
 
-    public Margin(Length marginX, Length marginY)
+    public Margin(Length marginX, Length marginY) : this(marginY, marginX, marginY, marginX)
     {
-        Top = marginY;
-        Bottom = marginY;
-        Left = marginX;
-        Right = marginX;
-    }
-
-    public Margin(Length top, Length right, Length bottom, Length left)
-    {
-        Top = top;
-        Right = right;
-        Bottom = bottom;
-        Left = left;
     }
 
     public static implicit operator Margin(int value)

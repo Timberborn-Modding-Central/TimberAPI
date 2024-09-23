@@ -4,21 +4,15 @@ using TimberbornBuilderPriorityToolFactory = Timberborn.BuilderPrioritySystemUI.
 
 namespace TimberApi.Tools.ToolSystem.Tools.BuilderPriority;
 
-public class BuilderPriorityToolFactory : BaseToolFactory<BuilderPriorityToolToolInformation>
+public class BuilderPriorityToolFactory(TimberbornBuilderPriorityToolFactory builderPriorityToolFactory)
+    : BaseToolFactory<BuilderPriorityToolToolInformation>
 {
-    private readonly TimberbornBuilderPriorityToolFactory _builderPriorityToolFactory;
-
-    public BuilderPriorityToolFactory(TimberbornBuilderPriorityToolFactory builderPriorityToolFactory)
-    {
-        _builderPriorityToolFactory = builderPriorityToolFactory;
-    }
-
     public override string Id => "PriorityTool";
 
     protected override Tool CreateTool(ToolSpecification toolSpecification,
         BuilderPriorityToolToolInformation toolInformation, ToolGroup? toolGroup)
     {
-        var priorityTool = _builderPriorityToolFactory.Create(toolInformation.Priority);
+        var priorityTool = builderPriorityToolFactory.Create(toolInformation.Priority);
         priorityTool.ToolGroup = toolGroup;
 
         return priorityTool;

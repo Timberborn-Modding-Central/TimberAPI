@@ -11,55 +11,31 @@ using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 
-public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
+public class PlantingToolFactory(
+    PlantableDescriber plantableDescriber,
+    PlantingSelectionService plantingSelectionService,
+    DevModePlantableSpawner devModePlantableSpawner,
+    SelectionToolProcessorFactory selectionToolProcessorFactory,
+    ILoc loc,
+    PrefabService prefabService,
+    ToolUnlockingService toolUnlockingService)
+    : BaseToolFactory<PlantingToolToolInformation>
 {
-    private readonly DevModePlantableSpawner _devModePlantableSpawner;
-
-    private readonly ILoc _loc;
-
-    private readonly PlantableDescriber _plantableDescriber;
-
-    private readonly PlantingSelectionService _plantingSelectionService;
-
-    private readonly PrefabService _prefabService;
-
-    private readonly SelectionToolProcessorFactory _selectionToolProcessorFactory;
-
-    private readonly ToolUnlockingService _toolUnlockingService;
-
-    public PlantingToolFactory(
-        PlantableDescriber plantableDescriber,
-        PlantingSelectionService plantingSelectionService,
-        DevModePlantableSpawner devModePlantableSpawner,
-        SelectionToolProcessorFactory selectionToolProcessorFactory,
-        ILoc loc,
-        PrefabService prefabService,
-        ToolUnlockingService toolUnlockingService)
-    {
-        _plantableDescriber = plantableDescriber;
-        _plantingSelectionService = plantingSelectionService;
-        _devModePlantableSpawner = devModePlantableSpawner;
-        _selectionToolProcessorFactory = selectionToolProcessorFactory;
-        _loc = loc;
-        _prefabService = prefabService;
-        _toolUnlockingService = toolUnlockingService;
-    }
-
     public override string Id => "PlantingTool";
 
     protected override Tool CreateTool(ToolSpecification toolSpecification, PlantingToolToolInformation toolInformation,
         ToolGroup? toolGroup)
     {
-        var prefab = _prefabService.GetAll<Prefab>()
+        var prefab = prefabService.GetAll<Prefab>()
             .First(o => o.IsNamedExactly(toolInformation.PrefabName));
         var plantable = prefab.GetComponentFast<Plantable>();
 
         return new PlantingTool(
-            _plantableDescriber,
-            _plantingSelectionService,
-            _devModePlantableSpawner,
-            _toolUnlockingService,
-            _selectionToolProcessorFactory,
+            plantableDescriber,
+            plantingSelectionService,
+            devModePlantableSpawner,
+            toolUnlockingService,
+            selectionToolProcessorFactory,
             plantable,
             GetPlanterBuildingName(plantable),
             toolGroup);
@@ -72,6 +48,6 @@ public class PlantingToolFactory : BaseToolFactory<PlantingToolToolInformation>
     
     private string GetPlanterBuildingName(Plantable plantable)
     {
-        return _loc.T(_prefabService.GetAll<PlanterBuildingSpec>().Single((Func<PlanterBuildingSpec, bool>) (building => building.PlantableResourceGroup == plantable.ResourceGroup)).GetComponentFast<LabeledEntitySpec>().DisplayNameLocKey);
+        return loc.T(prefabService.GetAll<PlanterBuildingSpec>().Single((Func<PlanterBuildingSpec, bool>) (building => building.PlantableResourceGroup == plantable.ResourceGroup)).GetComponentFast<LabeledEntitySpec>().DisplayNameLocKey);
     }
 }

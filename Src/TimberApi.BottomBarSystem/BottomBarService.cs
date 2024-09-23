@@ -8,33 +8,24 @@ using ToolGroupSpecificationService = TimberApi.Tools.ToolGroupSystem.ToolGroupS
 
 namespace TimberApi.BottomBarSystem;
 
-public class BottomBarService : ILoadableSingleton
+public class BottomBarService(
+    ToolGroupSpecificationService toolGroupSpecificationService,
+    ToolSpecificationService toolSpecificationService)
+    : ILoadableSingleton
 {
     private static readonly string BottomBarSection = "BottomBar";
 
     private readonly Dictionary<string, int> _toolGroupRows = new();
 
-    private readonly ToolGroupSpecificationService _toolGroupSpecificationService;
-
-    private readonly ToolSpecificationService _toolSpecificationService;
-
     private ImmutableDictionary<string, ToolGroupSpecification> _toolGroupSpecifications = null!;
 
     private ImmutableArray<BottomBarButton> _toolItemButtons;
-
-    public BottomBarService(
-        ToolGroupSpecificationService toolGroupSpecificationService,
-        ToolSpecificationService toolSpecificationService)
-    {
-        _toolGroupSpecificationService = toolGroupSpecificationService;
-        _toolSpecificationService = toolSpecificationService;
-    }
 
     public IEnumerable<BottomBarButton> ToolItemButtons => _toolItemButtons;
 
     public void Load()
     {
-        _toolGroupSpecifications = _toolGroupSpecificationService
+        _toolGroupSpecifications = toolGroupSpecificationService
             .GetBySection(BottomBarSection)
             .ToImmutableDictionary(specification => specification.Id);
 
@@ -58,7 +49,7 @@ public class BottomBarService : ILoadableSingleton
             );
         }
 
-        foreach (var specification in _toolSpecificationService.GetBySection("BottomBar"))
+        foreach (var specification in toolSpecificationService.GetBySection("BottomBar"))
             yield return new BottomBarButton(
                 specification.Id,
                 false,

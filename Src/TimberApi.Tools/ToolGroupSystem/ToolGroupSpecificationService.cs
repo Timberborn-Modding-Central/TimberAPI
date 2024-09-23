@@ -6,28 +6,19 @@ using Timberborn.SingletonSystem;
 
 namespace TimberApi.Tools.ToolGroupSystem;
 
-public class ToolGroupSpecificationService : ILoadableSingleton
+public class ToolGroupSpecificationService(
+    ISpecificationService specificationService,
+    ToolGroupSpecificationDeserializer toolGroupSpecificationDeserializer)
+    : ILoadableSingleton
 {
-    private readonly ISpecificationService _specificationService;
-
-    private readonly ToolGroupSpecificationDeserializer _toolGroupSpecificationDeserializer;
-
     private ImmutableDictionary<string, ToolGroupSpecification> _toolGroupSpecifications = null!;
-
-    public ToolGroupSpecificationService(
-        ISpecificationService specificationService,
-        ToolGroupSpecificationDeserializer toolGroupSpecificationDeserializer)
-    {
-        _specificationService = specificationService;
-        _toolGroupSpecificationDeserializer = toolGroupSpecificationDeserializer;
-    }
 
     public ImmutableArray<ToolGroupSpecification> ToolGroupSpecifications =>
         _toolGroupSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
     public void Load()
     {
-        _toolGroupSpecifications = _specificationService.GetSpecifications(_toolGroupSpecificationDeserializer)
+        _toolGroupSpecifications = specificationService.GetSpecifications(toolGroupSpecificationDeserializer)
             .ToImmutableDictionary(specification => specification.Id.ToLower());
     }
 

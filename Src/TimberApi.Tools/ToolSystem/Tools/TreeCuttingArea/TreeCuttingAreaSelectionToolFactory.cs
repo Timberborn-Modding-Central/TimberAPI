@@ -3,21 +3,15 @@ using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.TreeCuttingArea;
 
-public class TreeCuttingAreaSelectionToolFactory : IToolFactory
+public class TreeCuttingAreaSelectionToolFactory(TreeCuttingAreaSelectionTool treeCuttingAreaSelectionTool)
+    : IToolFactory
 {
-    private readonly TreeCuttingAreaSelectionTool _treeCuttingAreaSelectionTool;
-
-    public TreeCuttingAreaSelectionToolFactory(TreeCuttingAreaSelectionTool treeCuttingAreaSelectionTool)
-    {
-        _treeCuttingAreaSelectionTool = treeCuttingAreaSelectionTool;
-    }
-
     public string Id => "TreeCuttingAreaSelectionTool";
 
     public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
     {
-        _treeCuttingAreaSelectionTool.ToolGroup = toolGroup;
+        treeCuttingAreaSelectionTool.ToolGroup = toolGroup;
 
-        return _treeCuttingAreaSelectionTool;
+        return treeCuttingAreaSelectionTool;
     }
 }

@@ -3,21 +3,14 @@ using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.Cursor;
 
-public class CursorToolFactory : IToolFactory
+public class CursorToolFactory(CursorTool cursorTool) : IToolFactory
 {
-    private readonly CursorTool _cursorTool;
-
-    public CursorToolFactory(CursorTool cursorTool)
-    {
-        _cursorTool = cursorTool;
-    }
-
     public string Id => "CursorTool";
 
     public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
     {
-        _cursorTool.ToolGroup = toolGroup;
+        cursorTool.ToolGroup = toolGroup;
 
-        return _cursorTool;
+        return cursorTool;
     }
 }

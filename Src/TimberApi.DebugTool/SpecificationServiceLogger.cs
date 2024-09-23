@@ -9,12 +9,9 @@ using UnityEngine;
 
 namespace TimberApi.DebugTool;
 
-public class SpecificationServiceLogger : SpecificationService, ISpecificationService
+public class SpecificationServiceLogger(ObjectSaveReaderWriter objectSaveReaderWriter, IAssetLoader assetLoader)
+    : SpecificationService(objectSaveReaderWriter, assetLoader), ISpecificationService
 {
-    public SpecificationServiceLogger(ObjectSaveReaderWriter objectSaveReaderWriter, IAssetLoader assetLoader) : base(objectSaveReaderWriter, assetLoader)
-    {
-    }
-
     public new IEnumerable<T> GetSpecifications<T>(IObjectSerializer<T> serializer)
     {
 

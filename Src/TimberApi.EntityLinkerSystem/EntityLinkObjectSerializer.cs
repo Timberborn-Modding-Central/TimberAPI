@@ -9,6 +9,7 @@ namespace TimberApi.EntityLinkerSystem;
 public class EntityLinkObjectSerializer : IObjectSerializer<EntityLink>
 {
     protected static readonly PropertyKey<EntityLinker> LinkerKey = new("Linker");
+    
     protected static readonly PropertyKey<EntityLinker> LinkeeKey = new("Linkee");
 
     public virtual Obsoletable<EntityLink> Deserialize(IObjectLoader objectLoader)

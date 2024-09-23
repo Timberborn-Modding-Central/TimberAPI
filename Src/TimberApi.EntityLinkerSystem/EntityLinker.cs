@@ -18,8 +18,8 @@ namespace TimberApi.EntityLinkerSystem;
 /// </summary>
 public class EntityLinker : BaseComponent, IFinishedStateListener, IPersistentEntity
 {
-    //Keys for saving/loading
     protected static readonly ComponentKey EntityLinkerKey = new("EntityLinker");
+    
     protected static readonly ListKey<EntityLink> EntityLinksKey = new(nameof(EntityLinks));
 
     private readonly List<EntityLink> _entityLinks = new();

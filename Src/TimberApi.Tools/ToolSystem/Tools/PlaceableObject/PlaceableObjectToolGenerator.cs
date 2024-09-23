@@ -8,18 +8,11 @@ using Timberborn.Wonders;
 
 namespace TimberApi.Tools.ToolSystem.Tools.PlaceableObject;
 
-public class PlaceableObjectToolGenerator : ISpecificationGenerator
+public class PlaceableObjectToolGenerator(PrefabService prefabService) : ISpecificationGenerator
 {
-    private readonly PrefabService _prefabService;
-
-    public PlaceableObjectToolGenerator(PrefabService prefabService)
-    {
-        _prefabService = prefabService;
-    }
-
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        foreach (var placeableBlockObject in _prefabService.GetAll<PlaceableBlockObject>())
+        foreach (var placeableBlockObject in prefabService.GetAll<PlaceableBlockObject>())
         {
             if (!placeableBlockObject.UsableWithCurrentFeatureToggles) continue;
 

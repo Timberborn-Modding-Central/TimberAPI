@@ -1,11 +1,6 @@
 namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 
-public class PlantingToolToolInformation
+public class PlantingToolToolInformation(string prefabName)
 {
-    public PlantingToolToolInformation(string prefabName)
-    {
-        PrefabName = prefabName;
-    }
-
-    public string PrefabName { get; }
+    public string PrefabName { get; } = prefabName;
 }

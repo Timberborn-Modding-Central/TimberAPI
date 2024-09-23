@@ -7,27 +7,15 @@ using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolGroupSystem;
 
-public class ToolGroupService : ILoadableSingleton
+public class ToolGroupService(
+    ToolGroupSpecificationService toolGroupSpecificationService,
+    ToolGroupButtonFactoryService toolGroupButtonFactoryService,
+    ToolGroupFactoryService toolGroupFactoryService)
+    : ILoadableSingleton
 {
-    private readonly ToolGroupButtonFactoryService _toolGroupButtonFactoryService;
-
-    private readonly ToolGroupFactoryService _toolGroupFactoryService;
-
-    private readonly ToolGroupSpecificationService _toolGroupSpecificationService;
-
     private ImmutableDictionary<string, ToolGroupButton> _toolGroupButtons = null!;
 
     private ImmutableDictionary<string, IToolGroup> _toolGroups = null!;
-
-    public ToolGroupService(
-        ToolGroupSpecificationService toolGroupSpecificationService,
-        ToolGroupButtonFactoryService toolGroupButtonFactoryService,
-        ToolGroupFactoryService toolGroupFactoryService)
-    {
-        _toolGroupSpecificationService = toolGroupSpecificationService;
-        _toolGroupButtonFactoryService = toolGroupButtonFactoryService;
-        _toolGroupFactoryService = toolGroupFactoryService;
-    }
 
     public IEnumerable<IToolGroup> ToolGroups => _toolGroups.Select(pair => pair.Value).ToImmutableArray();
 
@@ -40,14 +28,14 @@ public class ToolGroupService : ILoadableSingleton
 
         var toolGroupButtons = new Dictionary<string, ToolGroupButton>();
 
-        foreach (var toolGroupSpecification in _toolGroupSpecificationService.ToolGroupSpecifications
+        foreach (var toolGroupSpecification in toolGroupSpecificationService.ToolGroupSpecifications
                      .OrderBy(x => x.Layout).ThenBy(x => x.Order))
         {
-            var toolGroup = _toolGroupFactoryService.Get(toolGroupSpecification.Type).Create(toolGroupSpecification);
+            var toolGroup = toolGroupFactoryService.Get(toolGroupSpecification.Type).Create(toolGroupSpecification);
 
             toolGroups.Add(toolGroupSpecification.Id.ToLower(), toolGroup);
 
-            var button = _toolGroupButtonFactoryService.Get(toolGroupSpecification.Layout)
+            var button = toolGroupButtonFactoryService.Get(toolGroupSpecification.Layout)
                 .Create(toolGroup, toolGroupSpecification);
             toolGroupButtons.Add(toolGroupSpecification.Id.ToLower(), button);
         }

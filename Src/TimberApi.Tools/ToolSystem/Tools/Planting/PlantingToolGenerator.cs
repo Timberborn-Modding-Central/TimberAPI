@@ -10,18 +10,11 @@ using Timberborn.PrefabSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 
-public class PlantingToolGenerator : ISpecificationGenerator
+public class PlantingToolGenerator(PrefabService prefabService) : ISpecificationGenerator
 {
-    private readonly PrefabService _prefabService;
-
-    public PlantingToolGenerator(PrefabService prefabService)
-    {
-        _prefabService = prefabService;
-    }
-
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        var plantables = _prefabService.GetAll<Plantable>().ToList();
+        var plantables = prefabService.GetAll<Plantable>().ToList();
         
         foreach (var plantable in plantables)
         {
