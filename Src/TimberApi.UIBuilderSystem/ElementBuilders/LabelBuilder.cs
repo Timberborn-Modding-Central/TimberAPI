@@ -15,7 +15,7 @@ public class LocalizableLabelBuilder : LabelBuilder<LocalizableLabelBuilder, Loc
     }
 }
 
-public class LabelBuilder : LabelBuilder<LabelBuilder, Label>
+public class LabelBuilder : LabelBuilder<LabelBuilder, NineSliceLabel>
 {
     protected override LabelBuilder BuilderInstance => this;
 
