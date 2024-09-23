@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{41EF4C9F-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{DCEA2668-0A15-4986-862A-5A8458574661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoModStarter", "AutoModStarter\AutoModStarter.csproj", "{7B795429-D8F9-49B7-B28F-083CF839B738}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoModStarter", "Debug\AutoModStarter\AutoModStarter.csproj", "{7B795429-D8F9-49B7-B28F-083CF839B738}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{A2296ABE-3AC0-4925-AAAE-5307D9B8BA9B}"
 EndProject
@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIBuilder", "UIBuilder", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.UIPresets", "Src\TimberApi.UIPresets\TimberApi.UIPresets.csproj", "{16D7728F-48DF-4BAC-9008-0FA00E045AA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.DebugTool", "Src\TimberApi.DebugTool\TimberApi.DebugTool.csproj", "{A6F03DEB-1982-45D0-A561-F9AD9A1CBD84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.DebugTool", "Debug\TimberApi.DebugTool\TimberApi.DebugTool.csproj", "{A6F03DEB-1982-45D0-A561-F9AD9A1CBD84}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specifications", "Specifications", "{C8B9BCD7-6FAA-40A7-B230-660B78092C36}"
 EndProject
