@@ -1,8 +1,8 @@
 {
   "Name": "TimberApi",
-  "Version": "0.7.6.0",
+  "Version": "0.7.7.0",
   "Id": "TimberApi",
-  "MinimumGameVersion": "0.6.6.1",
+  "MinimumGameVersion": "0.6.7.0",
   "Description": "TimberAPI supports modders to create new content in Timberborn.",
   "RequiredMods": [
     {
