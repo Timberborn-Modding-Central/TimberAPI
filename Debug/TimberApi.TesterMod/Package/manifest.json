@@ -1,0 +1,13 @@
+{
+  "Name": "TimberApi Tester Mod",
+  "Version": "1.0.0",
+  "Id": "TimberApi.TesterMod",
+  "MinimumGameVersion": "0.6.2.0",
+  "Description": "Testing mod for testing new features as a external mod.",
+  "RequiredMods": [
+    {
+      "Id": "Harmony",
+      "MinimumVersion": "2.3.3"
+    }
+  ]
+}
