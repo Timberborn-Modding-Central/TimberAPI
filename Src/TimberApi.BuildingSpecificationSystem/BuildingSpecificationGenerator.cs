@@ -7,7 +7,6 @@ using Timberborn.Buildings;
 using Timberborn.MechanicalSystem;
 using Timberborn.PrefabSystem;
 using Timberborn.Workshops;
-using UnityEngine;
 
 namespace TimberApi.BuildingSpecificationSystem;
 
@@ -19,8 +18,6 @@ internal class BuildingSpecificationGenerator(
 
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        Debug.LogWarning("GENERATING SPECS");
-
         var buildings = prefabService.GetAll<Building>();
 
         foreach (var building in buildings)
