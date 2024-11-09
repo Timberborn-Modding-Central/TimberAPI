@@ -43,9 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.DebugTool", "Debu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specifications", "Specifications", "{C8B9BCD7-6FAA-40A7-B230-660B78092C36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingSpecificationSystem", "Src\BuildingSpecificationSystem\BuildingSpecificationSystem.csproj", "{3337881E-5899-4621-9A72-1472BC1DD96A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.Console", "Src\TimberApi.Console\TimberApi.Console.csproj", "{657C6C03-BFE8-4688-B23D-099930AC81C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingSpecificationSystem", "Src\TimberApi.BuildingSpecificationSystem\TimberApi.BuildingSpecificationSystem.csproj", "{3337881E-5899-4621-9A72-1472BC1DD96A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.TesterMod", "Debug\TimberApi.TesterMod\TimberApi.TesterMod.csproj", "{D5BE7FAF-1007-4C0E-B551-1BD4FAC89C78}"
 EndProject

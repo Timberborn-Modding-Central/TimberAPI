@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TimberApi.SingletonSystem;
 using Timberborn.Buildings;
 using Timberborn.Goods;
 using Timberborn.MechanicalSystem;
 using Timberborn.PrefabSystem;
-using Timberborn.SingletonSystem;
 using Timberborn.Workshops;
 
-namespace BuildingSpecificationSystem;
+namespace TimberApi.BuildingSpecificationSystem;
 
 internal class BuildingChangeApplier(
     PrefabService prefabService,
     BuildingSpecificationService buildingSpecificationService)
-    : ILoadableSingleton
+    : IEarlyLoadableSingleton
 {
-    public void Load()
+    public void EarlyLoad()
     {
         foreach (var building in prefabService.GetAll<Building>())
         {
@@ -24,12 +24,14 @@ internal class BuildingChangeApplier(
             {
                 continue;
             }
-
+            
             ChangeBuildingProperties(building, buildingSpecification);
+            
 
-            if (building.TryGetComponentFast(out Manufactory manufactory))
+
+            if (building.TryGetComponentFast(out ManufactorySpec manufactorySpec))
             {
-                ChangeManufactoryRecipes(manufactory, buildingSpecification);
+                ChangeManufactoryRecipes(manufactorySpec, buildingSpecification);
             }
 
             if (building.TryGetComponentFast(out MechanicalNodeSpecification mechanicalNodeSpecification))
@@ -52,9 +54,9 @@ internal class BuildingChangeApplier(
         }
     }
 
-    private static void ChangeManufactoryRecipes(Manufactory manufactory, BuildingSpecification buildingSpecification)
+    private static void ChangeManufactoryRecipes(ManufactorySpec manufactorySpec, BuildingSpecification buildingSpecification)
     {
-        manufactory._manufactorySpec._productionRecipeIds = buildingSpecification.RecipeIds.Distinct().ToList();
+        manufactorySpec._productionRecipeIds = buildingSpecification.RecipeIds.Distinct().ToList();
     }
 
     private static void ChangeBuildingProperties(Building building, BuildingSpecification buildingSpecification)

@@ -1,11 +1,13 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
+using TimberApi.SingletonSystem;
 using Timberborn.Buildings;
 using Timberborn.Persistence;
 using Timberborn.PrefabSystem;
 using Timberborn.SingletonSystem;
+using UnityEngine;
 
-namespace BuildingSpecificationSystem;
+namespace TimberApi.BuildingSpecificationSystem;
 
 /// <summary>
 ///     This service fetches BuildingSpecifications
@@ -13,15 +15,16 @@ namespace BuildingSpecificationSystem;
 internal class BuildingSpecificationService(
     ISpecificationService specificationService,
     BuildingSpecificationObjectDeserializer buildingRecipeSpecificationObjectObjectDeserializer)
-    : ILoadableSingleton
+    : IEarlyLoadableSingleton
 {
     private ImmutableArray<BuildingSpecification> _buildingSpecifications;
 
     /// <summary>
     ///     Fetches all BuildingSpecifications on load and stores them
     /// </summary>
-    public void Load()
+    public void EarlyLoad()
     {
+        Debug.LogWarning("LOADING SPECS");
         _buildingSpecifications = specificationService.GetSpecifications(buildingRecipeSpecificationObjectObjectDeserializer).ToImmutableArray();
     }
 
@@ -29,6 +32,9 @@ internal class BuildingSpecificationService(
     {
         var prefab = building.GetComponentFast<Prefab>();
         var prefabName = prefab.PrefabName.ToLower();
+        Debug.LogWarning(prefabName);
+        Debug.LogWarning(_buildingSpecifications.Length);
+
         return _buildingSpecifications.FirstOrDefault(x => x?.BuildingId.ToLower() == prefabName);
     }
 }

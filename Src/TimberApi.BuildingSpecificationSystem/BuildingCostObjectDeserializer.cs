@@ -1,7 +1,7 @@
 ﻿using System;
 using Timberborn.Persistence;
 
-namespace BuildingSpecificationSystem;
+namespace TimberApi.BuildingSpecificationSystem;
 
 internal class BuildingCostObjectDeserializer : IObjectSerializer<BuildingCost>
 {

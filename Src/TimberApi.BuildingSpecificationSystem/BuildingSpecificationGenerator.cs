@@ -7,8 +7,9 @@ using Timberborn.Buildings;
 using Timberborn.MechanicalSystem;
 using Timberborn.PrefabSystem;
 using Timberborn.Workshops;
+using UnityEngine;
 
-namespace BuildingSpecificationSystem;
+namespace TimberApi.BuildingSpecificationSystem;
 
 internal class BuildingSpecificationGenerator(
     PrefabService prefabService
@@ -18,6 +19,8 @@ internal class BuildingSpecificationGenerator(
 
     public IEnumerable<GeneratedSpecification> Generate()
     {
+        Debug.LogWarning("GENERATING SPECS");
+
         var buildings = prefabService.GetAll<Building>();
 
         foreach (var building in buildings)
@@ -32,9 +35,9 @@ internal class BuildingSpecificationGenerator(
             int? powerInput = null;
             int? powerOutput = null;
 
-            if (building.TryGetComponentFast(out Manufactory manufactory))
+            if (building.TryGetComponentFast(out ManufactorySpec manufactorySpec))
             {
-                recipeIds = manufactory.ProductionRecipeIds;
+                recipeIds = manufactorySpec.ProductionRecipeIds;
             }
 
             if (building.TryGetComponentFast(out MechanicalNodeSpecification mechanicalNodeSpecification))
@@ -51,8 +54,8 @@ internal class BuildingSpecificationGenerator(
                 { DefaultValueHandling = DefaultValueHandling.Ignore };
             var buildingSpecificationJson =
                 JsonConvert.SerializeObject(buildingSpec, Formatting.Indented, jsonSerializerSettings);
-
-            yield return new GeneratedSpecification(buildingSpecificationJson, building.name, SpecificationName);
+            
+            yield return new GeneratedSpecification("Buildings", $"{SpecificationName}.{building.name}", buildingSpecificationJson);
         }
     }
 }
