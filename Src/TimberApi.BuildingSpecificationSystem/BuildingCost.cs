@@ -1,4 +1,4 @@
-﻿namespace BuildingSpecificationSystem;
+﻿namespace TimberApi.BuildingSpecificationSystem;
 
 /// <summary>
 ///     Stripped version of Timberborn.Goods.GoodAmountSpecification.

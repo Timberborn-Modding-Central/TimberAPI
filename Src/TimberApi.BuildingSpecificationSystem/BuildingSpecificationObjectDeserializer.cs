@@ -2,7 +2,7 @@
 using TimberApi.Extensions;
 using Timberborn.Persistence;
 
-namespace BuildingSpecificationSystem;
+namespace TimberApi.BuildingSpecificationSystem;
 
 internal class BuildingSpecificationObjectDeserializer(BuildingCostObjectDeserializer buildingCostObjectDeserializer)
     : IObjectSerializer<BuildingSpecification>

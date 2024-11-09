@@ -1,7 +1,8 @@
 ﻿using Bindito.Core;
 using TimberApi.SpecificationSystem;
+using UnityEngine;
 
-namespace BuildingSpecificationSystem;
+namespace TimberApi.BuildingSpecificationSystem;
 
 [Context("Game")]
 internal class BuildingSpecificationConfigurator : IConfigurator

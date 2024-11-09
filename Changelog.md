@@ -1,3 +1,6 @@
+## 0.7.7.1
+- Fixed `BuildingSpecification`.
+
 ## 0.7.7.0
 - Added `AddClass` to all presets, for adjusting presets with stylesheets.
 - Fixed missing `ModifyRoot` to all presets.

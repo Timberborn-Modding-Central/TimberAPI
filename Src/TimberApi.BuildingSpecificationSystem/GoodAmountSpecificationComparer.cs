@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Timberborn.Goods;
 
-namespace BuildingSpecificationSystem;
+namespace TimberApi.BuildingSpecificationSystem;
 
 internal class GoodAmountSpecificationComparer : IEqualityComparer<GoodAmountSpecification>
 {
