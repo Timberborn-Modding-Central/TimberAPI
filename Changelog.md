@@ -1,3 +1,6 @@
+## 0.7.7.2
+- Removed debug logging.
+
 ## 0.7.7.1
 - Fixed `BuildingSpecification`.
 
