@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
+using Timberborn.WaterBrushesUI;
 
 namespace TimberApi.Tools.ToolSystem.Tools.WaterGenerator;
 
@@ -11,7 +12,7 @@ public class WaterGeneratorToolGenerator : ISpecificationGenerator
         var json = JsonConvert.SerializeObject(new
         {
             Id = "WaterGenerator",
-            Type = "WaterGeneratorTool",
+            Type = "GenericTool",
             Layout = "GrouplessRed",
             Order = 80,
             NameLocKey = "Cursor",
@@ -21,7 +22,8 @@ public class WaterGeneratorToolGenerator : ISpecificationGenerator
             Hidden = false,
             ToolInformation = new
             {
-                BottomBarSection = 0
+                BottomBarSection = 0,
+                ClassName = typeof(WaterHeightBrushTool).FullName
             }
         });
 

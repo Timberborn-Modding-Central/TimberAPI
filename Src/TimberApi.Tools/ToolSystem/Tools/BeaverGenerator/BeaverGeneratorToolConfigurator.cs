@@ -8,7 +8,6 @@ internal class BeaverGeneratorToolConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
-        containerDefinition.MultiBind<IToolFactory>().To<BeaverGeneratorToolFactory>().AsSingleton();
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<BeaverGeneratorTool>().AsSingleton();
+        containerDefinition.MultiBind<ISpecificationGenerator>().To<BeaverGeneratorToolGenerator>().AsSingleton();
     }
 }

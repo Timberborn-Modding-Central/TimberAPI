@@ -1,3 +1,7 @@
+## 0.7.8.0
+- Added `Scenes` to `ToolSpecification` to specify in which scene the tool should be loaded `Game` is default.
+- Added `GenericTool` tool factory type to make compatibility without hard dependency possible for custom mod tools. 
+
 ## 0.7.7.2
 - Removed debug logging.
 

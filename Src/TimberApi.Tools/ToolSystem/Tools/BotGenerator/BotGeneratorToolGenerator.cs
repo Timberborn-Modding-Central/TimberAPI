@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
+using Timberborn.BotsUI;
 
 namespace TimberApi.Tools.ToolSystem.Tools.BotGenerator;
 
@@ -11,7 +12,7 @@ public class BotGeneratorToolGenerator : ISpecificationGenerator
         var json = JsonConvert.SerializeObject(new
         {
             Id = "BotGenerator",
-            Type = "BotGeneratorTool",
+            Type = "GenericTool",
             Layout = "GrouplessRed",
             Order = 70,
             NameLocKey = "Cursor",
@@ -21,7 +22,8 @@ public class BotGeneratorToolGenerator : ISpecificationGenerator
             Hidden = false,
             ToolInformation = new
             {
-                BottomBarSection = 0
+                BottomBarSection = 0,
+                ClassName = typeof(BotGeneratorTool).FullName
             }
         });
 

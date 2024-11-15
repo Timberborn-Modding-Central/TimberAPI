@@ -8,7 +8,6 @@ public class CursorToolConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
-        containerDefinition.MultiBind<IToolFactory>().To<CursorToolFactory>().AsSingleton();
         containerDefinition.MultiBind<ISpecificationGenerator>().To<CursorToolGenerator>().AsSingleton();
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Timberborn.SerializationSystem;
 
 namespace TimberApi.Tools.ToolSystem;
@@ -5,6 +7,7 @@ namespace TimberApi.Tools.ToolSystem;
 public class ToolSpecification(
     string id,
     string? groupId,
+    IEnumerable<string> scenes,
     string section,
     string type,
     string layout,
@@ -15,16 +18,17 @@ public class ToolSpecification(
     bool hidden,
     bool devMode,
     ObjectSave? toolInformation)
-    : ToolSpecification<ObjectSave>(id, groupId, section, type, layout, order, icon, nameLocKey, descriptionLocKey,
+    : ToolSpecification<ObjectSave>(id, groupId, scenes, section, type, layout, order, icon, nameLocKey, descriptionLocKey,
         hidden, devMode,
         toolInformation);
 
 public class ToolSpecification<T>(
     string id,
     string? groupId,
+    IEnumerable<string> scenes,
     string section,
     string type,
-    string layout,
+    string layout, 
     int order,
     string icon,
     string nameLocKey,
@@ -36,6 +40,8 @@ public class ToolSpecification<T>(
     public string Id { get; } = id;
 
     public string? GroupId { get; } = groupId;
+    
+    public HashSet<string> Scenes { get; } = scenes.ToHashSet();
 
     public string Section { get; } = section;
 

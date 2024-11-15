@@ -8,7 +8,6 @@ public class WaterGeneratorToolConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
-        containerDefinition.MultiBind<IToolFactory>().To<WaterGeneratorToolFactory>().AsSingleton();
         containerDefinition.MultiBind<ISpecificationGenerator>().To<WaterGeneratorToolGenerator>().AsSingleton();
     }
 }
