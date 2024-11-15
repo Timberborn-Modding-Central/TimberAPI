@@ -20,6 +20,7 @@ public class ToolSpecificationService(
     public void Load()
     {
         _toolSpecifications = specificationService.GetSpecifications(toolSpecificationDeserializer)
+            .Where(specification => specification.Scenes.Contains(SceneManager.CurrentScene.ToString()))
             .ToImmutableDictionary(specification => specification.Id.ToLower());
     }
 

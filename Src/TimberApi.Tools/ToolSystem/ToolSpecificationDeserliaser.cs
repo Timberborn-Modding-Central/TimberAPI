@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TimberApi.Extensions;
 using Timberborn.Persistence;
 using Timberborn.SerializationSystem;
@@ -17,6 +18,7 @@ public class ToolSpecificationDeserializer : IObjectSerializer<ToolSpecification
         return new ToolSpecification(
             objectLoader.Get(new PropertyKey<string>("Id")),
             objectLoader.GetValueOrNull(new PropertyKey<string>("GroupId")),
+            objectLoader.GetValueOrDefault(new ListKey<string>("Scenes"), ["Game"]),
             objectLoader.GetValueOrDefault(new PropertyKey<string>("Section"), "BottomBar"),
             objectLoader.Get(new PropertyKey<string>("Type")),
             objectLoader.GetValueOrDefault(new PropertyKey<string>("Layout"), "Default"),

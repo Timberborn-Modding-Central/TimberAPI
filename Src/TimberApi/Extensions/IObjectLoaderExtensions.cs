@@ -80,6 +80,31 @@ public static class IObjectLoaderExtensions
     {
         return !objectLoader.Has(key) ? defaultValue : objectLoader.Get(key, serializer);
     }
+    
+    public static List<int> GetValueOrDefault(this IObjectLoader objectLoader, ListKey<int> key, List<int> defaultValue)
+    {
+        return !objectLoader.Has(key) ? defaultValue : objectLoader.Get(key);
+    }
+    
+    public static List<float> GetValueOrDefault(this IObjectLoader objectLoader, ListKey<float> key, List<float> defaultValue)
+    {
+        return !objectLoader.Has(key) ? defaultValue : objectLoader.Get(key);
+    }
+    
+    public static List<bool> GetValueOrDefault(this IObjectLoader objectLoader, ListKey<bool> key, List<bool> defaultValue)
+    {
+        return !objectLoader.Has(key) ? defaultValue : objectLoader.Get(key);
+    }
+    
+    public static List<string> GetValueOrDefault(this IObjectLoader objectLoader, ListKey<string> key, List<string> defaultValue)
+    {
+        return !objectLoader.Has(key) ? defaultValue : objectLoader.Get(key);
+    }
+    
+    public static List<char> GetValueOrDefault(this IObjectLoader objectLoader, ListKey<char> key, List<char> defaultValue)
+    {
+        return !objectLoader.Has(key) ? defaultValue : objectLoader.Get(key);
+    }
 
     public static List<T> GetValueOrEmpty<T>(this IObjectLoader objectLoader, ListKey<T> key,
         IObjectSerializer<T> serializer) where T : class
