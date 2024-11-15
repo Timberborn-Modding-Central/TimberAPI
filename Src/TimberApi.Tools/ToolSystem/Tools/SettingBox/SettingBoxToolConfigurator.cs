@@ -8,7 +8,7 @@ public class SettingBoxToolConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
-        containerDefinition.MultiBind<IToolFactory>().To<SettingBoxToolFactory>().AsSingleton();
+        containerDefinition.Bind<SettingBoxTool>().AsSingleton();
         containerDefinition.MultiBind<ISpecificationGenerator>().To<SettingBoxToolGenerator>().AsSingleton();
     }
 }

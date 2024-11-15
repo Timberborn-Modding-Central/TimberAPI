@@ -16,7 +16,7 @@ public class SettingBoxToolGenerator : ISpecificationGenerator
         var json = JsonConvert.SerializeObject(new
         {
             Id = "SettingBox",
-            Type = "SettingBoxTool",
+            Type = "GenericTool",
             Layout = "GrouplessRed",
             Order = 1000,
             NameLocKey = "CAN NOT BE MODIFIED",
@@ -26,7 +26,8 @@ public class SettingBoxToolGenerator : ISpecificationGenerator
             Hidden = false,
             ToolInformation = new
             {
-                BottomBarSection = 2
+                BottomBarSection = 2,
+                ClassName = typeof(SettingBoxTool).FullName
             }
         });
 

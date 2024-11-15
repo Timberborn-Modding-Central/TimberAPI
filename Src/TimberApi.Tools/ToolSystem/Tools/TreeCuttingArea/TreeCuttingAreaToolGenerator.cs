@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
+using Timberborn.ForestryUI;
 
 namespace TimberApi.Tools.ToolSystem.Tools.TreeCuttingArea;
 
@@ -19,7 +20,7 @@ public class TreeCuttingAreaToolGenerator : ISpecificationGenerator
         {
             Id = "TreeCuttingAreaUnselection",
             GroupId = "TreeCutting",
-            Type = "TreeCuttingAreaUnselectionTool",
+            Type = "GenericTool",
             Layout = "Default",
             Order = 1000,
             NameLocKey = "CAN NOT BE MODIFIED",
@@ -29,7 +30,8 @@ public class TreeCuttingAreaToolGenerator : ISpecificationGenerator
             Hidden = false,
             ToolInformation = new
             {
-                BottomBarSection = 0
+                BottomBarSection = 0,
+                ClassName = typeof(TreeCuttingAreaUnselectionTool).FullName
             }
         });
 
@@ -42,7 +44,7 @@ public class TreeCuttingAreaToolGenerator : ISpecificationGenerator
         {
             Id = "TreeCuttingAreaSelection",
             GroupId = "TreeCutting",
-            Type = "TreeCuttingAreaSelectionTool",
+            Type = "GenericTool",
             Layout = "Default",
             Order = 0,
             NameLocKey = "CAN NOT BE MODIFIED",
@@ -52,7 +54,8 @@ public class TreeCuttingAreaToolGenerator : ISpecificationGenerator
             Hidden = false,
             ToolInformation = new
             {
-                BottomBarSection = 0
+                BottomBarSection = 0,
+                ClassName = typeof(TreeCuttingAreaSelectionTool).FullName
             }
         });
 

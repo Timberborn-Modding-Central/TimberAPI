@@ -8,7 +8,6 @@ public class BotGeneratorToolConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
-        containerDefinition.MultiBind<IToolFactory>().To<BotGeneratorToolFactory>().AsSingleton();
         containerDefinition.MultiBind<ISpecificationGenerator>().To<BotGeneratorToolGenerator>().AsSingleton();
     }
 }
