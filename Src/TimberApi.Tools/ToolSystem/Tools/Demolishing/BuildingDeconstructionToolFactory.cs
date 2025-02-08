@@ -7,7 +7,7 @@ public class BuildingDeconstructionToolFactory(BuildingDeconstructionTool buildi
 {
     public string Id => "BuildingDeconstructionTool";
 
-    public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
+    public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
         buildingDeconstructionTool.Initialize(toolGroup);
         return buildingDeconstructionTool;

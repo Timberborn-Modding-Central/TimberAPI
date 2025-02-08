@@ -14,7 +14,6 @@ public class SpecificationServiceLogger(ObjectSaveReaderWriter objectSaveReaderW
 {
     public new IEnumerable<T> GetSpecifications<T>(IObjectSerializer<T> serializer)
     {
-
             var type = typeof (T).Name;
 
             var specifications = new List<T>();

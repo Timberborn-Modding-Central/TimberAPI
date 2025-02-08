@@ -1,6 +1,6 @@
 using TimberApi.Tools.ToolGroupSystem;
 using Timberborn.ToolSystem;
-using ToolGroupSpecification = Timberborn.ToolSystem.ToolGroupSpecification;
+using ToolGroupSpec = TimberApi.Tools.ToolGroupSystem.ToolGroupSpec;
 
 namespace TimberApi.Tools.ToolGroupUI.Factories;
 
@@ -8,7 +8,7 @@ public class ToolGroupButtonRedFactory(ToolGroupButtonFactory toolGroupButtonFac
 {
     public string Id => "Red";
 
-    public ToolGroupButton Create(IToolGroup toolGroup, ToolGroupSpecification toolGroupSpecification)
+    public ToolGroupButton Create(IToolGroup toolGroup, ToolGroupSpec toolGroupSpecification)
     {
         return toolGroupButtonFactory.Create((ToolGroup)toolGroup, toolGroup.Icon, "UI/Images/BottomBar/button-bg-01");
     }

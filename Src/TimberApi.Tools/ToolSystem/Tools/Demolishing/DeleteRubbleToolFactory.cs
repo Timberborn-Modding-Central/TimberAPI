@@ -8,7 +8,7 @@ public class DeleteRubbleToolFactory(RecoveredGoodStackDeletionTool recoveredGoo
 {
     public string Id => "DeleteRecoveredGoodStackTool";
 
-    public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
+    public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
         recoveredGoodStackDeletionTool.Initialize(toolGroup);
         return recoveredGoodStackDeletionTool;

@@ -7,8 +7,8 @@ public class ToolButtonWonderBlueFactory(ToolButtonFactory toolButtonFactory) : 
 {
     public string Id => "WonderBlue";
 
-    public ToolButton Create(Tool tool, ToolSpecification toolGroupSpecification)
+    public ToolButton Create(Tool tool, ToolSpec toolGroupSpec)
     {
-        return toolButtonFactory.CreateHex(tool, toolGroupSpecification.Icon, "UI/Images/BottomBar/button-bg-02");
+        return toolButtonFactory.CreateHex(tool, toolGroupSpec.Icon, "UI/Images/BottomBar/button-bg-02");
     }
 }

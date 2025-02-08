@@ -1,25 +1,19 @@
-using Timberborn.Persistence;
 using Timberborn.ToolSystem;
 using TimberbornBuilderPriorityToolFactory = Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolFactory;
 
 namespace TimberApi.Tools.ToolSystem.Tools.BuilderPriority;
 
-public class BuilderPriorityToolFactory(TimberbornBuilderPriorityToolFactory builderPriorityToolFactory)
-    : BaseToolFactory<BuilderPriorityToolToolInformation>
+public class BuilderPriorityToolFactory(TimberbornBuilderPriorityToolFactory builderPriorityToolFactory) : IToolFactory
 {
-    public override string Id => "PriorityTool";
-
-    protected override Tool CreateTool(ToolSpecification toolSpecification,
-        BuilderPriorityToolToolInformation toolInformation, ToolGroup? toolGroup)
+    public string Id => "PriorityTool";
+    
+    public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
-        var priorityTool = builderPriorityToolFactory.Create(toolInformation.Priority);
+        var builderPriorityToolSpec = toolSpec.GetSpec<BuilderPriorityToolSpec>();
+        
+        var priorityTool = builderPriorityToolFactory.Create(builderPriorityToolSpec.Priority);
         priorityTool.ToolGroup = toolGroup;
 
         return priorityTool;
-    }
-
-    protected override BuilderPriorityToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)
-    {
-        return new BuilderPriorityToolToolInformation(objectLoader.Get(new PropertyKey<string>("Priority")));
     }
 }

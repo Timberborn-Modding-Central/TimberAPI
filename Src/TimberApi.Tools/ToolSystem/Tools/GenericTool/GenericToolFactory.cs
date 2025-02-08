@@ -2,25 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TimberApi.DependencyContainerSystem;
-using TimberApi.SingletonSystem;
 using Timberborn.Persistence;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.GenericTool;
 
-public class GenericToolFactory : BaseToolFactory<GenericToolToolInformation>, IEarlyLoadableSingleton
+public class GenericToolFactory : IToolFactory
 {
     private readonly PropertyKey<string> _classnameKey = new("ClassName");
     
-    public override string Id => "GenericTool";
-
+    public string Id => "GenericTool";
+    
     private List<Type> _toolTypes = null!;
-
-    protected override Tool CreateTool(ToolSpecification toolSpecification, GenericToolToolInformation toolInformation, ToolGroup? toolGroup)
+    
+    public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
-        if (DependencyContainer.GetInstance(GetTypeFromName(toolInformation.ClassName)) is not Tool tool)
+        var genericToolSpec = toolSpec.GetSpec<GenericToolSpec>();
+        
+        if (DependencyContainer.GetInstance(GetTypeFromName(genericToolSpec.ClassName)) is not Tool tool)
         {
-            throw new Exception($"GenericToolFactory could not find the Tool {toolInformation.ClassName}");
+            throw new Exception($"GenericToolFactory could not find the Tool {genericToolSpec.ClassName}");
         }
         
         tool.ToolGroup = toolGroup;
@@ -28,11 +29,6 @@ public class GenericToolFactory : BaseToolFactory<GenericToolToolInformation>, I
         return tool;
     }
 
-    protected override GenericToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)
-    {
-        return new GenericToolToolInformation(objectLoader.Get(_classnameKey));
-    }
-    
     public void EarlyLoad()
     {
         _toolTypes = AppDomain.CurrentDomain

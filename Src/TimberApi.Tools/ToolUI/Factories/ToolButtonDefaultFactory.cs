@@ -7,8 +7,8 @@ public class ToolButtonDefaultFactory(ToolButtonFactory toolButtonFactory) : ITo
 {
     public string Id => "Default";
 
-    public ToolButton Create(Tool tool, ToolSpecification toolGroupSpecification)
+    public ToolButton Create(Tool tool, ToolSpec toolGroupSpec)
     {
-        return toolButtonFactory.Create(tool, toolGroupSpecification.Icon);
+        return toolButtonFactory.Create(tool, toolGroupSpec.Icon);
     }
 }

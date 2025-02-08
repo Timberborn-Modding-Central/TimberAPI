@@ -7,8 +7,8 @@ public class ToolButtonBlueFactory(ToolButtonFactory toolButtonFactory) : IToolB
 {
     public string Id => "Blue";
 
-    public ToolButton Create(Tool tool, ToolSpecification toolGroupSpecification)
+    public ToolButton Create(Tool tool, ToolSpec toolGroupSpec)
     {
-        return toolButtonFactory.Create(tool, toolGroupSpecification.Icon, "UI/Images/BottomBar/button-bg-02");
+        return toolButtonFactory.Create(tool, toolGroupSpec.Icon, "UI/Images/BottomBar/button-bg-02");
     }
 }

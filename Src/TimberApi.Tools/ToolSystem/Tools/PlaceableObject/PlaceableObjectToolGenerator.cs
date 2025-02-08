@@ -12,12 +12,12 @@ public class PlaceableObjectToolGenerator(PrefabService prefabService) : ISpecif
 {
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        foreach (var placeableBlockObject in prefabService.GetAll<PlaceableBlockObject>())
+        foreach (var placeableBlockObject in prefabService.GetAll<PlaceableBlockObjectSpec>())
         {
             if (!placeableBlockObject.UsableWithCurrentFeatureToggles) continue;
 
             var labeledEntitySpec = placeableBlockObject.GetComponentFast<LabeledEntitySpec>();
-            var prefab = placeableBlockObject.GetComponentFast<Prefab>();
+            var prefab = placeableBlockObject.GetComponentFast<PrefabSpec>();
             var wonder = placeableBlockObject.GetComponentFast<Wonder>();
             
             var json = JsonConvert.SerializeObject(new

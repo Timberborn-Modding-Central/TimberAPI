@@ -21,17 +21,17 @@ public class SceneManager
     internal static void Patch(Harmony harmony)
     {
         harmony.Patch(
-            harmony.GetMethodInfo<GameSceneInstaller>(nameof(GameSceneInstaller.Configure)),
+            harmony.GetMethodInfo<GameSceneConfigurator>(nameof(GameSceneConfigurator.Configure)),
             harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMasterSceneConfigurator))
         );
 
         harmony.Patch(
-            harmony.GetMethodInfo<MainMenuSceneConfigurator>(nameof(GameSceneInstaller.Configure)),
+            harmony.GetMethodInfo<MainMenuSceneConfigurator>(nameof(MainMenuSceneConfigurator.Configure)),
             harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMainMenuSceneConfigurator))
         );
 
         harmony.Patch(
-            harmony.GetMethodInfo<MapEditorSceneConfigurator>(nameof(GameSceneInstaller.Configure)),
+            harmony.GetMethodInfo<MapEditorSceneConfigurator>(nameof(MapEditorSceneConfigurator.Configure)),
             harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMapEditorSceneConfigurator))
         );
     }

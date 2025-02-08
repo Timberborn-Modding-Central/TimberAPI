@@ -13,7 +13,7 @@ public class CancelPlantingToolFactory(
 {
     public string Id => "CancelPlantingTool";
 
-    public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
+    public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
         return new CancelPlantingTool(plantingSelectionService, loc, selectionToolProcessorFactory, toolGroup);
     }

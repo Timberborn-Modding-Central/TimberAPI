@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
+using Timberborn.BlueprintSystem;
 using Timberborn.EntitySystem;
 using Timberborn.Localization;
-using Timberborn.Persistence;
+using Timberborn.MortalSystem;
 using Timberborn.Planting;
 using Timberborn.PlantingUI;
 using Timberborn.PrefabSystem;
@@ -19,16 +20,17 @@ public class PlantingToolFactory(
     ILoc loc,
     PrefabService prefabService,
     ToolUnlockingService toolUnlockingService)
-    : BaseToolFactory<PlantingToolToolInformation>
+    : IToolFactory
 {
-    public override string Id => "PlantingTool";
-
-    protected override Tool CreateTool(ToolSpecification toolSpecification, PlantingToolToolInformation toolInformation,
-        ToolGroup? toolGroup)
+    public string Id => "PlantingTool";
+    
+    public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
-        var prefab = prefabService.GetAll<Prefab>()
-            .First(o => o.IsNamedExactly(toolInformation.PrefabName));
-        var plantable = prefab.GetComponentFast<Plantable>();
+        var plantingToolSpec = toolSpec.GetSpec<PlantingToolSpec>();
+        
+        var prefab = prefabService.GetAll<PrefabSpec>().First(o => o.IsNamedExactly(plantingToolSpec.PrefabName));
+        
+        var plantable = prefab.GetComponentFast<PlantableSpec>();
 
         return new PlantingTool(
             plantableDescriber,
@@ -40,13 +42,8 @@ public class PlantingToolFactory(
             GetPlanterBuildingName(plantable),
             toolGroup);
     }
-
-    protected override PlantingToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)
-    {
-        return new PlantingToolToolInformation(objectLoader.Get(new PropertyKey<string>("PrefabName")));
-    }
     
-    private string GetPlanterBuildingName(Plantable plantable)
+    private string GetPlanterBuildingName(PlantableSpec plantable)
     {
         return loc.T(prefabService.GetAll<PlanterBuildingSpec>().Single((Func<PlanterBuildingSpec, bool>) (building => building.PlantableResourceGroup == plantable.ResourceGroup)).GetComponentFast<LabeledEntitySpec>().DisplayNameLocKey);
     }

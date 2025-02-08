@@ -15,7 +15,6 @@ public class ToolGroupConfigurator : IConfigurator
     public void Configure(IContainerDefinition containerDefinition)
     {
         containerDefinition.Bind<ToolGroupSpecificationService>().AsSingleton();
-        containerDefinition.Bind<ToolGroupSpecificationDeserializer>().AsSingleton();
         containerDefinition.Bind<ToolGroupService>().AsSingleton();
         containerDefinition.Bind<ToolGroupFactoryService>().AsSingleton();
         containerDefinition.MultiBind<IToolGroupFactory>().To<ConstructionModeToolGroupFactory>().AsSingleton();

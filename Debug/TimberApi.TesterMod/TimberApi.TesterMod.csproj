@@ -37,6 +37,10 @@
         </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Src\TimberApi.SpecificationSystem\TimberApi.SpecificationSystem.csproj" />
+    </ItemGroup>
+
     <Target Name="CopyingFilesToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath)">
         <ItemGroup>
             <ModPackagePath Include="$(ProjectDir)\package\**\*.*"/>

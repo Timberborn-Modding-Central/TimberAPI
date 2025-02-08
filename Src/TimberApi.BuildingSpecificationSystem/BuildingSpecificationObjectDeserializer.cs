@@ -1,5 +1,9 @@
 ﻿using System;
 using TimberApi.Extensions;
+using Timberborn.BlueprintSystem;
+using Timberborn.Bots;
+using Timberborn.MortalSystem;
+using Timberborn.NeedSpecs;
 using Timberborn.Persistence;
 
 namespace TimberApi.BuildingSpecificationSystem;
@@ -25,6 +29,7 @@ internal class BuildingSpecificationObjectDeserializer(BuildingCostObjectDeseria
     /// <param name="objectSaver"></param>
     public void Serialize(BuildingSpecification value, IObjectSaver objectSaver)
     {
+        MortalSpec
         throw new NotSupportedException();
     }
 

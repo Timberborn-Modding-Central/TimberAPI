@@ -16,7 +16,7 @@ internal class BuildingChangeApplier(
 {
     public void EarlyLoad()
     {
-        foreach (var building in prefabService.GetAll<Building>())
+        foreach (var building in prefabService.GetAll<BuildingSpec>())
         {
             var buildingSpecification = buildingSpecificationService.GetBuildingSpecificationByBuilding(building);
 

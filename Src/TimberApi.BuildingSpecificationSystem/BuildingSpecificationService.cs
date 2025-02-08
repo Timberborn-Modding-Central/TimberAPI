@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using TimberApi.SingletonSystem;
+using Timberborn.BlueprintSystem;
 using Timberborn.Buildings;
 using Timberborn.Persistence;
 using Timberborn.PrefabSystem;
@@ -11,7 +12,7 @@ namespace TimberApi.BuildingSpecificationSystem;
 ///     This service fetches BuildingSpecifications
 /// </summary>
 internal class BuildingSpecificationService(
-    ISpecificationService specificationService,
+    ISpecService specificationService,
     BuildingSpecificationObjectDeserializer buildingRecipeSpecificationObjectObjectDeserializer)
     : IEarlyLoadableSingleton
 {

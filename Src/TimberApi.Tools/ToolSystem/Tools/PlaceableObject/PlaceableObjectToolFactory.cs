@@ -3,7 +3,6 @@ using Timberborn.AreaSelectionSystem;
 using Timberborn.BlockObjectTools;
 using Timberborn.BlockSystem;
 using Timberborn.InputSystem;
-using Timberborn.Persistence;
 using Timberborn.PrefabSystem;
 using Timberborn.ToolSystem;
 using Timberborn.UISound;
@@ -18,21 +17,21 @@ public class PlaceableObjectToolFactory(
     ToolUnlockingService toolUnlockingService,
     BlockObjectToolDescriber blockObjectToolDescriber,
     AreaPickerFactory areaPickerFactory,
-    BlockObjectPlacerService blockObjectPlacerService)
-    : BaseToolFactory<PlaceableObjectToolToolInformation>
+    BlockObjectPlacerService blockObjectPlacerService) : IToolFactory
 {
-    public override string Id => "PlaceableObjectTool";
-
-    protected override Tool CreateTool(ToolSpecification toolSpecification,
-        PlaceableObjectToolToolInformation toolInformation, ToolGroup? toolGroup)
+    public string Id => "PlaceableObjectTool";
+    
+    public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
-        var prefab = prefabService.GetAll<Prefab>().Single(o => o.IsNamed(toolInformation.PrefabName));
-        var placeableBlockObject = prefab.GetComponentFast<PlaceableBlockObject>();
-
-        placeableBlockObject._devModeTool = toolSpecification.DevMode;
-        placeableBlockObject._toolOrder = toolSpecification.Order;
+        var placeableObjectToolSpec = toolSpec.GetSpec<PlaceableObjectToolSpec>();
         
-        var matchingPlacer = blockObjectPlacerService.GetMatchingPlacer(prefab.GetComponentFast<BlockObject>());
+        var prefab = prefabService.GetAll<PrefabSpec>().Single(o => o.IsNamed(placeableObjectToolSpec.PrefabName));
+        var placeableBlockObject = prefab.GetComponentFast<PlaceableBlockObjectSpec>();
+
+        placeableBlockObject._devModeTool = toolSpec.DevMode;
+        placeableBlockObject._toolOrder = toolSpec.Order;
+        
+        var matchingPlacer = blockObjectPlacerService.GetMatchingPlacer(prefab.GetComponentFast<BlockObjectSpec>());
         var previewPlacer = previewPlacerFactory.Create(placeableBlockObject);
         
         return new BlockObjectTool(
@@ -46,10 +45,5 @@ public class PlaceableObjectToolFactory(
             blockObjectToolDescriber,
             previewPlacer
         );
-    }
-
-    protected override PlaceableObjectToolToolInformation DeserializeToolInformation(IObjectLoader objectLoader)
-    {
-        return new PlaceableObjectToolToolInformation(objectLoader.Get(new PropertyKey<string>("PrefabName")));
     }
 }

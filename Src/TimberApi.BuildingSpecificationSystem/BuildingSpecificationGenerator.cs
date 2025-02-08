@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
+using Timberborn.BlueprintSystem;
 using Timberborn.Buildings;
+using Timberborn.CommandLine;
+using Timberborn.GameStartup;
+using Timberborn.MainMenuModdingUI;
 using Timberborn.MechanicalSystem;
 using Timberborn.PrefabSystem;
 using Timberborn.Workshops;
+using Timberborn.Modding;
 
 namespace TimberApi.BuildingSpecificationSystem;
 
@@ -18,6 +23,7 @@ internal class BuildingSpecificationGenerator(
 
     public IEnumerable<GeneratedSpecification> Generate()
     {
+        Bluep
         var buildings = prefabService.GetAll<Building>();
 
         foreach (var building in buildings)
@@ -52,7 +58,7 @@ internal class BuildingSpecificationGenerator(
             var buildingSpecificationJson =
                 JsonConvert.SerializeObject(buildingSpec, Formatting.Indented, jsonSerializerSettings);
             
-            yield return new GeneratedSpecification("Buildings", $"{SpecificationName}.{building.name}", buildingSpecificationJson);
+            yield return new GeneratedSpecification("Buildings", $"{SpecificationName}.{building.name}", buildingSpecificationJson, true);
         }
     }
 }

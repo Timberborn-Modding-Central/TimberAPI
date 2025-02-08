@@ -14,16 +14,16 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecification
 {
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        var plantables = prefabService.GetAll<Plantable>().ToList();
+        var plantables = prefabService.GetAll<PlantableSpec>().ToList();
         
         foreach (var plantable in plantables)
         {
             var labeledEntitySpec = plantable.GetComponentFast<LabeledEntitySpec>();
             
-            var prefab = plantable.GetComponentFast<Prefab>();
+            var prefab = plantable.GetComponentFast<PrefabSpec>();
 
             var isCrop = plantable.GetComponentFast<Crop>() != null;
-            var naturalResource = plantable.GetComponentFast<NaturalResource>();
+            var naturalResource = plantable.GetComponentFast<NaturalResourceSpec>();
 
             var json = JsonConvert.SerializeObject(new
             {
@@ -31,7 +31,7 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecification
                 GroupId = isCrop ? "Fields" : "Forestry",
                 Type = "PlantingTool",
                 Layout = "Default",
-                Order = naturalResource.OrderId,
+                Order = naturalResource.Order,
                 Icon = labeledEntitySpec.ImagePath,
                 NameLocKey = labeledEntitySpec.DisplayNameLocKey,
                 labeledEntitySpec.DescriptionLocKey,

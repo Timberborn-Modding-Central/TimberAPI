@@ -11,7 +11,7 @@ internal class GeneratedSpecificationAssetRepository
 
     private readonly HashSet<string> _newCachedObjectSpecificationPaths = new();
 
-    public readonly Dictionary<string, OrderedAsset<TextAsset>> GeneratedSpecificationAssets = new();
+    public readonly Dictionary<string, OrderedAsset> GeneratedSpecificationAssets = new();
 
     public void AddSpecificationRange(IEnumerable<GeneratedSpecification> generatedSpecifications)
     {
@@ -51,13 +51,13 @@ internal class GeneratedSpecificationAssetRepository
         _newCachedObjectSpecificationPaths.Clear();
     }
 
-    private static OrderedAsset<TextAsset> CreateOrderedSpecificationAsset(GeneratedSpecification specification)
+    private static OrderedAsset CreateOrderedSpecificationAsset(GeneratedSpecification specification)
     {
         var asset = new TextAsset(specification.Json)
         {
             name = specification.SpecificationName
         };
 
-        return new OrderedAsset<TextAsset>(-1, asset);
+        return new OrderedAsset(-1, asset);
     }
 }

@@ -100,11 +100,7 @@ public class BottomBarPanel : ILoadableSingleton
 
     private int GetBottomBarSection(BottomBarButton bottomBarButton)
     {
-        if (bottomBarButton.ButtonInformation == null) return 1;
-
-        var objectLoader = ObjectLoader.CreateBasicLoader(bottomBarButton.ButtonInformation);
-
-        return objectLoader.GetValueOrDefault(new PropertyKey<int>("BottomBarSection"), 1);
+        return bottomBarButton.BottomBarSpec?.Section ?? 1;
     }
 
     private void InitializeSections()

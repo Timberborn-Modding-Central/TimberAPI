@@ -7,9 +7,9 @@ public class ToolButtonGrouplessGreenFactory(ToolButtonFactory toolButtonFactory
 {
     public string Id => "GrouplessGreen";
 
-    public ToolButton Create(Tool tool, ToolSpecification toolGroupSpecification)
+    public ToolButton Create(Tool tool, ToolSpec toolGroupSpec)
     {
-        return toolButtonFactory.CreateGroupless(tool, toolGroupSpecification.Icon,
+        return toolButtonFactory.CreateGroupless(tool, toolGroupSpec.Icon,
             "UI/Images/BottomBar/button-bg-03");
     }
 }

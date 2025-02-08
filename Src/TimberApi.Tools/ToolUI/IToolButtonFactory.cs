@@ -7,5 +7,5 @@ public interface IToolButtonFactory
 {
     public string Id { get; }
 
-    public ToolButton Create(Tool tool, ToolSpecification toolGroupSpecification);
+    public ToolButton Create(Tool tool, ToolSpec toolGroupSpec);
 }

@@ -1,4 +1,5 @@
 using Bindito.Core;
+using TimberApi.SpecificationSystem;
 
 namespace TimberApi.TesterMod;
 
@@ -27,7 +28,9 @@ public class MainMenuConfigurator : IConfigurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
-        
+        containerDefinition.Bind<Tester>().AsSingleton();
+        containerDefinition.Bind<TestSpecificationDeserializer>().AsSingleton();
+        containerDefinition.MultiBind<ISpecificationGenerator>().To<TestSpecificationGenerator>().AsSingleton();
     }
 }
 

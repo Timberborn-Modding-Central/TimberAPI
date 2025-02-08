@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Timberborn.AssetSystem;
@@ -12,25 +13,24 @@ internal class GeneratedSpecificationAssetProvider(
 {
     public bool IsBuiltIn => false;
 
-    public bool TryLoad<T>(string path, out OrderedAsset<T> orderedAsset) where T : Object
+    public bool TryLoad(string path, Type type, out OrderedAsset orderedAsset)
     {
-        if (typeof(T) == typeof(TextAsset) &&
-            generatedSpecificationAssetRepository.GeneratedSpecificationAssets.ContainsKey(path))
+        if (type == typeof(TextAsset) && generatedSpecificationAssetRepository.GeneratedSpecificationAssets.TryGetValue(path, out var asset))
         {
-            orderedAsset = generatedSpecificationAssetRepository.GeneratedSpecificationAssets[path].As<T>();
+            orderedAsset = asset;
 
             return true;
         }
 
-        orderedAsset = new OrderedAsset<T>();
+        orderedAsset = new OrderedAsset();
         return false;
     }
 
-    public IEnumerable<OrderedAsset<T>> LoadAll<T>(string path) where T : Object
+    public IEnumerable<OrderedAsset> LoadAll<T>(string path) where T : Object
     {
-        if (typeof(T) != typeof(TextAsset)) return new List<OrderedAsset<T>>();
+        if (typeof(T) != typeof(TextAsset)) return new List<OrderedAsset>();
 
-        return (IEnumerable<OrderedAsset<T>>)generatedSpecificationAssetRepository.GeneratedSpecificationAssets
+        return generatedSpecificationAssetRepository.GeneratedSpecificationAssets
             .Where(registeredSpecification => registeredSpecification.Key.StartsWith(path))
             .Select(registeredSpecification => registeredSpecification.Value);
     }

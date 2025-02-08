@@ -7,8 +7,8 @@ public class ToolButtonWonderFactory(ToolButtonFactory toolButtonFactory) : IToo
 {
     public string Id => "WonderDefault";
 
-    public ToolButton Create(Tool tool, ToolSpecification toolGroupSpecification)
+    public ToolButton Create(Tool tool, ToolSpec toolGroupSpec)
     {
-        return toolButtonFactory.CreateHex(tool, toolGroupSpecification.Icon);
+        return toolButtonFactory.CreateHex(tool, toolGroupSpec.Icon);
     }
 }

@@ -9,7 +9,7 @@ using Timberborn.ToolSystem;
 namespace TimberApi.Tools.ToolSystem;
 
 public class ToolService(
-    ToolSpecificationService toolSpecificationService,
+    ToolSpecService toolSpecService,
     ToolFactoryService toolFactoryService,
     ToolButtonFactoryService toolButtonFactoryService,
     ToolGroupService toolGroupService)
@@ -29,7 +29,7 @@ public class ToolService(
 
         var toolButtons = new Dictionary<string, ToolButton>();
 
-        foreach (var specification in toolSpecificationService.ToolSpecifications)
+        foreach (var specification in toolSpecService.ToolSpecifications)
         {
             var toolFactory = toolFactoryService.Get(specification.Type);
 

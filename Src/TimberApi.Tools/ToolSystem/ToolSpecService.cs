@@ -2,29 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Timberborn.Persistence;
+using Timberborn.BlueprintSystem;
 using Timberborn.SingletonSystem;
 
 namespace TimberApi.Tools.ToolSystem;
 
-public class ToolSpecificationService(
-    ISpecificationService specificationService,
-    ToolSpecificationDeserializer toolSpecificationDeserializer)
-    : ILoadableSingleton
+public class ToolSpecService(ISpecService specService) : ILoadableSingleton
 {
-    private ImmutableDictionary<string, ToolSpecification> _toolSpecifications = null!;
+    private ImmutableDictionary<string, ToolSpec> _toolSpecifications = null!;
 
-    public ImmutableArray<ToolSpecification> ToolSpecifications =>
+    public ImmutableArray<ToolSpec> ToolSpecifications =>
         _toolSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
     public void Load()
     {
-        _toolSpecifications = specificationService.GetSpecifications(toolSpecificationDeserializer)
+        _toolSpecifications = specService.GetSpecs<ToolSpec>()
             .Where(specification => specification.Scenes.Contains(SceneManager.CurrentScene.ToString()))
             .ToImmutableDictionary(specification => specification.Id.ToLower());
     }
 
-    public ToolSpecification Get(string id)
+    public ToolSpec Get(string id)
     {
         if (!_toolSpecifications.TryGetValue(id.ToLower(), out var toolSpecification))
             throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
@@ -32,21 +29,21 @@ public class ToolSpecificationService(
         return toolSpecification;
     }
 
-    public IEnumerable<ToolSpecification> GetByGroupId(string groupId)
+    public IEnumerable<ToolSpec> GetByGroupId(string groupId)
     {
         return _toolSpecifications
             .Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
             .Select(pair => pair.Value);
     }
 
-    public IEnumerable<ToolSpecification> GetBySection(string section)
+    public IEnumerable<ToolSpec> GetBySection(string section)
     {
         return _toolSpecifications
             .Where(pair => string.Equals(pair.Value.Section, section, StringComparison.CurrentCultureIgnoreCase))
             .Select(pair => pair.Value);
     }
 
-    public IEnumerable<ToolSpecification> GetByType(string type)
+    public IEnumerable<ToolSpec> GetByType(string type)
     {
         return _toolSpecifications
             .Where(pair => string.Equals(pair.Value.Type, type, StringComparison.CurrentCultureIgnoreCase))

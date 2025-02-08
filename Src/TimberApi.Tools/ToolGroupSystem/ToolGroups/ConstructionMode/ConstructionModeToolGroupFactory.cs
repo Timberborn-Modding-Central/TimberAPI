@@ -4,16 +4,16 @@ public class ConstructionModeToolGroupFactory : IToolGroupFactory
 {
     public string Id => "ConstructionModeToolGroup";
 
-    public IToolGroup Create(ToolGroupSpecification toolGroupSpecification)
+    public IToolGroup Create(ToolGroupSpec toolGroupSpec)
     {
         return new ConstructionModeToolGroup(
-            toolGroupSpecification.Id,
-            toolGroupSpecification.GroupId,
-            toolGroupSpecification.Order,
-            toolGroupSpecification.Section,
-            toolGroupSpecification.NameLocKey,
-            toolGroupSpecification.DevMode,
-            toolGroupSpecification.Icon
+            toolGroupSpec.Id,
+            toolGroupSpec.GroupId,
+            toolGroupSpec.Order,
+            toolGroupSpec.Section,
+            toolGroupSpec.NameLocKey,
+            toolGroupSpec.DevMode,
+            toolGroupSpec.Icon
         );
     }
 }

@@ -7,7 +7,7 @@ public class DemolishableUnselectionToolFactory(DemolishableUnselectionTool demo
 {
     public string Id => "DemolishableUnselectionTool";
 
-    public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
+    public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
         demolishableUnselectionTool.Initialize(toolGroup);
         return demolishableUnselectionTool;

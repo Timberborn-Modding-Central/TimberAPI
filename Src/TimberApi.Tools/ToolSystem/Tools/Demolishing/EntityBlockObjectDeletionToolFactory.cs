@@ -8,7 +8,7 @@ public class EntityBlockObjectDeletionToolFactory(EntityBlockObjectDeletionTool 
 {
     public string Id => "EntityBlockObjectDeletionTool";
 
-    public Tool Create(ToolSpecification toolSpecification, ToolGroup? toolGroup = null)
+    public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
         entityBlockObjectDeletionTool.Initialize(toolGroup);
         return entityBlockObjectDeletionTool;

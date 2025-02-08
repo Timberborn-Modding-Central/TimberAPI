@@ -19,11 +19,10 @@ public class BottomBarConfiguratorPatcher
                 harmony.GetHarmonyMethod<BottomBarConfiguratorPatcher>(nameof(DisableBottomBarSystemConfigurator))
             );
 
-            harmony.Patch(
-                harmony.GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider
-                    .CreateFolktailsConfiguration)),
-                harmony.GetHarmonyMethod<BottomBarConfiguratorPatcher>(nameof(CreateFolktailsConfigurationPatch))
-            );
+            // harmony.Patch(
+            //     harmony.GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider.CreateFolktailsConfiguration)),
+            //     harmony.GetHarmonyMethod<BottomBarConfiguratorPatcher>(nameof(CreateFolktailsConfigurationPatch))
+            // );
         }
         catch (Exception e)
         {

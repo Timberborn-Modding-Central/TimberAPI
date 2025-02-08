@@ -29,7 +29,7 @@ internal class EarlyLoadPatcher
         );
 
         harmony.Patch(
-            harmony.GetMethodInfo<FactionSpecificationService>(nameof(FactionSpecificationService.Load)),
+            harmony.GetMethodInfo<FactionSpecService>(nameof(FactionSpecService.Load)),
             harmony.GetHarmonyMethod<EarlyLoadPatcher>(nameof(BlockingLoadableSingletonLoad))
         );
     }

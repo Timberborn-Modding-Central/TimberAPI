@@ -17,7 +17,7 @@ public class EntityLinkerSystemConfigurator : IConfigurator
     private static TemplateModule ProvideTemplateModule()
     {
         var builder = new TemplateModule.Builder();
-        builder.AddDecorator<Building, EntityLinker>();
+        builder.AddDecorator<BuildingSpec, EntityLinker>();
         return builder.Build();
     }
 }

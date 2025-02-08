@@ -16,7 +16,7 @@ public class GameEarlyLoadPrefabCollection(
     FactionService factionService,
     IWorldSaveSupplier worldSaveSupplier,
     PrefabGroupService prefabGroupService,
-    FactionSpecificationService factionSpecificationService)
+    FactionSpecService factionSpecificationService)
     : ITimberApiLoadableSingleton
 {
     public void Load()

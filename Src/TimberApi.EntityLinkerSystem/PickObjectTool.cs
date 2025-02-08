@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Timberborn.BaseComponentSystem;
-using Timberborn.CoreUI;
 using Timberborn.EntitySystem;
 using Timberborn.InputSystem;
 using Timberborn.SelectionSystem;
@@ -22,8 +21,6 @@ public class PickObjectTool : Tool, IInputProcessor
         
     private readonly Highlighter _highlighter;
         
-    private readonly Colors _colors;
-        
     private readonly EntityComponentRegistry _entityComponentRegistry;
         
     //private readonly CursorService _cursorService;
@@ -40,12 +37,11 @@ public class PickObjectTool : Tool, IInputProcessor
         
     private Action<GameObject> _callback = null!;
 
-    public PickObjectTool(InputService inputService, ToolManager toolManager, Highlighter highlighter, Colors colors, EntityComponentRegistry entityComponentRegistry, CursorService cursorService, SelectableObjectRaycaster selectableObjectRaycaster)
+    public PickObjectTool(InputService inputService, ToolManager toolManager, Highlighter highlighter, EntityComponentRegistry entityComponentRegistry, CursorService cursorService, SelectableObjectRaycaster selectableObjectRaycaster)
     {
         _inputService = inputService;
         _toolManager = toolManager;
         _highlighter = highlighter;
-        _colors = colors;
         _entityComponentRegistry = entityComponentRegistry;
         //_cursorService = cursorService;
         _selectableObjectRaycaster = selectableObjectRaycaster;
@@ -93,7 +89,7 @@ public class PickObjectTool : Tool, IInputProcessor
         HighlightCandidates();
         if (_selectableObjectRaycaster.TryHitSelectableObject(out var hitObject) && _allCandidates.ContainsKey(hitObject.GameObjectFast))
         {
-            _highlighter.HighlightSecondary(hitObject, _colors.EntitySelection);
+            _highlighter.HighlightSecondary(hitObject, Color.blue);
             _warning = _validateCandidate(hitObject.GameObjectFast);
             if (_inputService is { MainMouseButtonDown: true, MouseOverUI: false })
             {
@@ -111,7 +107,7 @@ public class PickObjectTool : Tool, IInputProcessor
         _highlighter.UnhighlightAllSecondary();
         foreach (var allCandidate in _allCandidates)
         {
-            var color = _validateCandidate(allCandidate.Key) == "" ? _colors.BuildablePreview : _colors.UnbuildablePreview; _highlighter.HighlightSecondary(allCandidate.Value, color);
+            var color = _validateCandidate(allCandidate.Key) == "" ? Color.green : Color.red; _highlighter.HighlightSecondary(allCandidate.Value, color);
         }
     }
 

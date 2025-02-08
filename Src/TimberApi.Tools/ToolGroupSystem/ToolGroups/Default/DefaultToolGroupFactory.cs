@@ -4,16 +4,16 @@ public class DefaultToolGroupFactory : IToolGroupFactory
 {
     public string Id => "DefaultToolGroup";
 
-    public IToolGroup Create(ToolGroupSpecification toolGroupSpecification)
+    public IToolGroup Create(ToolGroupSpec toolGroupSpec)
     {
         return new ApiToolGroup(
-            toolGroupSpecification.Id,
-            toolGroupSpecification.GroupId,
-            toolGroupSpecification.Order,
-            toolGroupSpecification.Section,
-            toolGroupSpecification.NameLocKey,
-            toolGroupSpecification.DevMode,
-            toolGroupSpecification.Icon
+            toolGroupSpec.Id,
+            toolGroupSpec.GroupId,
+            toolGroupSpec.Order,
+            toolGroupSpec.Section,
+            toolGroupSpec.NameLocKey,
+            toolGroupSpec.DevMode,
+            toolGroupSpec.Icon
         );
     }
 }
