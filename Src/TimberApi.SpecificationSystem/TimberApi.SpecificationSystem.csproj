@@ -24,10 +24,6 @@
         <Reference Include="$(SolutionDir)Libs\UnityEngine.*.dll" Publicize="true" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Documents\Mods\TimberAPI\core\" />
-    </ItemGroup>
-
     <PropertyGroup>
         <CopyDllToPath>false</CopyDllToPath>
         <ModPath>Documents/Mods</ModPath>

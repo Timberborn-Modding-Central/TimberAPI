@@ -1,14 +1,10 @@
 using TimberApi.SingletonSystem;
-using Timberborn.AssetSystem;
 using Timberborn.BlueprintSystem;
 using Timberborn.FactionSystem;
 using Timberborn.GameFactionSystem;
 using Timberborn.GameScene;
 using Timberborn.PrefabGroupSystem;
-using Timberborn.SingletonSystem;
-using Timberborn.SoundSystem;
 using Timberborn.WorldPersistence;
-using UnityEngine;
 
 namespace TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
 
@@ -27,7 +23,6 @@ public class GameEarlyLoadPrefabCollection(
 {
     public void Load()
     {
-        Debug.LogError("I Should be first");
         EarlyLoadPatcher.BlockLoading = false;
         
         ((GameSceneWorldSaveSupplier)worldSaveSupplier).Load();
@@ -37,6 +32,5 @@ public class GameEarlyLoadPrefabCollection(
         prefabGroupService.Load();
         
         EarlyLoadPatcher.BlockLoading = true;
-        Debug.LogError("Finished early load");
     }
 }

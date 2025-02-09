@@ -5,7 +5,7 @@ namespace TimberApi.SpecificationSystem;
 [Context("Game")]
 [Context("MainMenu")]
 [Context("MapEditor")]
-internal class SpecificationSystemConfigurator : Configurator
+internal class SpecSystemConfigurator : Configurator
 {
     protected override void Configure()
     {

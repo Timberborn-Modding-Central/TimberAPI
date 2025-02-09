@@ -1,6 +1,5 @@
 using System;
 using HarmonyLib;
-using TimberApi.HarmonySystem;
 using TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
 using Timberborn.ModManagerScene;
 using UnityEngine;

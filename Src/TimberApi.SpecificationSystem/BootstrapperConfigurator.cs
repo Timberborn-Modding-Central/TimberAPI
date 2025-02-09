@@ -8,7 +8,7 @@ internal class BootstrapperConfigurator : Configurator
 {
     protected override void Configure()
     {
-        MultiBind<IAssetProvider>().To<GeneratedSpecificationAssetProvider>().AsSingleton().AsExported();
-        Bind<GeneratedSpecificationAssetRepository>().AsSingleton().AsExported();
+        MultiBind<IAssetProvider>().To<GeneratedSpecAssetProvider>().AsSingleton().AsExported();
+        Bind<GeneratedSpecAssetRepository>().AsSingleton().AsExported();
     }
 }

@@ -7,15 +7,15 @@ using Object = UnityEngine.Object;
 
 namespace TimberApi.SpecificationSystem;
 
-internal class GeneratedSpecificationAssetProvider(
-    GeneratedSpecificationAssetRepository generatedSpecificationAssetRepository)
+internal class GeneratedSpecAssetProvider(
+    GeneratedSpecAssetRepository generatedSpecAssetRepository)
     : IAssetProvider
 {
     public bool IsBuiltIn => false;
 
     public bool TryLoad(string path, Type type, out OrderedAsset orderedAsset)
     {
-        if (type == typeof(TextAsset) && generatedSpecificationAssetRepository.GeneratedSpecificationAssets.TryGetValue(path, out var asset))
+        if (type == typeof(TextAsset) && generatedSpecAssetRepository.GeneratedSpecAssets.TryGetValue(path, out var asset))
         {
             orderedAsset = asset;
 
@@ -30,13 +30,13 @@ internal class GeneratedSpecificationAssetProvider(
     {
         if (typeof(T) != typeof(TextAsset)) return new List<OrderedAsset>();
 
-        return generatedSpecificationAssetRepository.GeneratedSpecificationAssets
+        return generatedSpecAssetRepository.GeneratedSpecAssets
             .Where(registeredSpecification => registeredSpecification.Key.StartsWith(path))
             .Select(registeredSpecification => registeredSpecification.Value);
     }
 
     public void Reset()
     {
-        generatedSpecificationAssetRepository.Reset();
+        generatedSpecAssetRepository.Reset();
     }
 }
