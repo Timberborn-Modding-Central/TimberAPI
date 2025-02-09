@@ -1,5 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Timberborn.ModManagerScene;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TimberApi.TesterMod;
 

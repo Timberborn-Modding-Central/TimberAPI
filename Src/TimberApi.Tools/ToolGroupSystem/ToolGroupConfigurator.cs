@@ -10,7 +10,7 @@ namespace TimberApi.Tools.ToolGroupSystem;
 
 [Context("Game")]
 [Context("MapEditor")]
-public class ToolGroupConfigurator : IConfigurator
+public class ToolGroupConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

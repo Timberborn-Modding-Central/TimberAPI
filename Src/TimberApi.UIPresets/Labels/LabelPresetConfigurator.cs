@@ -5,7 +5,7 @@ namespace TimberApi.UIPresets.Labels;
 [Context("MainMenu")]
 [Context("MapEditor")]
 [Context("Game")]
-public class LabelPresetConfigurator : IConfigurator
+public class LabelPresetConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

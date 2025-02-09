@@ -5,13 +5,13 @@ using Timberborn.TemplateSystem;
 namespace TimberApi.EntityLinkerSystem;
 
 [Context("Game")]
-public class EntityLinkerSystemConfigurator : IConfigurator
+public class EntityLinkerSystemConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<EntityLinkObjectSerializer>().AsSingleton();
-        containerDefinition.Bind<PickObjectTool>().AsSingleton();
-        containerDefinition.MultiBind<TemplateModule>().ToProvider(ProvideTemplateModule).AsSingleton();
+        Bind<EntityLinkObjectSerializer>().AsSingleton();
+        Bind<PickObjectTool>().AsSingleton();
+        MultiBind<TemplateModule>().ToProvider(ProvideTemplateModule).AsSingleton();
     }
 
     private static TemplateModule ProvideTemplateModule()

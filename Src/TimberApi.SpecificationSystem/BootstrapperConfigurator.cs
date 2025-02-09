@@ -3,12 +3,12 @@ using Timberborn.AssetSystem;
 
 namespace TimberApi.SpecificationSystem;
 
-[Context("Global")]
-internal class BootstrapperConfigurator : IConfigurator
+[Context("Bootstrapper")]
+internal class BootstrapperConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.MultiBind<IAssetProvider>().To<GeneratedSpecificationAssetProvider>().AsSingleton();
-        containerDefinition.Bind<GeneratedSpecificationAssetRepository>().AsSingleton();
+        MultiBind<IAssetProvider>().To<GeneratedSpecificationAssetProvider>().AsSingleton().AsExported();
+        Bind<GeneratedSpecificationAssetRepository>().AsSingleton().AsExported();
     }
 }

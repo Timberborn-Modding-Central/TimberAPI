@@ -5,7 +5,7 @@ using TimberApi.Tools.ToolSystem.Tools.Planting;
 namespace TimberApi.Tools.ToolSystem.Tools.GenericTool;
 
 [Context("Game")]
-public class GenericToolConfigurator : IConfigurator
+public class GenericToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

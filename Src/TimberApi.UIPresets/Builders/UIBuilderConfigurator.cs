@@ -5,7 +5,7 @@ namespace TimberApi.UIPresets.Builders;
 [Context("Game")]
 [Context("MainMenu")]
 [Context("MapEditor")]
-public class UIBuilderConfigurator : IConfigurator
+public class UIBuilderConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

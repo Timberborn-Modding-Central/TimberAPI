@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TimberApi.SingletonSystem;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem;
 
@@ -11,6 +12,8 @@ internal class GeneratedSpecificationLoader(
     public void PostLoad()
     {
         foreach (var specificationGenerator in specificationGenerators)
+        {
             generatedSpecificationAssetRepository.AddSpecificationRange(specificationGenerator.Generate());
+        }
     }
 }

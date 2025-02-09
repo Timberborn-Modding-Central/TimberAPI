@@ -29,7 +29,6 @@ internal class BuildingSpecificationObjectDeserializer(BuildingCostObjectDeseria
     /// <param name="objectSaver"></param>
     public void Serialize(BuildingSpecification value, IObjectSaver objectSaver)
     {
-        MortalSpec
         throw new NotSupportedException();
     }
 

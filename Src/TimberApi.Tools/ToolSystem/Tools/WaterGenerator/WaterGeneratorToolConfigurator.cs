@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 namespace TimberApi.Tools.ToolSystem.Tools.WaterGenerator;
 
 [Context("Game")]
-public class WaterGeneratorToolConfigurator : IConfigurator
+public class WaterGeneratorToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

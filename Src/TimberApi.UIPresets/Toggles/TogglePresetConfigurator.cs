@@ -5,7 +5,7 @@ namespace TimberApi.UIPresets.Toggles;
 [Context("MainMenu")]
 [Context("MapEditor")]
 [Context("Game")]
-public class TogglePresetConfigurator : IConfigurator
+public class TogglePresetConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

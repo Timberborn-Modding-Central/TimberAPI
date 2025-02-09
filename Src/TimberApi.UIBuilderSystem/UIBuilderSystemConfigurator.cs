@@ -7,7 +7,7 @@ namespace TimberApi.UIBuilderSystem;
 [Context("MainMenu")]
 [Context("MapEditor")]
 [Context("Game")]
-public class UIBuilderSystemConfigurator : IConfigurator
+public class UIBuilderSystemConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

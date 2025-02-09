@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 namespace TimberApi.Tools.ToolSystem.Tools.BuilderPriority;
 
 [Context("Game")]
-public class BuilderPriorityToolConfigurator : IConfigurator
+public class BuilderPriorityToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

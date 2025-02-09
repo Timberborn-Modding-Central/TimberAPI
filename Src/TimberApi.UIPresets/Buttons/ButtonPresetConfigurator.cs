@@ -5,7 +5,7 @@ namespace TimberApi.UIPresets.Buttons;
 [Context("Game")]
 [Context("MainMenu")]
 [Context("MapEditor")]
-public class ButtonPresetConfigurator : IConfigurator
+public class ButtonPresetConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

@@ -5,7 +5,7 @@ namespace TimberApi.UIPresets.Dropdowns;
 [Context("MainMenu")]
 [Context("MapEditor")]
 [Context("Game")]
-public class DropdownPresetConfigurator : IConfigurator
+public class DropdownPresetConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

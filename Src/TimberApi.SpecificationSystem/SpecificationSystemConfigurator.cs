@@ -5,10 +5,10 @@ namespace TimberApi.SpecificationSystem;
 [Context("Game")]
 [Context("MainMenu")]
 [Context("MapEditor")]
-internal class SpecificationSystemConfigurator : IConfigurator
+internal class SpecificationSystemConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<GeneratedSpecificationLoader>().AsSingleton();
+        Bind<GeneratedSpecificationLoader>().AsSingleton();
     }
 }

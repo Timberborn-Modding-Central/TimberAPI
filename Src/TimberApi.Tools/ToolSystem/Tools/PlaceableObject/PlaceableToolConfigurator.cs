@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 namespace TimberApi.Tools.ToolSystem.Tools.PlaceableObject;
 
 [Context("Game")]
-public class PlaceableToolConfigurator : IConfigurator
+public class PlaceableToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

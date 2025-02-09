@@ -8,7 +8,6 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <UseLocalTimberbornSource>false</UseLocalTimberbornSource>
         <CopyDllToPath>false</CopyDllToPath>
         <ModPath>Documents/Mods</ModPath>
     </PropertyGroup>
@@ -16,22 +15,20 @@
     <ItemGroup>
         <PackageReference Include="Lib.Harmony" Version="2.3.3"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="System.Collections.Immutable" Version="5.0.0"/>
-        <PackageReference Include="UnityEngine.Modules" Version="6000.0.31" IncludeAssets="compile"/>
+        <PackageReference Include="System.Collections.Immutable" Version="9.0.0"/>
         <PackageReference Include="Castle.Core" Version="5.1.1"/>
-        <!--        Needs to be updated-->
-        <PackageReference Include="Timberborn.GameLibs" Version="0.3.4.3-r.0" ExcludeAssets="All" Condition="$(UseLocalTimberbornSource)"/>
-    </ItemGroup>
 
-    <ItemGroup Condition="$(UseLocalTimberbornSource)">
-        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2"/>
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.3" />
 
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Timberborn.*.dll" Publicize="true">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
+
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
+        
+        <Reference Include="$(SolutionDir)Libs\UnityEngine.*.dll" Publicize="true" />
     </ItemGroup>
 
     <Target Name="CopyingFilesToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath)">
@@ -40,7 +37,7 @@
         </ItemGroup>
 
         <Message Text="### Copying files to plugins ###" Importance="high"/>
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\$(SolutionName)\core"/>
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\$(SolutionName)\core"/><Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(ModPath)\$(SolutionName)\core"/>
         <Copy SourceFiles="@(ModPackagePath)" DestinationFolder="$(ModPath)\$(SolutionName)\%(RecursiveDir)" SkipUnchangedFiles="true"/>
     </Target>
 </Project>

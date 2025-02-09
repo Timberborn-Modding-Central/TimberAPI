@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 namespace TimberApi.Tools.ToolSystem.Tools.BeaverGenerator;
 
 [Context("Game")]
-internal class BeaverGeneratorToolConfigurator : IConfigurator
+internal class BeaverGeneratorToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

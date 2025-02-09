@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 namespace TimberApi.Tools.ToolSystem.Tools.CancelPlanting;
 
 [Context("Game")]
-public class CancelPlantingToolConfigurator : IConfigurator
+public class CancelPlantingToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

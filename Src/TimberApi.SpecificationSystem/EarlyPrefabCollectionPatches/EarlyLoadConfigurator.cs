@@ -3,19 +3,19 @@ using Bindito.Core;
 namespace TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
 
 [Context("MapEditor")]
-public class EarlyLoadConfigurator : IConfigurator
+public class EarlyLoadConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<MapEditorEarlyLoadPrefabCollection>().AsSingleton();
+        Bind<MapEditorEarlyLoadPrefabCollection>().AsSingleton();
     }
 }
 
 [Context("Game")]
-public class EarlyLoadGameConfigurator : IConfigurator
+public class EarlyLoadGameConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<GameEarlyLoadPrefabCollection>().AsSingleton();
+        Bind<GameEarlyLoadPrefabCollection>().AsSingleton();
     }
 }

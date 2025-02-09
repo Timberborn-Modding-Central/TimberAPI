@@ -23,7 +23,6 @@ internal class BuildingSpecificationGenerator(
 
     public IEnumerable<GeneratedSpecification> Generate()
     {
-        Bluep
         var buildings = prefabService.GetAll<Building>();
 
         foreach (var building in buildings)

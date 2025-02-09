@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 namespace TimberApi.Tools.ToolSystem.Tools.Cursor;
 
 [Context("Game")]
-public class CursorToolConfigurator : IConfigurator
+public class CursorToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

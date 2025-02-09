@@ -5,7 +5,7 @@ using UnityEngine;
 namespace TimberApi.BuildingSpecificationSystem;
 
 [Context("Game")]
-internal class BuildingSpecificationConfigurator : IConfigurator
+internal class BuildingSpecificationConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

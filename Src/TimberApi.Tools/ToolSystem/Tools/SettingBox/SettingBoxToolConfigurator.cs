@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 namespace TimberApi.Tools.ToolSystem.Tools.SettingBox;
 
 [Context("Game")]
-public class SettingBoxToolConfigurator : IConfigurator
+public class SettingBoxToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

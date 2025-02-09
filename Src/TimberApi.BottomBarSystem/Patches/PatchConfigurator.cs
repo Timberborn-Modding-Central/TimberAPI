@@ -3,7 +3,7 @@ using Bindito.Core;
 namespace TimberApi.BottomBarSystem.Patches;
 
 [Context("Game")]
-public class PatchConfigurator : IConfigurator
+public class PatchConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

@@ -1,44 +1,46 @@
 using Bindito.Core;
-using TimberApi.SpecificationSystem;
 
 namespace TimberApi.TesterMod;
 
 [Context("Game")]
 [Context("MainMenu")]
 [Context("MapEditor")]
-public class AllConfigurator : IConfigurator
+public class AllConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        
+       
     }
 }
 
 [Context("Game")]
-public class GameConfigurator : IConfigurator
+public class GameConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
         
     }
 }
 
 [Context("MainMenu")]
-public class MainMenuConfigurator : IConfigurator
+public class MainMenuConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    // public void Configure(IContainerDefinition containerDefinition)
+    // {
+    //     // containerDefinition.Bind<Tester>().AsSingleton();
+    //     // containerDefinition.Bind<TestSpecificationDeserializer>().AsSingleton();
+    //     // containerDefinition.MultiBind<ISpecificationGenerator>().To<TestSpecificationGenerator>().AsSingleton();
+    // }
+
+    protected override void Configure()
     {
-        containerDefinition.Bind<Tester>().AsSingleton();
-        containerDefinition.Bind<TestSpecificationDeserializer>().AsSingleton();
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<TestSpecificationGenerator>().AsSingleton();
     }
 }
 
 [Context("MapEditor")]
-public class MapEditorConfigurator : IConfigurator
+public class MapEditorConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        
     }
 }

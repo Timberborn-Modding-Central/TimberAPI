@@ -4,7 +4,7 @@ namespace TimberApi.Tools.ToolSystem;
 
 [Context("Game")]
 [Context("MapEditor")]
-public class ToolSystemConfigurator : IConfigurator
+public class ToolSystemConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

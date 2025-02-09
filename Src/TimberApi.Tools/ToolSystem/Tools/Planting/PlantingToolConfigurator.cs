@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 
 [Context("Game")]
-public class PlantingToolConfigurator : IConfigurator
+public class PlantingToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

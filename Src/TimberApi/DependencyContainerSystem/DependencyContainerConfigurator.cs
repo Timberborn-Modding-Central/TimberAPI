@@ -5,10 +5,10 @@ namespace TimberApi.DependencyContainerSystem;
 [Context("MainMenu")]
 [Context("Game")]
 [Context("MapEditor")]
-public class DependencyContainerConfigurator : IConfigurator
+public class DependencyContainerConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<DependencyContainer>().AsSingleton();
+        Bind<DependencyContainer>().AsSingleton();
     }
 }

@@ -5,7 +5,7 @@ namespace TimberApi.Tools.ToolGroupUI;
 
 [Context("Game")]
 [Context("MapEditor")]
-public class ToolGroupUIConfigurator : IConfigurator
+public class ToolGroupUIConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

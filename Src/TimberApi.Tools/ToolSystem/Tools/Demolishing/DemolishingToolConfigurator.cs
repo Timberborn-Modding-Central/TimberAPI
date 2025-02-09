@@ -4,7 +4,7 @@ using TimberApi.SpecificationSystem;
 namespace TimberApi.Tools.ToolSystem.Tools.Demolishing;
 
 [Context("Game")]
-public class DemolishingToolConfigurator : IConfigurator
+public class DemolishingToolConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

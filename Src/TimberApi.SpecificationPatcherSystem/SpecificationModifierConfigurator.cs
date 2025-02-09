@@ -6,7 +6,7 @@ namespace TimberApi.SpecificationPatcherSystem;
 [Context("MainMenu")]
 [Context("MapEditor")]
 [Context("Game")]
-public class SpecificationModifierConfigurator : IConfigurator
+public class SpecificationModifierConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {

@@ -1,4 +1,3 @@
-using Bindito.Core;
 using HarmonyLib;
 using TimberApi.HarmonySystem;
 using Timberborn.GameScene;
@@ -9,8 +8,7 @@ namespace TimberApi;
 
 public class SceneManager
 {
-    public delegate void SceneChangedCallback(Scene previousScene, Scene currentScene,
-        IContainerDefinition currentContainerDefinition);
+    public delegate void SceneChangedCallback(Scene previousScene, Scene currentScene);
 
     public static Scene PreviousScene { get; private set; }
 
@@ -21,7 +19,7 @@ public class SceneManager
     internal static void Patch(Harmony harmony)
     {
         harmony.Patch(
-            harmony.GetMethodInfo<GameSceneConfigurator>(nameof(GameSceneConfigurator.Configure)),
+            harmony.GetMethodInfo<GameSceneConfigurator>("Configure"),
             harmony.GetHarmonyMethod<SceneManager>(nameof(PatchMasterSceneConfigurator))
         );
 
@@ -36,25 +34,25 @@ public class SceneManager
         );
     }
 
-    private static void PatchMasterSceneConfigurator(IContainerDefinition containerDefinition)
+    private static void PatchMasterSceneConfigurator()
     {
-        ChangeScene(Scene.Game, containerDefinition);
+        ChangeScene(Scene.Game);
     }
 
-    private static void PatchMainMenuSceneConfigurator(IContainerDefinition containerDefinition)
+    private static void PatchMainMenuSceneConfigurator()
     {
-        ChangeScene(Scene.MainMenu, containerDefinition);
+        ChangeScene(Scene.MainMenu);
     }
 
-    private static void PatchMapEditorSceneConfigurator(IContainerDefinition containerDefinition)
+    private static void PatchMapEditorSceneConfigurator()
     {
-        ChangeScene(Scene.MapEditor, containerDefinition);
+        ChangeScene(Scene.MapEditor);
     }
 
-    public static void ChangeScene(Scene sceneEntrypoint, IContainerDefinition currentContainerDefinition)
+    public static void ChangeScene(Scene sceneEntrypoint)
     {
         PreviousScene = CurrentScene;
         CurrentScene = sceneEntrypoint;
-        SceneChanged(PreviousScene, CurrentScene, currentContainerDefinition);
+        SceneChanged(PreviousScene, CurrentScene);
     }
 }

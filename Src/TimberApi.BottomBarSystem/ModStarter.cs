@@ -17,8 +17,7 @@ public class ModStarter : IModStarter
         SceneManager.SceneChanged += SceneManagerOnSceneChanged;
     }
 
-    private void SceneManagerOnSceneChanged(Scene previousscene, Scene currentscene,
-        IContainerDefinition currentcontainerdefinition)
+    private void SceneManagerOnSceneChanged(Scene previousscene, Scene currentscene)
     {
         if (currentscene != Scene.Game)
         {

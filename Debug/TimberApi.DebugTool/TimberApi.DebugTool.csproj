@@ -20,14 +20,12 @@
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="System.Collections.Immutable" Version="8.0.0"/>
-        <PackageReference Include="UnityEngine.Modules" Version="6000.0.4" IncludeAssets="compile"/>
         <PackageReference Include="Castle.Core" Version="5.1.1"/>
         <!--        Needs to be updated-->
-        <PackageReference Include="Timberborn.GameLibs" Version="0.3.4.3-r.0" ExcludeAssets="All" Condition="$(UseLocalTimberbornSource)"/>
     </ItemGroup>
 
-    <ItemGroup Condition="$(UseLocalTimberbornSource)">
-        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2"/>
+    <ItemGroup >
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.3"/>
 
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Timberborn.*.dll" Publicize="true">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
@@ -35,6 +33,8 @@
         <Reference Include="$(SolutionDir)Timberborn\Timberborn_Data\Managed\Bindito.*.dll">
             <DestinationSubDirectory>libs/</DestinationSubDirectory>
         </Reference>
+
+        <Reference Include="$(SolutionDir)Libs\UnityEngine.*.dll" Publicize="true" />
     </ItemGroup>
 
     <Target Name="CopyingFilesToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath)">

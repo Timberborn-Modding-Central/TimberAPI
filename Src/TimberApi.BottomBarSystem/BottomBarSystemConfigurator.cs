@@ -3,7 +3,7 @@ using Bindito.Core;
 namespace TimberApi.BottomBarSystem;
 
 [Context("Game")]
-public class BottomBarSystemConfigurator : IConfigurator
+public class BottomBarSystemConfigurator : Configurator
 {
     public void Configure(IContainerDefinition containerDefinition)
     {
