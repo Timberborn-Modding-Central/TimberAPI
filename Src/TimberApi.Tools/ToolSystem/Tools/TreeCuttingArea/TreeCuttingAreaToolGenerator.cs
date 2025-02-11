@@ -5,16 +5,16 @@ using Timberborn.ForestryUI;
 
 namespace TimberApi.Tools.ToolSystem.Tools.TreeCuttingArea;
 
-public class TreeCuttingAreaToolGenerator : ISpecificationGenerator
+public class TreeCuttingAreaToolGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         yield return CreateCuttingTreeGroup();
         yield return TreeCuttingAreaSelectionTool();
         yield return TreeCuttingAreaUnselectionTool();
     }
 
-    private static GeneratedSpecification TreeCuttingAreaUnselectionTool()
+    private static GeneratedSpec TreeCuttingAreaUnselectionTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -35,10 +35,10 @@ public class TreeCuttingAreaToolGenerator : ISpecificationGenerator
             }
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.TreeCuttingAreaUnselection", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.TreeCuttingAreaUnselection", json);
     }
 
-    private static GeneratedSpecification TreeCuttingAreaSelectionTool()
+    private static GeneratedSpec TreeCuttingAreaSelectionTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -59,10 +59,10 @@ public class TreeCuttingAreaToolGenerator : ISpecificationGenerator
             }
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.TreeCuttingAreaSelection", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.TreeCuttingAreaSelection", json);
     }
 
-    private static GeneratedSpecification CreateCuttingTreeGroup()
+    private static GeneratedSpec CreateCuttingTreeGroup()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -82,6 +82,6 @@ public class TreeCuttingAreaToolGenerator : ISpecificationGenerator
             }
         });
 
-        return new GeneratedSpecification("Tools", "ToolGroupSpecification.TreeCutting", json);
+        return new GeneratedSpec("Tools", "ToolGroupSpecification.TreeCutting", json);
     }
 }

@@ -10,9 +10,9 @@ using Timberborn.PrefabSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 
-public class PlantingToolGenerator(PrefabService prefabService) : ISpecificationGenerator
+public class PlantingToolGenerator(PrefabService prefabService) : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         var plantables = prefabService.GetAll<PlantableSpec>().ToList();
         
@@ -43,7 +43,7 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecification
                 }
             });
 
-            yield return new GeneratedSpecification("Tools", $"ToolSpecification.{plantable.PrefabName}", json, true);
+            yield return new GeneratedSpec("Tools", $"ToolSpecification.{plantable.PrefabName}", json, true);
         }
 
         yield return CreateFieldsToolGroupSpecification();
@@ -51,7 +51,7 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecification
         yield return CreateForestryPlantingToolGroupSpecification();
     }
 
-    private static GeneratedSpecification CreateFieldsToolGroupSpecification()
+    private static GeneratedSpec CreateFieldsToolGroupSpecification()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -72,10 +72,10 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecification
         });
 
 
-        return new GeneratedSpecification("Tools", "ToolGroupSpecification.Fields", json);
+        return new GeneratedSpec("Tools", "ToolGroupSpecification.Fields", json);
     }
 
-    private static GeneratedSpecification CreateForestryPlantingToolGroupSpecification()
+    private static GeneratedSpec CreateForestryPlantingToolGroupSpecification()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -95,6 +95,6 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecification
             }
         });
 
-        return new GeneratedSpecification("Tools", "ToolGroupSpecification.Forestry", json);
+        return new GeneratedSpec("Tools", "ToolGroupSpecification.Forestry", json);
     }
 }

@@ -42,7 +42,10 @@ internal class EarlyLoadPatcher
 
     public static bool BlockingLoadableSingletonLoad()
     {
-        if (SceneManager.CurrentScene == Scene.MainMenu) return true;
+        if (ContextManager.CurrentContext == "MainMenu")
+        {
+            return true;
+        }
 
         return !BlockLoading;
     }

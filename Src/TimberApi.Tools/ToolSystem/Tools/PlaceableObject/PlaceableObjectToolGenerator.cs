@@ -8,9 +8,9 @@ using Timberborn.Wonders;
 
 namespace TimberApi.Tools.ToolSystem.Tools.PlaceableObject;
 
-public class PlaceableObjectToolGenerator(PrefabService prefabService) : ISpecificationGenerator
+public class PlaceableObjectToolGenerator(PrefabService prefabService) : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         foreach (var placeableBlockObject in prefabService.GetAll<PlaceableBlockObjectSpec>())
         {
@@ -38,7 +38,7 @@ public class PlaceableObjectToolGenerator(PrefabService prefabService) : ISpecif
                 }
             });
 
-            yield return new GeneratedSpecification("Tools", $"ToolSpecification.{prefab.PrefabName}", json, true);
+            yield return new GeneratedSpec("Tools", $"ToolSpecification.{prefab.PrefabName}", json, true);
         }
     }
 }

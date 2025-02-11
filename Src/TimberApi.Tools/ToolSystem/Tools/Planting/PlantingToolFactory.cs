@@ -9,6 +9,7 @@ using Timberborn.PlantingUI;
 using Timberborn.PrefabSystem;
 using Timberborn.SelectionToolSystem;
 using Timberborn.ToolSystem;
+using UnityEngine;
 
 namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 

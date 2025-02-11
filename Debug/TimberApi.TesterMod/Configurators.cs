@@ -25,11 +25,11 @@ public class GameConfigurator : Configurator
 [Context("MainMenu")]
 public class MainMenuConfigurator : Configurator
 {
-    // public void Configure(IContainerDefinition containerDefinition)
+    // protected override void Configure()
     // {
-    //     // containerDefinition.Bind<Tester>().AsSingleton();
-    //     // containerDefinition.Bind<TestSpecificationDeserializer>().AsSingleton();
-    //     // containerDefinition.MultiBind<ISpecificationGenerator>().To<TestSpecificationGenerator>().AsSingleton();
+    //     // Bind<Tester>().AsSingleton();
+    //     // Bind<TestSpecificationDeserializer>().AsSingleton();
+    //     // MultiBind<ISpecGenerator>().To<TestSpecificationGenerator>().AsSingleton();
     // }
 
     protected override void Configure()

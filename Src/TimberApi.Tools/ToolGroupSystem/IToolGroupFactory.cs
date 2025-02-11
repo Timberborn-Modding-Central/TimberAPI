@@ -4,5 +4,5 @@ public interface IToolGroupFactory
 {
     public string Id { get; }
 
-    public IToolGroup Create(ToolGroupSpec toolGroupSpec);
+    public IToolGroup Create(TimberApiToolGroupSpec timberApiToolGroupSpec);
 }

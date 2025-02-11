@@ -6,8 +6,8 @@ namespace TimberApi.Tools.ToolSystem.Tools.TreeCuttingArea;
 [Context("Game")]
 public class TreeCuttingAreaToolConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<TreeCuttingAreaToolGenerator>().AsSingleton();
+        MultiBind<ISpecGenerator>().To<TreeCuttingAreaToolGenerator>().AsSingleton();
     }
 }

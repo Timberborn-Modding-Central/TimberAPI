@@ -5,9 +5,9 @@ using Timberborn.WaterBrushesUI;
 
 namespace TimberApi.Tools.ToolSystem.Tools.WaterGenerator;
 
-public class WaterGeneratorToolGenerator : ISpecificationGenerator
+public class WaterGeneratorToolGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -27,6 +27,6 @@ public class WaterGeneratorToolGenerator : ISpecificationGenerator
             }
         });
 
-        yield return new GeneratedSpecification("Root", "ToolSpecification.WaterGenerator", json);
+        yield return new GeneratedSpec("Root", "ToolSpecification.WaterGenerator", json);
     }
 }

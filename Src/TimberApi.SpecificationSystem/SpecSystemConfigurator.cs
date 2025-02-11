@@ -9,6 +9,6 @@ internal class SpecSystemConfigurator : Configurator
 {
     protected override void Configure()
     {
-        Bind<GeneratedSpecificationLoader>().AsSingleton();
+        Bind<GeneratedSpecLoader>().AsSingleton();
     }
 }

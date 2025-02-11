@@ -7,8 +7,8 @@ namespace TimberApi.Tools.ToolSystem.Tools.GenericTool;
 [Context("Game")]
 public class GenericToolConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.MultiBind<IToolFactory>().To<GenericToolFactory>().AsSingleton();
+        MultiBind<IToolFactory>().To<GenericToolFactory>().AsSingleton();
     }
 }

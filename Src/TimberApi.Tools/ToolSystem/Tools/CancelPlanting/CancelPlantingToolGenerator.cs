@@ -4,15 +4,15 @@ using TimberApi.SpecificationSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.CancelPlanting;
 
-public class CancelPlantingToolGenerator : ISpecificationGenerator
+public class CancelPlantingToolGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         yield return FieldsCancelPlantingTool();
         yield return ForestryCancelPlantingTool();
     }
 
-    private static GeneratedSpecification ForestryCancelPlantingTool()
+    private static GeneratedSpec ForestryCancelPlantingTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -28,10 +28,10 @@ public class CancelPlantingToolGenerator : ISpecificationGenerator
             Hidden = false
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.ForestryCancelPlanting", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.ForestryCancelPlanting", json);
     }
 
-    private static GeneratedSpecification FieldsCancelPlantingTool()
+    private static GeneratedSpec FieldsCancelPlantingTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -47,6 +47,6 @@ public class CancelPlantingToolGenerator : ISpecificationGenerator
             Hidden = false
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.FieldsCancelPlanting", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.FieldsCancelPlanting", json);
     }
 }

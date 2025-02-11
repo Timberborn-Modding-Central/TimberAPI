@@ -17,7 +17,7 @@ public class BottomBarService(
 
     private readonly Dictionary<string, int> _toolGroupRows = new();
 
-    private ImmutableDictionary<string, ToolGroupSpec> _toolGroupSpecs = null!;
+    private ImmutableDictionary<string, TimberApiToolGroupSpec> _toolGroupSpecs = null!;
 
     private ImmutableArray<BottomBarButton> _toolItemButtons;
 
@@ -67,7 +67,7 @@ public class BottomBarService(
         return row;
     }
 
-    private int CalculateGroupRow(ToolGroupSpec toolGroupSpec)
+    private int CalculateGroupRow(TimberApiToolGroupSpec toolGroupSpec)
     {
         var row = 0;
 

@@ -13,19 +13,23 @@ public class ModStarter : IModStarter
 
     public void StartMod()
     {
-        _harmony = new Harmony("TimberApi.BottomBar");
-        SceneManager.SceneChanged += SceneManagerOnSceneChanged;
+        _harmony = new Harmony("SWAGGERSWAGY");
+        ContextManager.ContextChanged += SceneManagerOnContextChanged;
     }
 
-    private void SceneManagerOnSceneChanged(Scene previousscene, Scene currentscene)
+    private void SceneManagerOnContextChanged(string previousscene, string currentscene)
     {
-        if (currentscene != Scene.Game)
+        if (currentscene != "Game")
         {
-            _harmony.UnpatchAll("TimberApi.BottomBar");
+            Debug.LogWarning("REMOVE PATCHES");
             return;
         }
 
-        if (previousscene == Scene.Game) return;
+        if (previousscene == "Game")
+        {
+            Debug.LogWarning("It went from game to game");
+            return;
+        }
 
         try
         {
@@ -34,6 +38,7 @@ public class ModStarter : IModStarter
             ToolButtonPatcher.Patch(_harmony);
             ToolGroupButtonPatcher.Patch(_harmony);
             ToolGroupManagerPatcher.Patch(_harmony);
+            DisableTimberbornToolGeneration.Patch(_harmony);
         }
         catch (Exception e)
         {

@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using Timberborn.BotsUI;
+using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.BotGenerator;
 
-public class BotGeneratorToolGenerator : ISpecificationGenerator
+public class BotGeneratorToolGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -26,7 +27,7 @@ public class BotGeneratorToolGenerator : ISpecificationGenerator
                 ClassName = typeof(BotGeneratorTool).FullName
             }
         });
-
-        yield return new GeneratedSpecification("Tools", "ToolSpecification.BotGenerator", json);
+        
+        yield return new GeneratedSpec("Tools", "ToolSpecification.BotGenerator", json);
     }
 }

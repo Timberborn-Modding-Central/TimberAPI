@@ -4,14 +4,14 @@ using TimberApi.SpecificationSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.SettingBox;
 
-public class SettingBoxToolGenerator : ISpecificationGenerator
+public class SettingBoxToolGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         yield return SettingBoxTool();
     }
 
-    private static GeneratedSpecification SettingBoxTool()
+    private static GeneratedSpec SettingBoxTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -31,6 +31,6 @@ public class SettingBoxToolGenerator : ISpecificationGenerator
             }
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.SettingBox", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.SettingBox", json);
     }
 }

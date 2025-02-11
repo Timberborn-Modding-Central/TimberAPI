@@ -68,7 +68,7 @@
 - Added BottomBarRework.
 - Added ToolSpecifications.
 - Enhanced ToolGroupSpecifications.
-- Added Code SpecificationGeneration `ISpecificationGenerator`.
+- Added Code SpecificationGeneration `ISpecGenerator`.
 - Added `SceneManager`.
 - Enhanced SingletonSystem (`IEarlyLoadableSingleton`, `ILateLoadableSingleton`).
 - Extended `IObjectLoader` with more default fallbacks.

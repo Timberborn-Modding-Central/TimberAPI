@@ -7,26 +7,26 @@ namespace TimberApi.Tools.ToolUI;
 [Context("MapEditor")]
 public class ToolGroupUIConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<ToolButtonFactoryService>().AsSingleton();
+        Bind<ToolButtonFactoryService>().AsSingleton();
 
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonBlueFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonRedFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGreenFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonBrownFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonBlueFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonRedFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonGreenFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonBrownFactory>().AsSingleton();
 
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessBrownFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessGreenFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessRedFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessBlueFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessBrownFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessGreenFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessRedFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonGrouplessBlueFactory>().AsSingleton();
 
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonWonderBrownFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonWonderGreenFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonWonderRedFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonWonderBlueFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonWonderBrownFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonWonderGreenFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonWonderRedFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonWonderBlueFactory>().AsSingleton();
 
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonWonderFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolButtonFactory>().To<ToolButtonDefaultFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonWonderFactory>().AsSingleton();
+        MultiBind<IToolButtonFactory>().To<ToolButtonDefaultFactory>().AsSingleton();
     }
 }

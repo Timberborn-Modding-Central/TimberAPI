@@ -5,9 +5,9 @@ using Timberborn.PrioritySystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.BuilderPriority;
 
-public class BuilderPriorityToolGenerator : ISpecificationGenerator
+public class BuilderPriorityToolGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         foreach (var priority in Priorities.Ascending)
         {
@@ -29,13 +29,13 @@ public class BuilderPriorityToolGenerator : ISpecificationGenerator
                 }
             });
 
-            yield return new GeneratedSpecification("Tools", $"ToolSpecification.{priority.ToString()}", json);
+            yield return new GeneratedSpec("Tools", $"ToolSpecification.{priority.ToString()}", json);
         }
 
         yield return CreatePriorityToolGroup();
     }
 
-    private static GeneratedSpecification CreatePriorityToolGroup()
+    private static GeneratedSpec CreatePriorityToolGroup()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -55,6 +55,6 @@ public class BuilderPriorityToolGenerator : ISpecificationGenerator
             }
         });
 
-        return new GeneratedSpecification("Tools", "ToolGroupSpecification.Priority", json);
+        return new GeneratedSpec("Tools", "ToolGroupSpecification.Priority", json);
     }
 }

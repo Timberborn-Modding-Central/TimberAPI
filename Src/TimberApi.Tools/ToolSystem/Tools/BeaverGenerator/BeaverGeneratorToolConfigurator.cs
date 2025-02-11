@@ -6,8 +6,8 @@ namespace TimberApi.Tools.ToolSystem.Tools.BeaverGenerator;
 [Context("Game")]
 internal class BeaverGeneratorToolConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<BeaverGeneratorToolGenerator>().AsSingleton();
+        MultiBind<ISpecGenerator>().To<BeaverGeneratorToolGenerator>().AsSingleton();
     }
 }

@@ -6,10 +6,10 @@ namespace TimberApi.Tools.ToolSystem;
 [Context("MapEditor")]
 public class ToolSystemConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<ToolService>().AsSingleton();
-        containerDefinition.Bind<ToolFactoryService>().AsSingleton();
-        containerDefinition.Bind<ToolSpecService>().AsSingleton();
+        Bind<ToolService>().AsSingleton();
+        Bind<ToolFactoryService>().AsSingleton();
+        Bind<ToolSpecService>().AsSingleton();
     }
 }

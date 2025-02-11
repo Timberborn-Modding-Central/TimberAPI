@@ -6,8 +6,8 @@ namespace TimberApi.Tools.ToolUI;
 [Context("MapEditor")]
 public class ToolUIConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<ToolButtonFactory>().AsSingleton();
+        Bind<ToolButtonFactory>().AsSingleton();
     }
 }

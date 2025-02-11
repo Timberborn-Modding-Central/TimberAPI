@@ -6,8 +6,8 @@ namespace TimberApi.Tools.ToolSystem.Tools.Cursor;
 [Context("Game")]
 public class CursorToolConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<CursorToolGenerator>().AsSingleton();
+        MultiBind<ISpecGenerator>().To<CursorToolGenerator>().AsSingleton();
     }
 }

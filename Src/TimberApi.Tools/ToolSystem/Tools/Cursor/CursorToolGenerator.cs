@@ -5,9 +5,9 @@ using Timberborn.CursorToolSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.Cursor;
 
-public class CursorToolGenerator : ISpecificationGenerator
+public class CursorToolGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -27,6 +27,6 @@ public class CursorToolGenerator : ISpecificationGenerator
             }
         });
 
-        yield return new GeneratedSpecification("Tools", "ToolSpecification.Cursor", json);
+        yield return new GeneratedSpec("Tools", "ToolSpecification.Cursor", json);
     }
 }

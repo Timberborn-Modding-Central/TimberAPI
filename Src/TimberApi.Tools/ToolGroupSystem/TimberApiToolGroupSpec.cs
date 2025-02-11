@@ -2,7 +2,7 @@ using Timberborn.BlueprintSystem;
 
 namespace TimberApi.Tools.ToolGroupSystem;
 
-public record ToolGroupSpec : Timberborn.ToolSystem.ToolGroupSpec
+public record TimberApiToolGroupSpec : Timberborn.ToolSystem.ToolGroupSpec
 {
     [Serialize]
     public string Type { get; init; }

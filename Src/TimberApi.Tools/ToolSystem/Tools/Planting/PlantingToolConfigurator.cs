@@ -6,9 +6,9 @@ namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 [Context("Game")]
 public class PlantingToolConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.MultiBind<IToolFactory>().To<PlantingToolFactory>().AsSingleton();
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<PlantingToolGenerator>().AsSingleton();
+        MultiBind<IToolFactory>().To<PlantingToolFactory>().AsSingleton();
+        MultiBind<ISpecGenerator>().To<PlantingToolGenerator>().AsSingleton();
     }
 }

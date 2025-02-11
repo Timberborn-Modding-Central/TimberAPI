@@ -6,13 +6,13 @@ namespace TimberApi.Tools.ToolSystem.Tools.Demolishing;
 [Context("Game")]
 public class DemolishingToolConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.MultiBind<IToolFactory>().To<DemolishableUnselectionToolFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolFactory>().To<DemolishableSelectionToolFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolFactory>().To<EntityBlockObjectDeletionToolFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolFactory>().To<BuildingDeconstructionToolFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolFactory>().To<DeleteRubbleToolFactory>().AsSingleton();
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<DemolishingToolGenerator>().AsSingleton();
+        MultiBind<IToolFactory>().To<DemolishableUnselectionToolFactory>().AsSingleton();
+        MultiBind<IToolFactory>().To<DemolishableSelectionToolFactory>().AsSingleton();
+        MultiBind<IToolFactory>().To<EntityBlockObjectDeletionToolFactory>().AsSingleton();
+        MultiBind<IToolFactory>().To<BuildingDeconstructionToolFactory>().AsSingleton();
+        MultiBind<IToolFactory>().To<DeleteRubbleToolFactory>().AsSingleton();
+        MultiBind<ISpecGenerator>().To<DemolishingToolGenerator>().AsSingleton();
     }
 }

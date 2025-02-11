@@ -88,7 +88,6 @@ public class ToolButtonFactory(
         return Create(tool, toolImage, root);
     }
 
-
     public ToolButton Create(Tool tool, Sprite toolImage, VisualElement root)
     {
         root.Q<VisualElement>("ToolImage").style.backgroundImage = new StyleBackground(toolImage);

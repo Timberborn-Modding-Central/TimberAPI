@@ -12,16 +12,16 @@ namespace TimberApi.Tools.ToolGroupSystem;
 [Context("MapEditor")]
 public class ToolGroupConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<ToolGroupSpecificationService>().AsSingleton();
-        containerDefinition.Bind<ToolGroupService>().AsSingleton();
-        containerDefinition.Bind<ToolGroupFactoryService>().AsSingleton();
-        containerDefinition.MultiBind<IToolGroupFactory>().To<ConstructionModeToolGroupFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolGroupFactory>().To<DefaultToolGroupFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolGroupFactory>().To<PlantingModeToolGroupFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolGroupFactory>().To<TreeCuttingAreaToolGroupFactory>().AsSingleton();
-        containerDefinition.MultiBind<IToolGroupFactory>().To<BuilderPriorityToolGroupFactory>().AsSingleton();
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<TimberbornGroupGenerator>().AsSingleton();
+        Bind<ToolGroupSpecificationService>().AsSingleton();
+        Bind<ToolGroupService>().AsSingleton();
+        Bind<ToolGroupFactoryService>().AsSingleton();
+        MultiBind<IToolGroupFactory>().To<ConstructionModeToolGroupFactory>().AsSingleton();
+        MultiBind<IToolGroupFactory>().To<DefaultToolGroupFactory>().AsSingleton();
+        MultiBind<IToolGroupFactory>().To<PlantingModeToolGroupFactory>().AsSingleton();
+        MultiBind<IToolGroupFactory>().To<TreeCuttingAreaToolGroupFactory>().AsSingleton();
+        MultiBind<IToolGroupFactory>().To<BuilderPriorityToolGroupFactory>().AsSingleton();
+        MultiBind<ISpecGenerator>().To<TimberbornGroupGenerator>().AsSingleton();
     }
 }

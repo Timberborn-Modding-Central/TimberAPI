@@ -3,7 +3,7 @@ using TimberApi.SingletonSystem;
 
 namespace TimberApi.SpecificationSystem;
 
-internal class GeneratedSpecificationLoader(
+internal class GeneratedSpecLoader(
     GeneratedSpecAssetRepository generatedSpecAssetRepository,
     IEnumerable<ISpecGenerator> specificationGenerators)
     : ITimberApiPostLoadableSingleton

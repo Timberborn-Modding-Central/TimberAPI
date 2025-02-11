@@ -4,16 +4,16 @@ public class PlantingModeToolGroupFactory : IToolGroupFactory
 {
     public string Id => "PlantingModeToolGroup";
 
-    public IToolGroup Create(ToolGroupSpec toolGroupSpec)
+    public IToolGroup Create(TimberApiToolGroupSpec timberApiToolGroupSpec)
     {
         return new PlantingModeToolGroup(
-            toolGroupSpec.Id,
-            toolGroupSpec.GroupId,
-            toolGroupSpec.Order,
-            toolGroupSpec.Section,
-            toolGroupSpec.NameLocKey,
-            toolGroupSpec.DevMode,
-            toolGroupSpec.Icon
+            timberApiToolGroupSpec.Id,
+            timberApiToolGroupSpec.GroupId,
+            timberApiToolGroupSpec.Order,
+            timberApiToolGroupSpec.Section,
+            timberApiToolGroupSpec.NameLocKey,
+            timberApiToolGroupSpec.DevMode,
+            timberApiToolGroupSpec.Icon
         );
     }
 }

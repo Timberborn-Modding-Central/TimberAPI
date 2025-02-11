@@ -2,25 +2,24 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Timberborn.BlueprintSystem;
-using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 
 namespace TimberApi.Tools.ToolGroupSystem;
 
 public class ToolGroupSpecificationService(ISpecService specificationService) : ILoadableSingleton
 {
-    private ImmutableDictionary<string, ToolGroupSpec> _toolGroupSpecifications = null!;
+    private ImmutableDictionary<string, TimberApiToolGroupSpec> _toolGroupSpecifications = null!;
 
-    public ImmutableArray<ToolGroupSpec> ToolGroupSpecifications =>
+    public ImmutableArray<TimberApiToolGroupSpec> ToolGroupSpecifications =>
         _toolGroupSpecifications.Select(pair => pair.Value).ToImmutableArray();
 
     public void Load()
     {
-        _toolGroupSpecifications = specificationService.GetSpecs<ToolGroupSpec>()
+        _toolGroupSpecifications = specificationService.GetSpecs<TimberApiToolGroupSpec>()
             .ToImmutableDictionary(specification => specification.Id.ToLower());
     }
 
-    public ToolGroupSpec Get(string id)
+    public TimberApiToolGroupSpec Get(string id)
     {
         if (!_toolGroupSpecifications.TryGetValue(id.ToLower(), out var toolGroupSpecification))
             throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
@@ -28,14 +27,14 @@ public class ToolGroupSpecificationService(ISpecService specificationService) : 
         return toolGroupSpecification;
     }
 
-    public IEnumerable<ToolGroupSpec> GetByGroupId(string groupId)
+    public IEnumerable<TimberApiToolGroupSpec> GetByGroupId(string groupId)
     {
         return _toolGroupSpecifications
             .Where(pair => pair.Value.GroupId?.ToLower() == groupId.ToLower())
             .Select(pair => pair.Value);
     }
 
-    public IEnumerable<ToolGroupSpec> GetBySection(string section)
+    public IEnumerable<TimberApiToolGroupSpec> GetBySection(string section)
     {
         return _toolGroupSpecifications
             .Where(pair => pair.Value.Section.ToLower().Equals(section.ToLower()))

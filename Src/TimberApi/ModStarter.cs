@@ -16,7 +16,7 @@ public class ModStarter : IModStarter
         {
             var harmony = new Harmony("TimberApi");
 
-            SceneManager.Patch(harmony);
+            ContextManager.Patch(harmony);
 
             harmony.Patch(
                 harmony.GetMethodInfo<SingletonLifecycleService>(nameof(SingletonLifecycleService.LoadAll)),

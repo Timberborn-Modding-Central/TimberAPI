@@ -6,8 +6,8 @@ namespace TimberApi.Tools.ToolSystem.Tools.WaterGenerator;
 [Context("Game")]
 public class WaterGeneratorToolConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<WaterGeneratorToolGenerator>().AsSingleton();
+        MultiBind<ISpecGenerator>().To<WaterGeneratorToolGenerator>().AsSingleton();
     }
 }

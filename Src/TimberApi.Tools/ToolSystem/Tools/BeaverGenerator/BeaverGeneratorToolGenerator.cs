@@ -5,9 +5,9 @@ using Timberborn.BeaversUI;
 
 namespace TimberApi.Tools.ToolSystem.Tools.BeaverGenerator;
 
-internal class BeaverGeneratorToolGenerator : ISpecificationGenerator
+internal class BeaverGeneratorToolGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -27,6 +27,6 @@ internal class BeaverGeneratorToolGenerator : ISpecificationGenerator
             }
         });
 
-        yield return new GeneratedSpecification("tools", "ToolSpecification.BeaverGenerator", json);
+        yield return new GeneratedSpec("tools", "ToolSpecification.BeaverGenerator", json);
     }
 }

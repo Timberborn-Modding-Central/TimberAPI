@@ -4,42 +4,42 @@ using TimberApi.SpecificationSystem;
 
 namespace TimberApi.Tools.ToolGroupSystem;
 
-public class TimberbornGroupGenerator : ISpecificationGenerator
+public class TimberbornGroupGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         yield return MapEditorGroupDevelopment();
         yield return RuinsGroupDevelopment();
         yield return OtherGroupHidden();
     }
 
-    private static GeneratedSpecification MapEditorGroupDevelopment()
+    private static GeneratedSpec MapEditorGroupDevelopment()
     {
         var json = JsonConvert.SerializeObject(new
         {
             DevMode = true
         });
 
-        return new GeneratedSpecification(json, "MapEditor", "ToolGroupSpecification");
+        return new GeneratedSpec(json, "MapEditor", "ToolGroupSpecification");
     }
 
-    private static GeneratedSpecification RuinsGroupDevelopment()
+    private static GeneratedSpec RuinsGroupDevelopment()
     {
         var json = JsonConvert.SerializeObject(new
         {
             DevMode = true
         });
 
-        return new GeneratedSpecification(json, "Ruins", "ToolGroupSpecification");
+        return new GeneratedSpec(json, "Ruins", "ToolGroupSpecification");
     }
 
-    private static GeneratedSpecification OtherGroupHidden()
+    private static GeneratedSpec OtherGroupHidden()
     {
         var json = JsonConvert.SerializeObject(new
         {
             Hidden = true
         });
 
-        return new GeneratedSpecification(json, "Other", "ToolGroupSpecification");
+        return new GeneratedSpec(json, "Other", "ToolGroupSpecification");
     }
 }

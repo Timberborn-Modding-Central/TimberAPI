@@ -4,9 +4,9 @@ using TimberApi.SpecificationSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.Demolishing;
 
-public class DemolishingToolGenerator : ISpecificationGenerator
+public class DemolishingToolGenerator : ISpecGenerator
 {
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
         yield return CreateDemolishingToolGroup();
         yield return DemolishableSelectionTool();
@@ -16,7 +16,7 @@ public class DemolishingToolGenerator : ISpecificationGenerator
         yield return EntityBlockObjectDeletionTool();
     }
 
-    private static GeneratedSpecification EntityBlockObjectDeletionTool()
+    private static GeneratedSpec EntityBlockObjectDeletionTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -32,10 +32,10 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             Hidden = false
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.EntityBlockObjectDeletion", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.EntityBlockObjectDeletion", json);
     }
 
-    private static GeneratedSpecification DeleteRecoveredGoodStackTool()
+    private static GeneratedSpec DeleteRecoveredGoodStackTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -51,10 +51,10 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             Hidden = false
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.DeleteRecoveredGoodStack", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.DeleteRecoveredGoodStack", json);
     }
 
-    private static GeneratedSpecification BuildingDeconstructionTool()
+    private static GeneratedSpec BuildingDeconstructionTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -70,10 +70,10 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             Hidden = false
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.BuildingDeconstruction", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.BuildingDeconstruction", json);
     }
 
-    private static GeneratedSpecification DemolishableSelectionTool()
+    private static GeneratedSpec DemolishableSelectionTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -89,10 +89,10 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             Hidden = false
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.DemolishableSelection", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.DemolishableSelection", json);
     }
 
-    private static GeneratedSpecification DemolishableUnselectionTool()
+    private static GeneratedSpec DemolishableUnselectionTool()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -108,10 +108,10 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             Hidden = false
         });
 
-        return new GeneratedSpecification("Tools", "ToolSpecification.DemolishableUnselection", json);
+        return new GeneratedSpec("Tools", "ToolSpecification.DemolishableUnselection", json);
     }
 
-    private static GeneratedSpecification CreateDemolishingToolGroup()
+    private static GeneratedSpec CreateDemolishingToolGroup()
     {
         var json = JsonConvert.SerializeObject(new
         {
@@ -131,6 +131,6 @@ public class DemolishingToolGenerator : ISpecificationGenerator
             }
         });
 
-        return new GeneratedSpecification("Tools", "ToolGroupSpecification.Demolishing", json);
+        return new GeneratedSpec("Tools", "ToolGroupSpecification.Demolishing", json);
     }
 }
