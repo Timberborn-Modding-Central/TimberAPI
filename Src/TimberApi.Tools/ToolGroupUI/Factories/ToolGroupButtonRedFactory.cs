@@ -7,7 +7,7 @@ public class ToolGroupButtonRedFactory(ToolGroupButtonFactory toolGroupButtonFac
 {
     public string Id => "Red";
 
-    public ToolGroupButton Create(IToolGroup toolGroup, TimberApiToolGroupSpec timberApiToolGroupSpecification)
+    public ToolGroupButton Create(IToolGroup toolGroup, ToolGroupSpec toolGroupSpec)
     {
         return toolGroupButtonFactory.Create((ToolGroup)toolGroup, toolGroup.Icon, "UI/Images/BottomBar/button-bg-01");
     }

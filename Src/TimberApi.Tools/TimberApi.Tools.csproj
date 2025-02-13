@@ -32,6 +32,6 @@
 
     <Target Name="CopyingFilesToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath)">
         <Message Text="### Copying files to plugins ###" Importance="high"/>
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\$(SolutionName)\core"/><Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(ModPath)\$(SolutionName)\core"/>
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\$(SolutionName)\core"/>
     </Target>
 </Project>

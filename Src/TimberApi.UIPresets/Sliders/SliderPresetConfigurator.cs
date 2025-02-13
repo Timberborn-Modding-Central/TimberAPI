@@ -7,21 +7,21 @@ namespace TimberApi.UIPresets.Sliders;
 [Context("Game")]
 public class SliderPresetConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<MainMenuSliderInt>().AsTransient();
-        containerDefinition.Bind<MainMenuTextSliderInt>().AsTransient();
+        Bind<MainMenuSliderInt>().AsTransient();
+        Bind<MainMenuTextSliderInt>().AsTransient();
         
-        containerDefinition.Bind<GameSliderInt>().AsTransient();
-        containerDefinition.Bind<GameTextSliderInt>().AsTransient();
+        Bind<GameSliderInt>().AsTransient();
+        Bind<GameTextSliderInt>().AsTransient();
         
-        containerDefinition.Bind<MainMenuSlider>().AsTransient();
-        containerDefinition.Bind<MainMenuTextSlider>().AsTransient();
+        Bind<MainMenuSlider>().AsTransient();
+        Bind<MainMenuTextSlider>().AsTransient();
         
-        containerDefinition.Bind<GameSlider>().AsTransient();
-        containerDefinition.Bind<GameTextSlider>().AsTransient();
+        Bind<GameSlider>().AsTransient();
+        Bind<GameTextSlider>().AsTransient();
         
-        containerDefinition.Bind<GameMinMaxSlider>().AsTransient();
-        containerDefinition.Bind<GameTextMinMaxSlider>().AsTransient();
+        Bind<GameMinMaxSlider>().AsTransient();
+        Bind<GameTextMinMaxSlider>().AsTransient();
     }
 }

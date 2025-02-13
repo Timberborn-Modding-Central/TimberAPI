@@ -7,9 +7,9 @@ namespace TimberApi.UIPresets.Builders;
 [Context("MapEditor")]
 public class UIBuilderConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<FragmentBuilder>().AsTransient();
-        containerDefinition.Bind<BoxBuilder>().AsTransient();
+        Bind<FragmentBuilder>().AsTransient();
+        Bind<BoxBuilder>().AsTransient();
     }
 }

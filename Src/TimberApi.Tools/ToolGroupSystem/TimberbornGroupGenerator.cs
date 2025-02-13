@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
+using Timberborn.BlueprintSystem;
 
 namespace TimberApi.Tools.ToolGroupSystem;
 
-public class TimberbornGroupGenerator : ISpecGenerator
+public class TimberbornGroupGenerator(ISpecService specService) : ISpecGenerator
 {
     public IEnumerable<GeneratedSpec> Generate()
     {
@@ -12,12 +13,15 @@ public class TimberbornGroupGenerator : ISpecGenerator
         yield return RuinsGroupDevelopment();
         yield return OtherGroupHidden();
     }
-
+    
     private static GeneratedSpec MapEditorGroupDevelopment()
     {
         var json = JsonConvert.SerializeObject(new
         {
-            DevMode = true
+            TimberApiToolGroupSpec = new
+            {
+                DevMode = true,
+            }
         });
 
         return new GeneratedSpec(json, "MapEditor", "ToolGroupSpecification");

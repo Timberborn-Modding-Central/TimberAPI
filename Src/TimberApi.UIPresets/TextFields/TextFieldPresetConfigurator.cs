@@ -7,8 +7,8 @@ namespace TimberApi.UIPresets.TextFields;
 [Context("Game")]
 public class TextFieldPresetConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<DefaultTextField>().AsTransient();
+        Bind<DefaultTextField>().AsTransient();
     }
 }

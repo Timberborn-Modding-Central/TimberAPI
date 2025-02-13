@@ -13,7 +13,7 @@ public class ModStarter : IModStarter
 
     public void StartMod()
     {
-        _harmony = new Harmony("SWAGGERSWAGY");
+        _harmony = new Harmony("TimberApi.BottomBar");
         ContextManager.ContextChanged += SceneManagerOnContextChanged;
     }
 
@@ -21,13 +21,12 @@ public class ModStarter : IModStarter
     {
         if (currentscene != "Game")
         {
-            Debug.LogWarning("REMOVE PATCHES");
+            _harmony.UnpatchAll("TimberApi.BottomBar");
             return;
         }
 
         if (previousscene == "Game")
         {
-            Debug.LogWarning("It went from game to game");
             return;
         }
 

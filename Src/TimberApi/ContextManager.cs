@@ -25,6 +25,7 @@ public class ContextManager
     
     private static void Test(string contextName)
     {
+        Debug.LogError($"Changing context: {contextName}");
         ChangeScene(contextName);
     }
 

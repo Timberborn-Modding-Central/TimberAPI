@@ -7,5 +7,5 @@ public interface IToolGroupButtonFactory
 {
     public string Id { get; }
 
-    public ToolGroupButton Create(IToolGroup toolGroup, TimberApiToolGroupSpec timberApiToolGroupSpec);
+    public ToolGroupButton Create(IToolGroup toolGroup, ToolGroupSpec toolGroupSpec);
 }

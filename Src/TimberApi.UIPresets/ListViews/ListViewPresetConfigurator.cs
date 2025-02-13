@@ -7,8 +7,8 @@ namespace TimberApi.UIPresets.ListViews;
 [Context("Game")]
 public class ListViewPresetConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<DefaultListView>().AsTransient();
+        Bind<DefaultListView>().AsTransient();
     }
 }

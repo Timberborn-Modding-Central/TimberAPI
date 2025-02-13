@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using TimberApi.SingletonSystem;
 using Timberborn.BlueprintSystem;
 using Timberborn.FactionSystem;
@@ -5,6 +8,7 @@ using Timberborn.GameFactionSystem;
 using Timberborn.GameScene;
 using Timberborn.PrefabGroupSystem;
 using Timberborn.WorldPersistence;
+using UnityEngine;
 
 namespace TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
 

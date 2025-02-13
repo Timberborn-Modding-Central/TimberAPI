@@ -28,15 +28,16 @@ public class ToolGroupService(
 
         var toolGroupButtons = new Dictionary<string, ToolGroupButton>();
 
-        foreach (var toolGroupSpecification in toolGroupSpecificationService.ToolGroupSpecifications
-                     .OrderBy(x => x.Layout).ThenBy(x => x.Order))
+        foreach (var toolGroupSpecification in toolGroupSpecificationService.ToolGroupSpecs.OrderBy(x => x.GetSpec<ToolGroupExtensionSpec>().Layout).ThenBy(x => x.Order))
         {
-            var toolGroup = toolGroupFactoryService.Get(toolGroupSpecification.Type).Create(toolGroupSpecification);
+            var toolGroupExtensionSpec = toolGroupSpecification.GetSpec<ToolGroupExtensionSpec>();
+            
+            var toolGroup = toolGroupFactoryService.Get(toolGroupExtensionSpec.Type).Create(toolGroupSpecification);
 
             toolGroups.Add(toolGroupSpecification.Id.ToLower(), toolGroup);
 
-            var button = toolGroupButtonFactoryService.Get(toolGroupSpecification.Layout)
-                .Create(toolGroup, toolGroupSpecification);
+            var button = toolGroupButtonFactoryService.Get(toolGroupExtensionSpec.Layout).Create(toolGroup, toolGroupSpecification);
+            
             toolGroupButtons.Add(toolGroupSpecification.Id.ToLower(), button);
         }
 

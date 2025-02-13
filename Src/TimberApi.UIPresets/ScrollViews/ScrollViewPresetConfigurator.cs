@@ -7,8 +7,8 @@ namespace TimberApi.UIPresets.ScrollViews;
 [Context("Game")]
 public class ScrollViewPresetConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<DefaultScrollView>().AsTransient();
+        Bind<DefaultScrollView>().AsTransient();
     }
 }

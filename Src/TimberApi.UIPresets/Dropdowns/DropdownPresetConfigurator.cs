@@ -7,9 +7,9 @@ namespace TimberApi.UIPresets.Dropdowns;
 [Context("Game")]
 public class DropdownPresetConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<OptionDropdown>().AsTransient();
-        containerDefinition.Bind<GameDropdown>().AsTransient();
+        Bind<OptionDropdown>().AsTransient();
+        Bind<GameDropdown>().AsTransient();
     }
 }

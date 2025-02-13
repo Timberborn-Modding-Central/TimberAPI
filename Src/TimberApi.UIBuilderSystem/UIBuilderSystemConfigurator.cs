@@ -9,35 +9,35 @@ namespace TimberApi.UIBuilderSystem;
 [Context("Game")]
 public class UIBuilderSystemConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<LabelBuilder>().AsTransient();
-        containerDefinition.Bind<LocalizableLabelBuilder>().AsTransient();
+        Bind<LabelBuilder>().AsTransient();
+        Bind<LocalizableLabelBuilder>().AsTransient();
         
-        containerDefinition.Bind<SliderIntBuilder>().AsTransient();
-        containerDefinition.Bind<LocalizableSliderIntBuilder>().AsTransient();
+        Bind<SliderIntBuilder>().AsTransient();
+        Bind<LocalizableSliderIntBuilder>().AsTransient();
 
-        containerDefinition.Bind<SliderBuilder>().AsTransient();
-        containerDefinition.Bind<LocalizableSliderBuilder>().AsTransient();
+        Bind<SliderBuilder>().AsTransient();
+        Bind<LocalizableSliderBuilder>().AsTransient();
         
-        containerDefinition.Bind<MinMaxSliderBuilder>().AsTransient();
-        containerDefinition.Bind<LocalizableMinMaxSliderBuilder>().AsTransient();
+        Bind<MinMaxSliderBuilder>().AsTransient();
+        Bind<LocalizableMinMaxSliderBuilder>().AsTransient();
         
-        containerDefinition.Bind<ToggleBuilder>().AsTransient();
-        containerDefinition.Bind<LocalizableToggleBuilder>().AsTransient();
+        Bind<ToggleBuilder>().AsTransient();
+        Bind<LocalizableToggleBuilder>().AsTransient();
 
-        containerDefinition.Bind<DropDownBuilder>().AsTransient();
+        Bind<DropDownBuilder>().AsTransient();
         
         
-        containerDefinition.Bind<ButtonBuilder>().AsTransient();
-        containerDefinition.Bind<LocalizableButtonBuilder>().AsTransient();
-        containerDefinition.Bind<VisualElementBuilder>().AsTransient();
-        containerDefinition.Bind<ScrollViewBuilder>().AsTransient();
-        containerDefinition.Bind<ListViewBuilder>().AsTransient();
-        containerDefinition.Bind<TextFieldBuilder>().AsTransient();
+        Bind<ButtonBuilder>().AsTransient();
+        Bind<LocalizableButtonBuilder>().AsTransient();
+        Bind<VisualElementBuilder>().AsTransient();
+        Bind<ScrollViewBuilder>().AsTransient();
+        Bind<ListViewBuilder>().AsTransient();
+        Bind<TextFieldBuilder>().AsTransient();
 
-        containerDefinition.Bind<StyleSheetBuilder>().AsTransient();
-        containerDefinition.Bind<UIBuilder>().AsSingleton();
-        containerDefinition.Bind<BuilderStyleSheetCache>().AsSingleton();
+        Bind<StyleSheetBuilder>().AsTransient();
+        Bind<UIBuilder>().AsSingleton();
+        Bind<BuilderStyleSheetCache>().AsSingleton();
     }
 }

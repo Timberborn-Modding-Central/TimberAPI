@@ -1,8 +1,10 @@
+using Timberborn.ToolSystem;
+
 namespace TimberApi.Tools.ToolGroupSystem;
 
 public interface IToolGroupFactory
 {
     public string Id { get; }
 
-    public IToolGroup Create(TimberApiToolGroupSpec timberApiToolGroupSpec);
+    public IToolGroup Create(ToolGroupSpec toolGroupSpec);
 }
