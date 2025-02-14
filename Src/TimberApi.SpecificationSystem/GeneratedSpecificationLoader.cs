@@ -28,7 +28,7 @@ internal class GeneratedSpecLoader(
             generatedSpecAssetRepository.AddSpecRange(specificationGenerator.Generate());
         }
 
-        // Reloads the spec server, because everything is cached now. This is unoptimized but it is how it is for now.
+        // Reloads the spec service, because everything is cached now. This is unoptimized but it is how it is for now.
         // Might give problems with faction specs if they would have changed.
         specService.GetType()
             .GetField("_cachedBlueprints",BindingFlags.Instance|BindingFlags.NonPublic)!

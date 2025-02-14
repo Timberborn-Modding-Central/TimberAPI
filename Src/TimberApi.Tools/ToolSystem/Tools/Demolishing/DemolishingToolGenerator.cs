@@ -20,19 +20,22 @@ public class DemolishingToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "EntityBlockObjectDeletion",
-            GroupId = "Demolishing",
-            Type = "EntityBlockObjectDeletionTool",
-            Layout = "Default",
-            Order = 30,
-            NameLocKey = "CAN NOT BE MODIFIED",
-            DescriptionLocKey = "CAN NOT BE MODIFIED",
-            Icon = "Sprites/BottomBar/DeleteObjectIcon",
-            DevMode = false,
-            Hidden = false
+            ToolSpec = new
+            {
+                Id = "EntityBlockObjectDeletion",
+                GroupId = "Demolishing",
+                Type = "EntityBlockObjectDeletionTool",
+                Layout = "Default",
+                Order = 30,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/DeleteObjectIcon",
+                DevMode = false,
+                Hidden = false
+            }
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.EntityBlockObjectDeletion", json);
+        return new GeneratedSpec("Tools", "Tool.EntityBlockObjectDeletion", json);
     }
 
     private static GeneratedSpec DeleteRecoveredGoodStackTool()
@@ -51,7 +54,7 @@ public class DemolishingToolGenerator : ISpecGenerator
             Hidden = false
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.DeleteRecoveredGoodStack", json);
+        return new GeneratedSpec("Tools", "Tool.DeleteRecoveredGoodStack", json);
     }
 
     private static GeneratedSpec BuildingDeconstructionTool()
@@ -70,7 +73,7 @@ public class DemolishingToolGenerator : ISpecGenerator
             Hidden = false
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.BuildingDeconstruction", json);
+        return new GeneratedSpec("Tools", "Tool.BuildingDeconstruction", json);
     }
 
     private static GeneratedSpec DemolishableSelectionTool()
@@ -89,7 +92,7 @@ public class DemolishingToolGenerator : ISpecGenerator
             Hidden = false
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.DemolishableSelection", json);
+        return new GeneratedSpec("Tools", "Tool.DemolishableSelection", json);
     }
 
     private static GeneratedSpec DemolishableUnselectionTool()
@@ -108,7 +111,7 @@ public class DemolishingToolGenerator : ISpecGenerator
             Hidden = false
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.DemolishableUnselection", json);
+        return new GeneratedSpec("Tools", "Tool.DemolishableUnselection", json);
     }
 
     private static GeneratedSpec CreateDemolishingToolGroup()

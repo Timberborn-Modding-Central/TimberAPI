@@ -11,22 +11,27 @@ public class WaterGeneratorToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "WaterGenerator",
-            Type = "GenericTool",
-            Layout = "GrouplessRed",
-            Order = 80,
-            NameLocKey = "Cursor",
-            DescriptionLocKey = "Cursor",
-            Icon = "Sprites/BottomBar/WaterHeightBrushTool",
-            DevMode = true,
-            Hidden = false,
-            ToolInformation = new
+            ToolSpec = new
             {
-                BottomBarSection = 0,
+                Id = "WaterGenerator",
+                Type = "GenericTool",
+                Layout = "GrouplessRed",
+                Order = 80,
+                NameLocKey = "Cursor",
+                DescriptionLocKey = "Cursor",
+                Icon = "Sprites/BottomBar/WaterHeightBrushTool",
+                DevMode = true,
+                Hidden = false,
+            },
+            GenericToolSpec = new {
                 ClassName = typeof(WaterHeightBrushTool).FullName
-            }
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
+            },
         });
 
-        yield return new GeneratedSpec("Root", "ToolSpecification.WaterGenerator", json);
+        yield return new GeneratedSpec("Root", "Tool.WaterGenerator", json);
     }
 }

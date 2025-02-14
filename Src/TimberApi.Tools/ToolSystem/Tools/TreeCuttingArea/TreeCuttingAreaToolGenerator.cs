@@ -18,24 +18,29 @@ public class TreeCuttingAreaToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "TreeCuttingAreaUnselection",
-            GroupId = "TreeCutting",
-            Type = "GenericTool",
-            Layout = "Default",
-            Order = 1000,
-            NameLocKey = "CAN NOT BE MODIFIED",
-            DescriptionLocKey = "CAN NOT BE MODIFIED",
-            Icon = "Sprites/BottomBar/CancelToolIcon",
-            DevMode = false,
-            Hidden = false,
-            ToolInformation = new
+            ToolSpec = new
             {
-                BottomBarSection = 0,
+                Id = "TreeCuttingAreaUnselection",
+                GroupId = "TreeCutting",
+                Type = "GenericTool",
+                Layout = "Default",
+                Order = 1000,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/CancelToolIcon",
+                DevMode = false,
+                Hidden = false,
+            },
+            GenericToolSpec = new {
                 ClassName = typeof(TreeCuttingAreaUnselectionTool).FullName
-            }
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
+            },
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.TreeCuttingAreaUnselection", json);
+        return new GeneratedSpec("Tools", "Tool.TreeCuttingAreaUnselection", json);
     }
 
     private static GeneratedSpec TreeCuttingAreaSelectionTool()
@@ -59,7 +64,7 @@ public class TreeCuttingAreaToolGenerator : ISpecGenerator
             }
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.TreeCuttingAreaSelection", json);
+        return new GeneratedSpec("Tools", "Tool.TreeCuttingAreaSelection", json);
     }
 
     private static GeneratedSpec CreateCuttingTreeGroup()

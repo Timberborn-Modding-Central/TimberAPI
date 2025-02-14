@@ -22,23 +22,25 @@ public class PlaceableObjectToolGenerator(PrefabService prefabService) : ISpecGe
             
             var json = JsonConvert.SerializeObject(new
             {
-                Id = prefab.PrefabName,
-                GroupId = placeableBlockObject.ToolGroupId,
-                Type = "PlaceableObjectTool",
-                Layout = !wonder ? "Default" : "WonderDefault",
-                Order = placeableBlockObject.ToolOrder,
-                Icon = labeledEntitySpec.ImagePath,
-                NameLocKey = labeledEntitySpec.DisplayNameLocKey,
-                labeledEntitySpec.DescriptionLocKey,
-                Hidden = false,
-                DevMode = placeableBlockObject.DevModeTool,
-                ToolInformation = new
+                ToolSpec = new
                 {
-                    prefab.PrefabName
+                    Id = prefab.PrefabName,
+                    GroupId = placeableBlockObject.ToolGroupId,
+                    Type = "PlaceableObjectTool",
+                    Layout = !wonder ? "Default" : "WonderDefault",
+                    Order = placeableBlockObject.ToolOrder,
+                    Icon = labeledEntitySpec.ImagePath,
+                    NameLocKey = labeledEntitySpec.DisplayNameLocKey,
+                    labeledEntitySpec.DescriptionLocKey,
+                    Hidden = false,
+                    DevMode = placeableBlockObject.DevModeTool,
+                },
+                PlaceableObjectToolSpec = new {
+                    PrefabName = prefab.PrefabName 
                 }
             });
 
-            yield return new GeneratedSpec("Tools", $"ToolSpecification.{prefab.PrefabName}", json, true);
+            yield return new GeneratedSpec("Tools", $"Tool.{prefab.PrefabName}", json, true);
         }
     }
 }

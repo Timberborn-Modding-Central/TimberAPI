@@ -21,12 +21,14 @@ public class ToolGroupSpecificationService(ISpecService specificationService) : 
 
     public void Load()
     {
+        Debug.LogWarning("WSSSS");
         _toolGroupSpecifications = specificationService.GetSpecs<ToolGroupSpec>()
             .ToImmutableDictionary(specification => specification.Id.ToLower());
 
         _toolGroupExtensionSpecs = specificationService.GetSpecs<ToolGroupExtensionSpec>().ToImmutableArray();
         
-        Debug.LogWarning(_toolGroupSpecifications.Count);
+        Debug.LogWarning("BABABOE");
+
     }
 
     public ToolGroupSpec Get(string id)

@@ -13,23 +13,26 @@ public class BuilderPriorityToolGenerator : ISpecGenerator
         {
             var json = JsonConvert.SerializeObject(new
             {
-                Id = priority,
-                GroupId = "Priority",
-                Type = "PriorityTool",
-                Layout = "Default",
-                Order = (int)priority,
-                Icon = $"Sprites/Priority/Buttons/{priority}",
-                NameLocKey = "CAN NOT BE MODIFIED",
-                DescriptionLocKey = "CAN NOT BE MODIFIED",
-                Hidden = false,
-                DevMode = false,
-                ToolInformation = new
+                ToolSpec = new
+                {
+                    Id = priority,
+                    GroupId = "Priority",
+                    Type = "PriorityTool",
+                    Layout = "Default",
+                    Order = (int)priority,
+                    Icon = $"Sprites/Priority/Buttons/{priority}",
+                    NameLocKey = "CAN NOT BE MODIFIED",
+                    DescriptionLocKey = "CAN NOT BE MODIFIED",
+                    Hidden = false,
+                    DevMode = false,
+                },
+                BuilderPriorityToolSpec = new
                 {
                     Priority = priority
                 }
             });
 
-            yield return new GeneratedSpec("Tools", $"ToolSpecification.{priority.ToString()}", json);
+            yield return new GeneratedSpec("Tools", $"Tool.{priority.ToString()}", json);
         }
 
         yield return CreatePriorityToolGroup();
@@ -39,19 +42,25 @@ public class BuilderPriorityToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "Priority",
-            Layout = "Blue",
-            Order = 50,
-            Type = "BuilderPriorityToolGroup",
-            NameLocKey = "ToolGroups.Priority",
-            Icon = "Sprites/BottomBar/PriorityToolGroupIcon",
-            Section = "BottomBar",
-            DevMode = false,
-            Hidden = false,
-            FallbackGroup = false,
-            GroupInformation = new
+            ToolGroupSpec = new
             {
-                BottomBarSection = 0
+                Id = "Priority",
+                Order = 50,
+                NameLocKey = "ToolGroups.Priority",
+                Icon = "Sprites/BottomBar/PriorityToolGroupIcon",
+                FallbackGroup = false,
+            },
+            ToolGroupExtensionSpec = new
+            {
+                Type = "BuilderPriorityToolGroup",
+                Layout = "Blue",
+                Section = "BottomBar",
+                DevMode = false,
+                Hidden = false,
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
             }
         });
 

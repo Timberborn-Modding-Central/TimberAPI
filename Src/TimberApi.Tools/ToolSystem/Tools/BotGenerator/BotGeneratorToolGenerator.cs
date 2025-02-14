@@ -12,22 +12,28 @@ public class BotGeneratorToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "BotGenerator",
-            Type = "GenericTool",
-            Layout = "GrouplessRed",
-            Order = 70,
-            NameLocKey = "Cursor",
-            DescriptionLocKey = "Cursor",
-            Icon = "Sprites/BottomBar/BotGeneratorTool",
-            DevMode = true,
-            Hidden = false,
-            ToolInformation = new
+            ToolSpec = new
             {
-                BottomBarSection = 0,
+                Id = "BotGenerator",
+                Type = "GenericTool",
+                Layout = "GrouplessRed",
+                Order = 70,
+                NameLocKey = "Cursor",
+                DescriptionLocKey = "Cursor",
+                Icon = "Sprites/BottomBar/BotGeneratorTool",
+                DevMode = true,
+                Hidden = false,
+            },
+            GenericToolSpec = new {
                 ClassName = typeof(BotGeneratorTool).FullName
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
             }
+            
         });
         
-        yield return new GeneratedSpec("Tools", "ToolSpecification.BotGenerator", json);
+        yield return new GeneratedSpec("Tools", "Tool.BotGenerator", json);
     }
 }

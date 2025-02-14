@@ -18,32 +18,38 @@ public class TimberbornGroupGenerator(ISpecService specService) : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            TimberApiToolGroupSpec = new
+            ToolGroupExtensionSpec = new
             {
                 DevMode = true,
             }
         });
 
-        return new GeneratedSpec(json, "MapEditor", "ToolGroupSpecification");
+        return new GeneratedSpec("ToolGroups", "ToolGroup.MapEditor", json);
     }
 
     private static GeneratedSpec RuinsGroupDevelopment()
     {
         var json = JsonConvert.SerializeObject(new
         {
-            DevMode = true
+            ToolGroupExtensionSpec = new
+            {
+                DevMode = true,
+            }
         });
 
-        return new GeneratedSpec(json, "Ruins", "ToolGroupSpecification");
+        return new GeneratedSpec("ToolGroups", "ToolGroup.Ruins", json);
     }
 
     private static GeneratedSpec OtherGroupHidden()
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Hidden = true
+            ToolGroupExtensionSpec = new
+            {
+                Hidden = true,
+            }
         });
 
-        return new GeneratedSpec(json, "Other", "ToolGroupSpecification");
+        return new GeneratedSpec("ToolGroups", "ToolGroup.Other", json);
     }
 }

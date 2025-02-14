@@ -27,23 +27,25 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecGenerator
 
             var json = JsonConvert.SerializeObject(new
             {
-                Id = plantable.PrefabName,
-                GroupId = isCrop ? "Fields" : "Forestry",
-                Type = "PlantingTool",
-                Layout = "Default",
-                Order = naturalResource.Order,
-                Icon = labeledEntitySpec.ImagePath,
-                NameLocKey = labeledEntitySpec.DisplayNameLocKey,
-                labeledEntitySpec.DescriptionLocKey,
-                Hidden = false,
-                DevMode = false,
-                ToolInformation = new
+                ToolSpec = new
                 {
-                    prefab.PrefabName
+                    Id = plantable.PrefabName,
+                    GroupId = isCrop ? "Fields" : "Forestry",
+                    Type = "PlantingTool",
+                    Layout = "Default",
+                    Order = naturalResource.Order,
+                    Icon = labeledEntitySpec.ImagePath,
+                    NameLocKey = labeledEntitySpec.DisplayNameLocKey,
+                    labeledEntitySpec.DescriptionLocKey,
+                    Hidden = false,
+                    DevMode = false,
+                },
+                PlaceableObjectToolSpec = new {
+                    PrefabName = prefab.PrefabName 
                 }
             });
 
-            yield return new GeneratedSpec("Tools", $"ToolSpecification.{plantable.PrefabName}", json, true);
+            yield return new GeneratedSpec("Tools", $"Tool.{plantable.PrefabName}", json, true);
         }
 
         yield return CreateFieldsToolGroupSpecification();

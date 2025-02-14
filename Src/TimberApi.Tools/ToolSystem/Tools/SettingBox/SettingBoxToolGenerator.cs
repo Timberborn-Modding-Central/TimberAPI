@@ -15,22 +15,27 @@ public class SettingBoxToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "SettingBox",
-            Type = "GenericTool",
-            Layout = "GrouplessRed",
-            Order = 1000,
-            NameLocKey = "CAN NOT BE MODIFIED",
-            DescriptionLocKey = "CAN NOT BE MODIFIED",
-            Icon = "Sprites/BottomBar/Options",
-            DevMode = false,
-            Hidden = false,
-            ToolInformation = new
+            ToolSpec = new
             {
-                BottomBarSection = 2,
+                Id = "SettingBox",
+                Type = "GenericTool",
+                Layout = "GrouplessRed",
+                Order = 1000,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/Options",
+                DevMode = false,
+                Hidden = false,
+            },
+            GenericToolSpec = new {
                 ClassName = typeof(SettingBoxTool).FullName
-            }
+            },
+            BottomBarSpec = new
+            {
+                Section = 2,
+            },
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.SettingBox", json);
+        return new GeneratedSpec("Tools", "Tool.SettingBox", json);
     }
 }

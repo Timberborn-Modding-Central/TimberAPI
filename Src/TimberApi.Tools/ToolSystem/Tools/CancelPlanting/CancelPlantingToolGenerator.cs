@@ -16,19 +16,22 @@ public class CancelPlantingToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "ForestryCancelPlanting",
-            GroupId = "Forestry",
-            Type = "CancelPlantingTool",
-            Layout = "Default",
-            Order = 1000,
-            NameLocKey = "CAN NOT BE MODIFIED",
-            DescriptionLocKey = "CAN NOT BE MODIFIED",
-            Icon = "Sprites/BottomBar/CancelToolIcon",
-            DevMode = false,
-            Hidden = false
+            ToolSpec = new
+            {
+                Id = "ForestryCancelPlanting",
+                GroupId = "Forestry",
+                Type = "CancelPlantingTool",
+                Layout = "Default",
+                Order = 1000,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/CancelToolIcon",
+                DevMode = false,
+                Hidden = false
+            }
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.ForestryCancelPlanting", json);
+        return new GeneratedSpec("Tools", "Tool.ForestryCancelPlanting", json);
     }
 
     private static GeneratedSpec FieldsCancelPlantingTool()
@@ -47,6 +50,6 @@ public class CancelPlantingToolGenerator : ISpecGenerator
             Hidden = false
         });
 
-        return new GeneratedSpec("Tools", "ToolSpecification.FieldsCancelPlanting", json);
+        return new GeneratedSpec("Tools", "Tool.FieldsCancelPlanting", json);
     }
 }

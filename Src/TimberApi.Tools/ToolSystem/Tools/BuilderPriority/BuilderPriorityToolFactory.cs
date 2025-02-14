@@ -12,10 +12,8 @@ public class BuilderPriorityToolFactory(TimberbornBuilderPriorityToolFactory bui
     {
         var builderPriorityToolSpec = toolSpec.GetSpec<BuilderPriorityToolSpec>();
         
-        Debug.LogWarning("I AM RUNNING");
         var priorityTool = builderPriorityToolFactory.Create(builderPriorityToolSpec.Priority);
         priorityTool.ToolGroup = toolGroup;
-        Debug.LogWarning("AM I FINISHING?");
 
         return priorityTool;
     }

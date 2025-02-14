@@ -11,22 +11,27 @@ public class CursorToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "Cursor",
-            Type = "GenericTool",
-            Layout = "GrouplessRed",
-            Order = 0,
-            NameLocKey = "Cursor",
-            DescriptionLocKey = "Cursor",
-            Icon = "Sprites/BottomBar/Cursor",
-            DevMode = false,
-            Hidden = false,
-            ToolInformation = new
+            ToolSpec = new
             {
-                BottomBarSection = 0,
-                ClassName = typeof(CursorTool).FullName,
-            }
+                Id = "Cursor",
+                Type = "GenericTool",
+                Layout = "GrouplessRed",
+                Order = 0,
+                NameLocKey = "Cursor",
+                DescriptionLocKey = "Cursor",
+                Icon = "Sprites/BottomBar/Cursor",
+                DevMode = false,
+                Hidden = false,
+            },
+            GenericToolSpec = new {
+                ClassName = typeof(CursorTool).FullName
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
+            },
         });
 
-        yield return new GeneratedSpec("Tools", "ToolSpecification.Cursor", json);
+        yield return new GeneratedSpec("Tools", "Tool.Cursor", json);
     }
 }
