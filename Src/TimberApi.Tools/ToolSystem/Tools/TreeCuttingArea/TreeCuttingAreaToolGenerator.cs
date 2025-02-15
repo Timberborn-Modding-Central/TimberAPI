@@ -31,7 +31,8 @@ public class TreeCuttingAreaToolGenerator : ISpecGenerator
                 DevMode = false,
                 Hidden = false,
             },
-            GenericToolSpec = new {
+            GenericToolSpec = new
+            {
                 ClassName = typeof(TreeCuttingAreaUnselectionTool).FullName
             },
             BottomBarSpec = new
@@ -47,21 +48,27 @@ public class TreeCuttingAreaToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "TreeCuttingAreaSelection",
-            GroupId = "TreeCutting",
-            Type = "GenericTool",
-            Layout = "Default",
-            Order = 0,
-            NameLocKey = "CAN NOT BE MODIFIED",
-            DescriptionLocKey = "CAN NOT BE MODIFIED",
-            Icon = "Sprites/BottomBar/TreeCuttingAreaSelectionTool",
-            DevMode = false,
-            Hidden = false,
-            ToolInformation = new
+            ToolSpec = new
             {
-                BottomBarSection = 0,
+                Id = "TreeCuttingAreaSelection",
+                GroupId = "TreeCutting",
+                Type = "GenericTool",
+                Layout = "Default",
+                Order = 0,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/TreeCuttingAreaSelectionTool",
+                DevMode = false,
+                Hidden = false,
+            },
+            GenericToolSpec = new
+            {
                 ClassName = typeof(TreeCuttingAreaSelectionTool).FullName
-            }
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
+            },
         });
 
         return new GeneratedSpec("Tools", "Tool.TreeCuttingAreaSelection", json);
@@ -71,22 +78,28 @@ public class TreeCuttingAreaToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "TreeCutting",
-            Layout = "Blue",
-            Order = 10,
-            Type = "TreeCuttingAreaToolGroup",
-            NameLocKey = "ToolGroups.TreeCutting",
-            Icon = "Sprites/BottomBar/TreeToolGroupIcon",
-            Section = "BottomBar",
-            DevMode = false,
-            Hidden = false,
-            FallbackGroup = false,
-            GroupInformation = new
+            ToolGroupSpec = new
             {
-                BottomBarSection = 0
+                Id = "TreeCutting",
+                Order = 10,
+                NameLocKey = "ToolGroups.TreeCutting",
+                Icon = "Sprites/BottomBar/TreeToolGroupIcon",
+                FallbackGroup = false,
+            },
+            ToolGroupExtensionSpec = new
+            {
+                Type = "TreeCuttingAreaToolGroup",
+                Layout = "Blue",
+                Section = "BottomBar",
+                DevMode = false,
+                Hidden = false,
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
             }
         });
 
-        return new GeneratedSpec("Tools", "ToolGroupSpecification.TreeCutting", json);
+        return new GeneratedSpec("Tools", "ToolGroup.TreeCutting", json);
     }
 }

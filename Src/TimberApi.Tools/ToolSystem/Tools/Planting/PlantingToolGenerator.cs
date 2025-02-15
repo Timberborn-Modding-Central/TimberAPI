@@ -57,46 +57,58 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "Fields",
-            Layout = "Blue",
-            Order = 20,
-            Type = "PlantingModeToolGroup",
-            NameLocKey = "ToolGroups.FieldsPlanting",
-            Icon = "Sprites/BottomBar/FieldsPlantingToolGroupIcon",
-            Section = "BottomBar",
-            DevMode = false,
-            Hidden = false,
-            FallbackGroup = false,
-            GroupInformation = new
+            ToolGroupSpec = new
             {
-                BottomBarSection = 0
+                Id = "Fields",
+                Order = 20,
+                NameLocKey = "ToolGroups.FieldsPlanting",
+                Icon = "Sprites/BottomBar/FieldsPlantingToolGroupIcon",
+                FallbackGroup = false,
+            },
+            ToolGroupExtensionSpec = new
+            {
+                Type = "PlantingModeToolGroup",
+                Layout = "Blue",
+                Section = "BottomBar",
+                DevMode = false,
+                Hidden = false,
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
             }
         });
 
 
-        return new GeneratedSpec("Tools", "ToolGroupSpecification.Fields", json);
+        return new GeneratedSpec("Tools", "ToolGroup.Fields", json);
     }
 
     private static GeneratedSpec CreateForestryPlantingToolGroupSpecification()
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "Forestry",
-            Layout = "Blue",
-            Order = 30,
-            Type = "PlantingModeToolGroup",
-            NameLocKey = "ToolGroups.ForestryPlanting",
-            Icon = "Sprites/BottomBar/ForestryPlantingToolGroupIcon",
-            Section = "BottomBar",
-            DevMode = false,
-            Hidden = false,
-            FallbackGroup = false,
-            GroupInformation = new
+            ToolGroupSpec = new
             {
-                BottomBarSection = 0
+                Id = "Forestry",
+                Order = 30,
+                NameLocKey = "ToolGroups.ForestryPlanting",
+                Icon = "Sprites/BottomBar/ForestryPlantingToolGroupIcon",
+                FallbackGroup = false,
+            },
+            ToolGroupExtensionSpec = new
+            {
+                Type = "PlantingModeToolGroup",
+                Layout = "Blue",
+                Section = "BottomBar",
+                DevMode = false,
+                Hidden = false,
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
             }
         });
 
-        return new GeneratedSpec("Tools", "ToolGroupSpecification.Forestry", json);
+        return new GeneratedSpec("Tools", "ToolGroup.Forestry", json);
     }
 }

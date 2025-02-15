@@ -32,7 +32,7 @@ public class DemolishingToolGenerator : ISpecGenerator
                 Icon = "Sprites/BottomBar/DeleteObjectIcon",
                 DevMode = false,
                 Hidden = false
-            }
+            },
         });
 
         return new GeneratedSpec("Tools", "Tool.EntityBlockObjectDeletion", json);
@@ -42,16 +42,23 @@ public class DemolishingToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "DeleteRecoveredGoodStack",
-            GroupId = "Demolishing",
-            Type = "DeleteRecoveredGoodStackTool",
-            Layout = "Default",
-            Order = 10,
-            NameLocKey = "CAN NOT BE MODIFIED",
-            DescriptionLocKey = "CAN NOT BE MODIFIED",
-            Icon = "Sprites/BottomBar/DeleteRecoveredGoodStackToolIcon",
-            DevMode = false,
-            Hidden = false
+            ToolSpec = new
+            {
+                Id = "DeleteRecoveredGoodStack",
+                GroupId = "Demolishing",
+                Type = "DeleteRecoveredGoodStackTool",
+                Layout = "Default",
+                Order = 10,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/DeleteRecoveredGoodStackToolIcon",
+                DevMode = false,
+                Hidden = false,
+            },
+            BottomBarSpec = new
+            {
+                Section = 1,
+            },
         });
 
         return new GeneratedSpec("Tools", "Tool.DeleteRecoveredGoodStack", json);
@@ -61,16 +68,23 @@ public class DemolishingToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "BuildingDeconstruction",
-            GroupId = "Demolishing",
-            Type = "BuildingDeconstructionTool",
-            Layout = "Default",
-            Order = 0,
-            NameLocKey = "CAN NOT BE MODIFIED",
-            DescriptionLocKey = "CAN NOT BE MODIFIED",
-            Icon = "Sprites/BottomBar/DeleteObjectIcon",
-            DevMode = false,
-            Hidden = false
+            ToolSpec = new
+            {
+                Id = "BuildingDeconstruction",
+                GroupId = "Demolishing",
+                Type = "BuildingDeconstructionTool",
+                Layout = "Default",
+                Order = 0,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/DeleteObjectIcon",
+                DevMode = false,
+                Hidden = false,
+            },
+            BottomBarSpec = new
+            {
+                Section = 1,
+            },
         });
 
         return new GeneratedSpec("Tools", "Tool.BuildingDeconstruction", json);
@@ -80,16 +94,23 @@ public class DemolishingToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "DemolishableSelection",
-            GroupId = "Demolishing",
-            Type = "DemolishableSelectionTool",
-            Layout = "Default",
-            Order = 20,
-            NameLocKey = "CAN NOT BE MODIFIED",
-            DescriptionLocKey = "CAN NOT BE MODIFIED",
-            Icon = "Sprites/BottomBar/DemolishResourcesTool",
-            DevMode = false,
-            Hidden = false
+            ToolSpec = new
+            {
+                Id = "DemolishableSelection",
+                GroupId = "Demolishing",
+                Type = "DemolishableSelectionTool",
+                Layout = "Default",
+                Order = 20,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/DemolishResourcesTool",
+                DevMode = false,
+                Hidden = false
+            },
+            BottomBarSpec = new
+            {
+                Section = 1,
+            }
         });
 
         return new GeneratedSpec("Tools", "Tool.DemolishableSelection", json);
@@ -99,16 +120,23 @@ public class DemolishingToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "DemolishableUnselection",
-            GroupId = "Demolishing",
-            Type = "DemolishableUnselectionTool",
-            Layout = "Default",
-            Order = 1000,
-            NameLocKey = "CAN NOT BE MODIFIED",
-            DescriptionLocKey = "CAN NOT BE MODIFIED",
-            Icon = "Sprites/BottomBar/CancelToolIcon",
-            DevMode = false,
-            Hidden = false
+            ToolSpec = new
+            {
+                Id = "DemolishableUnselection",
+                GroupId = "Demolishing",
+                Type = "DemolishableUnselectionTool",
+                Layout = "Default",
+                Order = 1000,
+                NameLocKey = "CAN NOT BE MODIFIED",
+                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                Icon = "Sprites/BottomBar/CancelToolIcon",
+                DevMode = false,
+                Hidden = false
+            },
+            BottomBarSpec = new
+            {
+                Section = 1,
+            }
         });
 
         return new GeneratedSpec("Tools", "Tool.DemolishableUnselection", json);
@@ -118,22 +146,28 @@ public class DemolishingToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            Id = "Demolishing",
-            Layout = "Blue",
-            Order = 40,
-            Type = "ConstructionModeToolGroup",
-            NameLocKey = "ToolGroups.Demolishing",
-            Icon = "Sprites/BottomBar/DeleteGroupIcon",
-            Section = "BottomBar",
-            DevMode = false,
-            Hidden = false,
-            FallbackGroup = false,
-            GroupInformation = new
+            ToolGroupSpec = new
             {
-                BottomBarSection = 0
+                Id = "Demolishing",
+                Order = 40,
+                NameLocKey = "ToolGroups.Demolishing",
+                Icon = "Sprites/BottomBar/DeleteGroupIcon",
+                FallbackGroup = false,
+            },
+            ToolGroupExtensionSpec = new
+            {
+                Type = "ConstructionModeToolGroup",
+                Layout = "Blue",
+                Section = "BottomBar",
+                DevMode = false,
+                Hidden = false,
+            },
+            BottomBarSpec = new
+            {
+                Section = 0,
             }
         });
 
-        return new GeneratedSpec("Tools", "ToolGroupSpecification.Demolishing", json);
+        return new GeneratedSpec("Tools", "ToolGroup.Demolishing", json);
     }
 }

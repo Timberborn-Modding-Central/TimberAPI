@@ -64,6 +64,6 @@ public class BuilderPriorityToolGenerator : ISpecGenerator
             }
         });
 
-        return new GeneratedSpec("Tools", "ToolGroupSpecification.Priority", json);
+        return new GeneratedSpec("Tools", "ToolGroup.Priority", json);
     }
 }
