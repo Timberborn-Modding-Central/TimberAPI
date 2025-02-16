@@ -8,6 +8,7 @@ using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 using Timberborn.UILayoutSystem;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace TimberApi.BottomBarSystem;
@@ -60,12 +61,18 @@ public class BottomBarPanel : ILoadableSingleton
 
     private void InitializeButtons()
     {
-        foreach (var bottomBarButton in _bottomBarService.ToolItemButtons.Where(button => !button.Hidden)
-                     .OrderBy(button => button.Order))
+        foreach (var bottomBarButton in _bottomBarService.ToolItemButtons.Where(button => !button.Hidden).OrderBy(button => button.Order))
+        {
             if (bottomBarButton.IsGroup)
+            {
                 HandleGroupButton(bottomBarButton);
+            }
             else
+            {
                 HandleToolButton(bottomBarButton);
+            }
+                
+        }
     }
 
     private void HandleGroupButton(BottomBarButton bottomBarButton)
@@ -75,8 +82,7 @@ public class BottomBarPanel : ILoadableSingleton
         var section = GetBottomBarSection(bottomBarButton);
 
         AddElementToBottomBar(toolGroupButton.Root, _bottomBarService.GetGroupRow(bottomBarButton.Id), section);
-        AddElementToBottomBar(toolGroupButton.ToolButtonsElement, _bottomBarService.GetGroupRow(bottomBarButton.Id) + 1,
-            section);
+        AddElementToBottomBar(toolGroupButton.ToolButtonsElement, _bottomBarService.GetGroupRow(bottomBarButton.Id) + 1, section);
 
         if (bottomBarButton.GroupId != null)
             _toolGroupService.GetToolGroupButton(bottomBarButton.GroupId).AddToolGroupButton(toolGroupButton);
@@ -138,6 +144,9 @@ public class BottomBarPanel : ILoadableSingleton
 
     private void AddPanelsToWrapper()
     {
-        foreach (var bottomBarPanelPair in _bottomBarPanels.Reverse()) _bottomBarWrapper.Add(bottomBarPanelPair.Value);
+        foreach (var bottomBarPanelPair in _bottomBarPanels.Reverse())
+        {
+            _bottomBarWrapper.Add(bottomBarPanelPair.Value);
+        }
     }
 }

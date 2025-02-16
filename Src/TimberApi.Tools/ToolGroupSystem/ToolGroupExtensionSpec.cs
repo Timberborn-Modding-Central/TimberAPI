@@ -4,21 +4,21 @@ namespace TimberApi.Tools.ToolGroupSystem;
 
 public record ToolGroupExtensionSpec : ComponentSpec
 {
-    [Serialize]
-    public string Type { get; init; }
+    [Serialize(true)]
+    public string Type { get; init; } = "ConstructionModeToolGroup";
 
-    [Serialize]
-    public string? GroupId { get; init; }
+    [Serialize(true)]
+    public string? GroupId { get; init; } = null;
 
-    [Serialize]
-    public string Layout { get; init; }
+    [Serialize(true)]
+    public string Layout { get; init; } = "Green";
 
-    [Serialize]
-    public string Section { get; init; }
+    [Serialize(true)]
+    public string Section { get; init; } = "BottomBar";
 
-    [Serialize]
-    public bool DevMode { get; init; }
+    [Serialize(true)]
+    public bool DevMode { get; init; } = false;
 
-    [Serialize]
-    public bool Hidden { get; init; }
+    [Serialize(true)]
+    public bool Hidden { get; init; } = false;
 }

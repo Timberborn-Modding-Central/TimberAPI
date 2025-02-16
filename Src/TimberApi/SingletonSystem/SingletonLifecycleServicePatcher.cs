@@ -11,15 +11,11 @@ internal class SingletonLifecycleServicePatcher
 {
     public static void LoadAllPrefix(ISingletonRepository ____singletonRepository)
     {
-        Debug.LogError("1");
-
         LoadSingleton(____singletonRepository.GetSingletons<ITimberApiLoadableSingleton>(),
             singleton => singleton.Load());
         
-        Debug.LogError("2");
         LoadSingleton(____singletonRepository.GetSingletons<ITimberApiPostLoadableSingleton>(),
             singleton => singleton.PostLoad());
-        Debug.LogError("3");
     }
 
     public static void LoadSingletonsPrefix(ISingletonRepository ____singletonRepository)

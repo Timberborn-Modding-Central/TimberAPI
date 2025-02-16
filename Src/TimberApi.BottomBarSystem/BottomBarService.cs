@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using TimberApi.SpecificationSystem;
 using TimberApi.Tools.ToolGroupSystem;
 using TimberApi.Tools.ToolSystem;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
+using UnityEngine;
 using ToolGroupSpecificationService = TimberApi.Tools.ToolGroupSystem.ToolGroupSpecificationService;
 
 namespace TimberApi.BottomBarSystem;
@@ -18,7 +20,7 @@ public class BottomBarService(
 
     private readonly Dictionary<string, int> _toolGroupRows = new();
 
-    private ImmutableDictionary<string, ToolGroupExtensionSpec> _toolGroupSpecs = null!;
+    private ImmutableDictionary<string, ToolGroupSpec> _toolGroupSpecs = null!;
 
     private ImmutableArray<BottomBarButton> _toolItemButtons;
 
@@ -28,7 +30,8 @@ public class BottomBarService(
     {
         _toolGroupSpecs = toolGroupSpecificationService
             .GetBySection(BottomBarSection)
-            .ToImmutableDictionary(spec => spec.Id, spec => spec.GetSpec<ToolGroupExtensionSpec>());
+            .ToImmutableDictionary(spec => spec.Id);
+        
 
         _toolItemButtons = CreateItemButtons().ToImmutableArray().Sort();
     }
@@ -36,14 +39,14 @@ public class BottomBarService(
 
     private IEnumerable<BottomBarButton> CreateItemButtons()
     {
-        foreach (var toolGroupExtensionSpec in _toolGroupSpecs.Select(pair => pair.Value))
+        foreach (var toolGroupSpec in _toolGroupSpecs.Select(pair => pair.Value))
         {
-            var toolGroupSpec = toolGroupExtensionSpec.GetSpec<ToolGroupSpec>();
+            var toolGroupExtensionSpec = toolGroupSpec.GetSpec<ToolGroupExtensionSpec>();
             
             _toolGroupRows.Add(toolGroupSpec.Id.ToLower(), CalculateGroupRow(toolGroupExtensionSpec));
 
             yield return new BottomBarButton(
-                toolGroupSpec.GetSpec<BottomBarSpec>(),
+                toolGroupSpec.GetSpecOrDefault<BottomBarSpec>(),
                 toolGroupSpec.Id,
                 true,
                 toolGroupExtensionSpec.GroupId,
@@ -51,6 +54,7 @@ public class BottomBarService(
                 toolGroupSpec.Order
             );
         }
+        
 
         foreach (var toolSpec in toolSpecService.GetBySection("BottomBar"))
             yield return new BottomBarButton(
@@ -76,7 +80,7 @@ public class BottomBarService(
 
         while (toolGroupExtensionSpec.GroupId != null)
         {
-            toolGroupExtensionSpec = _toolGroupSpecs[toolGroupExtensionSpec.GroupId];
+            toolGroupExtensionSpec = _toolGroupSpecs[toolGroupExtensionSpec.GroupId].GetSpecOrDefault<ToolGroupExtensionSpec>();
             row += 1;
         }
 

@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using TimberApi.SpecificationSystem;
+using TimberApi.Tools.ToolGroupSystem.ToolGroups.ConstructionMode;
 using TimberApi.Tools.ToolGroupUI;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
+using UnityEngine;
 
 namespace TimberApi.Tools.ToolGroupSystem;
 
@@ -28,9 +31,9 @@ public class ToolGroupService(
 
         var toolGroupButtons = new Dictionary<string, ToolGroupButton>();
 
-        foreach (var toolGroupSpecification in toolGroupSpecificationService.ToolGroupSpecs.OrderBy(x => x.GetSpec<ToolGroupExtensionSpec>().Layout).ThenBy(x => x.Order))
+        foreach (var toolGroupSpecification in toolGroupSpecificationService.ToolGroupSpecs.OrderBy(x => x.GetSpecOrDefault<ToolGroupExtensionSpec>().Layout).ThenBy(x => x.Order))
         {
-            var toolGroupExtensionSpec = toolGroupSpecification.GetSpec<ToolGroupExtensionSpec>();
+            var toolGroupExtensionSpec = toolGroupSpecification.GetSpecOrDefault<ToolGroupExtensionSpec>();
             
             var toolGroup = toolGroupFactoryService.Get(toolGroupExtensionSpec.Type).Create(toolGroupSpecification);
 

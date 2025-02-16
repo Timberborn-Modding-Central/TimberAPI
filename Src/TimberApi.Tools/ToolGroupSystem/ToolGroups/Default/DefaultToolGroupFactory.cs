@@ -1,3 +1,4 @@
+using TimberApi.SpecificationSystem;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolGroupSystem.ToolGroups.Default;
@@ -8,7 +9,7 @@ public class DefaultToolGroupFactory : IToolGroupFactory
 
     public IToolGroup Create(ToolGroupSpec toolGroupSpec)
     {
-        var toolGroupExtensionSpec = toolGroupSpec.GetSpec<ToolGroupExtensionSpec>();
+        var toolGroupExtensionSpec = toolGroupSpec.GetSpecOrDefault<ToolGroupExtensionSpec>();
         
         return new ApiToolGroup(
             toolGroupSpec.Id,

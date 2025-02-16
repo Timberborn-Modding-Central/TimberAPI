@@ -35,6 +35,14 @@ public class PlaceableObjectToolGenerator(PrefabService prefabService) : ISpecGe
                     Hidden = false,
                     DevMode = placeableBlockObject.DevModeTool,
                 },
+                ToolGroupExtensionSpec = new
+                {
+                    Type = "ConstructionModeToolGroup",
+                    Layout = "Green",
+                    Section = "BottomBar",
+                    DevMode = false,
+                    Hidden = false,
+                },
                 PlaceableObjectToolSpec = new {
                     PrefabName = prefab.PrefabName 
                 }

@@ -18,23 +18,39 @@ public class TimberbornGroupGenerator(ISpecService specService) : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
+            // ToolGroupExtensionSpec = new
+            // {
+            //     DevMode = true,
+            // },
             ToolGroupExtensionSpec = new
             {
-                DevMode = true,
-            }
+                Type = "ConstructionModeToolGroup",
+                Layout = "Green",
+                Section = "BottomBar",
+                DevMode = false,
+                Hidden = false,
+            },
         });
 
-        return new GeneratedSpec("ToolGroups", "ToolGroup.MapEditor", json);
+        return new GeneratedSpec("toolgroups", "ToolGroup.MapEditor", json);
     }
 
     private static GeneratedSpec RuinsGroupDevelopment()
     {
         var json = JsonConvert.SerializeObject(new
         {
+            // ToolGroupExtensionSpec = new
+            // {
+            //     DevMode = true,
+            // }
             ToolGroupExtensionSpec = new
             {
-                DevMode = true,
-            }
+                Type = "ConstructionModeToolGroup",
+                Layout = "Green",
+                Section = "BottomBar",
+                DevMode = false,
+                Hidden = false,
+            },
         });
 
         return new GeneratedSpec("ToolGroups", "ToolGroup.Ruins", json);
@@ -44,10 +60,18 @@ public class TimberbornGroupGenerator(ISpecService specService) : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
+            // ToolGroupExtensionSpec = new
+            // {
+            //     Hidden = true,
+            // }
             ToolGroupExtensionSpec = new
             {
-                Hidden = true,
-            }
+                Type = "ConstructionModeToolGroup",
+                Layout = "Green",
+                Section = "BottomBar",
+                DevMode = false,
+                Hidden = false,
+            },
         });
 
         return new GeneratedSpec("ToolGroups", "ToolGroup.Other", json);

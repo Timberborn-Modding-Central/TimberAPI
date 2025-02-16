@@ -10,6 +10,7 @@ internal class SpecSystemConfigurator : Configurator
 {
     protected override void Configure()
     {
+        Bind<BlueprintExtensionHelper>().AsSingleton();
         Bind<GeneratedSpecLoader>().AsSingleton();
     }
 }

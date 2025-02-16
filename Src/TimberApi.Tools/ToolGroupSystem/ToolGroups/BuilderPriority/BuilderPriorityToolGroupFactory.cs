@@ -1,3 +1,4 @@
+using TimberApi.SpecificationSystem;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolGroupSystem.ToolGroups.BuilderPriority;
@@ -8,7 +9,7 @@ public class BuilderPriorityToolGroupFactory : IToolGroupFactory
 
     public IToolGroup Create(ToolGroupSpec toolGroupSpec)
     {
-        var toolGroupExtensionSpec = toolGroupSpec.GetSpec<ToolGroupExtensionSpec>();
+        var toolGroupExtensionSpec = toolGroupSpec.GetSpecOrDefault<ToolGroupExtensionSpec>();
         
         
         return new BuilderPriorityToolGroup(

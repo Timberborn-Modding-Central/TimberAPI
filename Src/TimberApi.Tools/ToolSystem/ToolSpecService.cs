@@ -17,7 +17,7 @@ public class ToolSpecService(ISpecService specService) : ILoadableSingleton
     public void Load()
     {
         _toolSpecifications = specService.GetSpecs<ToolSpec>()
-            .Where(specification => specification.Scenes.Contains(ContextManager.CurrentContext))
+            .Where(toolSpec => toolSpec.Scenes == null ? ContextManager.CurrentContext == "Game" : toolSpec.Scenes.Contains(ContextManager.CurrentContext))
             .ToImmutableDictionary(specification => specification.Id.ToLower());
     }
 

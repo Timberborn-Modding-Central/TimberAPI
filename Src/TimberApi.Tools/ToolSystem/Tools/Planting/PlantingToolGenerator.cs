@@ -40,7 +40,7 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecGenerator
                     Hidden = false,
                     DevMode = false,
                 },
-                PlaceableObjectToolSpec = new {
+                PlantingToolSpec = new {
                     PrefabName = prefab.PrefabName 
                 }
             });

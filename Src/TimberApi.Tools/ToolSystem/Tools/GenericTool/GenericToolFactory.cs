@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TimberApi.DependencyContainerSystem;
+using TimberApi.SingletonSystem;
+using Timberborn.ForestryUI;
 using Timberborn.Persistence;
 using Timberborn.ToolSystem;
+using UnityEngine;
 
 namespace TimberApi.Tools.ToolSystem.Tools.GenericTool;
 
-public class GenericToolFactory : IToolFactory
+public class GenericToolFactory : IToolFactory, IEarlyLoadableSingleton
 {
     private readonly PropertyKey<string> _classnameKey = new("ClassName");
     

@@ -37,7 +37,6 @@ public class ModStarter : IModStarter
             ToolButtonPatcher.Patch(_harmony);
             ToolGroupButtonPatcher.Patch(_harmony);
             ToolGroupManagerPatcher.Patch(_harmony);
-            DisableTimberbornToolGeneration.Patch(_harmony);
         }
         catch (Exception e)
         {
