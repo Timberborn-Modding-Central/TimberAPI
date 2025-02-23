@@ -1,6 +1,7 @@
 using Bindito.Core.Internal;
 using HarmonyLib;
 using TimberApi.HarmonySystem;
+using Timberborn.SoakedEffects;
 using UnityEngine;
 
 namespace TimberApi;

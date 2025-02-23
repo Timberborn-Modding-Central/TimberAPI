@@ -39,7 +39,7 @@ public class ToolSpecService(ISpecService specService) : ILoadableSingleton
     public IEnumerable<ToolSpec> GetBySection(string section)
     {
         return _toolSpecifications
-            .Where(pair => string.Equals(pair.Value.Section, section, StringComparison.CurrentCultureIgnoreCase))
+            .Where(pair => string.Equals(pair.Value.Section ?? "BottomBar", section, StringComparison.CurrentCultureIgnoreCase))
             .Select(pair => pair.Value);
     }
 

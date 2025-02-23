@@ -14,7 +14,7 @@ public class ToolGroupConfigurator : Configurator
 {
     protected override void Configure()
     {
-        Bind<ToolGroupSpecificationService>().AsSingleton();
+        Bind<ToolGroupSpecService>().AsSingleton();
         Bind<ToolGroupService>().AsSingleton();
         Bind<ToolGroupFactoryService>().AsSingleton();
         MultiBind<IToolGroupFactory>().To<ConstructionModeToolGroupFactory>().AsSingleton();
@@ -23,5 +23,6 @@ public class ToolGroupConfigurator : Configurator
         MultiBind<IToolGroupFactory>().To<TreeCuttingAreaToolGroupFactory>().AsSingleton();
         MultiBind<IToolGroupFactory>().To<BuilderPriorityToolGroupFactory>().AsSingleton();
         MultiBind<ISpecGenerator>().To<TimberbornGroupGenerator>().AsSingleton();
+        MultiBind<ISpecGenerator>().To<ToolGroupSpecConvertGenerator>().AsSingleton();
     }
 }

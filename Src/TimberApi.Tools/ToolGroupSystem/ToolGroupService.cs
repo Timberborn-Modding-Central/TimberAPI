@@ -1,17 +1,14 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using TimberApi.SpecificationSystem;
-using TimberApi.Tools.ToolGroupSystem.ToolGroups.ConstructionMode;
 using TimberApi.Tools.ToolGroupUI;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
-using UnityEngine;
 
 namespace TimberApi.Tools.ToolGroupSystem;
 
 public class ToolGroupService(
-    ToolGroupSpecificationService toolGroupSpecificationService,
+    ToolGroupSpecService toolGroupSpecService,
     ToolGroupButtonFactoryService toolGroupButtonFactoryService,
     ToolGroupFactoryService toolGroupFactoryService)
     : ILoadableSingleton
@@ -31,15 +28,13 @@ public class ToolGroupService(
 
         var toolGroupButtons = new Dictionary<string, ToolGroupButton>();
 
-        foreach (var toolGroupSpecification in toolGroupSpecificationService.ToolGroupSpecs.OrderBy(x => x.GetSpecOrDefault<ToolGroupExtensionSpec>().Layout).ThenBy(x => x.Order))
+        foreach (var toolGroupSpecification in toolGroupSpecService.ToolGroupSpecs.OrderBy(x => x.Layout).ThenBy(x => x.Order))
         {
-            var toolGroupExtensionSpec = toolGroupSpecification.GetSpecOrDefault<ToolGroupExtensionSpec>();
-            
-            var toolGroup = toolGroupFactoryService.Get(toolGroupExtensionSpec.Type).Create(toolGroupSpecification);
+            var toolGroup = toolGroupFactoryService.Get(toolGroupSpecification.Type ?? "ConstructionModeToolGroup").Create(toolGroupSpecification);
 
             toolGroups.Add(toolGroupSpecification.Id.ToLower(), toolGroup);
 
-            var button = toolGroupButtonFactoryService.Get(toolGroupExtensionSpec.Layout).Create(toolGroup, toolGroupSpecification);
+            var button = toolGroupButtonFactoryService.Get(toolGroupSpecification.Layout ?? "Green").Create(toolGroup, toolGroupSpecification);
             
             toolGroupButtons.Add(toolGroupSpecification.Id.ToLower(), button);
         }

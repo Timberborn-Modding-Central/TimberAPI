@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using HarmonyLib;
+using Timberborn.BlueprintSystem;
 using Timberborn.ModManagerScene;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -17,4 +19,10 @@ public class ModStarter : IModStarter
     {
         Debug.Log("Test");
     }
+}
+
+[HarmonyPatch(typeof(SpecService))]
+public static class TestPatch
+{
+    
 }

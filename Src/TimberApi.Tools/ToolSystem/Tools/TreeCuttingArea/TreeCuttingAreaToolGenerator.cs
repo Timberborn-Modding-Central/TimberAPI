@@ -78,16 +78,13 @@ public class TreeCuttingAreaToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            ToolGroupSpec = new
+            TimberApiToolGroupSpec = new
             {
                 Id = "TreeCutting",
                 Order = 10,
                 NameLocKey = "ToolGroups.TreeCutting",
                 Icon = "Sprites/BottomBar/TreeToolGroupIcon",
                 FallbackGroup = false,
-            },
-            ToolGroupExtensionSpec = new
-            {
                 Type = "TreeCuttingAreaToolGroup",
                 Layout = "Blue",
                 Section = "BottomBar",
@@ -100,6 +97,6 @@ public class TreeCuttingAreaToolGenerator : ISpecGenerator
             }
         });
 
-        return new GeneratedSpec("Tools", "ToolGroup.TreeCutting", json);
+        return new GeneratedSpec("ToolGroups", "TimberApiToolGroups.TreeCutting", json);
     }
 }

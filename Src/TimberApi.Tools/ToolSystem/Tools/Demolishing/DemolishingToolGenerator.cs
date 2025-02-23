@@ -146,16 +146,13 @@ public class DemolishingToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            ToolGroupSpec = new
+            TimberApiToolGroupSpec = new
             {
                 Id = "Demolishing",
                 Order = 40,
                 NameLocKey = "ToolGroups.Demolishing",
                 Icon = "Sprites/BottomBar/DeleteGroupIcon",
                 FallbackGroup = false,
-            },
-            ToolGroupExtensionSpec = new
-            {
                 Type = "ConstructionModeToolGroup",
                 Layout = "Blue",
                 Section = "BottomBar",
@@ -168,6 +165,6 @@ public class DemolishingToolGenerator : ISpecGenerator
             }
         });
 
-        return new GeneratedSpec("Tools", "ToolGroup.Demolishing", json);
+        return new GeneratedSpec("ToolGroups", "TimberApiToolGroup.Demolishing", json);
     }
 }

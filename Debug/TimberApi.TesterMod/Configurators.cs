@@ -9,7 +9,7 @@ public class AllConfigurator : Configurator
 {
     protected override void Configure()
     {
-       
+        Bind<TestClass>().AsSingleton();
     }
 }
 

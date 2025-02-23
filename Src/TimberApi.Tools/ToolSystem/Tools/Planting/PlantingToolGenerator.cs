@@ -57,16 +57,13 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            ToolGroupSpec = new
+            TimberApiToolGroupSpec = new
             {
                 Id = "Fields",
                 Order = 20,
                 NameLocKey = "ToolGroups.FieldsPlanting",
                 Icon = "Sprites/BottomBar/FieldsPlantingToolGroupIcon",
                 FallbackGroup = false,
-            },
-            ToolGroupExtensionSpec = new
-            {
                 Type = "PlantingModeToolGroup",
                 Layout = "Blue",
                 Section = "BottomBar",
@@ -80,23 +77,20 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecGenerator
         });
 
 
-        return new GeneratedSpec("Tools", "ToolGroup.Fields", json);
+        return new GeneratedSpec("ToolGroups", "TimberApiToolGroups.Fields", json);
     }
 
     private static GeneratedSpec CreateForestryPlantingToolGroupSpecification()
     {
         var json = JsonConvert.SerializeObject(new
         {
-            ToolGroupSpec = new
+            TimberApiToolGroupSpec = new
             {
                 Id = "Forestry",
                 Order = 30,
                 NameLocKey = "ToolGroups.ForestryPlanting",
                 Icon = "Sprites/BottomBar/ForestryPlantingToolGroupIcon",
                 FallbackGroup = false,
-            },
-            ToolGroupExtensionSpec = new
-            {
                 Type = "PlantingModeToolGroup",
                 Layout = "Blue",
                 Section = "BottomBar",
@@ -109,6 +103,6 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecGenerator
             }
         });
 
-        return new GeneratedSpec("Tools", "ToolGroup.Forestry", json);
+        return new GeneratedSpec("ToolGroups", "TimberApiToolGroups.Forestry", json);
     }
 }

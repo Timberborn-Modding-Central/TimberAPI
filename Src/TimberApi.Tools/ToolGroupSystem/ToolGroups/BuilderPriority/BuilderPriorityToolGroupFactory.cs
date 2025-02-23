@@ -1,24 +1,18 @@
-using TimberApi.SpecificationSystem;
-using Timberborn.ToolSystem;
-
 namespace TimberApi.Tools.ToolGroupSystem.ToolGroups.BuilderPriority;
 
 public class BuilderPriorityToolGroupFactory : IToolGroupFactory
 {
     public string Id => "BuilderPriorityToolGroup";
 
-    public IToolGroup Create(ToolGroupSpec toolGroupSpec)
+    public IToolGroup Create(TimberApiToolGroupSpec toolGroupSpec)
     {
-        var toolGroupExtensionSpec = toolGroupSpec.GetSpecOrDefault<ToolGroupExtensionSpec>();
-        
-        
         return new BuilderPriorityToolGroup(
             toolGroupSpec.Id,
-            toolGroupExtensionSpec?.GroupId,
+            toolGroupSpec.GroupId,
             toolGroupSpec.Order,
-            toolGroupExtensionSpec!.Section,
+            toolGroupSpec.Section ?? "BottomBar",
             toolGroupSpec.NameLocKey,
-            toolGroupExtensionSpec.DevMode,
+            toolGroupSpec.DevMode,
             toolGroupSpec.Icon
         );
     }

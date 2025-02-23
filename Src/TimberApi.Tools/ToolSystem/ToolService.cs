@@ -39,7 +39,7 @@ public class ToolService(
 
             tools.Add(specification.Id.ToLower(), tool);
 
-            var toolButton = toolButtonFactoryService.Get(specification.Layout).Create(tool, specification);
+            var toolButton = toolButtonFactoryService.Get(specification.Layout ?? "Default").Create(tool, specification);
             toolButtons.Add(specification.Id.ToLower(), toolButton);
         }
 

@@ -5,6 +5,7 @@ using Timberborn.BlockSystem;
 using Timberborn.EntitySystem;
 using Timberborn.PrefabSystem;
 using Timberborn.Wonders;
+using UnityEngine;
 
 namespace TimberApi.Tools.ToolSystem.Tools.PlaceableObject;
 
@@ -34,14 +35,6 @@ public class PlaceableObjectToolGenerator(PrefabService prefabService) : ISpecGe
                     labeledEntitySpec.DescriptionLocKey,
                     Hidden = false,
                     DevMode = placeableBlockObject.DevModeTool,
-                },
-                ToolGroupExtensionSpec = new
-                {
-                    Type = "ConstructionModeToolGroup",
-                    Layout = "Green",
-                    Section = "BottomBar",
-                    DevMode = false,
-                    Hidden = false,
                 },
                 PlaceableObjectToolSpec = new {
                     PrefabName = prefab.PrefabName 

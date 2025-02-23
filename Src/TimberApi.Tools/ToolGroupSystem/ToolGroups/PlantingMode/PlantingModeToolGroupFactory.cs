@@ -1,23 +1,18 @@
-using TimberApi.SpecificationSystem;
-using Timberborn.ToolSystem;
-
 namespace TimberApi.Tools.ToolGroupSystem.ToolGroups.PlantingMode;
 
 public class PlantingModeToolGroupFactory : IToolGroupFactory
 {
     public string Id => "PlantingModeToolGroup";
 
-    public IToolGroup Create(ToolGroupSpec toolGroupSpec)
+    public IToolGroup Create(TimberApiToolGroupSpec toolGroupSpec)
     {
-        var toolGroupExtensionSpec = toolGroupSpec.GetSpecOrDefault<ToolGroupExtensionSpec>();
-        
         return new PlantingModeToolGroup(
             toolGroupSpec.Id,
-            toolGroupExtensionSpec.GroupId,
+            toolGroupSpec.GroupId,
             toolGroupSpec.Order,
-            toolGroupExtensionSpec.Section,
+            toolGroupSpec.Section ?? "BottomBar",
             toolGroupSpec.NameLocKey,
-            toolGroupExtensionSpec.DevMode,
+            toolGroupSpec.DevMode,
             toolGroupSpec.Icon
         );
     }

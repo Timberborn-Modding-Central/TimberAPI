@@ -44,16 +44,13 @@ public class BuilderPriorityToolGenerator : ISpecGenerator
     {
         var json = JsonConvert.SerializeObject(new
         {
-            ToolGroupSpec = new
+            TimberApiToolGroupSpec = new
             {
                 Id = "Priority",
                 Order = 50,
                 NameLocKey = "ToolGroups.Priority",
                 Icon = "Sprites/BottomBar/PriorityToolGroupIcon",
                 FallbackGroup = false,
-            },
-            ToolGroupExtensionSpec = new
-            {
                 Type = "BuilderPriorityToolGroup",
                 Layout = "Blue",
                 Section = "BottomBar",
@@ -66,6 +63,6 @@ public class BuilderPriorityToolGenerator : ISpecGenerator
             }
         });
 
-        return new GeneratedSpec("Tools", "ToolGroup.Priority", json);
+        return new GeneratedSpec("ToolGroups", "TimberApiToolGroup.Priority", json);
     }
 }

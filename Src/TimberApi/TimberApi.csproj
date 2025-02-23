@@ -37,7 +37,7 @@
         </ItemGroup>
 
         <Message Text="### Copying files to plugins ###" Importance="high"/>
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\$(SolutionName)\core"/>
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\$(SolutionName)\version-0.7\core"/>
         <Copy SourceFiles="@(ModPackagePath)" DestinationFolder="$(ModPath)\$(SolutionName)\%(RecursiveDir)" SkipUnchangedFiles="true"/>
     </Target>
 </Project>
