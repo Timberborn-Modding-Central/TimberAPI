@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using TimberApi.Extensions;
 using TimberApi.Tools.ToolGroupSystem;
 using TimberApi.Tools.ToolSystem;
 using Timberborn.BottomBarSystem;
-using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 using Timberborn.UILayoutSystem;
@@ -91,7 +89,7 @@ public class BottomBarPanel : ILoadableSingleton
     private void HandleToolButton(BottomBarButton bottomBarButton)
     {
         var toolButton = _toolService.GetToolButton(bottomBarButton.Id);
-
+        
         if (bottomBarButton.GroupId is null)
         {
             AddElementToBottomBar(toolButton.Root, 0, GetBottomBarSection(bottomBarButton));

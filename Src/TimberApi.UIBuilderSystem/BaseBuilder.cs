@@ -1,5 +1,4 @@
 using Bindito.Core;
-using TimberApi.DependencyContainerSystem;
 using TimberApi.UIBuilderSystem.StyleSheetSystem;
 using Timberborn.CoreUI;
 using UnityEngine.UIElements;
@@ -34,7 +33,7 @@ public abstract class BaseBuilder<TElement> : BaseBuilder
     {
         if (!BuilderStyleSheetCache.TryGet(GetType(), out var styleSheet))
         {
-            var styleSheetBuilder = DependencyContainer.GetInstance<StyleSheetBuilder>();
+            var styleSheetBuilder = new StyleSheetBuilder();
 
             InitializeStyleSheet(styleSheetBuilder);
 

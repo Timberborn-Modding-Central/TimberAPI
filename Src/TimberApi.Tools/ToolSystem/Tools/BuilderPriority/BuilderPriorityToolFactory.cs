@@ -1,5 +1,6 @@
+using System;
+using Timberborn.PrioritySystem;
 using Timberborn.ToolSystem;
-using UnityEngine;
 using TimberbornBuilderPriorityToolFactory = Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolFactory;
 
 namespace TimberApi.Tools.ToolSystem.Tools.BuilderPriority;
@@ -10,9 +11,11 @@ public class BuilderPriorityToolFactory(TimberbornBuilderPriorityToolFactory bui
     
     public Tool Create(ToolSpec toolSpec, ToolGroup? toolGroup = null)
     {
-        var builderPriorityToolSpec = toolSpec.GetSpec<BuilderPriorityToolSpec>();
+        var builderPriorityToolSpec = toolSpec.GetSpec<PriorityToolSpec>();
+
+        Enum.TryParse(builderPriorityToolSpec.Priority, out Priority priority);
         
-        var priorityTool = builderPriorityToolFactory.Create(builderPriorityToolSpec.Priority);
+        var priorityTool = builderPriorityToolFactory.Create(priority);
         priorityTool.ToolGroup = toolGroup;
 
         return priorityTool;

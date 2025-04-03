@@ -5,26 +5,21 @@ namespace TimberApi.Tools.ToolGroupSystem;
 
 public record TimberApiToolGroupSpec : ToolGroupSpec
 {
-    public TimberApiToolGroupSpec()
-    {
-        Section = "Testing";
-    }
-    
-    [Serialize(true)]
-    public string? Type { get; init; } = "ConstructionModeToolGroup";
+    [Serialize]
+    public string Type { get; init; } = "ConstructionModeToolGroup";
 
-    [Serialize(true)]
+    [Serialize]
     public string? GroupId { get; init; } = null;
 
-    [Serialize(true)]
-    public string? Layout { get; init; } = "Green";
+    [Serialize]
+    public string Layout { get; init; } = "Green";
 
-    [Serialize(true)]
-    public string? Section { get; init; } = "BottomBar";
+    [Serialize]
+    public string Section { get; init; } = "BottomBar";
 
-    [Serialize(true)]
+    [Serialize]
     public bool DevMode { get; init; } = false;
 
-    [Serialize(true)]
+    [Serialize]
     public bool Hidden { get; init; } = false;
 }

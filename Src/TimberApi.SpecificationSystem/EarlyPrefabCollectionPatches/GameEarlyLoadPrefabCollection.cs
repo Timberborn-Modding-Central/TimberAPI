@@ -19,7 +19,7 @@ namespace TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
  */
 public class GameEarlyLoadPrefabCollection(
     FactionService factionService,
-    IWorldSaveSupplier worldSaveSupplier,
+    ISerializedWorldSupplier worldEntitiesLoader,
     PrefabGroupService prefabGroupService,
     FactionSpecService factionSpecificationService,
     ISpecService specService)
@@ -29,7 +29,8 @@ public class GameEarlyLoadPrefabCollection(
     {
         EarlyLoadPatcher.BlockLoading = false;
         
-        ((GameSceneWorldSaveSupplier)worldSaveSupplier).Load();
+        ((GameSceneSerializedWorldSupplier)worldEntitiesLoader).Load();
+        
         specService.Load();
         factionSpecificationService.Load();
         factionService.Load();

@@ -8,9 +8,11 @@ public class TimberbornGroupGenerator(ISpecService specService) : ISpecGenerator
 {
     public IEnumerable<GeneratedSpec> Generate()
     {
-        yield return MapEditorGroupDevelopment();
-        yield return RuinsGroupDevelopment();
-        yield return OtherGroupHidden();
+        // TODO: Double generated spec is not possible, it should be possible if it's not a object spec.
+        // yield return MapEditorGroupDevelopment();
+        // yield return RuinsGroupDevelopment();
+        // yield return OtherGroupHidden();
+        yield break;
     }
     
     private static GeneratedSpec MapEditorGroupDevelopment()

@@ -20,17 +20,17 @@ public class ContextManager
     {
         harmony.Patch(
             harmony.GetMethodInfo<ContainerDefinition>(nameof(ContainerDefinition.InstallAll), [typeof(string)]),
-            harmony.GetHarmonyMethod<ContextManager>(nameof(Test))
+            harmony.GetHarmonyMethod<ContextManager>(nameof(OnContextChanged))
         );
     }
     
-    private static void Test(string contextName)
+    private static void OnContextChanged(string contextName)
     {
-        Debug.LogError($"Changing context: {contextName}");
-        ChangeScene(contextName);
+        Debug.Log($"Context changed: {contextName}");
+        ChangeContext(contextName);
     }
 
-    public static void ChangeScene(string sceneEntrypoint)
+    public static void ChangeContext(string sceneEntrypoint)
     {
         PreviousContext = CurrentContext;
         CurrentContext = sceneEntrypoint;

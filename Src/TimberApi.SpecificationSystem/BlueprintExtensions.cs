@@ -25,14 +25,6 @@ public static class BlueprintExtensions
         }
         
         return new T();
-        
-        var component = (T) BlueprintExtensionHelper.AdvancedDeserializer.Deserialize(new T(), typeof(T));
-
-        // component.Initialize(componentSpec._blueprint);
-        
-        Debug.LogError(typeof(T));
-
-        return new T();
     }
     
 }

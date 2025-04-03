@@ -24,8 +24,8 @@ public class CancelPlantingToolGenerator : ISpecGenerator
                 Type = "CancelPlantingTool",
                 Layout = "Default",
                 Order = 1000,
-                NameLocKey = "CAN NOT BE MODIFIED",
-                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                NameLocKey = "Tool.FixedName",
+                DescriptionLocKey = "Tool.FixedDescription",
                 Icon = "Sprites/BottomBar/CancelToolIcon",
                 DevMode = false,
                 Hidden = false
@@ -46,8 +46,8 @@ public class CancelPlantingToolGenerator : ISpecGenerator
                 Type = "CancelPlantingTool",
                 Layout = "Default",
                 Order = 1000,
-                NameLocKey = "CAN NOT BE MODIFIED",
-                DescriptionLocKey = "CAN NOT BE MODIFIED",
+                NameLocKey = "Tool.FixedName",
+                DescriptionLocKey = "Tool.FixedDescription",
                 Icon = "Sprites/BottomBar/CancelToolIcon",
                 DevMode = false,
                 Hidden = false

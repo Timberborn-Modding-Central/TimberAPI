@@ -13,28 +13,28 @@ public class BuilderPriorityToolGenerator : ISpecGenerator
     {
         foreach (var priority in Priorities.Ascending)
         {
-            // var json = JsonConvert.SerializeObject(new
-            // {
-            //     ToolSpec = new
-            //     {
-            //         Id = priority,
-            //         GroupId = "Priority",
-            //         Type = "PriorityTool",
-            //         Layout = "Default",
-            //         Order = (int)priority,
-            //         Icon = $"Sprites/Priority/Buttons/{priority}",
-            //         NameLocKey = "CAN NOT BE MODIFIED",
-            //         DescriptionLocKey = "CAN NOT BE MODIFIED",
-            //         Hidden = false,
-            //         DevMode = false,
-            //     },
-            //     BuilderPriorityToolSpec = new
-            //     {
-            //         Priority = priority
-            //     }
-            // });
+            var json = JsonConvert.SerializeObject(new
+            {
+                ToolSpec = new
+                {
+                    Id = priority,
+                    GroupId = "Priority",
+                    Type = "PriorityTool",
+                    Layout = "Default",
+                    Order = (int)priority,
+                    Icon = $"Sprites/Priority/Buttons/{priority}",
+                    NameLocKey = "Tool.FixedName",
+                    DescriptionLocKey = "Tool.FixedDescription",
+                    Hidden = false,
+                    DevMode = false,
+                },
+                PriorityToolSpec = new
+                {
+                    Priority = priority
+                }
+            });
         
-            // yield return new GeneratedSpec("Tools", $"Tool.{priority.ToString()}", json);
+            yield return new GeneratedSpec("Tools", $"Tool.{priority.ToString()}", json);
         }
 
         yield return CreatePriorityToolGroup();

@@ -7,12 +7,10 @@ namespace TimberApi.BuildingSpecificationSystem;
 [Context("Game")]
 internal class BuildingSpecificationConfigurator : Configurator
 {
-    public void Configure(IContainerDefinition containerDefinition)
+    protected override void Configure()
     {
-        containerDefinition.Bind<BuildingSpecificationService>().AsSingleton();
-        containerDefinition.Bind<BuildingSpecificationObjectDeserializer>().AsSingleton();
-        containerDefinition.Bind<BuildingCostObjectDeserializer>().AsSingleton();
-        containerDefinition.MultiBind<ISpecificationGenerator>().To<BuildingSpecificationGenerator>().AsSingleton();
-        containerDefinition.Bind<BuildingChangeApplier>().AsSingleton();
+        Bind<BuildingSpecificationService>().AsSingleton();
+        MultiBind<ISpecGenerator>().To<BuildingSpecificationGenerator>().AsSingleton();
+        Bind<BuildingChangeApplier>().AsSingleton();
     }
 }

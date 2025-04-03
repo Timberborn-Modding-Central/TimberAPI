@@ -1,5 +1,6 @@
 using TimberApi.UIBuilderSystem;
 using TimberApi.UIBuilderSystem.ElementBuilders;
+using Timberborn.BlueprintSystem;
 using Timberborn.DropdownSystem;
 using UnityEngine.UIElements;
 

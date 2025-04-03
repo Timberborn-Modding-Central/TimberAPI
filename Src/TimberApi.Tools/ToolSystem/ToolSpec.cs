@@ -10,20 +10,20 @@ public record ToolSpec : OptionalComponentSpec
     [Serialize]
     public string Id { get; init; }
 
-    [Serialize(true)]
+    [Serialize]
     public string? GroupId { get; init; } = null;
 
-    [Serialize(true)]
-    public ImmutableArray<string>? Scenes { get; init; } = ["Game"];
+    [Serialize]
+    public ImmutableArray<string> Scenes { get; init; } = ["Game"];
 
-    [Serialize(true)]
-    public string? Section { get; init; } = "BottomBar";
+    [Serialize]
+    public string Section { get; init; } = "BottomBar";
 
     [Serialize]
     public string Type { get; init; }
 
-    [Serialize(true)]
-    public string? Layout { get; init; } = "Default";
+    [Serialize]
+    public string Layout { get; init; } = "Default";
 
     [Serialize]
     public int Order { get; init; }
@@ -31,21 +31,21 @@ public record ToolSpec : OptionalComponentSpec
     [Serialize]
     public string Icon { get; init; }
 
-    [Serialize(false, "NameLocKey")]
+    [Serialize("NameLocKey")]
     public LocalizedText Name { get; init; }
-    
+
     [Serialize]
     public string NameLocKey { get; init; }
 
-    [Serialize(false, "DescriptionLocKey")]
+    [Serialize("DescriptionLocKey")]
     public LocalizedText Description { get; init; }
-    
+
     [Serialize]
     public string DescriptionLocKey { get; init; }
 
-    [Serialize(true)]
+    [Serialize]
     public bool Hidden { get; init; } = false;
 
-    [Serialize(true)]
+    [Serialize]
     public bool DevMode { get; init; } = false;
 }

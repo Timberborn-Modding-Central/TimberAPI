@@ -19,7 +19,7 @@ public class PlaceableObjectToolGenerator(PrefabService prefabService) : ISpecGe
 
             var labeledEntitySpec = placeableBlockObject.GetComponentFast<LabeledEntitySpec>();
             var prefab = placeableBlockObject.GetComponentFast<PrefabSpec>();
-            var wonder = placeableBlockObject.GetComponentFast<Wonder>();
+            var wonder = placeableBlockObject.GetComponentFast<WonderSpec>();
             
             var json = JsonConvert.SerializeObject(new
             {

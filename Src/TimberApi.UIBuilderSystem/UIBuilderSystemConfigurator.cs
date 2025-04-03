@@ -36,7 +36,6 @@ public class UIBuilderSystemConfigurator : Configurator
         Bind<ListViewBuilder>().AsTransient();
         Bind<TextFieldBuilder>().AsTransient();
 
-        Bind<StyleSheetBuilder>().AsTransient();
         Bind<UIBuilder>().AsSingleton();
         Bind<BuilderStyleSheetCache>().AsSingleton();
     }

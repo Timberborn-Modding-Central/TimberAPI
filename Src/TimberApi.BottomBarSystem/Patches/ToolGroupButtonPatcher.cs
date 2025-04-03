@@ -6,6 +6,7 @@ using TimberApi.Tools.ToolSystem;
 using Timberborn.CoreUI;
 using Timberborn.CursorToolSystem;
 using Timberborn.ToolSystem;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace TimberApi.BottomBarSystem.Patches;

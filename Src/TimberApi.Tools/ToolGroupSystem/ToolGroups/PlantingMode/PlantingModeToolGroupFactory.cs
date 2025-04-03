@@ -10,7 +10,7 @@ public class PlantingModeToolGroupFactory : IToolGroupFactory
             toolGroupSpec.Id,
             toolGroupSpec.GroupId,
             toolGroupSpec.Order,
-            toolGroupSpec.Section ?? "BottomBar",
+            toolGroupSpec.Section,
             toolGroupSpec.NameLocKey,
             toolGroupSpec.DevMode,
             toolGroupSpec.Icon

@@ -5,6 +5,7 @@ using TimberApi.SpecificationSystem;
 using TimberApi.Tools.ToolGroupSystem;
 using TimberApi.Tools.ToolSystem;
 using Timberborn.SingletonSystem;
+using UnityEngine;
 using ToolGroupSpecService = TimberApi.Tools.ToolGroupSystem.ToolGroupSpecService;
 
 namespace TimberApi.BottomBarSystem;
@@ -29,18 +30,16 @@ public class BottomBarService(
         _toolGroupSpecs = toolGroupSpecService
             .GetBySection(BottomBarSection)
             .ToImmutableDictionary(spec => spec.Id);
-        
 
         _toolItemButtons = CreateItemButtons().ToImmutableArray().Sort();
     }
-
 
     private IEnumerable<BottomBarButton> CreateItemButtons()
     {
         foreach (var toolGroupSpec in _toolGroupSpecs.Select(pair => pair.Value))
         {
             _toolGroupRows.Add(toolGroupSpec.Id.ToLower(), CalculateGroupRow(toolGroupSpec));
-
+            
             yield return new BottomBarButton(
                 toolGroupSpec.GetSpecOrDefault<BottomBarSpec>(),
                 toolGroupSpec.Id,

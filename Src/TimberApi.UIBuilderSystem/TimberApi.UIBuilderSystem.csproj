@@ -24,11 +24,6 @@
         <Reference Include="$(SolutionDir)Libs\UnityEngine.*.dll" Publicize="true" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Documents\Mods\TimberAPI\core\" />
-      <Folder Include="StyleSheetSystem\PropertyBuilderExtensions\" />
-    </ItemGroup>
-
     <PropertyGroup>
         <CopyDllToPath>false</CopyDllToPath>
         <ModPath>Documents/Mods</ModPath>
@@ -36,6 +31,6 @@
 
     <Target Name="CopyingFilesToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath)">
         <Message Text="### Copying files to plugins ###" Importance="high"/>
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\$(SolutionName)\version-0.7\core"/>
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModPath)\TimberApi.UIBuilder\version-0.7"/>
     </Target>
 </Project>

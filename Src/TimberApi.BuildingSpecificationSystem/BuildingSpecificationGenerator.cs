@@ -17,17 +17,17 @@ namespace TimberApi.BuildingSpecificationSystem;
 
 internal class BuildingSpecificationGenerator(
     PrefabService prefabService
-) : ISpecificationGenerator
+) : ISpecGenerator
 {
     private const string SpecificationName = "BuildingSpecification";
 
-    public IEnumerable<GeneratedSpecification> Generate()
+    public IEnumerable<GeneratedSpec> Generate()
     {
-        var buildings = prefabService.GetAll<Building>();
+        var buildings = prefabService.GetAll<Timberborn.Buildings.BuildingSpec>();
 
         foreach (var building in buildings)
         {
-            var buildingId = building.GetComponentFast<Prefab>().PrefabName;
+            var buildingId = building.GetComponentFast<PrefabSpec>().PrefabName;
 
             IEnumerable<string> recipeIds = Array.Empty<string>();
 
@@ -42,14 +42,13 @@ internal class BuildingSpecificationGenerator(
                 recipeIds = manufactorySpec.ProductionRecipeIds;
             }
 
-            if (building.TryGetComponentFast(out MechanicalNodeSpecification mechanicalNodeSpecification))
+            if (building.TryGetComponentFast(out MechanicalNodeSpec mechanicalNodeSpecification))
             {
                 powerInput = mechanicalNodeSpecification.PowerInput;
                 powerOutput = mechanicalNodeSpecification.PowerOutput;
             }
 
-            var buildingSpec = new BuildingSpecification(buildingId, scienceCost, powerInput, powerOutput, recipeIds,
-                buildingCosts);
+            var buildingSpec = new BuildingSpec(buildingId, scienceCost, powerInput, powerOutput, recipeIds, buildingCosts);
 
 
             var jsonSerializerSettings = new JsonSerializerSettings
@@ -57,7 +56,7 @@ internal class BuildingSpecificationGenerator(
             var buildingSpecificationJson =
                 JsonConvert.SerializeObject(buildingSpec, Formatting.Indented, jsonSerializerSettings);
             
-            yield return new GeneratedSpecification("Buildings", $"{SpecificationName}.{building.name}", buildingSpecificationJson, true);
+            yield return new GeneratedSpec("Buildings", $"{SpecificationName}.{building.name}", buildingSpecificationJson, true);
         }
     }
 }

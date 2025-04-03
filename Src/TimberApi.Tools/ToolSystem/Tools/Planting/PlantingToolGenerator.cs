@@ -7,6 +7,7 @@ using Timberborn.Fields;
 using Timberborn.NaturalResources;
 using Timberborn.Planting;
 using Timberborn.PrefabSystem;
+using UnityEngine;
 
 namespace TimberApi.Tools.ToolSystem.Tools.Planting;
 
@@ -22,9 +23,9 @@ public class PlantingToolGenerator(PrefabService prefabService) : ISpecGenerator
             
             var prefab = plantable.GetComponentFast<PrefabSpec>();
 
-            var isCrop = plantable.GetComponentFast<Crop>() != null;
+            var isCrop = plantable.GetComponentFast<CropSpec>() != null;
             var naturalResource = plantable.GetComponentFast<NaturalResourceSpec>();
-
+            
             var json = JsonConvert.SerializeObject(new
             {
                 ToolSpec = new

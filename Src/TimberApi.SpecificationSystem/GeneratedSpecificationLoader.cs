@@ -32,7 +32,7 @@ internal class GeneratedSpecLoader(
         // Might give problems with faction specs if they would have changed.
         specService.GetType()
             .GetField("_cachedBlueprints",BindingFlags.Instance|BindingFlags.NonPublic)!
-            .SetValue(specService,new Dictionary<Type, List<SpecService.CachedBlueprint>>());
+            .SetValue(specService,new Dictionary<Type, List<Lazy<Blueprint>>>());
         
         EarlyLoadPatcher.BlockLoading = false;
 

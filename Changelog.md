@@ -1,3 +1,7 @@
+## 0.7.12.0
+- Updated for update 7.2
+- Fixed bottombar wonder icon
+
 ## 0.7.9.0
 - Disabled `BottomBarSystem`, `Tools` & `BuildingSpecificationSsystem` for update 7.
 - Updated `TimberApi`, `EntityLinkerSystem`, `SpecificationSystem`, `UIBuilderSystem`, `UIPresets` for update 7.

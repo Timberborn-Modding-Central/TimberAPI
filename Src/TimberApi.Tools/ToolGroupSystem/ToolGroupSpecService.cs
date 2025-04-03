@@ -5,6 +5,7 @@ using System.Linq;
 using Timberborn.BlueprintSystem;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
+using Timberborn.WaterBuildingsUI;
 using UnityEngine;
 
 namespace TimberApi.Tools.ToolGroupSystem;
@@ -17,12 +18,7 @@ public class ToolGroupSpecService(ISpecService specService) : ILoadableSingleton
 
     public void Load()
     {
-        _toolGroupSpec = specService.GetSpecs<TimberApiToolGroupSpec>().ToImmutableDictionary(specification =>
-        {
-            Debug.LogWarning(specification.Section);
-            
-            return specification.Id.ToLower();
-        });
+        _toolGroupSpec = specService.GetSpecs<TimberApiToolGroupSpec>().ToImmutableDictionary(specification => specification.Id.ToLower());
     }
 
     public ToolGroupSpec Get(string id)
@@ -42,9 +38,8 @@ public class ToolGroupSpecService(ISpecService specService) : ILoadableSingleton
 
     public IEnumerable<TimberApiToolGroupSpec> GetBySection(string section)
     {
-        Debug.LogWarning($"SWAGGA SWAGGA WHATS MY SPECCA: {_toolGroupSpec}");
         return _toolGroupSpec
-            .Where(pair => section.ToLower().Equals(pair.Value.Section?.ToLower() ?? "bottombar"))
+            .Where(pair => section.ToLower().Equals(pair.Value.Section.ToLower()))
             .Select(pair => pair.Value);
     }
 }

@@ -4,6 +4,6 @@ namespace TimberApi.BottomBarSystem;
 
 public record BottomBarSpec : ComponentSpec
 {
-    [Serialize(true)]
+    [Serialize]
     public int Section { get; init; } = 1;
 }

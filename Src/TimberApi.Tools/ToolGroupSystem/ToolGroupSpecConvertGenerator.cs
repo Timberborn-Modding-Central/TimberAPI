@@ -34,8 +34,6 @@ public class ToolGroupSpecConvertGenerator(IAssetLoader assetLoader) : ISpecGene
                 },
             });
             
-            Debug.LogWarning("TimberApi" + toolGroupText.Asset.name);
-            
             yield return new GeneratedSpec("ToolGroups", "TimberApi" + toolGroupText.Asset.name, json);
         }
     }

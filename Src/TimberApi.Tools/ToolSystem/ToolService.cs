@@ -5,6 +5,7 @@ using TimberApi.Tools.ToolGroupSystem;
 using TimberApi.Tools.ToolUI;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
+using UnityEngine;
 
 namespace TimberApi.Tools.ToolSystem;
 
@@ -32,14 +33,14 @@ public class ToolService(
         foreach (var specification in toolSpecService.ToolSpecifications)
         {
             var toolFactory = toolFactoryService.Get(specification.Type);
-
+            
             var tool = specification.GroupId is null
                 ? toolFactory.Create(specification)
                 : toolFactory.Create(specification, (ToolGroup)toolGroupService.GetToolGroup(specification.GroupId));
 
             tools.Add(specification.Id.ToLower(), tool);
 
-            var toolButton = toolButtonFactoryService.Get(specification.Layout ?? "Default").Create(tool, specification);
+            var toolButton = toolButtonFactoryService.Get(specification.Layout).Create(tool, specification);
             toolButtons.Add(specification.Id.ToLower(), toolButton);
         }
 

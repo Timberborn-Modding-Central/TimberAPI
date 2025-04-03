@@ -2,6 +2,7 @@ using HarmonyLib;
 using TimberApi.HarmonySystem;
 using Timberborn.BottomBarSystem;
 using Timberborn.TutorialSystem;
+using Timberborn.TutorialSystemInitialization;
 
 namespace TimberApi.BottomBarSystem.Patches;
 
@@ -12,6 +13,11 @@ public class BottomBarConfiguratorPatcher
         harmony.Patch(
             harmony.GetMethodInfo<BottomBarSystemConfigurator>(nameof(BottomBarSystemConfigurator.Configure)),
             harmony.GetHarmonyMethod<BottomBarConfiguratorPatcher>(nameof(DisableBottomBarSystemConfigurator))
+        );
+        
+        harmony.Patch(
+            harmony.GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider.CreateStartingFactionConfiguration)),
+            harmony.GetHarmonyMethod<BottomBarConfiguratorPatcher>(nameof(CreateFolktailsConfigurationPatch))
         );
     }
 

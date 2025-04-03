@@ -25,7 +25,7 @@ internal class EarlyLoadPatcher
         );
         
         harmony.Patch(
-            harmony.GetMethodInfo<GameSceneWorldSaveSupplier>(nameof(GameSceneWorldSaveSupplier.Load)),
+            harmony.GetMethodInfo<GameSceneSerializedWorldSupplier>(nameof(GameSceneSerializedWorldSupplier.Load)),
             harmony.GetHarmonyMethod<EarlyLoadPatcher>(nameof(BlockingLoadableSingletonLoad))
         );
 

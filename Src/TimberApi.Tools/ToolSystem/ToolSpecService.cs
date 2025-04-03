@@ -17,7 +17,7 @@ public class ToolSpecService(ISpecService specService) : ILoadableSingleton
     public void Load()
     {
         _toolSpecifications = specService.GetSpecs<ToolSpec>()
-            .Where(toolSpec => toolSpec.Scenes == null ? ContextManager.CurrentContext == "Game" : toolSpec.Scenes.Contains(ContextManager.CurrentContext))
+            .Where(toolSpec => toolSpec.Scenes.Contains(ContextManager.CurrentContext))
             .ToImmutableDictionary(specification => specification.Id.ToLower());
     }
 
@@ -39,7 +39,7 @@ public class ToolSpecService(ISpecService specService) : ILoadableSingleton
     public IEnumerable<ToolSpec> GetBySection(string section)
     {
         return _toolSpecifications
-            .Where(pair => string.Equals(pair.Value.Section ?? "BottomBar", section, StringComparison.CurrentCultureIgnoreCase))
+            .Where(pair => string.Equals(pair.Value.Section, section, StringComparison.CurrentCultureIgnoreCase))
             .Select(pair => pair.Value);
     }
 

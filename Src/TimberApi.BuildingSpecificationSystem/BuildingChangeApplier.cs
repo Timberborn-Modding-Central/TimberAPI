@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TimberApi.SingletonSystem;
-using Timberborn.Buildings;
 using Timberborn.Goods;
 using Timberborn.MechanicalSystem;
 using Timberborn.PrefabSystem;
@@ -16,7 +15,7 @@ internal class BuildingChangeApplier(
 {
     public void EarlyLoad()
     {
-        foreach (var building in prefabService.GetAll<BuildingSpec>())
+        foreach (var building in prefabService.GetAll<Timberborn.Buildings.BuildingSpec>())
         {
             var buildingSpecification = buildingSpecificationService.GetBuildingSpecificationByBuilding(building);
 
@@ -34,41 +33,45 @@ internal class BuildingChangeApplier(
                 ChangeManufactoryRecipes(manufactorySpec, buildingSpecification);
             }
 
-            if (building.TryGetComponentFast(out MechanicalNodeSpecification mechanicalNodeSpecification))
+            if (building.TryGetComponentFast(out MechanicalNodeSpec mechanicalNodeSpecification))
             {
                 ChangeMechanicalNodeSpecification(mechanicalNodeSpecification, buildingSpecification);
             }
         }
     }
 
-    private static void ChangeMechanicalNodeSpecification(MechanicalNodeSpecification mechanicalNodeSpecification, BuildingSpecification buildingSpecification)
+    private static void ChangeMechanicalNodeSpecification(MechanicalNodeSpec mechanicalNodeSpecification, BuildingSpec buildingSpec)
     {
-        if (buildingSpecification.PowerOutput != null)
+        if (buildingSpec.PowerOutput != null)
         {
-            mechanicalNodeSpecification._powerOutput = (int) buildingSpecification.PowerOutput;
+            mechanicalNodeSpecification._powerOutput = (int) buildingSpec.PowerOutput;
         }
 
-        if (buildingSpecification.PowerInput != null)
+        if (buildingSpec.PowerInput != null)
         {
-            mechanicalNodeSpecification._powerInput = (int) buildingSpecification.PowerInput;
+            mechanicalNodeSpecification._powerInput = (int) buildingSpec.PowerInput;
         }
     }
 
-    private static void ChangeManufactoryRecipes(ManufactorySpec manufactorySpec, BuildingSpecification buildingSpecification)
+    private static void ChangeManufactoryRecipes(ManufactorySpec manufactorySpec, BuildingSpec buildingSpec)
     {
-        manufactorySpec._productionRecipeIds = buildingSpecification.RecipeIds.Distinct().ToList();
+        manufactorySpec._productionRecipeIds = buildingSpec.RecipeIds.Distinct().ToList();
     }
 
-    private static void ChangeBuildingProperties(Building building, BuildingSpecification buildingSpecification)
+    private static void ChangeBuildingProperties(Timberborn.Buildings.BuildingSpec building, BuildingSpec buildingSpec)
     {
-        if (buildingSpecification.ScienceCost != null)
+        if (buildingSpec.ScienceCost != null)
         {
-            building._scienceCost = (int) buildingSpecification.ScienceCost;
+            building._scienceCost = (int) buildingSpec.ScienceCost;
         }
 
-        List<BuildingCost> reverseList = new(buildingSpecification.BuildingCosts);
+        List<BuildingCost> reverseList = new(buildingSpec.BuildingCosts);
         reverseList.Reverse();
 
-        building._buildingCost = reverseList.Select(x => new GoodAmountSpecification(x.GoodId, x.Amount)).Distinct(new GoodAmountSpecificationComparer()).ToArray();
+        building._buildingCost = reverseList.Select(x => new GoodAmountSpec
+        {
+            _goodId = x.GoodId,
+            _amount = x.Amount,
+        }).Distinct(new GoodAmountSpecComparer()).ToArray();
     }
 }

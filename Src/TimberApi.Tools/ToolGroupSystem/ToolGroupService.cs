@@ -30,11 +30,11 @@ public class ToolGroupService(
 
         foreach (var toolGroupSpecification in toolGroupSpecService.ToolGroupSpecs.OrderBy(x => x.Layout).ThenBy(x => x.Order))
         {
-            var toolGroup = toolGroupFactoryService.Get(toolGroupSpecification.Type ?? "ConstructionModeToolGroup").Create(toolGroupSpecification);
+            var toolGroup = toolGroupFactoryService.Get(toolGroupSpecification.Type).Create(toolGroupSpecification);
 
             toolGroups.Add(toolGroupSpecification.Id.ToLower(), toolGroup);
 
-            var button = toolGroupButtonFactoryService.Get(toolGroupSpecification.Layout ?? "Green").Create(toolGroup, toolGroupSpecification);
+            var button = toolGroupButtonFactoryService.Get(toolGroupSpecification.Layout).Create(toolGroup, toolGroupSpecification);
             
             toolGroupButtons.Add(toolGroupSpecification.Id.ToLower(), button);
         }
