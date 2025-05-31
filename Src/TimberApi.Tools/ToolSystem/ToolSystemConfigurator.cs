@@ -3,7 +3,7 @@ using Bindito.Core;
 namespace TimberApi.Tools.ToolSystem;
 
 [Context("Game")]
-[Context("MapEditor")]
+// [Context("MapEditor")]
 public class ToolSystemConfigurator : Configurator
 {
     protected override void Configure()
