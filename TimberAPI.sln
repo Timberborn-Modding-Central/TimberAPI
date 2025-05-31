@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.TesterMod", "Debu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberApi.SpecificationPatcherSystem", "Src\TimberApi.SpecificationPatcherSystem\TimberApi.SpecificationPatcherSystem.csproj", "{A5AA5ACE-4AF6-4062-9E42-2C3F4D4541D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterBottomBar", "Debug\BetterBottomBar\BetterBottomBar.csproj", "{C13E5AFA-61B0-4FA6-BE9F-AA13A9D5B525}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{A5AA5ACE-4AF6-4062-9E42-2C3F4D4541D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5AA5ACE-4AF6-4062-9E42-2C3F4D4541D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5AA5ACE-4AF6-4062-9E42-2C3F4D4541D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13E5AFA-61B0-4FA6-BE9F-AA13A9D5B525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13E5AFA-61B0-4FA6-BE9F-AA13A9D5B525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13E5AFA-61B0-4FA6-BE9F-AA13A9D5B525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13E5AFA-61B0-4FA6-BE9F-AA13A9D5B525}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FCD68CD4-2C29-4D4D-BAD9-4F3557E9184E} = {0DA10803-225A-45AA-9FF7-5136941817FC}
@@ -114,5 +120,6 @@ Global
 		{3337881E-5899-4621-9A72-1472BC1DD96A} = {C8B9BCD7-6FAA-40A7-B230-660B78092C36}
 		{D5BE7FAF-1007-4C0E-B551-1BD4FAC89C78} = {DCEA2668-0A15-4986-862A-5A8458574661}
 		{A5AA5ACE-4AF6-4062-9E42-2C3F4D4541D0} = {C8B9BCD7-6FAA-40A7-B230-660B78092C36}
+		{C13E5AFA-61B0-4FA6-BE9F-AA13A9D5B525} = {DCEA2668-0A15-4986-862A-5A8458574661}
 	EndGlobalSection
 EndGlobal

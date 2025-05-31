@@ -19,6 +19,11 @@ public class BottomBarConfiguratorPatcher
             harmony.GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider.CreateStartingFactionConfiguration)),
             harmony.GetHarmonyMethod<BottomBarConfiguratorPatcher>(nameof(CreateFolktailsConfigurationPatch))
         );
+        
+        harmony.Patch(
+            harmony.GetMethodInfo<TutorialConfigurationProvider>(nameof(TutorialConfigurationProvider.CreateStartingFactionConfiguration)),
+            harmony.GetHarmonyMethod<BottomBarConfiguratorPatcher>(nameof(CreateFolktailsConfigurationPatch))
+        );
     }
 
     public static bool DisableBottomBarSystemConfigurator()

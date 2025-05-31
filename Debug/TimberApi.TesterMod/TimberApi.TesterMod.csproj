@@ -35,6 +35,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Src\TimberApi.SpecificationSystem\TimberApi.SpecificationSystem.csproj" />
+      <ProjectReference Include="..\..\Src\TimberApi.UIBuilderSystem\TimberApi.UIBuilderSystem.csproj" />
     </ItemGroup>
 
     <Target Name="CopyingFilesToTimberborn" BeforeTargets="AfterBuild" Condition="$(CopyDllToPath)">

@@ -26,7 +26,7 @@ public abstract class BoxBuilder<TBuilder> : BaseBuilder<TBuilder, NineSliceVisu
 
     protected DefaultScrollView DefaultScrollView = null!;
 
-    protected string BackgroundClass = "api__box--nontransparant";
+    protected string BackgroundClass = "api__box--transparent";
 
     protected bool HasCloseButton = false;
         
@@ -105,6 +105,12 @@ public abstract class BoxBuilder<TBuilder> : BaseBuilder<TBuilder, NineSliceVisu
         return BuilderInstance;
     }
     
+    public TBuilder NonTransparent()
+    {
+        BackgroundClass = "api__box--nontransparent";
+        return BuilderInstance;
+    }
+    
     public TBuilder AddComponent<TComponentBuilder>(string name, Func<TComponentBuilder, TComponentBuilder> builder)
         where TComponentBuilder : BaseBuilder
     {
@@ -143,9 +149,21 @@ public abstract class BoxBuilder<TBuilder> : BaseBuilder<TBuilder, NineSliceVisu
         return BuilderInstance;
     }
     
+    public TBuilder AddComponent(BaseBuilder builder)
+    {
+        DefaultScrollView.AddComponent(builder);
+        return BuilderInstance;
+    }
+    
+    public TBuilder ModifyRoot(Action<VisualElementBuilder> visualElementBuilder)
+    {
+        visualElementBuilder.Invoke(VisualElementBuilder);
+        return BuilderInstance;
+    }
+    
     protected override NineSliceVisualElement InitializeRoot()
     {
-        DefaultScrollView = UIBuilder.Create<DefaultScrollView>();
+        DefaultScrollView = UIBuilder.Create<DefaultScrollView>("DefaultScrollView");
         
         VisualElementBuilder = UIBuilder.Create<VisualElementBuilder>()
             .AddComponent(DefaultScrollView.Build())
@@ -165,11 +183,11 @@ public abstract class BoxBuilder<TBuilder> : BaseBuilder<TBuilder, NineSliceVisu
             .AddClass("api__box--with-header", builder => builder
                 .MinWidth(350)
             )
-            .AddClass("api__box--nontransparant", builder => builder
+            .AddClass("api__box--nontransparent", builder => builder
                 .Add(Property.NineSlicedBackgroundImage, "UI/Images/Core/border_nontransparent",
                     StyleValueType.ResourcePath)
             )
-            .AddClass("api__box--transparant", builder => builder
+            .AddClass("api__box--transparent", builder => builder
                 .Add(Property.NineSlicedBackgroundImage, "UI/Images/Core/border_transparent",
                     StyleValueType.ResourcePath)
             )

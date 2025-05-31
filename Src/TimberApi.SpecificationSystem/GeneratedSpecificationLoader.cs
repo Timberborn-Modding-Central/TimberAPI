@@ -30,10 +30,11 @@ internal class GeneratedSpecLoader(
 
         // Reloads the spec service, because everything is cached now. This is unoptimized but it is how it is for now.
         // Might give problems with faction specs if they would have changed.
-        specService.GetType()
-            .GetField("_cachedBlueprints",BindingFlags.Instance|BindingFlags.NonPublic)!
-            .SetValue(specService,new Dictionary<Type, List<Lazy<Blueprint>>>());
-        
+        ((Dictionary<Type, List<Lazy<Blueprint>>>)specService.GetType()
+            .GetField("_cachedBlueprints", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .GetValue(specService))
+            .Clear();
+            
         EarlyLoadPatcher.BlockLoading = false;
 
         specService.Load();

@@ -69,6 +69,12 @@ public abstract class DefaultScrollView<TBuilder> : BaseBuilder<TBuilder, Scroll
         return BuilderInstance;
     }
     
+    public TBuilder AddComponent(BaseBuilder builder)
+    {
+        ScrollViewBuilder.AddComponent(builder);
+        return BuilderInstance;
+    }
+    
     protected override ScrollView InitializeRoot()
     {
         ScrollViewBuilder = UIBuilder.Create<ScrollViewBuilder>()

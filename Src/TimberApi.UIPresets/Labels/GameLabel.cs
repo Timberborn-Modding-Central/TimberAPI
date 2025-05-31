@@ -51,6 +51,12 @@ public abstract class GameLabel<TBuilder> : BaseBuilder<TBuilder, LocalizableLab
         return BuilderInstance;
     }
     
+    public TBuilder Bold()
+    {
+        LabelBuilder.AddClass("api__game_text-label--bold");
+        return BuilderInstance;
+    }
+    
     public TBuilder SetFontStyle(FontStyle style)
     {
         LabelBuilder.SetFontStyle(style);

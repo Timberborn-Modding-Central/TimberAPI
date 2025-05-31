@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimberApi.SpecificationSystem;
 using Timberborn.BotsUI;
-using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolSystem.Tools.BotGenerator;
 
@@ -31,7 +30,6 @@ public class BotGeneratorToolGenerator : ISpecGenerator
             {
                 Section = 0,
             }
-            
         });
         
         yield return new GeneratedSpec("Tools", "Tool.BotGenerator", json);
