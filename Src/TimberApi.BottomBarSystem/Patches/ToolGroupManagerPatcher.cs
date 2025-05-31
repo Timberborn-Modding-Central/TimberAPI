@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using HarmonyLib;
 using TimberApi.HarmonySystem;
 using TimberApi.Tools.ToolGroupSystem;
+using Timberborn.InputSystem;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
 

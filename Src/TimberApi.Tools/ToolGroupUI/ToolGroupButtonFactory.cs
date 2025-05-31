@@ -26,8 +26,7 @@ public class ToolGroupButtonFactory(
     public ToolGroupButton Create(ToolGroup toolGroup, Sprite toolGroupImage, Sprite backgroundImage)
     {
         var visualElement = visualElementLoader.LoadVisualElement("Common/BottomBar/ToolGroupButton");
-        visualElement.Q<VisualElement>("ToolGroupButtonWrapper").Q<VisualElement>("").style.backgroundImage =
-            new StyleBackground(backgroundImage);
+        visualElement.Q<VisualElement>("ToolGroupButtonWrapper").Q<VisualElement>("").style.backgroundImage = new StyleBackground(backgroundImage);
         InitializeElement(visualElement, toolGroup, toolGroupImage);
         var toolGroupButton = new ToolGroupButton(loc,
             toolGroupManager,

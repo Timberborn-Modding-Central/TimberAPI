@@ -67,6 +67,12 @@ public abstract class BaseElementBuilder<TBuilder, TElement> : BaseBuilder<TBuil
         Root.Add(UIBuilder.Build(builderType));
         return BuilderInstance;
     }
+    
+    public TBuilder AddComponent(BaseBuilder baseBuilder)
+    {
+        Root.Add(baseBuilder.BuildElement());
+        return BuilderInstance;
+    }
 
     public TBuilder AddComponent(VisualElement element)
     {
