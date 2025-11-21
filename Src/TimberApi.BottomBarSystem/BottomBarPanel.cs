@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TimberApi.Tools.ToolGroupSystem;
 using TimberApi.Tools.ToolSystem;
+using TimberApi.Tools.ToolUI;
 using Timberborn.BottomBarSystem;
 using Timberborn.SingletonSystem;
 using Timberborn.ToolSystem;
@@ -20,9 +21,9 @@ public class BottomBarPanel : ILoadableSingleton
 
     private readonly SortedDictionary<int, VisualElement> _mainWrapperSections = new();
 
-    private readonly ToolGroupService _toolGroupService;
+    private readonly TimberApi.Tools.ToolGroupSystem.ToolGroupService _toolGroupService;
 
-    private readonly ToolService _toolService;
+    private readonly TimberApi.Tools.ToolSystem.ToolService _toolService;
 
     private readonly UILayout _uiLayout;
 
@@ -32,7 +33,7 @@ public class BottomBarPanel : ILoadableSingleton
         BottomBarService bottomBarService,
         BottomBarUiService bottomBarUiService,
         UILayout uiLayout,
-        ToolButtonFactory toolButtonFactory, ToolService toolService, ToolGroupService toolGroupService)
+        ToolButtonFactory toolButtonFactory, TimberApi.Tools.ToolSystem.ToolService toolService, TimberApi.Tools.ToolGroupSystem.ToolGroupService toolGroupService)
     {
         _bottomBarUiService = bottomBarUiService;
         _uiLayout = uiLayout;

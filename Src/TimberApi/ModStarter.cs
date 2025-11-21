@@ -10,7 +10,7 @@ namespace TimberApi;
 
 public class ModStarter : IModStarter
 {
-    public void StartMod()
+    public void StartMod(IModEnvironment modEnvironment)
     {
         try
         {

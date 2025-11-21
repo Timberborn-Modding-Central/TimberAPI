@@ -11,7 +11,7 @@ public class ModStarter : IModStarter
 {
     private static Harmony _harmony = null!;
 
-    public void StartMod()
+    public void StartMod(IModEnvironment modEnvironment)
     {
         _harmony = new Harmony("TimberApi.BottomBar");
         ContextManager.ContextChanged += SceneManagerOnContextChanged;

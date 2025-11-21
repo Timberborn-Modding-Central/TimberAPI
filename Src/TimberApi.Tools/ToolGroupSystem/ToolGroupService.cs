@@ -3,6 +3,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using TimberApi.Tools.ToolGroupUI;
 using Timberborn.SingletonSystem;
+using Timberborn.ToolButtonSystem;
 using Timberborn.ToolSystem;
 
 namespace TimberApi.Tools.ToolGroupSystem;

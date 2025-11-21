@@ -1,27 +1,19 @@
+
+
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
-using TimberApi.SingletonSystem;
-using TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
 using Timberborn.BlueprintSystem;
-using Timberborn.FactionSystem;
-using Timberborn.GameFactionSystem;
-using Timberborn.MainMenuPanels;
-using Timberborn.SoundSystem;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace TimberApi.SpecificationSystem;
 
+#nullable disable
 internal class GeneratedSpecLoader(
     GeneratedSpecAssetRepository generatedSpecAssetRepository,
     IEnumerable<ISpecGenerator> specificationGenerators,
-    FactionSpecService factionSpecificationService,
     ISpecService specService)
-    : ITimberApiPostLoadableSingleton
 {
-    public void PostLoad()
+    public void RegenerateSpecBlueprints()
     {
         foreach (var specificationGenerator in specificationGenerators)
         {
@@ -30,16 +22,12 @@ internal class GeneratedSpecLoader(
 
         // Reloads the spec service, because everything is cached now. This is unoptimized but it is how it is for now.
         // Might give problems with faction specs if they would have changed.
-        ((Dictionary<Type, List<Lazy<Blueprint>>>)specService.GetType()
+        var test = ((Dictionary<Type, List<Lazy<Blueprint>>>)specService.GetType()
             .GetField("_cachedBlueprints", BindingFlags.Instance | BindingFlags.NonPublic)!
-            .GetValue(specService))
-            .Clear();
-            
-        EarlyLoadPatcher.BlockLoading = false;
-
-        specService.Load();
-        factionSpecificationService.Load();
+            .GetValue(specService));
         
-        EarlyLoadPatcher.BlockLoading = true;
+        test.Clear();
+        specService.Load();
     }
+
 }

@@ -13,7 +13,7 @@ internal class GeneratedSpecAssetProvider(
 {
     public bool IsBuiltIn => false;
 
-    public bool TryLoad(string path, Type type, out OrderedAsset orderedAsset)
+    public bool TryLoad<T>(string path, Type type, out OrderedAsset orderedAsset)  where T : Object
     {
         if (type == typeof(TextAsset) && generatedSpecAssetRepository.GeneratedSpecAssets.TryGetValue(path, out var asset))
         {

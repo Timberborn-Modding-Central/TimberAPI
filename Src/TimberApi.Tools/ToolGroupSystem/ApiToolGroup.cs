@@ -1,29 +1,28 @@
-using Timberborn.ToolSystem;
 using UnityEngine;
 
 namespace TimberApi.Tools.ToolGroupSystem;
 
-public class ApiToolGroup : ToolGroup, IToolGroup
+public class ApiToolGroup(
+    string id,
+    string? groupId,
+    int order,
+    string section,
+    string displayNameLocKey,
+    bool devMode,
+    Sprite icon)
+    : IToolGroup
 {
-    public ApiToolGroup(string id, string? groupId, int order, string section, string displayNameLocKey, bool devMode,
-        Sprite icon)
-    {
-        Id = id;
-        base.DisplayNameLocKey = displayNameLocKey;
-        Order = order;
-        Icon = icon;
-        DevMode = devMode;
-        Section = section;
-        GroupId = groupId;
-    }
+    public string Id { get; } = id;
 
-    public string Id { get; }
+    public string? GroupId { get; } = groupId;
 
-    public string? GroupId { get; }
+    public string DisplayNameLocKey { get; } = displayNameLocKey;
 
-    public int Order { get; }
+    public Sprite Icon { get; } = icon;
+    
+    public int Order { get; } = order;
 
-    public string Section { get; }
+    public string Section { get; } = section;
 
-    public bool DevMode { get; }
+    public bool DevMode { get; } = devMode;
 }

@@ -2,27 +2,25 @@ using UnityEngine;
 
 namespace TimberApi.Tools.ToolGroupSystem.ToolGroups.BuilderPriority;
 
-public sealed class BuilderPriorityToolGroup : Timberborn.BuilderPrioritySystemUI.BuilderPriorityToolGroup, IToolGroup
+public sealed class BuilderPriorityToolGroup(
+    string id,
+    string? groupId,
+    int order,
+    string section,
+    string displayNameLocKey,
+    bool devMode,
+    Sprite icon)
+    : IToolGroup
 {
-    public BuilderPriorityToolGroup(string id, string? groupId, int order, string section, string displayNameLocKey,
-        bool devMode, Sprite icon)
-    {
-        Id = id;
-        DisplayNameLocKey = displayNameLocKey;
-        Order = order;
-        Icon = icon;
-        DevMode = devMode;
-        Section = section;
-        GroupId = groupId;
-    }
+    public string Id { get; } = id;
 
-    public string Id { get; }
+    public string? GroupId { get; } = groupId;
 
-    public string? GroupId { get; }
+    public string DisplayNameLocKey { get; } = displayNameLocKey;
+    public Sprite Icon { get; } = icon;
+    public int Order { get; } = order;
 
-    public int Order { get; }
+    public string Section { get; } = section;
 
-    public string Section { get; }
-
-    public bool DevMode { get; }
+    public bool DevMode { get; } = devMode;
 }

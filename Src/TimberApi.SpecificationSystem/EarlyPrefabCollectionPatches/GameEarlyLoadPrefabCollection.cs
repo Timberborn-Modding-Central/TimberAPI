@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using TimberApi.SingletonSystem;
 using Timberborn.BlueprintSystem;
 using Timberborn.FactionSystem;
 using Timberborn.GameFactionSystem;
 using Timberborn.GameScene;
-using Timberborn.PrefabGroupSystem;
+using Timberborn.TemplateCollectionSystem;
 using Timberborn.WorldPersistence;
-using UnityEngine;
 
 namespace TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
 
@@ -20,7 +16,7 @@ namespace TimberApi.SpecificationSystem.EarlyPrefabCollectionPatches;
 public class GameEarlyLoadPrefabCollection(
     FactionService factionService,
     ISerializedWorldSupplier worldEntitiesLoader,
-    PrefabGroupService prefabGroupService,
+    TemplateCollectionService templateCollectionService,
     FactionSpecService factionSpecificationService,
     ISpecService specService)
     : ITimberApiLoadableSingleton
@@ -31,10 +27,11 @@ public class GameEarlyLoadPrefabCollection(
         
         ((GameSceneSerializedWorldSupplier)worldEntitiesLoader).Load();
         
-        specService.Load();
+        ((SpecService)specService).Load();
         factionSpecificationService.Load();
         factionService.Load();
-        prefabGroupService.Load();
+         
+        templateCollectionService.Load();
         
         EarlyLoadPatcher.BlockLoading = true;
     }

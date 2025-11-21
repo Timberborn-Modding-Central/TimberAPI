@@ -4,6 +4,7 @@ using System.Linq;
 using TimberApi.Tools.ToolGroupSystem;
 using TimberApi.Tools.ToolUI;
 using Timberborn.SingletonSystem;
+using Timberborn.ToolButtonSystem;
 using Timberborn.ToolSystem;
 using UnityEngine;
 
@@ -13,20 +14,20 @@ public class ToolService(
     ToolSpecService toolSpecService,
     ToolFactoryService toolFactoryService,
     ToolButtonFactoryService toolButtonFactoryService,
-    ToolGroupService toolGroupService)
+    TimberApi.Tools.ToolGroupSystem.ToolGroupService toolGroupService)
     : ILoadableSingleton
 {
     private ImmutableDictionary<string, ToolButton> _toolButtons = null!;
 
-    private ImmutableDictionary<string, Tool> _tools = null!;
+    private ImmutableDictionary<string, ITool> _tools = null!;
 
-    public IEnumerable<Tool> Tools => _tools.Select(pair => pair.Value).ToImmutableArray();
+    public IEnumerable<ITool> Tools => _tools.Select(pair => pair.Value).ToImmutableArray();
 
     public IEnumerable<ToolButton> ToolButtons => _toolButtons.Select(pair => pair.Value).ToImmutableArray();
 
     public void Load()
     {
-        var tools = new Dictionary<string, Tool>();
+        var tools = new Dictionary<string, ITool>();
 
         var toolButtons = new Dictionary<string, ToolButton>();
 
@@ -36,7 +37,7 @@ public class ToolService(
             
             var tool = specification.GroupId is null
                 ? toolFactory.Create(specification)
-                : toolFactory.Create(specification, (ToolGroup)toolGroupService.GetToolGroup(specification.GroupId));
+                : toolFactory.Create(specification, (IToolGroup)toolGroupService.GetToolGroup(specification.GroupId));
 
             tools.Add(specification.Id.ToLower(), tool);
 
@@ -48,7 +49,7 @@ public class ToolService(
         _toolButtons = toolButtons.ToImmutableDictionary();
     }
 
-    public Tool GetTool(string id)
+    public ITool GetTool(string id)
     {
         if (!_tools.TryGetValue(id.ToLower(), out var tool))
             throw new KeyNotFoundException($"The given ToolId ({id.ToLower()}) cannot be found.");
