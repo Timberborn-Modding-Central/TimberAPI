@@ -10,5 +10,7 @@ public class LocalizableMinMaxSlider : MinMaxSlider, ILocalizableElement
     [UxmlAttribute("text-loc-key")]
     public string TextLocKey;
 
+    public bool IsSet => !string.IsNullOrEmpty(TextLocKey);
+
     public void Localize(ILoc loc) => label = loc.T(TextLocKey);
 }
