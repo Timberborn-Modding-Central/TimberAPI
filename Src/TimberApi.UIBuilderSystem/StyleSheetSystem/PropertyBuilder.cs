@@ -63,6 +63,11 @@ public class PropertyBuilder(UnityEngine.UIElements.StyleSheets.StyleSheetBuilde
 
     public PropertyBuilder Add(Property property, string value, StyleValueType type)
     {
+        if (type == StyleValueType.ResourcePath)
+        {
+            builder.AddResourcePath(new ResolvedResourcePath(value));
+        }
+
         builder.BeginProperty(property.ToUnityString(), 0);
 
         builder.AddValue(value, UnityElementMapper.UnityStyleValueType[type]);
